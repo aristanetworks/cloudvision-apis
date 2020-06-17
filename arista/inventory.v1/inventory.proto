@@ -1,0 +1,71 @@
+// Copyright (c) 2020 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.inventory.v1;
+
+option go_package = "arista/resources/arista/inventory.v1;inventory";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+
+// StreamingStatus the status of streaming telemetry for this device.
+enum StreamingStatus {
+    // Unspecified is the uninitialized state of this enum.
+    STREAMING_STATUS_UNSPECIFIED = 0;
+    // Inactive indicates the device is not streaming telemetry.
+    STREAMING_STATUS_INACTIVE = 1;
+    // Active indicates the device is streaming telemetry.
+    STREAMING_STATUS_ACTIVE = 2;
+}
+
+// ExtendedAttributes wraps any additional, potentially non-standard, features
+// or attributes the device reports.
+message ExtendedAttributes {
+    // FeatureEnabled is a map of feature name to enabled status.
+    // If a feature is missing from this map it can be assumed off.
+    map<string, bool> feature_enabled = 1;
+}
+
+// DeviceKey uniquely identifies a single device.
+message DeviceKey {
+    option (fmp.model_key) = true;
+    google.protobuf.StringValue device_id = 1;
+};
+
+// Device is the primary model for this service.
+message Device {
+    option (fmp.model) = "ro";
+
+    // The key that uniquely identifies this device.
+    DeviceKey key = 1;
+
+    // SoftwareVersion gives the currently running device software version.
+    google.protobuf.StringValue software_version = 2;
+    // ModelName describes the hardware model of this device.
+    google.protobuf.StringValue model_name = 3;
+    // HardwareREvision describes any revisional data to the model name.
+    google.protobuf.StringValue hardware_revision = 4;
+
+    // FQDN gives the fully qualified hostname to reach the device.
+    google.protobuf.StringValue fqdn = 10;
+    // Hostname is the hostname as reported on the device.
+    google.protobuf.StringValue hostname = 11;
+    // DomainName provides the domain name the device is registered on.
+    google.protobuf.StringValue domain_name = 12;
+    // SystemMacAddress provides the MAC address of the management port.
+    google.protobuf.StringValue system_mac_address = 13;
+
+    // BootTime indicates when the device was last booted.
+    google.protobuf.Timestamp boot_time = 20;
+
+    // StreamingStatus the status of streaming telemetry for this device.
+    StreamingStatus streaming_status = 30;
+    // ExtendedAttributes wraps any additional, potentially non-standard, features
+    // or attributes the device reports.
+    ExtendedAttributes extended_attributes = 31;
+};

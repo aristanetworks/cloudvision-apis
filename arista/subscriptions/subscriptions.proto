@@ -1,0 +1,32 @@
+// Copyright (c) 2020 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.subscriptions;
+option go_package = "arista/resources/arista/subscriptions";
+
+enum Operation {
+    UNSPECIFIED = 0;
+
+    // INITIAL indicates the associated notification is that of the
+    // current state and a fully-specified Resource is provided.
+    INITIAL = 10;
+    // INITIAL_SYNC_COMPLETE indicates all existing-state has been
+    // streamed to the client. This status will be sent in an
+    // otherwise-empty message and no subsequent INITIAL messages
+    // should be expected.
+    INITIAL_SYNC_COMPLETE = 11;
+
+    // UPDATED indicates the associated notification carries
+    // modification to the last-streamed state. This indicates
+    // the contained Resource may be a partial diff, though, it
+    // may contain a fully-specified Resource.
+    UPDATED = 20;
+
+    // DETLETED indicates the associated notification carries
+    // a deletion. The Resource's key will always be set in this case,
+    // but no other fields should be expected.
+    DELETED = 30;
+};

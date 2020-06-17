@@ -1,0 +1,20 @@
+// Copyright (c) 2020 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package fmp;
+
+option go_package = "arista/resources/fmp";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MessageOptions {
+    // TODO: will need an official number from Google, just like gNMI extensions
+    //       this works for now, though.
+    string model = 51423;
+    bool   model_key = 51424;
+    string custom_filter = 51425;
+    bool   no_default_filter = 51426;
+}
