@@ -1,0 +1,95 @@
+{{range .Files}}
+{{$file_name := .Name}}- [{{.Name}}](#{{lower .Name}})
+  {{- if .Messages }}
+  {{range .Messages}}  - [{{.LongName}}](#{{lower .Name}})
+  {{end}}
+  {{- end -}}
+  {{- if .Enums }}
+  {{range .Enums}}  - [{{.LongName}}](#{{.FullName}})
+  {{end}}
+  {{- end -}}
+  {{- if .Extensions }}
+  {{range .Extensions}}  - [File-level Extensions](#{{$file_name}}-extensions)
+  {{end}}
+  {{- end -}}
+  {{- if .Services }}
+  {{range .Services}}  - [{{.Name}}](#{{.FullName}})
+  {{end}}
+  {{- end -}}
+{{end}}
+
+{{range .Files}}
+{{$file_name := .Name}}
+{{$pkg := .Package}}
+<a name="{{.Name}}"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## {{.Name}}
+{{.Description}}
+
+{{range .Messages}}
+<a name="{{.FullName}}"></a>
+
+### {{.LongName}}
+{{.Description}}
+
+{{if .HasFields}}
+| Field Name | Type  | Description |
+| ---------- | ----  | ----------- |
+{{range .Fields -}}
+{{$rep := eq "repeated" .Label -}}
+| **{{.Name}}** | {{if hasPrefix $pkg .FullType}}[{{.LongType}}](#{{lower .LongType}}){{else}}{{.LongType}}{{end}}{{if $rep}}[...]{{end}} | {{p .Description}} |
+{{end}}
+{{end}}
+
+
+{{if .HasExtensions}}
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{p .Description}} |
+{{end}}
+{{end}}
+
+{{end}} <!-- end messages -->
+
+{{range .Enums}}
+<a name="{{.FullName}}"></a>
+
+### {{.LongName}}
+{{.Description}}
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+{{range .Values -}}
+| {{.Name}} | {{.Number}} | {{p .Description}} |
+{{end}}
+
+{{end}} <!-- end enums -->
+
+{{if .HasExtensions}}
+<a name="{{$file_name}}-extensions"></a>
+
+### File-level Extensions
+| Extension | Type | Base | Number | Description |
+| --------- | ---- | ---- | ------ | ----------- |
+{{range .Extensions -}}
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{p .Description}} |
+{{end}}
+{{end}} <!-- end HasExtensions -->
+
+{{range .Services}}
+<a name="{{.FullName}}"></a>
+
+### {{.Name}}
+{{.Description}}
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+{{range .Methods -}}
+| {{.Name}} | [{{.RequestLongType}}](#{{.RequestFullType}}){{if .RequestStreaming}} stream{{end}} | [{{.ResponseLongType}}](#{{.ResponseFullType}}){{if .ResponseStreaming}} stream{{end}} | {{p .Description}} |
+{{end}}
+{{end}} <!-- end services -->
+
+{{end}}
+

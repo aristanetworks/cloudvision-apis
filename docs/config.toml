@@ -1,0 +1,22 @@
+baseURL = "https://aristanetworks.github.io/cloudvision-apis/"
+languageCode = "en-us"
+title = "Arista Networks FMP APIs"
+theme = "docs"
+
+[params]
+    themeVariant = "arista"
+
+[outputs]
+    home = [ "HTML", "RSS", "JSON"]
+
+[[menu.shortcuts]]
+    name = "<i class='fab fa-github'></i> Github"
+    identifier = "ds"
+    url = "https://github.com/aristanetworks/cloudvision-apis"
+    weight = 1
+
+[markup]
+    defaultMarkdownHandler = "goldmark"
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true

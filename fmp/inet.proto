@@ -1,0 +1,24 @@
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+// Useful types that come from ietf-inet-types.yang
+
+syntax = "proto3";
+
+package fmp;
+
+option go_package = "arista/resources/fmp";
+
+message IPAddress {
+	string value = 1;
+}
+
+message IPv4Address {
+	string value = 1;
+}
+
+message IPv6Address {
+	string value = 1;
+}

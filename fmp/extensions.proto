@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package fmp;
+
+option go_package = "arista/resources/fmp";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MessageOptions {
+    // TODO: will need an official number from Google, just like gNMI extensions
+    //       this works for now, though.
+    string model = 51423;
+    bool   model_key = 51424;
+    string custom_filter = 51425;
+    bool   no_default_filter = 51426;
+    bool   require_set_key = 51427;
+    string   unkeyed_model = 51428;
+}
