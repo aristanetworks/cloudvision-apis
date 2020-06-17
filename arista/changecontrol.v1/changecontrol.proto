@@ -1,0 +1,294 @@
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.changecontrol.v1;
+
+option go_package = "arista/resources/arista/changecontrol.v1;changecontrol";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// RepeatedRepeatedString wraps a repeated fmp.RepeatedString
+// to define a string matrix which is used to represent stage
+// rows (see StageConfig).
+message RepeatedRepeatedString {
+	// values is the underlying string matrix.
+	repeated fmp.RepeatedString values = 1;
+}
+
+// ChangeControlKey uniquely identifies a change control.
+message ChangeControlKey {
+	option (fmp.model_key) = true;
+
+	// id is the ID of a change control.
+	google.protobuf.StringValue id = 1;
+}
+
+// Action is an action to perform during the execution of
+// a stage of a change control. Available actions can be
+// fetched using the "action" services.
+message Action {
+	// name is the name of an action.
+	google.protobuf.StringValue name = 1;
+	// timeout (optional) is the maximum duration
+	// in seconds that the action can execute before
+	// timing out. If this is not set, then this is
+	// interpreted to mean there is no timeout.
+	google.protobuf.UInt32Value timeout = 2;
+	// args are the arguments of the action.
+	fmp.MapStringString args = 3;
+}
+
+// StageConfig holds a configuration for a stage in a change
+// control. Each stage generally defines either an action
+// or a series of sub-stages.
+message StageConfig {
+	// name is the name of the stage.
+	google.protobuf.StringValue name = 1;
+	// action (optional) is the action to perform on stage
+	// execution.
+	Action action = 2;
+        // rows (optional) is a series of rows of parallel stages
+	// referenced by ID. Each row is run one after the other
+	// and the stages within each row are run in parallel.
+	//
+	// For example:
+	//
+	// [["stage-1a", "stage-1b"], ["stage-2"]]
+	//
+	// This configures stage-1a and stage-1b to run at the
+	// same time, and then stage-2 once both of them have
+	// completed.
+        RepeatedRepeatedString rows = 3;
+}
+
+// StageConfigMap wraps a map from stage ID to StageConfig.
+// This defines the configuration and order of execution
+// for the stages in a change control.
+//
+// For example:
+//
+// {
+//     "root": { name: "root", rows: [["1-2"], ["3"]] },
+//     "1-2":  { name: "stages 1-2", rows: [["1a", "1b"], ["2"]] },
+//     "1a":   { name: "stage 1a", action: { name: "task", args: { "TaskID": "101" } },
+//     "1b":   { name: "stage 1b", action: { name: "task", args: { "TaskID": "102" } },
+//     "2":    { name: "stage 2", action: { name: "task", args: { "TaskID": "103" } },
+//     "3":    { name: "stage 3", action: { name: "task", args: { "TaskID": "104" } }
+// }
+//
+// Assuming the root stage ID of the enclosing change control
+// is "root", this would mean to do the following in sequence:
+//
+// root
+// |- stages 1-2
+// |  |- stage 1a, stage 1b (parallel)
+// |  |- stage 2
+// |- stage 3
+//
+// That is, execute tasks 101 and 102 in parallel, then task 103, then task 104.
+message StageConfigMap {
+	// values is the underlying map from stage ID to StageConfig.
+	map<string, StageConfig> values = 1;
+}
+
+// ChangeConfig holds a configuration for the change of a change
+// control which is essentially a named configuration of stages.
+message ChangeConfig {
+	// name is the name of the change.
+	google.protobuf.StringValue name = 1;
+	// root_stage_id is the ID of the root stage or the stage that
+	// should execute first.
+	google.protobuf.StringValue root_stage_id = 2;
+	// stages holds a configuration of stages. See StageConfigMap
+	// description for more information.
+	StageConfigMap stages = 3;
+	// notes (optional) are any notes associated with the change.
+	google.protobuf.StringValue notes = 4;
+}
+
+// FlagConfig is used to set a flag on a change control that takes
+// a boolean value (e.g. start/stop, approve/unapprove).
+message FlagConfig {
+	// value is the value of the flag (true or false).
+	google.protobuf.BoolValue value = 1;
+	// notes (optional) are any notes associated with the flag value.
+	google.protobuf.StringValue notes = 2;
+}
+
+// TimestampFlagConfig is used to set a flag on a change control
+// that takes a timestamp value (e.g. schedule/unschedule).
+message TimestampFlagConfig {
+	// value is the value of the flag (some timestamp).
+	google.protobuf.Timestamp value = 1;
+	// notes (optional) are the notes associated with the flag value.
+	google.protobuf.StringValue notes = 2;
+}
+
+// ChangeControlConfig holds the configuration of a change control.
+message ChangeControlConfig {
+	option (fmp.model) = "rw";
+
+	// key uniquely identifies the change control.
+	ChangeControlKey key = 1;
+	// change is the change subject to execution.
+	ChangeConfig change = 2;
+	// start (optional) is the flag to start (start.value set to
+	// true) or stop (start.value set to false) execution of the
+	// change control.
+	FlagConfig start = 3;
+	// schedule (optional) is the flag to schedule (schedule.value
+	// set to some timestamp) or unschedule (schedule.value set to
+	// nil) the change control for execution.
+	TimestampFlagConfig schedule = 4;
+}
+
+// StageStatus defines the possible execution statuses of a stage.
+enum StageStatus {
+    STAGE_STATUS_UNSPECIFIED = 0;
+    // STAGE_STATUS_RUNNING means the stage has begun execution.
+    STAGE_STATUS_RUNNING = 1;
+    // STAGE_STATUS_COMPLETED means the stage has ceased execution.
+    // Success/failure of a stage cannot be inferred from this status
+    // alone but rather this status plus the stage error. That is, no
+    // error implies success and some error implies failure.
+    STAGE_STATUS_COMPLETED = 2;
+}
+
+// Stage holds the configuration and status of a stage.
+message Stage {
+	// name is the name of the stage.
+	google.protobuf.StringValue name = 1;
+	// action is the action to perform during the stage.
+	Action action = 2;
+	// rows is a series of rows of parallel stages referenced
+	// by ID. See StageConfig.rows for more details.
+	RepeatedRepeatedString rows = 3;
+	// status is the execution status of the stage.
+	StageStatus status = 4;
+	// error is any error that occured during the execution
+	// of the stage.
+	google.protobuf.StringValue error = 5;
+}
+
+// StageMap is a map from stage ID to stage. This has essentially
+// the same structure as StageMapConfig, but with each ID mapping
+// to a Stage instead of StageConfig.
+message StageMap {
+	// values is the underlying map from stage ID to Stage.
+	map<string, Stage> values = 1;
+}
+
+// Change holds the configuration and status of the change of a
+// change control.
+message Change {
+	// name is the name of the change.
+	google.protobuf.StringValue name = 1;
+	// root_stage_id is the ID of the root stage or the stage that
+	// should execute first.
+	google.protobuf.StringValue root_stage_id = 2;
+	// stages holds a configuration of stages and their statuses.
+	StageMap stages = 3;
+	// notes are any notes associated with the change.
+	google.protobuf.StringValue notes = 4;
+	// time is the time at which the change was last updated.
+	google.protobuf.Timestamp time = 5;
+	// user is the user by which the change was last updated.
+	google.protobuf.StringValue user = 6;
+}
+
+// Flag holds the configuration of a boolean flag plus some
+// information about when and by whom it was set.
+message Flag {
+	// value is the value of the flag (true or false).
+	google.protobuf.BoolValue value = 1;
+	// notes are any notes associated with the setting of the flag.
+	google.protobuf.StringValue notes = 2;
+	// time is the time at which the flag was last updated.
+	google.protobuf.Timestamp time = 3;
+	// user is the user by which the flag was last updated.
+	google.protobuf.StringValue user = 4;
+}
+
+// TimestampFlag holds the configuration of a timestamp flag
+// plus some information about when and by whom is was set.
+message TimestampFlag {
+	// value is the value of the flag (some timestamp).
+	google.protobuf.Timestamp value = 1;
+	// notes are any notes associated with the setting of the flag.
+	google.protobuf.StringValue notes = 2;
+	// time is the time at which the flag was last updated.
+	google.protobuf.Timestamp time = 3;
+	// user is the user by which the flag was last updated.
+	google.protobuf.StringValue user = 4;
+}
+
+// ChangeControlStatus defines the possible execution statuses of
+// a change control.
+enum ChangeControlStatus {
+     CHANGE_CONTROL_STATUS_UNSPECIFIED = 0;
+     // CHANGE_CONTROL_STATUS_RUNNING means the change control has begun
+     // execution.
+     CHANGE_CONTROL_STATUS_RUNNING = 1;
+     // CHANGE_CONTROL_STATUS_COMPLETED means the change control has ceased
+     // execution. Success/failure of a change control cannot be inferred
+     // from this status alone but rather this status plus the change control
+     // error. That is, no error implies success and some error implies failure.
+     CHANGE_CONTROL_STATUS_COMPLETED = 2;
+     // CHANGE_CONTROL_STATUS_SCHEDULED means the change control has been
+     // scheduled for execution at some time. Any failure that occurs during
+     // this process will cause a transition back to the unspecified status,
+     // a reset of the schedule flag by the system, and an error on the change
+     // control reporting the details of the failure.
+     CHANGE_CONTROL_STATUS_SCHEDULED = 3;
+}
+
+// ChangeControl holds the configuration and status of a change control.
+message ChangeControl {
+	option (fmp.model) = "ro";
+
+	// key uniquely identifies a change control.
+	ChangeControlKey key = 1;
+	// change holds the configuration and status of the change of
+	// the change control.
+	Change change = 2;
+	// approve indicates whether the change control was flagged
+	// as approved (approve.value set to true) or unapproved
+	// (approve.value set to false).
+	Flag approve = 3;
+	// start indicates whether the change control was flagged to
+	// start (start.value set to true) or stop (start.value set
+	// to false) execution.
+	Flag start = 4;
+	// status is the execution status of the change control.
+	ChangeControlStatus status = 5;
+	// error is any error that occurred during the execution of the
+	// change control.
+	google.protobuf.StringValue error = 6;
+	// schedule indicates whether the change control was flagged
+	// to be scheduled (schedule.value set to some timestamp) or
+	// unscheduled (schedule.value set to nil) for execution.
+	TimestampFlag schedule = 7;
+}
+
+// ApproveConfig is used to configure the approval of a change control.
+message ApproveConfig {
+	option (fmp.model) = "rw";
+
+	// key uniquely identifies a change control.
+	ChangeControlKey key = 1;
+	// approve is the flag to approve (approve.value set to true) or
+	// unapprove (approve.value set to false) the change control.
+	FlagConfig approve = 2;
+	// version (optional) is the timestamp of the change of the
+	// change control. This field must be set when approve.value
+	// is set to true.
+	google.protobuf.Timestamp version = 3;
+}

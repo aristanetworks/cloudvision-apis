@@ -1,0 +1,35 @@
+# Copyright (c) 2020 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2021-08-10
+      description: Add autoFillActionID to schema
+      version: 1.0.15
+      onprem: true
+      cvaas: true
+
+    - date: 2021-07-22
+      description: change InputsKey path type to fmp.RepeatedString
+      version: 1.0.14
+
+    - date: 2021-07-21
+      description: Add AssignedTags resource
+      version: 1.0.13
+
+    - date: 2021-07-07
+      description: Add path to the key of Inputs an InputsConfig, Disabled yang support
+      version: 1.0.12
+
+    - date: 2021-06-20
+      description: Converted StudioConfig to a diff-based resource
+      version: 1.0.11
+
+    - date: 2021-06-04
+      description: Added InputsConfig resource
+      version: 1.0.10
+

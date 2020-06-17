@@ -1,0 +1,40 @@
+name: github pages
+
+on:
+  push:
+    branches:
+    - trunk
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@master
+      with:
+        submodules: true
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+
+    - name: Install Protoc
+      uses: arduino/setup-protoc@master
+
+    - name: Install Golang (for protoc-gen-doc)
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.17.6'
+
+    - name: Install protoc-gen-doc
+      run: go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+
+    - name: Generate Docs
+      run: make -C docs
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2.4.0
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./docs/public

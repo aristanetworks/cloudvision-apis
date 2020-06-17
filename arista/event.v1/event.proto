@@ -1,0 +1,132 @@
+// Copyright (c) 2020 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.event.v1;
+
+option go_package = "arista/resources/arista/event.v1;event";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+
+// EventSeverity is the severity level of the event
+enum EventSeverity {
+  EVENT_SEVERITY_UNSPECIFIED = 0;
+  EVENT_SEVERITY_INFO = 1;
+  EVENT_SEVERITY_WARNING = 2;
+  EVENT_SEVERITY_ERROR = 3;
+  EVENT_SEVERITY_CRITICAL = 4;
+}
+
+// ComponentType describes the type of entity on which the event occured
+enum ComponentType {
+  COMPONENT_TYPE_UNSPECIFIED = 0;
+  COMPONENT_TYPE_DEVICE = 1;
+  COMPONENT_TYPE_INTERFACE = 2;
+  COMPONENT_TYPE_TURBINE = 3;
+}
+
+// EventComponent describes an entity on which the event occured
+message EventComponent {
+  // type is the type of component
+  ComponentType type = 1;
+  // components identifies the entity on which the event occured
+  map<string, string> components = 2;
+}
+
+// EventComponents contains entities on which an event occured
+message EventComponents {
+  // components describes the components on which an event occured
+  repeated EventComponent components = 1;
+}
+
+// EventAck contains acknowledgement information of an event
+message EventAck {
+  // ack is the acknowledgement state of an event
+  google.protobuf.BoolValue ack = 1;
+  // acker is the user that acknowledged the event
+  google.protobuf.StringValue acker = 2;
+  // ack_time is the time of acknowledgement
+  google.protobuf.Timestamp ack_time = 3;
+}
+
+// EventNoteConfig configures a note
+message EventNoteConfig {
+  // note is the text of the note
+  google.protobuf.StringValue note = 1;
+}
+
+// Eventnote is the state of a note
+message EventNote {
+  // note is the text of the note
+  google.protobuf.StringValue note = 1;
+  // note_creator is the creator of the note
+  google.protobuf.StringValue note_creator = 2;
+}
+
+// EventKey uniquely identifies an event
+message EventKey {
+  option (fmp.model_key) = true;
+  // key is the event data identifier
+  google.protobuf.StringValue key = 1;
+  // timestamp is the time the event occured
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+// EventData is additional event data
+message EventData {
+  // data is event data specific to the type of this event
+  map<string, string> data = 1;
+}
+
+// EventNotesConfig configures the notes of an event
+message EventNotesConfig {
+  // notes is keyed by desired note time in Unix time, in milliseconds
+  map<int64, EventNoteConfig> notes = 1;
+}
+
+// EventAnnotationConfig configures an event annotation
+message EventAnnotationConfig{
+  option (fmp.model) = "rw";
+  // key is the event instance identifier
+  EventKey key = 1;
+  // ack is the acknowledgement state of an event
+  google.protobuf.BoolValue ack = 2;
+  // notes is the notes on an event
+  EventNotesConfig notes = 3;
+}
+
+// EventNotes is the notes of an event state
+message EventNotes {
+  // notes is keyed by the time desired
+  map<int64, EventNote> notes = 1;
+}
+
+// Event is a telemetry event
+message Event {
+  option (fmp.model) = "ro";
+  // key is the event instance identifier
+  EventKey key = 1;
+  // severity is the severity of the event
+  EventSeverity severity = 2;
+  // title is the title of the event
+  google.protobuf.StringValue title = 3;
+  // description is the description of the event
+  google.protobuf.StringValue description = 4;
+  // event_type is the type of the event
+  google.protobuf.StringValue event_type = 5;
+  // data is the data of the event
+  EventData data = 6;
+  // components is the components on which the event occurred
+  EventComponents components = 7;
+  // ack is the acknowledgement status of the event
+  EventAck ack = 8;
+  // notes is the notes of the event
+  EventNotes notes = 9;
+  // last_updated_time is the time of the most recent update to the event
+  google.protobuf.Timestamp last_updated_time = 10;
+}

@@ -1,0 +1,114 @@
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.tag.v2;
+
+option go_package = "arista/resources/arista/tag.v2;tag";
+
+import "google/protobuf/wrappers.proto";
+import "fmp/extensions.proto";
+
+// ElementType enumerates the types of network elements that can
+// be associated with tags.
+enum ElementType {
+	ELEMENT_TYPE_UNSPECIFIED = 0;
+	// ELEMENT_TYPE_DEVICE is used for device tags.
+	ELEMENT_TYPE_DEVICE = 1;
+	// ELEMENT_TYPE_INTERFACE is used for interface tags.
+	ELEMENT_TYPE_INTERFACE = 2;
+}
+
+// TagKey uniquely identifies a tag.
+message TagKey {
+	option (fmp.model_key) = true;
+	// workspace_id is the ID of a workspace. The special ID ""
+	// identifies the location where merged tags reside.
+	google.protobuf.StringValue workspace_id = 1;
+	// element_type is the category of network element to which
+	// this tag can be assigned.
+	ElementType element_type = 2;
+	// label is an arbitrary label.
+	google.protobuf.StringValue label = 3;
+	// value is an arbitrary value.
+	google.protobuf.StringValue value = 4;
+}
+
+// TagConfig holds a configuration for a user tag.
+message TagConfig {
+	option (fmp.model) = "rw";
+	// key identifies a tag. The special workspace ID "" for
+	// merged tags should not be set here.
+	TagKey key = 1;
+	// remove indicates whether to remove (true) or add (false,
+	// unset) the tag identified by the key if the encompassing
+	// workspace merges.
+	google.protobuf.BoolValue remove = 2;
+}
+
+// CreatorType enumerates the types of entities that can create
+// a tag.
+enum CreatorType {
+	CREATOR_TYPE_UNSPECIFIED = 0;
+	// CREATOR_TYPE_SYSTEM is used for system tags.
+	CREATOR_TYPE_SYSTEM = 1;
+	// CREATOR_TYPE_USER is used for user tags.
+	CREATOR_TYPE_USER = 2;
+}
+
+// Tag holds a merge-preview or the existing merged state (if the
+// workspace ID is "") of a tag.
+message Tag {
+	option (fmp.model) = "ro";
+	// key identifies a tag.
+	TagKey key = 1;
+	// creator_type is the creator type of the tag.
+	CreatorType creator_type = 2;
+}
+
+// TagAssignmentKey uniquely identifies an assignment between
+// a tag and a network element.
+message TagAssignmentKey {
+	option (fmp.model_key) = true;
+	// workspace_id is the ID of a workspace. The special ID ""
+	// identifies the location where merged assignments reside.
+	google.protobuf.StringValue workspace_id = 1;
+	// element_type is the element type of a tag. What should
+	// be set per element type:
+	//
+	// ELEMENT_TYPE_DEVICE: device_id
+	// ELEMENT_TYPE_INTERFACE: device_id, interface_id
+	ElementType element_type = 2;
+	// label is the label of a tag.
+	google.protobuf.StringValue label = 3;
+	// value is the value of a tag.
+	google.protobuf.StringValue value = 4;
+	// device_id identifies a device.
+	google.protobuf.StringValue device_id = 5;
+	// interface_id identifies an interface on a device.
+	google.protobuf.StringValue interface_id = 6;
+}
+
+// TagAssignmentConfig holds a configuration for an assignment
+// between a tag and a network element.
+message TagAssignmentConfig {
+	option (fmp.model) = "rw";
+	// key identifies an assignment. The special workspace ID ""
+	// for merged assignments should not be set here.
+	TagAssignmentKey key = 1;
+	// remove indicates whether to remove (true) or add (false,
+	// unset) the assignment identified by the key if the
+	// encompassing workspace merges.
+	google.protobuf.BoolValue remove = 2;
+}
+
+// TagAssignment holds a merge-preview or the existing merged
+// state (if the workspace ID is "") of an assignment between
+// a tag and a network element.
+message TagAssignment {
+	option (fmp.model) = "ro";
+	// key identifies an assignment.
+	TagAssignmentKey key = 1;
+}

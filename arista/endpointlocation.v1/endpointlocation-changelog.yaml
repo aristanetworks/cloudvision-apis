@@ -1,0 +1,74 @@
+# Copyright (c) 2020 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2020-04-09
+      description: Initial revision
+      version: 1.0.0
+    - date: 2020-04-24
+      description: Added MacType and changed learnedTs to protobuf timestamp
+      version: 1.0.1
+    - date: 2020-05-01
+      description: Added algorithm for internal devices
+      version: 1.0.2
+    - date: 2020-05-06
+      description: Added identifiers and removed ARP entry in response
+      version: 1.0.3
+    - date: 2020-05-15
+      description: Added primary management IP identifier
+      version: 1.0.4
+    - date: 2020-05-18
+      description: Added hostname identifier
+      version: 1.0.5
+    - date: 2020-06-26
+      description: Added identifier sources and renamed learnedTs to learnedTime
+      version: 1.0.6
+    - date: 2020-07-06
+      description: Added explanation for ARP locations
+      version: 1.0.7
+    - date: 2020-07-24
+      description: Rename internal and external devices to inventory and non-inventory devices
+      version: 1.0.8
+    - date: 2020-07-31
+      description: Added identifier source neighbor for IPv6 addresses
+      version: 1.0.9
+    - date: 2020-08-05
+      description: Added device message in response
+      version: 1.0.10
+    - date: 2020-08-19
+      description: Changed DeviceList to DeviceMap in response
+      version: 1.0.11
+    - date: 2020-08-21
+      description: Put EXPLANATION_OWN_PORT_INVENTORY_DEVICE before other inventory device explanations
+      version: 1.0.12
+    - date: 2020-09-17
+      description: Removed EXPLANATION_ARP
+      version: 1.0.13
+    - date: 2020-09-28
+      description: Added DeviceStatus enum
+      version: 1.0.14
+    - date: 2021-01-12
+      description: Added EXPLANATION_VXLAN for ports with Vxlan interface
+      version: 1.1.0
+    - date: 2021-01-21
+      description: Replaced EXPLANATION_VXLAN with EXPLANATION_VIRTUAL to account for all virtual ports
+      version: 1.1.1
+    - date: 2021-03-07
+      description: Added DHCP identifier source and device information to schema
+      version: 1.2.0
+    - date: 2021-05-24
+      description: Changed device hierarchy from a repeated string in a message to a fmp.RepeatedString
+      version: 1.2.1
+    - date: 2021-06-17
+      description: Added MAC_TYPE_PENDING_SECURE to correspond with pendingSecureMac type in MAC tables
+      version: 1.2.2
+    - date: 2021-06-21
+      description: Added username identifier type, wifi identifier source, wireless connection explanation, and wifi endpoint device type to schema
+      version: 1.2.3
+      onprem: true
+      cvaas: true

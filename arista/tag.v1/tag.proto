@@ -1,0 +1,118 @@
+// Copyright (c) 2020 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.tag.v1;
+
+option go_package = "arista/resources/arista/tag.v1;tag";
+
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+
+// TagKey uniquely identifies a tag for a network element.
+message TagKey {
+	option (fmp.model_key) = true;
+
+	// Label is the label of the tag.
+	google.protobuf.StringValue label = 1;
+	// Value is the value of the tag.
+	google.protobuf.StringValue value = 2;
+}
+
+// CreatorType specifies an entity that creates something.
+enum CreatorType {
+     CREATOR_TYPE_UNSPECIFIED = 0;
+     // CREATOR_TYPE_SYSTEM is the type for something created by the system.
+     CREATOR_TYPE_SYSTEM = 1;
+     // CREATOR_TYPE_USER is the type for something created by a user.
+     CREATOR_TYPE_USER = 2;
+}
+
+// InterfaceTagConfig is a label-value pair that may or may
+// not be assigned to an interface.
+message InterfaceTagConfig {
+	option (fmp.model) = "rw";
+
+	// Key uniquely identifies the interface tag.
+	TagKey key = 1;
+}
+
+// InterfaceTag is a label-value pair that may or may
+// not be assigned to an interface.
+message InterfaceTag {
+	option (fmp.model) = "ro";
+
+	// Key uniquely identifies the interface tag.
+	TagKey key = 1;
+	// CreatorType is the creator type of the tag.
+	CreatorType creator_type = 2;
+}
+
+// InterfaceTagAssignmentKey uniquely identifies an interface
+// tag assignment.
+message InterfaceTagAssignmentKey {
+	option (fmp.model_key) = true;
+
+	// Label is the label of the tag.
+	google.protobuf.StringValue label = 1;
+	// Value is the value of the tag.
+	google.protobuf.StringValue value = 2;
+	// DeviceId is the ID of the interface's device.
+	google.protobuf.StringValue device_id = 3;
+	// InterfaceId is the ID of the interface.
+	google.protobuf.StringValue interface_id = 4;
+}
+
+// InterfaceTagAssignmentConfig is the assignment of an interface tag
+// to a specific interface.
+message InterfaceTagAssignmentConfig {
+	option (fmp.model) = "rw";
+
+	// Key uniquely identifies the interface tag assignment.
+	InterfaceTagAssignmentKey key = 1;
+}
+
+// DeviceTagConfig is a label-value pair that may or may not
+// be assigned to a device.
+message DeviceTagConfig {
+	option (fmp.model) = "rw";
+
+	// Key uniquely identifies the device tag.
+	TagKey key = 1;
+}
+
+// DeviceTag is a label-value pair that may or may not
+// be assigned to a device.
+message DeviceTag {
+	option (fmp.model) = "ro";
+
+	// Key uniquely identifies the device tag.
+	TagKey key = 1;
+	// CreatorType is the creator type of the tag.
+	CreatorType creator_type = 2;
+}
+
+// DeviceTagAssignmentKey uniquely identifies a device tag
+// assignment.
+message DeviceTagAssignmentKey {
+	option (fmp.model_key) = true;
+
+	// Label is the label of the tag.
+	google.protobuf.StringValue label = 1;
+	// Value is the value of the tag.
+	google.protobuf.StringValue value = 2;
+	// DeviceId is the ID of the device.
+	google.protobuf.StringValue device_id = 3;
+}
+
+// DeviceTagAssignmentConfig is the assignment of a device tag to a
+// specific device.
+message DeviceTagAssignmentConfig {
+	option (fmp.model) = "rw";
+
+	// Key uniquely identifies the device tag assignment.
+	DeviceTagAssignmentKey key = 1;
+}

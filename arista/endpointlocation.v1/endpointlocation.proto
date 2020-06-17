@@ -1,0 +1,194 @@
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.endpointlocation.v1;
+
+option go_package = "arista/resources/arista/endpointlocation.v1;endpointlocation";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+enum MacType {
+    MAC_TYPE_UNSPECIFIED = 0;
+    MAC_TYPE_LEARNED_DYNAMIC = 1;
+    MAC_TYPE_LEARNED_SECURE = 2;
+    MAC_TYPE_CONFIGURED_DYNAMIC = 3;
+    MAC_TYPE_CONFIGURED_SECURE = 4;
+    MAC_TYPE_CONFIGURED_STATIC = 5;
+    MAC_TYPE_PEER_DYNAMIC = 6;
+    MAC_TYPE_PEER_STATIC = 7;
+    MAC_TYPE_PEER_SECURE = 8;
+    MAC_TYPE_LEARNED_REMOTE = 9;
+    MAC_TYPE_CONFIGURED_REMOTE = 10;
+    MAC_TYPE_RECEIVED_REMOTE = 11;
+    MAC_TYPE_PEER_LEARNED_REMOTE = 12;
+    MAC_TYPE_PEER_CONFIGURED_REMOTE = 13;
+    MAC_TYPE_PEER_RECEIVED_REMOTE = 14;
+    MAC_TYPE_EVPN_DYNAMIC_REMOTE = 15;
+    MAC_TYPE_EVPN_CONFIGURED_REMOTE = 16;
+    MAC_TYPE_PEER_EVPN_REMOTE = 17;
+    MAC_TYPE_CONFIGURED_ROUTER = 18;
+    MAC_TYPE_PEER_ROUTER = 19;
+    MAC_TYPE_EVPN_INTF_DYNAMIC = 20;
+    MAC_TYPE_EVPN_INTF_STATIC = 21;
+    MAC_TYPE_AUTHENTICATED = 22;
+    MAC_TYPE_PEER_AUTHENTICATED = 23;
+    MAC_TYPE_PENDING_SECURE = 24;
+
+    // This is used for capturing future MAC types
+    MAC_TYPE_OTHER = 99999;
+}
+
+enum Likelihood {
+    // These ports have unspecified likelihood
+    LIKELIHOOD_UNSPECIFIED = 0;
+    // These ports are very likely to be physically connected to the queried device
+    LIKELIHOOD_VERY_LIKELY = 1;
+    // These ports are likely to be physically connected to the queried device
+    LIKELIHOOD_LIKELY = 2;
+    // These ports are somewhat likely to be physically connected to the queried device
+    LIKELIHOOD_SOMEWHAT_LIKELY = 3;
+    // These ports are less likely to be physically connected to the queried device
+    LIKELIHOOD_LESS_LIKELY = 4;
+}
+
+enum IdentifierType {
+    IDENTIFIER_TYPE_UNSPECIFIED = 0;
+    IDENTIFIER_TYPE_MAC_ADDR = 1;
+    IDENTIFIER_TYPE_IPV4_ADDR = 2;
+    IDENTIFIER_TYPE_IPV6_ADDR = 3;
+    IDENTIFIER_TYPE_INVENTORY_DEVICE_ID = 4;
+    IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP = 5;
+    IDENTIFIER_TYPE_HOSTNAME = 6;
+    IDENTIFIER_TYPE_USERNAME = 7;
+
+    // May be used for some unknown LLDP chassis id type
+    IDENTIFIER_TYPE_OTHER = 99999;
+}
+
+enum IdentifierSource {
+    IDENTIFIER_SOURCE_UNSPECIFIED = 0;
+    IDENTIFIER_SOURCE_FDB = 1;
+    IDENTIFIER_SOURCE_ARP = 2;
+    IDENTIFIER_SOURCE_NEIGHBOR = 3;
+    // Onboarded or inventory devices
+    IDENTIFIER_SOURCE_DEVICE_INVENTORY = 4;
+    IDENTIFIER_SOURCE_LLDP = 5;
+    IDENTIFIER_SOURCE_DHCP = 6;
+    IDENTIFIER_SOURCE_WIFI = 7;
+}
+
+message IdentifierSourceList {
+    repeated IdentifierSource values = 1;
+}
+
+message Identifier {
+    IdentifierType type = 1;
+    google.protobuf.StringValue value = 2;
+    IdentifierSourceList source_list = 3;
+}
+
+message IdentifierList {
+    repeated Identifier values = 1;
+}
+
+enum Explanation {
+    // Explanation for ports that have unspecified likelihood
+    EXPLANATION_UNSPECIFIED = 0;
+    // Explanation for ports directly connected to the queried endpoint device in LLDP
+    EXPLANATION_DIRECT_CONNECTION = 1;
+    // Explanation for ports directly connected to at least one non-inventory device in LLDP
+    EXPLANATION_NON_INVENTORY_CONNECTION = 2;
+    // Explanation for ports not directly connected to any device in LLDP
+    EXPLANATION_NO_CONNECTION = 3;
+    // Explanation for ports only connected to inventory devices in LLDP
+    EXPLANATION_INVENTORY_CONNECTION = 4;
+    // Explanation for ports that are on the inventory device itself
+    EXPLANATION_OWN_PORT_INVENTORY_DEVICE = 5;
+    // Explanation for ports directly connected to the queried device in LLDP (for inventory devices)
+    EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE = 6;
+    // Explanation for ports not directly connected to any device in LLDP (for inventory devices)
+    EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE = 7;
+    // Explanation for ports connected to only other devices besides queried inventory device
+    EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE = 8;
+    // Explanation for ports containing a virtual interface
+    EXPLANATION_VIRTUAL = 9;
+    // Explanation for wireless clients that are directly connected to a wireless access point
+    EXPLANATION_WIRELESS_CONNECTION = 10;
+}
+
+message ExplanationList {
+    repeated Explanation values = 1;
+}
+
+message Location {
+    google.protobuf.StringValue device_id = 1;
+    DeviceStatus device_status = 2;
+    google.protobuf.StringValue interface = 3;
+    google.protobuf.UInt32Value vlan_id = 4;
+    google.protobuf.Timestamp learned_time = 5;
+    MacType mac_type = 6;
+    Likelihood likelihood = 7;
+    ExplanationList explanation_list = 8;
+    IdentifierList identifier_list = 9;
+}
+
+message LocationList {
+    repeated Location values = 1;
+}
+
+enum DeviceType {
+    DEVICE_TYPE_UNSPECIFIED = 0;
+    DEVICE_TYPE_INVENTORY = 1;
+    DEVICE_TYPE_ENDPOINT = 2;
+    DEVICE_TYPE_WIFI_ENDPOINT = 3;
+}
+
+enum DeviceStatus {
+    DEVICE_STATUS_UNSPECIFIED = 0;
+    DEVICE_STATUS_ACTIVE = 1;
+    DEVICE_STATUS_INACTIVE = 2;
+}
+
+message DeviceInfo {
+    google.protobuf.StringValue device_name = 1;
+    google.protobuf.BoolValue mobile = 2;
+    google.protobuf.BoolValue tablet = 3;
+    google.protobuf.UInt32Value score = 4;
+    google.protobuf.StringValue version = 5;
+    google.protobuf.StringValue mac_vendor = 6;
+    google.protobuf.StringValue classification = 7;
+    fmp.RepeatedString hierarchy = 8;
+}
+
+message Device {
+    IdentifierList identifier_list = 1;
+    DeviceType device_type = 2;
+    // The list of possible locations, in order from most likely to least likely
+    LocationList location_list = 3;
+    DeviceStatus device_status = 4;
+    DeviceInfo device_info = 5;
+}
+
+message DeviceMap {
+    map<string, Device> values = 1;
+}
+
+message EndpointLocationKey {
+    option (fmp.model_key) = true;
+
+    google.protobuf.StringValue search_term = 1;
+}
+
+message EndpointLocation {
+    option (fmp.model) = "ro";
+
+    EndpointLocationKey key = 1;
+    DeviceMap device_map = 2;
+}
