@@ -1,1 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+Event
+EventAck
+EventAnnotationConfig
+EventComponent
+EventComponent.ComponentsEntry
+EventComponents
+EventData
+EventData.DataEntry
+EventKey
+EventNote
+EventNoteConfig
+EventNotes
+EventNotes.NotesEntry
+EventNotesConfig
+EventNotesConfig.NotesEntry
+ComponentType
+EventSeverity
+arista/event.v1/services.gen.proto
+EventAnnotationConfigDeleteRequest
+EventAnnotationConfigDeleteResponse
+EventAnnotationConfigRequest
+EventAnnotationConfigResponse</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
+Device
+DeviceKey
+ExtendedAttributes
+ExtendedAttributes.FeatureEnabledEntry
+StreamingStatus
+arista/inventory.v1/services.gen.proto
+DeviceRequest
+DeviceResponse
+DeviceStreamRequest
+DeviceStreamResponse
+DeviceService
+Top
+arista/inventory.v1/inventory.proto
+Device Device is the primary model for this service.
+Field Name Type Description key DeviceKey The key that uniquely identifies this device.</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
+DeviceTag
+DeviceTagAssignmentConfig
+DeviceTagAssignmentKey
+DeviceTagConfig
+InterfaceTag
+InterfaceTagAssignmentConfig
+InterfaceTagAssignmentKey
+InterfaceTagConfig
+TagKey
+CreatorType
+arista/tag.v1/services.gen.proto
+DeviceTagAssignmentConfigDeleteRequest
+DeviceTagAssignmentConfigDeleteResponse
+DeviceTagAssignmentConfigRequest
+DeviceTagAssignmentConfigResponse
+DeviceTagAssignmentConfigSetRequest
+DeviceTagAssignmentConfigSetResponse
+DeviceTagAssignmentConfigStreamRequest
+DeviceTagAssignmentConfigStreamResponse
+DeviceTagConfigDeleteRequest
+DeviceTagConfigDeleteResponse
+DeviceTagConfigRequest</description></item></channel></rss>
