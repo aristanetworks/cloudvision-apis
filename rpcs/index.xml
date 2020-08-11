@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/</link><description>Recent content on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/index.xml" rel="self" type="application/rss+xml"/><item><title>Existing Clients</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</guid><description>Arista provides and maintains the following clients:
-Language Repository Go https://github.com/aristanetworks/cloudvision-go Python https://github.com/aristanetworks/cloudvision-python</description></item><item><title>Creating a Client</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</guid><description>A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.
-The main gRPC site has tutorials for generating clients in many languages:
-Java Node Ruby C#/.Net &amp;hellip; and more There is also an expansive ecosystem, so plenty of languages are supported.
-Tooling In general, there are two main components to generating a language binding:
-protoc: The protobuf compiler which call the language-specific generator typically installed via a package manager (apt, yum, brew, etc) protoc-gen-{language}: The language-specific generator typically installed with the language&amp;rsquo;s dependency manager, build tool, etc Generating Regardless of language, client generation generally follows a pattern of:</description></item><item><title>Error Handling</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</guid><description>Errors returned by the API follow the gRPC status code guidelines. This provides many niceties:
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Uniform RPCs on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/</link><description>Recent content in Uniform RPCs on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/rpcs/index.xml" rel="self" type="application/rss+xml"/><item><title>Error Handling</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</guid><description>Errors returned by the API follow the gRPC status code guidelines. This provides many niceties:
 Language-native idioms (exceptions, return codes, etc.) Easily mappable to HTTP error codes (used for HTTP access to RPCs) Uses metadata rather than a global schema for more detailed errors Example: Go Unary RPCs resp, err := example.GetOne(ExampleConfigRequest{Key: key}) if err != nil { log.Printf(&amp;#34;failed to get %+v: %s\n&amp;#34;, key, err) return err } Streaming RPCs stream, err := example.</description></item><item><title>Filtering</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</guid><description>Filtering is provided through a default and an (optional) additional model-specific mechanism. By default, all models support &amp;ldquo;partial equality filtering&amp;rdquo;. Models that provide a custom filtering method will document this filter-message in its model documentation.
 Partial-Equality Filters Unless intentionally disabled (and sufficiently documented), services provide a default filtering mechanism. The input type is the same as the model you are filtering, and if you wish to filter on a given field you set that field to non-nil.</description></item><item><title>GetOne</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</guid><description>GetOne returns a single instance of a resource.
 The Key field is required to be fully-specified because GetOne needs to identify exactly-one resource to fetch.
@@ -21,63 +16,4 @@ A *SetResponse will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This 
 The Key field is required to be fully-specified because Delete needs to identify exactly-one resource to delete.
 RPC Definition The protobuf definition of GetOne is defined as such (for ExampleConfig):
 rpc Delete (ExampleConfigDeleteRequest) returns (ExampleConfigDeleteResponse);Request Type The generated request for a model (ExampleConfig, here) looks like so:
-message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
-Event
-EventAck
-EventAnnotationConfig
-EventComponent
-EventComponent.ComponentsEntry
-EventComponents
-EventData
-EventData.DataEntry
-EventKey
-EventNote
-EventNoteConfig
-EventNotes
-EventNotes.NotesEntry
-EventNotesConfig
-EventNotesConfig.NotesEntry
-ComponentType
-EventSeverity
-arista/event.v1/services.gen.proto
-EventAnnotationConfigDeleteRequest
-EventAnnotationConfigDeleteResponse
-EventAnnotationConfigRequest
-EventAnnotationConfigResponse</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
-Device
-DeviceKey
-ExtendedAttributes
-ExtendedAttributes.FeatureEnabledEntry
-StreamingStatus
-arista/inventory.v1/services.gen.proto
-DeviceRequest
-DeviceResponse
-DeviceStreamRequest
-DeviceStreamResponse
-DeviceService
-Top
-arista/inventory.v1/inventory.proto
-Device Device is the primary model for this service.
-Field Name Type Description key DeviceKey The key that uniquely identifies this device.</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
-DeviceTag
-DeviceTagAssignmentConfig
-DeviceTagAssignmentKey
-DeviceTagConfig
-InterfaceTag
-InterfaceTagAssignmentConfig
-InterfaceTagAssignmentKey
-InterfaceTagConfig
-TagKey
-CreatorType
-arista/tag.v1/services.gen.proto
-DeviceTagAssignmentConfigDeleteRequest
-DeviceTagAssignmentConfigDeleteResponse
-DeviceTagAssignmentConfigRequest
-DeviceTagAssignmentConfigResponse
-DeviceTagAssignmentConfigSetRequest
-DeviceTagAssignmentConfigSetResponse
-DeviceTagAssignmentConfigStreamRequest
-DeviceTagAssignmentConfigStreamResponse
-DeviceTagConfigDeleteRequest
-DeviceTagConfigDeleteResponse
-DeviceTagConfigRequest</description></item></channel></rss>
+message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item></channel></rss>
