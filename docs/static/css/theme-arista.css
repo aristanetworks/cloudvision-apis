@@ -101,3 +101,14 @@ a:hover {
 #sidebar hr {
     border-color: var(--MENU-SECTION-HR-color);
 }
+
+code {
+    background-color: #F5F5F8;
+    border: none;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.copy-to-clipboard {
+    display: none;
+}

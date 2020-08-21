@@ -7,8 +7,12 @@ pre: "<b>b. </b>"
 
 `GetAll` fetches (and optionally filters) all resource instances.
 
-For the filtering options available, see the *Filtering* section.
-These are the same for `Subscribe`.
+For the filtering options available, see the [Filtering](/cloudvision-apis/rpcs/filtering) section.
+These filtering options are the same for [Subscribe](/cloudvision-apis/rpcs/subscribe).
+
+This RPC is effectively a full-table-scan so the time to complete depends on the amount of data
+the resource reflects. However, being a streaming API, this RPC will return the first message as
+soon as it is available without any buffering.
 
 
 #### RPC Definition
@@ -61,5 +65,8 @@ message TimeBounds {
 The fields `start` and `end` can be used in the following combinations:
 
 - `end`: returns the state of resources at `end`.
+    - responds with only fully-specified models
 - `start`: returns the state of resources at `start` and updates until now.
+    - returns all fully-specified models as of the `start` time, and then all subsequent changes/partials/diffs
 - `start` and `end`: returns the state of resources at `start` as well as any changes until `end`.
+    - same semantics as `start` alone, but only changes up to the `end` time

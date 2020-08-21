@@ -27,6 +27,29 @@ State models only have read methods defined and are denoted with the Protobuf me
 While not required, _state_ models are allowed to "echo" the associated _config_ model for convenience of the user. You should check the relevant model(s) before expecting this behaviour, however.
 
 
+## High Level Config-State Flow
+
+Below is a diagram explaining the data flow from writing a Config to the system creating/updating State.
+_Typically_, this process is asynchronous and the client will receive a response to the `Set` request before
+the state is readable. Verification and durably storing the config are the only gating requirements to responding to
+the Config write-request.
+
+While the config request is an input to deriving the state, there are other (possible) inputs into state:
+
+- non-configurable on-device settings or data (ex: device boot time)
+- CloudVision configuration (ex: default user permissions)
+- related config/state models (if noted in documentation)
+- etc
+
+Subscribing to State (ideally, with a filter) allows the client to wait for any asynchronous processing.
+
+![State-Config Data Flow](/cloudvision-apis/images/config-state-flow.svg)
+
+All responses from [RPCs](/cloudvision-apis/rpcs/) include a timestamp. This timestamp should be viewed as the time at
+which the system durably stored an action (whether config or state). Thus, all state requests will return a
+timestamp >= than that of the config that initiated the action.
+
+
 ## Nullable Types
 
 To make partial updates (both by users into the system as well as updates from the system) possible all primitive fields, maps, and repeated fields are wrapped in nullable messages. This nullability allows both the user and the system to differentiate between unset and zero-valued fields.
