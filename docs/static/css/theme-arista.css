@@ -112,3 +112,7 @@ code {
 .copy-to-clipboard {
     display: none;
 }
+
+#TableOfContents {
+    max-height: fit-content;
+}
