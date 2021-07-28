@@ -4,11 +4,7 @@ weight: 3
 chapter: false
 ---
 
-The port used to connect to CVP depends on your environment:
-
-- On-prem CVP deployments: **8443**
-- CloudVision as a Service: **443**
-
+The port used to connect to CVP is 443 for both on-prem and cloud deployments.
 
 ## Authentication
 
@@ -38,7 +34,7 @@ import json
 import grpc
 
 CV_HOST = "your_cvp_hostname_or_ip"
-CV_API_PORT = "8443"
+CV_API_PORT = "443"
 USERNAME = "your_cvp_username"
 PASSWORD = "your_cvp_password"
 
@@ -62,7 +58,7 @@ import json
 import grpc
 
 CV_HOST = "your_cvp_hostname_or_ip"
-CV_API_PORT = "8443"
+CV_API_PORT = "443"
 USERNAME = "your_cvp_username"
 PASSWORD = "your_cvp_password"
 
@@ -92,11 +88,11 @@ import tempfile
 import grpc
 
 CV_HOST = "your_cvp_hostname_or_ip"
-CV_API_PORT = "8443"
+CV_API_PORT = "443"
 USERNAME = "your_cvp_username"
 PASSWORD = "your_cvp_password"
 
-cert = bytes(ssl.get_server_certificate((CV_HOST, 443)))
+cert = bytes(ssl.get_server_certificate((CV_HOST, int(CV_API_PORT))))
 
 r = requests.post('https://' + CV_HOST + '/cvpservice/login/authenticate.do',
   auth=(USERNAME, PASSWORD),
@@ -115,7 +111,7 @@ channel = grpc.secure_channel(CV_HOST + ':' + CV_API_PORT, combined_credentials)
 import grpc
 
 CV_HOST = "your_cvp_hostname_or_ip"
-CV_API_PORT = "8443"
+CV_API_PORT = "443"
 
 # The certificate authority that signed the CVP certificate.
 # If the CVP certificate is self-signed, this is just the certificate itself.
@@ -136,7 +132,7 @@ channel = grpc.secure_channel(CV_HOST + ':' + CV_API_PORT, combined_credentials)
 import grpc
 
 CV_HOST = "your_cvp_hostname_or_ip"
-CV_API_PORT = "8443"
+CV_API_PORT = "443"
 
 # The certificate authority that signed the CVP certificate.
 # If the CVP certificate is self-signed, this is just the certificate itself.
