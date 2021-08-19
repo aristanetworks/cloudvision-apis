@@ -1,7 +1,7 @@
 ---
 title: Tags
 weight: 100
-chapter: true
+chapter: false
 ---
 
 {{% toc %}}
