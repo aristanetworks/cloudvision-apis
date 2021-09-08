@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
+ConfigDiff
+ConfigDiffKey
+ConfigError
+ConfigErrors
+ConfigKey
+ConfigSummary
+Configuration
+DiffEntries
+DiffEntry
+Summary
+SummaryKey
+ConfigFilterCode
+ConfigSyncCode
+ConfigType
+DiffOp
+ErrorCode
+arista/configstatus.v1/services.gen.proto
+ConfigDiffRequest
+ConfigDiffResponse
+ConfigDiffStreamRequest
+ConfigDiffStreamResponse
+ConfigurationRequest</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
 Event
 EventAck
 EventAnnotationConfig
@@ -35,7 +57,30 @@ DeviceService
 Top
 arista/inventory.v1/inventory.proto
 Device Device is the primary model for this service.
-Field Name Type Description key DeviceKey The key that uniquely identifies this device.</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
+Field Name Type Description key DeviceKey The key that uniquely identifies this device.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
+AssignedTags
+AssignedTagsConfig
+BooleanInputFieldProps
+CollectionInputFieldProps
+FloatInputFieldProps
+GroupInputFieldProps
+InputField
+InputFields
+InputFields.ValuesEntry
+InputSchema
+Inputs
+InputsConfig
+InputsKey
+IntegerInputFieldProps
+Layout
+ResolverInputFieldProps
+StringInputFieldProps
+Studio
+StudioConfig
+StudioKey
+Template
+InputFieldType
+ResolverFieldDisplayMode</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
 DeviceTagAssignmentKey
@@ -57,4 +102,49 @@ DeviceTagAssignmentConfigStreamRequest
 DeviceTagAssignmentConfigStreamResponse
 DeviceTagConfigDeleteRequest
 DeviceTagConfigDeleteResponse
-DeviceTagConfigRequest</description></item></channel></rss>
+DeviceTagConfigRequest</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
+Tag
+TagAssignment
+TagAssignmentConfig
+TagAssignmentKey
+TagConfig
+TagKey
+CreatorType
+ElementType
+arista/tag.v2/services.gen.proto
+TagAssignmentConfigDeleteRequest
+TagAssignmentConfigDeleteResponse
+TagAssignmentConfigRequest
+TagAssignmentConfigResponse
+TagAssignmentConfigSetRequest
+TagAssignmentConfigSetResponse
+TagAssignmentConfigStreamRequest
+TagAssignmentConfigStreamResponse
+TagAssignmentRequest
+TagAssignmentResponse
+TagAssignmentStreamRequest
+TagAssignmentStreamResponse
+TagConfigDeleteRequest</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
+BuildResult
+BuildResults
+BuildResults.ValuesEntry
+ConfigValidationResult
+ConfigletBuildResult
+ConfigletBuildResults
+ConfigletBuildResults.ValuesEntry
+InputError
+InputErrors
+InputValidationResult
+InputValidationResults
+InputValidationResults.ValuesEntry
+RequestParams
+Response
+Responses
+Responses.ValuesEntry
+TemplateError
+TemplateErrors
+Workspace
+WorkspaceBuild
+WorkspaceBuildKey
+WorkspaceConfig
+WorkspaceKey</description></item></channel></rss>
