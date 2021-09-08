@@ -1,0 +1,26 @@
+# Copyright (c) 2021 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2021-07-12
+      description: Rename resource from config to configstatus
+      version: 1.0.3
+      onprem: true
+      cvaas: true
+    - date: 2021-06-28
+      description: Refactor comments
+      version: 1.0.2
+    - date: 2021-06-14
+      description: Add common structs to config.proto
+      version: 1.0.1
+    - date: 2021-05-24
+      description: Remove ConfigDiff and related structs
+      version: 1.0.1
+    - date: 2021-04-20
+      description: Initial revision
+      version: 1.0.0

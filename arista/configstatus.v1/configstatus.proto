@@ -1,0 +1,209 @@
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.configstatus.v1;
+
+option go_package = "arista/resources/arista/configstatus.v1;configstatus";
+
+option java_package = "com.arista.configstatus.v1";
+option java_outer_classname = "Configstatus";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+
+// ErrorCode indicates warnings and errors produced during computing config
+enum ErrorCode {
+  ERROR_CODE_UNSPECIFIED = 0;
+  // DEVICE_WARNING indicates device warning
+  ERROR_CODE_DEVICE_WARNING = 1;
+  // DEVICE_ERROR indicates device error
+  ERROR_CODE_DEVICE_ERROR = 2;
+  // UNREACHABLE_DEVICE indicates the device cannot be reached
+  ERROR_CODE_UNREACHABLE_DEVICE = 3;
+  // CONFIG_FILTER_ERROR indicates error from partial config management filters
+  ERROR_CODE_CONFIG_FILTER_ERROR = 4;
+  // INTERNAL indicates internal errors
+  ERROR_CODE_INTERNAL = 5;
+}
+
+// ConfigError represents errors reported by CVP when handling device configuration
+message ConfigError {
+  ErrorCode error_code = 1;
+  google.protobuf.StringValue error_msg = 2;
+  // Line_num represents line number, if any
+  google.protobuf.Int32Value line_num = 3;
+  // Configlet_name represents the originating configlet name. Configlet_name
+  // and line_num point to the line where config warning or config error originate.
+  google.protobuf.StringValue configlet_name = 4;
+}
+
+message ConfigErrors {
+  repeated ConfigError values = 1;
+}
+
+// DiffOp is the operation to a line from one side of diff to get to another
+enum DiffOp {
+  DIFF_OP_UNSPECIFIED = 0;
+  // NOP indicates no change. A and B are identical at this line
+  DIFF_OP_NOP = 1;
+  // IGNORE indicates a line that's ignored in either A or B.
+  // One of a_line_num or b_line_num will be -1
+  DIFF_OP_IGNORE = 2;
+  // ADD is an addition of a line from A
+  DIFF_OP_ADD = 3;
+  // DELETE is deletion of a line from B
+  DIFF_OP_DELETE = 4;
+  // CHANGE is a modification to a line in A
+  DIFF_OP_CHANGE = 5;
+}
+// ConfigFilterCode indicates if a config line matches PCM filter(s)
+enum ConfigFilterCode {
+  // UNSPECIFIED indicates config line did not match any partial config management (PCM) filter
+  CONFIG_FILTER_CODE_UNSPECIFIED = 0;
+  // MANAGED_LINE indicates config line matches managed PCM filter hence is managed
+  CONFIG_FILTER_CODE_MANAGED_LINE = 1;
+  // UNMANAGED_LINE indicates config line matches unmanaged PCM filter hence is not managed
+  CONFIG_FILTER_CODE_UNMANAGED_LINE = 2;
+}
+// DiffEntry represents one entry in a Diff
+message DiffEntry {
+  DiffOp op = 1;
+  // line number in A this diff applies to
+  google.protobuf.Int32Value a_line_num = 2;
+  // line number in B this diff applies to
+  google.protobuf.Int32Value b_line_num = 3;
+  // line number in B of the leading command of the containing block
+  google.protobuf.Int32Value b_parent_line_num = 4;
+  // content of config line in A
+  google.protobuf.StringValue a_line = 5;
+  // content of config line in B
+  google.protobuf.StringValue b_line = 6;
+  // Config filter code of the line in A
+  ConfigFilterCode a_filter_code = 7;
+  // Config filter code of the line in B
+  ConfigFilterCode b_filter_code = 8;
+}
+// DiffEntries indicates potential multiple lines of config diff
+message DiffEntries {
+  repeated DiffEntry values = 1;
+}
+
+// ConfigSyncCode indicates config synchronization status
+enum ConfigSyncCode {
+  CONFIG_SYNC_CODE_UNSPECIFIED = 0;
+  // IN_SYNC indicates designed config and running config are identical
+  CONFIG_SYNC_CODE_IN_SYNC = 1;
+  // OUT_OF_SYNC indicates designed config and running config are not identical
+  CONFIG_SYNC_CODE_OUT_OF_SYNC = 2;
+}
+
+// ConfigSummary represents device configuration summary.
+message ConfigSummary {
+  ConfigSyncCode sync = 1;
+  // Number of lines with code no-operation
+  google.protobuf.Int32Value nop_lines = 2;
+  // Number of lines with code IGNORE
+  google.protobuf.Int32Value ignored_lines = 3;
+  // Number of lines with code ADD
+  google.protobuf.Int32Value added_lines = 4;
+  // Number of lines with code DELETE
+  google.protobuf.Int32Value deleted_lines = 5;
+  // Number of lines with code CHANGE
+  google.protobuf.Int32Value changed_lines = 6;
+  // Number of designed config errors
+  google.protobuf.Int32Value designed_config_errors = 7;
+  // Number of designed config warnings
+  google.protobuf.Int32Value designed_config_warnings = 8;
+  // Timestamp at which running config is updated
+  google.protobuf.Timestamp running_config_update_time = 9;
+  // Timestamp at which designed config is updated
+  google.protobuf.Timestamp designed_config_update_time = 10;
+  // The HTTP URI client can use to GET running config and associated errors
+  google.protobuf.StringValue running_config_uri = 11;
+  // The HTTP URI client can use to GET designed config and associated errors
+  google.protobuf.StringValue designed_config_uri = 12;
+  // The HTTP URI client can use to GET config diff and associated errors
+  google.protobuf.StringValue diff_uri = 13;
+  // Digest of the config diff. For example, it can be SHA-256 hash of the config diff
+  google.protobuf.StringValue digest = 14;
+}
+
+enum ConfigType {
+  CONFIG_TYPE_UNSPECIFIED = 0;
+  CONFIG_TYPE_RUNNING_CONFIG = 1;
+  CONFIG_TYPE_DESIGNED_CONFIG = 2;
+}
+
+// ConfigKey uniquely identifies a config request.
+message ConfigKey {
+  option (fmp.model_key) = true;
+
+  // Device_id is the serial number of the device
+  google.protobuf.StringValue device_id = 1;
+  // Type describes the config type
+  ConfigType type = 2;
+}
+
+// Configuration represents device's CLI configuration
+message Configuration {
+  option (fmp.model) = "ro";
+
+  ConfigKey key = 1;
+  // Uri represents the HTTP URI client can use to GET config body and associated errors
+  google.protobuf.StringValue uri = 2;
+  ConfigError error = 3;
+}
+
+// ConfigDiffKey uniquely identifies a configuration diff request
+message ConfigDiffKey {
+  option (fmp.model_key) = true;
+
+  // A_device_id is the serial number of the device on A side (left hand side)
+  google.protobuf.StringValue a_device_id = 1;
+  // A_type is the config type on A side (left hand side)
+  ConfigType a_type = 2;
+  // A_time is the time at which to fetch config on A side (left hand side)
+  google.protobuf.Timestamp a_time = 3;
+
+  // B_device_id is the serial number of the device on B side (right hand side)
+  google.protobuf.StringValue b_device_id = 4;
+  // B_type is the config type on B side (right hand side)
+  ConfigType b_type = 5;
+  // B_time is the time at which to fetch config on B side (right hand side)
+  google.protobuf.Timestamp b_time = 6;
+}
+
+message ConfigDiff {
+  option (fmp.model) = "ro";
+
+  // Key represents config diff key
+  ConfigDiffKey key = 1;
+
+  // Uri represents the HTTP URI client can use to GET config diff and associated errors
+  google.protobuf.StringValue uri = 2;
+  ConfigError error = 3;
+}
+
+// SummaryKey uniquely identifies a device summary request
+message SummaryKey {
+  option (fmp.model_key) = true;
+
+  // Device_id is the serial number of the device
+  google.protobuf.StringValue device_id = 1;
+}
+
+message Summary {
+  option (fmp.model) = "ro";
+
+  SummaryKey key = 1;
+
+  ConfigSummary summary = 2;
+  ConfigError error = 3;
+}

@@ -1,0 +1,323 @@
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.studio.v1;
+
+option go_package = "arista/resources/arista/studio.v1;studio";
+
+import "arista/workspace.v1/workspace.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option (fmp.disable_yang) = "repeated-key-fields";
+
+// Studio key
+message StudioKey {
+	option (fmp.model_key) = true;
+	// studio_id is the unique identifier of the studio
+	google.protobuf.StringValue studio_id = 1;
+	// workspace_id is the unique identifier of the workspace
+	// empty string ("") stands for the "mainline"
+	google.protobuf.StringValue workspace_id = 2;
+}
+
+// Studio configuration
+message StudioConfig {
+	option (fmp.model) = "rw";
+	StudioKey key = 1;
+
+	// remove specifies that the resource identified by the key is to be removed from mainline
+	// Other data fields are not allowed when this field is set to true
+	google.protobuf.BoolValue remove = 2;
+	// Changes to the below data fields in a workspace are applied on top of
+	// mainline content at the time the workspace was created
+	google.protobuf.StringValue display_name = 3;
+	google.protobuf.StringValue description = 4;
+	Template template = 5;
+	InputSchema input_schema = 6;
+}
+
+// Studio state
+message Studio {
+	option (fmp.model) = "ro";
+	StudioKey key = 1;
+
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.StringValue created_by = 3;
+	google.protobuf.Timestamp  last_modified_at = 4;
+	google.protobuf.StringValue last_modified_by = 5;
+
+	// Below are config fields, with workspace changes applied on top of mainline
+	// Note that this resource will be present in a workspace only if the studio is modified
+	// (via the StudioConfig resource)
+	google.protobuf.StringValue display_name = 6;
+	google.protobuf.StringValue description = 7;
+	Template template = 8;
+	InputSchema input_schema = 9;
+	arista.workspace.v1.InputValidationResults input_validation_results = 10;
+}
+
+// AssignedTagsConfig is the configuration to assign a studio to the set of devices matching a tag query
+message AssignedTagsConfig {
+	option (fmp.model) = "rw";
+	StudioKey key = 1;
+
+	// remove specifies that the resource identified by the key is to be removed from mainline
+	// Other data fields are not allowed when this field is set to true
+	google.protobuf.BoolValue remove = 2;
+	google.protobuf.StringValue query = 3;
+}
+
+// AssignedTags is the state of studio assignment
+message AssignedTags {
+	option (fmp.model) = "ro";
+	StudioKey key = 1;
+
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.StringValue created_by = 3;
+	google.protobuf.Timestamp  last_modified_at = 4;
+	google.protobuf.StringValue last_modified_by = 5;
+
+	google.protobuf.StringValue query = 6;
+}
+
+// Inputskey is the key of the InputsConfig and Inputs resources
+message InputsKey {
+	option (fmp.model_key) = true;
+	// studio_id is the unique identifier of the studio
+	google.protobuf.StringValue studio_id = 1;
+	// workspace_id is the unique identifier of the workspace
+	// empty string ("") stands for the "mainline"
+	google.protobuf.StringValue workspace_id = 2;
+	// path is the sequence of elements that uniquely identify an input field
+	// empty sequence stands for the "root", or the entire set of inputs
+	fmp.RepeatedString path = 3;
+}
+
+// InputsConfig provides values to the input fields of a studio
+message InputsConfig {
+	option (fmp.model) = "rw";
+	InputsKey key = 1;
+
+	// remove specifies that the resource identified by the key is to be removed from mainline
+	// Other data fields are not allowed when this field is set to true
+	google.protobuf.BoolValue remove = 2;
+	// inputs is the value of the input field as a JSON string. It can be the value for a
+	// simple or complex input field
+	google.protobuf.StringValue inputs = 3;
+}
+
+// Inputs is the state of inputs to a studio
+message Inputs {
+	option (fmp.model) = "ro";
+	InputsKey key = 1;
+
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.StringValue created_by = 3;
+	google.protobuf.Timestamp  last_modified_at = 4;
+	google.protobuf.StringValue last_modified_by = 5;
+
+	// inputs is the entire set of inputs, a single JSON string starting with root.
+	// This is the result of applying workspace-specific InputsConfig changes on top of mainline.
+	google.protobuf.StringValue inputs = 6;
+}
+
+enum TemplateType {
+	TEMPLATE_TYPE_UNSPECIFIED = 0;
+	TEMPLATE_TYPE_MAKO = 1;
+	TEMPLATE_TYPE_JINJA = 2;
+	TEMPLATE_TYPE_GO = 3;
+}
+
+// Template of the studio, with its type
+message Template {
+	TemplateType type = 1;
+	google.protobuf.StringValue body = 2;
+}
+
+// TODO: Move these to a separate file
+
+enum InputFieldType {
+	INPUT_FIELD_TYPE_UNSPECIFIED = 0;
+	INPUT_FIELD_TYPE_BOOLEAN = 1;
+	INPUT_FIELD_TYPE_INTEGER = 2;
+	INPUT_FIELD_TYPE_FLOAT = 3;
+	INPUT_FIELD_TYPE_STRING = 4;
+	INPUT_FIELD_TYPE_GROUP = 5;
+	INPUT_FIELD_TYPE_COLLECTION = 6;
+	INPUT_FIELD_TYPE_RESOLVER = 7;
+}
+
+enum ResolverFieldInputMode {
+	RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED = 0;
+	RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG = 1;
+	RESOLVER_FIELD_INPUT_MODE_SINGLE_INTERFACE_TAG = 2;
+	RESOLVER_FIELD_INPUT_MODE_MULTI_DEVICE_TAG = 3;
+	RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG = 4;
+}
+
+enum ResolverFieldDisplayMode {
+	RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED = 0;
+	RESOLVER_FIELD_DISPLAY_MODE_ALL = 1;
+	RESOLVER_FIELD_DISPLAY_MODE_SPARSE = 2;
+}
+
+message BooleanInputFieldProps {
+	// default_value represents the default value of the boolean input field (optional)
+	google.protobuf.BoolValue default_value = 1; // optional
+}
+
+message IntegerInputFieldProps {
+	// default_value represents the default value of the integer input field (optional)
+	google.protobuf.Int64Value default_value = 1; // optional
+
+	// static_options represents the list of valid integer values (optional)
+	fmp.RepeatedInt64 static_options = 2; // optional
+
+	// dynamic_options contains a pointer expression that reference an input field with a collection of
+	// integer input values which will be used as a list of valid values (optional)
+	fmp.RepeatedString dynamic_options = 4; // optional
+
+	// range represents the range constraint imposed on the integer value; eg. "-10..10", "min..10", "-10..max" (optional)
+	google.protobuf.StringValue range = 3; // optional
+}
+
+message FloatInputFieldProps {
+	// default_value represents the default value of the float input field (optional)
+	google.protobuf.FloatValue default_value = 2; // optional
+
+	// static_options represents the list of valid float values (optional)
+	fmp.RepeatedFloat static_options = 3; // optional
+
+	// dynamic_options contains a pointer expression that reference an input field with a collection of
+	// float input values which will be used as a list of valid values (optional)
+	fmp.RepeatedString dynamic_options = 4; // optional
+}
+
+message StringInputFieldProps {
+	// default_value represents the default value of the string input field (optional)
+	google.protobuf.StringValue default_value = 2; // optional
+
+	// static_options represents the list of valid string values (optional)
+	fmp.RepeatedString static_options = 3; // optional
+
+	// dynamic_options contains a pointer expression that reference an input field with a collection of
+	// string input values which will be used as a list of valid values (optional)
+	fmp.RepeatedString dynamic_options = 4; // optional
+
+	// length represents the length constraint imposed on the string value; eg. "5..10", "min..10", "5..max" (optional)
+	google.protobuf.StringValue length = 5; // optional
+
+	// pattern represents the regexp-based pattern constraint imposed on the string value; eg. "^[0-9a-fA-F]*$" (optional)
+	google.protobuf.StringValue pattern = 6; // optional
+
+	// format represents the format imposed on string value; supported formats: "ip", "ipv6", "mac" (optional)
+	google.protobuf.StringValue format = 7; // optional
+}
+
+message GroupInputFieldProps {
+	// members represents all the fields in the group input field
+	fmp.RepeatedString members = 1; // required
+}
+
+message CollectionInputFieldProps {
+	// base_field_id represent the ID of the collection input field's base field
+	google.protobuf.StringValue base_field_id = 1; // required
+
+	// key specifies a key in the collection that identifies each element
+	//
+	// It only supports the group base field type `INPUT_FIELD_TYPE_GROUP`. The key field specified the ID of the
+	// group member and each element of the collection can be uniquely identified by the key.
+	//
+	// If the type of the base field is:
+	// - `INPUT_FIELD_TYPE_GROUP`: the value of specified by the key field will used as the collection element's key.
+	// The key field specifies the ID of the group member, the group member type must be one of the following field types:
+	//    `INPUT_FIELD_TYPE_INTEGER`, `INPUT_FIELD_TYPE_FLOAT`, `INPUT_FIELD_TYPE_STRING`.
+	google.protobuf.StringValue key = 2; // optional
+}
+
+message ResolverInputFieldProps {
+	// base_field_id represent the ID of the resolver input field's base field
+	google.protobuf.StringValue base_field_id = 1; // required
+
+	// display_mode represents the resolver input field's display mode
+	ResolverFieldDisplayMode display_mode = 2; // required
+
+	// input_mode represents the resolver input field's input mode
+	ResolverFieldInputMode input_mode = 3; // required
+
+	// input_tag_label represents the tag label to allow in tag inputs (optional)
+	google.protobuf.StringValue input_tag_label = 4; // optional
+
+	// tag_filter_query specifies the tags that can be used in a resolver
+	google.protobuf.StringValue tag_filter_query = 5; // optional
+}
+
+message InputField {
+	// id represents the ID of the input field, which should be unique within the input schema resource
+	google.protobuf.StringValue id = 1; // required
+
+	// type represents the type of the input field
+	InputFieldType type = 2; // required
+
+	// type represents the variable name use to reference the value of the input field
+	google.protobuf.StringValue name = 3; // required
+
+	// label represents the label of the input field
+	google.protobuf.StringValue label = 4; // required
+
+	// description represents the description of the input field (optional)
+	google.protobuf.StringValue description = 5; // optional
+
+	// required indicates whether the input field requires a value, defaults to `false` if unset (optional)
+	google.protobuf.BoolValue required = 6; // optional
+
+	// boolean_props contains properties for input fields of INPUT_FIELD_TYPE_BOOLEAN type (optional)
+	BooleanInputFieldProps boolean_props = 7; // optional
+
+	// integer_props contains properties for input fields of INPUT_FIELD_TYPE_INTEGER type (optional)
+	IntegerInputFieldProps integer_props = 8; // optional
+
+	// float_props contains properties for input fields of INPUT_FIELD_TYPE_FLOAT type (optional)
+	FloatInputFieldProps float_props = 9; // optional
+
+	// string_props contains properties for input fields of INPUT_FIELD_TYPE_STRING type (optional)
+	StringInputFieldProps string_props = 10; // optional
+
+	// group_props contains properties for input fields of INPUT_FIELD_TYPE_GROUP type (optional)
+	GroupInputFieldProps group_props = 11; // optional
+
+	// collection_props contains properties for input fields of INPUT_FIELD_TYPE_COLLECTION type (optional)
+	CollectionInputFieldProps collection_props = 12; // optional
+
+	// resolver_props contains properties for input fields of INPUT_FIELD_TYPE_RESOLVER type (optional)
+	ResolverInputFieldProps resolver_props = 13; // optional
+
+	// auto_fill_action_id represents the link between the field and the autofill script that provides a value for it (optional)
+	google.protobuf.StringValue auto_fill_action_id = 14; // optional
+}
+
+message InputFields {
+	// values contains all input field configuration, mapped by each input field's respective field ID
+	map<string, InputField> values = 1; // required
+}
+
+// Layout specifies the display properties input fields
+message Layout {
+	google.protobuf.StringValue value = 1; // json string
+}
+
+// InputSchema specifies the input schema definition of a studio, consisting of a set of input fields,
+// and optionally their layout information
+message InputSchema {
+	InputFields fields = 1;
+	Layout layout = 2;
+}
