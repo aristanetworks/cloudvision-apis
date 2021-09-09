@@ -10,15 +10,14 @@ chapter: false
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
 {{% /notice %}}
 
-Tags
+# Tags
 ================================
 
 ## Tag.v1
 
-Get all device tags
---------------------------------
+### Get all device tags
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTag/all' | jq '.result.value.key | .label + " " + .value'
@@ -54,7 +53,7 @@ topology_datacenter Shannon"
 <snippet>
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 def get_all_device_tags(client):
@@ -69,7 +68,7 @@ for tag in get_all_device_tags(clnt):
     print (tag)
 ```
 
-### python requests
+#### python requests
 
 ```python
 def get_all_device_tags():
@@ -86,16 +85,15 @@ def get_all_device_tags():
 pp(get_all_device_tags())
 ```
 
-Get all assigned interface tags
---------------------------------
+### Get all assigned interface tags
 
-### curl
+#### curl
 
 ```bash
  curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
  ```
 
-### cvprac
+#### cvprac
 
 ```python
 def get_all_interface_tags(client):
@@ -106,7 +104,7 @@ def get_all_interface_tags(client):
 print(get_all_interface_tags(clnt))
 ```
 
-### python requests
+#### python requests
 
 ```python
 def get_all_interface_tags():
@@ -120,10 +118,9 @@ def get_all_interface_tags():
 pp(get_all_interface_tags())
 ```
 
-Get all tags for a device
---------------------------------
+### Get all tags for a device
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534"}}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
@@ -204,7 +201,7 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 "Ethernet104"
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 def filter_interface_tag(client, dId=None, ifId=None, label=None, value=None):
@@ -220,7 +217,7 @@ def filter_interface_tag(client, dId=None, ifId=None, label=None, value=None):
 print(filter_interface_tag(clnt, dId="JPE14070534", value="speed40Gbps"))
 ```
 
-### python requests
+#### python requests
 
 ```python
 def filter_interface_tag(dId=None, ifId=None, label=None, value=None):
@@ -238,10 +235,9 @@ def filter_interface_tag(dId=None, ifId=None, label=None, value=None):
 print(filter_interface_tag(dId="JPE14070534", value="speed40Gbps"))
 ```
 
-Get all tags for an interface of a device
-------------------------------------------
+### Get all tags for an interface of a device
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "interfaceId": "Ethernet1"}}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
@@ -280,22 +276,21 @@ Result:
 }
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 print(filter_interface_tag(clnt, dId="JPE14070534", ifId="Ethernet1"))
 ```
 
-### python requests
+#### python requests
 
 ```python
 print(filter_interface_tag(dId="JPE14070534", ifId="Ethernet1"))
 ```
 
-Get all interfaces that have a specific tag assigned
------------------------------------------------------
+### Get all interfaces that have a specific tag assigned
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "label":"lldp_hostname" }}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all' | jq '.result.value.key.interfaceId'
@@ -303,22 +298,21 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 "Ethernet2"
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 print(filter_interface_tag(clnt, dId="JPE14070534", label="lldp_hostname"))
 ```
 
-### python requests
+#### python requests
 
 ```python
 print(filter_interface_tag(dId="JPE14070534", label="lldp_hostname"))
 ```
 
-Get all interfaces that have a tag with a specific value on a device
---------------------------------
+### Get all interfaces that have a tag with a specific value on a device
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "value":"speed40Gbps" }}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
@@ -385,22 +379,21 @@ Result:
 }
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 print(filter_interface_tag(clnt, dId="JPE14070534", value="speed40Gbps"))
 ```
 
-### python requests
+#### python requests
 
 ```python
 print(filter_interface_tag(dId="JPE14070534", value="speed40Gbps"))
 ```
 
-Create interface tag
---------------------------------
+### Create interface tag
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagConfig' -d '{"key":{"label":"lldp_chassis","value":"50:08:00:0d:00:08"}}'
@@ -413,7 +406,7 @@ Result:
 ```
 
 
-### cvprac
+#### cvprac
 
 ```python
 def create_itag(client, label, value):
@@ -425,7 +418,7 @@ def create_itag(client, label, value):
 create_itag(clnt, "lldp_chassis", "50:08:00:0d:00:38")
 ```
 
-### python requests
+#### python requests
 
 ```python
 def create_itag(label, value):
@@ -439,10 +432,9 @@ def create_itag(label, value):
 create_itag("lldp_chassis", "50:08:00:0d:00:18")
 ```
 
-Assign interface tag
---------------------------------
+### Assign interface tag
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig' -d '{"key":{"label":"lldp_chassis", "value":"50:08:00:0d:00:08", "deviceId":"JPE14070534", "interfaceId": "Ethernet2"}}'
@@ -454,7 +446,7 @@ Result:
 {"value":{"key":{"label":"lldp_chassis", "value":"50:08:00:0d:00:08", "deviceId":"JPE14070534", "interfaceId":"Ethernet2"}}, "time":"2021-04-02T22:00:29.492449919Z"}%
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 def assign_itag(client, dId, ifId, label, value):
@@ -466,7 +458,7 @@ def assign_itag(client, dId, ifId, label, value):
 assign_itag(clnt, "JPE14070534", "Ethernet4", "lldp_chassis", "50:08:00:0d:00:38")
 ```
 
-### python requests
+#### python requests
 
 ```python
 def assign_itag(dId, ifId, label, value):
@@ -480,10 +472,9 @@ def assign_itag(dId, ifId, label, value):
 assign_itag("JPE14070534", "Ethernet3", "lldp_chassis", "50:08:00:0d:00:48")
 ```
 
-Create device tag
---------------------------------
+### Create device tag
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTagConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10"}}'
@@ -495,7 +486,7 @@ Result:
 {"value":{"key":{"label":"topology_hint_pod", "value":"ire-pod10"}}, "time":"2021-04-02T21:55:03.147265316Z"}%
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 def create_dtag(client, label, value):
@@ -507,7 +498,7 @@ def create_dtag(client, label, value):
 create_dtag(clnt, "topology_hint_pod", "ire-pod11")
 ```
 
-### python requests
+#### python requests
 
 ```python
 def create_dtag(label, value):
@@ -521,10 +512,9 @@ def create_dtag(label, value):
 create_dtag("topology_hint_pod", "ire-pod11")
 ```
 
-Assign device tag
---------------------------------
+### Assign device tag
 
-### curl
+#### curl
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTagAssignmentConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10","deviceId":"JPE14070534"}}'
@@ -536,7 +526,7 @@ Result:
 {"value":{"key":{"label":"topology_hint_pod", "value":"ire-pod10", "deviceId":"JPE14070534"}}, "time":"2021-04-02T21:56:24.575813791Z"}%
 ```
 
-### cvprac
+#### cvprac
 
 ```python
 def assign_dtag(client, dId, label, value):
@@ -548,7 +538,7 @@ def assign_dtag(client, dId, label, value):
 assign_dtag(clnt, "JPE14070534", "topology_hint_pod", "ire-pod11" )
 ```
 
-### python requests
+#### python requests
 
 ```python
 def assign_dtag(dId, label, value):
@@ -568,10 +558,9 @@ The Tag.v2 API is a workspace-aware resource APIs, meaning all changes must be d
 Changes only get commited upon submitting the workspace. The following examples will walk through device and interface
 tag creation and assignment workflow.
 
-Get all tags
---------------------------------
+### Get all tags
 
-### curl
+#### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"workspace_id":""}}]}'
@@ -599,10 +588,9 @@ Result:
 {"result":{"value":{"key":{"workspaceId":"","elementType":"ELEMENT_TYPE_INTERFACE","label":"name","value":"Vlan19"}},"time":"2021-09-01T17:15:38.668776675Z","type":"INITIAL"}}
 ```
 
-Get all interface tags
---------------------------------
+### Get all interface tags
 
-### curl
+#### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_INTERFACE"}}]}'
@@ -615,10 +603,9 @@ Result:
 {"result":{"value":{"key":{"workspaceId":"a79b211e-83f5-430e-b1e2-b404c5aa1075","elementType":"ELEMENT_TYPE_INTERFACE","label":"interface_role","value":"downlinks"},"creatorType":"CREATOR_TYPE_USER"},"time":"2021-09-01T13:29:21.111654547Z","type":"INITIAL"}}
 ```
 
-Get all device tags
---------------------------------
+### Get all device tags
 
-### curl
+#### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_DEVICE"}}]}'
@@ -636,10 +623,9 @@ Result:
 {"result":{"value":{"key":{"workspaceId":"0fa846aa-7830-402e-a33f-0fa20ad1ccf7","elementType":"ELEMENT_TYPE_DEVICE","label":"Role","value":"Leaf"},"creatorType":"CREATOR_TYPE_USER"},"time":"2021-08-30T14:27:58.547155198Z","type":"INITIAL"}}
 ```
 
-Create and assign device tag
---------------------------------
+### Create and assign device tag
 
-### curl
+#### curl
 
 1\. Create workspace
 
@@ -707,10 +693,9 @@ Result:
 Tag creation and assignment can be done in separate workspaces.
 {{% /notice %}}
 
-Create and assign interface tag
---------------------------------
+### Create and assign interface tag
 
-### curl
+#### curl
 
 1\. Create workspace
 
@@ -782,10 +767,9 @@ Result:
 Tag creation and assignment can be done in separate workspaces.
 {{% /notice %}}
 
-Unassign a device or interface tag
---------------------------------
+### Unassign a device or interface tag
 
-### curl
+#### curl
 
 1\. Create workspace
 
@@ -823,10 +807,9 @@ curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
-Remove an existing device/interface tag
---------------------------------
+### Remove an existing device/interface tag
 
-### curl
+#### curl
 
 1\. Create workspace
 
@@ -865,10 +848,9 @@ curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
-Show all tags edits in a workspace
---------------------------------
+### Show all tags edits in a workspace
 
-### curl
+#### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
@@ -880,10 +862,9 @@ Result:
 {"result":{"value":{"key":{"workspaceId":"test1337","elementType":"ELEMENT_TYPE_INTERFACE","label":"intfType","value":"servers"},"remove":false},"time":"2021-09-03T22:21:08.546104408Z","type":"INITIAL"}}
 ```
 
-Show all tag assignment edits in a workspace
---------------------------------
+### Show all tag assignment edits in a workspace
 
-### curl
+#### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
@@ -896,8 +877,7 @@ Result:
 {"result":{"value":{"key":{"workspaceId":"test1337","elementType":"ELEMENT_TYPE_INTERFACE","label":"intfType","value":"uplink","deviceId":"4B0C688DBE67D1AC9572445DCDB552F9","interfaceId":"Ethernet2"},"remove":false},"time":"2021-09-03T21:50:06.315113790Z","type":"INITIAL"}}
 ```
 
-Leaf-spine topology tagging example
---------------------------------
+### Leaf-spine topology tagging example
 
 1\. Create Workspace
 

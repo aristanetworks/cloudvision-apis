@@ -22,5 +22,5 @@ theme = "docs"
             unsafe = true
     [markup.tableOfContents]
         startLevel = 1
-        endLevel = 2
+        endLevel = 3
         ordered = false
