@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>studio.v1 :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221491></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/models/studio.v1/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221491></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221491></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221491></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -224,8 +224,81 @@ workspace.v1
 <ul>
 <li>
 <ul>
-<li><a href=#aristastudiov1studioproto>arista/studio.v1/studio.proto</a></li>
-<li><a href=#aristastudiov1servicesgenproto>arista/studio.v1/services.gen.proto</a></li>
+<li><a href=#aristastudiov1studioproto>arista/studio.v1/studio.proto</a>
+<ul>
+<li><a href=#assignedtags>AssignedTags</a></li>
+<li><a href=#assignedtagsconfig>AssignedTagsConfig</a></li>
+<li><a href=#booleaninputfieldprops>BooleanInputFieldProps</a></li>
+<li><a href=#collectioninputfieldprops>CollectionInputFieldProps</a></li>
+<li><a href=#floatinputfieldprops>FloatInputFieldProps</a></li>
+<li><a href=#groupinputfieldprops>GroupInputFieldProps</a></li>
+<li><a href=#inputfield>InputField</a></li>
+<li><a href=#inputfields>InputFields</a></li>
+<li><a href=#inputfieldsvaluesentry>InputFields.ValuesEntry</a></li>
+<li><a href=#inputschema>InputSchema</a></li>
+<li><a href=#inputs>Inputs</a></li>
+<li><a href=#inputsconfig>InputsConfig</a></li>
+<li><a href=#inputskey>InputsKey</a></li>
+<li><a href=#integerinputfieldprops>IntegerInputFieldProps</a></li>
+<li><a href=#layout>Layout</a></li>
+<li><a href=#resolverinputfieldprops>ResolverInputFieldProps</a></li>
+<li><a href=#stringinputfieldprops>StringInputFieldProps</a></li>
+<li><a href=#studio>Studio</a></li>
+<li><a href=#studioconfig>StudioConfig</a></li>
+<li><a href=#studiokey>StudioKey</a></li>
+<li><a href=#template>Template</a></li>
+<li><a href=#inputfieldtype>InputFieldType</a></li>
+<li><a href=#resolverfielddisplaymode>ResolverFieldDisplayMode</a></li>
+<li><a href=#resolverfieldinputmode>ResolverFieldInputMode</a></li>
+<li><a href=#templatetype>TemplateType</a></li>
+</ul>
+</li>
+<li><a href=#aristastudiov1servicesgenproto>arista/studio.v1/services.gen.proto</a>
+<ul>
+<li><a href=#assignedtagsconfigdeleterequest>AssignedTagsConfigDeleteRequest</a></li>
+<li><a href=#assignedtagsconfigdeleteresponse>AssignedTagsConfigDeleteResponse</a></li>
+<li><a href=#assignedtagsconfigrequest>AssignedTagsConfigRequest</a></li>
+<li><a href=#assignedtagsconfigresponse>AssignedTagsConfigResponse</a></li>
+<li><a href=#assignedtagsconfigsetrequest>AssignedTagsConfigSetRequest</a></li>
+<li><a href=#assignedtagsconfigsetresponse>AssignedTagsConfigSetResponse</a></li>
+<li><a href=#assignedtagsconfigstreamrequest>AssignedTagsConfigStreamRequest</a></li>
+<li><a href=#assignedtagsconfigstreamresponse>AssignedTagsConfigStreamResponse</a></li>
+<li><a href=#assignedtagsrequest>AssignedTagsRequest</a></li>
+<li><a href=#assignedtagsresponse>AssignedTagsResponse</a></li>
+<li><a href=#assignedtagsstreamrequest>AssignedTagsStreamRequest</a></li>
+<li><a href=#assignedtagsstreamresponse>AssignedTagsStreamResponse</a></li>
+<li><a href=#inputsconfigdeleterequest>InputsConfigDeleteRequest</a></li>
+<li><a href=#inputsconfigdeleteresponse>InputsConfigDeleteResponse</a></li>
+<li><a href=#inputsconfigrequest>InputsConfigRequest</a></li>
+<li><a href=#inputsconfigresponse>InputsConfigResponse</a></li>
+<li><a href=#inputsconfigsetrequest>InputsConfigSetRequest</a></li>
+<li><a href=#inputsconfigsetresponse>InputsConfigSetResponse</a></li>
+<li><a href=#inputsconfigstreamrequest>InputsConfigStreamRequest</a></li>
+<li><a href=#inputsconfigstreamresponse>InputsConfigStreamResponse</a></li>
+<li><a href=#inputsrequest>InputsRequest</a></li>
+<li><a href=#inputsresponse>InputsResponse</a></li>
+<li><a href=#inputsstreamrequest>InputsStreamRequest</a></li>
+<li><a href=#inputsstreamresponse>InputsStreamResponse</a></li>
+<li><a href=#studioconfigdeleterequest>StudioConfigDeleteRequest</a></li>
+<li><a href=#studioconfigdeleteresponse>StudioConfigDeleteResponse</a></li>
+<li><a href=#studioconfigrequest>StudioConfigRequest</a></li>
+<li><a href=#studioconfigresponse>StudioConfigResponse</a></li>
+<li><a href=#studioconfigsetrequest>StudioConfigSetRequest</a></li>
+<li><a href=#studioconfigsetresponse>StudioConfigSetResponse</a></li>
+<li><a href=#studioconfigstreamrequest>StudioConfigStreamRequest</a></li>
+<li><a href=#studioconfigstreamresponse>StudioConfigStreamResponse</a></li>
+<li><a href=#studiorequest>StudioRequest</a></li>
+<li><a href=#studioresponse>StudioResponse</a></li>
+<li><a href=#studiostreamrequest>StudioStreamRequest</a></li>
+<li><a href=#studiostreamresponse>StudioStreamResponse</a></li>
+<li><a href=#assignedtagsconfigservice>AssignedTagsConfigService</a></li>
+<li><a href=#assignedtagsservice>AssignedTagsService</a></li>
+<li><a href=#inputsconfigservice>InputsConfigService</a></li>
+<li><a href=#inputsservice>InputsService</a></li>
+<li><a href=#studioconfigservice>StudioConfigService</a></li>
+<li><a href=#studioservice>StudioService</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2379,18 +2452,18 @@ and optionally their layout information</p>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221491></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221491></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221491></script>
+<script src=/cloudvision-apis/js/learn.js?1631221491></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221491></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221491></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

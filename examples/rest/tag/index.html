@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>Tags :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221492 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221492 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221492></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/examples/rest/tag/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221492></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221492></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221492></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -227,7 +227,8 @@ workspace.v1
 <ul>
 <li><a href=#tags>Tags</a>
 <ul>
-<li><a href=#tagv1>Tag.v1</a></li>
+<li><a href=#tagv1>Tag.v1</a>
+<ul>
 <li><a href=#get-all-device-tags>Get all device tags</a></li>
 <li><a href=#get-all-assigned-interface-tags>Get all assigned interface tags</a></li>
 <li><a href=#get-all-tags-for-a-device>Get all tags for a device</a></li>
@@ -238,7 +239,10 @@ workspace.v1
 <li><a href=#assign-interface-tag>Assign interface tag</a></li>
 <li><a href=#create-device-tag>Create device tag</a></li>
 <li><a href=#assign-device-tag>Assign device tag</a></li>
-<li><a href=#tagv2>Tag.v2</a></li>
+</ul>
+</li>
+<li><a href=#tagv2>Tag.v2</a>
+<ul>
 <li><a href=#get-all-tags>Get all tags</a></li>
 <li><a href=#get-all-interface-tags>Get all interface tags</a></li>
 <li><a href=#get-all-device-tags-1>Get all device tags</a></li>
@@ -249,6 +253,8 @@ workspace.v1
 <li><a href=#show-all-tags-edits-in-a-workspace>Show all tags edits in a workspace</a></li>
 <li><a href=#show-all-tag-assignment-edits-in-a-workspace>Show all tag assignment edits in a workspace</a></li>
 <li><a href=#leaf-spine-topology-tagging-example>Leaf-spine topology tagging example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -267,7 +273,8 @@ Tags
 <ul>
 <li><a href=#tags>Tags</a>
 <ul>
-<li><a href=#tagv1>Tag.v1</a></li>
+<li><a href=#tagv1>Tag.v1</a>
+<ul>
 <li><a href=#get-all-device-tags>Get all device tags</a></li>
 <li><a href=#get-all-assigned-interface-tags>Get all assigned interface tags</a></li>
 <li><a href=#get-all-tags-for-a-device>Get all tags for a device</a></li>
@@ -278,7 +285,10 @@ Tags
 <li><a href=#assign-interface-tag>Assign interface tag</a></li>
 <li><a href=#create-device-tag>Create device tag</a></li>
 <li><a href=#assign-device-tag>Assign device tag</a></li>
-<li><a href=#tagv2>Tag.v2</a></li>
+</ul>
+</li>
+<li><a href=#tagv2>Tag.v2</a>
+<ul>
 <li><a href=#get-all-tags>Get all tags</a></li>
 <li><a href=#get-all-interface-tags>Get all interface tags</a></li>
 <li><a href=#get-all-device-tags-1>Get all device tags</a></li>
@@ -292,13 +302,16 @@ Tags
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </nav>
 <div class="notices tip"><p><a href=https://stedolan.github.io/jq/>jq</a> can be used to easily format and parse the outputs.</p>
 </div>
 <h1 id=tags>Tags</h1>
+<p>================================</p>
 <h2 id=tagv1>Tag.v1</h2>
-<h2 id=get-all-device-tags>Get all device tags</h2>
-<h3 id=curl>curl</h3>
+<h3 id=get-all-device-tags>Get all device tags</h3>
+<h4 id=curl>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/DeviceTag/all&#39;</span> | jq <span style=color:#e6db74>&#39;.result.value.key | .label + &#34; &#34; + .value&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>&lt;snippet&gt;
@@ -326,7 +339,7 @@ topology_datacenter Shannon<span style=color:#e6db74>&#34;
 </span><span style=color:#e6db74>&#34;</span>topology_hint_datacenter vDC1R<span style=color:#e6db74>&#34;
 </span><span style=color:#e6db74>&#34;</span>topology_hint_datacenter Shannon<span style=color:#e6db74>&#34;
 </span><span style=color:#e6db74>&lt;snippet&gt;
-</span></code></pre></div><h3 id=cvprac>cvprac</h3>
+</span></code></pre></div><h4 id=cvprac>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_all_device_tags</span>(client):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTag/all&#39;</span>
     tag_data <span style=color:#f92672>=</span> client<span style=color:#f92672>.</span>get(tag_url)
@@ -337,7 +350,7 @@ topology_datacenter Shannon<span style=color:#e6db74>&#34;
 
 <span style=color:#66d9ef>for</span> tag <span style=color:#f92672>in</span> get_all_device_tags(clnt):
     print (tag)
-</code></pre></div><h3 id=python-requests>python requests</h3>
+</code></pre></div><h4 id=python-requests>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_all_device_tags</span>():
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTag/all&#39;</span>
     url <span style=color:#f92672>=</span> cvp_url <span style=color:#f92672>+</span> tag_url
@@ -350,17 +363,17 @@ topology_datacenter Shannon<span style=color:#e6db74>&#34;
     <span style=color:#66d9ef>return</span> tags
 
 pp(get_all_device_tags())
-</code></pre></div><h2 id=get-all-assigned-interface-tags>Get all assigned interface tags</h2>
-<h3 id=curl-1>curl</h3>
+</code></pre></div><h3 id=get-all-assigned-interface-tags>Get all assigned interface tags</h3>
+<h4 id=curl-1>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
-</code></pre></div><h3 id=cvprac-1>cvprac</h3>
+</code></pre></div><h4 id=cvprac-1>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_all_interface_tags</span>(client):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
     tags <span style=color:#f92672>=</span> client<span style=color:#f92672>.</span>get(tag_url)
     <span style=color:#66d9ef>return</span> tags[<span style=color:#e6db74>&#39;data&#39;</span>]
 
 print(get_all_interface_tags(clnt))
-</code></pre></div><h3 id=python-requests-1>python requests</h3>
+</code></pre></div><h4 id=python-requests-1>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_all_interface_tags</span>():
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
     url <span style=color:#f92672>=</span> cvp_url <span style=color:#f92672>+</span> tag_url
@@ -370,8 +383,8 @@ print(get_all_interface_tags(clnt))
     <span style=color:#66d9ef>return</span> tags
 
 pp(get_all_interface_tags())
-</code></pre></div><h2 id=get-all-tags-for-a-device>Get all tags for a device</h2>
-<h3 id=curl-2>curl</h3>
+</code></pre></div><h3 id=get-all-tags-for-a-device>Get all tags for a device</h3>
+<h4 id=curl-2>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;deviceId&#34;: &#34;JPE14070534&#34;}}]}&#39;</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{
@@ -440,7 +453,7 @@ pp(get_all_interface_tags())
 <span style=color:#e6db74>&#34;Ethernet102&#34;</span>
 <span style=color:#e6db74>&#34;Ethernet103&#34;</span>
 <span style=color:#e6db74>&#34;Ethernet104&#34;</span>
-</code></pre></div><h3 id=cvprac-2>cvprac</h3>
+</code></pre></div><h4 id=cvprac-2>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>filter_interface_tag</span>(client, dId<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, ifId<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, value<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
     payload <span style=color:#f92672>=</span> {
@@ -452,7 +465,7 @@ pp(get_all_interface_tags())
     <span style=color:#66d9ef>return</span> response
 
 print(filter_interface_tag(clnt, dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, value<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;speed40Gbps&#34;</span>))
-</code></pre></div><h3 id=python-requests-2>python requests</h3>
+</code></pre></div><h4 id=python-requests-2>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>filter_interface_tag</span>(dId<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, ifId<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, value<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
     payload <span style=color:#f92672>=</span> {
@@ -466,8 +479,8 @@ print(filter_interface_tag(clnt, dId<span style=color:#f92672>=</span><span styl
     <span style=color:#66d9ef>return</span> response<span style=color:#f92672>.</span>text
 
 print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, value<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;speed40Gbps&#34;</span>))
-</code></pre></div><h2 id=get-all-tags-for-an-interface-of-a-device>Get all tags for an interface of a device</h2>
-<h3 id=curl-3>curl</h3>
+</code></pre></div><h3 id=get-all-tags-for-an-interface-of-a-device>Get all tags for an interface of a device</h3>
+<h4 id=curl-3>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;deviceId&#34;: &#34;JPE14070534&#34;, &#34;interfaceId&#34;: &#34;Ethernet1&#34;}}]}&#39;</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{
@@ -498,21 +511,21 @@ print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=colo
     <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;INITIAL&#34;</span>
   }
 }
-</code></pre></div><h3 id=cvprac-3>cvprac</h3>
+</code></pre></div><h4 id=cvprac-3>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(clnt, dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, ifId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Ethernet1&#34;</span>))
-</code></pre></div><h3 id=python-requests-3>python requests</h3>
+</code></pre></div><h4 id=python-requests-3>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, ifId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Ethernet1&#34;</span>))
-</code></pre></div><h2 id=get-all-interfaces-that-have-a-specific-tag-assigned>Get all interfaces that have a specific tag assigned</h2>
-<h3 id=curl-4>curl</h3>
+</code></pre></div><h3 id=get-all-interfaces-that-have-a-specific-tag-assigned>Get all interfaces that have a specific tag assigned</h3>
+<h4 id=curl-4>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;deviceId&#34;: &#34;JPE14070534&#34;, &#34;label&#34;:&#34;lldp_hostname&#34; }}]}&#39;</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span> | jq <span style=color:#e6db74>&#39;.result.value.key.interfaceId&#39;</span>
 
 <span style=color:#e6db74>&#34;Ethernet2&#34;</span>
-</code></pre></div><h3 id=cvprac-4>cvprac</h3>
+</code></pre></div><h4 id=cvprac-4>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(clnt, dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;lldp_hostname&#34;</span>))
-</code></pre></div><h3 id=python-requests-4>python requests</h3>
+</code></pre></div><h4 id=python-requests-4>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;lldp_hostname&#34;</span>))
-</code></pre></div><h2 id=get-all-interfaces-that-have-a-tag-with-a-specific-value-on-a-device>Get all interfaces that have a tag with a specific value on a device</h2>
-<h3 id=curl-5>curl</h3>
+</code></pre></div><h3 id=get-all-interfaces-that-have-a-tag-with-a-specific-value-on-a-device>Get all interfaces that have a tag with a specific value on a device</h3>
+<h4 id=curl-5>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;deviceId&#34;: &#34;JPE14070534&#34;, &#34;value&#34;:&#34;speed40Gbps&#34; }}]}&#39;</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>      <span style=color:#e6db74>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2021-03-27T00:38:41.886763089Z&#34;</span>,
@@ -571,16 +584,16 @@ print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=colo
       <span style=color:#e6db74>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>
    }
 }
-</code></pre></div><h3 id=cvprac-5>cvprac</h3>
+</code></pre></div><h4 id=cvprac-5>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(clnt, dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, value<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;speed40Gbps&#34;</span>))
-</code></pre></div><h3 id=python-requests-5>python requests</h3>
+</code></pre></div><h4 id=python-requests-5>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JPE14070534&#34;</span>, value<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;speed40Gbps&#34;</span>))
-</code></pre></div><h2 id=create-interface-tag>Create interface tag</h2>
-<h3 id=curl-6>curl</h3>
+</code></pre></div><h3 id=create-interface-tag>Create interface tag</h3>
+<h4 id=curl-6>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;label&#34;:&#34;lldp_chassis&#34;,&#34;value&#34;:&#34;50:08:00:0d:00:08&#34;}}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{<span style=color:#e6db74>&#34;value&#34;</span>:{<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:<span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;50:08:00:0d:00:08&#34;</span>}}, <span style=color:#e6db74>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2021-04-02T21:58:29.100209908Z&#34;</span>}<span style=color:#f92672>%</span>
-</code></pre></div><h3 id=cvprac-6>cvprac</h3>
+</code></pre></div><h4 id=cvprac-6>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_itag</span>(client, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label,<span style=color:#e6db74>&#34;value&#34;</span>:value}}
@@ -588,7 +601,7 @@ print(filter_interface_tag(dId<span style=color:#f92672>=</span><span style=colo
     <span style=color:#66d9ef>return</span> response
 
 create_itag(clnt, <span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;50:08:00:0d:00:38&#34;</span>)
-</code></pre></div><h3 id=python-requests-6>python requests</h3>
+</code></pre></div><h4 id=python-requests-6>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_itag</span>(label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label,<span style=color:#e6db74>&#34;value&#34;</span>:value}}
@@ -598,12 +611,12 @@ create_itag(clnt, <span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span
     <span style=color:#66d9ef>return</span> response
 
 create_itag(<span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;50:08:00:0d:00:18&#34;</span>)
-</code></pre></div><h2 id=assign-interface-tag>Assign interface tag</h2>
-<h3 id=curl-7>curl</h3>
+</code></pre></div><h3 id=assign-interface-tag>Assign interface tag</h3>
+<h4 id=curl-7>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;label&#34;:&#34;lldp_chassis&#34;, &#34;value&#34;:&#34;50:08:00:0d:00:08&#34;, &#34;deviceId&#34;:&#34;JPE14070534&#34;, &#34;interfaceId&#34;: &#34;Ethernet2&#34;}}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{<span style=color:#e6db74>&#34;value&#34;</span>:{<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:<span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;50:08:00:0d:00:08&#34;</span>, <span style=color:#e6db74>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=color:#e6db74>&#34;interfaceId&#34;</span>:<span style=color:#e6db74>&#34;Ethernet2&#34;</span>}}, <span style=color:#e6db74>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2021-04-02T22:00:29.492449919Z&#34;</span>}<span style=color:#f92672>%</span>
-</code></pre></div><h3 id=cvprac-7>cvprac</h3>
+</code></pre></div><h4 id=cvprac-7>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>assign_itag</span>(client, dId, ifId, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label, <span style=color:#e6db74>&#34;value&#34;</span>:value, <span style=color:#e6db74>&#34;deviceId&#34;</span>: dId, <span style=color:#e6db74>&#34;interfaceId&#34;</span>: ifId}}
@@ -611,7 +624,7 @@ create_itag(<span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style
     <span style=color:#66d9ef>return</span> response
 
 assign_itag(clnt, <span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=color:#e6db74>&#34;Ethernet4&#34;</span>, <span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;50:08:00:0d:00:38&#34;</span>)
-</code></pre></div><h3 id=python-requests-7>python requests</h3>
+</code></pre></div><h4 id=python-requests-7>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>assign_itag</span>(dId, ifId, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/InterfaceTagAssignmentConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label, <span style=color:#e6db74>&#34;value&#34;</span>:value, <span style=color:#e6db74>&#34;deviceId&#34;</span>: dId, <span style=color:#e6db74>&#34;interfaceId&#34;</span>: ifId}}
@@ -621,12 +634,12 @@ assign_itag(clnt, <span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span 
     <span style=color:#66d9ef>return</span> response
 
 assign_itag(<span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=color:#e6db74>&#34;Ethernet3&#34;</span>, <span style=color:#e6db74>&#34;lldp_chassis&#34;</span>, <span style=color:#e6db74>&#34;50:08:00:0d:00:48&#34;</span>)
-</code></pre></div><h2 id=create-device-tag>Create device tag</h2>
-<h3 id=curl-8>curl</h3>
+</code></pre></div><h3 id=create-device-tag>Create device tag</h3>
+<h4 id=curl-8>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/DeviceTagConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;label&#34;:&#34;topology_hint_pod&#34;, &#34;value&#34;:&#34;ire-pod10&#34;}}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{<span style=color:#e6db74>&#34;value&#34;</span>:{<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:<span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span style=color:#e6db74>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;ire-pod10&#34;</span>}}, <span style=color:#e6db74>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2021-04-02T21:55:03.147265316Z&#34;</span>}<span style=color:#f92672>%</span>
-</code></pre></div><h3 id=cvprac-8>cvprac</h3>
+</code></pre></div><h4 id=cvprac-8>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_dtag</span>(client, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTagConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label,<span style=color:#e6db74>&#34;value&#34;</span>:value}}
@@ -634,7 +647,7 @@ assign_itag(<span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=
     <span style=color:#66d9ef>return</span> response
 
 create_dtag(clnt, <span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span style=color:#e6db74>&#34;ire-pod11&#34;</span>)
-</code></pre></div><h3 id=python-requests-8>python requests</h3>
+</code></pre></div><h4 id=python-requests-8>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_dtag</span>(label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTagConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label, <span style=color:#e6db74>&#34;value&#34;</span>:value}}
@@ -644,12 +657,12 @@ create_dtag(clnt, <span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, 
     <span style=color:#66d9ef>return</span> response
 
 create_dtag(<span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span style=color:#e6db74>&#34;ire-pod11&#34;</span>)
-</code></pre></div><h2 id=assign-device-tag>Assign device tag</h2>
-<h3 id=curl-9>curl</h3>
+</code></pre></div><h3 id=assign-device-tag>Assign device tag</h3>
+<h4 id=curl-9>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/tag/v1/DeviceTagAssignmentConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;label&#34;:&#34;topology_hint_pod&#34;, &#34;value&#34;:&#34;ire-pod10&#34;,&#34;deviceId&#34;:&#34;JPE14070534&#34;}}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>{<span style=color:#e6db74>&#34;value&#34;</span>:{<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:<span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span style=color:#e6db74>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;ire-pod10&#34;</span>, <span style=color:#e6db74>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE14070534&#34;</span>}}, <span style=color:#e6db74>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2021-04-02T21:56:24.575813791Z&#34;</span>}<span style=color:#f92672>%</span>
-</code></pre></div><h3 id=cvprac-9>cvprac</h3>
+</code></pre></div><h4 id=cvprac-9>cvprac</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>assign_dtag</span>(client, dId, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTagAssignmentConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label, <span style=color:#e6db74>&#34;value&#34;</span>:value, <span style=color:#e6db74>&#34;deviceId&#34;</span>: dId}}
@@ -657,7 +670,7 @@ create_dtag(<span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span 
     <span style=color:#66d9ef>return</span> response
 
 assign_dtag(clnt, <span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>, <span style=color:#e6db74>&#34;ire-pod11&#34;</span> )
-</code></pre></div><h3 id=python-requests-9>python requests</h3>
+</code></pre></div><h4 id=python-requests-9>python requests</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>assign_dtag</span>(dId, label, value):
     tag_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;/api/resources/tag/v1/DeviceTagAssignmentConfig&#39;</span>
     payload <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;key&#34;</span>:{<span style=color:#e6db74>&#34;label&#34;</span>:label, <span style=color:#e6db74>&#34;value&#34;</span>:value, <span style=color:#e6db74>&#34;deviceId&#34;</span>: dId}}
@@ -671,8 +684,8 @@ assign_dtag(<span style=color:#e6db74>&#34;JPE14070534&#34;</span>, <span style=
 <p>The Tag.v2 API is a workspace-aware resource APIs, meaning all changes must be done within a workspace.
 Changes only get commited upon submitting the workspace. The following examples will walk through device and interface
 tag creation and assignment workflow.</p>
-<h2 id=get-all-tags>Get all tags</h2>
-<h3 id=curl-10>curl</h3>
+<h3 id=get-all-tags>Get all tags</h3>
+<h4 id=curl-10>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/tag/v2/Tag/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;&#34;}}]}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript>{<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_DEVICE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;bgp&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;disabled&#34;</span>}},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-08-31T12:13:02.196521931Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
@@ -692,14 +705,14 @@ tag creation and assignment workflow.</p>
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;name&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Vlan1&#34;</span>}},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-01T16:22:31.232251875Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;name&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Vlan55&#34;</span>}},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-07-28T02:59:06.877353719Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;name&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Vlan19&#34;</span>}},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-01T17:15:38.668776675Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
-</code></pre></div><h2 id=get-all-interface-tags>Get all interface tags</h2>
-<h3 id=curl-11>curl</h3>
+</code></pre></div><h3 id=get-all-interface-tags>Get all interface tags</h3>
+<h4 id=curl-11>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/tag/v2/Tag/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;elementType&#34;:&#34;ELEMENT_TYPE_INTERFACE&#34;}}]}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript>{<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;7de7c055-826c-4390-9dba-361afcb87536&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;topology_role&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;uplink&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-08-31T01:07:29.839897276Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;a79b211e-83f5-430e-b1e2-b404c5aa1075&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;interface_role&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;downlinks&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-01T13:29:21.111654547Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
-</code></pre></div><h2 id=get-all-device-tags-1>Get all device tags</h2>
-<h3 id=curl-12>curl</h3>
+</code></pre></div><h3 id=get-all-device-tags-1>Get all device tags</h3>
+<h4 id=curl-12>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/tag/v2/Tag/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;elementType&#34;:&#34;ELEMENT_TYPE_DEVICE&#34;}}]}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript>{<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;testTag&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_DEVICE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;topology_hint_pod&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ire-pod10&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-02T17:55:04.750886803Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
@@ -709,8 +722,8 @@ tag creation and assignment workflow.</p>
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;26ad35cb-23e5-459c-8ef2-f1adac43406c&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_DEVICE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;DC&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;DC@&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-07-29T13:21:27.229646717Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;26ad35cb-23e5-459c-8ef2-f1adac43406c&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_DEVICE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;DC&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;DC1&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-07-29T13:22:34.405718999Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;0fa846aa-7830-402e-a33f-0fa20ad1ccf7&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_DEVICE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Role&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Leaf&#34;</span>},<span style=color:#e6db74>&#34;creatorType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;CREATOR_TYPE_USER&#34;</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-08-30T14:27:58.547155198Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
-</code></pre></div><h2 id=create-and-assign-device-tag>Create and assign device tag</h2>
-<h3 id=curl-13>curl</h3>
+</code></pre></div><h3 id=create-and-assign-device-tag>Create and assign device tag</h3>
+<h4 id=curl-13>curl</h4>
 <p>1. Create workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;testTag&#34;},&#34;display_name&#34;:&#34;testTag&#34;,&#34;description&#34;:&#34;Test tag resource APIv2&#34;}&#39;</span>
 </code></pre></div><p>Result:</p>
@@ -736,8 +749,8 @@ tag creation and assignment workflow.</p>
 </code></pre></div>
 <div class="notices note"><p>Tag creation and assignment can be done in separate workspaces.</p>
 </div>
-<h2 id=create-and-assign-interface-tag>Create and assign interface tag</h2>
-<h3 id=curl-14>curl</h3>
+<h3 id=create-and-assign-interface-tag>Create and assign interface tag</h3>
+<h4 id=curl-14>curl</h4>
 <p>1. Create workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;testIntfTag&#34;},&#34;display_name&#34;:&#34;testIntfTag&#34;,&#34;description&#34;:&#34;Test interface tag resource APIv2&#34;}&#39;</span>
 </code></pre></div><p>Result:</p>
@@ -763,8 +776,8 @@ tag creation and assignment workflow.</p>
 </code></pre></div>
 <div class="notices note"><p>Tag creation and assignment can be done in separate workspaces.</p>
 </div>
-<h2 id=unassign-a-device-or-interface-tag>Unassign a device or interface tag</h2>
-<h3 id=curl-15>curl</h3>
+<h3 id=unassign-a-device-or-interface-tag>Unassign a device or interface tag</h3>
+<h4 id=curl-15>curl</h4>
 <p>1. Create workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;deleteTag&#34;},&#34;display_name&#34;:&#34;deleteTag&#34;,&#34;description&#34;:&#34;Test interface tag deletion resource APIv2&#34;}&#39;</span>
 </code></pre></div><p>2.2. Unassign an interface tag</p>
@@ -777,8 +790,8 @@ tag creation and assignment workflow.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&amp;key.buildId=b1&#39;</span>
 </code></pre></div><p>5. Submit the workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;deleteTag&#34;},&#34;request&#34;:&#34;REQUEST_SUBMIT&#34;,&#34;request_params&#34;:{&#34;request_id&#34;:&#34;s1&#34;}}&#39;</span>
-</code></pre></div><h2 id=remove-an-existing-deviceinterface-tag>Remove an existing device/interface tag</h2>
-<h3 id=curl-16>curl</h3>
+</code></pre></div><h3 id=remove-an-existing-deviceinterface-tag>Remove an existing device/interface tag</h3>
+<h4 id=curl-16>curl</h4>
 <p>1. Create workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;deleteTag&#34;},&#34;display_name&#34;:&#34;deleteTag&#34;,&#34;description&#34;:&#34;Test tag deletion&#34;}&#39;</span>
 </code></pre></div><p>2.1. Delete an interface tag</p>
@@ -791,18 +804,18 @@ tag creation and assignment workflow.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&amp;key.buildId=b1&#39;</span>
 </code></pre></div><p>5. Submit the workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;deleteTag&#34;},&#34;request&#34;:&#34;REQUEST_SUBMIT&#34;,&#34;request_params&#34;:{&#34;request_id&#34;:&#34;s1&#34;}}&#39;</span>
-</code></pre></div><h2 id=show-all-tags-edits-in-a-workspace>Show all tags edits in a workspace</h2>
-<h3 id=curl-17>curl</h3>
+</code></pre></div><h3 id=show-all-tags-edits-in-a-workspace>Show all tags edits in a workspace</h3>
+<h4 id=curl-17>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/tag/v2/TagConfig/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;workspace_id&#34;: &#34;test1337&#34;}}]}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript>{<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;test1337&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;intfType&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;servers&#34;</span>},<span style=color:#e6db74>&#34;remove&#34;</span><span style=color:#f92672>:</span><span style=color:#66d9ef>false</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-03T22:21:08.546104408Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
-</code></pre></div><h2 id=show-all-tag-assignment-edits-in-a-workspace>Show all tag assignment edits in a workspace</h2>
-<h3 id=curl-18>curl</h3>
+</code></pre></div><h3 id=show-all-tag-assignment-edits-in-a-workspace>Show all tag assignment edits in a workspace</h3>
+<h4 id=curl-18>curl</h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;key&#34;:{&#34;workspace_id&#34;: &#34;test1337&#34;}}]}&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript>{<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;test1337&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;intfType&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;uplink&#34;</span>,<span style=color:#e6db74>&#34;deviceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;4B0C688DBE67D1AC9572445DCDB552F9&#34;</span>,<span style=color:#e6db74>&#34;interfaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Ethernet1&#34;</span>},<span style=color:#e6db74>&#34;remove&#34;</span><span style=color:#f92672>:</span><span style=color:#66d9ef>false</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-03T21:50:06.187034368Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 {<span style=color:#e6db74>&#34;result&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;test1337&#34;</span>,<span style=color:#e6db74>&#34;elementType&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;ELEMENT_TYPE_INTERFACE&#34;</span>,<span style=color:#e6db74>&#34;label&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;intfType&#34;</span>,<span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;uplink&#34;</span>,<span style=color:#e6db74>&#34;deviceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;4B0C688DBE67D1AC9572445DCDB552F9&#34;</span>,<span style=color:#e6db74>&#34;interfaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Ethernet2&#34;</span>},<span style=color:#e6db74>&#34;remove&#34;</span><span style=color:#f92672>:</span><span style=color:#66d9ef>false</span>},<span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-09-03T21:50:06.315113790Z&#34;</span>,<span style=color:#e6db74>&#34;type&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
-</code></pre></div><h2 id=leaf-spine-topology-tagging-example>Leaf-spine topology tagging example</h2>
+</code></pre></div><h3 id=leaf-spine-topology-tagging-example>Leaf-spine topology tagging example</h3>
 <p>1. Create Workspace</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;AVD-lab&#34;},&#34;display_name&#34;:&#34;AVD-lab&#34;,&#34;description&#34;:&#34;Set up topology tags&#34;}&#39;</span>
 </code></pre></div><p>2. Create tags</p>
@@ -854,18 +867,18 @@ tag creation and assignment workflow.</p>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221492></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221492></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221492></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221492></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221492></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221492></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221492></script>
+<script src=/cloudvision-apis/js/learn.js?1631221492></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221492></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221492 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221492></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

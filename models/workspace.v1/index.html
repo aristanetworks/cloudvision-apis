@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>workspace.v1 :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221491></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/models/workspace.v1/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221491></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221491></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221491></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -224,8 +224,61 @@ workspace.v1
 <ul>
 <li>
 <ul>
-<li><a href=#aristaworkspacev1workspaceproto>arista/workspace.v1/workspace.proto</a></li>
-<li><a href=#aristaworkspacev1servicesgenproto>arista/workspace.v1/services.gen.proto</a></li>
+<li><a href=#aristaworkspacev1workspaceproto>arista/workspace.v1/workspace.proto</a>
+<ul>
+<li><a href=#buildresult>BuildResult</a></li>
+<li><a href=#buildresults>BuildResults</a></li>
+<li><a href=#buildresultsvaluesentry>BuildResults.ValuesEntry</a></li>
+<li><a href=#configvalidationresult>ConfigValidationResult</a></li>
+<li><a href=#configletbuildresult>ConfigletBuildResult</a></li>
+<li><a href=#configletbuildresults>ConfigletBuildResults</a></li>
+<li><a href=#configletbuildresultsvaluesentry>ConfigletBuildResults.ValuesEntry</a></li>
+<li><a href=#inputerror>InputError</a></li>
+<li><a href=#inputerrors>InputErrors</a></li>
+<li><a href=#inputvalidationresult>InputValidationResult</a></li>
+<li><a href=#inputvalidationresults>InputValidationResults</a></li>
+<li><a href=#inputvalidationresultsvaluesentry>InputValidationResults.ValuesEntry</a></li>
+<li><a href=#requestparams>RequestParams</a></li>
+<li><a href=#response>Response</a></li>
+<li><a href=#responses>Responses</a></li>
+<li><a href=#responsesvaluesentry>Responses.ValuesEntry</a></li>
+<li><a href=#templateerror>TemplateError</a></li>
+<li><a href=#templateerrors>TemplateErrors</a></li>
+<li><a href=#workspace>Workspace</a></li>
+<li><a href=#workspacebuild>WorkspaceBuild</a></li>
+<li><a href=#workspacebuildkey>WorkspaceBuildKey</a></li>
+<li><a href=#workspaceconfig>WorkspaceConfig</a></li>
+<li><a href=#workspacekey>WorkspaceKey</a></li>
+<li><a href=#buildstage>BuildStage</a></li>
+<li><a href=#buildstate>BuildState</a></li>
+<li><a href=#request>Request</a></li>
+<li><a href=#responsestatus>ResponseStatus</a></li>
+<li><a href=#workspacestate>WorkspaceState</a></li>
+</ul>
+</li>
+<li><a href=#aristaworkspacev1servicesgenproto>arista/workspace.v1/services.gen.proto</a>
+<ul>
+<li><a href=#workspacebuildrequest>WorkspaceBuildRequest</a></li>
+<li><a href=#workspacebuildresponse>WorkspaceBuildResponse</a></li>
+<li><a href=#workspacebuildstreamrequest>WorkspaceBuildStreamRequest</a></li>
+<li><a href=#workspacebuildstreamresponse>WorkspaceBuildStreamResponse</a></li>
+<li><a href=#workspaceconfigdeleterequest>WorkspaceConfigDeleteRequest</a></li>
+<li><a href=#workspaceconfigdeleteresponse>WorkspaceConfigDeleteResponse</a></li>
+<li><a href=#workspaceconfigrequest>WorkspaceConfigRequest</a></li>
+<li><a href=#workspaceconfigresponse>WorkspaceConfigResponse</a></li>
+<li><a href=#workspaceconfigsetrequest>WorkspaceConfigSetRequest</a></li>
+<li><a href=#workspaceconfigsetresponse>WorkspaceConfigSetResponse</a></li>
+<li><a href=#workspaceconfigstreamrequest>WorkspaceConfigStreamRequest</a></li>
+<li><a href=#workspaceconfigstreamresponse>WorkspaceConfigStreamResponse</a></li>
+<li><a href=#workspacerequest>WorkspaceRequest</a></li>
+<li><a href=#workspaceresponse>WorkspaceResponse</a></li>
+<li><a href=#workspacestreamrequest>WorkspaceStreamRequest</a></li>
+<li><a href=#workspacestreamresponse>WorkspaceStreamResponse</a></li>
+<li><a href=#workspacebuildservice>WorkspaceBuildService</a></li>
+<li><a href=#workspaceconfigservice>WorkspaceConfigService</a></li>
+<li><a href=#workspaceservice>WorkspaceService</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1687,18 +1740,18 @@ The result of the operation will be available in WorkspaceStatus when it is gene
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221491></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221491></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221491></script>
+<script src=/cloudvision-apis/js/learn.js?1631221491></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221491></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221491></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

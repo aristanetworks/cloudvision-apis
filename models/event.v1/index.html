@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>event.v1 :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221491></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/models/event.v1/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221491></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221491></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221491></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -224,8 +224,45 @@ workspace.v1
 <ul>
 <li>
 <ul>
-<li><a href=#aristaeventv1eventproto>arista/event.v1/event.proto</a></li>
-<li><a href=#aristaeventv1servicesgenproto>arista/event.v1/services.gen.proto</a></li>
+<li><a href=#aristaeventv1eventproto>arista/event.v1/event.proto</a>
+<ul>
+<li><a href=#event>Event</a></li>
+<li><a href=#eventack>EventAck</a></li>
+<li><a href=#eventannotationconfig>EventAnnotationConfig</a></li>
+<li><a href=#eventcomponent>EventComponent</a></li>
+<li><a href=#eventcomponentcomponentsentry>EventComponent.ComponentsEntry</a></li>
+<li><a href=#eventcomponents>EventComponents</a></li>
+<li><a href=#eventdata>EventData</a></li>
+<li><a href=#eventdatadataentry>EventData.DataEntry</a></li>
+<li><a href=#eventkey>EventKey</a></li>
+<li><a href=#eventnote>EventNote</a></li>
+<li><a href=#eventnoteconfig>EventNoteConfig</a></li>
+<li><a href=#eventnotes>EventNotes</a></li>
+<li><a href=#eventnotesnotesentry>EventNotes.NotesEntry</a></li>
+<li><a href=#eventnotesconfig>EventNotesConfig</a></li>
+<li><a href=#eventnotesconfignotesentry>EventNotesConfig.NotesEntry</a></li>
+<li><a href=#componenttype>ComponentType</a></li>
+<li><a href=#eventseverity>EventSeverity</a></li>
+</ul>
+</li>
+<li><a href=#aristaeventv1servicesgenproto>arista/event.v1/services.gen.proto</a>
+<ul>
+<li><a href=#eventannotationconfigdeleterequest>EventAnnotationConfigDeleteRequest</a></li>
+<li><a href=#eventannotationconfigdeleteresponse>EventAnnotationConfigDeleteResponse</a></li>
+<li><a href=#eventannotationconfigrequest>EventAnnotationConfigRequest</a></li>
+<li><a href=#eventannotationconfigresponse>EventAnnotationConfigResponse</a></li>
+<li><a href=#eventannotationconfigsetrequest>EventAnnotationConfigSetRequest</a></li>
+<li><a href=#eventannotationconfigsetresponse>EventAnnotationConfigSetResponse</a></li>
+<li><a href=#eventannotationconfigstreamrequest>EventAnnotationConfigStreamRequest</a></li>
+<li><a href=#eventannotationconfigstreamresponse>EventAnnotationConfigStreamResponse</a></li>
+<li><a href=#eventrequest>EventRequest</a></li>
+<li><a href=#eventresponse>EventResponse</a></li>
+<li><a href=#eventstreamrequest>EventStreamRequest</a></li>
+<li><a href=#eventstreamresponse>EventStreamResponse</a></li>
+<li><a href=#eventannotationconfigservice>EventAnnotationConfigService</a></li>
+<li><a href=#eventservice>EventService</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1169,18 +1206,18 @@ event.v1
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221491></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221491></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221491></script>
+<script src=/cloudvision-apis/js/learn.js?1631221491></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221491></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221491></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

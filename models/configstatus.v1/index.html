@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>configstatus.v1 :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221491></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/models/configstatus.v1/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221491></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221491></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221491></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -224,8 +224,45 @@ workspace.v1
 <ul>
 <li>
 <ul>
-<li><a href=#aristaconfigstatusv1configstatusproto>arista/configstatus.v1/configstatus.proto</a></li>
-<li><a href=#aristaconfigstatusv1servicesgenproto>arista/configstatus.v1/services.gen.proto</a></li>
+<li><a href=#aristaconfigstatusv1configstatusproto>arista/configstatus.v1/configstatus.proto</a>
+<ul>
+<li><a href=#configdiff>ConfigDiff</a></li>
+<li><a href=#configdiffkey>ConfigDiffKey</a></li>
+<li><a href=#configerror>ConfigError</a></li>
+<li><a href=#configerrors>ConfigErrors</a></li>
+<li><a href=#configkey>ConfigKey</a></li>
+<li><a href=#configsummary>ConfigSummary</a></li>
+<li><a href=#configuration>Configuration</a></li>
+<li><a href=#diffentries>DiffEntries</a></li>
+<li><a href=#diffentry>DiffEntry</a></li>
+<li><a href=#summary>Summary</a></li>
+<li><a href=#summarykey>SummaryKey</a></li>
+<li><a href=#configfiltercode>ConfigFilterCode</a></li>
+<li><a href=#configsynccode>ConfigSyncCode</a></li>
+<li><a href=#configtype>ConfigType</a></li>
+<li><a href=#diffop>DiffOp</a></li>
+<li><a href=#errorcode>ErrorCode</a></li>
+</ul>
+</li>
+<li><a href=#aristaconfigstatusv1servicesgenproto>arista/configstatus.v1/services.gen.proto</a>
+<ul>
+<li><a href=#configdiffrequest>ConfigDiffRequest</a></li>
+<li><a href=#configdiffresponse>ConfigDiffResponse</a></li>
+<li><a href=#configdiffstreamrequest>ConfigDiffStreamRequest</a></li>
+<li><a href=#configdiffstreamresponse>ConfigDiffStreamResponse</a></li>
+<li><a href=#configurationrequest>ConfigurationRequest</a></li>
+<li><a href=#configurationresponse>ConfigurationResponse</a></li>
+<li><a href=#configurationstreamrequest>ConfigurationStreamRequest</a></li>
+<li><a href=#configurationstreamresponse>ConfigurationStreamResponse</a></li>
+<li><a href=#summaryrequest>SummaryRequest</a></li>
+<li><a href=#summaryresponse>SummaryResponse</a></li>
+<li><a href=#summarystreamrequest>SummaryStreamRequest</a></li>
+<li><a href=#summarystreamresponse>SummaryStreamResponse</a></li>
+<li><a href=#configdiffservice>ConfigDiffService</a></li>
+<li><a href=#configurationservice>ConfigurationService</a></li>
+<li><a href=#summaryservice>SummaryService</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1305,18 +1342,18 @@ configstatus.v1
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221491></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221491></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221491></script>
+<script src=/cloudvision-apis/js/learn.js?1631221491></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221491></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221491></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

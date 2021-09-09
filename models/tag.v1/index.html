@@ -6,17 +6,17 @@
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>tag.v1 :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1631219717 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631219717></script>
+<link href=/cloudvision-apis/css/nucleus.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1631221491 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1631221491></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/models/tag.v1/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631219717></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1631221491></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1631221491></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1631219717></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1631221491></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -224,8 +224,70 @@ workspace.v1
 <ul>
 <li>
 <ul>
-<li><a href=#aristatagv1tagproto>arista/tag.v1/tag.proto</a></li>
-<li><a href=#aristatagv1servicesgenproto>arista/tag.v1/services.gen.proto</a></li>
+<li><a href=#aristatagv1tagproto>arista/tag.v1/tag.proto</a>
+<ul>
+<li><a href=#devicetag>DeviceTag</a></li>
+<li><a href=#devicetagassignmentconfig>DeviceTagAssignmentConfig</a></li>
+<li><a href=#devicetagassignmentkey>DeviceTagAssignmentKey</a></li>
+<li><a href=#devicetagconfig>DeviceTagConfig</a></li>
+<li><a href=#interfacetag>InterfaceTag</a></li>
+<li><a href=#interfacetagassignmentconfig>InterfaceTagAssignmentConfig</a></li>
+<li><a href=#interfacetagassignmentkey>InterfaceTagAssignmentKey</a></li>
+<li><a href=#interfacetagconfig>InterfaceTagConfig</a></li>
+<li><a href=#tagkey>TagKey</a></li>
+<li><a href=#creatortype>CreatorType</a></li>
+</ul>
+</li>
+<li><a href=#aristatagv1servicesgenproto>arista/tag.v1/services.gen.proto</a>
+<ul>
+<li><a href=#devicetagassignmentconfigdeleterequest>DeviceTagAssignmentConfigDeleteRequest</a></li>
+<li><a href=#devicetagassignmentconfigdeleteresponse>DeviceTagAssignmentConfigDeleteResponse</a></li>
+<li><a href=#devicetagassignmentconfigrequest>DeviceTagAssignmentConfigRequest</a></li>
+<li><a href=#devicetagassignmentconfigresponse>DeviceTagAssignmentConfigResponse</a></li>
+<li><a href=#devicetagassignmentconfigsetrequest>DeviceTagAssignmentConfigSetRequest</a></li>
+<li><a href=#devicetagassignmentconfigsetresponse>DeviceTagAssignmentConfigSetResponse</a></li>
+<li><a href=#devicetagassignmentconfigstreamrequest>DeviceTagAssignmentConfigStreamRequest</a></li>
+<li><a href=#devicetagassignmentconfigstreamresponse>DeviceTagAssignmentConfigStreamResponse</a></li>
+<li><a href=#devicetagconfigdeleterequest>DeviceTagConfigDeleteRequest</a></li>
+<li><a href=#devicetagconfigdeleteresponse>DeviceTagConfigDeleteResponse</a></li>
+<li><a href=#devicetagconfigrequest>DeviceTagConfigRequest</a></li>
+<li><a href=#devicetagconfigresponse>DeviceTagConfigResponse</a></li>
+<li><a href=#devicetagconfigsetrequest>DeviceTagConfigSetRequest</a></li>
+<li><a href=#devicetagconfigsetresponse>DeviceTagConfigSetResponse</a></li>
+<li><a href=#devicetagconfigstreamrequest>DeviceTagConfigStreamRequest</a></li>
+<li><a href=#devicetagconfigstreamresponse>DeviceTagConfigStreamResponse</a></li>
+<li><a href=#devicetagrequest>DeviceTagRequest</a></li>
+<li><a href=#devicetagresponse>DeviceTagResponse</a></li>
+<li><a href=#devicetagstreamrequest>DeviceTagStreamRequest</a></li>
+<li><a href=#devicetagstreamresponse>DeviceTagStreamResponse</a></li>
+<li><a href=#interfacetagassignmentconfigdeleterequest>InterfaceTagAssignmentConfigDeleteRequest</a></li>
+<li><a href=#interfacetagassignmentconfigdeleteresponse>InterfaceTagAssignmentConfigDeleteResponse</a></li>
+<li><a href=#interfacetagassignmentconfigrequest>InterfaceTagAssignmentConfigRequest</a></li>
+<li><a href=#interfacetagassignmentconfigresponse>InterfaceTagAssignmentConfigResponse</a></li>
+<li><a href=#interfacetagassignmentconfigsetrequest>InterfaceTagAssignmentConfigSetRequest</a></li>
+<li><a href=#interfacetagassignmentconfigsetresponse>InterfaceTagAssignmentConfigSetResponse</a></li>
+<li><a href=#interfacetagassignmentconfigstreamrequest>InterfaceTagAssignmentConfigStreamRequest</a></li>
+<li><a href=#interfacetagassignmentconfigstreamresponse>InterfaceTagAssignmentConfigStreamResponse</a></li>
+<li><a href=#interfacetagconfigdeleterequest>InterfaceTagConfigDeleteRequest</a></li>
+<li><a href=#interfacetagconfigdeleteresponse>InterfaceTagConfigDeleteResponse</a></li>
+<li><a href=#interfacetagconfigrequest>InterfaceTagConfigRequest</a></li>
+<li><a href=#interfacetagconfigresponse>InterfaceTagConfigResponse</a></li>
+<li><a href=#interfacetagconfigsetrequest>InterfaceTagConfigSetRequest</a></li>
+<li><a href=#interfacetagconfigsetresponse>InterfaceTagConfigSetResponse</a></li>
+<li><a href=#interfacetagconfigstreamrequest>InterfaceTagConfigStreamRequest</a></li>
+<li><a href=#interfacetagconfigstreamresponse>InterfaceTagConfigStreamResponse</a></li>
+<li><a href=#interfacetagrequest>InterfaceTagRequest</a></li>
+<li><a href=#interfacetagresponse>InterfaceTagResponse</a></li>
+<li><a href=#interfacetagstreamrequest>InterfaceTagStreamRequest</a></li>
+<li><a href=#interfacetagstreamresponse>InterfaceTagStreamResponse</a></li>
+<li><a href=#devicetagassignmentconfigservice>DeviceTagAssignmentConfigService</a></li>
+<li><a href=#devicetagconfigservice>DeviceTagConfigService</a></li>
+<li><a href=#devicetagservice>DeviceTagService</a></li>
+<li><a href=#interfacetagassignmentconfigservice>InterfaceTagAssignmentConfigService</a></li>
+<li><a href=#interfacetagconfigservice>InterfaceTagConfigService</a></li>
+<li><a href=#interfacetagservice>InterfaceTagService</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1836,18 +1898,18 @@ not be assigned to an interface.</p>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1631219717></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1631219717></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1631219717></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1631221491></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1631221491></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1631221491></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631219717></script>
-<script src=/cloudvision-apis/js/learn.js?1631219717></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1631219717></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1631219717 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1631219717></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1631221491></script>
+<script src=/cloudvision-apis/js/learn.js?1631221491></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1631221491></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1631221491 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1631221491></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>
