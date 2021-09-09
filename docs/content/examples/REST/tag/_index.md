@@ -13,7 +13,7 @@ chapter: false
 Tags
 ================================
 
-## Tag v1
+## Tag.v1
 
 Get all device tags
 --------------------------------
@@ -562,9 +562,9 @@ def assign_dtag(dId, label, value):
 assign_dtag("JPE14070534", "topology_hint_pod", "ire-pod11")
 ```
 
-## TagV2
+## Tag.v2
 
-The TagV2 API is a workspace-aware resource APIs, meaning all changes must be done within a workspace.
+The Tag.v2 API is a workspace-aware resource APIs, meaning all changes must be done within a workspace.
 Changes only get commited upon submitting the workspace. The following examples will walk through device and interface
 tag creation and assignment workflow.
 
