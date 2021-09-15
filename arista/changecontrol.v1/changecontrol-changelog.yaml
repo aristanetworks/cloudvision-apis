@@ -1,0 +1,26 @@
+# Copyright (c) 2020 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2021-08-11
+      description: Update documentation
+      version: 1.0.3
+      onprem: true
+      cvaas: true
+
+    - date: 2021-01-11
+      description: Add schedule flag and status
+      version: 1.0.2
+
+    - date: 2020-07-16
+      description: Remove action description service
+      version: 1.0.1
+
+    - date: 2020-06-08
+      description: Initial revision
+      version: 1.0.0
