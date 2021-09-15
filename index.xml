@@ -21,7 +21,29 @@ A *SetResponse will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This 
 The Key field is required to be fully-specified because Delete needs to identify exactly-one resource to delete.
 RPC Definition The protobuf definition of GetOne is defined as such (for ExampleConfig):
 rpc Delete (ExampleConfigDeleteRequest) returns (ExampleConfigDeleteResponse);Request Type The generated request for a model (ExampleConfig, here) looks like so:
-message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
+message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
+Action
+ApproveConfig
+Change
+ChangeConfig
+ChangeControl
+ChangeControlConfig
+ChangeControlKey
+Flag
+FlagConfig
+RepeatedRepeatedString
+Stage
+StageConfig
+StageConfigMap
+StageConfigMap.ValuesEntry
+StageMap
+StageMap.ValuesEntry
+TimestampFlag
+TimestampFlagConfig
+ChangeControlStatus
+StageStatus
+arista/changecontrol.v1/services.gen.proto
+ApproveConfigDeleteRequest</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
 ConfigDiff
 ConfigDiffKey
 ConfigError
@@ -43,7 +65,29 @@ ConfigDiffRequest
 ConfigDiffResponse
 ConfigDiffStreamRequest
 ConfigDiffStreamResponse
-ConfigurationRequest</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+ConfigurationRequest</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
+Device
+DeviceInfo
+DeviceMap
+DeviceMap.ValuesEntry
+EndpointLocation
+EndpointLocationKey
+ExplanationList
+Identifier
+IdentifierList
+IdentifierSourceList
+Location
+LocationList
+DeviceStatus
+DeviceType
+Explanation
+IdentifierSource
+IdentifierType
+Likelihood
+MacType
+arista/endpointlocation.v1/services.gen.proto
+EndpointLocationRequest
+EndpointLocationResponse</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
 Event
 EventAck
 EventAnnotationConfig

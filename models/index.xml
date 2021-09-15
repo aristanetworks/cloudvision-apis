@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
+Action
+ApproveConfig
+Change
+ChangeConfig
+ChangeControl
+ChangeControlConfig
+ChangeControlKey
+Flag
+FlagConfig
+RepeatedRepeatedString
+Stage
+StageConfig
+StageConfigMap
+StageConfigMap.ValuesEntry
+StageMap
+StageMap.ValuesEntry
+TimestampFlag
+TimestampFlagConfig
+ChangeControlStatus
+StageStatus
+arista/changecontrol.v1/services.gen.proto
+ApproveConfigDeleteRequest</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
 ConfigDiff
 ConfigDiffKey
 ConfigError
@@ -20,7 +42,29 @@ ConfigDiffRequest
 ConfigDiffResponse
 ConfigDiffStreamRequest
 ConfigDiffStreamResponse
-ConfigurationRequest</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+ConfigurationRequest</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
+Device
+DeviceInfo
+DeviceMap
+DeviceMap.ValuesEntry
+EndpointLocation
+EndpointLocationKey
+ExplanationList
+Identifier
+IdentifierList
+IdentifierSourceList
+Location
+LocationList
+DeviceStatus
+DeviceType
+Explanation
+IdentifierSource
+IdentifierType
+Likelihood
+MacType
+arista/endpointlocation.v1/services.gen.proto
+EndpointLocationRequest
+EndpointLocationResponse</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
 Event
 EventAck
 EventAnnotationConfig
