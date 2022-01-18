@@ -23,6 +23,8 @@ jobs:
 
     - name: Install Golang (for protoc-gen-doc)
       uses: actions/setup-go@v2
+      with:
+        go-version: '^1.17.6'
 
     - name: Install protoc-gen-doc
       run: go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
