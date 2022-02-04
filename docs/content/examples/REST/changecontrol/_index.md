@@ -23,7 +23,7 @@ A change can be only be in unapproved state if it was approved initially. Change
 ## Get the approval state for a specific change control
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/changecontrol/v1/ApproveConfig?key.id=-WIh3Xnwu'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ApproveConfig?key.id=-WIh3Xnwu'
 ```
 
 Output:
@@ -47,7 +47,7 @@ The state of a change that was unapproved will result in the following:
 ## Get the approval state for all approved/unapproved changes
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/changecontrol/v1/ApproveConfig/all'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ApproveConfig/all'
 ```
 
 Output:
@@ -65,7 +65,7 @@ Output:
 First we need to get the change control state for the specified key and extract the value of `time` from the `change` dictionary:
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/changecontrol/v1/ChangeControl?key.id=rxwA-N65u'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControl?key.id=rxwA-N65u'
 ```
 
 Output:
@@ -77,7 +77,7 @@ Output:
 Then use the `time` value in the `version` value in the ApproveConfig POST message as below:
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/changecontrol/v1/ApproveConfig' -H 'Content-Type: application/json' \
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ApproveConfig' -H 'Content-Type: application/json' \
 -d '{"key":{"id":"rxwA-N65u"}, "approve": {"value": true, "notes": "REST API test"}, "version": "2021-12-13T18:32:31.830585136Z"}'
 ```
 
@@ -90,7 +90,7 @@ Output:
 ## Create a change control
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.79/api/resources/changecontrol/v1/ChangeControlConfig' -d "`cat task_data.json`"
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d "`cat task_data.json`"
 ```
 
 where `task_data.json` looks like below:
@@ -190,7 +190,7 @@ or without `jq` formatting:
 Pending Change controls can be deleted as below:
 
 ```shell
-curl -sS -kX DELETE --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/changecontrol/v1/ChangeControlConfig?key.id=wvisXUy5N'
+curl -sS -kX DELETE --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig?key.id=wvisXUy5N'
 ```
 
 Output:
@@ -202,7 +202,7 @@ Output:
 ## Start a change control
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.79/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":true,"notes":"Starting change via REST call"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":true,"notes":"Starting change via REST call"}}'
 ```
 
 Output:
@@ -214,7 +214,7 @@ Output:
 ## Stop a change control
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.79/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":false,"notes":"Stopping change via REST call"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":false,"notes":"Stopping change via REST call"}}'
 ```
 
 Output:
@@ -226,13 +226,13 @@ Output:
 ## Schedule a change control
 
 {{% notice info %}}
-Change control scheduling using Resource APIs is only supported in 2021.3.0 or newer.
+Change control scheduling using Resource APIs is only supported in 2022.1.0 or newer.
 {{% /notice %}}
 
 The below example shows how to schedule a Change Control at 2:07 AM on 2021-12-23:
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.79/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"5821c7c1-e276-4387-b60a"},"schedule":{"value":"2021-12-23T02:07:00.0Z","notes":"CC schedule via curl"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"5821c7c1-e276-4387-b60a"},"schedule":{"value":"2021-12-23T02:07:00.0Z","notes":"CC schedule via curl"}}'
 ```
 
 Output:
@@ -252,7 +252,7 @@ Fetching the state of a scheduled change which wasn't approved before execution 
 e.g.:
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.79/api/resources/changecontrol/v1/ChangeControl?key.id=5821c7c1-e276-4387-b60a'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControl?key.id=5821c7c1-e276-4387-b60a'
 
 {"value":{"key":{"id":"5821c7c1-e276-4387-b60a"}, "change":{"name":"Change_20211222_191032", "rootStageId":"root", "stages":{"values":{"root":{"name":"root", "rows":{"values":[{"values":["stage0", "stage1", "stage2", "stage3"]}]}}, "stage0":{"name":"stage0", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1245"}}}}, "stage1":{"name":"stage1", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1246"}}}}, "stage2":{"name":"stage2", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1247"}}}}, "stage3":{"name":"stage3", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1248"}}}}}}, "notes":"curl_cc_test", "time":"2021-12-22T19:10:35.472979755Z", "user":"resourceapis"}, "error":"Reschedule required: not approved at schedule time", "schedule":{"notes":"Reschedule required: not approved at schedule time", "time":"2021-12-23T01:49:00.004927172Z"}}, "time":"2021-12-23T01:49:00.004927172Z"}
 ```

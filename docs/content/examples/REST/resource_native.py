@@ -12,7 +12,7 @@ from pprint import pprint as pp
 with open("token.tok") as f:
     token = f.read().strip('\n')
 
-cvp_url = "https://10.83.13.33"
+cvp_url = "https://192.0.2.100"
 
 def json_decoder(data):
     decoder = JSONDecoder()

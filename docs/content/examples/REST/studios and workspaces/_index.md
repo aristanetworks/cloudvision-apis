@@ -32,7 +32,7 @@ curl -sS -k -X POST $URL --cookie "access_token=$token" -d “$BODY”
 e.g.
 
 ```shell
-curl -sS -k -X POST "https://cvp139/api/resources/workspace/v1/WorkspaceConfig" --cookie "access_token=$token" -d '{"key":{"workspace_id":"ws-change-timezone"}, "display_name": "Set timezone to EST"}'
+curl -sS -k -X POST "https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig" --cookie "access_token=$token" -d '{"key":{"workspace_id":"ws-change-timezone"}, "display_name": "Set timezone to EST"}'
 ```
 
 > Note that for the field names in the POST body, both snake case (such as `studio_id`) and camel case (such as `studioId`) are accepted. Responses are always in camel case.
@@ -83,7 +83,7 @@ curl -sS -k -X GET  https://$CVP/api/resources/studio/v1/StudioConfig/all -b acc
 ```
 
 ```shell
-grpcurl  -H "Authorization: Bearer `cat token.tok`" -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/studio.v1/services.gen.proto  -cacert cvp.crt  10.83.12.174:8443 arista.studio.v1.StudioConfigService/GetAll
+grpcurl  -H "Authorization: Bearer `cat token.tok`" -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/studio.v1/services.gen.proto  -cacert cvp.crt  192.0.2.100:8443 arista.studio.v1.StudioConfigService/GetAll
 ```
 
 Get all studios’ state
@@ -388,7 +388,7 @@ POST BODY:
 grpcurl example:
 
 ```shell
-grpcurl  -H "Authorization: Bearer `cat token.tok`" -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/workspace.v1/services.gen.proto  -cacert cvp.crt -d '{"key":{"workspaceId": "builtin-studios-V0-l3ls"}}' 10.83.12.174:8443 arista.workspace.v1.WorkspaceConfigService/Delete
+grpcurl  -H "Authorization: Bearer `cat token.tok`" -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/workspace.v1/services.gen.proto  -cacert cvp.crt -d '{"key":{"workspaceId": "builtin-studios-V0-l3ls"}}' 192.0.2.100:8443 arista.workspace.v1.WorkspaceConfigService/Delete
 ```
 
 Result:
@@ -405,7 +405,7 @@ Result:
 curl example
 
 ```shell
-curl -sS -kX DELETE --header 'Accept: application/json' -H "Authorization: Bearer `cat token.tok`" 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig?key.workspaceId=builtin-studios-V0-l3ls'
+curl -sS -kX DELETE --header 'Accept: application/json' -H "Authorization: Bearer `cat token.tok`" 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig?key.workspaceId=builtin-studios-V0-l3ls'
 ```
 
 Result:

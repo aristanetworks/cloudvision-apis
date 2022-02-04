@@ -14,7 +14,7 @@ with open("token.tok") as f:
     token = f.read().strip('\n')
 
 clnt = CvpClient()
-clnt.connect(nodes=['10.83.13.33'], username='',password='',api_token=token)
+clnt.connect(nodes=['192.0.2.100'], username='',password='',api_token=token)
 
 def get_events_all(client):
     ''' Get All events '''

@@ -19,7 +19,7 @@ chapter: false
 #### curl
 
 ```bash
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTag/all' | jq '.result.value.key | .label + " " + .value'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/DeviceTag/all' | jq '.result.value.key | .label + " " + .value'
 ```
 
 Result:
@@ -89,7 +89,7 @@ pp(get_all_device_tags())
 #### curl
 
 ```bash
- curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
+ curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
  ```
 
 #### cvprac
@@ -122,7 +122,7 @@ pp(get_all_interface_tags())
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534"}}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534"}}]}' 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
  ```
 
 Result:
@@ -189,7 +189,7 @@ Result:
 Using `jq` to only print the list of 40Gbps interfaces:
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "value":"speed40Gbps" }}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all' | jq '.result.value.key.interfaceId'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "value":"speed40Gbps" }}]}' 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all' | jq '.result.value.key.interfaceId'
 "Ethernet97"
 "Ethernet98"
 "Ethernet99"
@@ -239,7 +239,7 @@ print(filter_interface_tag(dId="JPE14070534", value="speed40Gbps"))
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "interfaceId": "Ethernet1"}}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "interfaceId": "Ethernet1"}}]}' 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
 ```
 
 Result:
@@ -292,7 +292,7 @@ print(filter_interface_tag(dId="JPE14070534", ifId="Ethernet1"))
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "label":"lldp_hostname" }}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all' | jq '.result.value.key.interfaceId'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "label":"lldp_hostname" }}]}' 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all' | jq '.result.value.key.interfaceId'
 
 "Ethernet2"
 ```
@@ -314,7 +314,7 @@ print(filter_interface_tag(dId="JPE14070534", label="lldp_hostname"))
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "value":"speed40Gbps" }}]}' 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"key":{"deviceId": "JPE14070534", "value":"speed40Gbps" }}]}' 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
 ```
 
 Result:
@@ -395,7 +395,7 @@ print(filter_interface_tag(dId="JPE14070534", value="speed40Gbps"))
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagConfig' -d '{"key":{"label":"lldp_chassis","value":"50:08:00:0d:00:08"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagConfig' -d '{"key":{"label":"lldp_chassis","value":"50:08:00:0d:00:08"}}'
 ```
 
 Result:
@@ -436,7 +436,7 @@ create_itag("lldp_chassis", "50:08:00:0d:00:18")
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/InterfaceTagAssignmentConfig' -d '{"key":{"label":"lldp_chassis", "value":"50:08:00:0d:00:08", "deviceId":"JPE14070534", "interfaceId": "Ethernet2"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/InterfaceTagAssignmentConfig' -d '{"key":{"label":"lldp_chassis", "value":"50:08:00:0d:00:08", "deviceId":"JPE14070534", "interfaceId": "Ethernet2"}}'
 ```
 
 Result:
@@ -476,7 +476,7 @@ assign_itag("JPE14070534", "Ethernet3", "lldp_chassis", "50:08:00:0d:00:48")
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTagConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/DeviceTagConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10"}}'
 ```
 
 Result:
@@ -516,7 +516,7 @@ create_dtag("topology_hint_pod", "ire-pod11")
 #### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/tag/v1/DeviceTagAssignmentConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10","deviceId":"JPE14070534"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v1/DeviceTagAssignmentConfig' -d '{"key":{"label":"topology_hint_pod", "value":"ire-pod10","deviceId":"JPE14070534"}}'
 ```
 
 Result:
@@ -562,7 +562,7 @@ tag creation and assignment workflow.
 #### curl
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"workspace_id":""}}]}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"workspace_id":""}}]}'
 ```
 
 Result:
@@ -592,7 +592,7 @@ Result:
 #### curl
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_INTERFACE"}}]}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_INTERFACE"}}]}'
 ```
 
 Result:
@@ -607,7 +607,7 @@ Result:
 #### curl
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_DEVICE"}}]}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/Tag/all' -d '{"partialEqFilter": [{"key":{"elementType":"ELEMENT_TYPE_DEVICE"}}]}'
 ```
 
 Result:
@@ -629,7 +629,7 @@ Result:
 1\. Create workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"display_name":"testTag","description":"Test tag resource APIv2"}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"display_name":"testTag","description":"Test tag resource APIv2"}'
 ```
 
 Result:
@@ -641,7 +641,7 @@ Result:
 2\. Create the tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "testTag", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_pod", "value":"avd-pod10"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "testTag", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_pod", "value":"avd-pod10"}}'
 
 {"value":{"key":{"workspaceId":"testTag","elementType":"ELEMENT_TYPE_DEVICE","label":"topology_hint_pod","value":"avd-pod10"}},"time":"2021-09-02T17:55:14.319537170Z"}%
 ```
@@ -649,13 +649,13 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 3\. Assign the tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "testTag", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod10", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", }, "remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "testTag", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod10", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", }, "remove": false}'
 ```
 
 4\. Start the build
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
 ```
 
 Result:
@@ -667,7 +667,7 @@ Result:
 5\. Verify the build status
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=testTag&key.buildId=b1'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=testTag&key.buildId=b1'
 ```
 
 Result:
@@ -679,7 +679,7 @@ Result:
 6\. Submit the workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
 Result:
@@ -699,7 +699,7 @@ Tag creation and assignment can be done in separate workspaces.
 1\. Create workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"display_name":"testIntfTag","description":"Test interface tag resource APIv2"}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"display_name":"testIntfTag","description":"Test interface tag resource APIv2"}'
 ```
 
 Result:
@@ -711,7 +711,7 @@ Result:
 2\. Create the tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "testIntfTag", "element_type": "ELEMENT_TYPE_INTERFACE", "label":"intfType", "value":"uplink}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "testIntfTag", "element_type": "ELEMENT_TYPE_INTERFACE", "label":"intfType", "value":"uplink}}'
 ```
 
 Result:
@@ -723,13 +723,13 @@ Result:
 3\. Assign the tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "testIntfTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "intfType", "value": "uplink", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", "interfaceId":"Ethernet1"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "testIntfTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "intfType", "value": "uplink", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", "interfaceId":"Ethernet1"},"remove": false}'
 ```
 
 4\. Start the build
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
 ```
 
 Result:
@@ -741,7 +741,7 @@ Result:
 5\. Verify the build status
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=testIntfTag&key.buildId=b1'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=testIntfTag&key.buildId=b1'
 ```
 
 Result:
@@ -753,7 +753,7 @@ Result:
 6\. Submit the workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"testIntfTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
 Result:
@@ -773,37 +773,37 @@ Tag creation and assignment can be done in separate workspaces.
 1\. Create workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"display_name":"deleteTag","description":"Test interface tag deletion resource APIv2"}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"display_name":"deleteTag","description":"Test interface tag deletion resource APIv2"}'
 ```
 
 2\.2\. Unassign an interface tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "deleteTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "intfType", "value": "uplink", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", "interfaceId":"Ethernet1"},"remove": true}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "deleteTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "intfType", "value": "uplink", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9", "interfaceId":"Ethernet1"},"remove": true}'
 ```
 
 2\.2\. Unassign a device tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "deleteTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "location", "value": "Dublin", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9"},"remove": true}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "deleteTag", "elementType": "ELEMENT_TYPE_INTERFACE", "label": "location", "value": "Dublin", "deviceId": "4B0C688DBE67D1AC9572445DCDB552F9"},"remove": true}'
 ```
 
 3\. Start the build
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
 ```
 
 4\. Verify the build status
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&key.buildId=b1'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&key.buildId=b1'
 ```
 
 5\. Submit the workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
 ### Remove an existing device/interface tag
@@ -813,38 +813,38 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 1\. Create workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"display_name":"deleteTag","description":"Test tag deletion"}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"display_name":"deleteTag","description":"Test tag deletion"}'
 ```
 
 2\.1\. Delete an interface tag
 
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "deleteTag", "element_type": "ELEMENT_TYPE_INTERFACE", "label":"intfType", "value":"downlink"}, "remove": true}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "deleteTag", "element_type": "ELEMENT_TYPE_INTERFACE", "label":"intfType", "value":"downlink"}, "remove": true}'
 ```
 
 2\.2\. Delete a device tag
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "deleteTag", "element_type": "ELEMENT_TYPE_DEVICE", "label":"location", "value":"Dublin"}, "remove": true}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "deleteTag", "element_type": "ELEMENT_TYPE_DEVICE", "label":"location", "value":"Dublin"}, "remove": true}'
 ```
 
 3\. Start the build
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
 ```
 
 4\. Verify the build status
 
 ```shell
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&key.buildId=b1'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId=deleteTag&key.buildId=b1'
 ```
 
 5\. Submit the workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"deleteTag"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
 ### Show all tags edits in a workspace
@@ -852,7 +852,7 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 #### curl
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
 ```
 
 Result:
@@ -866,7 +866,7 @@ Result:
 #### curl
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig/all' -d '{"partialEqFilter": [{"key":{"workspace_id": "test1337"}}]}'
 ```
 
 Result:
@@ -881,139 +881,139 @@ Result:
 1\. Create Workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"display_name":"AVD-lab","description":"Set up topology tags"}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"display_name":"AVD-lab","description":"Set up topology tags"}'
 ```
 
 2\. Create tags
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_pod", "value":"avd-pod1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_pod", "value":"avd-pod1"}}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_datacenter", "value":"avd-dc1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_datacenter", "value":"avd-dc1"}}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-leafs1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-leafs1"}}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-leafs2"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-leafs2"}}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-spines"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagConfig' -d '{"key":{"workspace_id": "AVD-lab", "element_type": "ELEMENT_TYPE_DEVICE", "label":"topology_hint_rack", "value":"avd-spines"}}'
 ```
 
 3\. Assign tags
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_datacenter", "value": "avd-dc1", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_pod", "value": "avd-pod1", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs1", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs1", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs2", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs2", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs2", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-leafs2", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-spines", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-spines", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-spines", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_rack", "value": "avd-spines", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "BAD032986065E8DC14CBB6472EC314A6"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "0123F2E4462997EB155B7C50EC148767"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "8520AF39790A4EC959550166DC5DEADE"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "leaf", "deviceId": "6323DA7D2B542B5D09630F87351BEA41"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "spine", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "spine", "deviceId": "CD0EADBEEA126915EA78E0FB4DC776CA"},"remove": false}'
 ```
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "spine", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/tag/v2/TagAssignmentConfig' -d  '{"key": {"workspaceId": "AVD-lab", "elementType": "ELEMENT_TYPE_DEVICE", "label": "topology_hint_type", "value": "spine", "deviceId": "2568DB4A33177968A78C4FD5A8232159"},"remove": false}'
 ```
 
 4\. Start Build
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"request":"REQUEST_START_BUILD","request_params":{"request_id":"b1"}}'
 ```
 
 5\. Submit workspace
 
 ```shell
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig' -d '{"key":{"workspace_id":"AVD-lab"},"request":"REQUEST_SUBMIT","request_params":{"request_id":"s1"}}'
 ```
 
 Result:
