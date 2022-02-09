@@ -2,21 +2,21 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.0">
+<meta name=generator content="Hugo 0.92.1">
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>Studios and Workspaces :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1642543038 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1642543038></script>
+<link href=/cloudvision-apis/css/nucleus.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1644446903 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1644446903></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/examples/rest/studios-and-workspaces/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1642543038></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1642543038></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1644446903></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1644446903></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1642543038></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1644446903></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -345,7 +345,7 @@ Studios and Workspaces
 <p>You can use the below curl command to POST the body. “$token” is obtained from the access_token cookie returned by authenticating to CVP.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X POST $URL --cookie <span style=color:#e6db74>&#34;access_token=</span>$token<span style=color:#e6db74>&#34;</span> -d “$BODY”
 </code></pre></div><p>e.g.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X POST <span style=color:#e6db74>&#34;https://cvp139/api/resources/workspace/v1/WorkspaceConfig&#34;</span> --cookie <span style=color:#e6db74>&#34;access_token=</span>$token<span style=color:#e6db74>&#34;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;ws-change-timezone&#34;}, &#34;display_name&#34;: &#34;Set timezone to EST&#34;}&#39;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X POST <span style=color:#e6db74>&#34;https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig&#34;</span> --cookie <span style=color:#e6db74>&#34;access_token=</span>$token<span style=color:#e6db74>&#34;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspace_id&#34;:&#34;ws-change-timezone&#34;}, &#34;display_name&#34;: &#34;Set timezone to EST&#34;}&#39;</span>
 </code></pre></div><blockquote>
 <p>Note that for the field names in the POST body, both snake case (such as <code>studio_id</code>) and camel case (such as <code>studioId</code>) are accepted. Responses are always in camel case.</p>
 </blockquote>
@@ -362,7 +362,7 @@ Studios and Workspaces
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X GET https://$CVP/api/resources/workspace/v1/WorkspaceBuild?key.workspaceId<span style=color:#f92672>=</span>ws-timezone&amp;key.buildId<span style=color:#f92672>=</span>b1 -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span>
 </code></pre></div><h2 id=get-all-studio-configs>Get all studio configs</h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X GET  https://$CVP/api/resources/studio/v1/StudioConfig/all -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span>
-</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>grpcurl  -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/studio.v1/services.gen.proto  -cacert cvp.crt  10.83.12.174:8443 arista.studio.v1.StudioConfigService/GetAll
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>grpcurl  -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/studio.v1/services.gen.proto  -cacert cvp.crt  192.0.2.100:8443 arista.studio.v1.StudioConfigService/GetAll
 </code></pre></div><h2 id=get-all-studios-state>Get all studios’ state</h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -k -X GET https://$CVP/api/resources/studio/v1/Studio/all -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span>
 </code></pre></div><h2 id=get-a-single-studio-config-in-a-workspace>Get a single studio config in a workspace</h2>
@@ -559,7 +559,7 @@ Studios and Workspaces
       }
 }
 </code></pre></div><p>grpcurl example:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>grpcurl  -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/workspace.v1/services.gen.proto  -cacert cvp.crt -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspaceId&#34;: &#34;builtin-studios-V0-l3ls&#34;}}&#39;</span> 10.83.12.174:8443 arista.workspace.v1.WorkspaceConfigService/Delete
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>grpcurl  -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/workspace.v1/services.gen.proto  -cacert cvp.crt -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;workspaceId&#34;: &#34;builtin-studios-V0-l3ls&#34;}}&#39;</span> 192.0.2.100:8443 arista.workspace.v1.WorkspaceConfigService/Delete
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
   <span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span> {
@@ -568,7 +568,7 @@ Studios and Workspaces
   <span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;2021-07-22T17:09:51.788962287Z&#34;</span>
 }
 </code></pre></div><p>curl example</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX DELETE --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> <span style=color:#e6db74>&#39;https://10.83.12.174/api/resources/workspace/v1/WorkspaceConfig?key.workspaceId=builtin-studios-V0-l3ls&#39;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX DELETE --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -H <span style=color:#e6db74>&#34;Authorization: Bearer `cat token.tok`&#34;</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig?key.workspaceId=builtin-studios-V0-l3ls&#39;</span>
 </code></pre></div><p>Result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{<span style=color:#e6db74>&#34;key&#34;</span><span style=color:#f92672>:</span>{<span style=color:#e6db74>&#34;workspaceId&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;builtin-studios-V0-l3ls&#34;</span>}, <span style=color:#e6db74>&#34;time&#34;</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;2021-07-22T17:39:28.789768498Z&#34;</span>}<span style=color:#f92672>%</span>
 </code></pre></div>
@@ -584,18 +584,18 @@ Studios and Workspaces
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1642543038></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1642543038></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1644446903></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1644446903></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1642543038></script>
-<script src=/cloudvision-apis/js/learn.js?1642543038></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1642543038></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1642543038 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1642543038></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1644446903></script>
+<script src=/cloudvision-apis/js/learn.js?1644446903></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1644446903></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1644446903 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1644446903></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

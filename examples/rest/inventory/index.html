@@ -2,21 +2,21 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.0">
+<meta name=generator content="Hugo 0.92.1">
 <meta name=description content>
 <link rel="shortcut icon" href=https://aristanetworks.github.io/cloudvision-apis//images/favicon.ico type=image/x-icon>
 <title>Inventory :: Arista Networks FMP APIs</title>
-<link href=/cloudvision-apis/css/nucleus.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/fontawesome-all.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/hybrid.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/featherlight.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/auto-complete.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/hugo-theme.css?1642543038 rel=stylesheet>
-<link href=/cloudvision-apis/css/theme-arista.css?1642543038 rel=stylesheet>
-<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1642543038></script>
+<link href=/cloudvision-apis/css/nucleus.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/fontawesome-all.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/hybrid.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/featherlight.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/perfect-scrollbar.min.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/auto-complete.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/atom-one-dark-reasonable.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/hugo-theme.css?1644446903 rel=stylesheet>
+<link href=/cloudvision-apis/css/theme-arista.css?1644446903 rel=stylesheet>
+<script src=/cloudvision-apis/js/jquery-3.3.1.min.js?1644446903></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/cloudvision-apis/examples/rest/inventory/>
@@ -30,10 +30,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1642543038></script>
-<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1642543038></script>
+<script type=text/javascript src=/cloudvision-apis/js/lunr.min.js?1644446903></script>
+<script type=text/javascript src=/cloudvision-apis/js/auto-complete.js?1644446903></script>
 <script type=text/javascript>var baseurl="https://aristanetworks.github.io/cloudvision-apis/"</script>
-<script type=text/javascript src=/cloudvision-apis/js/search.js?1642543038></script>
+<script type=text/javascript src=/cloudvision-apis/js/search.js?1644446903></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -242,6 +242,7 @@ workspace.v1
 <ul>
 <li><a href=#device>Device</a>
 <ul>
+<li><a href=#get-device-state-by-serial-number>Get device state by serial number</a></li>
 <li><a href=#get-all-devices-from-inventory>Get all devices from inventory</a>
 <ul>
 <li><a href=#curl>curl</a></li>
@@ -249,6 +250,14 @@ workspace.v1
 <li><a href=#python-requests>python requests</a></li>
 </ul>
 </li>
+<li><a href=#decommission-a-device>Decommission a device</a></li>
+<li><a href=#get-the-decommission-state-of-a-device>Get the decommission state of a device</a></li>
+<li><a href=#get-the-decommission-state-of-all-devices>Get the decommission state of all devices</a></li>
+<li><a href=#get-the-decommission-state-of-all-devices-that-failed-to-be-decommissioned>Get the decommission state of all devices that failed to be decommissioned</a></li>
+<li><a href=#onboard-a-device>Onboard a device</a></li>
+<li><a href=#get-the-onboarding-state-by-request-id>Get the onboarding state by request ID</a></li>
+<li><a href=#get-the-onboarding-state-for-all-devices>Get the onboarding state for all devices</a></li>
+<li><a href=#get-the-provisioning-state-for-devices-in-ztp-mode>Get the provisioning state for devices in ZTP mode</a></li>
 </ul>
 </li>
 </ul>
@@ -267,6 +276,7 @@ Inventory
 <ul>
 <li><a href=#device>Device</a>
 <ul>
+<li><a href=#get-device-state-by-serial-number>Get device state by serial number</a></li>
 <li><a href=#get-all-devices-from-inventory>Get all devices from inventory</a>
 <ul>
 <li><a href=#curl>curl</a></li>
@@ -274,6 +284,14 @@ Inventory
 <li><a href=#python-requests>python requests</a></li>
 </ul>
 </li>
+<li><a href=#decommission-a-device>Decommission a device</a></li>
+<li><a href=#get-the-decommission-state-of-a-device>Get the decommission state of a device</a></li>
+<li><a href=#get-the-decommission-state-of-all-devices>Get the decommission state of all devices</a></li>
+<li><a href=#get-the-decommission-state-of-all-devices-that-failed-to-be-decommissioned>Get the decommission state of all devices that failed to be decommissioned</a></li>
+<li><a href=#onboard-a-device>Onboard a device</a></li>
+<li><a href=#get-the-onboarding-state-by-request-id>Get the onboarding state by request ID</a></li>
+<li><a href=#get-the-onboarding-state-for-all-devices>Get the onboarding state for all devices</a></li>
+<li><a href=#get-the-provisioning-state-for-devices-in-ztp-mode>Get the provisioning state for devices in ZTP mode</a></li>
 </ul>
 </li>
 </ul>
@@ -281,9 +299,13 @@ Inventory
 <div class="notices tip"><p><a href=https://stedolan.github.io/jq/>jq</a> can be used to easily format and parse the outputs.</p>
 </div>
 <h1 id=device>Device</h1>
-<h2 id=get-all-devices-from-inventory>Get all devices from inventory</h2>
+<h2 id=get-device-state-by-serial-number>Get device state by serial number</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/Device?key.deviceId=BAD032986065E8DC14CBB6472EC314A6&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;BAD032986065E8DC14CBB6472EC314A6&#34;</span>}, <span style=color:#f92672>&#34;softwareVersion&#34;</span>:<span style=color:#e6db74>&#34;4.27.0F&#34;</span>, <span style=color:#f92672>&#34;modelName&#34;</span>:<span style=color:#e6db74>&#34;vEOS-lab&#34;</span>, <span style=color:#f92672>&#34;hardwareRevision&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>, <span style=color:#f92672>&#34;fqdn&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf1&#34;</span>, <span style=color:#f92672>&#34;hostname&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf1&#34;</span>, <span style=color:#f92672>&#34;domainName&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>, <span style=color:#f92672>&#34;systemMacAddress&#34;</span>:<span style=color:#e6db74>&#34;50:08:00:a7:ca:c3&#34;</span>, <span style=color:#f92672>&#34;bootTime&#34;</span>:<span style=color:#e6db74>&#34;2021-12-01T20:06:18.607800006Z&#34;</span>, <span style=color:#f92672>&#34;streamingStatus&#34;</span>:<span style=color:#e6db74>&#34;STREAMING_STATUS_ACTIVE&#34;</span>, <span style=color:#f92672>&#34;extendedAttributes&#34;</span>:{<span style=color:#f92672>&#34;featureEnabled&#34;</span>:{<span style=color:#f92672>&#34;Danz&#34;</span>:<span style=color:#66d9ef>false</span>, <span style=color:#f92672>&#34;Mlag&#34;</span>:<span style=color:#66d9ef>false</span>}}}, <span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-03T10:04:38.376359403Z&#34;</span>}<span style=color:#960050;background-color:#1e0010>%</span>
+</code></pre></div><h2 id=get-all-devices-from-inventory>Get all devices from inventory</h2>
 <h3 id=curl>curl</h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://10.83.13.33/api/resources/inventory/v1/Device/all&#39;</span> | jq <span style=color:#e6db74>&#39;.result.value | with_entries(select(.[])) | select(.streamingStatus==&#34;STREAMING_STATUS_ACTIVE&#34;) | .hostname&#39;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/Device/all&#39;</span> | jq <span style=color:#e6db74>&#39;.result.value | with_entries(select(.[])) | select(.streamingStatus==&#34;STREAMING_STATUS_ACTIVE&#34;) | .hostname&#39;</span>
 <span style=color:#e6db74>&#34;cd263&#34;</span>
 <span style=color:#e6db74>&#34;sn413&#34;</span>
 <span style=color:#e6db74>&#34;fm422&#34;</span>
@@ -291,6 +313,13 @@ Inventory
 <span style=color:#e6db74>&#34;psp301&#34;</span>
 <span style=color:#e6db74>&#34;wl504&#34;</span>
 <span style=color:#e6db74>&#34;cloudEOS1&#34;</span>
+</code></pre></div><p>We can use <code>POST</code> and <code>partialEqFilter</code> to get more specific data, e.g.: to get all actively streaming devices we can filter by <code>streamingStatus</code> by setting the <code>"STREAMING_STATUS_ACTIVE"</code> or <code>2</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/Device/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;streamingStatus&#34;:2}]}&#39;</span>
+</code></pre></div><p>Get all actively streaming devices that are running on EOS 4.27.0F:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/Device/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [{&#34;streamingStatus&#34;:2, &#34;softwareVersion&#34;:&#34;4.27.0F&#34;}]}&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;6323DA7D2B542B5D09630F87351BEA41&#34;</span>},<span style=color:#f92672>&#34;softwareVersion&#34;</span>:<span style=color:#e6db74>&#34;4.27.0F&#34;</span>,<span style=color:#f92672>&#34;modelName&#34;</span>:<span style=color:#e6db74>&#34;vEOS-lab&#34;</span>,<span style=color:#f92672>&#34;hardwareRevision&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#f92672>&#34;fqdn&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf4&#34;</span>,<span style=color:#f92672>&#34;hostname&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf4&#34;</span>,<span style=color:#f92672>&#34;domainName&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#f92672>&#34;systemMacAddress&#34;</span>:<span style=color:#e6db74>&#34;50:08:00:25:9d:36&#34;</span>,<span style=color:#f92672>&#34;bootTime&#34;</span>:<span style=color:#e6db74>&#34;2021-10-20T17:44:35.621819972Z&#34;</span>,<span style=color:#f92672>&#34;streamingStatus&#34;</span>:<span style=color:#e6db74>&#34;STREAMING_STATUS_ACTIVE&#34;</span>,<span style=color:#f92672>&#34;extendedAttributes&#34;</span>:{<span style=color:#f92672>&#34;featureEnabled&#34;</span>:{<span style=color:#f92672>&#34;Danz&#34;</span>:<span style=color:#66d9ef>false</span>,<span style=color:#f92672>&#34;Mlag&#34;</span>:<span style=color:#66d9ef>false</span>}}},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-01-27T22:33:58.745524517Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;BAD032986065E8DC14CBB6472EC314A6&#34;</span>},<span style=color:#f92672>&#34;softwareVersion&#34;</span>:<span style=color:#e6db74>&#34;4.27.0F&#34;</span>,<span style=color:#f92672>&#34;modelName&#34;</span>:<span style=color:#e6db74>&#34;vEOS-lab&#34;</span>,<span style=color:#f92672>&#34;hardwareRevision&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#f92672>&#34;fqdn&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf1&#34;</span>,<span style=color:#f92672>&#34;hostname&#34;</span>:<span style=color:#e6db74>&#34;tp-avd-leaf1&#34;</span>,<span style=color:#f92672>&#34;domainName&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>,<span style=color:#f92672>&#34;systemMacAddress&#34;</span>:<span style=color:#e6db74>&#34;50:08:00:a7:ca:c3&#34;</span>,<span style=color:#f92672>&#34;bootTime&#34;</span>:<span style=color:#e6db74>&#34;2021-12-01T20:06:18.607800006Z&#34;</span>,<span style=color:#f92672>&#34;streamingStatus&#34;</span>:<span style=color:#e6db74>&#34;STREAMING_STATUS_ACTIVE&#34;</span>,<span style=color:#f92672>&#34;extendedAttributes&#34;</span>:{<span style=color:#f92672>&#34;featureEnabled&#34;</span>:{<span style=color:#f92672>&#34;Danz&#34;</span>:<span style=color:#66d9ef>false</span>,<span style=color:#f92672>&#34;Mlag&#34;</span>:<span style=color:#66d9ef>false</span>}}},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-03T10:04:38.376359403Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 </code></pre></div><h3 id=cvprac>cvprac</h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_active_devices</span>(client):
     <span style=color:#e6db74>&#39;&#39;&#39; Get active devices &#39;&#39;&#39;</span>
@@ -343,6 +372,45 @@ print(get_active_devices())
 </code></pre></div><h5 id=sample-output>Sample output</h5>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>python3 resource_native.py
 <span style=color:#f92672>[</span><span style=color:#e6db74>&#39;cd263&#39;</span>, <span style=color:#e6db74>&#39;sn413&#39;</span>, <span style=color:#e6db74>&#39;fm422&#39;</span>, <span style=color:#e6db74>&#39;sn503&#39;</span>, <span style=color:#e6db74>&#39;psp301&#39;</span>, <span style=color:#e6db74>&#39;wl504&#39;</span>, <span style=color:#e6db74>&#39;cloudEOS1&#39;</span><span style=color:#f92672>]</span>
+</code></pre></div><h2 id=decommission-a-device>Decommission a device</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioningConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;request_id&#34;:&#34;123456789&#34;},&#34;device_id&#34;: &#34;0123F2E4462997EB155B7C50EC148767&#34;}&#39;</span>
+</code></pre></div><h2 id=get-the-decommission-state-of-a-device>Get the decommission state of a device</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning?key.requestId=123456789&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;123456789&#34;</span>}, <span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;DECOMMISSIONING_STATUS_IN_PROGRESS&#34;</span>, <span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;Disabled TerminAttr, waiting for device to be marked inactive&#34;</span>}, <span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T00:40:24.893100195Z&#34;</span>}
+</code></pre></div><h2 id=get-the-decommission-state-of-all-devices>Get the decommission state of all devices</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning/all&#39;</span>
+</code></pre></div><h2 id=get-the-decommission-state-of-all-devices-that-failed-to-be-decommissioned>Get the decommission state of all devices that failed to be decommissioned</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [ {&#34;status&#34;:2}]}&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;2337d655-b1e5-4003-9325-beff8c9e7f4a&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;DECOMMISSIONING_STATUS_FAILURE&#34;</span>,<span style=color:#f92672>&#34;error&#34;</span>:<span style=color:#e6db74>&#34;Timed out waiting for device BAD032986065E8DC14CBB6472EC314A6 status to be inactive&#34;</span>,<span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:41:49.566294590Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;7802d5a5-040d-4d86-805f-d63891256201&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;DECOMMISSIONING_STATUS_FAILURE&#34;</span>,<span style=color:#f92672>&#34;error&#34;</span>:<span style=color:#e6db74>&#34;Pending/In-progress tasks exist for the device&#34;</span>,<span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:41:49.566299871Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;d88b046f-3338-450f-bf47-a28f6ced700e&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;DECOMMISSIONING_STATUS_FAILURE&#34;</span>,<span style=color:#f92672>&#34;error&#34;</span>:<span style=color:#e6db74>&#34;Pending/In-progress tasks exist for the device&#34;</span>,<span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:41:49.566304560Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+</code></pre></div><p>or get the state of decommissioning for devices for which the decommissioning is still in progress:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;: [ {&#34;status&#34;:1}]}&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;123456789&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;DECOMMISSIONING_STATUS_IN_PROGRESS&#34;</span>,<span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;Disabled TerminAttr, waiting for device to be marked inactive&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:41:46.376310308Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+</code></pre></div><h2 id=onboard-a-device>Onboard a device</h2>
+<div class="notices note"><p>The service account&rsquo;s name has to match the username logged in on the CVP UI and that same username has to be allowed on the device.
+The user should be logged in on the UI when using the the DeviceOnboarding APIs.</p>
+</div>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceOnboardingConfig&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;key&#34;:{&#34;requestId&#34;:&#34;133713371337&#34;},&#34;hostnameOrIp&#34;:&#34;192.0.2.139&#34;,&#34;device_type&#34;:&#34;eos&#34;}&#39;</span>
+</code></pre></div><h2 id=get-the-onboarding-state-by-request-id>Get the onboarding state by request ID</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceOnboarding?key.requestId=133713371337&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;133713371337&#34;</span>}, <span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;ZZZ9999999&#34;</span>, <span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;ONBOARDING_STATUS_SUCCESS&#34;</span>, <span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;Device onboarded successfully&#34;</span>}, <span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:51:13.447185558Z&#34;</span>}
+</code></pre></div><h2 id=get-the-onboarding-state-for-all-devices>Get the onboarding state for all devices</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX GET --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/DeviceOnboarding/all&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;requestId&#34;</span>:<span style=color:#e6db74>&#34;133713371337&#34;</span>},<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;ZZZ9999999&#34;</span>,<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;ONBOARDING_STATUS_SUCCESS&#34;</span>,<span style=color:#f92672>&#34;statusMessage&#34;</span>:<span style=color:#e6db74>&#34;Device onboarded successfully&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:51:13.447185558Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+</code></pre></div><h2 id=get-the-provisioning-state-for-devices-in-ztp-mode>Get the provisioning state for devices in ZTP mode</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -sS -kX POST --header <span style=color:#e6db74>&#39;Accept: application/json&#39;</span> -b access_token<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>cat token.tok<span style=color:#e6db74>`</span> <span style=color:#e6db74>&#39;https://192.0.2.100/api/resources/inventory/v1/ProvisionedDevice/all&#39;</span> -d <span style=color:#e6db74>&#39;{&#34;partialEqFilter&#34;:[{&#34;ztpMode&#34;:true}]}&#39;</span>
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE15214224&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;PROVISIONING_STATUS_SUCCESS&#34;</span>,<span style=color:#f92672>&#34;ztpMode&#34;</span>:<span style=color:#66d9ef>true</span>,<span style=color:#f92672>&#34;ipAddress&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;192.0.2.240&#34;</span>},<span style=color:#f92672>&#34;provisioningGroupName&#34;</span>:<span style=color:#e6db74>&#34;undefined_container&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-01-31T13:16:09.885Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE19050707&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;PROVISIONING_STATUS_SUCCESS&#34;</span>,<span style=color:#f92672>&#34;ztpMode&#34;</span>:<span style=color:#66d9ef>true</span>,<span style=color:#f92672>&#34;ipAddress&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;192.0.2.121&#34;</span>},<span style=color:#f92672>&#34;provisioningGroupName&#34;</span>:<span style=color:#e6db74>&#34;undefined_container&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-01-30T19:06:00.070338261Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE16401934&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;PROVISIONING_STATUS_SUCCESS&#34;</span>,<span style=color:#f92672>&#34;ztpMode&#34;</span>:<span style=color:#66d9ef>true</span>,<span style=color:#f92672>&#34;ipAddress&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;192.0.2.254&#34;</span>},<span style=color:#f92672>&#34;provisioningGroupName&#34;</span>:<span style=color:#e6db74>&#34;undefined_container&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:48:14.187Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
+{<span style=color:#f92672>&#34;result&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:{<span style=color:#f92672>&#34;key&#34;</span>:{<span style=color:#f92672>&#34;deviceId&#34;</span>:<span style=color:#e6db74>&#34;JPE15064123&#34;</span>},<span style=color:#f92672>&#34;status&#34;</span>:<span style=color:#e6db74>&#34;PROVISIONING_STATUS_SUCCESS&#34;</span>,<span style=color:#f92672>&#34;ztpMode&#34;</span>:<span style=color:#66d9ef>true</span>,<span style=color:#f92672>&#34;ipAddress&#34;</span>:{<span style=color:#f92672>&#34;value&#34;</span>:<span style=color:#e6db74>&#34;192.0.2.250&#34;</span>},<span style=color:#f92672>&#34;provisioningGroupName&#34;</span>:<span style=color:#e6db74>&#34;undefined_container&#34;</span>},<span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2022-02-04T19:53:13.016Z&#34;</span>,<span style=color:#f92672>&#34;type&#34;</span>:<span style=color:#e6db74>&#34;INITIAL&#34;</span>}}
 </code></pre></div>
 <footer class=footline>
 </footer>
@@ -356,18 +424,18 @@ print(get_active_devices())
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/cloudvision-apis/js/clipboard.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/jquery.sticky.js?1642543038></script>
-<script src=/cloudvision-apis/js/featherlight.min.js?1642543038></script>
-<script src=/cloudvision-apis/js/highlight.pack.js?1642543038></script>
+<script src=/cloudvision-apis/js/clipboard.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/perfect-scrollbar.jquery.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/jquery.sticky.js?1644446903></script>
+<script src=/cloudvision-apis/js/featherlight.min.js?1644446903></script>
+<script src=/cloudvision-apis/js/highlight.pack.js?1644446903></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1642543038></script>
-<script src=/cloudvision-apis/js/learn.js?1642543038></script>
-<script src=/cloudvision-apis/js/hugo-learn.js?1642543038></script>
-<link href=/cloudvision-apis/mermaid/mermaid.css?1642543038 rel=stylesheet>
-<script src=/cloudvision-apis/mermaid/mermaid.js?1642543038></script>
+<script src=/cloudvision-apis/js/modernizr.custom-3.6.0.js?1644446903></script>
+<script src=/cloudvision-apis/js/learn.js?1644446903></script>
+<script src=/cloudvision-apis/js/hugo-learn.js?1644446903></script>
+<link href=/cloudvision-apis/mermaid/mermaid.css?1644446903 rel=stylesheet>
+<script src=/cloudvision-apis/mermaid/mermaid.js?1644446903></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>
