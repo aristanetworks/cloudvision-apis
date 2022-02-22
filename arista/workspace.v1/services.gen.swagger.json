@@ -1,0 +1,2139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.workspace.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "WorkspaceService"
+    },
+    {
+      "name": "WorkspaceBuildService"
+    },
+    {
+      "name": "WorkspaceBuildDetailsService"
+    },
+    {
+      "name": "WorkspaceConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/workspace/v1/Workspace": {
+      "get": {
+        "operationId": "WorkspaceService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/Workspace/all": {
+      "get": {
+        "operationId": "WorkspaceService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/Workspace/watch": {
+      "get": {
+        "operationId": "WorkspaceService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuild": {
+      "get": {
+        "operationId": "WorkspaceBuildService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is a required field which represents workspace ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.buildId",
+            "description": "build_id is a required field which represents build ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuild/all": {
+      "get": {
+        "operationId": "WorkspaceBuildService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceBuildService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuild/watch": {
+      "get": {
+        "operationId": "WorkspaceBuildService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceBuildService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuildDetails": {
+      "get": {
+        "operationId": "WorkspaceBuildDetailsService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is a required field which represents workspace ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.buildId",
+            "description": "build_id is a required field which represents build ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.deviceId",
+            "description": "device_id is a required field which represents device ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildDetailsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuildDetails/all": {
+      "get": {
+        "operationId": "WorkspaceBuildDetailsService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildDetailsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceBuildDetailsService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildDetailsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceBuildDetails/watch": {
+      "get": {
+        "operationId": "WorkspaceBuildDetailsService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildDetailsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceBuildDetailsService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceBuildDetailsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceConfig": {
+      "get": {
+        "operationId": "WorkspaceConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkspaceConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "WorkspaceConfig carries the value to set into the datastore.\nSee the documentation on the WorkspaceConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceConfig/all": {
+      "get": {
+        "operationId": "WorkspaceConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceConfig/watch": {
+      "get": {
+        "operationId": "WorkspaceConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.configstatus.v1.ConfigError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "$ref": "#/definitions/arista.configstatus.v1.ErrorCode"
+        },
+        "errorMsg": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Line_num represents line number, if any"
+        },
+        "configletName": {
+          "type": "string",
+          "description": "Configlet_name represents the originating configlet name. Configlet_name\nand line_num point to the line where config warning or config error originate."
+        }
+      },
+      "title": "ConfigError represents errors reported by CVP when handling device configuration"
+    },
+    "arista.configstatus.v1.ConfigErrors": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigError"
+          }
+        }
+      }
+    },
+    "arista.configstatus.v1.ConfigSummary": {
+      "type": "object",
+      "properties": {
+        "sync": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode"
+        },
+        "nopLines": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of lines with code no-operation"
+        },
+        "ignoredLines": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of lines with code IGNORE"
+        },
+        "addedLines": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of lines with code ADD"
+        },
+        "deletedLines": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of lines with code DELETE"
+        },
+        "changedLines": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of lines with code CHANGE"
+        },
+        "designedConfigErrors": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of designed config errors"
+        },
+        "designedConfigWarnings": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of designed config warnings"
+        },
+        "runningConfigUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Timestamp at which running config is updated"
+        },
+        "designedConfigUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Timestamp at which designed config is updated"
+        },
+        "runningConfigUri": {
+          "type": "string",
+          "title": "The HTTP URI client can use to GET running config and associated errors"
+        },
+        "designedConfigUri": {
+          "type": "string",
+          "title": "The HTTP URI client can use to GET designed config and associated errors"
+        },
+        "diffUri": {
+          "type": "string",
+          "title": "The HTTP URI client can use to GET config diff and associated errors"
+        },
+        "digest": {
+          "type": "string",
+          "description": "Digest (SHA-256) of the config diff."
+        }
+      },
+      "description": "ConfigSummary represents device configuration summary."
+    },
+    "arista.configstatus.v1.ConfigSyncCode": {
+      "type": "string",
+      "enum": [
+        "CONFIG_SYNC_CODE_UNSPECIFIED",
+        "CONFIG_SYNC_CODE_IN_SYNC",
+        "CONFIG_SYNC_CODE_OUT_OF_SYNC"
+      ],
+      "default": "CONFIG_SYNC_CODE_UNSPECIFIED",
+      "description": "- CONFIG_SYNC_CODE_IN_SYNC: IN_SYNC indicates designed config and running config are identical\n - CONFIG_SYNC_CODE_OUT_OF_SYNC: OUT_OF_SYNC indicates designed config and running config are not identical",
+      "title": "ConfigSyncCode indicates config synchronization status"
+    },
+    "arista.configstatus.v1.ErrorCode": {
+      "type": "string",
+      "enum": [
+        "ERROR_CODE_UNSPECIFIED",
+        "ERROR_CODE_DEVICE_WARNING",
+        "ERROR_CODE_DEVICE_ERROR",
+        "ERROR_CODE_UNREACHABLE_DEVICE",
+        "ERROR_CODE_CONFIG_FILTER_ERROR",
+        "ERROR_CODE_INTERNAL"
+      ],
+      "default": "ERROR_CODE_UNSPECIFIED",
+      "description": "- ERROR_CODE_DEVICE_WARNING: DEVICE_WARNING indicates device warning\n - ERROR_CODE_DEVICE_ERROR: DEVICE_ERROR indicates device error\n - ERROR_CODE_UNREACHABLE_DEVICE: UNREACHABLE_DEVICE indicates the device cannot be reached\n - ERROR_CODE_CONFIG_FILTER_ERROR: CONFIG_FILTER_ERROR indicates error from partial config management filters\n - ERROR_CODE_INTERNAL: INTERNAL indicates internal errors",
+      "title": "ErrorCode indicates warnings and errors produced during computing config"
+    },
+    "arista.imagestatus.v1.ComplianceStatus": {
+      "type": "object",
+      "properties": {
+        "softwareImageComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "software_image_compliance_code is the compliance code for images."
+        },
+        "terminattrComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "terminattr_compliance_code is the compliance code for TerminAttr."
+        },
+        "extensionsComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "extensions_compliance_code is the compliance code for extensions."
+        }
+      },
+      "description": "ComplianceStatus indicates compliance status for software image, terminattr\nand extensions."
+    },
+    "arista.imagestatus.v1.ComplianceStatusBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ComplianceStatus"
+          },
+          "description": "values is the mapping of supervisor type to compliance code."
+        }
+      },
+      "description": "ComplianceStatusBySup is a map that indicates the compliance code for each\nsupervisor."
+    },
+    "arista.imagestatus.v1.DiffOp": {
+      "type": "string",
+      "enum": [
+        "DIFF_OP_UNSPECIFIED",
+        "DIFF_OP_NOP",
+        "DIFF_OP_ADD",
+        "DIFF_OP_DELETE",
+        "DIFF_OP_CHANGE"
+      ],
+      "default": "DIFF_OP_UNSPECIFIED",
+      "description": "DiffOp represents the operation performed to get from one side of the diff\nto the other.\n\n - DIFF_OP_NOP: NOP indicates no change.\n - DIFF_OP_ADD: ADD is an addition of a software.\n - DIFF_OP_DELETE: DELETE is deletion of a software.\n - DIFF_OP_CHANGE: CHANGE is an update to the software."
+    },
+    "arista.imagestatus.v1.ErrorCode": {
+      "type": "string",
+      "enum": [
+        "ERROR_CODE_UNSPECIFIED",
+        "ERROR_CODE_SUPPORT_NOT_INTRODUCED",
+        "ERROR_CODE_SUPPORT_REMOVED",
+        "ERROR_CODE_DEVICE_UNREACHABLE"
+      ],
+      "default": "ERROR_CODE_UNSPECIFIED",
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_SUPPORT_REMOVED: SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_DEVICE_UNREACHABLE: DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation."
+    },
+    "arista.imagestatus.v1.Extension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the extension."
+        },
+        "version": {
+          "type": "string",
+          "description": "version is the version of the extension."
+        },
+        "rebootRequired": {
+          "type": "boolean",
+          "description": "reboot_required indicates whether applying/deleting this extension\nwould result in a reboot."
+        }
+      },
+      "description": "Extension provides information of the running/designed extensions."
+    },
+    "arista.imagestatus.v1.ExtensionDiff": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp"
+        },
+        "a": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Extension",
+          "description": "a is the extension on the a side (left hand side)."
+        },
+        "b": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Extension",
+          "description": "b is the extension on the b side (right hand side)."
+        }
+      },
+      "description": "ExtensionDiff is the diff for the running/designed extensions."
+    },
+    "arista.imagestatus.v1.ExtensionDiffs": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
+          },
+          "description": "values is an ordered list of extension diffs applied to the device."
+        }
+      },
+      "description": "ExtensionDiffs is a list of extension diff information in the order they\nwill be applied."
+    },
+    "arista.imagestatus.v1.ExtensionDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiffs"
+          },
+          "description": "values is the mapping of supervisor type to extension diff."
+        }
+      },
+      "description": "ExtensionDiffsBySup is the extension diff information for each supervisor."
+    },
+    "arista.imagestatus.v1.ImageError": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "errorCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ErrorCode",
+          "description": "error_code is the error code."
+        },
+        "errorMsg": {
+          "type": "string",
+          "description": "error_msg provides a description of the error."
+        }
+      },
+      "description": "ImageError wraps `ErrorCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageErrors": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageError"
+          },
+          "description": "values is a list of image errors."
+        }
+      },
+      "description": "ImageErrors is the list of errors reported by CVP when handling image\nvalidations."
+    },
+    "arista.imagestatus.v1.ImageSummary": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku indicates the top-level sku or model number."
+        },
+        "runningImageUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "running_image_update_time is the most recent timestamp at which one of\nrunning image side properties is updated."
+        },
+        "designedImageUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "designed_image_update_time is the most recent timestamp at which one of\ndesigned image side properties is updated."
+        },
+        "dualSup": {
+          "type": "boolean",
+          "description": "dual_sup indicates if a device is a dual supervisor."
+        },
+        "activeSlot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "active_slot indicates the physical slot number for the the active\nsupervisor."
+        },
+        "standbySlot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "standby_slot indicates the physical slot number for the standby\nsupervisor."
+        },
+        "softwareImageDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImageDiffsBySup",
+          "description": "software_image_diff indicates the image diff for each supervisor."
+        },
+        "terminattrDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.TerminAttrDiffsBySup",
+          "description": "terminattr_diff indicates the terminattr diff for each supervisor."
+        },
+        "extensionsDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiffsBySup",
+          "description": "extensions_diff indicates the extension diff for each supervisor."
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "compliance_status is the aggregated compliance status (including both\nactive/standby and image/TA/extension compliance)."
+        },
+        "compliance": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ComplianceStatusBySup",
+          "description": "compliance provides compliance information for each supervisor."
+        },
+        "rebootRequired": {
+          "$ref": "#/definitions/arista.imagestatus.v1.RebootRequired",
+          "description": "reboot_required indicates whether a reboot is required if the designed\nimage is pushed to the device."
+        },
+        "digest": {
+          "type": "string",
+          "description": "digest is the digest of the image summary. It can use SHA-256 hash\nalgorithm for example. It is computed by stringifying the\nsoftware_image_diff, terminattr_diff and extensions_diff and computing the\nhash."
+        }
+      },
+      "description": "ImageSummary represents device image summary."
+    },
+    "arista.imagestatus.v1.ImageWarning": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "warningCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.WarningCode",
+          "description": "warning_code is the warning code."
+        },
+        "warningMsg": {
+          "type": "string",
+          "description": "warning_msg provides a description of the warning."
+        }
+      },
+      "description": "ImageWarning wraps `WarningCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageWarnings": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageWarning"
+          },
+          "description": "values is a list of image warnings."
+        }
+      },
+      "description": "ImageWarnings is the list of warnings reported by CVP when handling image\nvalidations."
+    },
+    "arista.imagestatus.v1.RebootRequired": {
+      "type": "object",
+      "properties": {
+        "softwareImageRebootRequired": {
+          "type": "boolean",
+          "description": "software_image_reboot_required indicates whether reboot is required\nfor the software image being applied."
+        },
+        "terminattrRebootRequired": {
+          "type": "boolean",
+          "description": "terminattr_reboot_required indicates whether reboot is required\nfor the terminattr being applied/deleted."
+        },
+        "extensionRebootRequired": {
+          "type": "boolean",
+          "description": "extension_reboot_required indicates whether reboot is required\nfor the extensions being applied/deleted."
+        }
+      },
+      "description": "RebootRequired indicates the reboot information per software image,\nterminattr and extension for the switch as a whole."
+    },
+    "arista.imagestatus.v1.SoftwareComplianceCode": {
+      "type": "string",
+      "enum": [
+        "SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED",
+        "SOFTWARE_COMPLIANCE_CODE_IN_SYNC",
+        "SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC"
+      ],
+      "default": "SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED",
+      "description": "SoftwareComplianceCode indicates possible compliance status.\n\n - SOFTWARE_COMPLIANCE_CODE_IN_SYNC: IN_SYNC indicates designed and running images/extensions are identical.\n - SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC: OUT_OF_SYNC indicates designed and running images/extensions are not\nidentical."
+    },
+    "arista.imagestatus.v1.SoftwareImage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the EOS image."
+        },
+        "version": {
+          "type": "string",
+          "description": "version is the version of the EOS image."
+        }
+      },
+      "description": "SoftwareImage provides information of the running/designed EOS image."
+    },
+    "arista.imagestatus.v1.SoftwareImageDiff": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp"
+        },
+        "a": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
+          "description": "a is the software image on the a side (left hand side)."
+        },
+        "b": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
+          "description": "b is the software image on the b side (right hand side)."
+        }
+      },
+      "description": "SoftwareImageDiff is the diff for the running/designed images."
+    },
+    "arista.imagestatus.v1.SoftwareImageDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImageDiff"
+          },
+          "description": "values is the mapping of supervisor type to image diff."
+        }
+      },
+      "description": "SoftwareImageDiffsBySup is software image diff information for each\nsupervisor."
+    },
+    "arista.imagestatus.v1.TerminAttrDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
+          },
+          "description": "values is the mapping of supervisor type to terminattr diff."
+        }
+      },
+      "description": "TerminAttrDiffs is the terminattr diff information for each supervisor."
+    },
+    "arista.imagestatus.v1.WarningCode": {
+      "type": "string",
+      "enum": [
+        "WARNING_CODE_UNSPECIFIED",
+        "WARNING_CODE_NOT_APPLICABLE",
+        "WARNING_CODE_SKUINFO_UNAVAILABLE",
+        "WARNING_CODE_DEVICE_SKU_UNAVAILABLE",
+        "WARNING_CODE_SWI_UNKNOWN",
+        "WARNING_CODE_TA_EOS_INCOMPATIBLE",
+        "WARNING_CODE_TA_CV_INCOMPATIBLE",
+        "WARNING_CODE_EOS_CV_INCOMPATIBLE"
+      ],
+      "default": "WARNING_CODE_UNSPECIFIED",
+      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_NOT_APPLICABLE: NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.workspace.v1.BuildStage": {
+      "type": "string",
+      "enum": [
+        "BUILD_STAGE_UNSPECIFIED",
+        "BUILD_STAGE_INPUT_VALIDATION",
+        "BUILD_STAGE_CONFIGLET_BUILD",
+        "BUILD_STAGE_CONFIG_VALIDATION",
+        "BUILD_STAGE_IMAGE_VALIDATION"
+      ],
+      "default": "BUILD_STAGE_UNSPECIFIED",
+      "title": "BuildStage is the stage of a workspace build"
+    },
+    "arista.workspace.v1.BuildState": {
+      "type": "string",
+      "enum": [
+        "BUILD_STATE_UNSPECIFIED",
+        "BUILD_STATE_IN_PROGRESS",
+        "BUILD_STATE_CANCELED",
+        "BUILD_STATE_SUCCESS",
+        "BUILD_STATE_FAIL"
+      ],
+      "default": "BUILD_STATE_UNSPECIFIED"
+    },
+    "arista.workspace.v1.ConfigValidationResult": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary"
+        },
+        "errors": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors"
+        },
+        "warnings": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors"
+        }
+      },
+      "title": "ConfigValidationResult is the result of validating config with an EOS device"
+    },
+    "arista.workspace.v1.ConfigletBuildResult": {
+      "type": "object",
+      "properties": {
+        "templateErrors": {
+          "$ref": "#/definitions/arista.workspace.v1.TemplateErrors"
+        },
+        "generatedConfig": {
+          "type": "string"
+        },
+        "otherError": {
+          "type": "string"
+        },
+        "executionId": {
+          "type": "string",
+          "description": "execution_id is a unique ID for an execution of the template. This ID can be used to\nretrieve logs generated by the template."
+        }
+      },
+      "title": "ConfigletBuildResult is the output of configlet (template) build"
+    },
+    "arista.workspace.v1.ConfigletBuildResults": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.workspace.v1.ConfigletBuildResult"
+          }
+        }
+      },
+      "title": "ConfigletBuildResults is the output of configlet build, one per studio"
+    },
+    "arista.workspace.v1.ImageValidationResult": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageSummary"
+        },
+        "errors": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageErrors"
+        },
+        "warnings": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageWarnings"
+        }
+      },
+      "title": "ImageValidationResult is the result of validating images and extensions for\ncompatibility with an EOS device"
+    },
+    "arista.workspace.v1.InputError": {
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "type": "string"
+        },
+        "path": {
+          "$ref": "#/definitions/fmp.RepeatedString"
+        },
+        "members": {
+          "$ref": "#/definitions/fmp.RepeatedString"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "InputError represents an error in an input field, with either schema or value"
+    },
+    "arista.workspace.v1.InputErrors": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.InputError"
+          }
+        }
+      },
+      "title": "InputErrors is the nullable list of InputError"
+    },
+    "arista.workspace.v1.InputValidationResult": {
+      "type": "object",
+      "properties": {
+        "inputSchemaErrors": {
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors"
+        },
+        "inputValueErrors": {
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors"
+        },
+        "otherErrors": {
+          "$ref": "#/definitions/fmp.RepeatedString"
+        }
+      },
+      "title": "InputValidationResult is the result of input validation of a studio"
+    },
+    "arista.workspace.v1.InputValidationResults": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.workspace.v1.InputValidationResult"
+          }
+        }
+      },
+      "title": "InputValidationResults is the result of input validation, one per studio"
+    },
+    "arista.workspace.v1.Request": {
+      "type": "string",
+      "enum": [
+        "REQUEST_UNSPECIFIED",
+        "REQUEST_START_BUILD",
+        "REQUEST_CANCEL_BUILD",
+        "REQUEST_SUBMIT",
+        "REQUEST_ABANDON",
+        "REQUEST_ROLLBACK"
+      ],
+      "default": "REQUEST_UNSPECIFIED",
+      "description": "Operations on a workspace that can be requested by a client.\nThese are workspace-specific operations. The standard operations Add, Delete, etc.\nare performed via the standard (\"core\") APIs.\nThis is an asynchronous request that returns immediately if the request is valid.\nThe result of the operation will be available in WorkspaceStatus when it is generated."
+    },
+    "arista.workspace.v1.RequestParams": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "title": "RequestParams is the parameters associated with a WorkspaceRequest"
+    },
+    "arista.workspace.v1.Response": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/arista.workspace.v1.ResponseStatus"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "Response is the response to the last Request, typically errors in processing"
+    },
+    "arista.workspace.v1.ResponseStatus": {
+      "type": "string",
+      "enum": [
+        "RESPONSE_STATUS_UNSPECIFIED",
+        "RESPONSE_STATUS_SUCCESS",
+        "RESPONSE_STATUS_FAIL"
+      ],
+      "default": "RESPONSE_STATUS_UNSPECIFIED"
+    },
+    "arista.workspace.v1.Responses": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.workspace.v1.Response"
+          }
+        }
+      },
+      "title": "Responses is the map of all request ID to response that are processed so far"
+    },
+    "arista.workspace.v1.TemplateError": {
+      "type": "object",
+      "properties": {
+        "lineNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "exception": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "title": "TemplateError represents a single error generated by a template evaluation"
+    },
+    "arista.workspace.v1.TemplateErrors": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.TemplateError"
+          }
+        }
+      },
+      "title": "TemplateErrors is the nullable list of TemplateError"
+    },
+    "arista.workspace.v1.Workspace": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceState"
+        },
+        "lastBuildId": {
+          "type": "string"
+        },
+        "responses": {
+          "$ref": "#/definitions/arista.workspace.v1.Responses"
+        },
+        "ccIds": {
+          "$ref": "#/definitions/fmp.RepeatedString"
+        },
+        "needsBuild": {
+          "type": "boolean",
+          "title": "needs_build indicates whether a rebuild of the workspace is necessary in order to submit it"
+        }
+      },
+      "title": "Workspace is the status of a workspace"
+    },
+    "arista.workspace.v1.WorkspaceBuild": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey"
+        },
+        "state": {
+          "$ref": "#/definitions/arista.workspace.v1.BuildState"
+        },
+        "error": {
+          "type": "string",
+          "description": "error contains an error message when the build fails early on, before per-device\nbuild result is computed."
+        }
+      },
+      "description": "WorkspaceBuild is the result, or output of a workspace build. This contains only the\nsummary. See WorkspaceBuildDetails for device-level details."
+    },
+    "arista.workspace.v1.WorkspaceBuildDetails": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey"
+        },
+        "state": {
+          "$ref": "#/definitions/arista.workspace.v1.BuildState"
+        },
+        "stage": {
+          "$ref": "#/definitions/arista.workspace.v1.BuildStage"
+        },
+        "inputValidationResults": {
+          "$ref": "#/definitions/arista.workspace.v1.InputValidationResults"
+        },
+        "configletBuildResults": {
+          "$ref": "#/definitions/arista.workspace.v1.ConfigletBuildResults"
+        },
+        "configValidationResult": {
+          "$ref": "#/definitions/arista.workspace.v1.ConfigValidationResult"
+        },
+        "imageValidationResult": {
+          "$ref": "#/definitions/arista.workspace.v1.ImageValidationResult"
+        }
+      },
+      "title": "WorkspaceBuildDetails is the workspace build result detail, which is per device"
+    },
+    "arista.workspace.v1.WorkspaceBuildDetailsKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "title": "workspace_id is a required field which represents workspace ID",
+          "required": [
+            "workspace_id"
+          ]
+        },
+        "buildId": {
+          "type": "string",
+          "title": "build_id is a required field which represents build ID",
+          "required": [
+            "build_id"
+          ]
+        },
+        "deviceId": {
+          "type": "string",
+          "title": "device_id is a required field which represents device ID",
+          "required": [
+            "device_id"
+          ]
+        }
+      },
+      "title": "WorkspaceBuildDetailsKey is the key to get worskspace build result details",
+      "required": [
+        "workspaceId",
+        "buildId",
+        "deviceId"
+      ]
+    },
+    "arista.workspace.v1.WorkspaceBuildDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetails",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceBuildDetails instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildDetailsStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetails"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildDetailsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetails",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this WorkspaceBuildDetails's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the WorkspaceBuildDetails value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "title": "workspace_id is a required field which represents workspace ID",
+          "required": [
+            "workspace_id"
+          ]
+        },
+        "buildId": {
+          "type": "string",
+          "title": "build_id is a required field which represents build ID",
+          "required": [
+            "build_id"
+          ]
+        }
+      },
+      "title": "WorkspaceBuildKey is the key to get the build result for a workspace",
+      "required": [
+        "workspaceId",
+        "buildId"
+      ]
+    },
+    "arista.workspace.v1.WorkspaceBuildResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuild",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceBuild instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuild"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuild",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this WorkspaceBuild's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the WorkspaceBuild value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/definitions/arista.workspace.v1.Request"
+        },
+        "requestParams": {
+          "$ref": "#/definitions/arista.workspace.v1.RequestParams"
+        }
+      },
+      "title": "WorkspaceConfig represents the configurable parameters of a workspace"
+    },
+    "arista.workspace.v1.WorkspaceConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey",
+          "description": "Key echoes back the key of the deleted WorkspaceConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceConfig instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig",
+          "description": "Value carries all the values given in the WorkspaceConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this WorkspaceConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the WorkspaceConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "required": [
+            "workspace_id"
+          ]
+        }
+      },
+      "title": "WorkspaceKey is the key to get a workspace's status",
+      "required": [
+        "workspaceId"
+      ]
+    },
+    "arista.workspace.v1.WorkspaceResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.Workspace",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspace instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceState": {
+      "type": "string",
+      "enum": [
+        "WORKSPACE_STATE_UNSPECIFIED",
+        "WORKSPACE_STATE_PENDING",
+        "WORKSPACE_STATE_SUBMITTED",
+        "WORKSPACE_STATE_ABANDONED",
+        "WORKSPACE_STATE_CONFLICTS",
+        "WORKSPACE_STATE_ROLLED_BACK"
+      ],
+      "default": "WORKSPACE_STATE_UNSPECIFIED"
+    },
+    "arista.workspace.v1.WorkspaceStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.workspace.v1.Workspace"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.Workspace",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Workspace's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Workspace value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

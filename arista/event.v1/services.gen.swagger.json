@@ -1,0 +1,961 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.event.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "EventService"
+    },
+    {
+      "name": "EventAnnotationConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/event/v1/Event": {
+      "get": {
+        "operationId": "EventService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.key",
+            "description": "key is the event data identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.timestamp",
+            "description": "timestamp is the time the event occured.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventService"
+        ]
+      }
+    },
+    "/api/resources/event/v1/Event/all": {
+      "get": {
+        "operationId": "EventService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventService"
+        ]
+      },
+      "post": {
+        "operationId": "EventService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventService"
+        ]
+      }
+    },
+    "/api/resources/event/v1/Event/watch": {
+      "get": {
+        "operationId": "EventService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventService"
+        ]
+      },
+      "post": {
+        "operationId": "EventService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventService"
+        ]
+      }
+    },
+    "/api/resources/event/v1/EventAnnotationConfig": {
+      "get": {
+        "operationId": "EventAnnotationConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.key",
+            "description": "key is the event data identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.timestamp",
+            "description": "timestamp is the time the event occured.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "EventAnnotationConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.key",
+            "description": "key is the event data identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.timestamp",
+            "description": "timestamp is the time the event occured.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "EventAnnotationConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "EventAnnotationConfig carries the value to set into the datastore.\nSee the documentation on the EventAnnotationConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig"
+            }
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      }
+    },
+    "/api/resources/event/v1/EventAnnotationConfig/all": {
+      "get": {
+        "operationId": "EventAnnotationConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventAnnotationConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "EventAnnotationConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventAnnotationConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      }
+    },
+    "/api/resources/event/v1/EventAnnotationConfig/watch": {
+      "get": {
+        "operationId": "EventAnnotationConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventAnnotationConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "EventAnnotationConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.event.v1.EventAnnotationConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventAnnotationConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.event.v1.ComponentType": {
+      "type": "string",
+      "enum": [
+        "COMPONENT_TYPE_UNSPECIFIED",
+        "COMPONENT_TYPE_DEVICE",
+        "COMPONENT_TYPE_INTERFACE",
+        "COMPONENT_TYPE_TURBINE"
+      ],
+      "default": "COMPONENT_TYPE_UNSPECIFIED",
+      "title": "ComponentType describes the type of entity on which the event occured"
+    },
+    "arista.event.v1.Event": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.event.v1.EventKey",
+          "title": "key is the event instance identifier"
+        },
+        "severity": {
+          "$ref": "#/definitions/arista.event.v1.EventSeverity",
+          "title": "severity is the severity of the event"
+        },
+        "title": {
+          "type": "string",
+          "title": "title is the title of the event"
+        },
+        "description": {
+          "type": "string",
+          "title": "description is the description of the event"
+        },
+        "eventType": {
+          "type": "string",
+          "title": "event_type is the type of the event"
+        },
+        "data": {
+          "$ref": "#/definitions/arista.event.v1.EventData",
+          "title": "data is the data of the event"
+        },
+        "components": {
+          "$ref": "#/definitions/arista.event.v1.EventComponents",
+          "title": "components is the components on which the event occurred"
+        },
+        "ack": {
+          "$ref": "#/definitions/arista.event.v1.EventAck",
+          "title": "ack is the acknowledgement status of the event"
+        },
+        "notes": {
+          "$ref": "#/definitions/arista.event.v1.EventNotes",
+          "title": "notes is the notes of the event"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last_updated_time is the time of the most recent update to the event"
+        }
+      },
+      "title": "Event is a telemetry event"
+    },
+    "arista.event.v1.EventAck": {
+      "type": "object",
+      "properties": {
+        "ack": {
+          "type": "boolean",
+          "title": "ack is the acknowledgement state of an event"
+        },
+        "acker": {
+          "type": "string",
+          "title": "acker is the user that acknowledged the event"
+        },
+        "ackTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "ack_time is the time of acknowledgement"
+        }
+      },
+      "title": "EventAck contains acknowledgement information of an event"
+    },
+    "arista.event.v1.EventAnnotationConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.event.v1.EventKey",
+          "title": "key is the event instance identifier"
+        },
+        "ack": {
+          "type": "boolean",
+          "title": "ack is the acknowledgement state of an event"
+        },
+        "notes": {
+          "$ref": "#/definitions/arista.event.v1.EventNotesConfig",
+          "title": "notes is the notes on an event"
+        }
+      },
+      "description": "NOTE: Either 1) key and ack or 2) key and notes are\n      required when used as an argument to Set.",
+      "title": "EventAnnotationConfig configures an event annotation"
+    },
+    "arista.event.v1.EventAnnotationConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.event.v1.EventKey",
+          "description": "Key echoes back the key of the deleted EventAnnotationConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.event.v1.EventAnnotationConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nEventAnnotationConfig instance in this response."
+        }
+      }
+    },
+    "arista.event.v1.EventAnnotationConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig",
+          "description": "Value carries all the values given in the EventAnnotationConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.event.v1.EventAnnotationConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.event.v1.EventAnnotationConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this EventAnnotationConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the EventAnnotationConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.event.v1.EventComponent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/arista.event.v1.ComponentType",
+          "title": "type is the type of component"
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "components identifies the entity on which the event occured"
+        }
+      },
+      "title": "EventComponent describes an entity on which the event occured"
+    },
+    "arista.event.v1.EventComponents": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.event.v1.EventComponent"
+          },
+          "title": "components describes the components on which an event occured"
+        }
+      },
+      "title": "EventComponents contains entities on which an event occured"
+    },
+    "arista.event.v1.EventData": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "data is event data specific to the type of this event"
+        }
+      },
+      "title": "EventData is additional event data"
+    },
+    "arista.event.v1.EventKey": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "key is the event data identifier",
+          "required": [
+            "key"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp is the time the event occured",
+          "required": [
+            "timestamp"
+          ]
+        }
+      },
+      "description": "NOTE: All fields are required when used as an argument\n      to GetOne, Set or Delete.",
+      "title": "EventKey uniquely identifies an event",
+      "required": [
+        "key",
+        "timestamp"
+      ]
+    },
+    "arista.event.v1.EventNote": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string",
+          "title": "note is the text of the note"
+        },
+        "noteCreator": {
+          "type": "string",
+          "title": "note_creator is the creator of the note"
+        }
+      },
+      "title": "Eventnote is the state of a note"
+    },
+    "arista.event.v1.EventNoteConfig": {
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string",
+          "title": "note is the text of the note"
+        }
+      },
+      "description": "NOTE: note is required when used as an argument\n      to Set.",
+      "title": "EventNoteConfig configures a note"
+    },
+    "arista.event.v1.EventNotes": {
+      "type": "object",
+      "properties": {
+        "notes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.event.v1.EventNote"
+          },
+          "title": "notes is keyed by the time desired"
+        }
+      },
+      "title": "EventNotes is the notes of an event state"
+    },
+    "arista.event.v1.EventNotesConfig": {
+      "type": "object",
+      "properties": {
+        "notes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.event.v1.EventNoteConfig"
+          },
+          "title": "notes is keyed by desired note time in Unix time, in milliseconds"
+        }
+      },
+      "description": "NOTE: notes is required when used as an argument\n      to Set.",
+      "title": "EventNotesConfig configures the notes of an event"
+    },
+    "arista.event.v1.EventResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.event.v1.Event",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nEvent instance in this response."
+        }
+      }
+    },
+    "arista.event.v1.EventSeverity": {
+      "type": "string",
+      "enum": [
+        "EVENT_SEVERITY_UNSPECIFIED",
+        "EVENT_SEVERITY_INFO",
+        "EVENT_SEVERITY_WARNING",
+        "EVENT_SEVERITY_ERROR",
+        "EVENT_SEVERITY_CRITICAL"
+      ],
+      "default": "EVENT_SEVERITY_UNSPECIFIED",
+      "title": "EventSeverity is the severity level of the event"
+    },
+    "arista.event.v1.EventStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.event.v1.Event"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.event.v1.EventStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.event.v1.Event",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Event's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Event value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

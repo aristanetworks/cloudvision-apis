@@ -1,0 +1,1429 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.changecontrol.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ApproveConfigService"
+    },
+    {
+      "name": "ChangeControlService"
+    },
+    {
+      "name": "ChangeControlConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/changecontrol/v1/ApproveConfig": {
+      "get": {
+        "operationId": "ApproveConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ApproveConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ApproveConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "ApproveConfig carries the value to set into the datastore.\nSee the documentation on the ApproveConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ApproveConfig/all": {
+      "get": {
+        "operationId": "ApproveConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ApproveConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ApproveConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ApproveConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ApproveConfig/watch": {
+      "get": {
+        "operationId": "ApproveConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ApproveConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ApproveConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ApproveConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApproveConfigService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControl": {
+      "get": {
+        "operationId": "ChangeControlService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControl/all": {
+      "get": {
+        "operationId": "ChangeControlService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControl/watch": {
+      "get": {
+        "operationId": "ChangeControlService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlConfig": {
+      "get": {
+        "operationId": "ChangeControlConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ChangeControlConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "ChangeControlConfig carries the value to set into the datastore.\nSee the documentation on the ChangeControlConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlConfig/all": {
+      "get": {
+        "operationId": "ChangeControlConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlConfig/watch": {
+      "get": {
+        "operationId": "ChangeControlConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.changecontrol.v1.Action": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the action."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "timeout is the maximum duration in seconds that\nthe action can execute before timing out. If this\nis not set, then this is interpreted to mean there\nis no timeout."
+        },
+        "args": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "description": "args are the arguments of the action."
+        }
+      },
+      "description": "Action is an action to perform during the execution of\na stage of a change control. Available actions can be\nfetched using the \"action\" services."
+    },
+    "arista.changecontrol.v1.ApproveConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "key uniquely identifies the change control."
+        },
+        "approve": {
+          "$ref": "#/definitions/arista.changecontrol.v1.FlagConfig",
+          "description": "approve is the flag to approve (`approve.value` set to `true`)\nor unapprove (`approve.value` set to `false`) the change control."
+        },
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "description": "version is the timestamp of the change control to approve.\nThis field must be set when `approve.value` is set to `true`\nand is intended to safeguard against approving a change control\nthat has been updated since last read."
+        }
+      },
+      "description": "ApproveConfig is used to configure the approval of a change control."
+    },
+    "arista.changecontrol.v1.ApproveConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "Key echoes back the key of the deleted ApproveConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.changecontrol.v1.ApproveConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApproveConfig instance in this response."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ApproveConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfig",
+          "description": "Value carries all the values given in the ApproveConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.changecontrol.v1.ApproveConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ApproveConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ApproveConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ApproveConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.changecontrol.v1.Change": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the change."
+        },
+        "rootStageId": {
+          "type": "string",
+          "description": "root_stage_id is the ID of the root stage or the stage that\nshould execute first."
+        },
+        "stages": {
+          "$ref": "#/definitions/arista.changecontrol.v1.StageMap",
+          "description": "stages holds a configuration of stages and their statuses."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are any notes associated with the change."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time is the time at which the change was last updated."
+        },
+        "user": {
+          "type": "string",
+          "description": "user is the user by which the change was last updated."
+        }
+      },
+      "description": "Change holds the configuration and status of the change of a\nchange control."
+    },
+    "arista.changecontrol.v1.ChangeConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the change."
+        },
+        "rootStageId": {
+          "type": "string",
+          "description": "root_stage_id is the ID of the root stage or the stage that\nshould execute first."
+        },
+        "stages": {
+          "$ref": "#/definitions/arista.changecontrol.v1.StageConfigMap",
+          "description": "stages holds a configuration of stages. See `StageConfigMap`\ndescription for more information."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are any notes associated with the change."
+        }
+      },
+      "description": "ChangeConfig holds a configuration for the change of a change\ncontrol which is essentially a named configuration of stages."
+    },
+    "arista.changecontrol.v1.ChangeControl": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "key uniquely identifies the change control."
+        },
+        "change": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Change",
+          "description": "change holds the configuration and status of the change of\nthe change control."
+        },
+        "approve": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Flag",
+          "description": "approve indicates whether the change control was flagged\nas approved (`approve.value` set to `true`) or unapproved\n(`approve.value` set to `false`)."
+        },
+        "start": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Flag",
+          "description": "start indicates whether the change control was flagged to\nstart (`start.value` set to `true`) or stop (`start.value`\nset to `false`) execution."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStatus",
+          "description": "status is the execution status of the change control."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is any error that occurred during the execution of the\nchange control."
+        },
+        "schedule": {
+          "$ref": "#/definitions/arista.changecontrol.v1.TimestampFlag",
+          "description": "schedule indicates whether the change control was flagged\nto be scheduled (`schedule.value` set to some timestamp) or\nunscheduled (`schedule.value` set to `nil`) for execution."
+        }
+      },
+      "description": "ChangeControl holds the configuration and status of a change control."
+    },
+    "arista.changecontrol.v1.ChangeControlConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "key uniquely identifies the change control."
+        },
+        "change": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeConfig",
+          "description": "change is the change subject to execution."
+        },
+        "start": {
+          "$ref": "#/definitions/arista.changecontrol.v1.FlagConfig",
+          "description": "start is the flag to start (`start.value` set to `true`)\nor stop (`start.value` set to `false`) execution of the\nchange control."
+        },
+        "schedule": {
+          "$ref": "#/definitions/arista.changecontrol.v1.TimestampFlagConfig",
+          "description": "schedule is the flag to schedule (`schedule.value` set to\nsome timestamp) or unschedule (`schedule.value` set to\n`nil`) the change control for execution."
+        }
+      },
+      "description": "ChangeControlConfig holds the configuration of a change control."
+    },
+    "arista.changecontrol.v1.ChangeControlConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "Key echoes back the key of the deleted ChangeControlConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControlConfig instance in this response."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfig",
+          "description": "Value carries all the values given in the ChangeControlConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ChangeControlConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ChangeControlConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is the ID of the change control.",
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "description": "ChangeControlKey uniquely identifies a change control.",
+      "required": [
+        "id"
+      ]
+    },
+    "arista.changecontrol.v1.ChangeControlResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControl",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControl instance in this response."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlStatus": {
+      "type": "string",
+      "enum": [
+        "CHANGE_CONTROL_STATUS_UNSPECIFIED",
+        "CHANGE_CONTROL_STATUS_RUNNING",
+        "CHANGE_CONTROL_STATUS_COMPLETED",
+        "CHANGE_CONTROL_STATUS_SCHEDULED"
+      ],
+      "default": "CHANGE_CONTROL_STATUS_UNSPECIFIED",
+      "description": "ChangeControlStatus defines the possible execution statuses of\na change control.\n\n - CHANGE_CONTROL_STATUS_RUNNING: CHANGE_CONTROL_STATUS_RUNNING means the change control has begun\nexecution.\n - CHANGE_CONTROL_STATUS_COMPLETED: CHANGE_CONTROL_STATUS_COMPLETED means the change control has ceased\nexecution. Success/failure of a change control cannot be inferred\nfrom this status alone but rather this status plus the change control\nerror. That is, no error implies success and some error implies failure.\n - CHANGE_CONTROL_STATUS_SCHEDULED: CHANGE_CONTROL_STATUS_SCHEDULED means the change control has been\nscheduled for execution at some time. Any failure that occurs during\nthis process will cause a transition back to the unspecified status,\na reset of the schedule flag by the system, and an error on the change\ncontrol reporting the details of the failure."
+    },
+    "arista.changecontrol.v1.ChangeControlStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControl"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControl",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ChangeControl's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ChangeControl value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.changecontrol.v1.Flag": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "value is the value of the flag (`true` or `false`)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are any notes associated with the setting of the flag."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time is the time at which the flag was last updated."
+        },
+        "user": {
+          "type": "string",
+          "description": "user is the user by which the flag was last updated."
+        }
+      },
+      "description": "Flag holds the configuration of a boolean flag plus some\ninformation about when and by whom it was set."
+    },
+    "arista.changecontrol.v1.FlagConfig": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "value is the value of the flag (`true` or `false`)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are any notes associated with the flag value."
+        }
+      },
+      "description": "FlagConfig is used to set a flag on a change control that takes\na boolean value (e.g. start/stop, approve/unapprove)."
+    },
+    "arista.changecontrol.v1.RepeatedRepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmp.RepeatedString"
+          },
+          "description": "values is a list of `fmp.RepeatedString`."
+        }
+      },
+      "description": "RepeatedRepeatedString wraps a repeated `fmp.RepeatedString`\nto define a string matrix which is used to represent stage\nrows (see `StageConfig`)."
+    },
+    "arista.changecontrol.v1.Stage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the stage."
+        },
+        "action": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Action",
+          "description": "action is the action to perform during the stage."
+        },
+        "rows": {
+          "$ref": "#/definitions/arista.changecontrol.v1.RepeatedRepeatedString",
+          "description": "rows is a series of rows of parallel stages referenced\nby ID. See `StageConfig.rows` for more details."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.changecontrol.v1.StageStatus",
+          "description": "status is the execution status of the stage."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is any error that occured during the execution\nof the stage."
+        }
+      },
+      "description": "Stage holds the configuration and status of a stage."
+    },
+    "arista.changecontrol.v1.StageConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the stage."
+        },
+        "action": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Action",
+          "description": "action is the action to perform on stage execution."
+        },
+        "rows": {
+          "$ref": "#/definitions/arista.changecontrol.v1.RepeatedRepeatedString",
+          "description": "rows is a series of rows of parallel stages referenced\nby ID. Each row is run one after the other and the\nstages within each row are run in parallel.\n\nFor example:\n\n```\n[[\"1a\", \"1b\"], [\"2\"]]\n```\n\nThis configures stage 1a and stage 1b to run at the\nsame time, and then stage 2 once both of them have\ncompleted."
+        }
+      },
+      "description": "StageConfig holds a configuration for a stage in a change\ncontrol. Each stage generally defines either an action\nor a series of sub-stages."
+    },
+    "arista.changecontrol.v1.StageConfigMap": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.changecontrol.v1.StageConfig"
+          },
+          "description": "values is a map from stage ID to `StageConfig`."
+        }
+      },
+      "description": "StageConfigMap wraps a map from stage ID to `StageConfig`.\nThis defines the configuration and order of execution\nfor the stages in a change control.\n\nFor example:\n\n```\n{\n    \"root\": { name: \"root\", rows: [[\"1-2\"], [\"3\"]] },\n    \"1-2\":  { name: \"stages 1-2\", rows: [[\"1\"], [\"2\"]] },\n    \"1\":    { name: \"stage 1\", rows: [[\"1a\", \"1b\"]] },\n    \"1a\":   { name: \"stage 1a\", action: { name: \"task\", args: { \"TaskID\": \"101\" } },\n    \"1b\":   { name: \"stage 1b\", action: { name: \"task\", args: { \"TaskID\": \"102\" } },\n    \"2\":    { name: \"stage 2\", action: { name: \"task\", args: { \"TaskID\": \"103\" } },\n    \"3\":    { name: \"stage 3\", action: { name: \"task\", args: { \"TaskID\": \"104\" } }\n}\n```\n\nAssuming the root stage ID of the enclosing change control\nis \"root\", this would mean to do the following in sequence:\n\n```\nroot\n|- stages 1-2\n|  |- stage 1\n|  |  |- stage 1a, stage 1b (parallel)\n|  |- stage 2\n|- stage 3\n```\n\nThat is, execute tasks `101` and `102` in parallel, then task `103`, then task `104`."
+    },
+    "arista.changecontrol.v1.StageMap": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.changecontrol.v1.Stage"
+          },
+          "description": "values is a map from stage ID to `Stage`."
+        }
+      },
+      "description": "StageMap is a map from stage ID to `Stage`. This has essentially\nthe same structure as `StageConfigMap`, but with each ID mapping\nto a `Stage` instead of `StageConfig`."
+    },
+    "arista.changecontrol.v1.StageStatus": {
+      "type": "string",
+      "enum": [
+        "STAGE_STATUS_UNSPECIFIED",
+        "STAGE_STATUS_RUNNING",
+        "STAGE_STATUS_COMPLETED"
+      ],
+      "default": "STAGE_STATUS_UNSPECIFIED",
+      "description": "StageStatus defines the possible execution statuses of a stage.\n\n - STAGE_STATUS_RUNNING: STAGE_STATUS_RUNNING means the stage has begun execution.\n - STAGE_STATUS_COMPLETED: STAGE_STATUS_COMPLETED means the stage has ceased execution.\nSuccess/failure of a stage cannot be inferred from this status\nalone but rather this status plus the stage error. That is, no\nerror implies success and some error implies failure."
+    },
+    "arista.changecontrol.v1.TimestampFlag": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "date-time",
+          "description": "value is the value of the flag (some timestamp)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are any notes associated with the setting of the flag."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time is the time at which the flag was last updated."
+        },
+        "user": {
+          "type": "string",
+          "description": "user is the user by which the flag was last updated."
+        }
+      },
+      "description": "TimestampFlag holds the configuration of a timestamp flag\nplus some information about when and by whom is was set."
+    },
+    "arista.changecontrol.v1.TimestampFlagConfig": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "date-time",
+          "description": "value is the value of the flag (some timestamp)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "notes are the notes associated with the flag value."
+        }
+      },
+      "description": "TimestampFlagConfig is used to set a flag on a change control\nthat takes a timestamp value (e.g. schedule/unschedule)."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.MapStringString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The map\u003cstring, string\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, string\u003e`."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

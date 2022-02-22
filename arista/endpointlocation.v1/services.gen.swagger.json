@@ -1,0 +1,660 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.endpointlocation.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "EndpointLocationService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/endpointlocation/v1/EndpointLocation": {
+      "get": {
+        "operationId": "EndpointLocationService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.searchTerm",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    },
+    "/api/resources/endpointlocation/v1/EndpointLocation/all": {
+      "get": {
+        "operationId": "EndpointLocationService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.EndpointLocationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      },
+      "post": {
+        "operationId": "EndpointLocationService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.EndpointLocationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    },
+    "/api/resources/endpointlocation/v1/EndpointLocation/watch": {
+      "get": {
+        "operationId": "EndpointLocationService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.EndpointLocationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      },
+      "post": {
+        "operationId": "EndpointLocationService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.EndpointLocationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.endpointlocation.v1.Device": {
+      "type": "object",
+      "properties": {
+        "identifierList": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList"
+        },
+        "deviceType": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceType"
+        },
+        "locationList": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.LocationList",
+          "title": "The list of possible locations, in order from most likely to least likely"
+        },
+        "deviceStatus": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus"
+        },
+        "deviceInfo": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceInfo"
+        }
+      }
+    },
+    "arista.endpointlocation.v1.DeviceInfo": {
+      "type": "object",
+      "properties": {
+        "deviceName": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "boolean"
+        },
+        "tablet": {
+          "type": "boolean"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "version": {
+          "type": "string"
+        },
+        "macVendor": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "hierarchy": {
+          "$ref": "#/definitions/fmp.RepeatedString"
+        }
+      }
+    },
+    "arista.endpointlocation.v1.DeviceMap": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.Device"
+          }
+        }
+      }
+    },
+    "arista.endpointlocation.v1.DeviceStatus": {
+      "type": "string",
+      "enum": [
+        "DEVICE_STATUS_UNSPECIFIED",
+        "DEVICE_STATUS_ACTIVE",
+        "DEVICE_STATUS_INACTIVE"
+      ],
+      "default": "DEVICE_STATUS_UNSPECIFIED"
+    },
+    "arista.endpointlocation.v1.DeviceType": {
+      "type": "string",
+      "enum": [
+        "DEVICE_TYPE_UNSPECIFIED",
+        "DEVICE_TYPE_INVENTORY",
+        "DEVICE_TYPE_ENDPOINT",
+        "DEVICE_TYPE_WIFI_ENDPOINT"
+      ],
+      "default": "DEVICE_TYPE_UNSPECIFIED"
+    },
+    "arista.endpointlocation.v1.EndpointLocation": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey"
+        },
+        "deviceMap": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceMap"
+        }
+      }
+    },
+    "arista.endpointlocation.v1.EndpointLocationKey": {
+      "type": "object",
+      "properties": {
+        "searchTerm": {
+          "type": "string",
+          "required": [
+            "search_term"
+          ]
+        }
+      },
+      "required": [
+        "searchTerm"
+      ]
+    },
+    "arista.endpointlocation.v1.EndpointLocationResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocation",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nEndpointLocation instance in this response."
+        }
+      }
+    },
+    "arista.endpointlocation.v1.EndpointLocationStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocation"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.endpointlocation.v1.EndpointLocationStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocation",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this EndpointLocation's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the EndpointLocation value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.endpointlocation.v1.Explanation": {
+      "type": "string",
+      "enum": [
+        "EXPLANATION_UNSPECIFIED",
+        "EXPLANATION_DIRECT_CONNECTION",
+        "EXPLANATION_NON_INVENTORY_CONNECTION",
+        "EXPLANATION_NO_CONNECTION",
+        "EXPLANATION_INVENTORY_CONNECTION",
+        "EXPLANATION_OWN_PORT_INVENTORY_DEVICE",
+        "EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE",
+        "EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE",
+        "EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE",
+        "EXPLANATION_VIRTUAL",
+        "EXPLANATION_WIRELESS_CONNECTION"
+      ],
+      "default": "EXPLANATION_UNSPECIFIED",
+      "title": "- EXPLANATION_UNSPECIFIED: Explanation for ports that have unspecified likelihood\n - EXPLANATION_DIRECT_CONNECTION: Explanation for ports directly connected to the queried endpoint device in LLDP\n - EXPLANATION_NON_INVENTORY_CONNECTION: Explanation for ports directly connected to at least one non-inventory device in LLDP\n - EXPLANATION_NO_CONNECTION: Explanation for ports not directly connected to any device in LLDP\n - EXPLANATION_INVENTORY_CONNECTION: Explanation for ports only connected to inventory devices in LLDP\n - EXPLANATION_OWN_PORT_INVENTORY_DEVICE: Explanation for ports that are on the inventory device itself\n - EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE: Explanation for ports directly connected to the queried device in LLDP (for inventory devices)\n - EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE: Explanation for ports not directly connected to any device in LLDP (for inventory devices)\n - EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE: Explanation for ports connected to only other devices besides queried inventory device\n - EXPLANATION_VIRTUAL: Explanation for ports containing a virtual interface\n - EXPLANATION_WIRELESS_CONNECTION: Explanation for wireless clients that are directly connected to a wireless access point"
+    },
+    "arista.endpointlocation.v1.ExplanationList": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.Explanation"
+          }
+        }
+      }
+    },
+    "arista.endpointlocation.v1.Identifier": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierType"
+        },
+        "value": {
+          "type": "string"
+        },
+        "sourceList": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierSourceList"
+        }
+      }
+    },
+    "arista.endpointlocation.v1.IdentifierList": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.Identifier"
+          }
+        }
+      }
+    },
+    "arista.endpointlocation.v1.IdentifierSource": {
+      "type": "string",
+      "enum": [
+        "IDENTIFIER_SOURCE_UNSPECIFIED",
+        "IDENTIFIER_SOURCE_FDB",
+        "IDENTIFIER_SOURCE_ARP",
+        "IDENTIFIER_SOURCE_NEIGHBOR",
+        "IDENTIFIER_SOURCE_DEVICE_INVENTORY",
+        "IDENTIFIER_SOURCE_LLDP",
+        "IDENTIFIER_SOURCE_DHCP",
+        "IDENTIFIER_SOURCE_WIFI"
+      ],
+      "default": "IDENTIFIER_SOURCE_UNSPECIFIED",
+      "title": "- IDENTIFIER_SOURCE_DEVICE_INVENTORY: Onboarded or inventory devices"
+    },
+    "arista.endpointlocation.v1.IdentifierSourceList": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierSource"
+          }
+        }
+      }
+    },
+    "arista.endpointlocation.v1.IdentifierType": {
+      "type": "string",
+      "enum": [
+        "IDENTIFIER_TYPE_UNSPECIFIED",
+        "IDENTIFIER_TYPE_MAC_ADDR",
+        "IDENTIFIER_TYPE_IPV4_ADDR",
+        "IDENTIFIER_TYPE_IPV6_ADDR",
+        "IDENTIFIER_TYPE_INVENTORY_DEVICE_ID",
+        "IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP",
+        "IDENTIFIER_TYPE_HOSTNAME",
+        "IDENTIFIER_TYPE_USERNAME",
+        "IDENTIFIER_TYPE_OTHER"
+      ],
+      "default": "IDENTIFIER_TYPE_UNSPECIFIED",
+      "title": "- IDENTIFIER_TYPE_OTHER: May be used for some unknown LLDP chassis id type"
+    },
+    "arista.endpointlocation.v1.Likelihood": {
+      "type": "string",
+      "enum": [
+        "LIKELIHOOD_UNSPECIFIED",
+        "LIKELIHOOD_VERY_LIKELY",
+        "LIKELIHOOD_LIKELY",
+        "LIKELIHOOD_SOMEWHAT_LIKELY",
+        "LIKELIHOOD_LESS_LIKELY"
+      ],
+      "default": "LIKELIHOOD_UNSPECIFIED",
+      "title": "- LIKELIHOOD_UNSPECIFIED: These ports have unspecified likelihood\n - LIKELIHOOD_VERY_LIKELY: These ports are very likely to be physically connected to the queried device\n - LIKELIHOOD_LIKELY: These ports are likely to be physically connected to the queried device\n - LIKELIHOOD_SOMEWHAT_LIKELY: These ports are somewhat likely to be physically connected to the queried device\n - LIKELIHOOD_LESS_LIKELY: These ports are less likely to be physically connected to the queried device"
+    },
+    "arista.endpointlocation.v1.Location": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        },
+        "deviceStatus": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "learnedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "macType": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.MacType"
+        },
+        "likelihood": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.Likelihood"
+        },
+        "explanationList": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.ExplanationList"
+        },
+        "identifierList": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList"
+        }
+      }
+    },
+    "arista.endpointlocation.v1.LocationList": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.endpointlocation.v1.Location"
+          }
+        }
+      }
+    },
+    "arista.endpointlocation.v1.MacType": {
+      "type": "string",
+      "enum": [
+        "MAC_TYPE_UNSPECIFIED",
+        "MAC_TYPE_LEARNED_DYNAMIC",
+        "MAC_TYPE_LEARNED_SECURE",
+        "MAC_TYPE_CONFIGURED_DYNAMIC",
+        "MAC_TYPE_CONFIGURED_SECURE",
+        "MAC_TYPE_CONFIGURED_STATIC",
+        "MAC_TYPE_PEER_DYNAMIC",
+        "MAC_TYPE_PEER_STATIC",
+        "MAC_TYPE_PEER_SECURE",
+        "MAC_TYPE_LEARNED_REMOTE",
+        "MAC_TYPE_CONFIGURED_REMOTE",
+        "MAC_TYPE_RECEIVED_REMOTE",
+        "MAC_TYPE_PEER_LEARNED_REMOTE",
+        "MAC_TYPE_PEER_CONFIGURED_REMOTE",
+        "MAC_TYPE_PEER_RECEIVED_REMOTE",
+        "MAC_TYPE_EVPN_DYNAMIC_REMOTE",
+        "MAC_TYPE_EVPN_CONFIGURED_REMOTE",
+        "MAC_TYPE_PEER_EVPN_REMOTE",
+        "MAC_TYPE_CONFIGURED_ROUTER",
+        "MAC_TYPE_PEER_ROUTER",
+        "MAC_TYPE_EVPN_INTF_DYNAMIC",
+        "MAC_TYPE_EVPN_INTF_STATIC",
+        "MAC_TYPE_AUTHENTICATED",
+        "MAC_TYPE_PEER_AUTHENTICATED",
+        "MAC_TYPE_PENDING_SECURE",
+        "MAC_TYPE_OTHER"
+      ],
+      "default": "MAC_TYPE_UNSPECIFIED",
+      "title": "- MAC_TYPE_OTHER: This is used for capturing future MAC types"
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

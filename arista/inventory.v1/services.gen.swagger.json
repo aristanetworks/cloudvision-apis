@@ -1,0 +1,2120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.inventory.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "DeviceService"
+    },
+    {
+      "name": "DeviceDecommissioningService"
+    },
+    {
+      "name": "DeviceDecommissioningConfigService"
+    },
+    {
+      "name": "DeviceOnboardingService"
+    },
+    {
+      "name": "DeviceOnboardingConfigService"
+    },
+    {
+      "name": "ProvisionedDeviceService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/inventory/v1/Device": {
+      "get": {
+        "operationId": "DeviceService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the unique identifier of the device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/Device/all": {
+      "get": {
+        "operationId": "DeviceService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/Device/watch": {
+      "get": {
+        "operationId": "DeviceService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioning": {
+      "get": {
+        "operationId": "DeviceDecommissioningService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioning/all": {
+      "get": {
+        "operationId": "DeviceDecommissioningService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceDecommissioningService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioning/watch": {
+      "get": {
+        "operationId": "DeviceDecommissioningService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceDecommissioningService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioningConfig": {
+      "get": {
+        "operationId": "DeviceDecommissioningConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceDecommissioningConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceDecommissioningConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "DeviceDecommissioningConfig carries the value to set into the datastore.\nSee the documentation on the DeviceDecommissioningConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfig"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioningConfig/all": {
+      "get": {
+        "operationId": "DeviceDecommissioningConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceDecommissioningConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceDecommissioningConfig/watch": {
+      "get": {
+        "operationId": "DeviceDecommissioningConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceDecommissioningConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceDecommissioningConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboarding": {
+      "get": {
+        "operationId": "DeviceOnboardingService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboarding/all": {
+      "get": {
+        "operationId": "DeviceOnboardingService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceOnboardingService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboarding/watch": {
+      "get": {
+        "operationId": "DeviceOnboardingService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceOnboardingService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboardingConfig": {
+      "get": {
+        "operationId": "DeviceOnboardingConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceOnboardingConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.requestId",
+            "description": "request_id should be a UUID for the request.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceOnboardingConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "DeviceOnboardingConfig carries the value to set into the datastore.\nSee the documentation on the DeviceOnboardingConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfig"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboardingConfig/all": {
+      "get": {
+        "operationId": "DeviceOnboardingConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceOnboardingConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/DeviceOnboardingConfig/watch": {
+      "get": {
+        "operationId": "DeviceOnboardingConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceOnboardingConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceOnboardingConfigService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/ProvisionedDevice": {
+      "get": {
+        "operationId": "ProvisionedDeviceService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the unique identifier of the device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProvisionedDeviceService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/ProvisionedDevice/all": {
+      "get": {
+        "operationId": "ProvisionedDeviceService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.ProvisionedDeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProvisionedDeviceService"
+        ]
+      },
+      "post": {
+        "operationId": "ProvisionedDeviceService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.ProvisionedDeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProvisionedDeviceService"
+        ]
+      }
+    },
+    "/api/resources/inventory/v1/ProvisionedDevice/watch": {
+      "get": {
+        "operationId": "ProvisionedDeviceService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.ProvisionedDeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProvisionedDeviceService"
+        ]
+      },
+      "post": {
+        "operationId": "ProvisionedDeviceService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.inventory.v1.ProvisionedDeviceStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProvisionedDeviceService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.inventory.v1.DecommissioningStatus": {
+      "type": "string",
+      "enum": [
+        "DECOMMISSIONING_STATUS_UNSPECIFIED",
+        "DECOMMISSIONING_STATUS_IN_PROGRESS",
+        "DECOMMISSIONING_STATUS_FAILURE",
+        "DECOMMISSIONING_STATUS_SUCCESS"
+      ],
+      "default": "DECOMMISSIONING_STATUS_UNSPECIFIED",
+      "description": "DecommissioningStatus defines the set of possible states in the decommissioning\nprocess for a device.\n\n - DECOMMISSIONING_STATUS_IN_PROGRESS: DECOMMISSIONING_STATUS_IN_PROGRESS indicates decommissioning is in progress.\n - DECOMMISSIONING_STATUS_FAILURE: DECOMMISSIONING_STATUS_FAILURE indicates decommissioning failed.\n - DECOMMISSIONING_STATUS_SUCCESS: DECOMMISSIONING_STATUS_SUCCESS indicates decommissioning succeeded."
+    },
+    "arista.inventory.v1.Device": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceKey",
+          "description": "key uniquely identifies the device."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "software_version gives the currently running device software version."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "model_name describes the hardware model of this device."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "hardware_revision describes any revisional data to the model name."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "fqdn gives the device's fully qualified domain name."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "hostname is the hostname as reported on the device."
+        },
+        "domainName": {
+          "type": "string",
+          "description": "domain_name provides the domain name on which the device is registered."
+        },
+        "systemMacAddress": {
+          "type": "string",
+          "description": "system_mac_address provides the MAC address of the management port."
+        },
+        "bootTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "boot_time indicates when the device was last booted."
+        },
+        "streamingStatus": {
+          "$ref": "#/definitions/arista.inventory.v1.StreamingStatus",
+          "description": "streaming_status is the status of telemetry streaming for this device."
+        },
+        "extendedAttributes": {
+          "$ref": "#/definitions/arista.inventory.v1.ExtendedAttributes",
+          "description": "extended_attributes wraps any additional, potentially non-standard, features\nor attributes that the device reports."
+        }
+      },
+      "description": "Device describes an onboarded device."
+    },
+    "arista.inventory.v1.DeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "options": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "options is a map from device option to value.\n\nE.g., for an SNMP device, this could be the following:\n\n\"address\":   \"my_snmp_hostname\",\n\"community\": \"public\""
+        }
+      },
+      "description": "DeviceConfiguration holds the device-specific configuration for a third-party\ndevice, as defined in https://github.com/aristanetworks/cloudvision-go."
+    },
+    "arista.inventory.v1.DeviceDecommissioning": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "key identifies the request for which to retrieve a decommissioning status."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.inventory.v1.DecommissioningStatus",
+          "description": "status describes the decommissioning status of the device."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is the error that caused status to become DECOMMISSIONING_STATUS_FAILURE."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "status_message contains information on the status of the decommissioning attempt,\nif any. This is generally an unstructured log message that is for display\npurposes only (its structure and contents may change)."
+        }
+      },
+      "description": "DeviceOnboarding describes the status of a decommissioning process."
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "key identifies the request to decommission the device."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the unique device ID that was discovered via onboarding."
+        }
+      },
+      "description": "DeviceDecommissioningConfig describes a device decommissioning request.\n\"Decommissioning\" refers to the process of stopping device streaming to\nCloudVision and removing it from CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceDecommissioningConfig sends a decommissioning request with\n   a UUID that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the decommissioning procedure\n   and tracking the status of the decommissioning attempt.\n4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the\n   same UUID to see the status of the request."
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "Key echoes back the key of the deleted DeviceDecommissioningConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceDecommissioningConfig instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfig",
+          "description": "Value carries all the values given in the DeviceDecommissioningConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceDecommissioningConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceDecommissioningConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioning",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceDecommissioning instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioning"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceDecommissioningStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioning",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceDecommissioning's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceDecommissioning value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the unique identifier of the device.",
+          "required": [
+            "device_id"
+          ]
+        }
+      },
+      "description": "DeviceKey uniquely identifies a single device.",
+      "required": [
+        "deviceId"
+      ]
+    },
+    "arista.inventory.v1.DeviceOnboarding": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "key identifies the request for which to retrieve an onboarding status."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the unique device ID that is discovered via onboarding."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.inventory.v1.OnboardingStatus",
+          "description": "status describes the onboarding status of the device."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is the error that caused status to become ONBOARDING_STATUS_FAILURE."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "status_message contains information on the status of the onboarding attempt,\nif any. This is generally an unstructured log message that is for display\npurposes only (its structure and contents may change)."
+        }
+      },
+      "description": "DeviceOnboarding describes the status of an onboarding process."
+    },
+    "arista.inventory.v1.DeviceOnboardingConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "key identifies the request to onboard the device at hostname_or_ip."
+        },
+        "hostnameOrIp": {
+          "type": "string",
+          "description": "hostname_or_ip is a hostname or an IP at which the device can be reached."
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "device_type describes the method by which to retrieve information for the\ndevice. The value should be \"eos\" for eos devices. For third-party devices,\nsupported values are: \"openconfig\", \"snmp\", \"cvp\", \"mwm\", and \"vCenter\"."
+        },
+        "deviceConfig": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceConfiguration",
+          "description": "device_config is the configuration for a third-party device."
+        }
+      },
+      "description": "DeviceOnboardingConfig describes a device onboarding request. \"Onboarding\"\nrefers to the process of initiating device streaming to CloudVision and\nadding the streaming device to CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceOnboardingConfig sends an onboarding request with a UUID\n   that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the onboarding procedure and\n   tracking the status of the onboarding attempt.\n4. The user may do a GetOne or Subscribe on DeviceOnboarding using the same\n   UUID to see the status of the request."
+    },
+    "arista.inventory.v1.DeviceOnboardingConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.UUIDKey",
+          "description": "Key echoes back the key of the deleted DeviceOnboardingConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceOnboardingConfig instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfig",
+          "description": "Value carries all the values given in the DeviceOnboardingConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceOnboardingConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceOnboardingConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceOnboarding",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceOnboarding instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.DeviceOnboarding"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceOnboardingStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceOnboarding",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceOnboarding's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceOnboarding value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.Device",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDevice instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.Device"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.DeviceStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.Device",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Device's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Device value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.ExtendedAttributes": {
+      "type": "object",
+      "properties": {
+        "featureEnabled": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "description": "feature_enabled is a map of feature name to enabled status.\nIf a feature is missing from this map it can be assumed off."
+        }
+      },
+      "description": "ExtendedAttributes wraps any additional, potentially non-standard, features\nor attributes the device reports."
+    },
+    "arista.inventory.v1.OnboardingStatus": {
+      "type": "string",
+      "enum": [
+        "ONBOARDING_STATUS_UNSPECIFIED",
+        "ONBOARDING_STATUS_IN_PROGRESS",
+        "ONBOARDING_STATUS_FAILURE",
+        "ONBOARDING_STATUS_SUCCESS"
+      ],
+      "default": "ONBOARDING_STATUS_UNSPECIFIED",
+      "description": "OnboardingStatus defines the set of possible states in the onboarding process\nfor a device.\n\n - ONBOARDING_STATUS_IN_PROGRESS: ONBOARDING_STATUS_IN_PROGRESS indicates onboarding is in progress.\n - ONBOARDING_STATUS_FAILURE: ONBOARDING_STATUS_FAILURE indicates onboarding failed.\n - ONBOARDING_STATUS_SUCCESS: ONBOARDING_STATUS_SUCCESS indicates onboarding succeeded."
+    },
+    "arista.inventory.v1.ProvisionedDevice": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.inventory.v1.DeviceKey",
+          "description": "key uniquely identifies the device."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.inventory.v1.ProvisioningStatus",
+          "description": "status describes the onboarded device's provisioning status."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is the error that caused status to become PROVISIONING_STATUS_FAILURE."
+        },
+        "ztpMode": {
+          "type": "boolean",
+          "description": "ztp_mode indicates whether the device is in ZTP mode."
+        },
+        "ipAddress": {
+          "$ref": "#/definitions/fmp.IPAddress",
+          "description": "ip_address is the current (post-provisioning) IP address of the device."
+        },
+        "provisioningGroupName": {
+          "type": "string",
+          "description": "provisioning_group_name is the name of the group (also known as a container)\nto which the device belongs. Any provisioning operation performed on this\ngroup will also be performed on this device. If the device is not yet provisioned,\nthis will not be set. Once it is provisioned, this will be set to \"undefined_container\"\nwhich indicates that the device does not yet belong to a group. At this point,\na user may set it to an existing group."
+        }
+      },
+      "description": "ProvisionedDevice describes the provisioning status of an onboarded device\nif the onboarded device is configured for provisioning."
+    },
+    "arista.inventory.v1.ProvisionedDeviceResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.ProvisionedDevice",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nProvisionedDevice instance in this response."
+        }
+      }
+    },
+    "arista.inventory.v1.ProvisionedDeviceStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.inventory.v1.ProvisionedDevice"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.inventory.v1.ProvisionedDeviceStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.inventory.v1.ProvisionedDevice",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ProvisionedDevice's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ProvisionedDevice value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.inventory.v1.ProvisioningStatus": {
+      "type": "string",
+      "enum": [
+        "PROVISIONING_STATUS_UNSPECIFIED",
+        "PROVISIONING_STATUS_IN_PROGRESS",
+        "PROVISIONING_STATUS_FAILURE",
+        "PROVISIONING_STATUS_SUCCESS"
+      ],
+      "default": "PROVISIONING_STATUS_UNSPECIFIED",
+      "description": "ProvisioningStatus defines the set of possible states in the provisioning\nprocess for a device.\n\n - PROVISIONING_STATUS_IN_PROGRESS: PROVISIONING_STATUS_IN_PROGRESS indicates provisioning is in progress.\n - PROVISIONING_STATUS_FAILURE: PROVISIONING_STATUS_FAILURE indicates provisioning failed.\n - PROVISIONING_STATUS_SUCCESS: PROVISIONING_STATUS_SUCCESS indicates provisioning succeeded."
+    },
+    "arista.inventory.v1.StreamingStatus": {
+      "type": "string",
+      "enum": [
+        "STREAMING_STATUS_UNSPECIFIED",
+        "STREAMING_STATUS_INACTIVE",
+        "STREAMING_STATUS_ACTIVE"
+      ],
+      "default": "STREAMING_STATUS_UNSPECIFIED",
+      "description": "StreamingStatus defines the status of telemetry streaming for a device.\n\n - STREAMING_STATUS_INACTIVE: STREAMING_STATUS_INACTIVE indicates the device is not streaming telemetry.\n - STREAMING_STATUS_ACTIVE: STREAMING_STATUS_ACTIVE indicates the device is streaming telemetry."
+    },
+    "arista.inventory.v1.UUIDKey": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "request_id should be a UUID for the request.",
+          "required": [
+            "request_id"
+          ]
+        }
+      },
+      "description": "UUIDKey is a key that holds a UUID for an onboarding or decommissioning request.",
+      "required": [
+        "requestId"
+      ]
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.IPAddress": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

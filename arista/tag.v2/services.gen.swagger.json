@@ -1,0 +1,1695 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.tag.v2 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "TagService"
+    },
+    {
+      "name": "TagAssignmentService"
+    },
+    {
+      "name": "TagAssignmentConfigService"
+    },
+    {
+      "name": "TagConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/tag/v2/Tag": {
+      "get": {
+        "operationId": "TagService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is an arbitrary label.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is an arbitrary value.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Tag/all": {
+      "get": {
+        "operationId": "TagService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      },
+      "post": {
+        "operationId": "TagService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Tag/watch": {
+      "get": {
+        "operationId": "TagService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      },
+      "post": {
+        "operationId": "TagService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignment": {
+      "get": {
+        "operationId": "TagAssignmentService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is the label of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is the value of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.deviceId",
+            "description": "device_id identifies a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.interfaceId",
+            "description": "interface_id identifies an interface on a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignment/all": {
+      "get": {
+        "operationId": "TagAssignmentService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignment/watch": {
+      "get": {
+        "operationId": "TagAssignmentService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig": {
+      "get": {
+        "operationId": "TagAssignmentConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is the label of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is the value of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.deviceId",
+            "description": "device_id identifies a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.interfaceId",
+            "description": "interface_id identifies an interface on a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "TagAssignmentConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is the label of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is the value of a tag.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.deviceId",
+            "description": "device_id identifies a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.interfaceId",
+            "description": "interface_id identifies an interface on a device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "TagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the TagAssignmentConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/all": {
+      "get": {
+        "operationId": "TagAssignmentConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/watch": {
+      "get": {
+        "operationId": "TagAssignmentConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig": {
+      "get": {
+        "operationId": "TagConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is an arbitrary label.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is an arbitrary value.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "TagConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.elementType",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.label",
+            "description": "label is an arbitrary label.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.value",
+            "description": "value is an arbitrary value.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "TagConfig carries the value to set into the datastore.\nSee the documentation on the TagConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfig"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig/all": {
+      "get": {
+        "operationId": "TagConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig/watch": {
+      "get": {
+        "operationId": "TagConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.tag.v2.CreatorType": {
+      "type": "string",
+      "enum": [
+        "CREATOR_TYPE_UNSPECIFIED",
+        "CREATOR_TYPE_SYSTEM",
+        "CREATOR_TYPE_USER"
+      ],
+      "default": "CREATOR_TYPE_UNSPECIFIED",
+      "description": "CreatorType enumerates the types of entities that can create\na tag.\n\n - CREATOR_TYPE_SYSTEM: CREATOR_TYPE_SYSTEM is used for system tags.\n - CREATOR_TYPE_USER: CREATOR_TYPE_USER is used for user tags."
+    },
+    "arista.tag.v2.ElementType": {
+      "type": "string",
+      "enum": [
+        "ELEMENT_TYPE_UNSPECIFIED",
+        "ELEMENT_TYPE_DEVICE",
+        "ELEMENT_TYPE_INTERFACE"
+      ],
+      "default": "ELEMENT_TYPE_UNSPECIFIED",
+      "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags."
+    },
+    "arista.tag.v2.Tag": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey",
+          "description": "key identifies a tag."
+        },
+        "creatorType": {
+          "$ref": "#/definitions/arista.tag.v2.CreatorType",
+          "description": "creator_type is the creator type of the tag."
+        }
+      },
+      "description": "Tag holds a merge-preview or the existing merged state (if the\nworkspace ID is \"\") of a tag."
+    },
+    "arista.tag.v2.TagAssignment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey",
+          "description": "key identifies an assignment."
+        }
+      },
+      "description": "TagAssignment holds a merge-preview or the existing merged\nstate (if the workspace ID is \"\") of an assignment between\na tag and a network element."
+    },
+    "arista.tag.v2.TagAssignmentConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey",
+          "description": "key identifies an assignment. The special workspace ID \"\"\nfor merged assignments should not be set here."
+        },
+        "remove": {
+          "type": "boolean",
+          "description": "remove indicates whether to remove (true) or add (false,\nunset) the assignment identified by the key if the\nencompassing workspace merges."
+        }
+      },
+      "description": "TagAssignmentConfig holds a configuration for an assignment\nbetween a tag and a network element."
+    },
+    "arista.tag.v2.TagAssignmentConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey",
+          "description": "Key echoes back the key of the deleted TagAssignmentConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagAssignmentConfig instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig",
+          "description": "Value carries all the values given in the TagAssignmentConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this TagAssignmentConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the TagAssignmentConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside.",
+          "required": [
+            "workspace_id"
+          ]
+        },
+        "elementType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementType",
+          "description": "ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id",
+          "title": "element_type is the element type of a tag. What should\nbe set per element type:",
+          "required": [
+            "element_type"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "label is the label of a tag.",
+          "required": [
+            "label"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "value is the value of a tag.",
+          "required": [
+            "value"
+          ]
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "device_id identifies a device.",
+          "required": [
+            "device_id"
+          ]
+        },
+        "interfaceId": {
+          "type": "string",
+          "description": "interface_id identifies an interface on a device.",
+          "required": [
+            "interface_id"
+          ]
+        }
+      },
+      "description": "TagAssignmentKey uniquely identifies an assignment between\na tag and a network element.",
+      "required": [
+        "workspaceId",
+        "elementType",
+        "label",
+        "value",
+        "deviceId",
+        "interfaceId"
+      ]
+    },
+    "arista.tag.v2.TagAssignmentResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagAssignment instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.tag.v2.TagAssignment"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignment",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this TagAssignment's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the TagAssignment value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.tag.v2.TagConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey",
+          "description": "key identifies a tag. The special workspace ID \"\" for\nmerged tags should not be set here."
+        },
+        "remove": {
+          "type": "boolean",
+          "description": "remove indicates whether to remove (true) or add (false,\nunset) the tag identified by the key if the encompassing\nworkspace merges."
+        }
+      },
+      "description": "TagConfig holds a configuration for a user tag."
+    },
+    "arista.tag.v2.TagConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey",
+          "description": "Key echoes back the key of the deleted TagConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.tag.v2.TagConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagConfig instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.TagConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagConfig",
+          "description": "Value carries all the values given in the TagConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.tag.v2.TagConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.tag.v2.TagConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.tag.v2.TagConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this TagConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the TagConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.tag.v2.TagKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside.",
+          "required": [
+            "workspace_id"
+          ]
+        },
+        "elementType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementType",
+          "description": "element_type is the category of network element to which\nthis tag can be assigned.",
+          "required": [
+            "element_type"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "label is an arbitrary label.",
+          "required": [
+            "label"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "value is an arbitrary value.",
+          "required": [
+            "value"
+          ]
+        }
+      },
+      "description": "TagKey uniquely identifies a tag.",
+      "required": [
+        "workspaceId",
+        "elementType",
+        "label",
+        "value"
+      ]
+    },
+    "arista.tag.v2.TagResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Tag",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTag instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.TagStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.tag.v2.Tag"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.tag.v2.TagStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Tag",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Tag's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Tag value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
