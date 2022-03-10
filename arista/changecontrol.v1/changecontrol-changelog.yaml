@@ -7,6 +7,12 @@
 # New entries go on top.
 
 Changes:
+    - date: 2021-11-29
+      description: Update documentation (again)
+      version: 1.0.4
+      onprem: true
+      cvaas: true
+
     - date: 2021-08-11
       description: Update documentation
       version: 1.0.3

@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -18,11 +18,11 @@ import "google/protobuf/timestamp.proto";
 
 message DeviceRequest {
 	// Key uniquely identifies a Device instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	DeviceKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -70,12 +70,384 @@ message DeviceStreamResponse {
 };
 
 service DeviceService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (DeviceRequest) returns (DeviceResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (DeviceStreamRequest) returns (stream DeviceStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (DeviceStreamRequest) returns (stream DeviceStreamResponse);
+}
+
+message DeviceDecommissioningRequest {
+	// Key uniquely identifies a DeviceDecommissioning instance to retrieve.
+	// This value must be populated.
+	UUIDKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceDecommissioning value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceDecommissioning instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceDecommissioning partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message DeviceDecommissioningStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	DeviceDecommissioning value = 1;
+
+	// Time holds the timestamp of this DeviceDecommissioning's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the DeviceDecommissioning value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service DeviceDecommissioningService {
+	rpc GetOne (DeviceDecommissioningRequest) returns (DeviceDecommissioningResponse);
+	rpc GetAll (DeviceDecommissioningStreamRequest) returns (stream DeviceDecommissioningStreamResponse);
+	rpc Subscribe (DeviceDecommissioningStreamRequest) returns (stream DeviceDecommissioningStreamResponse);
+}
+
+message DeviceDecommissioningConfigRequest {
+	// Key uniquely identifies a DeviceDecommissioningConfig instance to retrieve.
+	// This value must be populated.
+	UUIDKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningConfigResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceDecommissioningConfig value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceDecommissioningConfig instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningConfigStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceDecommissioningConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message DeviceDecommissioningConfigStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	DeviceDecommissioningConfig value = 1;
+
+	// Time holds the timestamp of this DeviceDecommissioningConfig's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the DeviceDecommissioningConfig value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message DeviceDecommissioningConfigSetRequest {
+	// DeviceDecommissioningConfig carries the value to set into the datastore.
+	// See the documentation on the DeviceDecommissioningConfig struct for which fields are required.
+	DeviceDecommissioningConfig value = 1;
+};
+
+message DeviceDecommissioningConfigSetResponse {
+	// Value carries all the values given in the DeviceDecommissioningConfigSetRequest as well
+	// as any server-generated values.
+	DeviceDecommissioningConfig value = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// creation. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningConfigDeleteRequest {
+	// Key indicates which DeviceDecommissioningConfig instance to remove.
+	// This field must always be set.
+	UUIDKey key = 1;
+};
+
+message DeviceDecommissioningConfigDeleteResponse {
+	// Key echoes back the key of the deleted DeviceDecommissioningConfig instance.
+	UUIDKey key = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// deletion. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+service DeviceDecommissioningConfigService {
+	rpc GetOne (DeviceDecommissioningConfigRequest) returns (DeviceDecommissioningConfigResponse);
+	rpc GetAll (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
+	rpc Subscribe (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
+	rpc Set (DeviceDecommissioningConfigSetRequest) returns (DeviceDecommissioningConfigSetResponse);
+	rpc Delete (DeviceDecommissioningConfigDeleteRequest) returns (DeviceDecommissioningConfigDeleteResponse);
+}
+
+message DeviceOnboardingRequest {
+	// Key uniquely identifies a DeviceOnboarding instance to retrieve.
+	// This value must be populated.
+	UUIDKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceOnboarding value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceOnboarding instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceOnboarding partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message DeviceOnboardingStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	DeviceOnboarding value = 1;
+
+	// Time holds the timestamp of this DeviceOnboarding's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the DeviceOnboarding value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service DeviceOnboardingService {
+	rpc GetOne (DeviceOnboardingRequest) returns (DeviceOnboardingResponse);
+	rpc GetAll (DeviceOnboardingStreamRequest) returns (stream DeviceOnboardingStreamResponse);
+	rpc Subscribe (DeviceOnboardingStreamRequest) returns (stream DeviceOnboardingStreamResponse);
+}
+
+message DeviceOnboardingConfigRequest {
+	// Key uniquely identifies a DeviceOnboardingConfig instance to retrieve.
+	// This value must be populated.
+	UUIDKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingConfigResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceOnboardingConfig value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceOnboardingConfig instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingConfigStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceOnboardingConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message DeviceOnboardingConfigStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	DeviceOnboardingConfig value = 1;
+
+	// Time holds the timestamp of this DeviceOnboardingConfig's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the DeviceOnboardingConfig value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message DeviceOnboardingConfigSetRequest {
+	// DeviceOnboardingConfig carries the value to set into the datastore.
+	// See the documentation on the DeviceOnboardingConfig struct for which fields are required.
+	DeviceOnboardingConfig value = 1;
+};
+
+message DeviceOnboardingConfigSetResponse {
+	// Value carries all the values given in the DeviceOnboardingConfigSetRequest as well
+	// as any server-generated values.
+	DeviceOnboardingConfig value = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// creation. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingConfigDeleteRequest {
+	// Key indicates which DeviceOnboardingConfig instance to remove.
+	// This field must always be set.
+	UUIDKey key = 1;
+};
+
+message DeviceOnboardingConfigDeleteResponse {
+	// Key echoes back the key of the deleted DeviceOnboardingConfig instance.
+	UUIDKey key = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// deletion. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+service DeviceOnboardingConfigService {
+	rpc GetOne (DeviceOnboardingConfigRequest) returns (DeviceOnboardingConfigResponse);
+	rpc GetAll (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
+	rpc Subscribe (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
+	rpc Set (DeviceOnboardingConfigSetRequest) returns (DeviceOnboardingConfigSetResponse);
+	rpc Delete (DeviceOnboardingConfigDeleteRequest) returns (DeviceOnboardingConfigDeleteResponse);
+}
+
+message ProvisionedDeviceRequest {
+	// Key uniquely identifies a ProvisionedDevice instance to retrieve.
+	// This value must be populated.
+	DeviceKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ProvisionedDeviceResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ProvisionedDevice value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ProvisionedDevice instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ProvisionedDeviceStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ProvisionedDevice partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message ProvisionedDeviceStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	ProvisionedDevice value = 1;
+
+	// Time holds the timestamp of this ProvisionedDevice's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the ProvisionedDevice value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service ProvisionedDeviceService {
+	rpc GetOne (ProvisionedDeviceRequest) returns (ProvisionedDeviceResponse);
+	rpc GetAll (ProvisionedDeviceStreamRequest) returns (stream ProvisionedDeviceStreamResponse);
+	rpc Subscribe (ProvisionedDeviceStreamRequest) returns (stream ProvisionedDeviceStreamResponse);
 }
