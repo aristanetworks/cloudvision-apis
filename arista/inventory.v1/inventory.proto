@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -12,21 +12,57 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 import "fmp/extensions.proto";
+import "fmp/inet.proto";
 
-// StreamingStatus the status of streaming telemetry for this device.
+// StreamingStatus defines the status of telemetry streaming for a device.
 enum StreamingStatus {
-    // Unspecified is the uninitialized state of this enum.
     STREAMING_STATUS_UNSPECIFIED = 0;
-    // Inactive indicates the device is not streaming telemetry.
+    // STREAMING_STATUS_INACTIVE indicates the device is not streaming telemetry.
     STREAMING_STATUS_INACTIVE = 1;
-    // Active indicates the device is streaming telemetry.
+    // STREAMING_STATUS_ACTIVE indicates the device is streaming telemetry.
     STREAMING_STATUS_ACTIVE = 2;
+}
+
+// OnboardingStatus defines the set of possible states in the onboarding process
+// for a device.
+enum OnboardingStatus {
+    ONBOARDING_STATUS_UNSPECIFIED = 0;
+    // ONBOARDING_STATUS_IN_PROGRESS indicates onboarding is in progress.
+    ONBOARDING_STATUS_IN_PROGRESS = 1;
+    // ONBOARDING_STATUS_FAILURE indicates onboarding failed.
+    ONBOARDING_STATUS_FAILURE = 2;
+    // ONBOARDING_STATUS_SUCCESS indicates onboarding succeeded.
+    ONBOARDING_STATUS_SUCCESS = 3;
+}
+
+// DecommissioningStatus defines the set of possible states in the decommissioning
+// process for a device.
+enum DecommissioningStatus {
+    DECOMMISSIONING_STATUS_UNSPECIFIED = 0;
+    // DECOMMISSIONING_STATUS_IN_PROGRESS indicates decommissioning is in progress.
+    DECOMMISSIONING_STATUS_IN_PROGRESS = 1;
+    // DECOMMISSIONING_STATUS_FAILURE indicates decommissioning failed.
+    DECOMMISSIONING_STATUS_FAILURE = 2;
+    // DECOMMISSIONING_STATUS_SUCCESS indicates decommissioning succeeded.
+    DECOMMISSIONING_STATUS_SUCCESS = 3;
+}
+
+// ProvisioningStatus defines the set of possible states in the provisioning
+// process for a device.
+enum ProvisioningStatus {
+    PROVISIONING_STATUS_UNSPECIFIED = 0;
+    // PROVISIONING_STATUS_IN_PROGRESS indicates provisioning is in progress.
+    PROVISIONING_STATUS_IN_PROGRESS = 1;
+    // PROVISIONING_STATUS_FAILURE indicates provisioning failed.
+    PROVISIONING_STATUS_FAILURE = 2;
+    // PROVISIONING_STATUS_SUCCESS indicates provisioning succeeded.
+    PROVISIONING_STATUS_SUCCESS = 3;
 }
 
 // ExtendedAttributes wraps any additional, potentially non-standard, features
 // or attributes the device reports.
 message ExtendedAttributes {
-    // FeatureEnabled is a map of feature name to enabled status.
+    // feature_enabled is a map of feature name to enabled status.
     // If a feature is missing from this map it can be assumed off.
     map<string, bool> feature_enabled = 1;
 }
@@ -34,38 +70,162 @@ message ExtendedAttributes {
 // DeviceKey uniquely identifies a single device.
 message DeviceKey {
     option (fmp.model_key) = true;
+    // device_id is the unique identifier of the device.
     google.protobuf.StringValue device_id = 1;
-};
+}
 
-// Device is the primary model for this service.
+// DeviceConfiguration holds the device-specific configuration for a third-party
+// device, as defined in https://github.com/aristanetworks/cloudvision-go.
+message DeviceConfiguration {
+    // options is a map from device option to value.
+    //
+    // E.g., for an SNMP device, this could be the following:
+    //
+    // "address":   "my_snmp_hostname",
+    // "community": "public"
+    map<string, string> options = 1;
+}
+
+// UUIDKey is a key that holds a UUID for an onboarding or decommissioning request.
+message UUIDKey {
+    option (fmp.model_key) = true;
+    // request_id should be a UUID for the request.
+    google.protobuf.StringValue request_id = 1;
+}
+
+// DeviceOnboardingConfig describes a device onboarding request. "Onboarding"
+// refers to the process of initiating device streaming to CloudVision and
+// adding the streaming device to CloudVision's inventory.
+//
+// The request flow works as follows:
+//
+// 1. Set on DeviceOnboardingConfig sends an onboarding request with a UUID
+//    that the user is responsible for generating.
+// 2. Once the server receives the request, it validates and records it.
+// 3. Then, the server processes it, initiating the onboarding procedure and
+//    tracking the status of the onboarding attempt.
+// 4. The user may do a GetOne or Subscribe on DeviceOnboarding using the same
+//    UUID to see the status of the request.
+message DeviceOnboardingConfig {
+    option (fmp.model) = "rw";
+
+    // key identifies the request to onboard the device at hostname_or_ip.
+    UUIDKey key = 1;
+    // hostname_or_ip is a hostname or an IP at which the device can be reached.
+    google.protobuf.StringValue hostname_or_ip = 2;
+    // device_type describes the method by which to retrieve information for the
+    // device. The value should be "eos" for eos devices. For third-party devices,
+    // supported values are: "openconfig", "snmp", "cvp", "mwm", and "vCenter".
+    google.protobuf.StringValue device_type = 3;
+    // device_config is the configuration for a third-party device.
+    DeviceConfiguration device_config = 4;
+}
+
+// DeviceOnboarding describes the status of an onboarding process.
+message DeviceOnboarding {
+    option (fmp.model) = "ro";
+
+    // key identifies the request for which to retrieve an onboarding status.
+    UUIDKey key = 1;
+    // device_id is the unique device ID that is discovered via onboarding.
+    google.protobuf.StringValue device_id = 2;
+    // status describes the onboarding status of the device.
+    OnboardingStatus status = 3;
+    // error is the error that caused status to become ONBOARDING_STATUS_FAILURE.
+    google.protobuf.StringValue error = 4;
+    // status_message contains information on the status of the onboarding attempt,
+    // if any. This is generally an unstructured log message that is for display
+    // purposes only (its structure and contents may change).
+    google.protobuf.StringValue status_message = 5;
+}
+
+// DeviceDecommissioningConfig describes a device decommissioning request.
+// "Decommissioning" refers to the process of stopping device streaming to
+// CloudVision and removing it from CloudVision's inventory.
+//
+// The request flow works as follows:
+//
+// 1. Set on DeviceDecommissioningConfig sends a decommissioning request with
+//    a UUID that the user is responsible for generating.
+// 2. Once the server receives the request, it validates and records it.
+// 3. Then, the server processes it, initiating the decommissioning procedure
+//    and tracking the status of the decommissioning attempt.
+// 4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the
+//    same UUID to see the status of the request.
+message DeviceDecommissioningConfig {
+    option (fmp.model) = "rw";
+
+    // key identifies the request to decommission the device.
+    UUIDKey key = 1;
+    // device_id is the unique device ID that was discovered via onboarding.
+    google.protobuf.StringValue device_id = 2;
+}
+
+// DeviceOnboarding describes the status of a decommissioning process.
+message DeviceDecommissioning {
+    option (fmp.model) = "ro";
+
+    // key identifies the request for which to retrieve a decommissioning status.
+    UUIDKey key = 1;
+    // status describes the decommissioning status of the device.
+    DecommissioningStatus status = 2;
+    // error is the error that caused status to become DECOMMISSIONING_STATUS_FAILURE.
+    google.protobuf.StringValue error = 3;
+    // status_message contains information on the status of the decommissioning attempt,
+    // if any. This is generally an unstructured log message that is for display
+    // purposes only (its structure and contents may change).
+    google.protobuf.StringValue status_message = 4;
+}
+
+// Device describes an onboarded device.
 message Device {
     option (fmp.model) = "ro";
 
-    // The key that uniquely identifies this device.
+    // key uniquely identifies the device.
     DeviceKey key = 1;
-
-    // SoftwareVersion gives the currently running device software version.
+    // software_version gives the currently running device software version.
     google.protobuf.StringValue software_version = 2;
-    // ModelName describes the hardware model of this device.
+    // model_name describes the hardware model of this device.
     google.protobuf.StringValue model_name = 3;
-    // HardwareREvision describes any revisional data to the model name.
+    // hardware_revision describes any revisional data to the model name.
     google.protobuf.StringValue hardware_revision = 4;
-
-    // FQDN gives the fully qualified hostname to reach the device.
+    // fqdn gives the device's fully qualified domain name.
     google.protobuf.StringValue fqdn = 10;
-    // Hostname is the hostname as reported on the device.
+    // hostname is the hostname as reported on the device.
     google.protobuf.StringValue hostname = 11;
-    // DomainName provides the domain name the device is registered on.
+    // domain_name provides the domain name on which the device is registered.
     google.protobuf.StringValue domain_name = 12;
-    // SystemMacAddress provides the MAC address of the management port.
+    // system_mac_address provides the MAC address of the management port.
     google.protobuf.StringValue system_mac_address = 13;
-
-    // BootTime indicates when the device was last booted.
+    // boot_time indicates when the device was last booted.
     google.protobuf.Timestamp boot_time = 20;
-
-    // StreamingStatus the status of streaming telemetry for this device.
+    // streaming_status is the status of telemetry streaming for this device.
     StreamingStatus streaming_status = 30;
-    // ExtendedAttributes wraps any additional, potentially non-standard, features
-    // or attributes the device reports.
+    // extended_attributes wraps any additional, potentially non-standard, features
+    // or attributes that the device reports.
     ExtendedAttributes extended_attributes = 31;
-};
+}
+
+// ProvisionedDevice describes the provisioning status of an onboarded device
+// if the onboarded device is configured for provisioning.
+message ProvisionedDevice {
+   option (fmp.model) = "ro";
+
+   // key uniquely identifies the device.
+   DeviceKey key = 1;
+   // status describes the onboarded device's provisioning status.
+   ProvisioningStatus status = 2;
+   // error is the error that caused status to become PROVISIONING_STATUS_FAILURE.
+   google.protobuf.StringValue error = 3;
+   // ztp_mode indicates whether the device is in ZTP mode.
+   google.protobuf.BoolValue ztp_mode = 4;
+   // ip_address is the current (post-provisioning) IP address of the device.
+   fmp.IPAddress ip_address = 5;
+   // provisioning_group_name is the name of the group (also known as a container)
+   // to which the device belongs. Any provisioning operation performed on this
+   // group will also be performed on this device. If the device is not yet provisioned,
+   // this will not be set. Once it is provisioned, this will be set to "undefined_container"
+   // which indicates that the device does not yet belong to a group. At this point,
+   // a user may set it to an existing group.
+   google.protobuf.StringValue provisioning_group_name = 6;
+}

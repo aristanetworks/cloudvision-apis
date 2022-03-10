@@ -1,0 +1,35 @@
+# Copyright (c) 2020 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2022-02-08
+      description: Update documentation
+      version: 1.0.8
+      cvaas: true
+      onprem: true
+    - date: 2021-10-21
+      description: Remove deviceId from DeviceDecommissioning
+      version: 1.0.7
+    - date: 2021-05-11
+      description: Add field status_message
+      version: 1.0.6
+    - date: 2020-12-01
+      description: Add field comments
+      version: 1.0.5
+    - date: 2020-12-01
+      description: Add onboarding and decommissioning resources
+      version: 1.0.4
+    - date: 2020-06-05
+      description: Change service suffix from Resource to Service
+      version: 1.0.2
+    - date: 2020-04-10
+      description: changed Go package name to a versionless one
+      version: 1.0.1
+    - date: 2020-04-10
+      description: Initial revision
+      version: 1.0.0
