@@ -88,20 +88,27 @@ EventAnnotationConfigDeleteResponse
 EventAnnotationConfigRequest
 EventAnnotationConfigResponse</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
 Device
+DeviceConfiguration
+DeviceConfiguration.OptionsEntry
+DeviceDecommissioning
+DeviceDecommissioningConfig
 DeviceKey
+DeviceOnboarding
+DeviceOnboardingConfig
 ExtendedAttributes
 ExtendedAttributes.FeatureEnabledEntry
+ProvisionedDevice
+UUIDKey
+DecommissioningStatus
+OnboardingStatus
+ProvisioningStatus
 StreamingStatus
 arista/inventory.v1/services.gen.proto
-DeviceRequest
-DeviceResponse
-DeviceStreamRequest
-DeviceStreamResponse
-DeviceService
-Top
-arista/inventory.v1/inventory.proto
-Device Device is the primary model for this service.
-Field Name Type Description key DeviceKey The key that uniquely identifies this device.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
+DeviceDecommissioningConfigDeleteRequest
+DeviceDecommissioningConfigDeleteResponse
+DeviceDecommissioningConfigRequest
+DeviceDecommissioningConfigResponse
+DeviceDecommissioningConfigSetRequest</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
 AssignedTags
 AssignedTagsConfig
 BooleanInputFieldProps
