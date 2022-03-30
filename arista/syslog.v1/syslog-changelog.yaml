@@ -1,0 +1,33 @@
+# Copyright (c) 2021 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2022-01-27
+      description: Data Model change for syslog export status
+      version: 1.0.5
+      onprem: true
+
+    - date: 2021-11-23
+      description: Swapping timestamp and log_timestamp field
+      version: 1.0.4
+
+    - date: 2021-11-22
+      description: Introducing log_ts field in export status
+      version: 1.0.3
+
+    - date: 2021-11-17
+      description: Updating Format Protocol to include custom format
+      version: 1.0.2
+
+    - date: 2021-04-08
+      description: Replacing failure with error
+      version: 1.0.1
+
+    - date: 2021-03-09
+      description: Add model for remote syslog server
+      version: 1.0.0

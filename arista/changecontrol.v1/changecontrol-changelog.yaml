@@ -8,7 +8,7 @@
 
 Changes:
     - date: 2021-11-29
-      description: Update documentation (again)
+      description: Update documentation
       version: 1.0.4
       onprem: true
       cvaas: true

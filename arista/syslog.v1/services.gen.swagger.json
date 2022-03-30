@@ -1,0 +1,1153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.syslog.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ExportService"
+    },
+    {
+      "name": "ExportConfigService"
+    },
+    {
+      "name": "ExportFormatConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/syslog/v1/Export": {
+      "get": {
+        "operationId": "ExportService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.hostnameOrIp",
+            "description": "hostname_or_ip is the IP address or hostname of the syslog server.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.portNum.value",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "key.protocol",
+            "description": "protocol defines the transport protocol for the syslog export.\n\n - TRANSPORT_PROTOCOL_UDP: TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP).",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "TRANSPORT_PROTOCOL_UNSPECIFIED",
+              "TRANSPORT_PROTOCOL_UDP"
+            ],
+            "default": "TRANSPORT_PROTOCOL_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/Export/all": {
+      "get": {
+        "operationId": "ExportService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ExportService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/Export/watch": {
+      "get": {
+        "operationId": "ExportService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ExportService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/ExportConfig": {
+      "get": {
+        "operationId": "ExportConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.hostnameOrIp",
+            "description": "hostname_or_ip is the IP address or hostname of the syslog server.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.portNum.value",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "key.protocol",
+            "description": "protocol defines the transport protocol for the syslog export.\n\n - TRANSPORT_PROTOCOL_UDP: TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP).",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "TRANSPORT_PROTOCOL_UNSPECIFIED",
+              "TRANSPORT_PROTOCOL_UDP"
+            ],
+            "default": "TRANSPORT_PROTOCOL_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ExportConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.hostnameOrIp",
+            "description": "hostname_or_ip is the IP address or hostname of the syslog server.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.portNum.value",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "key.protocol",
+            "description": "protocol defines the transport protocol for the syslog export.\n\n - TRANSPORT_PROTOCOL_UDP: TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP).",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "TRANSPORT_PROTOCOL_UNSPECIFIED",
+              "TRANSPORT_PROTOCOL_UDP"
+            ],
+            "default": "TRANSPORT_PROTOCOL_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "ExportConfig carries the value to set into the datastore.\nSee the documentation on the ExportConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/ExportConfig/all": {
+      "get": {
+        "operationId": "ExportConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/ExportConfig/watch": {
+      "get": {
+        "operationId": "ExportConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ExportConfigService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/ExportFormatConfig": {
+      "get": {
+        "operationId": "ExportFormatConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportFormatConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportFormatConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "ExportFormatConfig carries the value to set into the datastore.\nSee the documentation on the ExportFormatConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ExportFormatConfigService"
+        ]
+      }
+    },
+    "/api/resources/syslog/v1/ExportFormatConfig/watch": {
+      "get": {
+        "operationId": "ExportFormatConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportFormatConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ExportFormatConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ExportFormatConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.syslog.v1.ExportFormatConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ExportFormatConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.syslog.v1.Export": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportKey",
+          "title": "key uniquely identifies a syslog server"
+        },
+        "stats": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportStats",
+          "description": "stats contains the statistics for all export operations."
+        },
+        "lastError": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportError",
+          "description": "last_error provides the details of the last export error."
+        },
+        "lastSuccess": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportSuccess",
+          "description": "last_success provides details of last successful export."
+        }
+      },
+      "description": "Export provides the export status for a syslog server."
+    },
+    "arista.syslog.v1.ExportConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportKey",
+          "description": "key uniquely identifies a syslog server."
+        }
+      },
+      "description": "ExportConfig is used to configure a syslog server."
+    },
+    "arista.syslog.v1.ExportConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportKey",
+          "description": "Key echoes back the key of the deleted ExportConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.syslog.v1.ExportConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nExportConfig instance in this response."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportConfig",
+          "description": "Value carries all the values given in the ExportConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.syslog.v1.ExportConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.syslog.v1.ExportConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ExportConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ExportConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportError": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "timestamp provides the timestamp of the export error."
+        },
+        "error": {
+          "type": "string",
+          "description": "error indicates the export error."
+        },
+        "detail": {
+          "type": "string",
+          "description": "detail indicates the audit log that was not exported."
+        },
+        "logTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "log_timestamp provides the timestamp of the last audit log\nthat was not exported due to error."
+        }
+      },
+      "description": "ExportError provides the details of the most recent export error."
+    },
+    "arista.syslog.v1.ExportFormatConfig": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/arista.syslog.v1.Format",
+          "description": "format defines the syslog format to be used for export."
+        }
+      },
+      "description": "ExportFormatConfig is used to confgure a global format for\nexporting logs to all the configured syslog servers."
+    },
+    "arista.syslog.v1.ExportFormatConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nExportFormatConfig instance in this response."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportFormatConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfig",
+          "description": "Value carries all the values given in the ExportFormatConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.syslog.v1.ExportFormatConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportFormatConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportFormatConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ExportFormatConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ExportFormatConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportKey": {
+      "type": "object",
+      "properties": {
+        "hostnameOrIp": {
+          "type": "string",
+          "description": "hostname_or_ip is the IP address or hostname of the syslog server.",
+          "required": [
+            "hostnameOrIp"
+          ]
+        },
+        "portNum": {
+          "$ref": "#/definitions/fmp.Port",
+          "description": "port_num is the destination port number of the syslog server.",
+          "required": [
+            "portNum"
+          ]
+        },
+        "protocol": {
+          "$ref": "#/definitions/arista.syslog.v1.TransportProtocol",
+          "description": "protocol defines the transport protocol for the syslog export.",
+          "required": [
+            "protocol"
+          ]
+        }
+      },
+      "description": "ExportKey uniquely identifies a syslog server to which to export logs.",
+      "required": [
+        "hostnameOrIp",
+        "portNum",
+        "protocol"
+      ]
+    },
+    "arista.syslog.v1.ExportResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.Export",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nExport instance in this response."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportResult": {
+      "type": "string",
+      "enum": [
+        "EXPORT_RESULT_UNSPECIFIED",
+        "EXPORT_RESULT_SUCCESS",
+        "EXPORT_RESULT_FAILURE"
+      ],
+      "default": "EXPORT_RESULT_UNSPECIFIED",
+      "description": "ExportResult defines the set of possible results of an export operation.\n\n - EXPORT_RESULT_SUCCESS: EXPORT_RESULT_SUCCESS indicates a successful export operation.\n - EXPORT_RESULT_FAILURE: EXPORT_RESULT_FAILURE indicates an unsuccessful export operation."
+    },
+    "arista.syslog.v1.ExportStats": {
+      "type": "object",
+      "properties": {
+        "numSuccess": {
+          "type": "string",
+          "format": "uint64",
+          "description": "num_success indicates the count of successful exports."
+        },
+        "numErrors": {
+          "type": "string",
+          "format": "uint64",
+          "description": "num_errors indicates the count of export errors."
+        },
+        "lastResult": {
+          "$ref": "#/definitions/arista.syslog.v1.ExportResult",
+          "description": "last_result provides the status of the last export operation."
+        }
+      },
+      "description": "ExportStats provide statistics of export operations to a syslog sever."
+    },
+    "arista.syslog.v1.ExportStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.syslog.v1.Export"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.syslog.v1.Export",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Export's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Export value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.syslog.v1.ExportSuccess": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "timestamp provides the timestamp of last successful export opeartion."
+        },
+        "logTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "log_timestamp provides the timestamp of the last successful audit log."
+        }
+      },
+      "description": "ExportSuccess provides the details of the last successful export operation."
+    },
+    "arista.syslog.v1.Format": {
+      "type": "string",
+      "enum": [
+        "FORMAT_UNSPECIFIED",
+        "FORMAT_RFC3164",
+        "FORMAT_RFC5424",
+        "FORMAT_CUSTOM"
+      ],
+      "default": "FORMAT_UNSPECIFIED",
+      "description": "Format defines the set of formats to be used for export to syslog servers.\n\n - FORMAT_RFC3164: FORMAT_RFC3164 indicates the BSD syslog protocol as defined by RFC 3164.\n - FORMAT_RFC5424: FORMAT_RFC5424 indicates the IETF syslog protocol as defined by RFC 5424.\n - FORMAT_CUSTOM: FORMAT_CUSTOM indicates a native custom format with a UTC timestamp."
+    },
+    "arista.syslog.v1.TransportProtocol": {
+      "type": "string",
+      "enum": [
+        "TRANSPORT_PROTOCOL_UNSPECIFIED",
+        "TRANSPORT_PROTOCOL_UDP"
+      ],
+      "default": "TRANSPORT_PROTOCOL_UNSPECIFIED",
+      "description": "TransportProtocol defines the set of transport protocols to be used for export.\n\n - TRANSPORT_PROTOCOL_UDP: TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP)."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.Port": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

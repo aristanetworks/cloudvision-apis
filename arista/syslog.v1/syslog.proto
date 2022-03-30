@@ -1,0 +1,112 @@
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.syslog.v1;
+
+option go_package = "arista/resources/arista/syslog.v1;syslog";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "fmp/extensions.proto";
+import "fmp/inet.proto";
+
+// TransportProtocol defines the set of transport protocols to be used for export.
+enum TransportProtocol {
+    TRANSPORT_PROTOCOL_UNSPECIFIED = 0;
+    // TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP).
+    TRANSPORT_PROTOCOL_UDP = 1;
+}
+
+// Format defines the set of formats to be used for export to syslog servers.
+enum Format {
+    FORMAT_UNSPECIFIED = 0;
+    // FORMAT_RFC3164 indicates the BSD syslog protocol as defined by RFC 3164.
+    FORMAT_RFC3164 = 1;
+    // FORMAT_RFC5424 indicates the IETF syslog protocol as defined by RFC 5424.
+    FORMAT_RFC5424 = 2;
+    // FORMAT_CUSTOM indicates a native custom format with a UTC timestamp.
+    FORMAT_CUSTOM = 3;
+}
+
+// ExportResult defines the set of possible results of an export operation.
+enum ExportResult {
+    EXPORT_RESULT_UNSPECIFIED = 0;
+    // EXPORT_RESULT_SUCCESS indicates a successful export operation.
+    EXPORT_RESULT_SUCCESS = 1;
+    // EXPORT_RESULT_FAILURE indicates an unsuccessful export operation.
+    EXPORT_RESULT_FAILURE = 2;
+}
+
+// ExportKey uniquely identifies a syslog server to which to export logs.
+message ExportKey {
+    option (fmp.model_key) = true;
+    // hostname_or_ip is the IP address or hostname of the syslog server.
+    google.protobuf.StringValue hostname_or_ip = 1;
+    // port_num is the destination port number of the syslog server.
+    fmp.Port port_num = 2;
+    // protocol defines the transport protocol for the syslog export.
+    TransportProtocol protocol = 3;
+}
+
+// ExportSuccess provides the details of the last successful export operation.
+message ExportSuccess {
+    // timestamp provides the timestamp of last successful export opeartion.
+    google.protobuf.Timestamp timestamp = 1;
+    // log_timestamp provides the timestamp of the last successful audit log.
+    google.protobuf.Timestamp log_timestamp = 2;
+}
+
+// ExportError provides the details of the most recent export error.
+message ExportError {
+    // timestamp provides the timestamp of the export error.
+    google.protobuf.Timestamp timestamp = 1;
+    // error indicates the export error.
+    google.protobuf.StringValue error = 2;
+    // detail indicates the audit log that was not exported.
+    google.protobuf.StringValue detail = 3;
+    // log_timestamp provides the timestamp of the last audit log
+    // that was not exported due to error.
+    google.protobuf.Timestamp log_timestamp = 4;
+}
+
+// ExportStats provide statistics of export operations to a syslog sever.
+message ExportStats {
+    // num_success indicates the count of successful exports.
+    google.protobuf.UInt64Value num_success = 1;
+    // num_errors indicates the count of export errors.
+    google.protobuf.UInt64Value num_errors = 2;
+    // last_result provides the status of the last export operation.
+    ExportResult last_result = 3;
+}
+
+// ExportConfig is used to configure a syslog server.
+message ExportConfig {
+    option (fmp.model) = "rw";
+    // key uniquely identifies a syslog server.
+    ExportKey key = 1;
+}
+
+// ExportFormatConfig is used to confgure a global format for
+// exporting logs to all the configured syslog servers.
+message ExportFormatConfig {
+    option (fmp.unkeyed_model) = "rw";
+    // format defines the syslog format to be used for export.
+    Format format = 1;
+}
+
+// Export provides the export status for a syslog server.
+message Export {
+    option (fmp.model) = "ro";
+    // key uniquely identifies a syslog server
+    ExportKey key = 1;
+    // stats contains the statistics for all export operations.
+    ExportStats stats = 2;
+    // last_error provides the details of the last export error.
+    ExportError last_error = 3;
+    // last_success provides details of last successful export.
+    ExportSuccess last_success = 4;
+}

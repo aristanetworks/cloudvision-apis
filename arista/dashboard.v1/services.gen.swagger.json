@@ -1,0 +1,1137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.dashboard.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "DashboardService"
+    },
+    {
+      "name": "DashboardConfigService"
+    },
+    {
+      "name": "GlobalDashboardConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/dashboard/v1/Dashboard": {
+      "get": {
+        "operationId": "DashboardService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.dashboardId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/Dashboard/all": {
+      "get": {
+        "operationId": "DashboardService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardService"
+        ]
+      },
+      "post": {
+        "operationId": "DashboardService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/Dashboard/watch": {
+      "get": {
+        "operationId": "DashboardService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardService"
+        ]
+      },
+      "post": {
+        "operationId": "DashboardService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/DashboardConfig": {
+      "get": {
+        "operationId": "DashboardConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.dashboardId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DashboardConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.dashboardId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DashboardConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "DashboardConfig carries the value to set into the datastore.\nSee the documentation on the DashboardConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/DashboardConfig/all": {
+      "get": {
+        "operationId": "DashboardConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DashboardConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/DashboardConfig/watch": {
+      "get": {
+        "operationId": "DashboardConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DashboardConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/GlobalDashboardConfig": {
+      "get": {
+        "operationId": "GlobalDashboardConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "GlobalDashboardConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "GlobalDashboardConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "GlobalDashboardConfig carries the value to set into the datastore.\nSee the documentation on the GlobalDashboardConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig"
+            }
+          }
+        ],
+        "tags": [
+          "GlobalDashboardConfigService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/GlobalDashboardConfig/watch": {
+      "get": {
+        "operationId": "GlobalDashboardConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "GlobalDashboardConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "GlobalDashboardConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "GlobalDashboardConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.dashboard.v1.Dashboard": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardKey",
+          "description": "key is the unique identifier. It will always be defined."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created_at represents the date the dashboard was first created.\nOld dashboards may not have this field set."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created_by keeps the name of the user who first created this dashboard.\nOld dashboards may not have this field set."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_modified_at holds the timestamp this dashboard was last updated by an user.\nOld dashboards may not have this field set."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last_modified_by holds the username who last updated this dashboard.\nOld dashboards may not have this field set."
+        },
+        "metaData": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardMetadata",
+          "description": "meta_data includes version metadata about the dashboard."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the dashboard name, displayed at the top of the dashboard."
+        },
+        "description": {
+          "type": "string",
+          "description": "description may include details about what is displayed in the dashboard."
+        },
+        "widgets": {
+          "$ref": "#/definitions/arista.dashboard.v1.Widgets",
+          "description": "widgets list of widgets in the dashboard."
+        }
+      },
+      "description": "Dashboard state contains all dashboard data."
+    },
+    "arista.dashboard.v1.DashboardConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardKey",
+          "description": "key is the unique identifier. It always must be defined.\nIf set, will create or update a dashboard."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the dashboard name, displayed at the top of the dashboard."
+        },
+        "description": {
+          "type": "string",
+          "description": "description may include details about what is displayed in the dashboard."
+        },
+        "widgets": {
+          "$ref": "#/definitions/arista.dashboard.v1.Widgets",
+          "description": "widgets list of widgets in the dashboard."
+        }
+      },
+      "description": "DashboardConfig includes all user-editable dashboard fields."
+    },
+    "arista.dashboard.v1.DashboardConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardKey",
+          "description": "Key echoes back the key of the deleted DashboardConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDashboardConfig instance in this response."
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig",
+          "description": "Value carries all the values given in the DashboardConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DashboardConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DashboardConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardKey": {
+      "type": "object",
+      "properties": {
+        "dashboardId": {
+          "type": "string",
+          "required": [
+            "dashboard_id"
+          ]
+        }
+      },
+      "description": "DashboardKey represents the dashboard unique identifier.",
+      "required": [
+        "dashboardId"
+      ]
+    },
+    "arista.dashboard.v1.DashboardMetadata": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "schema_version is managed internally."
+        },
+        "legacyKey": {
+          "type": "string",
+          "description": "legacy_key holds the key of a previous version of the dashboard, in case it was migrated."
+        },
+        "legacyVersion": {
+          "type": "string",
+          "description": "legacy_version tells from which version the dashboard was migrated from."
+        }
+      },
+      "description": "DashboardMetadata includes versioning metadata. All the data here is managed internally, and\nis read-only."
+    },
+    "arista.dashboard.v1.DashboardResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.Dashboard",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDashboard instance in this response."
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.dashboard.v1.Dashboard"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.dashboard.v1.Filter"
+          },
+          "description": "For each Dashboard in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Dashboard is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.Dashboard",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Dashboard's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Dashboard value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.dashboard.v1.Dimensions": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "width of the widget in the UI, represented in number of cells."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "description": "height of the widget in the UI, represented in number of cells."
+        }
+      },
+      "description": "Dimensions represents the dimensions in cells of the widgets in the UI."
+    },
+    "arista.dashboard.v1.Filter": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "tags includes the values to be matched in the dashboard description.\nTags are matched by word. Generally, a tag is prefixed by a '#',\nwhich must be omitted when provided here.\nAll provided tags must match inside a dashboard for it to be returned.\nE.g., to match \"#devices\", the tag should be set to \"devices\"."
+        }
+      },
+      "description": "Filter is used to filter dashboards for non exact match cases."
+    },
+    "arista.dashboard.v1.GlobalDashboardConfig": {
+      "type": "object",
+      "properties": {
+        "defaultDashboard": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardKey",
+          "description": "default_dashboard is the default dashboard shown to a user.\nTo unset, use an empty key (`{dashboard_id: nil}`) in a `Set()` call."
+        }
+      },
+      "description": "GlobalDashboardConfig holds global configs related to Dashboards."
+    },
+    "arista.dashboard.v1.GlobalDashboardConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nGlobalDashboardConfig instance in this response."
+        }
+      }
+    },
+    "arista.dashboard.v1.GlobalDashboardConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig",
+          "description": "Value carries all the values given in the GlobalDashboardConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.dashboard.v1.GlobalDashboardConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.dashboard.v1.GlobalDashboardConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this GlobalDashboardConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the GlobalDashboardConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.dashboard.v1.Position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int64",
+          "description": "x represents a position in the horizontal axis."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int64",
+          "description": "y represents a position in the vertical axis."
+        }
+      },
+      "description": "Position represents a cell position in the UI."
+    },
+    "arista.dashboard.v1.Widget": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id holds the unique identifier for the widget inside a dashboard"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the widget is displayed at the top of the widget."
+        },
+        "position": {
+          "$ref": "#/definitions/arista.dashboard.v1.Position",
+          "description": "position of the widget, represented as a (x,y) coordinate in a grid.\nTop left is at (0,0)."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/arista.dashboard.v1.Dimensions",
+          "description": "dimension of the widget represents how many cell in the grid it takes."
+        },
+        "type": {
+          "type": "string",
+          "description": "type is the widget type. Each type is handled differently in the UI,\nand can use different `inputs`."
+        },
+        "inputs": {
+          "type": "string",
+          "description": "inputs contains metadata about the data the widget will display, encoded in a JSON string.\nInternal data vary based on the widget type `type` and is managed by the client."
+        },
+        "location": {
+          "type": "string",
+          "description": "location is used as a position display hint, used and managed by the UI."
+        }
+      },
+      "description": "Widgets are used to create a dashboard.\nEach widget is responsible to display some type of data.\nWidgets are individually configurable."
+    },
+    "arista.dashboard.v1.Widgets": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.dashboard.v1.Widget"
+          }
+        }
+      },
+      "description": "Widgets holds a list of `Widget`s."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
