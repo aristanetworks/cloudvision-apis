@@ -1,0 +1,169 @@
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.dashboard.v1;
+
+option go_package = "arista/resources/arista/dashboard.v1;dashboard";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// Basic structures
+
+// Position represents a cell position in the UI.
+message Position {
+	// x represents a position in the horizontal axis.
+	google.protobuf.UInt32Value x = 1;
+
+	// y represents a position in the vertical axis.
+	google.protobuf.UInt32Value y = 2;
+}
+
+// Dimensions represents the dimensions in cells of the widgets in the UI.
+message Dimensions {
+	// width of the widget in the UI, represented in number of cells.
+	google.protobuf.UInt32Value width = 1;
+
+	// height of the widget in the UI, represented in number of cells.
+	google.protobuf.UInt32Value height = 2;
+}
+
+// Widgets are used to create a dashboard.
+// Each widget is responsible to display some type of data.
+// Widgets are individually configurable.
+message Widget {
+
+	// id holds the unique identifier for the widget inside a dashboard
+	google.protobuf.StringValue id = 1;
+
+	// name of the widget is displayed at the top of the widget.
+	google.protobuf.StringValue name = 2;
+
+	// position of the widget, represented as a (x,y) coordinate in a grid.
+	// Top left is at (0,0).
+	Position position = 3;
+
+	// dimension of the widget represents how many cell in the grid it takes.
+	Dimensions dimensions = 4;
+
+	// type is the widget type. Each type is handled differently in the UI,
+	// and can use different `inputs`.
+	google.protobuf.StringValue type = 5;
+
+	// inputs contains metadata about the data the widget will display, encoded in a JSON string.
+	// Internal data vary based on the widget type `type` and is managed by the client.
+	google.protobuf.StringValue inputs = 6;
+
+	// location is used as a position display hint, used and managed by the UI.
+	google.protobuf.StringValue location = 7;
+}
+
+
+// Dashboard State
+
+// Widgets holds a list of `Widget`s.
+message Widgets {
+	repeated Widget values = 1;
+}
+
+// DashboardKey represents the dashboard unique identifier.
+message DashboardKey {
+	option (fmp.model_key) = true;
+
+	google.protobuf.StringValue dashboard_id = 1;
+}
+
+// DashboardConfig includes all user-editable dashboard fields.
+message DashboardConfig {
+	option (fmp.model) = "rw";
+
+	// key is the unique identifier. It always must be defined.
+	// If set, will create or update a dashboard.
+	DashboardKey key = 1;
+
+	// name is the dashboard name, displayed at the top of the dashboard.
+	google.protobuf.StringValue name = 2;
+
+	// description may include details about what is displayed in the dashboard.
+	google.protobuf.StringValue description = 3;
+
+	// widgets list of widgets in the dashboard.
+	Widgets widgets = 4;
+}
+
+// DashboardMetadata includes versioning metadata. All the data here is managed internally, and
+// is read-only.
+message DashboardMetadata {
+	// schema_version is managed internally.
+	google.protobuf.StringValue schema_version = 1;
+
+	// legacy_key holds the key of a previous version of the dashboard, in case it was migrated.
+	google.protobuf.StringValue legacy_key = 2;
+
+	// legacy_version tells from which version the dashboard was migrated from.
+	google.protobuf.StringValue legacy_version = 3;
+}
+
+
+// Filter is used to filter dashboards for non exact match cases.
+message Filter {
+	// tags includes the values to be matched in the dashboard description.
+	// Tags are matched by word. Generally, a tag is prefixed by a '#',
+	// which must be omitted when provided here.
+	// All provided tags must match inside a dashboard for it to be returned.
+	// E.g., to match "#devices", the tag should be set to "devices".
+	fmp.RepeatedString tags = 1;
+}
+
+// Dashboard state contains all dashboard data.
+message Dashboard {
+	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "[]Filter";
+
+	// key is the unique identifier. It will always be defined.
+	DashboardKey key = 1;
+
+	// created_at represents the date the dashboard was first created.
+	// Old dashboards may not have this field set.
+	google.protobuf.Timestamp created_at = 2;
+
+	// created_by keeps the name of the user who first created this dashboard.
+	// Old dashboards may not have this field set.
+	google.protobuf.StringValue created_by = 3;
+
+	// last_modified_at holds the timestamp this dashboard was last updated by an user.
+	// Old dashboards may not have this field set.
+	google.protobuf.Timestamp last_modified_at = 4;
+
+	// last_modified_by holds the username who last updated this dashboard.
+	// Old dashboards may not have this field set.
+	google.protobuf.StringValue last_modified_by = 5;
+
+	// meta_data includes version metadata about the dashboard.
+	DashboardMetadata meta_data = 6;
+
+	// name is the dashboard name, displayed at the top of the dashboard.
+	google.protobuf.StringValue name = 7;
+
+	// description may include details about what is displayed in the dashboard.
+	google.protobuf.StringValue description = 8;
+
+	// widgets list of widgets in the dashboard.
+	Widgets widgets = 9;
+}
+
+// GlobalDashboardConfig holds global configs related to Dashboards.
+message GlobalDashboardConfig {
+	option (fmp.unkeyed_model) = "rw";
+
+	// default_dashboard is the default dashboard shown to a user.
+	// To unset, use an empty key (`{dashboard_id: nil}`) in a `Set()` call.
+	DashboardKey default_dashboard = 1;
+}
