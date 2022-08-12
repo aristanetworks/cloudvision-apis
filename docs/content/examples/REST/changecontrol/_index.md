@@ -22,6 +22,8 @@ A change can be only be in unapproved state if it was approved initially. Change
 
 ## Get the approval state for a specific change control
 
+### curl
+
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ApproveConfig?key.id=-WIh3Xnwu'
 ```
@@ -46,6 +48,8 @@ The state of a change that was unapproved will result in the following:
 
 ## Get the approval state for all approved/unapproved changes
 
+### curl
+
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ApproveConfig/all'
 ```
@@ -63,6 +67,8 @@ Output:
 ## Approve a change
 
 First we need to get the change control state for the specified key and extract the value of `time` from the `change` dictionary:
+
+### curl
 
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControl?key.id=rxwA-N65u'
@@ -88,6 +94,8 @@ Output:
 ```
 
 ## Create a change control
+
+### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d "`cat task_data.json`"
@@ -187,6 +195,8 @@ or without `jq` formatting:
 
 ## Delete a change control
 
+### curl
+
 Pending Change controls can be deleted as below:
 
 ```shell
@@ -201,6 +211,8 @@ Output:
 
 ## Start a change control
 
+### curl
+
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":true,"notes":"Starting change via REST call"}}'
 ```
@@ -213,6 +225,8 @@ Output:
 
 ## Stop a change control
 
+### curl
+
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig' -d '{"key":{"id":"VhkkzxK4U"},"start":{"value":false,"notes":"Stopping change via REST call"}}'
 ```
@@ -224,6 +238,8 @@ Output:
 ```
 
 ## Schedule a change control
+
+### curl
 
 {{% notice info %}}
 Change control scheduling using Resource APIs is only supported in 2022.1.0 or newer.

@@ -6,8 +6,6 @@ chapter: false
 
 {{% toc %}}
 
-
-
 {{% notice tip %}}
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
 {{% /notice %}}
@@ -21,7 +19,7 @@ Get all active events
 ### curl
 
 ```bash
-curl -sS -kX GET --header 'Accept: application/json' 'https://10.83.13.33/api/resources/event/v1/Event/all' -b access_token=`cat token.tok`
+curl -sS -kX GET --header 'Accept: application/json' 'https://192.0.2.33/api/resources/event/v1/Event/all' -b access_token=`cat token.tok`
 ```
 
 ### cvprac
@@ -50,7 +48,7 @@ Get a specific event
 ### curl
 
 ```bash
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/event/v1/Event?key.key=6152f6160fc38f55&key.timestamp=2021-03-23T13:38:59.295341290Z'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.33/api/resources/event/v1/Event?key.key=6152f6160fc38f55&key.timestamp=2021-03-23T13:38:59.295341290Z'
 ```
 
 Result:
@@ -121,7 +119,7 @@ Get events between two dates
 ### curl
 
 ```bash
-curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://10.83.13.33/api/resources/event/v1/Event/all?time.start=2021-03-24T09:00:00Z&time.end=2021-03-24T10:00:00Z'
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.33/api/resources/event/v1/Event/all?time.start=2021-03-24T09:00:00Z&time.end=2021-03-24T10:00:00Z'
 ```
 
 Result:
@@ -222,7 +220,7 @@ To apply filters on events, the POST method has to be used.
 ### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"severity": 1}]}' 'https://10.83.13.33/api/resources/event/v1/Event/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"severity": 1}]}' 'https://192.0.2.33/api/resources/event/v1/Event/all'
 ```
 
 Result:
@@ -264,11 +262,11 @@ Result:
 ```
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"severity": "EVENT_SEVERITY_INFO"}]}' 'https://10.83.13.33/api/resources/event/v1/Event/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"severity": "EVENT_SEVERITY_INFO"}]}' 'https://192.0.2.33/api/resources/event/v1/Event/all'
 ```
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partial_eq_filter": [{"severity": 1}]}' 'https://10.83.13.33/api/resources/event/v1/Event/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partial_eq_filter": [{"severity": 1}]}' 'https://192.0.2.33/api/resources/event/v1/Event/all'
 ```
 
 ### cvprac
@@ -304,7 +302,7 @@ Get specific event types
 ### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"eventType":"LOW_DEVICE_DISK_SPACE"}]}' 'https://10.83.13.33/api/resources/event/v1/Event/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"eventType":"LOW_DEVICE_DISK_SPACE"}]}' 'https://192.0.2.33/api/resources/event/v1/Event/all'
 ```
 
 Result:
@@ -381,7 +379,7 @@ To get only the ERROR events we can add the `severity` key to our filter.
 ### curl
 
 ```bash
-curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"eventType":"LOW_DEVICE_DISK_SPACE","severity":"EVENT_SEVERITY_ERROR"}]}' 'https://10.83.13.33/api/resources/event/v1/Event/all'
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` -d '{"partialEqFilter": [{"eventType":"LOW_DEVICE_DISK_SPACE","severity":"EVENT_SEVERITY_ERROR"}]}' 'https://192.0.2.33/api/resources/event/v1/Event/all'
 ```
 
 Result:

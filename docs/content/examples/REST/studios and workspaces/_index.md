@@ -151,52 +151,82 @@ Create a workspace
 
 URL: `https://$CVP_INSTANCE/api/resources/workspace/v1/WorkspaceConfig `
 
-POST BODY:
+POST BODY (`workspace.json`):
 
-```javascript
+```json
 {
-      "key":{
-         "workspace_id":"ws-change-timezone"
-      }
-      "display_name":"Configure timezone",
-      "description":"Configure timezone on all devices",
+    "key":{
+        "workspace_id":"ws-change-timezone"
+    },
+    "display_name":"Configure timezone",
+    "description":"Configure timezone on all devices",
 }
 ```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat workspace.json`"
+```
+
 
 Set inputs for the studio
 -------------------------
 
 URL: `https://$CVP/api/resources/studio/v1/InputsConfig `
 
-POST BODY:
+POST BODY (`studio-payload.json`):
 
 > Note the embedded JSON string.
 
-```javascript
+```json
 {
   "key": {
-    "studio_id": "studio-timezone",
+    "studio_id": "studio-date-time",
     "workspace_id": "ws-change-timezone"
   },
-  "inputs": "{\n  \"timezoneAssignment\": [\n   {\n     \"inputs\": {\n       \"timezone\": \"IST\"\n     },\n     \"tags\": {\n       \"query\": \"eos:4.20\"\n     }\n   },\n   {\n     \"inputs\": {\n       \"timezone\": \"AST\"\n     },\n     \"tags\": {}\n   }\n ]\n }\n"
+  "path": {"values": []},
+  "inputs": "{\"ntpServerResolver\": [{\"inputs\": {\"ntpServers\": [{\"iburst\": false, \"ntpServer\": \"time.google.com\", \"preferred\": false, \"vrf\": \"MGMT\"}, {\"iburst\": false, \"ntpServer\": \"pool.ntp.org\", \"preferred\": false, \"vrf\": \"MGMT\"}]}, \"tags\": {\"query\": \"datacenter:NY\"}}], \"timezoneResolver\": [{\"inputs\": {\"timezoneGroup\": {\"otherTimezone\": \"\", \"timezone\": \"GMT\"}}, \"tags\": {\"query\": \"datacenter:NY\"}}]}"
 }
 ```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/studio/v1/InputsConfig' \
+  -d "`cat studio-payload.json`"
+```
+
 
 Assign the studio to devices
 ----------------------------
 
 URL: `https://$CVP/api/resources/studio/v1/AssignedTagsConfig `
 
-POST BODY:
+POST BODY (`assigntags.json`):
 
 ```javascript
 {
   "key": {
-    "studio_id": "studio-timezone",
+    "studio_id": "studio-date-time",
     "workspace_id": "ws-change-timezone"
   },
   "query": "datacenter:NY"
 }
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/studio/v1/AssignedTagsConfig' \
+  -d "`cat assigntags.json`"
 ```
 
 Build the workspace
@@ -204,7 +234,7 @@ Build the workspace
 
 URL: `https://$CVP/api/resources/workspace/v1/WorkspaceConfig `
 
-POST BODY:
+POST BODY (`ws-build.json`):
 
 ```javascript
 {
@@ -216,6 +246,15 @@ POST BODY:
          "request_id":"b1"
       }
 }
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat workspace.json`"
 ```
 
 Submit the workspace
@@ -235,6 +274,15 @@ POST BODY:
          "request_id":"s1"
       }
 }
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat ws-submit.json`"
 ```
 
 Create a new Studio
@@ -257,18 +305,27 @@ POST BODY:
 }
 ```
 
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat workspace.json`"
+```
+
 Create a studio
 ---------------
 
 URL: `https://$CVP_INSTANCE/api/resources/studio/v1/StudioConfig`
 
-POST BODY:
+POST BODY (`newstudio.json`):
 
 ```javascript
 {
     "key": {
         "studio_id": "studio-timezone",
-        "workspace_id": "ws-change-timezone"
+        "workspace_id": "ws-timezone"
     },
     "display_name": "Set timezone",
     "description": "This configlet generates timezone configuration",
@@ -329,12 +386,21 @@ POST BODY:
 }
 ```
 
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/studio/v1/StudioConfig' \
+  -d "`cat newstudio.json`"
+```
+
 Build the workspace
 -------------------
 
 URL: `https://$CVP/api/resources/workspace/v1/WorkspaceConfig`
 
-POST BODY:
+POST BODY (`ws-build.json`):
 
 ```javascript
 {
@@ -348,12 +414,21 @@ POST BODY:
 }
 ```
 
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat ws-build.json`"
+```
+
 Submit the workspace
 --------------------------------
 
 URL: `https://$CVP/api/resources/workspace/v1/WorkspaceConfig `
 
-POST BODY:
+POST BODY (`ws-submit.json`):
 
 ```javascript
 {
@@ -367,11 +442,221 @@ POST BODY:
 }
 ```
 
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat ws-submit.json`"
+```
+
 Delete a Studio
 ===============
 
+Create workspace
+----------------
+
+POST BODY (`workspace.json`):
+
+```json
+{
+      "key":{
+            "workspace_id":"del-studio"
+      },
+      "display_name":"Delete timezone studio",
+      "description":"Remove timezone on all devices"
+}
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat workspace.json`"
+```
+
+Output:
+
+```json
+{
+    "value": {
+        "key": {
+            "workspaceId": "del-studio"
+        },
+        "displayName": "Delete timezone studio",
+        "description": "Remove timezone on all devices"
+    },
+    "time": "2022-08-16T23:59:35.551Z"
+}
+```
+
+Unassign the tags
+-----------------
+
+POST BODY (`unassigntags.json`):
+
+```json
+{
+    "key": {
+      "studio_id": "studio-timezone",
+      "workspace_id": "del-studio"
+    },
+    "query": ""
+}
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/studio/v1/AssignedTagsConfig' \
+  -d "`cat unassigntags.json`"
+```
+
+Output:
+
+```json
+{
+    "value": {
+        "key": {
+            "studioId": "studio-timezone",
+            "workspaceId": "ws-timezone-delete"
+        },
+        "query": ""
+    },
+    "time": "2022-08-16T23:24:30.397673655Z"
+}
+```
+
+Delete the studio
+-----------------
+
+POST BODY (`deletestudio.json`):
+
+```json
+{
+    "key": {
+        "studio_id": "studio-timezone",
+        "workspace_id": "del-studio"
+    },
+    "remove": true
+}
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/studio/v1/StudioConfig' \
+  -d "`cat deletestudio.json`"
+```
+
+```json
+{
+    "value": {
+        "key": {
+            "studioId": "studio-timezone",
+            "workspaceId": "del-studio"
+        },
+        "remove": true
+    },
+    "time": "2022-08-17T00:00:45.225196219Z"
+}
+```
+
+Build the workspace
+-----------------------
+
+POST BODY (`ws-build.json`):
+
+```json
+{
+    "key":{
+       "workspace_id":"del-studio"
+    },
+    "request":"REQUEST_START_BUILD",
+    "request_params":{
+       "request_id":"b1"
+    }
+}
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat ws-build.json`"
+```
+
+Output:
+
+```json
+{
+    "value": {
+        "key": {
+            "workspaceId": "del-studio"
+        },
+        "request": "REQUEST_START_BUILD",
+        "requestParams": {
+            "requestId": "b1"
+        }
+    },
+    "time": "2022-08-17T00:00:54.195Z"
+}
+```
+
+Submit the workspace
+--------------------
+
+POST BODY (`ws-submit.json`):
+
+```json
+{
+    "key":{
+       "workspace_id": "del-studio"
+    },
+    "request": "REQUEST_SUBMIT",
+    "request_params":{
+       "request_id":"s1"
+    }
+}
+```
+
+### curl
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' \
+  -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/workspace/v1/WorkspaceConfig' \
+  -d "`cat ws-submit.json`"
+```
+
+Output:
+
+```json
+{
+    "value": {
+        "key": {
+            "workspaceId": "del-studio"
+        },
+        "request": "REQUEST_SUBMIT",
+        "requestParams": {
+            "requestId": "s1"
+        }
+    },
+    "time": "2022-08-17T00:00:57.894Z"
+}
+```
+
 Delete a workspace
-------------------
+==================
 
 URL: `https://$CVP_INSTANCE/api/resources/workspace/v1/WorkspaceConfig`
 
@@ -385,7 +670,7 @@ POST BODY:
 }
 ```
 
-grpcurl example:
+## grpcurl
 
 ```shell
 grpcurl  -H "Authorization: Bearer `cat token.tok`" -import-path $GOPATH/src/arista/resources -proto $GOPATH/src/arista/resources/arista/workspace.v1/services.gen.proto  -cacert cvp.crt -d '{"key":{"workspaceId": "builtin-studios-V0-l3ls"}}' 192.0.2.100:8443 arista.workspace.v1.WorkspaceConfigService/Delete
@@ -402,7 +687,7 @@ Result:
 }
 ```
 
-curl example
+## curl
 
 ```shell
 curl -sS -kX DELETE --header 'Accept: application/json' -H "Authorization: Bearer `cat token.tok`" 'https://192.0.2.100/api/resources/workspace/v1/WorkspaceConfig?key.workspaceId=builtin-studios-V0-l3ls'
@@ -410,6 +695,11 @@ curl -sS -kX DELETE --header 'Accept: application/json' -H "Authorization: Beare
 
 Result:
 
-```javascript
-{"key":{"workspaceId":"builtin-studios-V0-l3ls"}, "time":"2021-07-22T17:39:28.789768498Z"}%
+```json
+{
+    "key": {
+        "workspaceId": "builtin-studios-V0-l3ls"
+    },
+    "time": "2021-07-22T17:39:28.789768498Z"
+}
 ```

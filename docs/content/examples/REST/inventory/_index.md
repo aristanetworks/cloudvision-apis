@@ -15,6 +15,8 @@ Device
 
 ## Get device state by serial number
 
+### curl
+
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/Device?key.deviceId=BAD032986065E8DC14CBB6472EC314A6'
 ```
@@ -125,11 +127,15 @@ python3 resource_native.py
 
 ## Decommission a device
 
+### curl
+
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioningConfig' -d '{"key":{"request_id":"123456789"},"device_id": "0123F2E4462997EB155B7C50EC148767"}'
 ```
 
 ## Get the decommission state of a device
+
+### curl
 
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning?key.requestId=123456789'
@@ -143,11 +149,15 @@ Output:
 
 ## Get the decommission state of all devices
 
+### curl
+
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning/all'
 ```
 
 ## Get the decommission state of all devices that failed to be decommissioned
+
+### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceDecommissioning/all' -d '{"partialEqFilter": [ {"status":2}]}'
@@ -181,11 +191,15 @@ The service account's name has to match the username logged in on the CVP UI and
 The user should be logged in on the UI when using the the DeviceOnboarding APIs.
 {{% /notice %}}
 
+### curl
+
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceOnboardingConfig' -d '{"key":{"requestId":"133713371337"},"hostnameOrIp":"192.0.2.139","device_type":"eos"}'
 ```
 
 ## Get the onboarding state by request ID
+
+### curl
 
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceOnboarding?key.requestId=133713371337'
@@ -199,6 +213,8 @@ Output:
 
 ## Get the onboarding state for all devices
 
+### curl
+
 ```shell
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceOnboarding/all'
 ```
@@ -210,6 +226,8 @@ Output:
 ```
 
 ## Get the provisioning state for devices in ZTP mode
+
+### curl
 
 ```shell
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/ProvisionedDevice/all' -d '{"partialEqFilter":[{"ztpMode":true}]}'
