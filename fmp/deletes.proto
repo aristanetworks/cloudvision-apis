@@ -1,0 +1,24 @@
+// Copyright (c) 2022 Arista Networks, Inc.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package fmp;
+option go_package = "arista/resources/fmp";
+
+// DeleteError defines the set of delete error types.
+enum DeleteError {
+        // DELETE_ERROR_UNSPECIFIED indicates that the delete error
+        // is not specified.
+        DELETE_ERROR_UNSPECIFIED = 0;
+        // DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized
+        // to perform the specified delete.
+        DELETE_ERROR_UNAUTHORIZED = 1;
+        // DELETE_ERROR_INTERNAL indicates that the server encountered an
+        // unrecoverable error on the specified delete.
+        DELETE_ERROR_INTERNAL = 2;
+        // DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is
+        // not allowed by the service.
+        DELETE_ERROR_UNDELETABLE_KEY = 3;
+}

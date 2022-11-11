@@ -19,6 +19,7 @@ lint:
       - fmp/yang.proto
       - fmp/inet.proto
       - fmp/wrappers.proto
+      - fmp/deletes.proto
       - arista/subscriptions/subscriptions.proto
       - arista/time/time.proto
 breaking:
