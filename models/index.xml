@@ -20,7 +20,31 @@ TimestampFlagConfig
 ChangeControlStatus
 StageStatus
 arista/changecontrol.v1/services.gen.proto
-ApproveConfigDeleteRequest</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
+ApproveConfigDeleteRequest
+ApproveConfigDeleteResponse
+ApproveConfigRequest
+ApproveConfigResponse
+ApproveConfigSetRequest
+ApproveConfigSetResponse
+ApproveConfigStreamRequest
+ApproveConfigStreamResponse
+ChangeControlConfigDeleteRequest
+ChangeControlConfigDeleteResponse
+ChangeControlConfigRequest
+ChangeControlConfigResponse
+ChangeControlConfigSetRequest
+ChangeControlConfigSetResponse
+ChangeControlConfigStreamRequest
+ChangeControlConfigStreamResponse
+ChangeControlRequest
+ChangeControlResponse
+ChangeControlStreamRequest
+ChangeControlStreamResponse
+ApproveConfigService
+ChangeControlConfigService
+ChangeControlService
+Top
+arista/changecontrol.v1/changecontrol.proto Action Action is an action to perform during the execution of a stage of a change control. Available actions can be fetched using the &amp;ldquo;action&amp;rdquo; services.</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
 ConfigDiff
 ConfigDiffKey
 ConfigError
@@ -42,7 +66,21 @@ ConfigDiffRequest
 ConfigDiffResponse
 ConfigDiffStreamRequest
 ConfigDiffStreamResponse
-ConfigurationRequest</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
+ConfigurationRequest
+ConfigurationResponse
+ConfigurationStreamRequest
+ConfigurationStreamResponse
+SummaryRequest
+SummaryResponse
+SummaryStreamRequest
+SummaryStreamResponse
+ConfigDiffService
+ConfigurationService
+SummaryService
+Top
+arista/configstatus.v1/configstatus.proto ConfigDiff Field Name Type Description key ConfigDiffKey Key represents config diff key
+uri google.protobuf.StringValue Uri represents the HTTP URI client can use to GET config diff and associated errors
+error ConfigError ConfigDiffKey ConfigDiffKey uniquely identifies a configuration diff request</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
 Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget Widgets arista/dashboard.v1/services.gen.proto
 DashboardConfigDeleteRequest
 DashboardConfigDeleteResponse
@@ -61,7 +99,14 @@ GlobalDashboardConfigResponse
 GlobalDashboardConfigSetRequest
 GlobalDashboardConfigSetResponse
 GlobalDashboardConfigStreamRequest
-GlobalDashboardConfigStreamResponse</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
+GlobalDashboardConfigStreamResponse
+DashboardConfigService
+DashboardService
+GlobalDashboardConfigService
+Top
+arista/dashboard.v1/dashboard.proto Dashboard Dashboard state contains all dashboard data.
+Field Name Type Description key DashboardKey key is the unique identifier. It will always be defined.
+created_at google.protobuf.Timestamp created_at represents the date the dashboard was first created.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
 Device
 DeviceInfo
 DeviceMap
@@ -83,7 +128,13 @@ Likelihood
 MacType
 arista/endpointlocation.v1/services.gen.proto
 EndpointLocationRequest
-EndpointLocationResponse</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+EndpointLocationResponse
+EndpointLocationStreamRequest
+EndpointLocationStreamResponse
+EndpointLocationService
+Top
+arista/endpointlocation.v1/endpointlocation.proto Device Field Name Type Description identifier_list IdentifierList device_type DeviceType location_list LocationList The list of possible locations, in order from most likely to least likely
+device_status DeviceStatus device_info DeviceInfo DeviceInfo Field Name Type Description device_name google.protobuf.StringValue mobile google.protobuf.BoolValue tablet google.protobuf.BoolValue score google.protobuf.UInt32Value version google.</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
 Event
 EventAck
 EventAnnotationConfig
@@ -105,7 +156,22 @@ arista/event.v1/services.gen.proto
 EventAnnotationConfigDeleteRequest
 EventAnnotationConfigDeleteResponse
 EventAnnotationConfigRequest
-EventAnnotationConfigResponse</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
+EventAnnotationConfigResponse
+EventAnnotationConfigSetRequest
+EventAnnotationConfigSetResponse
+EventAnnotationConfigStreamRequest
+EventAnnotationConfigStreamResponse
+EventRequest
+EventResponse
+EventStreamRequest
+EventStreamResponse
+EventAnnotationConfigService
+EventService
+Top
+arista/event.v1/event.proto Event Event is a telemetry event
+Field Name Type Description key EventKey key is the event instance identifier
+severity EventSeverity severity is the severity of the event
+title google.protobuf.StringValue title is the title of the event</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
 Device
 DeviceConfiguration
 DeviceConfiguration.OptionsEntry
@@ -127,7 +193,43 @@ DeviceDecommissioningConfigDeleteRequest
 DeviceDecommissioningConfigDeleteResponse
 DeviceDecommissioningConfigRequest
 DeviceDecommissioningConfigResponse
-DeviceDecommissioningConfigSetRequest</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
+DeviceDecommissioningConfigSetRequest
+DeviceDecommissioningConfigSetResponse
+DeviceDecommissioningConfigStreamRequest
+DeviceDecommissioningConfigStreamResponse
+DeviceDecommissioningRequest
+DeviceDecommissioningResponse
+DeviceDecommissioningStreamRequest
+DeviceDecommissioningStreamResponse
+DeviceOnboardingConfigDeleteRequest
+DeviceOnboardingConfigDeleteResponse
+DeviceOnboardingConfigRequest
+DeviceOnboardingConfigResponse
+DeviceOnboardingConfigSetRequest
+DeviceOnboardingConfigSetResponse
+DeviceOnboardingConfigStreamRequest
+DeviceOnboardingConfigStreamResponse
+DeviceOnboardingRequest
+DeviceOnboardingResponse
+DeviceOnboardingStreamRequest
+DeviceOnboardingStreamResponse
+DeviceRequest
+DeviceResponse
+DeviceStreamRequest
+DeviceStreamResponse
+ProvisionedDeviceRequest
+ProvisionedDeviceResponse
+ProvisionedDeviceStreamRequest
+ProvisionedDeviceStreamResponse
+DeviceDecommissioningConfigService
+DeviceDecommissioningService
+DeviceOnboardingConfigService
+DeviceOnboardingService
+DeviceService
+ProvisionedDeviceService
+Top
+arista/inventory.v1/inventory.proto Device Device describes an onboarded device.
+Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
 AssignedTags
 AssignedTagsConfig
 BooleanInputFieldProps
@@ -150,7 +252,52 @@ StudioConfig
 StudioKey
 Template
 InputFieldType
-ResolverFieldDisplayMode</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
+ResolverFieldDisplayMode
+ResolverFieldInputMode
+TemplateType
+arista/studio.v1/services.gen.proto
+AssignedTagsConfigDeleteRequest
+AssignedTagsConfigDeleteResponse
+AssignedTagsConfigRequest
+AssignedTagsConfigResponse
+AssignedTagsConfigSetRequest
+AssignedTagsConfigSetResponse
+AssignedTagsConfigStreamRequest
+AssignedTagsConfigStreamResponse
+AssignedTagsRequest
+AssignedTagsResponse
+AssignedTagsStreamRequest
+AssignedTagsStreamResponse
+InputsConfigDeleteRequest
+InputsConfigDeleteResponse
+InputsConfigRequest
+InputsConfigResponse
+InputsConfigSetRequest
+InputsConfigSetResponse
+InputsConfigStreamRequest
+InputsConfigStreamResponse
+InputsRequest
+InputsResponse
+InputsStreamRequest
+InputsStreamResponse
+StudioConfigDeleteRequest
+StudioConfigDeleteResponse
+StudioConfigRequest
+StudioConfigResponse
+StudioConfigSetRequest
+StudioConfigSetResponse
+StudioConfigStreamRequest
+StudioConfigStreamResponse
+StudioRequest
+StudioResponse
+StudioStreamRequest
+StudioStreamResponse
+AssignedTagsConfigService
+AssignedTagsService
+InputsConfigService
+InputsService
+StudioConfigService
+StudioService</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
 DeviceTagAssignmentKey
@@ -172,7 +319,44 @@ DeviceTagAssignmentConfigStreamRequest
 DeviceTagAssignmentConfigStreamResponse
 DeviceTagConfigDeleteRequest
 DeviceTagConfigDeleteResponse
-DeviceTagConfigRequest</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
+DeviceTagConfigRequest
+DeviceTagConfigResponse
+DeviceTagConfigSetRequest
+DeviceTagConfigSetResponse
+DeviceTagConfigStreamRequest
+DeviceTagConfigStreamResponse
+DeviceTagRequest
+DeviceTagResponse
+DeviceTagStreamRequest
+DeviceTagStreamResponse
+InterfaceTagAssignmentConfigDeleteRequest
+InterfaceTagAssignmentConfigDeleteResponse
+InterfaceTagAssignmentConfigRequest
+InterfaceTagAssignmentConfigResponse
+InterfaceTagAssignmentConfigSetRequest
+InterfaceTagAssignmentConfigSetResponse
+InterfaceTagAssignmentConfigStreamRequest
+InterfaceTagAssignmentConfigStreamResponse
+InterfaceTagConfigDeleteRequest
+InterfaceTagConfigDeleteResponse
+InterfaceTagConfigRequest
+InterfaceTagConfigResponse
+InterfaceTagConfigSetRequest
+InterfaceTagConfigSetResponse
+InterfaceTagConfigStreamRequest
+InterfaceTagConfigStreamResponse
+InterfaceTagRequest
+InterfaceTagResponse
+InterfaceTagStreamRequest
+InterfaceTagStreamResponse
+DeviceTagAssignmentConfigService
+DeviceTagConfigService
+DeviceTagService
+InterfaceTagAssignmentConfigService
+InterfaceTagConfigService
+InterfaceTagService
+Top
+arista/tag.v1/tag.proto DeviceTag DeviceTag is a label-value pair that may or may not be assigned to a device.</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
 Tag
 TagAssignment
 TagAssignmentConfig
@@ -194,7 +378,25 @@ TagAssignmentRequest
 TagAssignmentResponse
 TagAssignmentStreamRequest
 TagAssignmentStreamResponse
-TagConfigDeleteRequest</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
+TagConfigDeleteRequest
+TagConfigDeleteResponse
+TagConfigRequest
+TagConfigResponse
+TagConfigSetRequest
+TagConfigSetResponse
+TagConfigStreamRequest
+TagConfigStreamResponse
+TagRequest
+TagResponse
+TagStreamRequest
+TagStreamResponse
+TagAssignmentConfigService
+TagAssignmentService
+TagConfigService
+TagService
+Top
+arista/tag.v2/tag.proto Tag Tag holds a merge-preview or the existing merged state (if the workspace ID is &amp;ldquo;&amp;rdquo;) of a tag.
+Field Name Type Description key TagKey key identifies a tag.</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
 BuildResult
 BuildResults
 BuildResults.ValuesEntry
@@ -217,4 +419,32 @@ Workspace
 WorkspaceBuild
 WorkspaceBuildKey
 WorkspaceConfig
-WorkspaceKey</description></item></channel></rss>
+WorkspaceKey
+BuildStage
+BuildState
+Request
+ResponseStatus
+WorkspaceState
+arista/workspace.v1/services.gen.proto
+WorkspaceBuildRequest
+WorkspaceBuildResponse
+WorkspaceBuildStreamRequest
+WorkspaceBuildStreamResponse
+WorkspaceConfigDeleteRequest
+WorkspaceConfigDeleteResponse
+WorkspaceConfigRequest
+WorkspaceConfigResponse
+WorkspaceConfigSetRequest
+WorkspaceConfigSetResponse
+WorkspaceConfigStreamRequest
+WorkspaceConfigStreamResponse
+WorkspaceRequest
+WorkspaceResponse
+WorkspaceStreamRequest
+WorkspaceStreamResponse
+WorkspaceBuildService
+WorkspaceConfigService
+WorkspaceService
+Top
+arista/workspace.v1/workspace.proto BuildResult BuildResult is the per-device build output
+Field Name Type Description state BuildState stage BuildStage input_validation_results InputValidationResults configlet_build_results ConfigletBuildResults config_validation_result ConfigValidationResult BuildResults BuildResults is the build output for all devices, indexed by device ID</description></item></channel></rss>
