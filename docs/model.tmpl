@@ -1,4 +1,13 @@
 {{range .Files}}
+  {{- if (index .Options "deprecated"|default false)}}
+{{`{{% notice warning %}}`}}
+**DEPRECATED: This API is no longer supported.
+{{`{{% /notice %}}`}}
+    {{break}}
+  {{end}}
+{{end}}
+
+{{range .Files}}
 {{$file_name := .Name}}- [{{.Name}}](#{{lower .Name}})
   {{- if .Messages }}
   {{range .Messages}}  - [{{.LongName}}](#{{lower .Name}})

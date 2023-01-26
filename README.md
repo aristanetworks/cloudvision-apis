@@ -28,3 +28,17 @@ Arista distributes pre-compiled clients for some languages. They are hosted in t
 
 You may also generate your own. See [aristanetworks.github.io/cloudvision-apis](https://aristanetworks.github.io/cloudvision-apis/clients/creating)
 for more details.
+
+## Deprecation Policy
+
+Deprecated APIs will containing the following at the top of the .proto file for the model:
+
+```
+option deprecated = true;
+```
+
+Announcements for API deprecation and the timeline for API removal are done as follows:
+
+* For the cloud service (CVaaS), announcements are made on [status.arista.io](https://status.arista.io).
+* For the on-premises product, announcements are made in the release notes of a particular version.
+  APIs are removed two releases after deprecation is announced.
