@@ -14,3 +14,7 @@ option go_package = "arista/resources/fmp";
 message MACAddress {
 	string value = 1;
 }
+
+message RepeatedMACAddress {
+    repeated MACAddress values = 1;
+}

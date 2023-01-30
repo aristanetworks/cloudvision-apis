@@ -14,7 +14,9 @@ option go_package = "arista/resources/arista/inventory.v1;inventory";
 import "arista/inventory.v1/inventory.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message DeviceRequest {
 	// Key uniquely identifies a Device instance to retrieve.
@@ -226,12 +228,27 @@ message DeviceDecommissioningConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceDecommissioningConfigDeleteAllRequest {
+};
+
+message DeviceDecommissioningConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the DeviceDecommissioningConfig instance that failed to be deleted.
+	UUIDKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service DeviceDecommissioningConfigService {
 	rpc GetOne (DeviceDecommissioningConfigRequest) returns (DeviceDecommissioningConfigResponse);
 	rpc GetAll (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
 	rpc Subscribe (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
 	rpc Set (DeviceDecommissioningConfigSetRequest) returns (DeviceDecommissioningConfigSetResponse);
 	rpc Delete (DeviceDecommissioningConfigDeleteRequest) returns (DeviceDecommissioningConfigDeleteResponse);
+	rpc DeleteAll (DeviceDecommissioningConfigDeleteAllRequest) returns (stream DeviceDecommissioningConfigDeleteAllResponse);
 }
 
 message DeviceOnboardingRequest {
@@ -385,12 +402,27 @@ message DeviceOnboardingConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceOnboardingConfigDeleteAllRequest {
+};
+
+message DeviceOnboardingConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the DeviceOnboardingConfig instance that failed to be deleted.
+	UUIDKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service DeviceOnboardingConfigService {
 	rpc GetOne (DeviceOnboardingConfigRequest) returns (DeviceOnboardingConfigResponse);
 	rpc GetAll (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
 	rpc Subscribe (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
 	rpc Set (DeviceOnboardingConfigSetRequest) returns (DeviceOnboardingConfigSetResponse);
 	rpc Delete (DeviceOnboardingConfigDeleteRequest) returns (DeviceOnboardingConfigDeleteResponse);
+	rpc DeleteAll (DeviceOnboardingConfigDeleteAllRequest) returns (stream DeviceOnboardingConfigDeleteAllResponse);
 }
 
 message ProvisionedDeviceRequest {
