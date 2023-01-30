@@ -35,11 +35,26 @@ message Dimensions {
 	google.protobuf.UInt32Value height = 2;
 }
 
+// WidgetStyles represents the widget's panel appearance.
+message WidgetStyles {
+	// hide_title is used to hint the dashboard that the widget title must be hidden.
+	google.protobuf.BoolValue hide_title = 1;
+
+	// background_color is used to set the widget's background color.
+	google.protobuf.StringValue background_color = 2;
+
+	// hide_horizontal_bar is used to hint the dashboard that the title separator must be hidden.
+	google.protobuf.BoolValue hide_horizontal_bar = 3;
+
+	// titleSize is used to set widget's title size.
+	google.protobuf.UInt32Value title_size = 4;
+}
+
+
 // Widgets are used to create a dashboard.
 // Each widget is responsible to display some type of data.
 // Widgets are individually configurable.
 message Widget {
-
 	// id holds the unique identifier for the widget inside a dashboard
 	google.protobuf.StringValue id = 1;
 
@@ -63,8 +78,10 @@ message Widget {
 
 	// location is used as a position display hint, used and managed by the UI.
 	google.protobuf.StringValue location = 7;
-}
 
+	// WidgetStyles represents the widget's panel appearance.
+	WidgetStyles styles = 8;
+}
 
 // Dashboard State
 
@@ -109,6 +126,9 @@ message DashboardMetadata {
 
 	// legacy_version tells from which version the dashboard was migrated from.
 	google.protobuf.StringValue legacy_version = 3;
+
+	// from_package records the contributing package key and version, if applicable.
+	google.protobuf.StringValue from_package = 4;
 }
 
 

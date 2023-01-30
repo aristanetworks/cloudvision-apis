@@ -1,0 +1,32 @@
+# Copyright (c) 2020 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+  - date: 2022-12-20
+    description: Update documentation and publish the API
+    version: 1.2.1
+    cvaas: true
+    onprem: true
+  - date: 2022-12-13
+    description: Adding force authentication to saml
+    version: 1.2.0
+  - date: 2022-11-22
+    description: Add roles_scope_name to oauth
+    version: 1.1.0
+  - date: 2022-10-21
+    description: replace custom repeat string with fmp.RepeatedString
+    version: 1.0.3
+  - date: 2022-09-07
+    description: Add permitted_email_domains field to oauth and saml
+    version: 1.0.2
+  - date: 2020-09-15
+    description: Add oauth jwks_uri field
+    version: 1.0.1
+  - date: 2020-07-30
+    description: Initial revision
+    version: 1.0.0

@@ -1,0 +1,48 @@
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.redirector.v1;
+
+option go_package = "arista/resources/arista/redirector.v1;redirector";
+
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// AssignmentKey allows to uniquely identify an assignment.
+message AssignmentKey {
+    option (fmp.model_key) = true;
+
+    // system_id is the unique identifier of a device.
+    google.protobuf.StringValue system_id = 1;
+}
+
+// Assignment returns the information about the regional clusters that the
+// system is assigned to. Each cluster consists of a series of hosts, each of
+// which the client can use to connect.
+message Assignment {
+    option (fmp.model) = "ro";
+
+    // key uniquely identifies the assignment of system_id to the cluster.
+    AssignmentKey key = 1;
+    // clusters that the system is assigned to.
+    Clusters clusters = 2;
+}
+
+// Clusters wraps a cluster list which contain the information about the hosts.
+message Clusters {
+    // values contains the list of clusters associated with the region
+    repeated Cluster values = 2;
+}
+
+message Cluster {
+    // name of the cluster. The name can change over time as new clusters
+    // are added or removed.
+    google.protobuf.StringValue name = 1;
+    // hosts in the cluster that the devices can connect to.
+    fmp.RepeatedString hosts = 2;
+}

@@ -15,7 +15,9 @@ option go_package = "arista/resources/arista/dashboard.v1;dashboard";
 import "arista/dashboard.v1/dashboard.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message DashboardRequest {
 	// Key uniquely identifies a Dashboard instance to retrieve.
@@ -172,12 +174,27 @@ message DashboardConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DashboardConfigDeleteAllRequest {
+};
+
+message DashboardConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the DashboardConfig instance that failed to be deleted.
+	DashboardKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service DashboardConfigService {
 	rpc GetOne (DashboardConfigRequest) returns (DashboardConfigResponse);
 	rpc GetAll (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
 	rpc Subscribe (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
 	rpc Set (DashboardConfigSetRequest) returns (DashboardConfigSetResponse);
 	rpc Delete (DashboardConfigDeleteRequest) returns (DashboardConfigDeleteResponse);
+	rpc DeleteAll (DashboardConfigDeleteAllRequest) returns (stream DashboardConfigDeleteAllResponse);
 }
 
 message GlobalDashboardConfigRequest {
@@ -255,5 +272,6 @@ service GlobalDashboardConfigService {
 	
 	rpc Subscribe (GlobalDashboardConfigStreamRequest) returns (stream GlobalDashboardConfigStreamResponse);
 	rpc Set (GlobalDashboardConfigSetRequest) returns (GlobalDashboardConfigSetResponse);
+	
 	
 }

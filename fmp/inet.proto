@@ -15,12 +15,24 @@ message IPAddress {
 	string value = 1;
 }
 
+message RepeatedIPAddress {
+    repeated IPAddress values = 1;
+}
+
 message IPv4Address {
 	string value = 1;
 }
 
+message RepeatedIPv4Address {
+    repeated IPv4Address values = 1;
+}
+
 message IPv6Address {
 	string value = 1;
+}
+
+message RepeatedIPv6Address {
+    repeated IPv6Address values = 1;
 }
 
 message IPPrefix {
