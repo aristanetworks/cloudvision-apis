@@ -104,7 +104,9 @@ Top
 arista/configstatus.v1/configstatus.proto ConfigDiff Field Name Type Description key ConfigDiffKey Key represents config diff key
 uri google.protobuf.StringValue Uri represents the HTTP URI client can use to GET config diff and associated errors
 error ConfigError ConfigDiffKey ConfigDiffKey uniquely identifies a configuration diff request</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
-Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget Widgets arista/dashboard.v1/services.gen.proto
+Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget WidgetStyles Widgets arista/dashboard.v1/services.gen.proto
+DashboardConfigDeleteAllRequest
+DashboardConfigDeleteAllResponse
 DashboardConfigDeleteRequest
 DashboardConfigDeleteResponse
 DashboardConfigRequest
@@ -194,7 +196,40 @@ Top
 arista/event.v1/event.proto Event Event is a telemetry event
 Field Name Type Description key EventKey key is the event instance identifier
 severity EventSeverity severity is the severity of the event
-title google.protobuf.StringValue title is the title of the event</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
+title google.protobuf.StringValue title is the title of the event</description></item><item><title>identityprovider.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</guid><description>arista/identityprovider.v1/identityprovider.proto
+OAuthConfig
+OAuthKey
+SAMLConfig
+SAMLKey
+ProtocolBinding
+arista/identityprovider.v1/services.gen.proto
+OAuthConfigDeleteAllRequest
+OAuthConfigDeleteAllResponse
+OAuthConfigDeleteRequest
+OAuthConfigDeleteResponse
+OAuthConfigRequest
+OAuthConfigResponse
+OAuthConfigSetRequest
+OAuthConfigSetResponse
+OAuthConfigStreamRequest
+OAuthConfigStreamResponse
+SAMLConfigDeleteAllRequest
+SAMLConfigDeleteAllResponse
+SAMLConfigDeleteRequest
+SAMLConfigDeleteResponse
+SAMLConfigRequest
+SAMLConfigResponse
+SAMLConfigSetRequest
+SAMLConfigSetResponse
+SAMLConfigStreamRequest
+SAMLConfigStreamResponse
+OAuthConfigService
+SAMLConfigService
+Top
+arista/identityprovider.v1/identityprovider.proto OAuthConfig OAuthConfig holds the configuration for an OAuth provider.
+Field Name Type Description key OAuthKey key is the ID of the OAuth provider.
+endpoint google.protobuf.StringValue endpoint is the URL that identifies an OAuth authorization server.
+This endpoint is used to interact with the provider.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
 Device
 DeviceConfiguration
 DeviceConfiguration.OptionsEntry
@@ -252,7 +287,17 @@ DeviceService
 ProvisionedDeviceService
 Top
 arista/inventory.v1/inventory.proto Device Device describes an onboarded device.
-Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
+Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>arista/redirector.v1/redirector.proto
+Assignment AssignmentKey Cluster Clusters arista/redirector.v1/services.gen.proto
+AssignmentRequest
+AssignmentResponse
+AssignmentStreamRequest
+AssignmentStreamResponse
+AssignmentService
+Top
+arista/redirector.v1/redirector.proto Assignment Assignment returns the information about the regional clusters that the system is assigned to. Each cluster consists of a series of hosts, each of which the client can use to connect.
+Field Name Type Description key AssignmentKey key uniquely identifies the assignment of system_id to the cluster.
+clusters Clusters clusters that the system is assigned to.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
 AssignedTags
 AssignedTagsConfig
 BooleanInputFieldProps
