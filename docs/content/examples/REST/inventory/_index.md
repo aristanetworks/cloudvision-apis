@@ -225,6 +225,20 @@ Output:
 {"result":{"value":{"key":{"requestId":"133713371337"},"deviceId":"ZZZ9999999","status":"ONBOARDING_STATUS_SUCCESS","statusMessage":"Device onboarded successfully"},"time":"2022-02-04T19:51:13.447185558Z","type":"INITIAL"}}
 ```
 
+## Get the onboarding state for all devices and filter by status
+
+### curl
+
+```shell
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/inventory/v1/DeviceOnboarding/all' -d '{"partialEqFilter":[{"status":"ONBOARDING_STATUS_SUCCESS"}]}'
+```
+
+```json
+{"result":{"value":{"key":{"requestId":"133713371337"},"deviceId":"ZZZ7654321","status":"ONBOARDING_STATUS_SUCCESS","statusMessage":"Device onboarded successfully"},"time":"2022-02-04T19:51:13.447185558Z","type":"INITIAL"}}
+{"result":{"value":{"key":{"requestId":"1337133713381123"},"deviceId":"ZZZ1234567","status":"ONBOARDING_STATUS_SUCCESS","statusMessage":"Device onboarded successfully"},"time":"2022-02-04T22:46:33.709449980Z","type":"INITIAL"}}
+{"result":{"value":{"key":{"requestId":"0342271e-19e0-4672-9d09-85acd7a427b5"},"deviceId":"6323DA7D2B542B5D09630F87351BEA41","status":"ONBOARDING_STATUS_SUCCESS","statusMessage":"Device onboarded successfully"},"time":"2022-07-11T15:19:22.293390239Z","type":"INITIAL"}}
+```
+
 ## Get the provisioning state for devices in ZTP mode
 
 ### curl
