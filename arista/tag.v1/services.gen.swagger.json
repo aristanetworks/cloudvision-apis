@@ -26,24 +26,6 @@
     },
     {
       "name": "InterfaceTagConfigService"
-    },
-    {
-      "name": "WSDeviceTagService"
-    },
-    {
-      "name": "WSDeviceTagAssignmentConfigService"
-    },
-    {
-      "name": "WSDeviceTagConfigService"
-    },
-    {
-      "name": "WSInterfaceTagService"
-    },
-    {
-      "name": "WSInterfaceTagAssignmentConfigService"
-    },
-    {
-      "name": "WSInterfaceTagConfigService"
     }
   ],
   "schemes": [
@@ -387,7 +369,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "DeviceTagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the DeviceTagAssignmentConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -443,6 +425,35 @@
             "format": "date-time"
           }
         ],
+        "tags": [
+          "DeviceTagAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceTagAssignmentConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v1.DeviceTagAssignmentConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v1.DeviceTagAssignmentConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
         "tags": [
           "DeviceTagAssignmentConfigService"
         ]
@@ -672,7 +683,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "DeviceTagConfig carries the value to set into the datastore.\nSee the documentation on the DeviceTagConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -728,6 +739,35 @@
             "format": "date-time"
           }
         ],
+        "tags": [
+          "DeviceTagConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceTagConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v1.DeviceTagConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v1.DeviceTagConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
         "tags": [
           "DeviceTagConfigService"
         ]
@@ -1203,7 +1243,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "InterfaceTagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the InterfaceTagAssignmentConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -1259,6 +1299,35 @@
             "format": "date-time"
           }
         ],
+        "tags": [
+          "InterfaceTagAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "InterfaceTagAssignmentConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v1.InterfaceTagAssignmentConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v1.InterfaceTagAssignmentConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
         "tags": [
           "InterfaceTagAssignmentConfigService"
         ]
@@ -1488,7 +1557,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "InterfaceTagConfig carries the value to set into the datastore.\nSee the documentation on the InterfaceTagConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -1544,6 +1613,35 @@
             "format": "date-time"
           }
         ],
+        "tags": [
+          "InterfaceTagConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "InterfaceTagConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v1.InterfaceTagConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v1.InterfaceTagConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
         "tags": [
           "InterfaceTagConfigService"
         ]
@@ -1673,1694 +1771,6 @@
           "InterfaceTagConfigService"
         ]
       }
-    },
-    "/api/resources/tag/v1/WSDeviceTag": {
-      "get": {
-        "operationId": "WSDeviceTagService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTag/all": {
-      "get": {
-        "operationId": "WSDeviceTagService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTag/watch": {
-      "get": {
-        "operationId": "WSDeviceTagService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagAssignmentConfig": {
-      "get": {
-        "operationId": "WSDeviceTagAssignmentConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "DeviceId is the ID of the device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag assignment.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "WSDeviceTagAssignmentConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "DeviceId is the ID of the device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag assignment.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagAssignmentConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": "WSDeviceTagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the WSDeviceTagAssignmentConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfig"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagAssignmentConfig/all": {
-      "get": {
-        "operationId": "WSDeviceTagAssignmentConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagAssignmentConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagAssignmentConfig/watch": {
-      "get": {
-        "operationId": "WSDeviceTagAssignmentConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagAssignmentConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagConfig": {
-      "get": {
-        "operationId": "WSDeviceTagConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "WSDeviceTagConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": "WSDeviceTagConfig carries the value to set into the datastore.\nSee the documentation on the WSDeviceTagConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfig"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagConfig/all": {
-      "get": {
-        "operationId": "WSDeviceTagConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSDeviceTagConfig/watch": {
-      "get": {
-        "operationId": "WSDeviceTagConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSDeviceTagConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSDeviceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSDeviceTagConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTag": {
-      "get": {
-        "operationId": "WSInterfaceTagService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTag/all": {
-      "get": {
-        "operationId": "WSInterfaceTagService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTag/watch": {
-      "get": {
-        "operationId": "WSInterfaceTagService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagAssignmentConfig": {
-      "get": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "DeviceId is the ID of the interface's device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.interfaceId",
-            "description": "InterfaceId is the ID of the interface.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag assignment.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "DeviceId is the ID of the interface's device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.interfaceId",
-            "description": "InterfaceId is the ID of the interface.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag assignment.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": "WSInterfaceTagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the WSInterfaceTagAssignmentConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfig"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagAssignmentConfig/all": {
-      "get": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagAssignmentConfig/watch": {
-      "get": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagAssignmentConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagAssignmentConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagConfig": {
-      "get": {
-        "operationId": "WSInterfaceTagConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "WSInterfaceTagConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.label",
-            "description": "Label is the label of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.value",
-            "description": "Value is the value of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.wsId",
-            "description": "WSId identifies the workspace of the tag.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": "WSInterfaceTagConfig carries the value to set into the datastore.\nSee the documentation on the WSInterfaceTagConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfig"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagConfig/all": {
-      "get": {
-        "operationId": "WSInterfaceTagConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      }
-    },
-    "/api/resources/tag/v1/WSInterfaceTagConfig/watch": {
-      "get": {
-        "operationId": "WSInterfaceTagConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "WSInterfaceTagConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.tag.v1.WSInterfaceTagConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "WSInterfaceTagConfigService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -3396,10 +1806,6 @@
         "creatorType": {
           "$ref": "#/definitions/arista.tag.v1.CreatorType",
           "description": "CreatorType is the creator type of the tag."
-        },
-        "assigned": {
-          "type": "boolean",
-          "description": "Assigned indicates whether the tag is assigned."
         }
       },
       "description": "DeviceTag is a label-value pair that may or may not\nbe assigned to a device."
@@ -3412,7 +1818,29 @@
           "description": "Key uniquely identifies the device tag assignment."
         }
       },
-      "description": "DeviceTagAssignmentConfig is the assignment of a device tag to a\nspecific device.\n\nNOTE: key is required when used as an argument to Set."
+      "description": "DeviceTagAssignmentConfig is the assignment of a device tag to a\nspecific device."
+    },
+    "arista.tag.v1.DeviceTagAssignmentConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v1.DeviceTagAssignmentKey",
+          "description": "This is the key of the DeviceTagAssignmentConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v1.DeviceTagAssignmentConfigDeleteResponse": {
       "type": "object",
@@ -3497,27 +1925,18 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
+          "description": "Label is the label of the tag."
         },
         "value": {
           "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
+          "description": "Value is the value of the tag."
         },
         "deviceId": {
           "type": "string",
-          "description": "DeviceId is the ID of the device.",
-          "required": [
-            "device_id"
-          ]
+          "description": "DeviceId is the ID of the device."
         }
       },
-      "description": "DeviceTagAssignmentKey uniquely identifies a device tag\nassignment.\n\nNOTE: All fields are required when used as an argument\n      to GetOne, Set or Delete.",
+      "description": "DeviceTagAssignmentKey uniquely identifies a device tag\nassignment.",
       "required": [
         "label",
         "value",
@@ -3532,7 +1951,29 @@
           "description": "Key uniquely identifies the device tag."
         }
       },
-      "description": "DeviceTagConfig is a label-value pair that may or may not\nbe assigned to a device.\n\nNOTE: key is required when used as an argument to Set."
+      "description": "DeviceTagConfig is a label-value pair that may or may not\nbe assigned to a device."
+    },
+    "arista.tag.v1.DeviceTagConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v1.TagKey",
+          "description": "This is the key of the DeviceTagConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v1.DeviceTagConfigDeleteResponse": {
       "type": "object",
@@ -3670,10 +2111,6 @@
         "creatorType": {
           "$ref": "#/definitions/arista.tag.v1.CreatorType",
           "description": "CreatorType is the creator type of the tag."
-        },
-        "assigned": {
-          "type": "boolean",
-          "description": "Assigned indicates whether the tag is assigned."
         }
       },
       "description": "InterfaceTag is a label-value pair that may or may\nnot be assigned to an interface."
@@ -3686,7 +2123,29 @@
           "description": "Key uniquely identifies the interface tag assignment."
         }
       },
-      "description": "InterfaceTagAssignmentConfig is the assignment of an interface tag\nto a specific interface.\n\nNOTE: key is required when used as an argument to Set."
+      "description": "InterfaceTagAssignmentConfig is the assignment of an interface tag\nto a specific interface."
+    },
+    "arista.tag.v1.InterfaceTagAssignmentConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v1.InterfaceTagAssignmentKey",
+          "description": "This is the key of the InterfaceTagAssignmentConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v1.InterfaceTagAssignmentConfigDeleteResponse": {
       "type": "object",
@@ -3771,34 +2230,22 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
+          "description": "Label is the label of the tag."
         },
         "value": {
           "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
+          "description": "Value is the value of the tag."
         },
         "deviceId": {
           "type": "string",
-          "description": "DeviceId is the ID of the interface's device.",
-          "required": [
-            "device_id"
-          ]
+          "description": "DeviceId is the ID of the interface's device."
         },
         "interfaceId": {
           "type": "string",
-          "description": "InterfaceId is the ID of the interface.",
-          "required": [
-            "interface_id"
-          ]
+          "description": "InterfaceId is the ID of the interface."
         }
       },
-      "description": "InterfaceTagAssignmentKey uniquely identifies an interface\ntag assignment.\n\nNOTE: All fields are required when used as an argument\n      to GetOne, Set or Delete.",
+      "description": "InterfaceTagAssignmentKey uniquely identifies an interface\ntag assignment.",
       "required": [
         "label",
         "value",
@@ -3814,7 +2261,29 @@
           "description": "Key uniquely identifies the interface tag."
         }
       },
-      "description": "InterfaceTagConfig is a label-value pair that may or may\nnot be assigned to an interface.\n\nNOTE: key is required when used as an argument to Set."
+      "description": "InterfaceTagConfig is a label-value pair that may or may\nnot be assigned to an interface."
+    },
+    "arista.tag.v1.InterfaceTagConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v1.TagKey",
+          "description": "This is the key of the InterfaceTagConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v1.InterfaceTagConfigDeleteResponse": {
       "type": "object",
@@ -3947,627 +2416,17 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
+          "description": "Label is the label of the tag."
         },
         "value": {
           "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
+          "description": "Value is the value of the tag."
         }
       },
-      "description": "TagKey uniquely identifies a tag for a network element.\n\nNOTE: All fields are required when used as an argument\n      to GetOne, Set or Delete.",
+      "description": "TagKey uniquely identifies a tag for a network element.",
       "required": [
         "label",
         "value"
-      ]
-    },
-    "arista.tag.v1.WSDeviceTag": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key uniquely identifies the device tag and\nits workspace."
-        },
-        "creatorType": {
-          "$ref": "#/definitions/arista.tag.v1.CreatorType",
-          "description": "CreatorType is the creator type of the tag."
-        },
-        "assigned": {
-          "type": "boolean",
-          "description": "Assigned indicates whether the tag is assigned."
-        }
-      },
-      "description": "WSDeviceTag holds the state of a device\ntag in a workspace."
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentKey",
-          "description": "Key uniquely identifies the device tag assignment and\nits workspace."
-        }
-      },
-      "description": "WSDeviceTagAssignmentConfig holds the configuration\nfor a device tag assignment in a workspace."
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentKey",
-          "description": "Key echoes back the key of the deleted WSDeviceTagAssignmentConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSDeviceTagAssignmentConfig instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfig",
-          "description": "Value carries all the values given in the WSDeviceTagAssignmentConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagAssignmentConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSDeviceTagAssignmentConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSDeviceTagAssignmentConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagAssignmentKey": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
-        },
-        "value": {
-          "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
-        },
-        "deviceId": {
-          "type": "string",
-          "description": "DeviceId is the ID of the device.",
-          "required": [
-            "device_id"
-          ]
-        },
-        "wsId": {
-          "type": "string",
-          "description": "WSId identifies the workspace of the tag assignment.",
-          "required": [
-            "ws_id"
-          ]
-        }
-      },
-      "description": "WSDeviceTagAssignmentKey uniquely identifies a\ndevice tag assignment as it exists in a particular\nworkspace.",
-      "required": [
-        "label",
-        "value",
-        "deviceId",
-        "wsId"
-      ]
-    },
-    "arista.tag.v1.WSDeviceTagConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key uniquely identifies the device tag and\nits workspace."
-        }
-      },
-      "description": "WSDeviceTagConfig holds the configuration for\na device tag in a workspace."
-    },
-    "arista.tag.v1.WSDeviceTagConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key echoes back the key of the deleted WSDeviceTagConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSDeviceTagConfig instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfig",
-          "description": "Value carries all the values given in the WSDeviceTagConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTagConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSDeviceTagConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSDeviceTagConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTag",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSDeviceTag instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSDeviceTag"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSDeviceTagStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSDeviceTag",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSDeviceTag's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSDeviceTag value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTag": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key uniquely identifies the interface tag and\nits workspace."
-        },
-        "creatorType": {
-          "$ref": "#/definitions/arista.tag.v1.CreatorType",
-          "description": "CreatorType is the creator type of the tag."
-        },
-        "assigned": {
-          "type": "boolean",
-          "description": "Assigned indicates whether the tag is assigned."
-        }
-      },
-      "description": "WSInterfaceTag holds the state of an interface\ntag in a workspace."
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentKey",
-          "description": "Key uniquely identifies the interface tag assignment and\nits workspace."
-        }
-      },
-      "description": "WSInterfaceTagAssignmentConfig holds the configuration\nfor an interface tag assignment in a workspace."
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentKey",
-          "description": "Key echoes back the key of the deleted WSInterfaceTagAssignmentConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSInterfaceTagAssignmentConfig instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfig",
-          "description": "Value carries all the values given in the WSInterfaceTagAssignmentConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagAssignmentConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSInterfaceTagAssignmentConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSInterfaceTagAssignmentConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagAssignmentKey": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
-        },
-        "value": {
-          "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
-        },
-        "deviceId": {
-          "type": "string",
-          "description": "DeviceId is the ID of the interface's device.",
-          "required": [
-            "device_id"
-          ]
-        },
-        "interfaceId": {
-          "type": "string",
-          "description": "InterfaceId is the ID of the interface.",
-          "required": [
-            "interface_id"
-          ]
-        },
-        "wsId": {
-          "type": "string",
-          "description": "WSId identifies the workspace of the tag assignment.",
-          "required": [
-            "ws_id"
-          ]
-        }
-      },
-      "description": "WSInterfaceTagAssignmentKey uniquely identifies\nan interface tag assignment as it exists in a particular\nworkspace.",
-      "required": [
-        "label",
-        "value",
-        "deviceId",
-        "interfaceId",
-        "wsId"
-      ]
-    },
-    "arista.tag.v1.WSInterfaceTagConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key uniquely identifies the interface tag and\nits workspace."
-        }
-      },
-      "description": "WSInterfaceTagConfig holds the configuration for\nan interface tag in a workspace."
-    },
-    "arista.tag.v1.WSInterfaceTagConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.tag.v1.WSTagKey",
-          "description": "Key echoes back the key of the deleted WSInterfaceTagConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSInterfaceTagConfig instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfig",
-          "description": "Value carries all the values given in the WSInterfaceTagConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTagConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSInterfaceTagConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSInterfaceTagConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTag",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWSInterfaceTag instance in this response."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/arista.tag.v1.WSInterfaceTag"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.tag.v1.WSInterfaceTagStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.tag.v1.WSInterfaceTag",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this WSInterfaceTag's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the WSInterfaceTag value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.tag.v1.WSTagKey": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "Label is the label of the tag.",
-          "required": [
-            "label"
-          ]
-        },
-        "value": {
-          "type": "string",
-          "description": "Value is the value of the tag.",
-          "required": [
-            "value"
-          ]
-        },
-        "wsId": {
-          "type": "string",
-          "description": "WSId identifies the workspace of the tag.",
-          "required": [
-            "ws_id"
-          ]
-        }
-      },
-      "description": "WSTagKey uniquely identifies a tag as it exists\nin a particular workspace.",
-      "required": [
-        "label",
-        "value",
-        "wsId"
       ]
     },
     "arista.time.TimeBounds": {
@@ -4582,6 +2441,17 @@
           "format": "date-time"
         }
       }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
     },
     "google.protobuf.Any": {
       "type": "object",
