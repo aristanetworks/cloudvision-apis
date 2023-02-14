@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -14,15 +14,17 @@ option go_package = "arista/resources/arista/tag.v1;tag";
 import "arista/tag.v1/tag.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message DeviceTagRequest {
 	// Key uniquely identifies a DeviceTag instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	TagKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -70,23 +72,18 @@ message DeviceTagStreamResponse {
 };
 
 service DeviceTagService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (DeviceTagRequest) returns (DeviceTagResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (DeviceTagStreamRequest) returns (stream DeviceTagStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (DeviceTagStreamRequest) returns (stream DeviceTagStreamResponse);
 }
 
 message DeviceTagAssignmentConfigRequest {
 	// Key uniquely identifies a DeviceTagAssignmentConfig instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	DeviceTagAssignmentKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -155,7 +152,7 @@ message DeviceTagAssignmentConfigSetResponse {
 
 message DeviceTagAssignmentConfigDeleteRequest {
 	// Key indicates which DeviceTagAssignmentConfig instance to remove.
-	// This field (and all keys, unless otherwise specified) must always be set.
+	// This field must always be set.
 	DeviceTagAssignmentKey key = 1;
 };
 
@@ -172,30 +169,36 @@ message DeviceTagAssignmentConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceTagAssignmentConfigDeleteAllRequest {
+};
+
+message DeviceTagAssignmentConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the DeviceTagAssignmentConfig instance that failed to be deleted.
+	DeviceTagAssignmentKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service DeviceTagAssignmentConfigService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (DeviceTagAssignmentConfigRequest) returns (DeviceTagAssignmentConfigResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (DeviceTagAssignmentConfigStreamRequest) returns (stream DeviceTagAssignmentConfigStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (DeviceTagAssignmentConfigStreamRequest) returns (stream DeviceTagAssignmentConfigStreamResponse);
-	// Set allows setting values for the entity specified by the key in the request.
-	// The key must be provided and all fields set (unless otherwise specified).
 	rpc Set (DeviceTagAssignmentConfigSetRequest) returns (DeviceTagAssignmentConfigSetResponse);
-	// Delete will remove the entity specified by the key within the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc Delete (DeviceTagAssignmentConfigDeleteRequest) returns (DeviceTagAssignmentConfigDeleteResponse);
+	rpc DeleteAll (DeviceTagAssignmentConfigDeleteAllRequest) returns (stream DeviceTagAssignmentConfigDeleteAllResponse);
 }
 
 message DeviceTagConfigRequest {
 	// Key uniquely identifies a DeviceTagConfig instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	TagKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -264,7 +267,7 @@ message DeviceTagConfigSetResponse {
 
 message DeviceTagConfigDeleteRequest {
 	// Key indicates which DeviceTagConfig instance to remove.
-	// This field (and all keys, unless otherwise specified) must always be set.
+	// This field must always be set.
 	TagKey key = 1;
 };
 
@@ -281,30 +284,36 @@ message DeviceTagConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceTagConfigDeleteAllRequest {
+};
+
+message DeviceTagConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the DeviceTagConfig instance that failed to be deleted.
+	TagKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service DeviceTagConfigService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (DeviceTagConfigRequest) returns (DeviceTagConfigResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (DeviceTagConfigStreamRequest) returns (stream DeviceTagConfigStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (DeviceTagConfigStreamRequest) returns (stream DeviceTagConfigStreamResponse);
-	// Set allows setting values for the entity specified by the key in the request.
-	// The key must be provided and all fields set (unless otherwise specified).
 	rpc Set (DeviceTagConfigSetRequest) returns (DeviceTagConfigSetResponse);
-	// Delete will remove the entity specified by the key within the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc Delete (DeviceTagConfigDeleteRequest) returns (DeviceTagConfigDeleteResponse);
+	rpc DeleteAll (DeviceTagConfigDeleteAllRequest) returns (stream DeviceTagConfigDeleteAllResponse);
 }
 
 message InterfaceTagRequest {
 	// Key uniquely identifies a InterfaceTag instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	TagKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -352,23 +361,18 @@ message InterfaceTagStreamResponse {
 };
 
 service InterfaceTagService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (InterfaceTagRequest) returns (InterfaceTagResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (InterfaceTagStreamRequest) returns (stream InterfaceTagStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (InterfaceTagStreamRequest) returns (stream InterfaceTagStreamResponse);
 }
 
 message InterfaceTagAssignmentConfigRequest {
 	// Key uniquely identifies a InterfaceTagAssignmentConfig instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	InterfaceTagAssignmentKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -437,7 +441,7 @@ message InterfaceTagAssignmentConfigSetResponse {
 
 message InterfaceTagAssignmentConfigDeleteRequest {
 	// Key indicates which InterfaceTagAssignmentConfig instance to remove.
-	// This field (and all keys, unless otherwise specified) must always be set.
+	// This field must always be set.
 	InterfaceTagAssignmentKey key = 1;
 };
 
@@ -454,30 +458,36 @@ message InterfaceTagAssignmentConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message InterfaceTagAssignmentConfigDeleteAllRequest {
+};
+
+message InterfaceTagAssignmentConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the InterfaceTagAssignmentConfig instance that failed to be deleted.
+	InterfaceTagAssignmentKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service InterfaceTagAssignmentConfigService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (InterfaceTagAssignmentConfigRequest) returns (InterfaceTagAssignmentConfigResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (InterfaceTagAssignmentConfigStreamRequest) returns (stream InterfaceTagAssignmentConfigStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (InterfaceTagAssignmentConfigStreamRequest) returns (stream InterfaceTagAssignmentConfigStreamResponse);
-	// Set allows setting values for the entity specified by the key in the request.
-	// The key must be provided and all fields set (unless otherwise specified).
 	rpc Set (InterfaceTagAssignmentConfigSetRequest) returns (InterfaceTagAssignmentConfigSetResponse);
-	// Delete will remove the entity specified by the key within the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc Delete (InterfaceTagAssignmentConfigDeleteRequest) returns (InterfaceTagAssignmentConfigDeleteResponse);
+	rpc DeleteAll (InterfaceTagAssignmentConfigDeleteAllRequest) returns (stream InterfaceTagAssignmentConfigDeleteAllResponse);
 }
 
 message InterfaceTagConfigRequest {
 	// Key uniquely identifies a InterfaceTagConfig instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	TagKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -546,7 +556,7 @@ message InterfaceTagConfigSetResponse {
 
 message InterfaceTagConfigDeleteRequest {
 	// Key indicates which InterfaceTagConfig instance to remove.
-	// This field (and all keys, unless otherwise specified) must always be set.
+	// This field must always be set.
 	TagKey key = 1;
 };
 
@@ -563,19 +573,25 @@ message InterfaceTagConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message InterfaceTagConfigDeleteAllRequest {
+};
+
+message InterfaceTagConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the InterfaceTagConfig instance that failed to be deleted.
+	TagKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service InterfaceTagConfigService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (InterfaceTagConfigRequest) returns (InterfaceTagConfigResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (InterfaceTagConfigStreamRequest) returns (stream InterfaceTagConfigStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (InterfaceTagConfigStreamRequest) returns (stream InterfaceTagConfigStreamResponse);
-	// Set allows setting values for the entity specified by the key in the request.
-	// The key must be provided and all fields set (unless otherwise specified).
 	rpc Set (InterfaceTagConfigSetRequest) returns (InterfaceTagConfigSetResponse);
-	// Delete will remove the entity specified by the key within the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc Delete (InterfaceTagConfigDeleteRequest) returns (InterfaceTagConfigDeleteResponse);
+	rpc DeleteAll (InterfaceTagConfigDeleteAllRequest) returns (stream InterfaceTagConfigDeleteAllResponse);
 }
