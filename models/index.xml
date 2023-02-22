@@ -342,7 +342,8 @@ AssignedTagsService
 InputsConfigService
 InputsService
 StudioConfigService
-StudioService</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>arista/tag.v1/tag.proto
+StudioService</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
+arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
 DeviceTagAssignmentKey
@@ -354,6 +355,8 @@ InterfaceTagConfig
 TagKey
 CreatorType
 arista/tag.v1/services.gen.proto
+DeviceTagAssignmentConfigDeleteAllRequest
+DeviceTagAssignmentConfigDeleteAllResponse
 DeviceTagAssignmentConfigDeleteRequest
 DeviceTagAssignmentConfigDeleteResponse
 DeviceTagAssignmentConfigRequest
@@ -362,6 +365,8 @@ DeviceTagAssignmentConfigSetRequest
 DeviceTagAssignmentConfigSetResponse
 DeviceTagAssignmentConfigStreamRequest
 DeviceTagAssignmentConfigStreamResponse
+DeviceTagConfigDeleteAllRequest
+DeviceTagConfigDeleteAllResponse
 DeviceTagConfigDeleteRequest
 DeviceTagConfigDeleteResponse
 DeviceTagConfigRequest
@@ -374,6 +379,8 @@ DeviceTagRequest
 DeviceTagResponse
 DeviceTagStreamRequest
 DeviceTagStreamResponse
+InterfaceTagAssignmentConfigDeleteAllRequest
+InterfaceTagAssignmentConfigDeleteAllResponse
 InterfaceTagAssignmentConfigDeleteRequest
 InterfaceTagAssignmentConfigDeleteResponse
 InterfaceTagAssignmentConfigRequest
@@ -382,6 +389,8 @@ InterfaceTagAssignmentConfigSetRequest
 InterfaceTagAssignmentConfigSetResponse
 InterfaceTagAssignmentConfigStreamRequest
 InterfaceTagAssignmentConfigStreamResponse
+InterfaceTagConfigDeleteAllRequest
+InterfaceTagConfigDeleteAllResponse
 InterfaceTagConfigDeleteRequest
 InterfaceTagConfigDeleteResponse
 InterfaceTagConfigRequest
@@ -395,13 +404,7 @@ InterfaceTagResponse
 InterfaceTagStreamRequest
 InterfaceTagStreamResponse
 DeviceTagAssignmentConfigService
-DeviceTagConfigService
-DeviceTagService
-InterfaceTagAssignmentConfigService
-InterfaceTagConfigService
-InterfaceTagService
-Top
-arista/tag.v1/tag.proto DeviceTag DeviceTag is a label-value pair that may or may not be assigned to a device.</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
+DeviceTagConfigService</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
 Tag
 TagAssignment
 TagAssignmentConfig
