@@ -159,6 +159,11 @@ message DeviceDecommissioningConfig {
     UUIDKey key = 1;
     // device_id is the unique device ID that was discovered via onboarding.
     google.protobuf.StringValue device_id = 2;
+    // force is a flag that indicates if the decommission is to be forced.
+    // Normally, if there are pending or in-progress tasks associated with the device
+    // the decommission would fail. In case of a forced decommission, such blocking
+    // tasks would be ignored and decommissioning will be continued.
+    google.protobuf.BoolValue force = 3;
 }
 
 // DeviceOnboarding describes the status of a decommissioning process.

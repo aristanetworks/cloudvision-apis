@@ -255,10 +255,7 @@
       "properties": {
         "systemId": {
           "type": "string",
-          "description": "system_id is the unique identifier of a device.",
-          "required": [
-            "system_id"
-          ]
+          "description": "system_id is the unique identifier of a device."
         }
       },
       "description": "AssignmentKey allows to uniquely identify an assignment.",
