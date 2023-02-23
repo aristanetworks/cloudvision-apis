@@ -331,10 +331,7 @@
       "type": "object",
       "properties": {
         "searchTerm": {
-          "type": "string",
-          "required": [
-            "search_term"
-          ]
+          "type": "string"
         }
       },
       "required": [

@@ -545,7 +545,7 @@
         },
         "parameters": [
           {
-            "name": "value",
+            "name": "body",
             "description": "DeviceDecommissioningConfig carries the value to set into the datastore.\nSee the documentation on the DeviceDecommissioningConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -1056,7 +1056,7 @@
         },
         "parameters": [
           {
-            "name": "value",
+            "name": "body",
             "description": "DeviceOnboardingConfig carries the value to set into the datastore.\nSee the documentation on the DeviceOnboardingConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -1752,7 +1752,10 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "description": "device_id is the unique identifier of the device."
+          "description": "device_id is the unique identifier of the device.",
+          "required": [
+            "device_id"
+          ]
         }
       },
       "description": "DeviceKey uniquely identifies a single device.",
@@ -2132,7 +2135,10 @@
       "properties": {
         "requestId": {
           "type": "string",
-          "description": "request_id should be a UUID for the request."
+          "description": "request_id should be a UUID for the request.",
+          "required": [
+            "request_id"
+          ]
         }
       },
       "description": "UUIDKey is a key that holds a UUID for an onboarding or decommissioning request.",
@@ -2187,11 +2193,14 @@
     "google.protobuf.Any": {
       "type": "object",
       "properties": {
-        "@type": {
+        "typeUrl": {
           "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "google.rpc.Status": {
       "type": "object",

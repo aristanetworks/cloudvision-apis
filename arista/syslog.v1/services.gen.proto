@@ -15,7 +15,9 @@ option go_package = "arista/resources/arista/syslog.v1;syslog";
 import "arista/syslog.v1/syslog.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message ExportRequest {
 	// Key uniquely identifies a Export instance to retrieve.
@@ -168,12 +170,27 @@ message ExportConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ExportConfigDeleteAllRequest {
+};
+
+message ExportConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the ExportConfig instance that failed to be deleted.
+	ExportKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service ExportConfigService {
 	rpc GetOne (ExportConfigRequest) returns (ExportConfigResponse);
 	rpc GetAll (ExportConfigStreamRequest) returns (stream ExportConfigStreamResponse);
 	rpc Subscribe (ExportConfigStreamRequest) returns (stream ExportConfigStreamResponse);
 	rpc Set (ExportConfigSetRequest) returns (ExportConfigSetResponse);
 	rpc Delete (ExportConfigDeleteRequest) returns (ExportConfigDeleteResponse);
+	rpc DeleteAll (ExportConfigDeleteAllRequest) returns (stream ExportConfigDeleteAllResponse);
 }
 
 message ExportFormatConfigRequest {
@@ -251,5 +268,6 @@ service ExportFormatConfigService {
 	
 	rpc Subscribe (ExportFormatConfigStreamRequest) returns (stream ExportFormatConfigStreamResponse);
 	rpc Set (ExportFormatConfigSetRequest) returns (ExportFormatConfigSetResponse);
+	
 	
 }
