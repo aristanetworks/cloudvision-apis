@@ -116,6 +116,10 @@ get_event("bf931ff01f5c5a2","2021-04-01T18:14:53Z")
 Get events between two dates
 --------------------------------
 
+{{% notice note %}}
+When fetching a state from NetDB between two arbitrary dates, the result returned will contain data that existed between those two dates and not just data that was created between those dates. For instance if BGP events are queried between 2021-03-24 09:00 and 2021-03-24 10:00 the result will contain events that were active in the range of 9 AM to 10 AM. If there were events that started before 9 AM and were not resolved (still active) at that time, the result will contain those events too.
+{{% /notice %}}
+
 ### curl
 
 ```bash
