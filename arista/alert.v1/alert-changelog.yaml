@@ -1,0 +1,78 @@
+# Copyright (c) 2021 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+  - date: 2023-05-02
+    description: Adding custom HTTP headers
+    version: 1.5.0
+    onprem: true
+    cvaas: true
+  - date: 2023-04-21
+    description: Adding additional documentation
+    version: 1.4.1
+    onprem: true
+    cvaas: true
+  - date: 2023-01-04
+    description: Adding matches.ruleID
+    version: 1.4.0
+    onprem: true
+    cvaas: true
+  - date: 2022-12-12
+    description: Adding single alert/webhook option
+    version: 1.3.0
+  - date: 2022-11-30
+    description: Add simple_output flag to webhook endpoint
+    version: 1.2.0
+  - date: 2022-11-10
+    description: Adding single alert/email option
+    version: 1.1.0
+  - date: 2022-08-02
+    description: Removing matches.interfaceID
+    version: 1.0.13
+  - date: 2022-07-27
+    description: Adding TLS option to syslog
+    version: 1.0.12
+  - date: 2022-07-14
+    description: Remove SNMP template type
+    version: 1.0.12
+  - date: 2022-07-14
+    description: Adding zoom support
+    version: 1.0.11
+  - date: 2022-07-13
+    description: Adding ability to hide tags in alert message bodies
+    version: 1.0.10
+  - date: 2022-07-11
+    description: Adding email subject, opsgenie, syslog and snmp template types
+    version: 1.0.9
+  - date: 2022-05-12
+    description: Adding cue syslog, snmp and sendgrid settings fields to rAPI
+    version: 1.0.8
+  - date: 2022-05-03
+    description: Adding more detailed comments
+    version: 1.0.7
+  - date: 2022-05-02
+    description: Add SNMP authentication configuration
+    version: 1.0.6
+  - date: 2022-04-11
+    description: Changin error types to more structured objects instead of strings
+    version: 1.0.5
+  - date: 2022-03-04
+    description: Adding Sendgrid onprem settings fields to rAPI
+    version: 1.0.4
+  - date: 2022-03-03
+    description: Adding SNMP, Syslog and Sendgrid configuration fields to rAPI
+    version: 1.0.3
+  - date: 2021-09-30
+    description: Adding turbine configuration fields to rAPI
+    version: 1.0.2
+  - date: 2021-06-02
+    description: Adding additional documentation to matches field
+    version: 1.0.1
+  - date: 2021-01-11
+    description: Initial revision
+    version: 1.0.0
