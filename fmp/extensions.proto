@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package fmp;
 
-option go_package = "arista/resources/fmp";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/fmp";
 
 import "google/protobuf/descriptor.proto";
 
