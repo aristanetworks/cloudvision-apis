@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -14,181 +14,320 @@ import "google/protobuf/wrappers.proto";
 import "fmp/extensions.proto";
 import "fmp/wrappers.proto";
 
+// MacType describes how the MAC address was learned on the port location.
 enum MacType {
+    // MAC_TYPE_UNSPECIFIED is the default unspecified MAC type.
     MAC_TYPE_UNSPECIFIED = 0;
+    // MAC_TYPE_LEARNED_DYNAMIC indicates a MAC that is dynamically learned in hardware.
     MAC_TYPE_LEARNED_DYNAMIC = 1;
+    // MAC_TYPE_LEARNED_SECURE indicates a MAC that is learned in hardware on a port-security protect interface.
     MAC_TYPE_LEARNED_SECURE = 2;
+    // MAC_TYPE_CONFIGURED_DYNAMIC indicates a configured dynamic MAC.
     MAC_TYPE_CONFIGURED_DYNAMIC = 3;
+    // MAC_TYPE_CONFIGURED_SECURE indicates a MAC configured on an interface with Port Security: Protect mode enabled
     MAC_TYPE_CONFIGURED_SECURE = 4;
+    // MAC_TYPE_CONFIGURED_STATIC indicates a statically configured MAC.
     MAC_TYPE_CONFIGURED_STATIC = 5;
+    // MAC_TYPE_PEER_DYNAMIC indicates a dynamically learned MAC discovered via an MLAG peer.
     MAC_TYPE_PEER_DYNAMIC = 6;
+    // MAC_TYPE_PEER_STATIC indicates a statically configured MAC discovered via an MLAG peer.
     MAC_TYPE_PEER_STATIC = 7;
+    // MAC_TYPE_PEER_SECURE indicates a secure MAC learned from an MLAG peer.
     MAC_TYPE_PEER_SECURE = 8;
+    // MAC_TYPE_LEARNED_REMOTE indicates a MAC learned remotely behind a VxLAN VTEP.
     MAC_TYPE_LEARNED_REMOTE = 9;
+    // MAC_TYPE_CONFIGURED_REMOTE indicates a MAC configured behind a VxLAN VTEP.
     MAC_TYPE_CONFIGURED_REMOTE = 10;
+    // MAC_TYPE_RECEIVED_REMOTE indicates a MAC received from a VxLAN controller.
     MAC_TYPE_RECEIVED_REMOTE = 11;
+    // MAC_TYPE_PEER_LEARNED_REMOTE indicates a remote MAC learned on a peer VTEP.
     MAC_TYPE_PEER_LEARNED_REMOTE = 12;
+    // MAC_TYPE_PEER_CONFIGURED_REMOTE indicates an MLAG peer configured remote MAC.
     MAC_TYPE_PEER_CONFIGURED_REMOTE = 13;
+    // MAC_TYPE_PEER_RECEIVED_REMOTE indicates a remote MAC received from a VxLAN controller by the MLAG peer.
     MAC_TYPE_PEER_RECEIVED_REMOTE = 14;
+    // MAC_TYPE_EVPN_DYNAMIC_REMOTE indicates an EVPN dynamic remote MAC.
     MAC_TYPE_EVPN_DYNAMIC_REMOTE = 15;
+    // MAC_TYPE_EVPN_CONFIGURED_REMOTE indicates an EVPN configured remote MAC.
     MAC_TYPE_EVPN_CONFIGURED_REMOTE = 16;
+    // MAC_TYPE_PEER_EVPN_REMOTE indicates an MLAG peer EVPN remote MAC.
     MAC_TYPE_PEER_EVPN_REMOTE = 17;
+    // MAC_TYPE_CONFIGURED_ROUTER indicates a configured MAC used in routing.
     MAC_TYPE_CONFIGURED_ROUTER = 18;
+    // MAC_TYPE_PEER_ROUTER indicates an MLAG peer specific router MAC.
     MAC_TYPE_PEER_ROUTER = 19;
+    // MAC_TYPE_EVPN_INTF_DYNAMIC indicates a MAC advertised by EVPN when a dynamic MAC is learned on ESI (Ethernet Segment Identifier).
     MAC_TYPE_EVPN_INTF_DYNAMIC = 20;
+    // MAC_TYPE_EVPN_INTF_STATIC indicates a MAC configured on EVPN ESI.
     MAC_TYPE_EVPN_INTF_STATIC = 21;
+    // MAC_TYPE_AUTHENTICATED indicates a MAC authenticated via 802.1X.
     MAC_TYPE_AUTHENTICATED = 22;
+    // MAC_TYPE_PEER_AUTHENTICATED indicates a MAC authenticated by 802.1X and learned on an MLAG peer.
     MAC_TYPE_PEER_AUTHENTICATED = 23;
+    // MAC_TYPE_PENDING_SECURE indicates a secure MAC in a pending state.
     MAC_TYPE_PENDING_SECURE = 24;
-
-    // This is used for capturing future MAC types
+    // MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC indicates a MAC learned behind VTEP in software in the case of a VxLAN remote MAC.
+    MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC = 25;
+    // MAC_TYPE_OTHER is used for capturing future MAC types.
     MAC_TYPE_OTHER = 99999;
 }
 
+// Likelihood indicates a level of confidence.
 enum Likelihood {
-    // These ports have unspecified likelihood
+    // LIKELIHOOD_UNSPECIFIED is the default unspecified likelihood.
     LIKELIHOOD_UNSPECIFIED = 0;
-    // These ports are very likely to be physically connected to the queried device
+    // LIKELIHOOD_VERY_LIKELY indicates very high confidence.
     LIKELIHOOD_VERY_LIKELY = 1;
-    // These ports are likely to be physically connected to the queried device
+    // LIKELIHOOD_LIKELY indicates high confidence.
     LIKELIHOOD_LIKELY = 2;
-    // These ports are somewhat likely to be physically connected to the queried device
+    // LIKELIHOOD_SOMEWHAT_LIKELY indicates medium confidence.
     LIKELIHOOD_SOMEWHAT_LIKELY = 3;
-    // These ports are less likely to be physically connected to the queried device
+    // LIKELIHOOD_LESS_LIKELY indicates low confidence.
     LIKELIHOOD_LESS_LIKELY = 4;
 }
 
+// IdentifierType defines the set of ways for identifying endpoints.
 enum IdentifierType {
+     // IDENTIFIER_TYPE_UNSPECIFIED is the default unspecified identifier.
     IDENTIFIER_TYPE_UNSPECIFIED = 0;
+    // IDENTIFIER_TYPE_MAC_ADDR indicates a MAC address identifier.
     IDENTIFIER_TYPE_MAC_ADDR = 1;
+    // IDENTIFIER_TYPE_IPV4_ADDR indicates an IPv4 address identifier.
     IDENTIFIER_TYPE_IPV4_ADDR = 2;
+    // IDENTIFIER_TYPE_IPV6_ADDR indicates an IPv6 address identifier.
     IDENTIFIER_TYPE_IPV6_ADDR = 3;
+    // IDENTIFIER_TYPE_INVENTORY_DEVICE_ID indicates an inventory device identifier.
     IDENTIFIER_TYPE_INVENTORY_DEVICE_ID = 4;
+    // IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP indicates a primary management IP identifier.
     IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP = 5;
+    // IDENTIFIER_TYPE_HOSTNAME indicates a hostname identifier.
     IDENTIFIER_TYPE_HOSTNAME = 6;
+    // IDENTIFIER_TYPE_USERNAME indicates a username identifier.
     IDENTIFIER_TYPE_USERNAME = 7;
-
-    // May be used for some unknown LLDP chassis id type
+    // IDENTIFIER_TYPE_OTHER is used for an unknown identifier.
     IDENTIFIER_TYPE_OTHER = 99999;
 }
 
+// IdentifierSource defines the set of network protocols and other
+// information sources where an identifier was found.
 enum IdentifierSource {
+     // IDENTIFIER_SOURCE_UNSPECIFIED is the default unspecified identifier source.
     IDENTIFIER_SOURCE_UNSPECIFIED = 0;
+    // IDENTIFIER_SOURCE_FDB indicates a forwarding table.
     IDENTIFIER_SOURCE_FDB = 1;
+    // IDENTIFIER_SOURCE_ARP indicates ARP (IPv4).
     IDENTIFIER_SOURCE_ARP = 2;
+    // IDENTIFIER_SOURCE_NEIGHBOR indicates NDP (IPv6).
     IDENTIFIER_SOURCE_NEIGHBOR = 3;
-    // Onboarded or inventory devices
+    // IDENTIFIER_SOURCE_DEVICE_INVENTORY indicates that an endpoint is in the
+    // CloudVision inventory.
     IDENTIFIER_SOURCE_DEVICE_INVENTORY = 4;
+    // IDENTIFIER_SOURCE_LLDP indicates LLDP.
     IDENTIFIER_SOURCE_LLDP = 5;
+    // IDENTIFIER_SOURCE_DHCP indicates DHCP.
     IDENTIFIER_SOURCE_DHCP = 6;
+    // IDENTIFIER_SOURCE_WIFI indicates a WiFi endpoint that was learned through
+    // a wireless manager.
     IDENTIFIER_SOURCE_WIFI = 7;
 }
 
+// IdentifierSourceList is a list of IdentifierSource.
 message IdentifierSourceList {
+    // values is an unordered list of unique IdentifierSource.
     repeated IdentifierSource values = 1;
 }
 
+// Identifier holds device identification information.
 message Identifier {
+    // type is the identifier type corresponding to value.
     IdentifierType type = 1;
+    // value is the string representation of the identifier. Its interpretation
+    // depends on type.
     google.protobuf.StringValue value = 2;
+    // source_list is the set of sources where this identifier was discovered.
     IdentifierSourceList source_list = 3;
 }
 
+// IdentifierList is a list of Identifier.
 message IdentifierList {
+    // values is an unordered list of Identifier where each Identifier has a
+    // unique type and value combination.
     repeated Identifier values = 1;
 }
 
+// Explanation defines the set of reasons for why a location has a certain likelihood.
+// Some explanations apply to queried endpoints while others apply to queried devices
+// in the CloudVision device inventory.
 enum Explanation {
-    // Explanation for ports that have unspecified likelihood
+    // EXPLANATION_UNSPECIFIED is the default unspecified explanation.
     EXPLANATION_UNSPECIFIED = 0;
-    // Explanation for ports directly connected to the queried endpoint device in LLDP
+    // EXPLANATION_DIRECT_CONNECTION indicates a direct connection to the queried
+    // endpoint device discovered via LLDP.
     EXPLANATION_DIRECT_CONNECTION = 1;
-    // Explanation for ports directly connected to at least one non-inventory device in LLDP
+    // EXPLANATION_NON_INVENTORY_CONNECTION indicates a direct connection to at least
+    // one non-inventory device (likely discovered via LLDP).
     EXPLANATION_NON_INVENTORY_CONNECTION = 2;
-    // Explanation for ports not directly connected to any device in LLDP
+    // EXPLANATION_NO_CONNECTION indicates that a location has no direct connection to
+    // any known device.
     EXPLANATION_NO_CONNECTION = 3;
-    // Explanation for ports only connected to inventory devices in LLDP
+    // EXPLANATION_INVENTORY_CONNECTION indicates that all of a location's known connections
+    // are to devices in the inventory.
     EXPLANATION_INVENTORY_CONNECTION = 4;
-    // Explanation for ports that are on the inventory device itself
+    // EXPLANATION_OWN_PORT_INVENTORY_DEVICE indicates a location on the queried inventory
+    // device itself.
     EXPLANATION_OWN_PORT_INVENTORY_DEVICE = 5;
-    // Explanation for ports directly connected to the queried device in LLDP (for inventory devices)
+    // EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE indicates a direct connection to the
+    // queried inventory device discovered via LLDP.
     EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE = 6;
-    // Explanation for ports not directly connected to any device in LLDP (for inventory devices)
+    // EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE indicates that a location has no direct
+    // connection to any known device (for queried inventory devices).
     EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE = 7;
-    // Explanation for ports connected to only other devices besides queried inventory device
+    // EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE indicates that a location only has
+    // connections to other devices besides the queried inventory device.
     EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE = 8;
-    // Explanation for ports containing a virtual interface
+    // EXPLANATION_VIRTUAL indicates that a location contains a virtual interface.
     EXPLANATION_VIRTUAL = 9;
-    // Explanation for wireless clients that are directly connected to a wireless access point
+    // EXPLANATION_WIRELESS_CONNECTION indicates a direct connection from a wireless access
+    // point in the device inventory to a wireless client.
     EXPLANATION_WIRELESS_CONNECTION = 10;
 }
 
+// ExplanationList is a list of Explanation.
 message ExplanationList {
+    // values is a list of unique Explanation. Currently, this will
+    // always contain one value, but in the future it may contain
+    // more.
     repeated Explanation values = 1;
 }
 
+// Location is a port (device_id, interface, vlan_id) on which
+// at least one identifier has been discovered.
 message Location {
+    // device_id identifies the device of the port.
     google.protobuf.StringValue device_id = 1;
+    // device_status is the status of the device identified by device_id.
     DeviceStatus device_status = 2;
+    // interface is the interface of the port.
     google.protobuf.StringValue interface = 3;
+    // vlan_id identifies the VLAN of the port.
     google.protobuf.UInt32Value vlan_id = 4;
+    // learned_time is when the port learned its identifiers.
     google.protobuf.Timestamp learned_time = 5;
+    // mac_type is how the port learned its MAC address identifier.
     MacType mac_type = 6;
+    // likelihood is the probability level that the port is directly connected
+    // to the queried endpoint.
     Likelihood likelihood = 7;
+    // explanation_list holds the reasons that the port was assigned likelihood.
     ExplanationList explanation_list = 8;
+    // identifier_list holds the discovered identifiers of the port.
     IdentifierList identifier_list = 9;
 }
 
+// LocationList is a list of Location.
 message LocationList {
+    // values is a list of unique Location.
     repeated Location values = 1;
 }
 
+// DeviceType defines a broad set of categories for
+// all queried devices.
 enum DeviceType {
+    // DEVICE_TYPE_UNSPECIFIED is the default unspecified device type.
     DEVICE_TYPE_UNSPECIFIED = 0;
+    // DEVICE_TYPE_INVENTORY indicates a device in the CloudVision inventory.
     DEVICE_TYPE_INVENTORY = 1;
+    // DEVICE_TYPE_ENDPOINT indicates a non-WiFi endpoint that does not exist
+    // in the CloudVision inventory.
     DEVICE_TYPE_ENDPOINT = 2;
+    // DEVICE_TYPE_WIFI_ENDPOINT indicates a WiFi client/endpoint that does not
+    // exist in the CloudVision inventory.
     DEVICE_TYPE_WIFI_ENDPOINT = 3;
 }
 
+// DeviceStatus is the network status of a device.
 enum DeviceStatus {
+    // DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.
     DEVICE_STATUS_UNSPECIFIED = 0;
+    // DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data
+    // to CloudVision.
     DEVICE_STATUS_ACTIVE = 1;
+    // DEVICE_STATUS_INACTIVE indicates a device is either not streaming its
+    // telemetry data to CloudVision or has been decommissioned from CloudVision.
     DEVICE_STATUS_INACTIVE = 2;
 }
 
+// DeviceInfo holds various attributes of a device (typically an endpoint) from Fingerbank.
 message DeviceInfo {
+    // device_name is the name of the device.
     google.protobuf.StringValue device_name = 1;
+    // mobile indicates whether the device is a mobile.
     google.protobuf.BoolValue mobile = 2;
+    // tablet indicates whether the device is a tablet.
     google.protobuf.BoolValue tablet = 3;
+    // score is a value from 0 to 100 that indicates how confident we are
+    // that the device has device_name.
+    // Fingerbank API documentation of score: https://api.fingerbank.org/api_doc/2/combinations.html
     google.protobuf.UInt32Value score = 4;
+    // version is the version of device_name.
     google.protobuf.StringValue version = 5;
+    // mac_vendor is the enterprise that assigns the MAC address of the device.
     google.protobuf.StringValue mac_vendor = 6;
+    // classification is the broadest category to which device_name belongs.
+    // This is the highest level in hierarchy.
     google.protobuf.StringValue classification = 7;
+    // hierarchy is a list of categorizations of the device from most broad
+    // to most specific. The first element is always classification and the
+    // last element is always device_name.
+    //
+    // For example,
+    //
+    // ["VoIP Device", "FooInc VoIP", "FooInc PhoneSet IP", "FooInc PhoneSet IP Model123"]
+    //
+    // In this hierarchy, "VoIP Device" is classification and "FooInc PhoneSet IP Model123"
+    // is device_name.
     fmp.RepeatedString hierarchy = 8;
 }
 
+// Device holds information for a device matching a search term.
 message Device {
+    // identifier_list holds the unique identifiers for the device.
     IdentifierList identifier_list = 1;
+    // device_type is the broad category of the device.
     DeviceType device_type = 2;
-    // The list of possible locations, in order from most likely to least likely
+    // location_list is the list of possible locations of the device.
+    // It is ordered from most likely to least likely.
     LocationList location_list = 3;
+    // device_status is the network status of the device.
     DeviceStatus device_status = 4;
+    // device_info holds various attributes of the device.
     DeviceInfo device_info = 5;
 }
 
+// DeviceMap is a collection of Device.
 message DeviceMap {
+    // values is a map from most specific identifier to Device.
+    // The key could be device serial number or MAC address.
     map<string, Device> values = 1;
 }
 
+// EndpointLocationKey holds a search term used to locate an endpoint.
 message EndpointLocationKey {
     option (fmp.model_key) = true;
 
+    // search_term is used to match against identifiers on devices.
+    // This could be a MAC/IP address, hostname, etc.
     google.protobuf.StringValue search_term = 1;
 }
 
+// EndpointLocation is the entrypoint to searching for
+// endpoints.
 message EndpointLocation {
     option (fmp.model) = "ro";
 
+    // key holds a search term used to locate an endpoint.
     EndpointLocationKey key = 1;
+    // device_map holds the devices (and their potential locations)
+    // that match the search term.
     DeviceMap device_map = 2;
 }

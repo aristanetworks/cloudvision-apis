@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -48,6 +48,17 @@ message EndpointLocationStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each EndpointLocation at end.
+	//     * Each EndpointLocation response is fully-specified (all fields set).
+	//   * start: Returns the state of each EndpointLocation at start, followed by updates until now.
+	//     * Each EndpointLocation response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each EndpointLocation at start, followed by updates
+	//     until end.
+	//     * Each EndpointLocation response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;

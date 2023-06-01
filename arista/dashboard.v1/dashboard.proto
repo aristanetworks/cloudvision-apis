@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 // Subject to Arista Networks, Inc.'s EULA.
 // FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
@@ -14,8 +14,6 @@ import "google/protobuf/wrappers.proto";
 
 import "fmp/extensions.proto";
 import "fmp/wrappers.proto";
-
-// Basic structures
 
 // Position represents a cell position in the UI.
 message Position {
@@ -46,14 +44,13 @@ message WidgetStyles {
 	// hide_horizontal_bar is used to hint the dashboard that the title separator must be hidden.
 	google.protobuf.BoolValue hide_horizontal_bar = 3;
 
-	// titleSize is used to set widget's title size.
+	// title_size is used to set widget's title size.
 	google.protobuf.UInt32Value title_size = 4;
 }
 
 
-// Widgets are used to create a dashboard.
+// Widget is used to create a dashboard.
 // Each widget is responsible to display some type of data.
-// Widgets are individually configurable.
 message Widget {
 	// id holds the unique identifier for the widget inside a dashboard
 	google.protobuf.StringValue id = 1;
@@ -65,7 +62,7 @@ message Widget {
 	// Top left is at (0,0).
 	Position position = 3;
 
-	// dimension of the widget represents how many cell in the grid it takes.
+	// dimensions of the widget represents how many cell in the grid it takes.
 	Dimensions dimensions = 4;
 
 	// type is the widget type. Each type is handled differently in the UI,
@@ -79,14 +76,16 @@ message Widget {
 	// location is used as a position display hint, used and managed by the UI.
 	google.protobuf.StringValue location = 7;
 
-	// WidgetStyles represents the widget's panel appearance.
+	// styles represents the widget's panel appearance.
 	WidgetStyles styles = 8;
-}
 
-// Dashboard State
+	// parent stores the id of its parent widget.
+	google.protobuf.StringValue parent = 9;
+}
 
 // Widgets holds a list of `Widget`s.
 message Widgets {
+	// values holds a list of widgets
 	repeated Widget values = 1;
 }
 
@@ -94,6 +93,7 @@ message Widgets {
 message DashboardKey {
 	option (fmp.model_key) = true;
 
+	// dashboard_id holds the id of the dashboard
 	google.protobuf.StringValue dashboard_id = 1;
 }
 

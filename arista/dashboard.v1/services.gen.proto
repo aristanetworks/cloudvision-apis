@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 // Subject to Arista Networks, Inc.'s EULA.
 // FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
@@ -55,6 +55,17 @@ message DashboardStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Dashboard at end.
+	//     * Each Dashboard response is fully-specified (all fields set).
+	//   * start: Returns the state of each Dashboard at start, followed by updates until now.
+	//     * Each Dashboard response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Dashboard at start, followed by updates
+	//     until end.
+	//     * Each Dashboard response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -115,6 +126,17 @@ message DashboardConfigStreamRequest {
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
 	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DashboardConfig at end.
+	//     * Each DashboardConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DashboardConfig at start, followed by updates until now.
+	//     * Each DashboardConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DashboardConfig at start, followed by updates
+	//     until end.
+	//     * Each DashboardConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
@@ -155,6 +177,21 @@ message DashboardConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DashboardConfigSetSomeRequest {
+	// value contains a list of DashboardConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated DashboardConfig values = 1;
+};
+
+message DashboardConfigSetSomeResponse {
+	DashboardKey key = 1;
+	string error = 2;
+};
+
 message DashboardConfigDeleteRequest {
 	// Key indicates which DashboardConfig instance to remove.
 	// This field must always be set.
@@ -193,6 +230,7 @@ service DashboardConfigService {
 	rpc GetAll (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
 	rpc Subscribe (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
 	rpc Set (DashboardConfigSetRequest) returns (DashboardConfigSetResponse);
+	rpc SetSome (DashboardConfigSetSomeRequest) returns (stream DashboardConfigSetSomeResponse);
 	rpc Delete (DashboardConfigDeleteRequest) returns (DashboardConfigDeleteResponse);
 	rpc DeleteAll (DashboardConfigDeleteAllRequest) returns (stream DashboardConfigDeleteAllResponse);
 }
@@ -226,6 +264,17 @@ message GlobalDashboardConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each GlobalDashboardConfig at end.
+	//     * Each GlobalDashboardConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.
+	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates
+	//     until end.
+	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;

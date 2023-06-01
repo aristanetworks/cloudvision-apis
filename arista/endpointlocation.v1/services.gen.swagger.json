@@ -43,6 +43,7 @@
         "parameters": [
           {
             "name": "key.searchTerm",
+            "description": "search_term is used to match against identifiers on devices.\nThis could be a MAC/IP address, hostname, etc.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -239,52 +240,66 @@
       "type": "object",
       "properties": {
         "identifierList": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList"
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList",
+          "description": "identifier_list holds the unique identifiers for the device."
         },
         "deviceType": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceType"
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceType",
+          "description": "device_type is the broad category of the device."
         },
         "locationList": {
           "$ref": "#/definitions/arista.endpointlocation.v1.LocationList",
-          "title": "The list of possible locations, in order from most likely to least likely"
+          "description": "location_list is the list of possible locations of the device.\nIt is ordered from most likely to least likely."
         },
         "deviceStatus": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus"
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus",
+          "description": "device_status is the network status of the device."
         },
         "deviceInfo": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceInfo"
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceInfo",
+          "description": "device_info holds various attributes of the device."
         }
-      }
+      },
+      "description": "Device holds information for a device matching a search term."
     },
     "arista.endpointlocation.v1.DeviceInfo": {
       "type": "object",
       "properties": {
         "deviceName": {
-          "type": "string"
+          "type": "string",
+          "description": "device_name is the name of the device."
         },
         "mobile": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "mobile indicates whether the device is a mobile."
         },
         "tablet": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "tablet indicates whether the device is a tablet."
         },
         "score": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "score is a value from 0 to 100 that indicates how confident we are\nthat the device has device_name.\nFingerbank API documentation of score: https://api.fingerbank.org/api_doc/2/combinations.html"
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "description": "version is the version of device_name."
         },
         "macVendor": {
-          "type": "string"
+          "type": "string",
+          "description": "mac_vendor is the enterprise that assigns the MAC address of the device."
         },
         "classification": {
-          "type": "string"
+          "type": "string",
+          "description": "classification is the broadest category to which device_name belongs.\nThis is the highest level in hierarchy."
         },
         "hierarchy": {
-          "$ref": "#/definitions/fmp.RepeatedString"
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "hierarchy is a list of categorizations of the device from most broad\nto most specific. The first element is always classification and the\nlast element is always device_name.\n\nFor example,\n\n[\"VoIP Device\", \"FooInc VoIP\", \"FooInc PhoneSet IP\", \"FooInc PhoneSet IP Model123\"]\n\nIn this hierarchy, \"VoIP Device\" is classification and \"FooInc PhoneSet IP Model123\"\nis device_name."
         }
-      }
+      },
+      "description": "DeviceInfo holds various attributes of a device (typically an endpoint) from Fingerbank."
     },
     "arista.endpointlocation.v1.DeviceMap": {
       "type": "object",
@@ -293,9 +308,11 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/arista.endpointlocation.v1.Device"
-          }
+          },
+          "description": "values is a map from most specific identifier to Device.\nThe key could be device serial number or MAC address."
         }
-      }
+      },
+      "description": "DeviceMap is a collection of Device."
     },
     "arista.endpointlocation.v1.DeviceStatus": {
       "type": "string",
@@ -304,7 +321,8 @@
         "DEVICE_STATUS_ACTIVE",
         "DEVICE_STATUS_INACTIVE"
       ],
-      "default": "DEVICE_STATUS_UNSPECIFIED"
+      "default": "DEVICE_STATUS_UNSPECIFIED",
+      "description": "DeviceStatus is the network status of a device.\n\n - DEVICE_STATUS_UNSPECIFIED: DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.\n - DEVICE_STATUS_ACTIVE: DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_INACTIVE: DEVICE_STATUS_INACTIVE indicates a device is either not streaming its\ntelemetry data to CloudVision or has been decommissioned from CloudVision."
     },
     "arista.endpointlocation.v1.DeviceType": {
       "type": "string",
@@ -314,26 +332,32 @@
         "DEVICE_TYPE_ENDPOINT",
         "DEVICE_TYPE_WIFI_ENDPOINT"
       ],
-      "default": "DEVICE_TYPE_UNSPECIFIED"
+      "default": "DEVICE_TYPE_UNSPECIFIED",
+      "description": "DeviceType defines a broad set of categories for\nall queried devices.\n\n - DEVICE_TYPE_UNSPECIFIED: DEVICE_TYPE_UNSPECIFIED is the default unspecified device type.\n - DEVICE_TYPE_INVENTORY: DEVICE_TYPE_INVENTORY indicates a device in the CloudVision inventory.\n - DEVICE_TYPE_ENDPOINT: DEVICE_TYPE_ENDPOINT indicates a non-WiFi endpoint that does not exist\nin the CloudVision inventory.\n - DEVICE_TYPE_WIFI_ENDPOINT: DEVICE_TYPE_WIFI_ENDPOINT indicates a WiFi client/endpoint that does not\nexist in the CloudVision inventory."
     },
     "arista.endpointlocation.v1.EndpointLocation": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey"
+          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey",
+          "description": "key holds a search term used to locate an endpoint."
         },
         "deviceMap": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceMap"
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceMap",
+          "description": "device_map holds the devices (and their potential locations)\nthat match the search term."
         }
-      }
+      },
+      "description": "EndpointLocation is the entrypoint to searching for\nendpoints."
     },
     "arista.endpointlocation.v1.EndpointLocationKey": {
       "type": "object",
       "properties": {
         "searchTerm": {
-          "type": "string"
+          "type": "string",
+          "description": "search_term is used to match against identifiers on devices.\nThis could be a MAC/IP address, hostname, etc."
         }
       },
+      "description": "EndpointLocationKey holds a search term used to locate an endpoint.",
       "required": [
         "searchTerm"
       ]
@@ -358,13 +382,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocation"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each EndpointLocation at end.\n    * Each EndpointLocation response is fully-specified (all fields set).\n  * start: Returns the state of each EndpointLocation at start, followed by updates until now.\n    * Each EndpointLocation response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each EndpointLocation at start, followed by updates\n    until end.\n    * Each EndpointLocation response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -402,7 +427,7 @@
         "EXPLANATION_WIRELESS_CONNECTION"
       ],
       "default": "EXPLANATION_UNSPECIFIED",
-      "title": "- EXPLANATION_UNSPECIFIED: Explanation for ports that have unspecified likelihood\n - EXPLANATION_DIRECT_CONNECTION: Explanation for ports directly connected to the queried endpoint device in LLDP\n - EXPLANATION_NON_INVENTORY_CONNECTION: Explanation for ports directly connected to at least one non-inventory device in LLDP\n - EXPLANATION_NO_CONNECTION: Explanation for ports not directly connected to any device in LLDP\n - EXPLANATION_INVENTORY_CONNECTION: Explanation for ports only connected to inventory devices in LLDP\n - EXPLANATION_OWN_PORT_INVENTORY_DEVICE: Explanation for ports that are on the inventory device itself\n - EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE: Explanation for ports directly connected to the queried device in LLDP (for inventory devices)\n - EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE: Explanation for ports not directly connected to any device in LLDP (for inventory devices)\n - EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE: Explanation for ports connected to only other devices besides queried inventory device\n - EXPLANATION_VIRTUAL: Explanation for ports containing a virtual interface\n - EXPLANATION_WIRELESS_CONNECTION: Explanation for wireless clients that are directly connected to a wireless access point"
+      "description": "Explanation defines the set of reasons for why a location has a certain likelihood.\nSome explanations apply to queried endpoints while others apply to queried devices\nin the CloudVision device inventory.\n\n - EXPLANATION_UNSPECIFIED: EXPLANATION_UNSPECIFIED is the default unspecified explanation.\n - EXPLANATION_DIRECT_CONNECTION: EXPLANATION_DIRECT_CONNECTION indicates a direct connection to the queried\nendpoint device discovered via LLDP.\n - EXPLANATION_NON_INVENTORY_CONNECTION: EXPLANATION_NON_INVENTORY_CONNECTION indicates a direct connection to at least\none non-inventory device (likely discovered via LLDP).\n - EXPLANATION_NO_CONNECTION: EXPLANATION_NO_CONNECTION indicates that a location has no direct connection to\nany known device.\n - EXPLANATION_INVENTORY_CONNECTION: EXPLANATION_INVENTORY_CONNECTION indicates that all of a location's known connections\nare to devices in the inventory.\n - EXPLANATION_OWN_PORT_INVENTORY_DEVICE: EXPLANATION_OWN_PORT_INVENTORY_DEVICE indicates a location on the queried inventory\ndevice itself.\n - EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE: EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE indicates a direct connection to the\nqueried inventory device discovered via LLDP.\n - EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE: EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE indicates that a location has no direct\nconnection to any known device (for queried inventory devices).\n - EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE: EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE indicates that a location only has\nconnections to other devices besides the queried inventory device.\n - EXPLANATION_VIRTUAL: EXPLANATION_VIRTUAL indicates that a location contains a virtual interface.\n - EXPLANATION_WIRELESS_CONNECTION: EXPLANATION_WIRELESS_CONNECTION indicates a direct connection from a wireless access\npoint in the device inventory to a wireless client."
     },
     "arista.endpointlocation.v1.ExplanationList": {
       "type": "object",
@@ -411,23 +436,29 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/arista.endpointlocation.v1.Explanation"
-          }
+          },
+          "description": "values is a list of unique Explanation. Currently, this will\nalways contain one value, but in the future it may contain\nmore."
         }
-      }
+      },
+      "description": "ExplanationList is a list of Explanation."
     },
     "arista.endpointlocation.v1.Identifier": {
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierType"
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierType",
+          "description": "type is the identifier type corresponding to value."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "value is the string representation of the identifier. Its interpretation\ndepends on type."
         },
         "sourceList": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierSourceList"
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierSourceList",
+          "description": "source_list is the set of sources where this identifier was discovered."
         }
-      }
+      },
+      "description": "Identifier holds device identification information."
     },
     "arista.endpointlocation.v1.IdentifierList": {
       "type": "object",
@@ -435,10 +466,13 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.endpointlocation.v1.Identifier"
-          }
+          },
+          "description": "values is an unordered list of Identifier where each Identifier has a\nunique type and value combination."
         }
-      }
+      },
+      "description": "IdentifierList is a list of Identifier."
     },
     "arista.endpointlocation.v1.IdentifierSource": {
       "type": "string",
@@ -453,7 +487,7 @@
         "IDENTIFIER_SOURCE_WIFI"
       ],
       "default": "IDENTIFIER_SOURCE_UNSPECIFIED",
-      "title": "- IDENTIFIER_SOURCE_DEVICE_INVENTORY: Onboarded or inventory devices"
+      "description": "IdentifierSource defines the set of network protocols and other\ninformation sources where an identifier was found.\n\n - IDENTIFIER_SOURCE_UNSPECIFIED: IDENTIFIER_SOURCE_UNSPECIFIED is the default unspecified identifier source.\n - IDENTIFIER_SOURCE_FDB: IDENTIFIER_SOURCE_FDB indicates a forwarding table.\n - IDENTIFIER_SOURCE_ARP: IDENTIFIER_SOURCE_ARP indicates ARP (IPv4).\n - IDENTIFIER_SOURCE_NEIGHBOR: IDENTIFIER_SOURCE_NEIGHBOR indicates NDP (IPv6).\n - IDENTIFIER_SOURCE_DEVICE_INVENTORY: IDENTIFIER_SOURCE_DEVICE_INVENTORY indicates that an endpoint is in the\nCloudVision inventory.\n - IDENTIFIER_SOURCE_LLDP: IDENTIFIER_SOURCE_LLDP indicates LLDP.\n - IDENTIFIER_SOURCE_DHCP: IDENTIFIER_SOURCE_DHCP indicates DHCP.\n - IDENTIFIER_SOURCE_WIFI: IDENTIFIER_SOURCE_WIFI indicates a WiFi endpoint that was learned through\na wireless manager."
     },
     "arista.endpointlocation.v1.IdentifierSourceList": {
       "type": "object",
@@ -462,9 +496,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierSource"
-          }
+          },
+          "description": "values is an unordered list of unique IdentifierSource."
         }
-      }
+      },
+      "description": "IdentifierSourceList is a list of IdentifierSource."
     },
     "arista.endpointlocation.v1.IdentifierType": {
       "type": "string",
@@ -480,7 +516,7 @@
         "IDENTIFIER_TYPE_OTHER"
       ],
       "default": "IDENTIFIER_TYPE_UNSPECIFIED",
-      "title": "- IDENTIFIER_TYPE_OTHER: May be used for some unknown LLDP chassis id type"
+      "description": "IdentifierType defines the set of ways for identifying endpoints.\n\n - IDENTIFIER_TYPE_UNSPECIFIED: IDENTIFIER_TYPE_UNSPECIFIED is the default unspecified identifier.\n - IDENTIFIER_TYPE_MAC_ADDR: IDENTIFIER_TYPE_MAC_ADDR indicates a MAC address identifier.\n - IDENTIFIER_TYPE_IPV4_ADDR: IDENTIFIER_TYPE_IPV4_ADDR indicates an IPv4 address identifier.\n - IDENTIFIER_TYPE_IPV6_ADDR: IDENTIFIER_TYPE_IPV6_ADDR indicates an IPv6 address identifier.\n - IDENTIFIER_TYPE_INVENTORY_DEVICE_ID: IDENTIFIER_TYPE_INVENTORY_DEVICE_ID indicates an inventory device identifier.\n - IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP: IDENTIFIER_TYPE_PRIMARY_MANAGEMENT_IP indicates a primary management IP identifier.\n - IDENTIFIER_TYPE_HOSTNAME: IDENTIFIER_TYPE_HOSTNAME indicates a hostname identifier.\n - IDENTIFIER_TYPE_USERNAME: IDENTIFIER_TYPE_USERNAME indicates a username identifier.\n - IDENTIFIER_TYPE_OTHER: IDENTIFIER_TYPE_OTHER is used for an unknown identifier."
     },
     "arista.endpointlocation.v1.Likelihood": {
       "type": "string",
@@ -492,41 +528,51 @@
         "LIKELIHOOD_LESS_LIKELY"
       ],
       "default": "LIKELIHOOD_UNSPECIFIED",
-      "title": "- LIKELIHOOD_UNSPECIFIED: These ports have unspecified likelihood\n - LIKELIHOOD_VERY_LIKELY: These ports are very likely to be physically connected to the queried device\n - LIKELIHOOD_LIKELY: These ports are likely to be physically connected to the queried device\n - LIKELIHOOD_SOMEWHAT_LIKELY: These ports are somewhat likely to be physically connected to the queried device\n - LIKELIHOOD_LESS_LIKELY: These ports are less likely to be physically connected to the queried device"
+      "description": "Likelihood indicates a level of confidence.\n\n - LIKELIHOOD_UNSPECIFIED: LIKELIHOOD_UNSPECIFIED is the default unspecified likelihood.\n - LIKELIHOOD_VERY_LIKELY: LIKELIHOOD_VERY_LIKELY indicates very high confidence.\n - LIKELIHOOD_LIKELY: LIKELIHOOD_LIKELY indicates high confidence.\n - LIKELIHOOD_SOMEWHAT_LIKELY: LIKELIHOOD_SOMEWHAT_LIKELY indicates medium confidence.\n - LIKELIHOOD_LESS_LIKELY: LIKELIHOOD_LESS_LIKELY indicates low confidence."
     },
     "arista.endpointlocation.v1.Location": {
       "type": "object",
       "properties": {
         "deviceId": {
-          "type": "string"
+          "type": "string",
+          "description": "device_id identifies the device of the port."
         },
         "deviceStatus": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus"
+          "$ref": "#/definitions/arista.endpointlocation.v1.DeviceStatus",
+          "description": "device_status is the status of the device identified by device_id."
         },
         "interface": {
-          "type": "string"
+          "type": "string",
+          "description": "interface is the interface of the port."
         },
         "vlanId": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "vlan_id identifies the VLAN of the port."
         },
         "learnedTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "learned_time is when the port learned its identifiers."
         },
         "macType": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.MacType"
+          "$ref": "#/definitions/arista.endpointlocation.v1.MacType",
+          "description": "mac_type is how the port learned its MAC address identifier."
         },
         "likelihood": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.Likelihood"
+          "$ref": "#/definitions/arista.endpointlocation.v1.Likelihood",
+          "description": "likelihood is the probability level that the port is directly connected\nto the queried endpoint."
         },
         "explanationList": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.ExplanationList"
+          "$ref": "#/definitions/arista.endpointlocation.v1.ExplanationList",
+          "description": "explanation_list holds the reasons that the port was assigned likelihood."
         },
         "identifierList": {
-          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList"
+          "$ref": "#/definitions/arista.endpointlocation.v1.IdentifierList",
+          "description": "identifier_list holds the discovered identifiers of the port."
         }
-      }
+      },
+      "description": "Location is a port (device_id, interface, vlan_id) on which\nat least one identifier has been discovered."
     },
     "arista.endpointlocation.v1.LocationList": {
       "type": "object",
@@ -534,10 +580,13 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.endpointlocation.v1.Location"
-          }
+          },
+          "description": "values is a list of unique Location."
         }
-      }
+      },
+      "description": "LocationList is a list of Location."
     },
     "arista.endpointlocation.v1.MacType": {
       "type": "string",
@@ -567,10 +616,11 @@
         "MAC_TYPE_AUTHENTICATED",
         "MAC_TYPE_PEER_AUTHENTICATED",
         "MAC_TYPE_PENDING_SECURE",
+        "MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC",
         "MAC_TYPE_OTHER"
       ],
       "default": "MAC_TYPE_UNSPECIFIED",
-      "title": "- MAC_TYPE_OTHER: This is used for capturing future MAC types"
+      "description": "MacType describes how the MAC address was learned on the port location.\n\n - MAC_TYPE_UNSPECIFIED: MAC_TYPE_UNSPECIFIED is the default unspecified MAC type.\n - MAC_TYPE_LEARNED_DYNAMIC: MAC_TYPE_LEARNED_DYNAMIC indicates a MAC that is dynamically learned in hardware.\n - MAC_TYPE_LEARNED_SECURE: MAC_TYPE_LEARNED_SECURE indicates a MAC that is learned in hardware on a port-security protect interface.\n - MAC_TYPE_CONFIGURED_DYNAMIC: MAC_TYPE_CONFIGURED_DYNAMIC indicates a configured dynamic MAC.\n - MAC_TYPE_CONFIGURED_SECURE: MAC_TYPE_CONFIGURED_SECURE indicates a MAC configured on an interface with Port Security: Protect mode enabled\n - MAC_TYPE_CONFIGURED_STATIC: MAC_TYPE_CONFIGURED_STATIC indicates a statically configured MAC.\n - MAC_TYPE_PEER_DYNAMIC: MAC_TYPE_PEER_DYNAMIC indicates a dynamically learned MAC discovered via an MLAG peer.\n - MAC_TYPE_PEER_STATIC: MAC_TYPE_PEER_STATIC indicates a statically configured MAC discovered via an MLAG peer.\n - MAC_TYPE_PEER_SECURE: MAC_TYPE_PEER_SECURE indicates a secure MAC learned from an MLAG peer.\n - MAC_TYPE_LEARNED_REMOTE: MAC_TYPE_LEARNED_REMOTE indicates a MAC learned remotely behind a VxLAN VTEP.\n - MAC_TYPE_CONFIGURED_REMOTE: MAC_TYPE_CONFIGURED_REMOTE indicates a MAC configured behind a VxLAN VTEP.\n - MAC_TYPE_RECEIVED_REMOTE: MAC_TYPE_RECEIVED_REMOTE indicates a MAC received from a VxLAN controller.\n - MAC_TYPE_PEER_LEARNED_REMOTE: MAC_TYPE_PEER_LEARNED_REMOTE indicates a remote MAC learned on a peer VTEP.\n - MAC_TYPE_PEER_CONFIGURED_REMOTE: MAC_TYPE_PEER_CONFIGURED_REMOTE indicates an MLAG peer configured remote MAC.\n - MAC_TYPE_PEER_RECEIVED_REMOTE: MAC_TYPE_PEER_RECEIVED_REMOTE indicates a remote MAC received from a VxLAN controller by the MLAG peer.\n - MAC_TYPE_EVPN_DYNAMIC_REMOTE: MAC_TYPE_EVPN_DYNAMIC_REMOTE indicates an EVPN dynamic remote MAC.\n - MAC_TYPE_EVPN_CONFIGURED_REMOTE: MAC_TYPE_EVPN_CONFIGURED_REMOTE indicates an EVPN configured remote MAC.\n - MAC_TYPE_PEER_EVPN_REMOTE: MAC_TYPE_PEER_EVPN_REMOTE indicates an MLAG peer EVPN remote MAC.\n - MAC_TYPE_CONFIGURED_ROUTER: MAC_TYPE_CONFIGURED_ROUTER indicates a configured MAC used in routing.\n - MAC_TYPE_PEER_ROUTER: MAC_TYPE_PEER_ROUTER indicates an MLAG peer specific router MAC.\n - MAC_TYPE_EVPN_INTF_DYNAMIC: MAC_TYPE_EVPN_INTF_DYNAMIC indicates a MAC advertised by EVPN when a dynamic MAC is learned on ESI (Ethernet Segment Identifier).\n - MAC_TYPE_EVPN_INTF_STATIC: MAC_TYPE_EVPN_INTF_STATIC indicates a MAC configured on EVPN ESI.\n - MAC_TYPE_AUTHENTICATED: MAC_TYPE_AUTHENTICATED indicates a MAC authenticated via 802.1X.\n - MAC_TYPE_PEER_AUTHENTICATED: MAC_TYPE_PEER_AUTHENTICATED indicates a MAC authenticated by 802.1X and learned on an MLAG peer.\n - MAC_TYPE_PENDING_SECURE: MAC_TYPE_PENDING_SECURE indicates a secure MAC in a pending state.\n - MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC: MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC indicates a MAC learned behind VTEP in software in the case of a VxLAN remote MAC.\n - MAC_TYPE_OTHER: MAC_TYPE_OTHER is used for capturing future MAC types."
     },
     "arista.subscriptions.Operation": {
       "type": "string",
@@ -632,6 +682,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }

@@ -10,6 +10,7 @@ Changes:
     - date: 2020-04-09
       description: Initial revision
       version: 1.0.0
+      cvaas: true
     - date: 2020-04-24
       description: Added MacType and changed learnedTs to protobuf timestamp
       version: 1.0.1
@@ -70,5 +71,8 @@ Changes:
     - date: 2021-06-21
       description: Added username identifier type, wifi identifier source, wireless connection explanation, and wifi endpoint device type to schema
       version: 1.2.3
+    - date: 2023-04-24
+      description: Added MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC to correspond with softwareLearnedDynamicMac type in MAC tables
+      version: 1.8.0
       onprem: true
       cvaas: true
