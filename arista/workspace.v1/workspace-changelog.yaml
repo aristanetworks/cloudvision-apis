@@ -7,11 +7,67 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-05-08
+      description: Add state per build stage
+      version: 1.2.16
+      cvaas: true
+    - date: 2023-04-27
+      description: Add REQUEST_REBASE to Request
+      version: 1.2.15
+    - date: 2023-04-10
+      description: Add ImageValidationSkipCause
+      version: 1.2.14
+    - date: 2023-02-17
+      description: Add ExceptionMsg to TemplateError
+      version: 1.2.13
+    - date: 2022-12-02
+      description: Update documentation
+      version: 1.2.12
+    - date: 2022-11-08
+      description: Change DeviceStatus to ConfigValidationSkipCause
+      version: 1.2.11
+    - date: 2022-10-28
+      description: Add ConfigSources to ConfigValidationResult
+      version: 1.2.10
+    - date: 2022-10-04
+      description: Add DEVICE_STATUS_PREPROVISIONED to DeviceStatus
+      version: 1.2.9
+    - date: 2022-08-25
+      description: Add DeviceStatus to WorkspaceBuildDetails
+      version: 1.2.8
+    - date: 2022-08-23
+      description: Add REQUEST_SUBMIT_FORCE to Request
+      version: 1.2.7
+    - date: 2022-05-25
+      description: Add InputErrors to ConfigletBuildResult
+      version: 1.2.6
+    - date: 2022-05-13
+      description: Add BUILD_STATE_SKIPPED to BuildState
+      version: 1.2.5
+    - date: 2022-02-16
+      description: Add ImageInputError to ImageValidationResult
+      version: 1.2.4
+    - date: 2022-01-25
+      description: Add ImageValidationResult to WorkspaceBuildDetails
+      version: 1.2.3
+    - date: 2022-01-20
+      description: Add execution_id field to ConfigletBuildResult
+      version: 1.2.2
+    - date: 2021-12-07
+      description: Add needs_build field to Workspace state
+      version: 1.2.1
+    - date: 2021-11-01
+      description: Remove BuildResults, and add WorkspaceBuildDetails resource
+      version: 1.2.0
+    - date: 2021-10-25
+      description: Add error to WorkspaceBuild
+      version: 1.1.6
+    - date: 2021-10-15
+      description: Add other_error to ConfigletBuildResult
+      version: 1.1.5
     - date: 2021-07-12
       description: Import configstatus instead of config
       version: 1.1.4
-      onprem: true
-      cvaas: true
     - date: 2021-06-15
       description: Use common structs from config.proto
       version: 1.1.3

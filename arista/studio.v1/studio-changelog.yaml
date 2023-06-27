@@ -7,11 +7,70 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-03-31
+      description: Add SetSome to all Config services
+      version: 1.2.2
+      cvaas: true
+
+    - date: 2023-03-21
+      description: Change AutofillAction keys to reflect 1:1 binding of AutofillAction to Input
+      version: 1.2.1
+
+    - date: 2023-02-27
+      description: Correct variable names in AutofillAction descriptions
+      version: 1.1.1
+
+    - date: 2023-01-24
+      description: Add AutofillAction definitions
+      version: 1.1.0
+
+    - date: 2022-12-12
+      description: Update documentation
+      version: 1.0.25
+
+    - date: 2022-12-06
+      description: Renamed built_in to immutable in StudioSummary
+      version: 1.0.24
+
+    - date: 2022-12-06
+      description: Remove deleted from StudioSummary
+      version: 1.0.23
+
+    - date: 2022-11-23
+      description: Add new models to support the Inventory and topology studio
+      version: 1.0.22
+
+    - date: 2022-09-14
+      description: Add Tag Matcher Input type
+      version: 1.0.22
+
+    - date: 2022-8-12
+      description: Add extra_values_allowed field
+      version: 1.0.21
+
+    - date: 2022-5-20
+      description: Add new fields to StudioSummary
+      version: 1.0.20
+
+    - date: 2021-12-21
+      description: Update documentation
+      version: 1.0.19
+
+    - date: 2021-12-09
+      description: Add SecretInput resource
+      version: 1.0.18
+
+    - date: 2021-12-08
+      description: Remove input_validation_results from Studio State resource
+      version: 1.0.17
+
+    - date: 2021-09-17
+      description: Add StudioSummary resource
+      version: 1.0.16
+
     - date: 2021-08-10
       description: Add autoFillActionID to schema
       version: 1.0.15
-      onprem: true
-      cvaas: true
 
     - date: 2021-07-22
       description: change InputsKey path type to fmp.RepeatedString
@@ -33,3 +92,42 @@ Changes:
       description: Added InputsConfig resource
       version: 1.0.10
 
+    - date: 2021-05-19
+      description: Added AssignedTagsConfig resource
+      version: 1.0.9
+
+    - date: 2021-05-19
+      description: Moved inputschema into studio
+      version: 1.0.8
+
+    - date: 2021-05-04
+      description: Moved template into studio
+      version: 1.0.7
+
+    - date: 2021-03-25
+      description: changed assigned_tags to query string
+      version: 1.0.6
+
+    - date: 2021-02-03
+      description: renamed change_context_id to workspace_id
+      version: 1.0.5
+
+    - date: 2021-01-29
+      description: included input validation result into studio model
+      version: 1.0.4
+
+    - date: 2020-05-06
+      description: renamed repeated fields to values
+      version: 1.0.3
+
+    - date: 2020-05-06
+      description: changed InputValues to repeated string
+      version: 1.0.2
+
+    - date: 2020-04-10
+      description: changed Go package name to a versionless one
+      version: 1.0.1
+
+    - date: 2020-04-10
+      description: Initial revision
+      version: 1.0.0

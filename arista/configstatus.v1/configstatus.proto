@@ -79,7 +79,7 @@ message DiffEntry {
   google.protobuf.Int32Value a_line_num = 2;
   // line number in B this diff applies to
   google.protobuf.Int32Value b_line_num = 3;
-  // line number in B of the leading command of the containing block
+  // line number of the parent command in B
   google.protobuf.Int32Value b_parent_line_num = 4;
   // content of config line in A
   google.protobuf.StringValue a_line = 5;
@@ -89,6 +89,8 @@ message DiffEntry {
   ConfigFilterCode a_filter_code = 7;
   // Config filter code of the line in B
   ConfigFilterCode b_filter_code = 8;
+  // line number of the parent command in A
+  google.protobuf.Int32Value a_parent_line_num = 9;
 }
 // DiffEntries indicates potential multiple lines of config diff
 message DiffEntries {
@@ -102,6 +104,39 @@ enum ConfigSyncCode {
   CONFIG_SYNC_CODE_IN_SYNC = 1;
   // OUT_OF_SYNC indicates designed config and running config are not identical
   CONFIG_SYNC_CODE_OUT_OF_SYNC = 2;
+}
+
+// ConfigSourceType indicates the type of source for the proposed/designed configuration
+// for the device
+enum ConfigSourceType {
+	CONFIG_SOURCE_TYPE_UNSPECIFIED = 0;
+
+	// CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET - configlet created from
+	// the network provisioning workflow.
+	CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET = 1;
+
+	// CONFIG_SOURCE_TYPE_STUDIO - config generated from a regular studio
+	CONFIG_SOURCE_TYPE_STUDIO = 2;
+
+	// SCONFIG_SOURCE_TYPE_STUDIO_STATIC - static config from studios framework
+	CONFIG_SOURCE_TYPE_STUDIO_STATIC = 3;
+}
+
+// ConfigSource describes an individual source of the proposed/designed config
+message ConfigSource {
+   ConfigSourceType source_type = 1;
+
+   // source_id identifier to distinguish between multiple instances of the source type
+   // source_id is :
+   //	configlet name for CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET
+   //	studio id for CONFIG_SOURCE_TYPE_STUDIO
+   //	configlet id for CONFIG_SOURCE_TYPE_STUDIO_STATIC
+   google.protobuf.StringValue source_id = 2;
+}
+
+// ConfigSources is the list of sources of the proposed/designed config
+message ConfigSources {
+   repeated ConfigSource values = 1;
 }
 
 // ConfigSummary represents device configuration summary.
@@ -131,7 +166,7 @@ message ConfigSummary {
   google.protobuf.StringValue designed_config_uri = 12;
   // The HTTP URI client can use to GET config diff and associated errors
   google.protobuf.StringValue diff_uri = 13;
-  // Digest of the config diff. For example, it can be SHA-256 hash of the config diff
+  // Digest (SHA-256) of the config diff.
   google.protobuf.StringValue digest = 14;
 }
 
@@ -158,7 +193,6 @@ message Configuration {
   ConfigKey key = 1;
   // Uri represents the HTTP URI client can use to GET config body and associated errors
   google.protobuf.StringValue uri = 2;
-  ConfigError error = 3;
 }
 
 // ConfigDiffKey uniquely identifies a configuration diff request
@@ -188,7 +222,6 @@ message ConfigDiff {
 
   // Uri represents the HTTP URI client can use to GET config diff and associated errors
   google.protobuf.StringValue uri = 2;
-  ConfigError error = 3;
 }
 
 // SummaryKey uniquely identifies a device summary request
@@ -205,5 +238,60 @@ message Summary {
   SummaryKey key = 1;
 
   ConfigSummary summary = 2;
-  ConfigError error = 3;
+}
+
+// SecurityProfile holds the EOS configuration for the security profile.
+message SecurityProfile {
+  option (fmp.model) = "ro";
+
+  // key uniquely identifies the configuration
+  ConfigKey key = 1;
+  // config describes the security profile config body
+  google.protobuf.StringValue config = 2;
+}
+
+// SecurityProfileComplianceSummary holds the compliance summary for
+// security profile configuration.
+message SecurityProfileComplianceSummary {
+  ConfigSyncCode sync = 1;
+  // nop_lines is the number of lines with code no-operation
+  google.protobuf.Int32Value nop_lines = 2;
+  // ignored_lines is the number of lines with code IGNORE
+  google.protobuf.Int32Value ignored_lines = 3;
+  // added_lines is the number of lines with code ADD
+  google.protobuf.Int32Value added_lines = 4;
+  // deleted_lines is the number of lines with code DELETE
+  google.protobuf.Int32Value deleted_lines = 5;
+  // changed_lines is the Number of lines with code CHANGE
+  google.protobuf.Int32Value changed_lines = 6;
+  // digest is the digest (SHA-256 hash) of the security profile configuration diff
+  google.protobuf.StringValue digest = 7;
+  // running_config_update_time is the timestamp at which running security profile
+  // or running config is updated
+  google.protobuf.Timestamp running_config_update_time = 8;
+  // designed_config_update_time is the timestamp at which designed security profile or
+  // designed config is updated
+  google.protobuf.Timestamp designed_config_update_time = 9;
+}
+
+// SecurityProfileDiffSummary holds device compliance summary w.r.t security profile.
+message SecurityProfileDiffSummary {
+  option (fmp.model) = "ro";
+
+  // key uniquely identifies the Summary
+  SummaryKey key = 1;
+
+  // summary is the security profile configuration compliance summary
+  SecurityProfileComplianceSummary summary = 2;
+}
+
+// SecurityProfileDiff holds the security profile configuration diff.
+message SecurityProfileDiff {
+  option (fmp.model) = "ro";
+
+  // key represents security profile config diff key
+  ConfigDiffKey key = 1;
+
+  // diff represents diff entries
+  DiffEntries diff = 2;
 }

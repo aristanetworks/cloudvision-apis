@@ -1,0 +1,327 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+// Subject to Arista Networks, Inc.'s EULA.
+// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+syntax = "proto3";
+
+package arista.imagestatus.v1;
+
+option go_package = "arista/resources/arista/imagestatus.v1;imagestatus";
+
+option java_package = "com.arista.imagestatus.v1";
+option java_outer_classname = "Imagestatus";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+
+// SoftwareImage provides information of the running/designed EOS image.
+message SoftwareImage {
+    // name is the name of the EOS image.
+    google.protobuf.StringValue name = 1;
+    // version is the version of the EOS image.
+    google.protobuf.StringValue version = 2;
+}
+
+// ExtensionInstallStatus indicates whether an extension is installed, not installed
+// or force installed.
+enum ExtensionInstallStatus {
+    // EXTENSION_INSTALL_STATUS_UNSPECIFIED indicates extensions install status is unspecified.
+    EXTENSION_INSTALL_STATUS_UNSPECIFIED = 0;
+    // EXTENSION_INSTALL_STATUS_NOT_INSTALLED indicates extension is not installed on the device.
+    EXTENSION_INSTALL_STATUS_NOT_INSTALLED = 1;
+    // EXTENSION_INSTALL_STATUS_INSTALLED indicates extension is installed on the device.
+    EXTENSION_INSTALL_STATUS_INSTALLED = 2;
+    // EXTENSION_INSTALL_STATUS_FORCE_INSTALLED indicates extension is force installed on
+    // device.
+    EXTENSION_INSTALL_STATUS_FORCE_INSTALLED = 3;
+}
+
+// Extension provides information of the running/designed extensions.
+message Extension {
+    // name is the name of the extension.
+    google.protobuf.StringValue name = 1;
+    // version is the version of the extension.
+    google.protobuf.StringValue version = 2;
+    // reboot_required indicates whether applying/deleting this extension
+    // would result in a reboot.
+    google.protobuf.BoolValue reboot_required = 3;
+    // present indicates whether the extension is present in the device
+    // or not.
+    google.protobuf.BoolValue present = 4;
+    // installed indicates whether the extension is installed, not
+    // installed or force installed.
+    ExtensionInstallStatus installed = 5;
+}
+
+// Extensions provides an ordered list of running/designed extensions.
+message Extensions {
+    // values represents extension information.
+    repeated Extension values = 1;
+}
+
+// SoftwareComplianceCode indicates possible compliance status.
+enum SoftwareComplianceCode {
+    // SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED indicates compliance code is unspecified.
+    SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED = 0;
+    // SOFTWARE_COMPLIANCE_CODE_IN_SYNC indicates designed and running images/extensions
+    // are identical.
+    SOFTWARE_COMPLIANCE_CODE_IN_SYNC = 1;
+    // SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC indicates designed and running images/extensions
+    // are not identical.
+    SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC = 2;
+}
+
+// ComplianceStatus indicates compliance status for software image, terminattr
+// and extensions.
+message ComplianceStatus {
+    // software_image_compliance_code is the compliance code for images.
+    SoftwareComplianceCode software_image_compliance_code = 1;
+    // terminattr_compliance_code is the compliance code for TerminAttr.
+    SoftwareComplianceCode terminattr_compliance_code = 2;
+    // extensions_compliance_code is the compliance code for extensions.
+    SoftwareComplianceCode extensions_compliance_code = 3;
+}
+
+// ComplianceStatusBySup is a map that indicates the compliance code for each
+// supervisor.
+message ComplianceStatusBySup {
+    // values is the mapping of supervisor type to compliance code.
+    map<string, ComplianceStatus> values = 1;
+}
+
+// RebootRequired indicates the reboot information per software image,
+// terminattr and extension for the switch as a whole.
+message RebootRequired {
+    // software_image_reboot_required indicates whether reboot is required
+    // for the software image being applied.
+    google.protobuf.BoolValue software_image_reboot_required = 1;
+    // terminattr_reboot_required indicates whether reboot is required
+    // for the terminattr being applied/deleted.
+    google.protobuf.BoolValue terminattr_reboot_required = 2;
+    // extension_reboot_required indicates whether reboot is required
+    // for the extensions being applied/deleted.
+    google.protobuf.BoolValue extension_reboot_required = 3;
+}
+
+// DiffOp represents the operation performed to get from one side of the diff
+// to the other.
+enum DiffOp {
+    // DIFF_OP_UNSPECIFIED indicates op code is unspecified.
+    DIFF_OP_UNSPECIFIED = 0;
+    // DIFF_OP_NOP indicates no change.
+    DIFF_OP_NOP = 1;
+    // DIFF_OP_ADD is an addition of a software.
+    DIFF_OP_ADD = 2;
+    // DIFF_OP_DELETE is deletion of a software.
+    DIFF_OP_DELETE = 3;
+    // DIFF_OP_CHANGE is an update to the software.
+    DIFF_OP_CHANGE = 4;
+}
+
+// SoftwareImageDiff is the diff for the running/designed images.
+message SoftwareImageDiff {
+    // code indicates the operation performed to get from one side of the diff
+    // to the other.
+    DiffOp code = 1;
+    // a is the software image on the a side (left hand side).
+    SoftwareImage a = 2;
+    // b is the software image on the b side (right hand side).
+    SoftwareImage b = 3;
+}
+
+// SoftwareImageDiffsBySup is software image diff information for each
+// supervisor.
+message SoftwareImageDiffsBySup {
+    // values is the mapping of supervisor type to image diff.
+    map<string, SoftwareImageDiff> values = 1;
+}
+
+// ExtensionDiff is the diff for the running/designed extensions.
+message ExtensionDiff {
+    // code indicates the operation performed to get from one side of the diff
+    // to the other.
+    DiffOp code = 1;
+    // a is the extension on the a side (left hand side).
+    Extension a = 2;
+    // b is the extension on the b side (right hand side).
+    Extension b = 3;
+}
+
+// TerminAttrDiffsBySup is the terminattr diff information for each supervisor.
+message TerminAttrDiffsBySup {
+    // values is the mapping of supervisor type to terminattr diff.
+    map<string, ExtensionDiff> values = 1;
+}
+
+// ExtensionDiffs is a list of extension diff information in the order they
+// will be applied.
+message ExtensionDiffs {
+    // values is an ordered list of extension diffs applied to the device.
+    repeated ExtensionDiff values = 1;
+}
+
+// ExtensionDiffsBySup is the extension diff information for each supervisor.
+message ExtensionDiffsBySup {
+    // values is the mapping of supervisor type to extension diff.
+    map<string, ExtensionDiffs> values = 1;
+}
+
+// ImageSummary represents device image summary.
+message ImageSummary {
+    // sku indicates the top-level sku or model number.
+    google.protobuf.StringValue sku = 1;
+    // running_image_update_time is the most recent timestamp at which one of
+    // running image side properties is updated.
+    google.protobuf.Timestamp running_image_update_time = 2;
+    // designed_image_update_time is the most recent timestamp at which one of
+    // designed image side properties is updated.
+    google.protobuf.Timestamp designed_image_update_time = 3;
+    // dual_sup indicates if a device is a dual supervisor.
+    google.protobuf.BoolValue dual_sup = 4;
+    // active_slot indicates the physical slot number for the the active
+    // supervisor.
+    google.protobuf.Int32Value active_slot = 5;
+    // standby_slot indicates the physical slot number for the standby
+    // supervisor.
+    google.protobuf.Int32Value standby_slot = 6;
+    // software_image_diff indicates the image diff for each supervisor.
+    SoftwareImageDiffsBySup software_image_diff = 7;
+    // terminattr_diff indicates the terminattr diff for each supervisor.
+    TerminAttrDiffsBySup terminattr_diff = 8;
+    // extensions_diff indicates the extension diff for each supervisor.
+    ExtensionDiffsBySup extensions_diff = 9;
+    // compliance_status is the aggregated compliance status (including both
+    // active/standby and image/TA/extension compliance).
+    SoftwareComplianceCode compliance_status = 10;
+    // compliance provides compliance information for each supervisor.
+    ComplianceStatusBySup compliance = 11;
+    // reboot_required indicates whether a reboot is required if the designed
+    // image is pushed to the device.
+    RebootRequired reboot_required = 12;
+    // digest is the digest of the image summary. It can use SHA-256 hash
+    // algorithm for example. It is computed by stringifying the
+    //software_image_diff, terminattr_diff and extensions_diff and computing the
+    // hash.
+    google.protobuf.StringValue digest = 13;
+}
+
+// SummaryKey uniquely identifies a device summary request.
+message SummaryKey {
+    option (fmp.model_key) = true;
+    // device_id is the serial number of the device
+    google.protobuf.StringValue device_id = 1;
+}
+
+// Summary represents the device image summary.
+message Summary {
+    option (fmp.model) = "ro";
+    // key represents the image summary key.
+    SummaryKey key = 1;
+    // summary is the image diff summary.
+    ImageSummary summary = 2;
+    // errors are the image errors encountered while validating the image. These are
+    // displayed on the change control review page (for changes made outside the workspace).
+    ImageErrors errors = 3;
+    // warnings are the image warnings encountered while validating the image. These are
+    // displayed on the change control review page (for changes made outside the workspace).
+    ImageWarnings warnings = 4;
+}
+
+// ErrorCode indicates errors produced during image validations.
+enum ErrorCode {
+    // ERROR_CODE_UNSPECIFIED indicates error code is unspecified.
+    ERROR_CODE_UNSPECIFIED = 0;
+    // ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does
+    // not support the SKU.
+    ERROR_CODE_SUPPORT_NOT_INTRODUCED = 1;
+    // ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer
+    // supports the SKU.
+    ERROR_CODE_SUPPORT_REMOVED = 2;
+    // ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device
+    // is unreachable during a compliance computation.
+    ERROR_CODE_DEVICE_UNREACHABLE = 3;
+    // ERROR_CODE_VALIDATION_FAILED represents case where the validations checks
+    // failed.
+    ERROR_CODE_VALIDATION_FAILED = 4;
+    // ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are
+    // unable to get proposed image information for a device.
+    ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED = 5;
+    // ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we
+    // fail to get running image information from an active supervisor.
+    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED = 6;
+    // ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we
+    // fail to get information from peer supervisor.
+    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED = 7;
+}
+
+// ImageError wraps `ErrorCode` enum with a reason string.
+message ImageError {
+    // sku represents the name of the sku.
+    google.protobuf.StringValue sku = 1;
+    // error_code is the error code.
+    ErrorCode error_code = 2;
+    // error_msg provides a description of the error.
+    google.protobuf.StringValue error_msg = 3;
+}
+
+// ImageErrors is the list of errors reported by CVP when handling image
+// validations.
+message ImageErrors {
+    // values is a list of image errors.
+    repeated ImageError values = 1;
+}
+
+// WarningCode indicates warnings produced during image validations.
+enum WarningCode {
+    // WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.
+    WARNING_CODE_UNSPECIFIED = 0;
+    // WARNING_CODE_NOT_APPLICABLE represents cases where EOS <-> SKU/TA compatibility
+    // is not applicable for non physical switches like vEos.
+    WARNING_CODE_NOT_APPLICABLE = 1;
+    // WARNING_CODE_SKUINFO_UNAVAILABLE represents case where
+    // information about certain skus is missing.
+    WARNING_CODE_SKUINFO_UNAVAILABLE = 2;
+    // WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.
+    WARNING_CODE_DEVICE_SKU_UNAVAILABLE = 3;
+    // WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.
+    WARNING_CODE_SWI_UNKNOWN = 4;
+    // WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.
+    // TA is lower than embedded TA in swi or given TA is unsupported by the EOS.
+    WARNING_CODE_TA_EOS_INCOMPATIBLE = 5;
+    // WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.
+    // TA is lower than minimum supported TA on CV.
+    WARNING_CODE_TA_CV_INCOMPATIBLE = 6;
+    // WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet
+    // supported by CV. Given EOS is outside range of CV's minimum and maximum EOS.
+    WARNING_CODE_EOS_CV_INCOMPATIBLE = 7;
+    // WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is
+    // not valid for EOS.
+    WARNING_CODE_EOS_ARCH_UNKNOWN = 8;
+    // WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower
+    // in version than embedded TA in SWI.
+    WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE = 9;
+    // WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are
+    // different.
+    WARNING_CODE_ARCH_INCOMPATIBLE = 10;
+}
+
+// ImageWarning wraps `WarningCode` enum with a reason string.
+message ImageWarning {
+    // sku represents the name of the sku.
+    google.protobuf.StringValue sku = 1;
+    // warning_code is the warning code.
+    WarningCode warning_code = 2;
+    // warning_msg provides a description of the warning.
+    google.protobuf.StringValue warning_msg = 3;
+}
+
+// ImageWarnings is the list of warnings reported by CVP when handling image
+// validations.
+message ImageWarnings {
+    // values is a list of image warnings.
+    repeated ImageWarning values = 1;
+}

@@ -1,0 +1,763 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.imagestatus.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "SummaryService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/imagestatus/v1/Summary": {
+      "get": {
+        "operationId": "SummaryService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the serial number of the device",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/api/resources/imagestatus/v1/Summary/all": {
+      "get": {
+        "operationId": "SummaryService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.SummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.SummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/api/resources/imagestatus/v1/Summary/watch": {
+      "get": {
+        "operationId": "SummaryService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.SummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.SummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.imagestatus.v1.ComplianceStatus": {
+      "type": "object",
+      "properties": {
+        "softwareImageComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "software_image_compliance_code is the compliance code for images."
+        },
+        "terminattrComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "terminattr_compliance_code is the compliance code for TerminAttr."
+        },
+        "extensionsComplianceCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "extensions_compliance_code is the compliance code for extensions."
+        }
+      },
+      "description": "ComplianceStatus indicates compliance status for software image, terminattr\nand extensions."
+    },
+    "arista.imagestatus.v1.ComplianceStatusBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ComplianceStatus"
+          },
+          "description": "values is the mapping of supervisor type to compliance code."
+        }
+      },
+      "description": "ComplianceStatusBySup is a map that indicates the compliance code for each\nsupervisor."
+    },
+    "arista.imagestatus.v1.DiffOp": {
+      "type": "string",
+      "enum": [
+        "DIFF_OP_UNSPECIFIED",
+        "DIFF_OP_NOP",
+        "DIFF_OP_ADD",
+        "DIFF_OP_DELETE",
+        "DIFF_OP_CHANGE"
+      ],
+      "default": "DIFF_OP_UNSPECIFIED",
+      "description": "DiffOp represents the operation performed to get from one side of the diff\nto the other.\n\n - DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED indicates op code is unspecified.\n - DIFF_OP_NOP: DIFF_OP_NOP indicates no change.\n - DIFF_OP_ADD: DIFF_OP_ADD is an addition of a software.\n - DIFF_OP_DELETE: DIFF_OP_DELETE is deletion of a software.\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE is an update to the software."
+    },
+    "arista.imagestatus.v1.ErrorCode": {
+      "type": "string",
+      "enum": [
+        "ERROR_CODE_UNSPECIFIED",
+        "ERROR_CODE_SUPPORT_NOT_INTRODUCED",
+        "ERROR_CODE_SUPPORT_REMOVED",
+        "ERROR_CODE_DEVICE_UNREACHABLE",
+        "ERROR_CODE_VALIDATION_FAILED",
+        "ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED",
+        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED",
+        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED"
+      ],
+      "default": "ERROR_CODE_UNSPECIFIED",
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor."
+    },
+    "arista.imagestatus.v1.Extension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the extension."
+        },
+        "version": {
+          "type": "string",
+          "description": "version is the version of the extension."
+        },
+        "rebootRequired": {
+          "type": "boolean",
+          "description": "reboot_required indicates whether applying/deleting this extension\nwould result in a reboot."
+        },
+        "present": {
+          "type": "boolean",
+          "description": "present indicates whether the extension is present in the device\nor not."
+        },
+        "installed": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ExtensionInstallStatus",
+          "description": "installed indicates whether the extension is installed, not\ninstalled or force installed."
+        }
+      },
+      "description": "Extension provides information of the running/designed extensions."
+    },
+    "arista.imagestatus.v1.ExtensionDiff": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "code indicates the operation performed to get from one side of the diff\nto the other."
+        },
+        "a": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Extension",
+          "description": "a is the extension on the a side (left hand side)."
+        },
+        "b": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Extension",
+          "description": "b is the extension on the b side (right hand side)."
+        }
+      },
+      "description": "ExtensionDiff is the diff for the running/designed extensions."
+    },
+    "arista.imagestatus.v1.ExtensionDiffs": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
+          },
+          "description": "values is an ordered list of extension diffs applied to the device."
+        }
+      },
+      "description": "ExtensionDiffs is a list of extension diff information in the order they\nwill be applied."
+    },
+    "arista.imagestatus.v1.ExtensionDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiffs"
+          },
+          "description": "values is the mapping of supervisor type to extension diff."
+        }
+      },
+      "description": "ExtensionDiffsBySup is the extension diff information for each supervisor."
+    },
+    "arista.imagestatus.v1.ExtensionInstallStatus": {
+      "type": "string",
+      "enum": [
+        "EXTENSION_INSTALL_STATUS_UNSPECIFIED",
+        "EXTENSION_INSTALL_STATUS_NOT_INSTALLED",
+        "EXTENSION_INSTALL_STATUS_INSTALLED",
+        "EXTENSION_INSTALL_STATUS_FORCE_INSTALLED"
+      ],
+      "default": "EXTENSION_INSTALL_STATUS_UNSPECIFIED",
+      "description": "ExtensionInstallStatus indicates whether an extension is installed, not installed\nor force installed.\n\n - EXTENSION_INSTALL_STATUS_UNSPECIFIED: EXTENSION_INSTALL_STATUS_UNSPECIFIED indicates extensions install status is unspecified.\n - EXTENSION_INSTALL_STATUS_NOT_INSTALLED: EXTENSION_INSTALL_STATUS_NOT_INSTALLED indicates extension is not installed on the device.\n - EXTENSION_INSTALL_STATUS_INSTALLED: EXTENSION_INSTALL_STATUS_INSTALLED indicates extension is installed on the device.\n - EXTENSION_INSTALL_STATUS_FORCE_INSTALLED: EXTENSION_INSTALL_STATUS_FORCE_INSTALLED indicates extension is force installed on\ndevice."
+    },
+    "arista.imagestatus.v1.ImageError": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "errorCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ErrorCode",
+          "description": "error_code is the error code."
+        },
+        "errorMsg": {
+          "type": "string",
+          "description": "error_msg provides a description of the error."
+        }
+      },
+      "description": "ImageError wraps `ErrorCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageErrors": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageError"
+          },
+          "description": "values is a list of image errors."
+        }
+      },
+      "description": "ImageErrors is the list of errors reported by CVP when handling image\nvalidations."
+    },
+    "arista.imagestatus.v1.ImageSummary": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku indicates the top-level sku or model number."
+        },
+        "runningImageUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "running_image_update_time is the most recent timestamp at which one of\nrunning image side properties is updated."
+        },
+        "designedImageUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "designed_image_update_time is the most recent timestamp at which one of\ndesigned image side properties is updated."
+        },
+        "dualSup": {
+          "type": "boolean",
+          "description": "dual_sup indicates if a device is a dual supervisor."
+        },
+        "activeSlot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "active_slot indicates the physical slot number for the the active\nsupervisor."
+        },
+        "standbySlot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "standby_slot indicates the physical slot number for the standby\nsupervisor."
+        },
+        "softwareImageDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImageDiffsBySup",
+          "description": "software_image_diff indicates the image diff for each supervisor."
+        },
+        "terminattrDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.TerminAttrDiffsBySup",
+          "description": "terminattr_diff indicates the terminattr diff for each supervisor."
+        },
+        "extensionsDiff": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiffsBySup",
+          "description": "extensions_diff indicates the extension diff for each supervisor."
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareComplianceCode",
+          "description": "compliance_status is the aggregated compliance status (including both\nactive/standby and image/TA/extension compliance)."
+        },
+        "compliance": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ComplianceStatusBySup",
+          "description": "compliance provides compliance information for each supervisor."
+        },
+        "rebootRequired": {
+          "$ref": "#/definitions/arista.imagestatus.v1.RebootRequired",
+          "description": "reboot_required indicates whether a reboot is required if the designed\nimage is pushed to the device."
+        },
+        "digest": {
+          "type": "string",
+          "description": "digest is the digest of the image summary. It can use SHA-256 hash\nalgorithm for example. It is computed by stringifying the\nsoftware_image_diff, terminattr_diff and extensions_diff and computing the\nhash."
+        }
+      },
+      "description": "ImageSummary represents device image summary."
+    },
+    "arista.imagestatus.v1.ImageWarning": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "warningCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.WarningCode",
+          "description": "warning_code is the warning code."
+        },
+        "warningMsg": {
+          "type": "string",
+          "description": "warning_msg provides a description of the warning."
+        }
+      },
+      "description": "ImageWarning wraps `WarningCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageWarnings": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageWarning"
+          },
+          "description": "values is a list of image warnings."
+        }
+      },
+      "description": "ImageWarnings is the list of warnings reported by CVP when handling image\nvalidations."
+    },
+    "arista.imagestatus.v1.RebootRequired": {
+      "type": "object",
+      "properties": {
+        "softwareImageRebootRequired": {
+          "type": "boolean",
+          "description": "software_image_reboot_required indicates whether reboot is required\nfor the software image being applied."
+        },
+        "terminattrRebootRequired": {
+          "type": "boolean",
+          "description": "terminattr_reboot_required indicates whether reboot is required\nfor the terminattr being applied/deleted."
+        },
+        "extensionRebootRequired": {
+          "type": "boolean",
+          "description": "extension_reboot_required indicates whether reboot is required\nfor the extensions being applied/deleted."
+        }
+      },
+      "description": "RebootRequired indicates the reboot information per software image,\nterminattr and extension for the switch as a whole."
+    },
+    "arista.imagestatus.v1.SoftwareComplianceCode": {
+      "type": "string",
+      "enum": [
+        "SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED",
+        "SOFTWARE_COMPLIANCE_CODE_IN_SYNC",
+        "SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC"
+      ],
+      "default": "SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED",
+      "description": "SoftwareComplianceCode indicates possible compliance status.\n\n - SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED: SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED indicates compliance code is unspecified.\n - SOFTWARE_COMPLIANCE_CODE_IN_SYNC: SOFTWARE_COMPLIANCE_CODE_IN_SYNC indicates designed and running images/extensions\nare identical.\n - SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC: SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC indicates designed and running images/extensions\nare not identical."
+    },
+    "arista.imagestatus.v1.SoftwareImage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name is the name of the EOS image."
+        },
+        "version": {
+          "type": "string",
+          "description": "version is the version of the EOS image."
+        }
+      },
+      "description": "SoftwareImage provides information of the running/designed EOS image."
+    },
+    "arista.imagestatus.v1.SoftwareImageDiff": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "code indicates the operation performed to get from one side of the diff\nto the other."
+        },
+        "a": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
+          "description": "a is the software image on the a side (left hand side)."
+        },
+        "b": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
+          "description": "b is the software image on the b side (right hand side)."
+        }
+      },
+      "description": "SoftwareImageDiff is the diff for the running/designed images."
+    },
+    "arista.imagestatus.v1.SoftwareImageDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImageDiff"
+          },
+          "description": "values is the mapping of supervisor type to image diff."
+        }
+      },
+      "description": "SoftwareImageDiffsBySup is software image diff information for each\nsupervisor."
+    },
+    "arista.imagestatus.v1.Summary": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.imagestatus.v1.SummaryKey",
+          "description": "key represents the image summary key."
+        },
+        "summary": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageSummary",
+          "description": "summary is the image diff summary."
+        },
+        "errors": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageErrors",
+          "description": "errors are the image errors encountered while validating the image. These are\ndisplayed on the change control review page (for changes made outside the workspace)."
+        },
+        "warnings": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageWarnings",
+          "description": "warnings are the image warnings encountered while validating the image. These are\ndisplayed on the change control review page (for changes made outside the workspace)."
+        }
+      },
+      "description": "Summary represents the device image summary."
+    },
+    "arista.imagestatus.v1.SummaryKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "title": "device_id is the serial number of the device"
+        }
+      },
+      "description": "SummaryKey uniquely identifies a device summary request.",
+      "required": [
+        "deviceId"
+      ]
+    },
+    "arista.imagestatus.v1.SummaryResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Summary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSummary instance in this response."
+        }
+      }
+    },
+    "arista.imagestatus.v1.SummaryStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.Summary"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.imagestatus.v1.SummaryStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Summary",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Summary's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Summary value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.imagestatus.v1.TerminAttrDiffsBySup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
+          },
+          "description": "values is the mapping of supervisor type to terminattr diff."
+        }
+      },
+      "description": "TerminAttrDiffsBySup is the terminattr diff information for each supervisor."
+    },
+    "arista.imagestatus.v1.WarningCode": {
+      "type": "string",
+      "enum": [
+        "WARNING_CODE_UNSPECIFIED",
+        "WARNING_CODE_NOT_APPLICABLE",
+        "WARNING_CODE_SKUINFO_UNAVAILABLE",
+        "WARNING_CODE_DEVICE_SKU_UNAVAILABLE",
+        "WARNING_CODE_SWI_UNKNOWN",
+        "WARNING_CODE_TA_EOS_INCOMPATIBLE",
+        "WARNING_CODE_TA_CV_INCOMPATIBLE",
+        "WARNING_CODE_EOS_CV_INCOMPATIBLE",
+        "WARNING_CODE_EOS_ARCH_UNKNOWN",
+        "WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE",
+        "WARNING_CODE_ARCH_INCOMPATIBLE"
+      ],
+      "default": "WARNING_CODE_UNSPECIFIED",
+      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

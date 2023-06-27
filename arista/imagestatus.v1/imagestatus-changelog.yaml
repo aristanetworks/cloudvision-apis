@@ -1,0 +1,40 @@
+# Copyright (c) 2021 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2023-05-01
+      description: Add new device error codes
+      version: 1.0.9
+      cvaas: true
+    - date: 2023-04-24
+      description: Add field facing documentation
+      version: 1.0.8
+    - date: 2022-12-22
+      description: Add new warning and error codes
+      version: 1.0.7
+    - date: 2022-04-06
+      description: Add present and installed information
+      version: 1.0.6
+    - date: 2022-01-25
+      description: Update ImageSummary and add image validations
+      version: 1.0.5
+    - date: 2021-11-10
+      description: Remove ConfigError from Summary
+      version: 1.0.4
+    - date: 2021-07-12
+      description: Import configstatus instead of config
+      version: 1.0.3
+    - date: 2021-06-29
+      description: Rename resource from image to imagestatus
+      version: 1.0.2
+    - date: 2021-06-28
+      description: Add running/designed image update time fields
+      version: 1.0.1
+    - date: 2021-04-20
+      description: Initial revision
+      version: 1.0.0

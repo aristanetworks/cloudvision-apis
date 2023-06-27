@@ -257,9 +257,18 @@ enum ChangeControlStatus {
      CHANGE_CONTROL_STATUS_SCHEDULED = 3;
 }
 
+// Filter is used to filter changecontrols for requested device ids.
+message Filter {
+	// device_ids includes the list of device ids to be matched with devices
+	// in the changecontrol state model.
+	// At least one of the provided device ids must be present in CC devices field.
+	fmp.RepeatedString device_ids = 1;
+}
+
 // ChangeControl holds the configuration and status of a change control.
 message ChangeControl {
 	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "Filter";
 
 	// key uniquely identifies the change control.
 	ChangeControlKey key = 1;
@@ -283,6 +292,8 @@ message ChangeControl {
 	// to be scheduled (`schedule.value` set to some timestamp) or
 	// unscheduled (`schedule.value` set to `nil`) for execution.
 	TimestampFlag schedule = 7;
+	// device_ids is a list of device IDs on which the change control will operate.
+	fmp.RepeatedString device_ids = 8;
 }
 
 // ApproveConfig is used to configure the approval of a change control.

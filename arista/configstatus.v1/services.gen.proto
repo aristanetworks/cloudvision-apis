@@ -139,6 +139,183 @@ service ConfigurationService {
 	rpc Subscribe (ConfigurationStreamRequest) returns (stream ConfigurationStreamResponse);
 }
 
+message SecurityProfileRequest {
+	// Key uniquely identifies a SecurityProfile instance to retrieve.
+	// This value must be populated.
+	ConfigKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfile value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// SecurityProfile instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfile partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message SecurityProfileStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	SecurityProfile value = 1;
+
+	// Time holds the timestamp of this SecurityProfile's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the SecurityProfile value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service SecurityProfileService {
+	rpc GetOne (SecurityProfileRequest) returns (SecurityProfileResponse);
+	rpc GetAll (SecurityProfileStreamRequest) returns (stream SecurityProfileStreamResponse);
+	rpc Subscribe (SecurityProfileStreamRequest) returns (stream SecurityProfileStreamResponse);
+}
+
+message SecurityProfileDiffRequest {
+	// Key uniquely identifies a SecurityProfileDiff instance to retrieve.
+	// This value must be populated.
+	ConfigDiffKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfileDiff value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// SecurityProfileDiff instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfileDiff partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message SecurityProfileDiffStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	SecurityProfileDiff value = 1;
+
+	// Time holds the timestamp of this SecurityProfileDiff's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the SecurityProfileDiff value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service SecurityProfileDiffService {
+	rpc GetOne (SecurityProfileDiffRequest) returns (SecurityProfileDiffResponse);
+	rpc GetAll (SecurityProfileDiffStreamRequest) returns (stream SecurityProfileDiffStreamResponse);
+	rpc Subscribe (SecurityProfileDiffStreamRequest) returns (stream SecurityProfileDiffStreamResponse);
+}
+
+message SecurityProfileDiffSummaryRequest {
+	// Key uniquely identifies a SecurityProfileDiffSummary instance to retrieve.
+	// This value must be populated.
+	SummaryKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffSummaryResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfileDiffSummary value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// SecurityProfileDiffSummary instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffSummaryStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfileDiffSummary partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message SecurityProfileDiffSummaryStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	SecurityProfileDiffSummary value = 1;
+
+	// Time holds the timestamp of this SecurityProfileDiffSummary's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the SecurityProfileDiffSummary value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service SecurityProfileDiffSummaryService {
+	rpc GetOne (SecurityProfileDiffSummaryRequest) returns (SecurityProfileDiffSummaryResponse);
+	rpc GetAll (SecurityProfileDiffSummaryStreamRequest) returns (stream SecurityProfileDiffSummaryStreamResponse);
+	rpc Subscribe (SecurityProfileDiffSummaryStreamRequest) returns (stream SecurityProfileDiffSummaryStreamResponse);
+}
+
 message SummaryRequest {
 	// Key uniquely identifies a Summary instance to retrieve.
 	// This value must be populated.

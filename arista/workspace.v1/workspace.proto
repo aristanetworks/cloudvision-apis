@@ -1,7 +1,27 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 // Subject to Arista Networks, Inc.'s EULA.
 // FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+// CloudVision allows users to version control provisioning operations
+// that impact device configuration and image management. A workspace is
+// something like a git branch, within which changes can be made without
+// immediately impacting a device's running configuration. Changes can be
+// made, modified, and previewed in a workspace. Once satisfied with the
+// set of changes, a user may submit a workspace to the "mainline" branch,
+// allowing the changes to be propagated to devices via Change Controls.
+//
+// A workspace comprises a set of diff operations (e.g., add/modify/remove)
+// that will be applied to the mainline if the workspace is submitted
+// successfully.
+//
+// A workspace itself is generic and can be used for any conceivable
+// set of device provisioning operations, but it is not capable of
+// describing the specific kind of changes. Rather, it holds changes
+// defined by other Resource APIs that are "workspace-aware", such as
+// studio.v1 and tag.v2. These APIs allow users to make changes within
+// the context of a specific workspace, identified in the resource key
+// with the field `workspace_id`.
 
 syntax = "proto3";
 
@@ -15,183 +35,410 @@ import "fmp/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "arista/configstatus.v1/configstatus.proto";
+import "arista/imagestatus.v1/imagestatus.proto";
 
+// WorkspaceState enumerates the general states of a workspace. Some of these states
+// are derived as a result of executing a specific request on the workspace (see Request).
 enum WorkspaceState {
+	// WORKSPACE_STATE_UNSPECIFIED indicates unspecified workspace state.
 	WORKSPACE_STATE_UNSPECIFIED = 0;
+	// WORKSPACE_STATE_PENDING indicates that the changes in the workspace are open and
+	// have not been submitted.
 	WORKSPACE_STATE_PENDING = 1;
+	// WORKSPACE_STATE_SUBMITTED indicates that the changes in the workspace have been
+	// submitted to the mainline.
 	WORKSPACE_STATE_SUBMITTED = 2;
+	// WORKSPACE_STATE_ABANDONED indicates that the workspace has been intentionally
+	// closed, and may no longer be updated.
 	WORKSPACE_STATE_ABANDONED = 3;
+	// WORKSPACE_STATE_CONFLICTS indicates that the changes in the workspace are in
+	// conflict with the current state of the system.
 	WORKSPACE_STATE_CONFLICTS = 4;
+	// WORKSPACE_STATE_ROLLED_BACK indicates that the workspace was submitted, but
+	// has been rolled back (the changes have been undone).
 	WORKSPACE_STATE_ROLLED_BACK = 5;
 }
 
-// Operations on a workspace that can be requested by a client.
-// These are workspace-specific operations. The standard operations Add, Delete, etc.
-// are performed via the standard ("core") APIs.
-// This is an asynchronous request that returns immediately if the request is valid.
-// The result of the operation will be available in WorkspaceStatus when it is generated.
+// Request enumerates the set of asynchronous operations that can be performed on a
+// workspace.
 enum Request {
+	// REQUEST_UNSPECIFIED describes unspecified request.
 	REQUEST_UNSPECIFIED = 0;
-	REQUEST_START_BUILD = 1;    // Start a new build
-	REQUEST_CANCEL_BUILD = 2;   // Cancel any pending build
-	REQUEST_SUBMIT = 3;         // Submit the workspace (merge into mainline)
-	REQUEST_ABANDON = 4;        // Abandon the workspace. Not delete
-	REQUEST_ROLLBACK = 5;       // Rollback an already submitted workspace
+	// REQUEST_START_BUILD describes a request to start building a workspace. This kicks
+	// of a multi-stage operation to compile and validate the changes in a workspace (see
+	// BuildStage for more details).
+	REQUEST_START_BUILD = 1;
+	// REQUEST_CANCEL_BUILD describes a request to stop building a workspace.
+	REQUEST_CANCEL_BUILD = 2;
+	// REQUEST_SUBMIT describes a request to submit a workspace to the mainline. Before
+	// submission, some checks are made that can cause the request to fail. E.g., if there
+	// is a modified configuration for a non-streaming device in the workspace, then the
+	// request will fail. Once submitted, changes are applied and change controls are
+	// created (if necessary).
+	REQUEST_SUBMIT = 3;
+	// REQUEST_ABANDON describes a request to abandon a workspace. This operation does
+	// not delete the workspace from the system, but closes it to any further updates.
+	REQUEST_ABANDON = 4;
+	// REQUEST_ROLLBACK describes a request to rollback a submitted workspace, undoing
+	// corresponding changes in the mainline.
+	REQUEST_ROLLBACK = 5;
+	// REQUEST_SUBMIT_FORCE describes a request to submit a workspace without making any
+	// checks that could normally cause the submission to fail. See REQUEST_SUBMIT for
+	// more details.
+	REQUEST_SUBMIT_FORCE = 6;
+	// REQUEST_REBASE describes a request to rebase a workspace. This operation updates
+	// workspace state to reflect the latest mainline content, and re-applies workspace
+	// changes on top of that.
+	REQUEST_REBASE = 7;
 }
 
+// ResponseStatus enumerates the set of execution statuses of a Response.
 enum ResponseStatus {
+	// RESPONSE_STATUS_UNSPECIFIED indicates unspecified response status.
 	RESPONSE_STATUS_UNSPECIFIED = 0;
+	// RESPONSE_STATUS_SUCCESS indicates that the original Request was successful
+	// in its execution.
 	RESPONSE_STATUS_SUCCESS = 1;
+	// RESPONSE_STATUS_FAIL indicates that the original Request was unsuccessful
+	// in its execution.
 	RESPONSE_STATUS_FAIL = 2;
 }
 
-// RequestParams is the parameters associated with a WorkspaceRequest
+// RequestParams define the parameters for a Request.
 message RequestParams {
+	// request_id is the unique ID of the request. This is used to identify
+	// the Response for the request in Responses.
 	google.protobuf.StringValue request_id = 1;
 }
 
-// Response is the response to the last Request, typically errors in processing
+// Response is a response to a Request.
 message Response {
+	// status is the execution status of the response.
 	ResponseStatus status = 1;
+	// message is a string that provides more details about the response.
 	google.protobuf.StringValue message = 2;
+	// code is the code of the response.
+	ResponseCode code = 3;
 }
 
-// Responses is the map of all request ID to response that are processed so far
+// ResponseCode is a code for a Response indicating a particular scenario.
+enum ResponseCode {
+	// RESPONSE_CODE_UNSPECIFIED indicates unspecified response code.
+	RESPONSE_CODE_UNSPECIFIED = 0;
+	// RESPONSE_CODE_INACTIVE_DEVICES_EXIST indicates that there are devices that have inactive
+	// streaming status.
+	RESPONSE_CODE_INACTIVE_DEVICES_EXIST = 1;
+}
+
+// Responses is a collection of responses for completed requests.
 message Responses {
+	// values is a map from request ID to Response.
 	map<string, Response> values = 1;
 }
 
-// WorkspaceKey is the key to get a workspace's status
+// WorkspaceKey uniquely identifies a workspace.
 message WorkspaceKey {
 	option (fmp.model_key) = true;
+
+	// workspace_id is the unique ID of the workspace.
 	google.protobuf.StringValue workspace_id = 1;
 }
 
-// WorkspaceConfig represents the configurable parameters of a workspace
+// WorkspaceConfig holds the configuration of a workspace.
 message WorkspaceConfig {
 	option (fmp.model) = "rw";
-	WorkspaceKey key = 1;
-	google.protobuf.StringValue display_name = 2;
-	google.protobuf.StringValue description = 3;
 
+	// key identifies the workspace.
+	WorkspaceKey key = 1;
+	// display_name is the user-defined name of the workspace.
+	google.protobuf.StringValue display_name = 2;
+	// description is a brief description of the workspace.
+	google.protobuf.StringValue description = 3;
+	// request (if not REQUEST_UNSPECIFIED) kicks off an asynchronous operation
+	// on the workspace.
 	Request request = 4;
+	// request_params specify the parameters for `request`.
 	RequestParams request_params = 5;
 }
 
-// Workspace is the status of a workspace
+// Workspace holds the status of a workspace.
 message Workspace {
 	option (fmp.model) = "ro";
+
+	// key identifies the workspace.
 	WorkspaceKey key = 1;
+	// created_at indicates when the workspace was created.
 	google.protobuf.Timestamp created_at = 2;
+	// created_by indicates who created the workspace.
 	google.protobuf.StringValue created_by = 3;
+	// last_modified_at indicates when the workspace was last updated.
 	google.protobuf.Timestamp  last_modified_at = 4;
+	// last_modified_by indicates who last updated the workspace.
 	google.protobuf.StringValue last_modified_by = 5;
-
+	// state describes the status of the workspace.
 	WorkspaceState state = 6;
+	// last_build_id is the last build ID that was set in a WorkspaceBuild
+	// for this workspace.
 	google.protobuf.StringValue last_build_id = 7;
+	// responses are the responses for all requests that have been executed
+	// thusfar for this workspace.
 	Responses responses = 8;
-	fmp.RepeatedString cc_ids = 9;	// Change Controls created by submitting this workspace
+	// cc_ids are the IDs of any change controls that were created as a result
+	// of submitting this workspace.
+	fmp.RepeatedString cc_ids = 9;
+	// needs_build indicates whether a rebuild of the workspace is necessary
+	// in order to submit it.
+	google.protobuf.BoolValue needs_build = 10;
+	// last_rebased_at indicates when the workspace was last rebased.
+	google.protobuf.Timestamp last_rebased_at = 11;
+	// needs_rebase indicates whether a rebase of the workspace is necessary
+	// in order to submit it.
+	google.protobuf.BoolValue needs_rebase = 12;
 }
 
+// BuildState enumerates the set of states that a BuildStage can be in during a
+// workspace build cycle.
 enum BuildState {
+	// BUILD_STATE_UNSPECIFIED indicates unspecified build state.
 	BUILD_STATE_UNSPECIFIED = 0;
+	// BUILD_STATE_IN_PROGRESS indicates that the BuildStage was started but has
+	// not yet completed.
 	BUILD_STATE_IN_PROGRESS = 1;
+	// BUILD_STATE_CANCELED indicates that the BuildStage was started but then
+	// stopped before completion.
 	BUILD_STATE_CANCELED = 2;
+	// BUILD_STATE_SUCCESS indicates that the BuildStage was started and ran to
+	// completion successfully.
 	BUILD_STATE_SUCCESS = 3;
+	// BUILD_STATE_FAIL indicates that the BuildStage was started and ran to
+	// completion unsuccessfully.
 	BUILD_STATE_FAIL = 4;
+	// BUILD_STATE_SKIPPED indicates that the BuildStage was not run.
+	BUILD_STATE_SKIPPED = 5;
 }
 
-// BuildStage is the stage of a workspace build
+// BuildStage enumerates the types of stages of a build of a workspace.
 enum BuildStage {
+	// BUILD_STAGE_UNSPECIFIED indicates unspecified build stage.
 	BUILD_STAGE_UNSPECIFIED = 0;
+	// BUILD_STAGE_INPUT_VALIDATION describes the stage that detects input
+	// errors in studios based on their schemas.
 	BUILD_STAGE_INPUT_VALIDATION = 1;
+	// BUILD_STAGE_CONFIGLET_BUILD describes the stage that generates EOS CLI
+	// configs and images for devices by evaluating studio templates against
+	// their inputs.
 	BUILD_STAGE_CONFIGLET_BUILD = 2;
+	// BUILD_STAGE_CONFIG_VALIDATION describes the stage that validates the
+	// generated EOS CLI configs (e.g., checks for errors in the config).
 	BUILD_STAGE_CONFIG_VALIDATION = 3;
+	// BUILD_STAGE_IMAGE_VALIDATION describes the stage that validates the
+	// generated images (e.g., checks device compatibility).
+	BUILD_STAGE_IMAGE_VALIDATION = 4;
 }
 
-// InputError represents an error in an input field, with either schema or value
+// InputError holds the details for an error on a studio input field or value.
 message InputError {
-	google.protobuf.StringValue field_id = 1;	// ID of the field
-	fmp.RepeatedString path = 2;	// Path leading up to the field
-	fmp.RepeatedString members = 3;	// Members of the field
-	google.protobuf.StringValue message = 4;	// The error message
+	// field_id is the ID of the input field.
+	google.protobuf.StringValue field_id = 1;
+	// path is the path leading up to the input field.
+	fmp.RepeatedString path = 2;
+	// members are the members of the input field (if it is a group).
+	fmp.RepeatedString members = 3;
+	// message is the error message.
+	google.protobuf.StringValue message = 4;
 }
 
-// InputErrors is the nullable list of InputError
+// InputErrors is a list of InputError.
 message InputErrors {
+	// values is a list of InputError.
 	repeated InputError values = 1;
 }
 
-// InputValidationResult is the result of input validation of a studio
+// InputValidationResult holds the result of an input validation build stage.
 message InputValidationResult {
+	// input_schema_errors are errors for fields in the input schema.
 	InputErrors input_schema_errors = 1;
+	// input_value_errors are errors for values assigned to fields in the input schema.
 	InputErrors input_value_errors = 2;
+	// other_errors are other miscellaneous errors.
 	fmp.RepeatedString other_errors = 3;
 }
 
-// InputValidationResults is the result of input validation, one per studio
+// InputValidationResults is a collection of InputValidationResult (one per studio).
 message InputValidationResults {
+	// values is map from studio ID to InputValidationResult.
 	map<string, InputValidationResult> values = 1;
 }
 
-// TemplateError represents a single error generated by a template evaluation
+// TemplateError holds details for an error that occured while evaluating a studio
+// template against its inputs.
 message TemplateError {
-	google.protobuf.UInt32Value line_num = 1;	// Line on which the error occurred
-	google.protobuf.StringValue exception = 2;	// The exception type
-	google.protobuf.StringValue detail = 3;		// Backtrace, etc.
+	// line_num is the number of the line on which the error occurred.
+	google.protobuf.UInt32Value line_num = 1;
+	// exception is the type of the exception thrown during the script execution.
+	// E.g., AssertionError, etc.
+	google.protobuf.StringValue exception = 2;
+	// detail holds the details of the exception. E.g., a full backtrace.
+	google.protobuf.StringValue detail = 3;
+	// exception_msg is the message of the exception thrown during the script execution.
+	google.protobuf.StringValue exception_msg = 4;
 }
 
-// TemplateErrors is the nullable list of TemplateError
+// TemplateErrors is a list of TemplateError.
 message TemplateErrors {
+	// values is a list of TemplateError.
 	repeated TemplateError values = 1;
 }
 
-// ConfigletBuildResult is the output of configlet (template) build
+// ConfigletBuildResult holds the result of a configlet build stage.
 message ConfigletBuildResult {
+	// template_errors are errors that occured during studio template evaluation.
 	TemplateErrors template_errors = 1;
+	// generated_config is the EOS CLI config that was generated from the stage.
 	google.protobuf.StringValue generated_config = 2;
+	// other_error is any other miscellaneous error.
+	google.protobuf.StringValue other_error = 3;
+	// execution_id is the unique ID for the execution of the template. This ID
+	// can be used to retrieve logs generated by the template.
+	google.protobuf.StringValue execution_id = 4;
+	// input_errors are errors in input fields that are raised by the template.
+	InputErrors input_errors = 5;
 }
 
-// ConfigletBuildResults is the output of configlet build, one per studio
+// ConfigletBuildResults is a collection of ConfigletBuildResult (one per studio).
 message ConfigletBuildResults {
+	// values is a map from studio ID to ConfigletBuildResult.
 	map<string, ConfigletBuildResult> values = 1;
 }
 
-// ConfigValidationResult is the result of validating config with an EOS device
+// ConfigValidationResult holds the result of a config validation stage.
 message ConfigValidationResult {
+	// summary is a summary of the changes to the previous config.
 	arista.configstatus.v1.ConfigSummary summary = 1;
+	// errors are any errors detected in the generated config.
 	arista.configstatus.v1.ConfigErrors errors = 2;
+	// warnings are any warnings about the generated config.
 	arista.configstatus.v1.ConfigErrors warnings = 3;
+	// config_sources identify the entities that generated the config.
+	arista.configstatus.v1.ConfigSources config_sources = 4;
 }
 
-// BuildResult is the per-device build output
-message BuildResult {
-	BuildState state = 1;
-	BuildStage stage = 2;
-	InputValidationResults input_validation_results = 3;
-	ConfigletBuildResults configlet_build_results = 4;
-	ConfigValidationResult config_validation_result = 5;
+// ImageValidationResult holds the result of an image validation stage.
+message ImageValidationResult {
+	// summary is a summary of the changes to the previous image.
+	arista.imagestatus.v1.ImageSummary summary = 1;
+	// errors are any errors detected in the generated image.
+	arista.imagestatus.v1.ImageErrors errors = 2;
+	// warnings are any warnings about the generated image.
+	arista.imagestatus.v1.ImageWarnings warnings = 3;
+	// image_input_error indicates any errors in image inputs.
+	google.protobuf.StringValue image_input_error = 4;
 }
 
-// BuildResults is the build output for all devices, indexed by device ID
-message BuildResults {
-	map<string, BuildResult> values = 1;
+// BuildStageState holds the state per build stage.
+message BuildStageState {
+	// values is a map from build stage to build state.
+	// The possible keys to this map are BUILD_STAGE_UNSPECIFIED,
+	// BUILD_STAGE_INPUT_VALIDATION, BUILD_STAGE_CONFIGLET_BUILD,
+	// BUILD_STAGE_CONFIG_VALIDATION and BUILD_STAGE_IMAGE_VALIDATION.
+	map<string, BuildState> values = 1;
 }
 
-// WorkspaceBuildKey is the key to get the build result for a workspace
+// WorkspaceBuildKey uniquely identifies a build for a workspace.
 message WorkspaceBuildKey {
 	option (fmp.model_key) = true;
-	// workspace_id is a required field which represents workspace ID
+
+	// workspace_id is the ID of the workspace.
 	google.protobuf.StringValue workspace_id = 1;
-	// build_id is a required field which represents build ID
+	// build_id is the ID of the build.
 	google.protobuf.StringValue build_id = 2;
 }
 
-// WorkspaceBuild is the result, or output of a workspace build
-// This includes results for all devices across all studios in the workspace
+// WorkspaceBuild holds the details for a build of a workspace.
 message WorkspaceBuild {
 	option (fmp.model) = "ro";
+
+	// key identifies the build.
 	WorkspaceBuildKey key = 1;
+	// state is the execution status of the build.
 	BuildState state = 2;
-	BuildResults build_results = 3;
+	reserved 3;
+	// error is an error message that is set if the build fails early before
+	// the per-device build result is computed.
+	google.protobuf.StringValue error = 4;
+}
+
+// WorkspaceBuildDetailsKey uniquely identifies a build for a particular
+// device in a workspace.
+message WorkspaceBuildDetailsKey {
+	option (fmp.model_key) = true;
+
+	// workspace_id is the ID of the workspace.
+	google.protobuf.StringValue workspace_id = 1;
+	// build_id is the ID of the build.
+	google.protobuf.StringValue build_id = 2;
+	// device_id is the ID of the device.
+	google.protobuf.StringValue device_id = 3;
+}
+
+// WorkspaceBuildDetails holds the details for a build of a device in a workspace.
+message WorkspaceBuildDetails {
+	option (fmp.model) = "ro";
+
+	// key identifies the build.
+	WorkspaceBuildDetailsKey key = 1;
+	// state is the execution status of the build.
+	BuildState state = 2;
+	// stage is the stage of the build.
+	BuildStage stage = 3;
+	// input_validation_results are the results of the input validation stage.
+	InputValidationResults input_validation_results = 4;
+	// configlet_build_results are the results of the configlet build stage.
+	ConfigletBuildResults configlet_build_results = 5;
+	// config_validation_result is the result of the config validation stage.
+	ConfigValidationResult config_validation_result = 6;
+	// image_validation_result is the result of the image validation stage.
+	ImageValidationResult image_validation_result = 7;
+	// config_validation_skip_cause is the reason, if any, that the config
+	// validation stage was skipped.
+	ConfigValidationSkipCause config_validation_skip_cause = 8;
+	// image_validation_skip_cause is the reason, if any, that the image
+	// validation stage was skipped.
+	ImageValidationSkipCause image_validation_skip_cause = 9;
+	// build_stage_state is the state for each build stage.
+	BuildStageState build_stage_state = 10;
+}
+
+// ConfigValidationSkipCause enumerates the set of reasons a device can skip the config
+// validation stage.
+enum ConfigValidationSkipCause {
+	// CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates config validation skip cause is
+	// unspecified.
+	CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED = 0;
+	// CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped
+	// because the device is not streaming.
+	CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE = 1;
+	// CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was
+	// skipped because the device is pre-provisioned.
+	CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED = 2;
+	// CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED indicates that the stage was
+	// skipped because the device has no configuration changes in the workspace.
+	CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED = 3;
+}
+
+// ImageValidationSkipCause enumerates the set of reasons a device can skip the image
+// validation stage.
+enum ImageValidationSkipCause {
+	// IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is
+	// unspecified.
+	IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED = 0;
+	// IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped
+	// because the device is not streaming.
+	IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE = 1;
+	// IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was
+	// skipped because the device is pre-provisioned.
+	IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED = 2;
+	// IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was
+	// skipped because the device has no image changes in the workspace.
+	IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED = 3;
 }

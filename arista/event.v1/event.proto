@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -15,19 +15,51 @@ import "fmp/extensions.proto";
 
 // EventSeverity is the severity level of the event
 enum EventSeverity {
+  // EVENT_SEVERITY_UNSPECIFIED is the default value, if the severity is not specified.
   EVENT_SEVERITY_UNSPECIFIED = 0;
+  // EVENT_SEVERITY_INFO is used for generally useful information.
   EVENT_SEVERITY_INFO = 1;
+  // EVENT_SEVERITY_WARNING is used for potentially harmful conditions.
   EVENT_SEVERITY_WARNING = 2;
+  // EVENT_SEVERITY_ERROR is used for errors events that may allow for continued functioning.
   EVENT_SEVERITY_ERROR = 3;
+  // EVENT_SEVERITY_CRITICAL is used to designate severe errors that impede functioning.
   EVENT_SEVERITY_CRITICAL = 4;
 }
 
 // ComponentType describes the type of entity on which the event occured
 enum ComponentType {
+  // COMPONENT_TYPE_UNSPECIFIED is the default value, if the type is not specified.
   COMPONENT_TYPE_UNSPECIFIED = 0;
+  // COMPONENT_TYPE_DEVICE is used for device events.
   COMPONENT_TYPE_DEVICE = 1;
+  // COMPONENT_TYPE_INTERFACE is used for device interface events.
   COMPONENT_TYPE_INTERFACE = 2;
+  // COMPONENT_TYPE_TURBINE is used for events on the internal CVP turbine
+  // components. A turbine is an internal CV streaming analytics backend process.
   COMPONENT_TYPE_TURBINE = 3;
+  // COMPONENT_TYPE_DVS is used for DVS events.
+  // A vSphere Distributed Switch provides centralized management and
+  // monitoring of the networking configuration of all workload servers that are
+  // associated with the switch.
+  COMPONENT_TYPE_DVS = 4;
+  // COMPONENT_TYPE_DVS_INTERFACE is used for DVS interface events.
+  COMPONENT_TYPE_DVS_INTERFACE = 5;
+  // COMPONENT_TYPE_VM is used for VM events.
+  // A VM is a software computer that, like a physical computer, runs an
+  // operating system and applications.
+  COMPONENT_TYPE_VM = 6;
+  // COMPONENT_TYPE_VM_INTERFACE is used for VM interface events.
+  COMPONENT_TYPE_VM_INTERFACE = 7;
+  // COMPONENT_TYPE_WORKLOAD_SERVER is used for workload server events.
+  // A workload server is a server/data storage device on which the hypervisor is installed.
+  COMPONENT_TYPE_WORKLOAD_SERVER = 8;
+  // COMPONENT_TYPE_WORKLOAD_SERVER_INTERFACE is used for workload server interface events.
+  COMPONENT_TYPE_WORKLOAD_SERVER_INTERFACE = 9;
+  // COMPONENT_TYPE_APPLICATION is used for application-service events.
+  COMPONENT_TYPE_APPLICATION = 10;
+  // COMPONENT_TYPE_CVP_NODE is used for CVP node events.
+  COMPONENT_TYPE_CVP_NODE = 11;
 }
 
 // EventComponent describes an entity on which the event occured
@@ -54,13 +86,26 @@ message EventAck {
   google.protobuf.Timestamp ack_time = 3;
 }
 
+// EventRead contains read information of an event
+message EventRead {
+  // read is the read state of an event
+  google.protobuf.BoolValue read = 1;
+  // reader is the user that read the event
+  google.protobuf.StringValue reader = 2;
+  // read_time is the time of read
+  google.protobuf.Timestamp read_time = 3;
+}
+
 // EventNoteConfig configures a note
+//
+// NOTE: note is required when used as an argument
+//       to Set.
 message EventNoteConfig {
   // note is the text of the note
   google.protobuf.StringValue note = 1;
 }
 
-// Eventnote is the state of a note
+// EventNote is the state of a note
 message EventNote {
   // note is the text of the note
   google.protobuf.StringValue note = 1;
@@ -69,6 +114,9 @@ message EventNote {
 }
 
 // EventKey uniquely identifies an event
+//
+// NOTE: All fields are required when used as an argument
+//       to GetOne, Set or Delete.
 message EventKey {
   option (fmp.model_key) = true;
   // key is the event data identifier
@@ -84,12 +132,18 @@ message EventData {
 }
 
 // EventNotesConfig configures the notes of an event
+//
+// NOTE: notes is required when used as an argument
+//       to Set.
 message EventNotesConfig {
   // notes is keyed by desired note time in Unix time, in milliseconds
   map<int64, EventNoteConfig> notes = 1;
 }
 
 // EventAnnotationConfig configures an event annotation
+//
+// NOTE: Either 1) key and ack or 2) key and notes or 3) key and read are
+//       required when used as an argument to Set.
 message EventAnnotationConfig{
   option (fmp.model) = "rw";
   // key is the event instance identifier
@@ -98,6 +152,8 @@ message EventAnnotationConfig{
   google.protobuf.BoolValue ack = 2;
   // notes is the notes on an event
   EventNotesConfig notes = 3;
+  // read is the read state of an event. Setting this implies that an event has been read by a user
+  google.protobuf.BoolValue read = 4;
 }
 
 // EventNotes is the notes of an event state
@@ -129,4 +185,8 @@ message Event {
   EventNotes notes = 9;
   // last_updated_time is the time of the most recent update to the event
   google.protobuf.Timestamp last_updated_time = 10;
+  // read is the read status of the event
+  EventRead read = 11;
+  // rule_id is the label of the rule associated with the event
+  google.protobuf.StringValue rule_id = 12;
 }

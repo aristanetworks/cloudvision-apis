@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 // Subject to Arista Networks, Inc.'s EULA.
 // FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
@@ -52,6 +52,17 @@ message OAuthConfigStreamRequest {
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
 	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each OAuthConfig at end.
+	//     * Each OAuthConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each OAuthConfig at start, followed by updates until now.
+	//     * Each OAuthConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each OAuthConfig at start, followed by updates
+	//     until end.
+	//     * Each OAuthConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
@@ -92,6 +103,21 @@ message OAuthConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message OAuthConfigSetSomeRequest {
+	// value contains a list of OAuthConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated OAuthConfig values = 1;
+};
+
+message OAuthConfigSetSomeResponse {
+	OAuthKey key = 1;
+	string error = 2;
+};
+
 message OAuthConfigDeleteRequest {
 	// Key indicates which OAuthConfig instance to remove.
 	// This field must always be set.
@@ -130,6 +156,7 @@ service OAuthConfigService {
 	rpc GetAll (OAuthConfigStreamRequest) returns (stream OAuthConfigStreamResponse);
 	rpc Subscribe (OAuthConfigStreamRequest) returns (stream OAuthConfigStreamResponse);
 	rpc Set (OAuthConfigSetRequest) returns (OAuthConfigSetResponse);
+	rpc SetSome (OAuthConfigSetSomeRequest) returns (stream OAuthConfigSetSomeResponse);
 	rpc Delete (OAuthConfigDeleteRequest) returns (OAuthConfigDeleteResponse);
 	rpc DeleteAll (OAuthConfigDeleteAllRequest) returns (stream OAuthConfigDeleteAllResponse);
 }
@@ -166,6 +193,17 @@ message SAMLConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SAMLConfig at end.
+	//     * Each SAMLConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each SAMLConfig at start, followed by updates until now.
+	//     * Each SAMLConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SAMLConfig at start, followed by updates
+	//     until end.
+	//     * Each SAMLConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -207,6 +245,21 @@ message SAMLConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SAMLConfigSetSomeRequest {
+	// value contains a list of SAMLConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated SAMLConfig values = 1;
+};
+
+message SAMLConfigSetSomeResponse {
+	SAMLKey key = 1;
+	string error = 2;
+};
+
 message SAMLConfigDeleteRequest {
 	// Key indicates which SAMLConfig instance to remove.
 	// This field must always be set.
@@ -245,6 +298,7 @@ service SAMLConfigService {
 	rpc GetAll (SAMLConfigStreamRequest) returns (stream SAMLConfigStreamResponse);
 	rpc Subscribe (SAMLConfigStreamRequest) returns (stream SAMLConfigStreamResponse);
 	rpc Set (SAMLConfigSetRequest) returns (SAMLConfigSetResponse);
+	rpc SetSome (SAMLConfigSetSomeRequest) returns (stream SAMLConfigSetSomeResponse);
 	rpc Delete (SAMLConfigDeleteRequest) returns (SAMLConfigDeleteResponse);
 	rpc DeleteAll (SAMLConfigDeleteAllRequest) returns (stream SAMLConfigDeleteAllResponse);
 }

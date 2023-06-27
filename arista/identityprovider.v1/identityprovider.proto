@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 // Subject to Arista Networks, Inc.'s EULA.
 // FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
@@ -24,7 +24,7 @@ message OAuthKey {
 
 // OAuthConfig holds the configuration for an OAuth provider.
 message OAuthConfig {
-	option (fmp.model) = "rw";
+        option (fmp.model) = "rw";
         // key is the ID of the OAuth provider.
         OAuthKey key = 1;
         // endpoint is the URL that identifies an OAuth authorization server.
@@ -34,10 +34,10 @@ message OAuthConfig {
         google.protobuf.StringValue endpoint = 2;
         // client_id is the ID that the OAuth authorization server issues to the
         // registered client.
-	google.protobuf.StringValue client_id = 3;
+        google.protobuf.StringValue client_id = 3;
         // client_secret is the secret that the OAuth authorization server issues
         // to the registered client.
-	google.protobuf.StringValue client_secret = 4;
+        google.protobuf.StringValue client_secret = 4;
         // algorithms is the set of signing algorithms. This is an optional field.
         // If specified, only this set of algorithms may be used to sign the JWT.
         // Otherwise, this defaults to the set of algorithms that the provider supports.
@@ -45,9 +45,9 @@ message OAuthConfig {
         // link_to_shared_provider indicates whether or not use the provider as a shared
         // provider. This is an optional field and set to false by default.
         google.protobuf.BoolValue link_to_shared_provider = 6;
-	// jwks_uri is where signing keys are downloaded. This is an optional field.
+        // jwks_uri is where signing keys are downloaded. This is an optional field.
         // Only needed if the default construction from endpoint would be incorrect.
-	google.protobuf.StringValue jwks_uri = 7;
+        google.protobuf.StringValue jwks_uri = 7;
         // permitted_email_domains are domains of emails that users are allowed to use.
         // This is an optional field. If not set, all domains are accepted by default.
         fmp.RepeatedString permitted_email_domains = 8;
@@ -57,11 +57,18 @@ message OAuthConfig {
         // request URL. This is an optional field. If not set, CloudVision determines that
         // mapping roles from the provider is disabled.
         google.protobuf.StringValue roles_scope_name = 9;
+        // bearer_token_introspection_endpoint is the provider instrospection endpoint used in
+        // Bearer Token based login support for CloudVision. This endpoint will be used to verify
+        // the bearer token received when an external application is logging in. This is an
+        // optional field. CloudVision will only support this feature for a single provider per
+        // org, hence only one provider is allowed to have this field set. If not set for any
+        // providers, CloudVision determines that Bearer Token based login support is disabled.
+        google.protobuf.StringValue bearer_token_introspection_endpoint = 10;
 }
 
 // SAMLKey contains SAML Provider ID.
 message SAMLKey {
-	option (fmp.model_key) = true;
+        option (fmp.model_key) = true;
         // provider_id is the ID of the SAML provider.
         google.protobuf.StringValue provider_id = 1;
 }
@@ -78,13 +85,13 @@ enum ProtocolBinding {
 
 // SAMLConfig holds the configuration for a SAML provider.
 message SAMLConfig {
-	option (fmp.model) = "rw";
+        option (fmp.model) = "rw";
         // key is the ID of the SAML provider.
         SAMLKey key = 1;
         // idp_issuer identifies the SAML provider. There is no restriction on its format
         // other than a string to carry the issuer's name.
         google.protobuf.StringValue idp_issuer = 2;
-        // idp_metadata_url is the URL that CloudVision uses to fetch the 
+        // idp_metadata_url is the URL that CloudVision uses to fetch the
         // SAML provider metadata.
         google.protobuf.StringValue idp_metadata_url = 3;
         // authreq_binding specifies the ProtocolBinding used to send SAML authentication
@@ -102,4 +109,22 @@ message SAMLConfig {
         // force_saml_authn indicates wether or not enable force authentication in SAML login.
         // This is an optional field. If not set, it defaults to false.
         google.protobuf.BoolValue force_saml_authn = 8;
+        // roles_attrname specifies the Attribute name for CloudVision roles in the Assertion
+        // of SAMLResponse. This is an optional field. If not set, CloudVision determines that
+        // mapping roles from the provider is disabled.
+        google.protobuf.StringValue roles_attrname = 9;
+        // org_attrname specifies the Attribute name for CloudVision organization/tenant in
+        // the Assertion of SAMLResponse. This is an optional field. CloudVision supports use
+        // of certain shared SAML Identity Providers for authenticating users across multiple
+        // CloudVision organizations/tenants. In case a given organization uses a shared provider,
+        // then, CloudVision needs this attribute to determine if the organization that
+        // the shared SAML Identity Provider is sending the assertion for is the same as the
+        // one the user requested to be logged into. For an existing user on CloudVision,
+        // the user's email is used to determine which organization the user belongs to do
+        // the same verification but in case a dynamic user creation is needed and the given
+        // user doesn't exist on CloudVision currently then the matching organization attribute
+        // from the shared Identity Privder becomes necessary. Dynamic user creation is
+        // disabled for a given organization using shared Identity Provider if this attribute
+        // is not specified.
+        google.protobuf.StringValue org_attrname = 10;
 }

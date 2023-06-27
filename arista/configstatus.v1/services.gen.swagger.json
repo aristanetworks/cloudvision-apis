@@ -58,14 +58,14 @@
         "parameters": [
           {
             "name": "key.aDeviceId",
-            "description": "A_device_id is the serial number of the device on A side (left hand side).",
+            "description": "A_device_id is the serial number of the device on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.aType",
-            "description": "A_type is the config type on A side (left hand side).",
+            "description": "A_type is the config type on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -78,7 +78,7 @@
           },
           {
             "name": "key.aTime",
-            "description": "A_time is the time at which to fetch config on A side (left hand side).",
+            "description": "A_time is the time at which to fetch config on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -86,14 +86,14 @@
           },
           {
             "name": "key.bDeviceId",
-            "description": "B_device_id is the serial number of the device on B side (right hand side).",
+            "description": "B_device_id is the serial number of the device on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.bType",
-            "description": "B_type is the config type on B side (right hand side).",
+            "description": "B_type is the config type on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -106,7 +106,7 @@
           },
           {
             "name": "key.bTime",
-            "description": "B_time is the time at which to fetch config on B side (right hand side).",
+            "description": "B_time is the time at which to fetch config on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -318,14 +318,14 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device.",
+            "description": "Device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.type",
-            "description": "Type describes the config type.",
+            "description": "Type describes the config type",
             "in": "query",
             "required": true,
             "type": "string",
@@ -542,14 +542,14 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device.",
+            "description": "Device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.type",
-            "description": "Type describes the config type.",
+            "description": "Type describes the config type",
             "in": "query",
             "required": true,
             "type": "string",
@@ -766,14 +766,14 @@
         "parameters": [
           {
             "name": "key.aDeviceId",
-            "description": "A_device_id is the serial number of the device on A side (left hand side).",
+            "description": "A_device_id is the serial number of the device on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.aType",
-            "description": "A_type is the config type on A side (left hand side).",
+            "description": "A_type is the config type on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -786,7 +786,7 @@
           },
           {
             "name": "key.aTime",
-            "description": "A_time is the time at which to fetch config on A side (left hand side).",
+            "description": "A_time is the time at which to fetch config on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -794,14 +794,14 @@
           },
           {
             "name": "key.bDeviceId",
-            "description": "B_device_id is the serial number of the device on B side (right hand side).",
+            "description": "B_device_id is the serial number of the device on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.bType",
-            "description": "B_type is the config type on B side (right hand side).",
+            "description": "B_type is the config type on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -814,7 +814,7 @@
           },
           {
             "name": "key.bTime",
-            "description": "B_time is the time at which to fetch config on B side (right hand side).",
+            "description": "B_time is the time at which to fetch config on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1026,7 +1026,7 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device.",
+            "description": "Device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
@@ -1237,7 +1237,7 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device.",
+            "description": "Device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
@@ -1448,47 +1448,29 @@
       "properties": {
         "aDeviceId": {
           "type": "string",
-          "title": "A_device_id is the serial number of the device on A side (left hand side)",
-          "required": [
-            "a_device_id"
-          ]
+          "title": "A_device_id is the serial number of the device on A side (left hand side)"
         },
         "aType": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "A_type is the config type on A side (left hand side)",
-          "required": [
-            "a_type"
-          ]
+          "title": "A_type is the config type on A side (left hand side)"
         },
         "aTime": {
           "type": "string",
           "format": "date-time",
-          "title": "A_time is the time at which to fetch config on A side (left hand side)",
-          "required": [
-            "a_time"
-          ]
+          "title": "A_time is the time at which to fetch config on A side (left hand side)"
         },
         "bDeviceId": {
           "type": "string",
-          "title": "B_device_id is the serial number of the device on B side (right hand side)",
-          "required": [
-            "b_device_id"
-          ]
+          "title": "B_device_id is the serial number of the device on B side (right hand side)"
         },
         "bType": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "B_type is the config type on B side (right hand side)",
-          "required": [
-            "b_type"
-          ]
+          "title": "B_type is the config type on B side (right hand side)"
         },
         "bTime": {
           "type": "string",
           "format": "date-time",
-          "title": "B_time is the time at which to fetch config on B side (right hand side)",
-          "required": [
-            "b_time"
-          ]
+          "title": "B_time is the time at which to fetch config on B side (right hand side)"
         }
       },
       "title": "ConfigDiffKey uniquely identifies a configuration diff request",
@@ -1565,17 +1547,11 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "title": "Device_id is the serial number of the device",
-          "required": [
-            "device_id"
-          ]
+          "title": "Device_id is the serial number of the device"
         },
         "type": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "Type describes the config type",
-          "required": [
-            "type"
-          ]
+          "title": "Type describes the config type"
         }
       },
       "description": "ConfigKey uniquely identifies a config request.",
@@ -2056,10 +2032,7 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "title": "Device_id is the serial number of the device",
-          "required": [
-            "device_id"
-          ]
+          "title": "Device_id is the serial number of the device"
         }
       },
       "title": "SummaryKey uniquely identifies a device summary request",

@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -14,15 +14,17 @@ option go_package = "arista/resources/arista/event.v1;event";
 import "arista/event.v1/event.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message EventRequest {
 	// Key uniquely identifies a Event instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	EventKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -49,6 +51,17 @@ message EventStreamRequest {
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
 	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Event at end.
+	//     * Each Event response is fully-specified (all fields set).
+	//   * start: Returns the state of each Event at start, followed by updates until now.
+	//     * Each Event response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Event at start, followed by updates
+	//     until end.
+	//     * Each Event response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
@@ -70,23 +83,18 @@ message EventStreamResponse {
 };
 
 service EventService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (EventRequest) returns (EventResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (EventStreamRequest) returns (stream EventStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (EventStreamRequest) returns (stream EventStreamResponse);
 }
 
 message EventAnnotationConfigRequest {
 	// Key uniquely identifies a EventAnnotationConfig instance to retrieve.
-	// This value (and all fields, unless otherwise specified) must be populated.
+	// This value must be populated.
 	EventKey key = 1;
 
 	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at twhich it makes the request.
+	// If no time is given, the server will use the time at which it makes the request.
 	google.protobuf.Timestamp time = 2;
 };
 
@@ -112,6 +120,17 @@ message EventAnnotationConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each EventAnnotationConfig at end.
+	//     * Each EventAnnotationConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each EventAnnotationConfig at start, followed by updates until now.
+	//     * Each EventAnnotationConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each EventAnnotationConfig at start, followed by updates
+	//     until end.
+	//     * Each EventAnnotationConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -153,9 +172,24 @@ message EventAnnotationConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message EventAnnotationConfigSetSomeRequest {
+	// value contains a list of EventAnnotationConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated EventAnnotationConfig values = 1;
+};
+
+message EventAnnotationConfigSetSomeResponse {
+	EventKey key = 1;
+	string error = 2;
+};
+
 message EventAnnotationConfigDeleteRequest {
 	// Key indicates which EventAnnotationConfig instance to remove.
-	// This field (and all keys, unless otherwise specified) must always be set.
+	// This field must always be set.
 	EventKey key = 1;
 };
 
@@ -172,19 +206,26 @@ message EventAnnotationConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message EventAnnotationConfigDeleteAllRequest {
+};
+
+message EventAnnotationConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the EventAnnotationConfig instance that failed to be deleted.
+	EventKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service EventAnnotationConfigService {
-	// GetOne returns a unary model as specified by the key in the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
 	rpc GetOne (EventAnnotationConfigRequest) returns (EventAnnotationConfigResponse);
-	// GetAll returns all entities for this model, with optional filtering.
 	rpc GetAll (EventAnnotationConfigStreamRequest) returns (stream EventAnnotationConfigStreamResponse);
-	// Subscribe first returns all initial state known to the system,
-	// then will send deltas as entities are changed.
 	rpc Subscribe (EventAnnotationConfigStreamRequest) returns (stream EventAnnotationConfigStreamResponse);
-	// Set allows setting values for the entity specified by the key in the request.
-	// The key must be provided and all fields set (unless otherwise specified).
 	rpc Set (EventAnnotationConfigSetRequest) returns (EventAnnotationConfigSetResponse);
-	// Delete will remove the entity specified by the key within the request.
-	// The key must be provided and all fields populated (unless otherwise specified).
+	rpc SetSome (EventAnnotationConfigSetSomeRequest) returns (stream EventAnnotationConfigSetSomeResponse);
 	rpc Delete (EventAnnotationConfigDeleteRequest) returns (EventAnnotationConfigDeleteResponse);
+	rpc DeleteAll (EventAnnotationConfigDeleteAllRequest) returns (stream EventAnnotationConfigDeleteAllResponse);
 }

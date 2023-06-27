@@ -52,6 +52,7 @@
         "parameters": [
           {
             "name": "key.workspaceId",
+            "description": "workspace_id is the unique ID of the workspace.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -262,14 +263,14 @@
         "parameters": [
           {
             "name": "key.workspaceId",
-            "description": "workspace_id is a required field which represents workspace ID.",
+            "description": "workspace_id is the ID of the workspace.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.buildId",
-            "description": "build_id is a required field which represents build ID.",
+            "description": "build_id is the ID of the build.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -480,21 +481,21 @@
         "parameters": [
           {
             "name": "key.workspaceId",
-            "description": "workspace_id is a required field which represents workspace ID.",
+            "description": "workspace_id is the ID of the workspace.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.buildId",
-            "description": "build_id is a required field which represents build ID.",
+            "description": "build_id is the ID of the build.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.deviceId",
-            "description": "device_id is a required field which represents device ID.",
+            "description": "device_id is the ID of the device.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -705,6 +706,7 @@
         "parameters": [
           {
             "name": "key.workspaceId",
+            "description": "workspace_id is the unique ID of the workspace.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -741,6 +743,7 @@
         "parameters": [
           {
             "name": "key.workspaceId",
+            "description": "workspace_id is the unique ID of the workspace.",
             "in": "query",
             "required": true,
             "type": "string"
@@ -768,7 +771,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "WorkspaceConfig carries the value to set into the datastore.\nSee the documentation on the WorkspaceConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -828,6 +831,35 @@
           "WorkspaceConfigService"
         ]
       },
+      "delete": {
+        "operationId": "WorkspaceConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      },
       "post": {
         "operationId": "WorkspaceConfigService_GetAll2",
         "responses": {
@@ -860,6 +892,52 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceConfig/some": {
+      "post": {
+        "operationId": "WorkspaceConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of WorkspaceConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
+              }
             }
           }
         ],
@@ -983,10 +1061,49 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigError"
           }
         }
       }
+    },
+    "arista.configstatus.v1.ConfigSource": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSourceType"
+        },
+        "sourceId": {
+          "type": "string",
+          "title": "source_id identifier to distinguish between multiple instances of the source type\nsource_id is :\n\tconfiglet name for CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET\n\tstudio id for CONFIG_SOURCE_TYPE_STUDIO\n\tconfiglet id for CONFIG_SOURCE_TYPE_STUDIO_STATIC"
+        }
+      },
+      "title": "ConfigSource describes an individual source of the proposed/designed config"
+    },
+    "arista.configstatus.v1.ConfigSourceType": {
+      "type": "string",
+      "enum": [
+        "CONFIG_SOURCE_TYPE_UNSPECIFIED",
+        "CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET",
+        "CONFIG_SOURCE_TYPE_STUDIO",
+        "CONFIG_SOURCE_TYPE_STUDIO_STATIC"
+      ],
+      "default": "CONFIG_SOURCE_TYPE_UNSPECIFIED",
+      "description": "- CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET: CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET - configlet created from\nthe network provisioning workflow.\n - CONFIG_SOURCE_TYPE_STUDIO: CONFIG_SOURCE_TYPE_STUDIO - config generated from a regular studio\n - CONFIG_SOURCE_TYPE_STUDIO_STATIC: SCONFIG_SOURCE_TYPE_STUDIO_STATIC - static config from studios framework",
+      "title": "ConfigSourceType indicates the type of source for the proposed/designed configuration\nfor the device"
+    },
+    "arista.configstatus.v1.ConfigSources": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigSource"
+          }
+        }
+      },
+      "title": "ConfigSources is the list of sources of the proposed/designed config"
     },
     "arista.configstatus.v1.ConfigSummary": {
       "type": "object",
@@ -1124,7 +1241,7 @@
         "DIFF_OP_CHANGE"
       ],
       "default": "DIFF_OP_UNSPECIFIED",
-      "description": "DiffOp represents the operation performed to get from one side of the diff\nto the other.\n\n - DIFF_OP_NOP: NOP indicates no change.\n - DIFF_OP_ADD: ADD is an addition of a software.\n - DIFF_OP_DELETE: DELETE is deletion of a software.\n - DIFF_OP_CHANGE: CHANGE is an update to the software."
+      "description": "DiffOp represents the operation performed to get from one side of the diff\nto the other.\n\n - DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED indicates op code is unspecified.\n - DIFF_OP_NOP: DIFF_OP_NOP indicates no change.\n - DIFF_OP_ADD: DIFF_OP_ADD is an addition of a software.\n - DIFF_OP_DELETE: DIFF_OP_DELETE is deletion of a software.\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE is an update to the software."
     },
     "arista.imagestatus.v1.ErrorCode": {
       "type": "string",
@@ -1132,10 +1249,14 @@
         "ERROR_CODE_UNSPECIFIED",
         "ERROR_CODE_SUPPORT_NOT_INTRODUCED",
         "ERROR_CODE_SUPPORT_REMOVED",
-        "ERROR_CODE_DEVICE_UNREACHABLE"
+        "ERROR_CODE_DEVICE_UNREACHABLE",
+        "ERROR_CODE_VALIDATION_FAILED",
+        "ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED",
+        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED",
+        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED"
       ],
       "default": "ERROR_CODE_UNSPECIFIED",
-      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_SUPPORT_REMOVED: SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_DEVICE_UNREACHABLE: DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation."
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor."
     },
     "arista.imagestatus.v1.Extension": {
       "type": "object",
@@ -1151,6 +1272,14 @@
         "rebootRequired": {
           "type": "boolean",
           "description": "reboot_required indicates whether applying/deleting this extension\nwould result in a reboot."
+        },
+        "present": {
+          "type": "boolean",
+          "description": "present indicates whether the extension is present in the device\nor not."
+        },
+        "installed": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ExtensionInstallStatus",
+          "description": "installed indicates whether the extension is installed, not\ninstalled or force installed."
         }
       },
       "description": "Extension provides information of the running/designed extensions."
@@ -1159,7 +1288,8 @@
       "type": "object",
       "properties": {
         "code": {
-          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp"
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "code indicates the operation performed to get from one side of the diff\nto the other."
         },
         "a": {
           "$ref": "#/definitions/arista.imagestatus.v1.Extension",
@@ -1178,6 +1308,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
           },
           "description": "values is an ordered list of extension diffs applied to the device."
@@ -1197,6 +1328,17 @@
         }
       },
       "description": "ExtensionDiffsBySup is the extension diff information for each supervisor."
+    },
+    "arista.imagestatus.v1.ExtensionInstallStatus": {
+      "type": "string",
+      "enum": [
+        "EXTENSION_INSTALL_STATUS_UNSPECIFIED",
+        "EXTENSION_INSTALL_STATUS_NOT_INSTALLED",
+        "EXTENSION_INSTALL_STATUS_INSTALLED",
+        "EXTENSION_INSTALL_STATUS_FORCE_INSTALLED"
+      ],
+      "default": "EXTENSION_INSTALL_STATUS_UNSPECIFIED",
+      "description": "ExtensionInstallStatus indicates whether an extension is installed, not installed\nor force installed.\n\n - EXTENSION_INSTALL_STATUS_UNSPECIFIED: EXTENSION_INSTALL_STATUS_UNSPECIFIED indicates extensions install status is unspecified.\n - EXTENSION_INSTALL_STATUS_NOT_INSTALLED: EXTENSION_INSTALL_STATUS_NOT_INSTALLED indicates extension is not installed on the device.\n - EXTENSION_INSTALL_STATUS_INSTALLED: EXTENSION_INSTALL_STATUS_INSTALLED indicates extension is installed on the device.\n - EXTENSION_INSTALL_STATUS_FORCE_INSTALLED: EXTENSION_INSTALL_STATUS_FORCE_INSTALLED indicates extension is force installed on\ndevice."
     },
     "arista.imagestatus.v1.ImageError": {
       "type": "object",
@@ -1222,6 +1364,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ImageError"
           },
           "description": "values is a list of image errors."
@@ -1315,6 +1458,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ImageWarning"
           },
           "description": "values is a list of image warnings."
@@ -1348,7 +1492,7 @@
         "SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC"
       ],
       "default": "SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED",
-      "description": "SoftwareComplianceCode indicates possible compliance status.\n\n - SOFTWARE_COMPLIANCE_CODE_IN_SYNC: IN_SYNC indicates designed and running images/extensions are identical.\n - SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC: OUT_OF_SYNC indicates designed and running images/extensions are not\nidentical."
+      "description": "SoftwareComplianceCode indicates possible compliance status.\n\n - SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED: SOFTWARE_COMPLIANCE_CODE_UNSPECIFIED indicates compliance code is unspecified.\n - SOFTWARE_COMPLIANCE_CODE_IN_SYNC: SOFTWARE_COMPLIANCE_CODE_IN_SYNC indicates designed and running images/extensions\nare identical.\n - SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC: SOFTWARE_COMPLIANCE_CODE_OUT_OF_SYNC indicates designed and running images/extensions\nare not identical."
     },
     "arista.imagestatus.v1.SoftwareImage": {
       "type": "object",
@@ -1368,7 +1512,8 @@
       "type": "object",
       "properties": {
         "code": {
-          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp"
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "code indicates the operation performed to get from one side of the diff\nto the other."
         },
         "a": {
           "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
@@ -1405,7 +1550,7 @@
           "description": "values is the mapping of supervisor type to terminattr diff."
         }
       },
-      "description": "TerminAttrDiffs is the terminattr diff information for each supervisor."
+      "description": "TerminAttrDiffsBySup is the terminattr diff information for each supervisor."
     },
     "arista.imagestatus.v1.WarningCode": {
       "type": "string",
@@ -1417,10 +1562,13 @@
         "WARNING_CODE_SWI_UNKNOWN",
         "WARNING_CODE_TA_EOS_INCOMPATIBLE",
         "WARNING_CODE_TA_CV_INCOMPATIBLE",
-        "WARNING_CODE_EOS_CV_INCOMPATIBLE"
+        "WARNING_CODE_EOS_CV_INCOMPATIBLE",
+        "WARNING_CODE_EOS_ARCH_UNKNOWN",
+        "WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE",
+        "WARNING_CODE_ARCH_INCOMPATIBLE"
       ],
       "default": "WARNING_CODE_UNSPECIFIED",
-      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_NOT_APPLICABLE: NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS."
+      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent."
     },
     "arista.subscriptions.Operation": {
       "type": "string",
@@ -1457,7 +1605,20 @@
         "BUILD_STAGE_IMAGE_VALIDATION"
       ],
       "default": "BUILD_STAGE_UNSPECIFIED",
-      "title": "BuildStage is the stage of a workspace build"
+      "description": "BuildStage enumerates the types of stages of a build of a workspace.\n\n - BUILD_STAGE_UNSPECIFIED: BUILD_STAGE_UNSPECIFIED indicates unspecified build stage.\n - BUILD_STAGE_INPUT_VALIDATION: BUILD_STAGE_INPUT_VALIDATION describes the stage that detects input\nerrors in studios based on their schemas.\n - BUILD_STAGE_CONFIGLET_BUILD: BUILD_STAGE_CONFIGLET_BUILD describes the stage that generates EOS CLI\nconfigs and images for devices by evaluating studio templates against\ntheir inputs.\n - BUILD_STAGE_CONFIG_VALIDATION: BUILD_STAGE_CONFIG_VALIDATION describes the stage that validates the\ngenerated EOS CLI configs (e.g., checks for errors in the config).\n - BUILD_STAGE_IMAGE_VALIDATION: BUILD_STAGE_IMAGE_VALIDATION describes the stage that validates the\ngenerated images (e.g., checks device compatibility)."
+    },
+    "arista.workspace.v1.BuildStageState": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.workspace.v1.BuildState"
+          },
+          "description": "values is a map from build stage to build state.\nThe possible keys to this map are BUILD_STAGE_UNSPECIFIED,\nBUILD_STAGE_INPUT_VALIDATION, BUILD_STAGE_CONFIGLET_BUILD,\nBUILD_STAGE_CONFIG_VALIDATION and BUILD_STAGE_IMAGE_VALIDATION."
+        }
+      },
+      "description": "BuildStageState holds the state per build stage."
     },
     "arista.workspace.v1.BuildState": {
       "type": "string",
@@ -1466,43 +1627,70 @@
         "BUILD_STATE_IN_PROGRESS",
         "BUILD_STATE_CANCELED",
         "BUILD_STATE_SUCCESS",
-        "BUILD_STATE_FAIL"
+        "BUILD_STATE_FAIL",
+        "BUILD_STATE_SKIPPED"
       ],
-      "default": "BUILD_STATE_UNSPECIFIED"
+      "default": "BUILD_STATE_UNSPECIFIED",
+      "description": "BuildState enumerates the set of states that a BuildStage can be in during a\nworkspace build cycle.\n\n - BUILD_STATE_UNSPECIFIED: BUILD_STATE_UNSPECIFIED indicates unspecified build state.\n - BUILD_STATE_IN_PROGRESS: BUILD_STATE_IN_PROGRESS indicates that the BuildStage was started but has\nnot yet completed.\n - BUILD_STATE_CANCELED: BUILD_STATE_CANCELED indicates that the BuildStage was started but then\nstopped before completion.\n - BUILD_STATE_SUCCESS: BUILD_STATE_SUCCESS indicates that the BuildStage was started and ran to\ncompletion successfully.\n - BUILD_STATE_FAIL: BUILD_STATE_FAIL indicates that the BuildStage was started and ran to\ncompletion unsuccessfully.\n - BUILD_STATE_SKIPPED: BUILD_STATE_SKIPPED indicates that the BuildStage was not run."
     },
     "arista.workspace.v1.ConfigValidationResult": {
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary",
+          "description": "summary is a summary of the changes to the previous config."
         },
         "errors": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors",
+          "description": "errors are any errors detected in the generated config."
         },
         "warnings": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors",
+          "description": "warnings are any warnings about the generated config."
+        },
+        "configSources": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSources",
+          "description": "config_sources identify the entities that generated the config."
         }
       },
-      "title": "ConfigValidationResult is the result of validating config with an EOS device"
+      "description": "ConfigValidationResult holds the result of a config validation stage."
+    },
+    "arista.workspace.v1.ConfigValidationSkipCause": {
+      "type": "string",
+      "enum": [
+        "CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
+        "CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE",
+        "CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED",
+        "CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED"
+      ],
+      "default": "CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
+      "description": "ConfigValidationSkipCause enumerates the set of reasons a device can skip the config\nvalidation stage.\n\n - CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED: CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates config validation skip cause is\nunspecified.\n - CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE: CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED: CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED indicates that the stage was\nskipped because the device has no configuration changes in the workspace."
     },
     "arista.workspace.v1.ConfigletBuildResult": {
       "type": "object",
       "properties": {
         "templateErrors": {
-          "$ref": "#/definitions/arista.workspace.v1.TemplateErrors"
+          "$ref": "#/definitions/arista.workspace.v1.TemplateErrors",
+          "description": "template_errors are errors that occured during studio template evaluation."
         },
         "generatedConfig": {
-          "type": "string"
+          "type": "string",
+          "description": "generated_config is the EOS CLI config that was generated from the stage."
         },
         "otherError": {
-          "type": "string"
+          "type": "string",
+          "description": "other_error is any other miscellaneous error."
         },
         "executionId": {
           "type": "string",
-          "description": "execution_id is a unique ID for an execution of the template. This ID can be used to\nretrieve logs generated by the template."
+          "description": "execution_id is the unique ID for the execution of the template. This ID\ncan be used to retrieve logs generated by the template."
+        },
+        "inputErrors": {
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors",
+          "description": "input_errors are errors in input fields that are raised by the template."
         }
       },
-      "title": "ConfigletBuildResult is the output of configlet (template) build"
+      "description": "ConfigletBuildResult holds the result of a configlet build stage."
     },
     "arista.workspace.v1.ConfigletBuildResults": {
       "type": "object",
@@ -1511,43 +1699,66 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/arista.workspace.v1.ConfigletBuildResult"
-          }
+          },
+          "description": "values is a map from studio ID to ConfigletBuildResult."
         }
       },
-      "title": "ConfigletBuildResults is the output of configlet build, one per studio"
+      "description": "ConfigletBuildResults is a collection of ConfigletBuildResult (one per studio)."
     },
     "arista.workspace.v1.ImageValidationResult": {
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/arista.imagestatus.v1.ImageSummary"
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageSummary",
+          "description": "summary is a summary of the changes to the previous image."
         },
         "errors": {
-          "$ref": "#/definitions/arista.imagestatus.v1.ImageErrors"
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageErrors",
+          "description": "errors are any errors detected in the generated image."
         },
         "warnings": {
-          "$ref": "#/definitions/arista.imagestatus.v1.ImageWarnings"
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageWarnings",
+          "description": "warnings are any warnings about the generated image."
+        },
+        "imageInputError": {
+          "type": "string",
+          "description": "image_input_error indicates any errors in image inputs."
         }
       },
-      "title": "ImageValidationResult is the result of validating images and extensions for\ncompatibility with an EOS device"
+      "description": "ImageValidationResult holds the result of an image validation stage."
+    },
+    "arista.workspace.v1.ImageValidationSkipCause": {
+      "type": "string",
+      "enum": [
+        "IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
+        "IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE",
+        "IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED",
+        "IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED"
+      ],
+      "default": "IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
+      "description": "ImageValidationSkipCause enumerates the set of reasons a device can skip the image\nvalidation stage.\n\n - IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED: IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is\nunspecified.\n - IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE: IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED: IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was\nskipped because the device has no image changes in the workspace."
     },
     "arista.workspace.v1.InputError": {
       "type": "object",
       "properties": {
         "fieldId": {
-          "type": "string"
+          "type": "string",
+          "description": "field_id is the ID of the input field."
         },
         "path": {
-          "$ref": "#/definitions/fmp.RepeatedString"
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "path is the path leading up to the input field."
         },
         "members": {
-          "$ref": "#/definitions/fmp.RepeatedString"
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "members are the members of the input field (if it is a group)."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "message is the error message."
         }
       },
-      "title": "InputError represents an error in an input field, with either schema or value"
+      "description": "InputError holds the details for an error on a studio input field or value."
     },
     "arista.workspace.v1.InputErrors": {
       "type": "object",
@@ -1555,26 +1766,31 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.InputError"
-          }
+          },
+          "description": "values is a list of InputError."
         }
       },
-      "title": "InputErrors is the nullable list of InputError"
+      "description": "InputErrors is a list of InputError."
     },
     "arista.workspace.v1.InputValidationResult": {
       "type": "object",
       "properties": {
         "inputSchemaErrors": {
-          "$ref": "#/definitions/arista.workspace.v1.InputErrors"
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors",
+          "description": "input_schema_errors are errors for fields in the input schema."
         },
         "inputValueErrors": {
-          "$ref": "#/definitions/arista.workspace.v1.InputErrors"
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors",
+          "description": "input_value_errors are errors for values assigned to fields in the input schema."
         },
         "otherErrors": {
-          "$ref": "#/definitions/fmp.RepeatedString"
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "other_errors are other miscellaneous errors."
         }
       },
-      "title": "InputValidationResult is the result of input validation of a studio"
+      "description": "InputValidationResult holds the result of an input validation build stage."
     },
     "arista.workspace.v1.InputValidationResults": {
       "type": "object",
@@ -1583,10 +1799,11 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/arista.workspace.v1.InputValidationResult"
-          }
+          },
+          "description": "values is map from studio ID to InputValidationResult."
         }
       },
-      "title": "InputValidationResults is the result of input validation, one per studio"
+      "description": "InputValidationResults is a collection of InputValidationResult (one per studio)."
     },
     "arista.workspace.v1.Request": {
       "type": "string",
@@ -1596,31 +1813,49 @@
         "REQUEST_CANCEL_BUILD",
         "REQUEST_SUBMIT",
         "REQUEST_ABANDON",
-        "REQUEST_ROLLBACK"
+        "REQUEST_ROLLBACK",
+        "REQUEST_SUBMIT_FORCE",
+        "REQUEST_REBASE"
       ],
       "default": "REQUEST_UNSPECIFIED",
-      "description": "Operations on a workspace that can be requested by a client.\nThese are workspace-specific operations. The standard operations Add, Delete, etc.\nare performed via the standard (\"core\") APIs.\nThis is an asynchronous request that returns immediately if the request is valid.\nThe result of the operation will be available in WorkspaceStatus when it is generated."
+      "description": "Request enumerates the set of asynchronous operations that can be performed on a\nworkspace.\n\n - REQUEST_UNSPECIFIED: REQUEST_UNSPECIFIED describes unspecified request.\n - REQUEST_START_BUILD: REQUEST_START_BUILD describes a request to start building a workspace. This kicks\nof a multi-stage operation to compile and validate the changes in a workspace (see\nBuildStage for more details).\n - REQUEST_CANCEL_BUILD: REQUEST_CANCEL_BUILD describes a request to stop building a workspace.\n - REQUEST_SUBMIT: REQUEST_SUBMIT describes a request to submit a workspace to the mainline. Before\nsubmission, some checks are made that can cause the request to fail. E.g., if there\nis a modified configuration for a non-streaming device in the workspace, then the\nrequest will fail. Once submitted, changes are applied and change controls are\ncreated (if necessary).\n - REQUEST_ABANDON: REQUEST_ABANDON describes a request to abandon a workspace. This operation does\nnot delete the workspace from the system, but closes it to any further updates.\n - REQUEST_ROLLBACK: REQUEST_ROLLBACK describes a request to rollback a submitted workspace, undoing\ncorresponding changes in the mainline.\n - REQUEST_SUBMIT_FORCE: REQUEST_SUBMIT_FORCE describes a request to submit a workspace without making any\nchecks that could normally cause the submission to fail. See REQUEST_SUBMIT for\nmore details.\n - REQUEST_REBASE: REQUEST_REBASE describes a request to rebase a workspace. This operation updates\nworkspace state to reflect the latest mainline content, and re-applies workspace\nchanges on top of that."
     },
     "arista.workspace.v1.RequestParams": {
       "type": "object",
       "properties": {
         "requestId": {
-          "type": "string"
+          "type": "string",
+          "description": "request_id is the unique ID of the request. This is used to identify\nthe Response for the request in Responses."
         }
       },
-      "title": "RequestParams is the parameters associated with a WorkspaceRequest"
+      "description": "RequestParams define the parameters for a Request."
     },
     "arista.workspace.v1.Response": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/arista.workspace.v1.ResponseStatus"
+          "$ref": "#/definitions/arista.workspace.v1.ResponseStatus",
+          "description": "status is the execution status of the response."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "message is a string that provides more details about the response."
+        },
+        "code": {
+          "$ref": "#/definitions/arista.workspace.v1.ResponseCode",
+          "description": "code is the code of the response."
         }
       },
-      "title": "Response is the response to the last Request, typically errors in processing"
+      "description": "Response is a response to a Request."
+    },
+    "arista.workspace.v1.ResponseCode": {
+      "type": "string",
+      "enum": [
+        "RESPONSE_CODE_UNSPECIFIED",
+        "RESPONSE_CODE_INACTIVE_DEVICES_EXIST"
+      ],
+      "default": "RESPONSE_CODE_UNSPECIFIED",
+      "description": "ResponseCode is a code for a Response indicating a particular scenario.\n\n - RESPONSE_CODE_UNSPECIFIED: RESPONSE_CODE_UNSPECIFIED indicates unspecified response code.\n - RESPONSE_CODE_INACTIVE_DEVICES_EXIST: RESPONSE_CODE_INACTIVE_DEVICES_EXIST indicates that there are devices that have inactive\nstreaming status."
     },
     "arista.workspace.v1.ResponseStatus": {
       "type": "string",
@@ -1629,7 +1864,8 @@
         "RESPONSE_STATUS_SUCCESS",
         "RESPONSE_STATUS_FAIL"
       ],
-      "default": "RESPONSE_STATUS_UNSPECIFIED"
+      "default": "RESPONSE_STATUS_UNSPECIFIED",
+      "description": "ResponseStatus enumerates the set of execution statuses of a Response.\n\n - RESPONSE_STATUS_UNSPECIFIED: RESPONSE_STATUS_UNSPECIFIED indicates unspecified response status.\n - RESPONSE_STATUS_SUCCESS: RESPONSE_STATUS_SUCCESS indicates that the original Request was successful\nin its execution.\n - RESPONSE_STATUS_FAIL: RESPONSE_STATUS_FAIL indicates that the original Request was unsuccessful\nin its execution."
     },
     "arista.workspace.v1.Responses": {
       "type": "object",
@@ -1638,26 +1874,34 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/arista.workspace.v1.Response"
-          }
+          },
+          "description": "values is a map from request ID to Response."
         }
       },
-      "title": "Responses is the map of all request ID to response that are processed so far"
+      "description": "Responses is a collection of responses for completed requests."
     },
     "arista.workspace.v1.TemplateError": {
       "type": "object",
       "properties": {
         "lineNum": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "line_num is the number of the line on which the error occurred."
         },
         "exception": {
-          "type": "string"
+          "type": "string",
+          "description": "exception is the type of the exception thrown during the script execution.\nE.g., AssertionError, etc."
         },
         "detail": {
-          "type": "string"
+          "type": "string",
+          "description": "detail holds the details of the exception. E.g., a full backtrace."
+        },
+        "exceptionMsg": {
+          "type": "string",
+          "description": "exception_msg is the message of the exception thrown during the script execution."
         }
       },
-      "title": "TemplateError represents a single error generated by a template evaluation"
+      "description": "TemplateError holds details for an error that occured while evaluating a studio\ntemplate against its inputs."
     },
     "arista.workspace.v1.TemplateErrors": {
       "type": "object",
@@ -1665,120 +1909,152 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.TemplateError"
-          }
+          },
+          "description": "values is a list of TemplateError."
         }
       },
-      "title": "TemplateErrors is the nullable list of TemplateError"
+      "description": "TemplateErrors is a list of TemplateError."
     },
     "arista.workspace.v1.Workspace": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey",
+          "description": "key identifies the workspace."
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "created_at indicates when the workspace was created."
         },
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "created_by indicates who created the workspace."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "last_modified_at indicates when the workspace was last updated."
         },
         "lastModifiedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "last_modified_by indicates who last updated the workspace."
         },
         "state": {
-          "$ref": "#/definitions/arista.workspace.v1.WorkspaceState"
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceState",
+          "description": "state describes the status of the workspace."
         },
         "lastBuildId": {
-          "type": "string"
+          "type": "string",
+          "description": "last_build_id is the last build ID that was set in a WorkspaceBuild\nfor this workspace."
         },
         "responses": {
-          "$ref": "#/definitions/arista.workspace.v1.Responses"
+          "$ref": "#/definitions/arista.workspace.v1.Responses",
+          "description": "responses are the responses for all requests that have been executed\nthusfar for this workspace."
         },
         "ccIds": {
-          "$ref": "#/definitions/fmp.RepeatedString"
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "cc_ids are the IDs of any change controls that were created as a result\nof submitting this workspace."
         },
         "needsBuild": {
           "type": "boolean",
-          "title": "needs_build indicates whether a rebuild of the workspace is necessary in order to submit it"
+          "description": "needs_build indicates whether a rebuild of the workspace is necessary\nin order to submit it."
+        },
+        "lastRebasedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_rebased_at indicates when the workspace was last rebased."
+        },
+        "needsRebase": {
+          "type": "boolean",
+          "description": "needs_rebase indicates whether a rebase of the workspace is necessary\nin order to submit it."
         }
       },
-      "title": "Workspace is the status of a workspace"
+      "description": "Workspace holds the status of a workspace."
     },
     "arista.workspace.v1.WorkspaceBuild": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey"
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey",
+          "description": "key identifies the build."
         },
         "state": {
-          "$ref": "#/definitions/arista.workspace.v1.BuildState"
+          "$ref": "#/definitions/arista.workspace.v1.BuildState",
+          "description": "state is the execution status of the build."
         },
         "error": {
           "type": "string",
-          "description": "error contains an error message when the build fails early on, before per-device\nbuild result is computed."
+          "description": "error is an error message that is set if the build fails early before\nthe per-device build result is computed."
         }
       },
-      "description": "WorkspaceBuild is the result, or output of a workspace build. This contains only the\nsummary. See WorkspaceBuildDetails for device-level details."
+      "description": "WorkspaceBuild holds the details for a build of a workspace."
     },
     "arista.workspace.v1.WorkspaceBuildDetails": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey"
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey",
+          "description": "key identifies the build."
         },
         "state": {
-          "$ref": "#/definitions/arista.workspace.v1.BuildState"
+          "$ref": "#/definitions/arista.workspace.v1.BuildState",
+          "description": "state is the execution status of the build."
         },
         "stage": {
-          "$ref": "#/definitions/arista.workspace.v1.BuildStage"
+          "$ref": "#/definitions/arista.workspace.v1.BuildStage",
+          "description": "stage is the stage of the build."
         },
         "inputValidationResults": {
-          "$ref": "#/definitions/arista.workspace.v1.InputValidationResults"
+          "$ref": "#/definitions/arista.workspace.v1.InputValidationResults",
+          "description": "input_validation_results are the results of the input validation stage."
         },
         "configletBuildResults": {
-          "$ref": "#/definitions/arista.workspace.v1.ConfigletBuildResults"
+          "$ref": "#/definitions/arista.workspace.v1.ConfigletBuildResults",
+          "description": "configlet_build_results are the results of the configlet build stage."
         },
         "configValidationResult": {
-          "$ref": "#/definitions/arista.workspace.v1.ConfigValidationResult"
+          "$ref": "#/definitions/arista.workspace.v1.ConfigValidationResult",
+          "description": "config_validation_result is the result of the config validation stage."
         },
         "imageValidationResult": {
-          "$ref": "#/definitions/arista.workspace.v1.ImageValidationResult"
+          "$ref": "#/definitions/arista.workspace.v1.ImageValidationResult",
+          "description": "image_validation_result is the result of the image validation stage."
+        },
+        "configValidationSkipCause": {
+          "$ref": "#/definitions/arista.workspace.v1.ConfigValidationSkipCause",
+          "description": "config_validation_skip_cause is the reason, if any, that the config\nvalidation stage was skipped."
+        },
+        "imageValidationSkipCause": {
+          "$ref": "#/definitions/arista.workspace.v1.ImageValidationSkipCause",
+          "description": "image_validation_skip_cause is the reason, if any, that the image\nvalidation stage was skipped."
+        },
+        "buildStageState": {
+          "$ref": "#/definitions/arista.workspace.v1.BuildStageState",
+          "description": "build_stage_state is the state for each build stage."
         }
       },
-      "title": "WorkspaceBuildDetails is the workspace build result detail, which is per device"
+      "description": "WorkspaceBuildDetails holds the details for a build of a device in a workspace."
     },
     "arista.workspace.v1.WorkspaceBuildDetailsKey": {
       "type": "object",
       "properties": {
         "workspaceId": {
           "type": "string",
-          "title": "workspace_id is a required field which represents workspace ID",
-          "required": [
-            "workspace_id"
-          ]
+          "description": "workspace_id is the ID of the workspace."
         },
         "buildId": {
           "type": "string",
-          "title": "build_id is a required field which represents build ID",
-          "required": [
-            "build_id"
-          ]
+          "description": "build_id is the ID of the build."
         },
         "deviceId": {
           "type": "string",
-          "title": "device_id is a required field which represents device ID",
-          "required": [
-            "device_id"
-          ]
+          "description": "device_id is the ID of the device."
         }
       },
-      "title": "WorkspaceBuildDetailsKey is the key to get worskspace build result details",
+      "description": "WorkspaceBuildDetailsKey uniquely identifies a build for a particular\ndevice in a workspace.",
       "required": [
         "workspaceId",
         "buildId",
@@ -1805,13 +2081,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetails"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuildDetails at end.\n    * Each WorkspaceBuildDetails response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuildDetails at start, followed by updates until now.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuildDetails at start, followed by updates\n    until end.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1838,20 +2115,14 @@
       "properties": {
         "workspaceId": {
           "type": "string",
-          "title": "workspace_id is a required field which represents workspace ID",
-          "required": [
-            "workspace_id"
-          ]
+          "description": "workspace_id is the ID of the workspace."
         },
         "buildId": {
           "type": "string",
-          "title": "build_id is a required field which represents build ID",
-          "required": [
-            "build_id"
-          ]
+          "description": "build_id is the ID of the build."
         }
       },
-      "title": "WorkspaceBuildKey is the key to get the build result for a workspace",
+      "description": "WorkspaceBuildKey uniquely identifies a build for a workspace.",
       "required": [
         "workspaceId",
         "buildId"
@@ -1877,13 +2148,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuild"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuild at end.\n    * Each WorkspaceBuild response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuild at start, followed by updates until now.\n    * Each WorkspaceBuild response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuild at start, followed by updates\n    until end.\n    * Each WorkspaceBuild response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1909,22 +2181,49 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey",
+          "description": "key identifies the workspace."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "display_name is the user-defined name of the workspace."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "description is a brief description of the workspace."
         },
         "request": {
-          "$ref": "#/definitions/arista.workspace.v1.Request"
+          "$ref": "#/definitions/arista.workspace.v1.Request",
+          "description": "request (if not REQUEST_UNSPECIFIED) kicks off an asynchronous operation\non the workspace."
         },
         "requestParams": {
-          "$ref": "#/definitions/arista.workspace.v1.RequestParams"
+          "$ref": "#/definitions/arista.workspace.v1.RequestParams",
+          "description": "request_params specify the parameters for `request`."
         }
       },
-      "title": "WorkspaceConfig represents the configurable parameters of a workspace"
+      "description": "WorkspaceConfig holds the configuration of a workspace."
+    },
+    "arista.workspace.v1.WorkspaceConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey",
+          "description": "This is the key of the WorkspaceConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.workspace.v1.WorkspaceConfigDeleteResponse": {
       "type": "object",
@@ -1970,19 +2269,31 @@
         }
       }
     },
+    "arista.workspace.v1.WorkspaceConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceConfigStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceConfig at end.\n    * Each WorkspaceConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceConfig at start, followed by updates until now.\n    * Each WorkspaceConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceConfig at start, followed by updates\n    until end.\n    * Each WorkspaceConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -2009,12 +2320,10 @@
       "properties": {
         "workspaceId": {
           "type": "string",
-          "required": [
-            "workspace_id"
-          ]
+          "description": "workspace_id is the unique ID of the workspace."
         }
       },
-      "title": "WorkspaceKey is the key to get a workspace's status",
+      "description": "WorkspaceKey uniquely identifies a workspace.",
       "required": [
         "workspaceId"
       ]
@@ -2043,7 +2352,8 @@
         "WORKSPACE_STATE_CONFLICTS",
         "WORKSPACE_STATE_ROLLED_BACK"
       ],
-      "default": "WORKSPACE_STATE_UNSPECIFIED"
+      "default": "WORKSPACE_STATE_UNSPECIFIED",
+      "description": "WorkspaceState enumerates the general states of a workspace. Some of these states\nare derived as a result of executing a specific request on the workspace (see Request).\n\n - WORKSPACE_STATE_UNSPECIFIED: WORKSPACE_STATE_UNSPECIFIED indicates unspecified workspace state.\n - WORKSPACE_STATE_PENDING: WORKSPACE_STATE_PENDING indicates that the changes in the workspace are open and\nhave not been submitted.\n - WORKSPACE_STATE_SUBMITTED: WORKSPACE_STATE_SUBMITTED indicates that the changes in the workspace have been\nsubmitted to the mainline.\n - WORKSPACE_STATE_ABANDONED: WORKSPACE_STATE_ABANDONED indicates that the workspace has been intentionally\nclosed, and may no longer be updated.\n - WORKSPACE_STATE_CONFLICTS: WORKSPACE_STATE_CONFLICTS indicates that the changes in the workspace are in\nconflict with the current state of the system.\n - WORKSPACE_STATE_ROLLED_BACK: WORKSPACE_STATE_ROLLED_BACK indicates that the workspace was submitted, but\nhas been rolled back (the changes have been undone)."
     },
     "arista.workspace.v1.WorkspaceStreamRequest": {
       "type": "object",
@@ -2051,13 +2361,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.Workspace"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Workspace at end.\n    * Each Workspace response is fully-specified (all fields set).\n  * start: Returns the state of each Workspace at start, followed by updates until now.\n    * Each Workspace response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Workspace at start, followed by updates\n    until end.\n    * Each Workspace response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -2078,6 +2389,17 @@
           "description": "Operation indicates how the Workspace value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
     },
     "fmp.RepeatedString": {
       "type": "object",
@@ -2114,6 +2436,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }

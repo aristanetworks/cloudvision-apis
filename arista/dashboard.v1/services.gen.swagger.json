@@ -49,6 +49,7 @@
         "parameters": [
           {
             "name": "key.dashboardId",
+            "description": "dashboard_id holds the id of the dashboard",
             "in": "query",
             "required": true,
             "type": "string"
@@ -259,6 +260,7 @@
         "parameters": [
           {
             "name": "key.dashboardId",
+            "description": "dashboard_id holds the id of the dashboard",
             "in": "query",
             "required": true,
             "type": "string"
@@ -295,6 +297,7 @@
         "parameters": [
           {
             "name": "key.dashboardId",
+            "description": "dashboard_id holds the id of the dashboard",
             "in": "query",
             "required": true,
             "type": "string"
@@ -443,6 +446,52 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DashboardConfigService"
+        ]
+      }
+    },
+    "/api/resources/dashboard/v1/DashboardConfig/some": {
+      "post": {
+        "operationId": "DashboardConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.dashboard.v1.DashboardConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of DashboardConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
+              }
             }
           }
         ],
@@ -820,19 +869,31 @@
         }
       }
     },
+    "arista.dashboard.v1.DashboardConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
     "arista.dashboard.v1.DashboardConfigStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DashboardConfig at end.\n    * Each DashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DashboardConfig at start, followed by updates until now.\n    * Each DashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DashboardConfig at start, followed by updates\n    until end.\n    * Each DashboardConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -858,7 +919,8 @@
       "type": "object",
       "properties": {
         "dashboardId": {
-          "type": "string"
+          "type": "string",
+          "title": "dashboard_id holds the id of the dashboard"
         }
       },
       "description": "DashboardKey represents the dashboard unique identifier.",
@@ -908,6 +970,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.dashboard.v1.Dashboard"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -915,13 +978,14 @@
         "filter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.dashboard.v1.Filter"
           },
           "description": "For each Dashboard in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Dashboard is streamed to the user."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Dashboard at end.\n    * Each Dashboard response is fully-specified (all fields set).\n  * start: Returns the state of each Dashboard at start, followed by updates until now.\n    * Each Dashboard response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Dashboard at start, followed by updates\n    until end.\n    * Each Dashboard response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1014,13 +1078,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each GlobalDashboardConfig at end.\n    * Each GlobalDashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates\n    until end.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1075,7 +1140,7 @@
         },
         "dimensions": {
           "$ref": "#/definitions/arista.dashboard.v1.Dimensions",
-          "description": "dimension of the widget represents how many cell in the grid it takes."
+          "description": "dimensions of the widget represents how many cell in the grid it takes."
         },
         "type": {
           "type": "string",
@@ -1091,10 +1156,14 @@
         },
         "styles": {
           "$ref": "#/definitions/arista.dashboard.v1.WidgetStyles",
-          "description": "WidgetStyles represents the widget's panel appearance."
+          "description": "styles represents the widget's panel appearance."
+        },
+        "parent": {
+          "type": "string",
+          "description": "parent stores the id of its parent widget."
         }
       },
-      "description": "Widgets are used to create a dashboard.\nEach widget is responsible to display some type of data.\nWidgets are individually configurable."
+      "description": "Widget is used to create a dashboard.\nEach widget is responsible to display some type of data."
     },
     "arista.dashboard.v1.WidgetStyles": {
       "type": "object",
@@ -1114,7 +1183,7 @@
         "titleSize": {
           "type": "integer",
           "format": "int64",
-          "description": "titleSize is used to set widget's title size."
+          "description": "title_size is used to set widget's title size."
         }
       },
       "description": "WidgetStyles represents the widget's panel appearance."
@@ -1125,8 +1194,10 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.dashboard.v1.Widget"
-          }
+          },
+          "title": "values holds a list of widgets"
         }
       },
       "description": "Widgets holds a list of `Widget`s."
@@ -1202,6 +1273,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }

@@ -15,7 +15,9 @@ option go_package = "arista/resources/arista/changecontrol.v1;changecontrol";
 import "arista/changecontrol.v1/changecontrol.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message ApproveConfigRequest {
 	// Key uniquely identifies a ApproveConfig instance to retrieve.
@@ -109,12 +111,27 @@ message ApproveConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ApproveConfigDeleteAllRequest {
+};
+
+message ApproveConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the ApproveConfig instance that failed to be deleted.
+	ChangeControlKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service ApproveConfigService {
 	rpc GetOne (ApproveConfigRequest) returns (ApproveConfigResponse);
 	rpc GetAll (ApproveConfigStreamRequest) returns (stream ApproveConfigStreamResponse);
 	rpc Subscribe (ApproveConfigStreamRequest) returns (stream ApproveConfigStreamResponse);
 	rpc Set (ApproveConfigSetRequest) returns (ApproveConfigSetResponse);
 	rpc Delete (ApproveConfigDeleteRequest) returns (ApproveConfigDeleteResponse);
+	rpc DeleteAll (ApproveConfigDeleteAllRequest) returns (stream ApproveConfigDeleteAllResponse);
 }
 
 message ChangeControlRequest {
@@ -146,6 +163,10 @@ message ChangeControlStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated ChangeControl partial_eq_filter = 1;
+	// For each ChangeControl in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ChangeControl is streamed to the user.
+	Filter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -268,10 +289,25 @@ message ChangeControlConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ChangeControlConfigDeleteAllRequest {
+};
+
+message ChangeControlConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the ChangeControlConfig instance that failed to be deleted.
+	ChangeControlKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service ChangeControlConfigService {
 	rpc GetOne (ChangeControlConfigRequest) returns (ChangeControlConfigResponse);
 	rpc GetAll (ChangeControlConfigStreamRequest) returns (stream ChangeControlConfigStreamResponse);
 	rpc Subscribe (ChangeControlConfigStreamRequest) returns (stream ChangeControlConfigStreamResponse);
 	rpc Set (ChangeControlConfigSetRequest) returns (ChangeControlConfigSetResponse);
 	rpc Delete (ChangeControlConfigDeleteRequest) returns (ChangeControlConfigDeleteResponse);
+	rpc DeleteAll (ChangeControlConfigDeleteAllRequest) returns (stream ChangeControlConfigDeleteAllResponse);
 }

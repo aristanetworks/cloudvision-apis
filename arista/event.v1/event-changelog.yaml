@@ -10,6 +10,7 @@ Changes:
     - date: 2023-04-17
       description: Add field rule_id
       version: 1.0.8
+      cvaas: true
     - date: 2022-07-28
       description: Add additional component types
       version: 1.0.7
