@@ -20,6 +20,7 @@ lint:
       - fmp/inet.proto
       - fmp/wrappers.proto
       - fmp/deletes.proto
+      - fmp/pages.proto
       - arista/subscriptions/subscriptions.proto
       - arista/time/time.proto
 breaking:
