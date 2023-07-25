@@ -194,6 +194,10 @@ message Workspace {
 	// needs_rebase indicates whether a rebase of the workspace is necessary
 	// in order to submit it.
 	google.protobuf.BoolValue needs_rebase = 12;
+	// display_name is the user-defined name of the workspace.
+	google.protobuf.StringValue display_name = 13;
+	// description is a brief description of the workspace.
+	google.protobuf.StringValue description = 14;
 }
 
 // BuildState enumerates the set of states that a BuildStage can be in during a
