@@ -172,7 +172,6 @@ curl -sS -kX POST --header 'Accept: application/json' \
   -d "`cat workspace.json`"
 ```
 
-
 Set inputs for the studio
 -------------------------
 
@@ -186,9 +185,9 @@ POST BODY (`studio-payload.json`):
 {
   "key": {
     "studio_id": "studio-date-time",
-    "workspace_id": "ws-change-timezone"
+    "workspace_id": "ws-change-timezone",
+    "path": {"values": []}
   },
-  "path": {"values": []},
   "inputs": "{\"ntpServerResolver\": [{\"inputs\": {\"ntpServers\": [{\"iburst\": false, \"ntpServer\": \"time.google.com\", \"preferred\": false, \"vrf\": \"MGMT\"}, {\"iburst\": false, \"ntpServer\": \"pool.ntp.org\", \"preferred\": false, \"vrf\": \"MGMT\"}]}, \"tags\": {\"query\": \"datacenter:NY\"}}], \"timezoneResolver\": [{\"inputs\": {\"timezoneGroup\": {\"otherTimezone\": \"\", \"timezone\": \"GMT\"}}, \"tags\": {\"query\": \"datacenter:NY\"}}]}"
 }
 ```
@@ -201,7 +200,6 @@ curl -sS -kX POST --header 'Accept: application/json' \
   'https://192.0.2.79/api/resources/studio/v1/InputsConfig' \
   -d "`cat studio-payload.json`"
 ```
-
 
 Assign the studio to devices
 ----------------------------
