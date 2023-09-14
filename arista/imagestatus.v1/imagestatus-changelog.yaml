@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-10-24
+      description: Add a new warning code WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED
+      version: 1.3.0
+      cvaas: true
     - date: 2023-10-18
       description: Remove supervisor related errors
       version: 1.2.1
