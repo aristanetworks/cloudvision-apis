@@ -136,6 +136,9 @@ enum EndpointErrorType {
 	// ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR is caused by the number of alerts sent to a sender
 	// exceeding the built-in limit
 	ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR = 10;
+	// ENDPOINT_ERROR_TYPE_O_AUTH_ERROR is caused when we failed authenticating using the
+	// OAuth apis
+	ENDPOINT_ERROR_TYPE_O_AUTH_ERROR = 11;
 }
 
 // Settings portion of config, a list of default global settings used by broadcast groups
@@ -190,6 +193,7 @@ message EmailSettings {
 	// smarthost is the hostname and port of the SMTP server
 	google.protobuf.StringValue smarthost = 2;
 	// auth_username the username to use when sending emails
+	// required for all auth methods
 	google.protobuf.StringValue auth_username = 3;
 	// auth_password the password to use when sending emails
 	google.protobuf.StringValue auth_password = 4;
@@ -198,8 +202,20 @@ message EmailSettings {
 	// single_alert_per_email configures the Alerter such that each alert generates a separate email
 	// notification, the email will only have a single notification, the format will also be different
 	google.protobuf.BoolValue single_alert_per_email = 6;
+	// azure_o_auth used for auth when using an Azure smtp server
+	// uses auth_username
+	AzureOAuth azure_o_auth = 7;
 }
 
+// AzureOAuth contains the settings for the sending of emails on Azure smtp server
+message AzureOAuth {
+	// client_id of the Azure environment
+	google.protobuf.StringValue client_id = 1;
+	// tenant_id of the Azure environment
+	google.protobuf.StringValue tenant_id = 2;
+	// client_secret is a user generated secret key used for auth
+	google.protobuf.StringValue client_secret = 3;
+}
 
 // HttpSettings are the settings to be used when sending various message over a http connection
 message HttpSettings {

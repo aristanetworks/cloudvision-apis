@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2023-09-14
+    description: Adding Azure Auth support
+    version: 1.6.0
+    onprem: true
+    cvaas: true
   - date: 2023-05-02
     description: Adding custom HTTP headers
     version: 1.5.0
