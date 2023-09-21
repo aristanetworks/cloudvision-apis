@@ -7,6 +7,26 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-09-20
+      description: Add embedded information to extensions
+      version: 1.2.0
+      cvaas: true
+    - date: 2023-08-04
+      description: Add TaCvIncompatible and EosCvIncompatible error codes and deprecate the warning codes
+      version: 1.1.3
+      cvaas: true
+    - date: 2023-08-03
+      description: Add a new incompatibility error code and deprecate an old warning code
+      version: 1.1.2
+      cvaas: true
+    - date: 2023-07-27
+      description: Add image metadata to imageDiff
+      version: 1.1.1
+      cvaas: true
+    - date: 2023-07-25
+      description: Add status detail information
+      version: 1.1.0
+      cvaas: true
     - date: 2023-05-01
       description: Add new device error codes
       version: 1.0.9

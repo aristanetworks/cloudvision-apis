@@ -24,6 +24,24 @@ message SoftwareImage {
     google.protobuf.StringValue name = 1;
     // version is the version of the EOS image.
     google.protobuf.StringValue version = 2;
+    // metadata  is the metadata of EOS image.
+    ImageMetadata metadata = 3;
+}
+
+// ImageMetadata provides information regarding the software image.
+message ImageMetadata {
+    // version is the version of the EOS image.
+    google.protobuf.StringValue version = 1;
+    // release is the release name of the EOS image.
+    google.protobuf.StringValue release = 2;
+    // flavor is the flavor information of the EOS image.
+    // default flavor is DEFAULT. Other flavors can be DPE, 2GB, etc.
+    google.protobuf.StringValue flavor = 3;
+    // variant is the variant information of the EOS image.
+    // possible values: INT or US.
+    google.protobuf.StringValue variant = 4;
+    // arch is the architecture of the EOS image.
+    google.protobuf.StringValue arch = 5;
 }
 
 // ExtensionInstallStatus indicates whether an extension is installed, not installed
@@ -55,6 +73,11 @@ message Extension {
     // installed indicates whether the extension is installed, not
     // installed or force installed.
     ExtensionInstallStatus installed = 5;
+    // status_detail gives the details behind installation of the extension.
+    google.protobuf.StringValue status_detail = 6;
+    // is_embedded indicates whether the extension is embedded in the EOS swi
+    // or not.
+    google.protobuf.BoolValue is_embedded = 7;
 }
 
 // Extensions provides an ordered list of running/designed extensions.
@@ -256,6 +279,15 @@ enum ErrorCode {
     // ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we
     // fail to get information from peer supervisor.
     ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED = 7;
+    // ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and
+    // TerminAttr architecture are incompatible.
+    ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE = 8;
+    // ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with
+    // CloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.
+    ERROR_CODE_TA_CV_INCOMPATIBLE = 9;
+    // ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with
+    // CloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.
+    ERROR_CODE_EOS_CV_INCOMPATIBLE = 10;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.
@@ -294,10 +326,12 @@ enum WarningCode {
     WARNING_CODE_TA_EOS_INCOMPATIBLE = 5;
     // WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.
     // TA is lower than minimum supported TA on CV.
-    WARNING_CODE_TA_CV_INCOMPATIBLE = 6;
+    // Deprecated - use ERROR_CODE_TA_CV_INCOMPATIBLE.
+    WARNING_CODE_TA_CV_INCOMPATIBLE = 6 [deprecated=true];
     // WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet
     // supported by CV. Given EOS is outside range of CV's minimum and maximum EOS.
-    WARNING_CODE_EOS_CV_INCOMPATIBLE = 7;
+    // Deprecated - use ERROR_CODE_EOS_CV_INCOMPATIBLE.
+    WARNING_CODE_EOS_CV_INCOMPATIBLE = 7 [deprecated=true];
     // WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is
     // not valid for EOS.
     WARNING_CODE_EOS_ARCH_UNKNOWN = 8;
@@ -305,8 +339,8 @@ enum WarningCode {
     // in version than embedded TA in SWI.
     WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE = 9;
     // WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are
-    // different.
-    WARNING_CODE_ARCH_INCOMPATIBLE = 10;
+    // different. Deprecated.
+    WARNING_CODE_ARCH_INCOMPATIBLE = 10 [deprecated=true];
 }
 
 // ImageWarning wraps `WarningCode` enum with a reason string.
