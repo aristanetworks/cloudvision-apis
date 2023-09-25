@@ -93,6 +93,21 @@ Output:
 {"value":{"key":{"id":"rxwA-N65u"}, "approve":{"value":true, "notes":"REST API test"}, "version":"2021-12-13T18:32:31.830585136Z"}, "time":"2021-12-13T19:00:11.500491001Z"}
 ```
 
+## Get the state of all Change Controls
+
+```shell
+curl -L -X GET "https://192.0.2.100/api/resources/changecontrol/v1/ChangeControl/all" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer `cat token.tok`"
+```
+
+Output:
+
+```json
+{"result":{"value":{"key":{"id":"CC_Task_f7d44737-485e-4002-bfe7-8c577ac51023"},"change":{"name":"Change Control CC_Task_f7d44737-485e-4002-bfe7-8c577ac51023","rootStageId":"root","stages":{"values":{"Task_2827":{"name":"Task stage 2827","action":{"name":"task","timeout":7200,"args":{"values":{"TaskID":"2827"}}},"rows":{},"status":"STAGE_STATUS_COMPLETED"},"root":{"name":"root","rows":{"values":[{"values":["Task_2827"]}]},"status":"STAGE_STATUS_COMPLETED"}}},"notes":"Auto Generated Request","time":"2023-08-25T02:13:17.292234597Z","user":"cvpadmin"},"approve":{"value":true,"notes":"","time":"2023-08-25T02:13:17.315590969Z","user":"cvpadmin"},"start":{"value":true,"notes":"Auto Start","time":"2023-08-25T02:13:17.327707307Z","user":"cvpadmin"},"status":"CHANGE_CONTROL_STATUS_COMPLETED","deviceIds":{"values":["BAD032986065E8DC14CBB6472EC314A6"]}},"time":"2023-08-25T02:13:17.991529440Z","type":"INITIAL"}}
+...
+```
+
 ## Create a change control
 
 ### curl
@@ -271,4 +286,40 @@ e.g.:
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` 'https://192.0.2.100/api/resources/changecontrol/v1/ChangeControl?key.id=5821c7c1-e276-4387-b60a'
 
 {"value":{"key":{"id":"5821c7c1-e276-4387-b60a"}, "change":{"name":"Change_20211222_191032", "rootStageId":"root", "stages":{"values":{"root":{"name":"root", "rows":{"values":[{"values":["stage0", "stage1", "stage2", "stage3"]}]}}, "stage0":{"name":"stage0", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1245"}}}}, "stage1":{"name":"stage1", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1246"}}}}, "stage2":{"name":"stage2", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1247"}}}}, "stage3":{"name":"stage3", "action":{"name":"task", "timeout":3000, "args":{"values":{"TaskID":"1248"}}}}}}, "notes":"curl_cc_test", "time":"2021-12-22T19:10:35.472979755Z", "user":"resourceapis"}, "error":"Reschedule required: not approved at schedule time", "schedule":{"notes":"Reschedule required: not approved at schedule time", "time":"2021-12-23T01:49:00.004927172Z"}}, "time":"2021-12-23T01:49:00.004927172Z"}
+```
+
+## Change the name of a Change Control
+
+### curl
+
+
+```shell
+curl -L -X POST "https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer `cat token.tok`" \
+-d '{"key": {"id": "FvDMjNx7aRbUPnCUVqLQ4"},"change": {"name": "MLAG ISSU in DC1" }}'
+```
+
+or
+
+```shell
+curl -L -X POST "https://192.0.2.100/api/resources/changecontrol/v1/ChangeControlConfig" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer `cat token.tok`" \
+-d @cc_payload.json
+```
+
+where `cc_payload.json` has the following content:
+
+```json
+{
+  "key": {
+    "id": "FvDMjNx7aRbUPnCUVqLQ4"
+  },
+  "change": {
+    "name": "MLAG ISSU in DC1"
+  }
+}
 ```
