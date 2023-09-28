@@ -274,10 +274,10 @@ enum ErrorCode {
     ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED = 5;
     // ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we
     // fail to get running image information from an active supervisor.
-    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED = 6;
+    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED = 6 [deprecated=true];
     // ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we
     // fail to get information from peer supervisor.
-    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED = 7;
+    ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED = 7 [deprecated=true];
     // ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and
     // TerminAttr architecture are incompatible.
     ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE = 8;
