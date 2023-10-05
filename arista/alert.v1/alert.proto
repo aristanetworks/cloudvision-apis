@@ -1002,3 +1002,20 @@ message TemplateConfig {
 	// Templates must not fail for any valid input
 	google.protobuf.StringValue template = 2;
 }
+
+// DefaultTemplate is the system default template which is used when no user template has been set
+message DefaultTemplate {
+	option (fmp.model) = "ro";
+	option (fmp.no_default_filter) = true;
+
+
+	// key identifies which template the configuration is for
+	TemplateKey key = 1;
+	// template is the string template value to be used
+	// Templates need to be compatible with their respective parsers
+	// Message templates are read and parsed by https://golang.org/pkg/text/template/
+	// Html templates are read and parsed by https://golang.org/pkg/html/template/
+	// Templates must output valid JSON for certain templates
+	// Templates must not fail for any valid input
+	google.protobuf.StringValue template = 2;
+}
