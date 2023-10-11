@@ -59,7 +59,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -83,6 +83,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
           {
             "name": "time",
@@ -297,7 +312,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -335,6 +350,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
           {
             "name": "time",
@@ -549,7 +579,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -587,6 +617,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
           {
             "name": "time",
@@ -627,7 +672,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:. ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -665,6 +710,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -689,7 +749,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "TagAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the TagAssignmentConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -749,6 +809,35 @@
           "TagAssignmentConfigService"
         ]
       },
+      "delete": {
+        "operationId": "TagAssignmentConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
       "post": {
         "operationId": "TagAssignmentConfigService_GetAll2",
         "responses": {
@@ -781,6 +870,52 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/some": {
+      "post": {
+        "operationId": "TagAssignmentConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of TagAssignmentConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig"
+              }
             }
           }
         ],
@@ -902,7 +1037,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -926,6 +1061,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
           {
             "name": "time",
@@ -966,7 +1116,7 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -990,6 +1140,21 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "key.elementSubType",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -1014,7 +1179,7 @@
         },
         "parameters": [
           {
-            "name": "body",
+            "name": "value",
             "description": "TagConfig carries the value to set into the datastore.\nSee the documentation on the TagConfig struct for which fields are required.",
             "in": "body",
             "required": true,
@@ -1074,6 +1239,35 @@
           "TagConfigService"
         ]
       },
+      "delete": {
+        "operationId": "TagConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "TagConfigService"
+        ]
+      },
       "post": {
         "operationId": "TagConfigService_GetAll2",
         "responses": {
@@ -1106,6 +1300,52 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/arista.tag.v2.TagConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig/some": {
+      "post": {
+        "operationId": "TagConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of TagConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagConfig"
+              }
             }
           }
         ],
@@ -1219,10 +1459,23 @@
       "enum": [
         "CREATOR_TYPE_UNSPECIFIED",
         "CREATOR_TYPE_SYSTEM",
-        "CREATOR_TYPE_USER"
+        "CREATOR_TYPE_USER",
+        "CREATOR_TYPE_EXTERNAL"
       ],
       "default": "CREATOR_TYPE_UNSPECIFIED",
-      "description": "CreatorType enumerates the types of entities that can create\na tag.\n\n - CREATOR_TYPE_SYSTEM: CREATOR_TYPE_SYSTEM is used for system tags.\n - CREATOR_TYPE_USER: CREATOR_TYPE_USER is used for user tags."
+      "description": "CreatorType enumerates the types of entities that can create\na tag.\n\n - CREATOR_TYPE_UNSPECIFIED: CREATOR_TYPE_UNSPECIFIED is the default value.\n - CREATOR_TYPE_SYSTEM: CREATOR_TYPE_SYSTEM is used for system tags.\n - CREATOR_TYPE_USER: CREATOR_TYPE_USER is used for user tags.\n - CREATOR_TYPE_EXTERNAL: CREATOR_TYPE_EXTERNAL is used for tags created from external sources.\nFor E.g., vCenter"
+    },
+    "arista.tag.v2.ElementSubType": {
+      "type": "string",
+      "enum": [
+        "ELEMENT_SUB_TYPE_UNSPECIFIED",
+        "ELEMENT_SUB_TYPE_DEVICE",
+        "ELEMENT_SUB_TYPE_VDS",
+        "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+        "ELEMENT_SUB_TYPE_VM"
+      ],
+      "default": "ELEMENT_SUB_TYPE_UNSPECIFIED",
+      "description": "ElementSubType enumerates the sub-types of network elements that can\nbe associated with tags.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications."
     },
     "arista.tag.v2.ElementType": {
       "type": "string",
@@ -1232,7 +1485,7 @@
         "ELEMENT_TYPE_INTERFACE"
       ],
       "default": "ELEMENT_TYPE_UNSPECIFIED",
-      "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags."
+      "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags."
     },
     "arista.tag.v2.Tag": {
       "type": "object",
@@ -1254,6 +1507,10 @@
         "key": {
           "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey",
           "description": "key identifies an assignment."
+        },
+        "tagCreatorType": {
+          "$ref": "#/definitions/arista.tag.v2.CreatorType",
+          "description": "tag_creator_type is the creator type of the tag\ninvolved in the assignment."
         }
       },
       "description": "TagAssignment holds a merge-preview or the existing merged\nstate (if the workspace ID is \"\") of an assignment between\na tag and a network element."
@@ -1270,7 +1527,29 @@
           "description": "remove indicates whether to remove (true) or add (false,\nunset) the assignment identified by the key if the\nencompassing workspace merges."
         }
       },
-      "description": "TagAssignmentConfig holds a configuration for an assignment\nbetween a tag and a network element."
+      "description": "TagAssignmentConfig holds a configuration for an assignment\nbetween a tag and a network element.\nThe tag assignments that belong to entities other than ELEMENT_SUB_TYPE_DEVICE\nwill always be present in mainline only."
+    },
+    "arista.tag.v2.TagAssignmentConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey",
+          "description": "This is the key of the TagAssignmentConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v2.TagAssignmentConfigDeleteResponse": {
       "type": "object",
@@ -1316,19 +1595,31 @@
         }
       }
     },
+    "arista.tag.v2.TagAssignmentConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
     "arista.tag.v2.TagAssignmentConfigStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignmentConfig at end.\n    * Each TagAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignmentConfig at start, followed by updates until now.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignmentConfig at start, followed by updates\n    until end.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1355,46 +1646,32 @@
       "properties": {
         "workspaceId": {
           "type": "string",
-          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside.",
-          "required": [
-            "workspace_id"
-          ]
+          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged assignments reside."
         },
         "elementType": {
           "$ref": "#/definitions/arista.tag.v2.ElementType",
           "description": "ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id",
-          "title": "element_type is the element type of a tag. What should\nbe set per element type:",
-          "required": [
-            "element_type"
-          ]
+          "title": "element_type is the element type of a tag. What should\nbe set per element type:"
         },
         "label": {
           "type": "string",
-          "description": "label is the label of a tag.",
-          "required": [
-            "label"
-          ]
+          "description": "label is the label of a tag."
         },
         "value": {
           "type": "string",
-          "description": "value is the value of a tag.",
-          "required": [
-            "value"
-          ]
+          "description": "value is the value of a tag."
         },
         "deviceId": {
           "type": "string",
-          "description": "device_id identifies a device.",
-          "required": [
-            "device_id"
-          ]
+          "description": "device_id identifies a device."
         },
         "interfaceId": {
           "type": "string",
-          "description": "interface_id identifies an interface on a device.",
-          "required": [
-            "interface_id"
-          ]
+          "description": "interface_id identifies an interface on a device."
+        },
+        "elementSubType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementSubType",
+          "description": "element_sub_type is the element sub-type of a tag."
         }
       },
       "description": "TagAssignmentKey uniquely identifies an assignment between\na tag and a network element.",
@@ -1404,7 +1681,8 @@
         "label",
         "value",
         "deviceId",
-        "interfaceId"
+        "interfaceId",
+        "elementSubType"
       ]
     },
     "arista.tag.v2.TagAssignmentResponse": {
@@ -1427,13 +1705,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagAssignment"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignment at end.\n    * Each TagAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignment at start, followed by updates until now.\n    * Each TagAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignment at start, followed by updates\n    until end.\n    * Each TagAssignment response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1467,7 +1746,29 @@
           "description": "remove indicates whether to remove (true) or add (false,\nunset) the tag identified by the key if the encompassing\nworkspace merges."
         }
       },
-      "description": "TagConfig holds a configuration for a user tag."
+      "description": "TagConfig holds a configuration for a user tag.\nThe tags that belong to entities other than ELEMENT_SUB_TYPE_DEVICE\nwill always be present in mainline only."
+    },
+    "arista.tag.v2.TagConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey",
+          "description": "This is the key of the TagConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
     },
     "arista.tag.v2.TagConfigDeleteResponse": {
       "type": "object",
@@ -1513,19 +1814,31 @@
         }
       }
     },
+    "arista.tag.v2.TagConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
     "arista.tag.v2.TagConfigStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagConfig at end.\n    * Each TagConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagConfig at start, followed by updates until now.\n    * Each TagConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagConfig at start, followed by updates\n    until end.\n    * Each TagConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1552,31 +1865,23 @@
       "properties": {
         "workspaceId": {
           "type": "string",
-          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside.",
-          "required": [
-            "workspace_id"
-          ]
+          "description": "workspace_id is the ID of a workspace. The special ID \"\"\nidentifies the location where merged tags reside."
         },
         "elementType": {
           "$ref": "#/definitions/arista.tag.v2.ElementType",
-          "description": "element_type is the category of network element to which\nthis tag can be assigned.",
-          "required": [
-            "element_type"
-          ]
+          "description": "element_type is the category of network element to which\nthis tag can be assigned."
         },
         "label": {
           "type": "string",
-          "description": "label is an arbitrary label.",
-          "required": [
-            "label"
-          ]
+          "description": "label is an arbitrary label."
         },
         "value": {
           "type": "string",
-          "description": "value is an arbitrary value.",
-          "required": [
-            "value"
-          ]
+          "description": "value is an arbitrary value."
+        },
+        "elementSubType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementSubType",
+          "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned."
         }
       },
       "description": "TagKey uniquely identifies a tag.",
@@ -1584,7 +1889,8 @@
         "workspaceId",
         "elementType",
         "label",
-        "value"
+        "value",
+        "elementSubType"
       ]
     },
     "arista.tag.v2.TagResponse": {
@@ -1607,13 +1913,14 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.tag.v2.Tag"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Tag at end.\n    * Each Tag response is fully-specified (all fields set).\n  * start: Returns the state of each Tag at start, followed by updates until now.\n    * Each Tag response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Tag at start, followed by updates\n    until end.\n    * Each Tag response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1648,6 +1955,17 @@
         }
       }
     },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
     "google.protobuf.Any": {
       "type": "object",
       "properties": {
@@ -1670,6 +1988,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }

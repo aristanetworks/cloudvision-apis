@@ -14,7 +14,9 @@ option go_package = "arista/resources/arista/tag.v2;tag";
 import "arista/tag.v2/tag.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
+import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message TagRequest {
 	// Key uniquely identifies a Tag instance to retrieve.
@@ -48,6 +50,17 @@ message TagStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Tag at end.
+	//     * Each Tag response is fully-specified (all fields set).
+	//   * start: Returns the state of each Tag at start, followed by updates until now.
+	//     * Each Tag response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Tag at start, followed by updates
+	//     until end.
+	//     * Each Tag response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -108,6 +121,17 @@ message TagAssignmentStreamRequest {
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
 	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each TagAssignment at end.
+	//     * Each TagAssignment response is fully-specified (all fields set).
+	//   * start: Returns the state of each TagAssignment at start, followed by updates until now.
+	//     * Each TagAssignment response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each TagAssignment at start, followed by updates
+	//     until end.
+	//     * Each TagAssignment response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
@@ -167,6 +191,17 @@ message TagAssignmentConfigStreamRequest {
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
 	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each TagAssignmentConfig at end.
+	//     * Each TagAssignmentConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each TagAssignmentConfig at start, followed by updates until now.
+	//     * Each TagAssignmentConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each TagAssignmentConfig at start, followed by updates
+	//     until end.
+	//     * Each TagAssignmentConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
@@ -207,6 +242,21 @@ message TagAssignmentConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagAssignmentConfigSetSomeRequest {
+	// value contains a list of TagAssignmentConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated TagAssignmentConfig values = 1;
+};
+
+message TagAssignmentConfigSetSomeResponse {
+	TagAssignmentKey key = 1;
+	string error = 2;
+};
+
 message TagAssignmentConfigDeleteRequest {
 	// Key indicates which TagAssignmentConfig instance to remove.
 	// This field must always be set.
@@ -226,12 +276,28 @@ message TagAssignmentConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagAssignmentConfigDeleteAllRequest {
+};
+
+message TagAssignmentConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the TagAssignmentConfig instance that failed to be deleted.
+	TagAssignmentKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service TagAssignmentConfigService {
 	rpc GetOne (TagAssignmentConfigRequest) returns (TagAssignmentConfigResponse);
 	rpc GetAll (TagAssignmentConfigStreamRequest) returns (stream TagAssignmentConfigStreamResponse);
 	rpc Subscribe (TagAssignmentConfigStreamRequest) returns (stream TagAssignmentConfigStreamResponse);
 	rpc Set (TagAssignmentConfigSetRequest) returns (TagAssignmentConfigSetResponse);
+	rpc SetSome (TagAssignmentConfigSetSomeRequest) returns (stream TagAssignmentConfigSetSomeResponse);
 	rpc Delete (TagAssignmentConfigDeleteRequest) returns (TagAssignmentConfigDeleteResponse);
+	rpc DeleteAll (TagAssignmentConfigDeleteAllRequest) returns (stream TagAssignmentConfigDeleteAllResponse);
 }
 
 message TagConfigRequest {
@@ -266,6 +332,17 @@ message TagConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each TagConfig at end.
+	//     * Each TagConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each TagConfig at start, followed by updates until now.
+	//     * Each TagConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each TagConfig at start, followed by updates
+	//     until end.
+	//     * Each TagConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -307,6 +384,21 @@ message TagConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagConfigSetSomeRequest {
+	// value contains a list of TagConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated TagConfig values = 1;
+};
+
+message TagConfigSetSomeResponse {
+	TagKey key = 1;
+	string error = 2;
+};
+
 message TagConfigDeleteRequest {
 	// Key indicates which TagConfig instance to remove.
 	// This field must always be set.
@@ -326,10 +418,26 @@ message TagConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagConfigDeleteAllRequest {
+};
+
+message TagConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the TagConfig instance that failed to be deleted.
+	TagKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
 service TagConfigService {
 	rpc GetOne (TagConfigRequest) returns (TagConfigResponse);
 	rpc GetAll (TagConfigStreamRequest) returns (stream TagConfigStreamResponse);
 	rpc Subscribe (TagConfigStreamRequest) returns (stream TagConfigStreamResponse);
 	rpc Set (TagConfigSetRequest) returns (TagConfigSetResponse);
+	rpc SetSome (TagConfigSetSomeRequest) returns (stream TagConfigSetSomeResponse);
 	rpc Delete (TagConfigDeleteRequest) returns (TagConfigDeleteResponse);
+	rpc DeleteAll (TagConfigDeleteAllRequest) returns (stream TagConfigDeleteAllResponse);
 }

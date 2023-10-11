@@ -14,11 +14,33 @@ import "fmp/extensions.proto";
 // ElementType enumerates the types of network elements that can
 // be associated with tags.
 enum ElementType {
+	// ELEMENT_TYPE_UNSPECIFIED is the default value.
 	ELEMENT_TYPE_UNSPECIFIED = 0;
 	// ELEMENT_TYPE_DEVICE is used for device tags.
 	ELEMENT_TYPE_DEVICE = 1;
 	// ELEMENT_TYPE_INTERFACE is used for interface tags.
 	ELEMENT_TYPE_INTERFACE = 2;
+}
+
+// ElementSubType enumerates the sub-types of network elements that can
+// be associated with tags.
+enum ElementSubType {
+	// ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.
+	ELEMENT_SUB_TYPE_UNSPECIFIED = 0;
+	// ELEMENT_SUB_TYPE_DEVICE is used for EOS or
+	// third-party devices discovered via LLDP/SNMP.
+	ELEMENT_SUB_TYPE_DEVICE = 1;
+  // ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.
+	ELEMENT_SUB_TYPE_VDS = 2;
+	// ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server
+	// tags (such as VMWare ESXi host).
+	// A workload server is a server/data storage device on which
+	// the hypervisor is installed.
+	ELEMENT_SUB_TYPE_WORKLOAD_SERVER = 3;
+	// ELEMENT_SUB_TYPE_VM is used for VM tags.
+	// A VM is a software computer that, like a physical computer,
+	// runs an operating system and applications.
+	ELEMENT_SUB_TYPE_VM = 4;
 }
 
 // TagKey uniquely identifies a tag.
@@ -34,9 +56,14 @@ message TagKey {
 	google.protobuf.StringValue label = 3;
 	// value is an arbitrary value.
 	google.protobuf.StringValue value = 4;
+	// element_sub_type is the sub-category of network element
+	// to which this tag can be assigned.
+	ElementSubType element_sub_type = 5;
 }
 
 // TagConfig holds a configuration for a user tag.
+// The tags that belong to entities other than ELEMENT_SUB_TYPE_DEVICE
+// will always be present in mainline only.
 message TagConfig {
 	option (fmp.model) = "rw";
 	// key identifies a tag. The special workspace ID "" for
@@ -51,11 +78,15 @@ message TagConfig {
 // CreatorType enumerates the types of entities that can create
 // a tag.
 enum CreatorType {
+	// CREATOR_TYPE_UNSPECIFIED is the default value.
 	CREATOR_TYPE_UNSPECIFIED = 0;
 	// CREATOR_TYPE_SYSTEM is used for system tags.
 	CREATOR_TYPE_SYSTEM = 1;
 	// CREATOR_TYPE_USER is used for user tags.
 	CREATOR_TYPE_USER = 2;
+	// CREATOR_TYPE_EXTERNAL is used for tags created from external sources.
+	// For E.g., vCenter
+	CREATOR_TYPE_EXTERNAL = 3;
 }
 
 // Tag holds a merge-preview or the existing merged state (if the
@@ -89,10 +120,14 @@ message TagAssignmentKey {
 	google.protobuf.StringValue device_id = 5;
 	// interface_id identifies an interface on a device.
 	google.protobuf.StringValue interface_id = 6;
+	// element_sub_type is the element sub-type of a tag.
+	ElementSubType element_sub_type = 7;
 }
 
 // TagAssignmentConfig holds a configuration for an assignment
 // between a tag and a network element.
+// The tag assignments that belong to entities other than ELEMENT_SUB_TYPE_DEVICE
+// will always be present in mainline only.
 message TagAssignmentConfig {
 	option (fmp.model) = "rw";
 	// key identifies an assignment. The special workspace ID ""
@@ -111,4 +146,7 @@ message TagAssignment {
 	option (fmp.model) = "ro";
 	// key identifies an assignment.
 	TagAssignmentKey key = 1;
+	// tag_creator_type is the creator type of the tag
+	// involved in the assignment.
+	CreatorType tag_creator_type = 2;
 }
