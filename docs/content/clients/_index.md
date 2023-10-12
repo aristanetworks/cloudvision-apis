@@ -8,4 +8,4 @@ Clients are generated from the base `.proto` files shipped in this repository us
 
 While Arista maintains clients for some languages, creating a client for your language of choice is also possible.
 
-{{% children  %}}
+{{% children  /%}}
