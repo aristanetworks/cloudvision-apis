@@ -4,7 +4,7 @@ weight: 100
 chapter: false
 ---
 
-{{% toc %}}
+{{% toc /%}}
 
 {{% notice info %}}
 Lifecycle Resource APIs are supported from CVP 2022.1.1 or newer and in CloudVision-as-a-Service.

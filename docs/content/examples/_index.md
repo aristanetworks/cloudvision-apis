@@ -4,4 +4,4 @@ weight: 100
 chapter: false
 ---
 
-{{% children %}}
+{{% children /%}}

@@ -4,7 +4,7 @@ weight: 100
 chapter: false
 ---
 
-{{% toc %}}
+{{% toc /%}}
 
 {{% notice info %}}
 Dashboard Resource APIs are supported from CVP 2021.3.0 (gRPC only) or newer and in CloudVision-as-a-Service.

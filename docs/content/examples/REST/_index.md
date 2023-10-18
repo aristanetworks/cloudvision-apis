@@ -6,7 +6,7 @@ chapter: false
 
 
 
-{{% children %}}
+{{% children /%}}
 
 {{% notice info %}}
 

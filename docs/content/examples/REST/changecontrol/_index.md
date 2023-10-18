@@ -4,7 +4,7 @@ weight: 100
 chapter: false
 ---
 
-{{% toc %}}
+{{% toc /%}}
 
 {{% notice info %}}
 Change Control Resource APIs are supported from CVP 2021.2.0 or newer and in CloudVision-as-a-Service.
