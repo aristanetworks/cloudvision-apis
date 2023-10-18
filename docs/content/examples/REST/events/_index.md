@@ -4,7 +4,7 @@ weight: 100
 chapter: false
 ---
 
-{{% toc /%}}
+{{% toc %}}
 
 {{% notice tip %}}
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
