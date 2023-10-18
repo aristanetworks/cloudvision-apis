@@ -21,7 +21,75 @@ A *SetResponse will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This 
 The Key field is required to be fully-specified because Delete needs to identify exactly-one resource to delete.
 RPC Definition The protobuf definition of GetOne is defined as such (for ExampleConfig):
 rpc Delete (ExampleConfigDeleteRequest) returns (ExampleConfigDeleteResponse); Request Type The generated request for a model (ExampleConfig, here) looks like so:
-message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
+message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>arista/alert.v1/alert.proto
+Alert
+AlertConfig
+AzureOAuth
+BroadcastGroup
+BroadcastGroups
+BroadcastGroups.ValuesEntry
+ConfigError
+ConfigErrors
+CueData
+CueData.ValuesEntry
+CueSNMPAuth
+CueSNMPEndpoint
+CueSNMPSettings
+CueSendgridEndpoint
+CueSendgridEndpoints
+CueSendgridSettings
+CueSnmpEndpoints
+CueSyslogEndpoint
+CueSyslogEndpoints
+CueSyslogSettings
+DefaultTemplate
+EmailEndpoint
+EmailEndpoints
+EmailSettings
+EndpointError
+EndpointErrors
+EventList
+GoogleChatEndpoint
+GoogleChatEndpoints
+GoogleChatSettings
+HeaderValues
+HttpHeaders
+HttpHeaders.ValuesEntry
+HttpSettings
+InhibitionSettings
+InhibitionSettings.ValuesEntry
+Matches
+MsTeamsEndpoint
+MsTeamsEndpoints
+MsTeamsSettings
+OpsgenieEndpoint
+OpsgenieEndpoints
+OpsgenieSettings
+PagerdutyEndpoint
+PagerdutyEndpoints
+PagerdutySettings
+Priorities
+PushoverEndpoint
+PushoverEndpoints
+Rule
+Rules
+SNMPAuth
+SNMPEndpoint
+SNMPEndpoints
+SNMPSettings
+SendgridEndpoint
+SendgridEndpoints
+SendgridSettings
+Settings
+SlackEndpoint
+SlackEndpoints
+SlackSettings
+SyslogEndpoint
+SyslogEndpoints
+SyslogSettings
+TemplateConfig
+TemplateKey
+VictorOpsEndpoint</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
 Action
 ApproveConfig
 Change
@@ -29,6 +97,7 @@ ChangeConfig
 ChangeControl
 ChangeControlConfig
 ChangeControlKey
+Filter
 Flag
 FlagConfig
 RepeatedRepeatedString
@@ -43,6 +112,8 @@ TimestampFlagConfig
 ChangeControlStatus
 StageStatus
 arista/changecontrol.v1/services.gen.proto
+ApproveConfigDeleteAllRequest
+ApproveConfigDeleteAllResponse
 ApproveConfigDeleteRequest
 ApproveConfigDeleteResponse
 ApproveConfigRequest
@@ -51,6 +122,8 @@ ApproveConfigSetRequest
 ApproveConfigSetResponse
 ApproveConfigStreamRequest
 ApproveConfigStreamResponse
+ChangeControlConfigDeleteAllRequest
+ChangeControlConfigDeleteAllResponse
 ChangeControlConfigDeleteRequest
 ChangeControlConfigDeleteResponse
 ChangeControlConfigRequest
@@ -73,13 +146,20 @@ ConfigDiffKey
 ConfigError
 ConfigErrors
 ConfigKey
+ConfigSource
+ConfigSources
 ConfigSummary
 Configuration
 DiffEntries
 DiffEntry
+SecurityProfile
+SecurityProfileComplianceSummary
+SecurityProfileDiff
+SecurityProfileDiffSummary
 Summary
 SummaryKey
 ConfigFilterCode
+ConfigSourceType
 ConfigSyncCode
 ConfigType
 DiffOp
@@ -93,17 +173,30 @@ ConfigurationRequest
 ConfigurationResponse
 ConfigurationStreamRequest
 ConfigurationStreamResponse
+SecurityProfileDiffRequest
+SecurityProfileDiffResponse
+SecurityProfileDiffStreamRequest
+SecurityProfileDiffStreamResponse
+SecurityProfileDiffSummaryRequest
+SecurityProfileDiffSummaryResponse
+SecurityProfileDiffSummaryStreamRequest
+SecurityProfileDiffSummaryStreamResponse
+SecurityProfileRequest
+SecurityProfileResponse
+SecurityProfileStreamRequest
+SecurityProfileStreamResponse
 SummaryRequest
 SummaryResponse
 SummaryStreamRequest
 SummaryStreamResponse
 ConfigDiffService
 ConfigurationService
+SecurityProfileDiffService
+SecurityProfileDiffSummaryService
+SecurityProfileService
 SummaryService
 Top
-arista/configstatus.v1/configstatus.proto ConfigDiff Field Name Type Description key ConfigDiffKey Key represents config diff key
-uri google.protobuf.StringValue Uri represents the HTTP URI client can use to GET config diff and associated errors
-error ConfigError ConfigDiffKey ConfigDiffKey uniquely identifies a configuration diff request</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
+arista/configstatus.v1/configstatus.proto ConfigDiff Field Name Type Description key ConfigDiffKey Key represents config diff key</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
 Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget WidgetStyles Widgets arista/dashboard.v1/services.gen.proto
 DashboardConfigDeleteAllRequest
 DashboardConfigDeleteAllResponse
@@ -113,6 +206,8 @@ DashboardConfigRequest
 DashboardConfigResponse
 DashboardConfigSetRequest
 DashboardConfigSetResponse
+DashboardConfigSetSomeRequest
+DashboardConfigSetSomeResponse
 DashboardConfigStreamRequest
 DashboardConfigStreamResponse
 DashboardRequest
@@ -158,8 +253,10 @@ EndpointLocationStreamRequest
 EndpointLocationStreamResponse
 EndpointLocationService
 Top
-arista/endpointlocation.v1/endpointlocation.proto Device Field Name Type Description identifier_list IdentifierList device_type DeviceType location_list LocationList The list of possible locations, in order from most likely to least likely
-device_status DeviceStatus device_info DeviceInfo DeviceInfo Field Name Type Description device_name google.protobuf.StringValue mobile google.protobuf.BoolValue tablet google.protobuf.BoolValue score google.protobuf.UInt32Value version google.</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
+arista/endpointlocation.v1/endpointlocation.proto Device Device holds information for a device matching a search term.
+Field Name Type Description identifier_list IdentifierList identifier_list holds the unique identifiers for the device.
+device_type DeviceType device_type is the broad category of the device.
+location_list LocationList location_list is the list of possible locations of the device.</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
 Event
 EventAck
 EventAnnotationConfig
@@ -175,15 +272,20 @@ EventNotes
 EventNotes.NotesEntry
 EventNotesConfig
 EventNotesConfig.NotesEntry
+EventRead
 ComponentType
 EventSeverity
 arista/event.v1/services.gen.proto
+EventAnnotationConfigDeleteAllRequest
+EventAnnotationConfigDeleteAllResponse
 EventAnnotationConfigDeleteRequest
 EventAnnotationConfigDeleteResponse
 EventAnnotationConfigRequest
 EventAnnotationConfigResponse
 EventAnnotationConfigSetRequest
 EventAnnotationConfigSetResponse
+EventAnnotationConfigSetSomeRequest
+EventAnnotationConfigSetSomeResponse
 EventAnnotationConfigStreamRequest
 EventAnnotationConfigStreamResponse
 EventRequest
@@ -211,6 +313,8 @@ OAuthConfigRequest
 OAuthConfigResponse
 OAuthConfigSetRequest
 OAuthConfigSetResponse
+OAuthConfigSetSomeRequest
+OAuthConfigSetSomeResponse
 OAuthConfigStreamRequest
 OAuthConfigStreamResponse
 SAMLConfigDeleteAllRequest
@@ -221,6 +325,8 @@ SAMLConfigRequest
 SAMLConfigResponse
 SAMLConfigSetRequest
 SAMLConfigSetResponse
+SAMLConfigSetSomeRequest
+SAMLConfigSetSomeResponse
 SAMLConfigStreamRequest
 SAMLConfigStreamResponse
 OAuthConfigService
@@ -228,8 +334,46 @@ SAMLConfigService
 Top
 arista/identityprovider.v1/identityprovider.proto OAuthConfig OAuthConfig holds the configuration for an OAuth provider.
 Field Name Type Description key OAuthKey key is the ID of the OAuth provider.
-endpoint google.protobuf.StringValue endpoint is the URL that identifies an OAuth authorization server.
-This endpoint is used to interact with the provider.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
+endpoint google.protobuf.StringValue endpoint is the URL that identifies an OAuth authorization server.</description></item><item><title>imagestatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</guid><description>arista/imagestatus.v1/imagestatus.proto
+ComplianceStatus
+ComplianceStatusBySup
+ComplianceStatusBySup.ValuesEntry
+Extension
+ExtensionDiff
+ExtensionDiffs
+ExtensionDiffsBySup
+ExtensionDiffsBySup.ValuesEntry
+Extensions
+ImageError
+ImageErrors
+ImageMetadata
+ImageSummary
+ImageWarning
+ImageWarnings
+RebootRequired
+SoftwareImage
+SoftwareImageDiff
+SoftwareImageDiffsBySup
+SoftwareImageDiffsBySup.ValuesEntry
+Summary
+SummaryKey
+TerminAttrDiffsBySup
+TerminAttrDiffsBySup.ValuesEntry
+DiffOp
+ErrorCode
+ExtensionInstallStatus
+SoftwareComplianceCode
+WarningCode
+arista/imagestatus.v1/services.gen.proto
+SummaryRequest
+SummaryResponse
+SummaryStreamRequest
+SummaryStreamResponse
+SummaryService
+Top
+arista/imagestatus.v1/imagestatus.proto ComplianceStatus ComplianceStatus indicates compliance status for software image, terminattr and extensions.
+Field Name Type Description software_image_compliance_code SoftwareComplianceCode software_image_compliance_code is the compliance code for images.
+terminattr_compliance_code SoftwareComplianceCode terminattr_compliance_code is the compliance code for TerminAttr.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
 Device
 DeviceConfiguration
 DeviceConfiguration.OptionsEntry
@@ -304,8 +448,15 @@ Field Name Type Description key AssignmentKey key uniquely identifies the assign
 clusters Clusters clusters that the system is assigned to.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
 AssignedTags
 AssignedTagsConfig
+AutofillAction
+AutofillActionConfig
+AutofillActionKey
+AutofillArgumentProvider
+AutofillArgumentProviders
+AutofillArgumentProviders.ValuesEntry
 BooleanInputFieldProps
 CollectionInputFieldProps
+DeviceInfo
 FloatInputFieldProps
 GroupInputFieldProps
 InputField
@@ -316,60 +467,53 @@ Inputs
 InputsConfig
 InputsKey
 IntegerInputFieldProps
+InterfaceInfo
+InterfaceInfos
 Layout
 ResolverInputFieldProps
+SecretInput
 StringInputFieldProps
 Studio
 StudioConfig
 StudioKey
+StudioSummary
+TagMatcherInputFieldProps
 Template
+TopologyInput
+TopologyInputConfig
+TopologyInputKey
+TopologyUpdate
+TopologyUpdateConfig
+TopologyUpdateKey
+TopologyUpdateSync
+TopologyUpdateSyncConfig
+WorkspaceKey
+AutofillProviderType
 InputFieldType
 ResolverFieldDisplayMode
 ResolverFieldInputMode
+TagMatcherFieldMode
 TemplateType
+TopologyElement
+TopologyOperation
+TopologyUpdateStatus
 arista/studio.v1/services.gen.proto
+AssignedTagsConfigDeleteAllRequest
+AssignedTagsConfigDeleteAllResponse
 AssignedTagsConfigDeleteRequest
 AssignedTagsConfigDeleteResponse
 AssignedTagsConfigRequest
 AssignedTagsConfigResponse
 AssignedTagsConfigSetRequest
 AssignedTagsConfigSetResponse
+AssignedTagsConfigSetSomeRequest
+AssignedTagsConfigSetSomeResponse
 AssignedTagsConfigStreamRequest
 AssignedTagsConfigStreamResponse
 AssignedTagsRequest
 AssignedTagsResponse
 AssignedTagsStreamRequest
-AssignedTagsStreamResponse
-InputsConfigDeleteRequest
-InputsConfigDeleteResponse
-InputsConfigRequest
-InputsConfigResponse
-InputsConfigSetRequest
-InputsConfigSetResponse
-InputsConfigStreamRequest
-InputsConfigStreamResponse
-InputsRequest
-InputsResponse
-InputsStreamRequest
-InputsStreamResponse
-StudioConfigDeleteRequest
-StudioConfigDeleteResponse
-StudioConfigRequest
-StudioConfigResponse
-StudioConfigSetRequest
-StudioConfigSetResponse
-StudioConfigStreamRequest
-StudioConfigStreamResponse
-StudioRequest
-StudioResponse
-StudioStreamRequest
-StudioStreamResponse
-AssignedTagsConfigService
-AssignedTagsService
-InputsConfigService
-InputsService
-StudioConfigService
-StudioService</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
+AssignedTagsStreamResponse</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
 arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
@@ -439,26 +583,35 @@ TagAssignmentKey
 TagConfig
 TagKey
 CreatorType
+ElementSubType
 ElementType
 arista/tag.v2/services.gen.proto
+TagAssignmentConfigDeleteAllRequest
+TagAssignmentConfigDeleteAllResponse
 TagAssignmentConfigDeleteRequest
 TagAssignmentConfigDeleteResponse
 TagAssignmentConfigRequest
 TagAssignmentConfigResponse
 TagAssignmentConfigSetRequest
 TagAssignmentConfigSetResponse
+TagAssignmentConfigSetSomeRequest
+TagAssignmentConfigSetSomeResponse
 TagAssignmentConfigStreamRequest
 TagAssignmentConfigStreamResponse
 TagAssignmentRequest
 TagAssignmentResponse
 TagAssignmentStreamRequest
 TagAssignmentStreamResponse
+TagConfigDeleteAllRequest
+TagConfigDeleteAllResponse
 TagConfigDeleteRequest
 TagConfigDeleteResponse
 TagConfigRequest
 TagConfigResponse
 TagConfigSetRequest
 TagConfigSetResponse
+TagConfigSetSomeRequest
+TagConfigSetSomeResponse
 TagConfigStreamRequest
 TagConfigStreamResponse
 TagRequest
@@ -472,13 +625,13 @@ TagService
 Top
 arista/tag.v2/tag.proto Tag Tag holds a merge-preview or the existing merged state (if the workspace ID is &amp;ldquo;&amp;rdquo;) of a tag.
 Field Name Type Description key TagKey key identifies a tag.</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
-BuildResult
-BuildResults
-BuildResults.ValuesEntry
+BuildStageState
+BuildStageState.ValuesEntry
 ConfigValidationResult
 ConfigletBuildResult
 ConfigletBuildResults
 ConfigletBuildResults.ValuesEntry
+ImageValidationResult
 InputError
 InputErrors
 InputValidationResult
@@ -492,34 +645,47 @@ TemplateError
 TemplateErrors
 Workspace
 WorkspaceBuild
+WorkspaceBuildDetails
+WorkspaceBuildDetailsKey
 WorkspaceBuildKey
 WorkspaceConfig
 WorkspaceKey
 BuildStage
 BuildState
+ConfigValidationSkipCause
+ImageValidationSkipCause
 Request
+ResponseCode
 ResponseStatus
 WorkspaceState
 arista/workspace.v1/services.gen.proto
+WorkspaceBuildDetailsRequest
+WorkspaceBuildDetailsResponse
+WorkspaceBuildDetailsStreamRequest
+WorkspaceBuildDetailsStreamResponse
 WorkspaceBuildRequest
 WorkspaceBuildResponse
 WorkspaceBuildStreamRequest
 WorkspaceBuildStreamResponse
+WorkspaceConfigDeleteAllRequest
+WorkspaceConfigDeleteAllResponse
 WorkspaceConfigDeleteRequest
 WorkspaceConfigDeleteResponse
 WorkspaceConfigRequest
 WorkspaceConfigResponse
 WorkspaceConfigSetRequest
 WorkspaceConfigSetResponse
+WorkspaceConfigSetSomeRequest
+WorkspaceConfigSetSomeResponse
 WorkspaceConfigStreamRequest
 WorkspaceConfigStreamResponse
 WorkspaceRequest
 WorkspaceResponse
 WorkspaceStreamRequest
 WorkspaceStreamResponse
+WorkspaceBuildDetailsService
 WorkspaceBuildService
 WorkspaceConfigService
 WorkspaceService
 Top
-arista/workspace.v1/workspace.proto BuildResult BuildResult is the per-device build output
-Field Name Type Description state BuildState stage BuildStage input_validation_results InputValidationResults configlet_build_results ConfigletBuildResults config_validation_result ConfigValidationResult BuildResults BuildResults is the build output for all devices, indexed by device ID</description></item></channel></rss>
+arista/workspace.v1/workspace.proto BuildStageState BuildStageState holds the state per build stage.</description></item></channel></rss>
