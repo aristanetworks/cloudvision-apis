@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-10-19
+      description: Add built_by, authz_result and authz_status
+      version: 1.3.0
+      cvaas: true
     - date: 2023-10-17
       description: Add DisplayName and Description to Workspace
       version: 1.2.17

@@ -347,6 +347,31 @@ message BuildStageState {
 	map<string, BuildState> values = 1;
 }
 
+// AuthzResult has the result of the authorization check for workspace changes.
+message AuthzResult {
+	// has_unauthorized_tag_change is true when there is a tag assignment that results
+	// in change in permissions and the subject is not authorized to do it.
+	google.protobuf.BoolValue has_unauthorized_tag_change = 1;
+	// has_unauthorized_device_change is true when there is atleast 1 device
+	// for which the subject doesn't have provision permission.
+	google.protobuf.BoolValue has_unauthorized_device_change = 2;
+	// error is an error message that is set when either of the above values
+	// are true.
+	google.protobuf.StringValue error = 3;
+}
+
+// DeviceAuthzStatus holds the result of the authorization check on device.
+enum DeviceAuthzStatus {
+	// DEVICE_AUTHZ_STATUS_UNSPECIFIED indicates the authorization check is pending.
+	DEVICE_AUTHZ_STATUS_UNSPECIFIED = 0;
+	// DEVICE_AUTHZ_STATUS_AUTHORIZED indicates the subject
+	// is authorized to provision this device.
+	DEVICE_AUTHZ_STATUS_AUTHORIZED = 1;
+	// DEVICE_AUTHZ_STATUS_UNAUTHORIZED indicates the subject
+	// is unauthorized to provision this device.
+	DEVICE_AUTHZ_STATUS_UNAUTHORIZED = 2;
+}
+
 // WorkspaceBuildKey uniquely identifies a build for a workspace.
 message WorkspaceBuildKey {
 	option (fmp.model_key) = true;
@@ -369,6 +394,10 @@ message WorkspaceBuild {
 	// error is an error message that is set if the build fails early before
 	// the per-device build result is computed.
 	google.protobuf.StringValue error = 4;
+	// built_by is the details of subject who built the workspace.
+	google.protobuf.StringValue built_by = 5;
+	// authz_result has the result of authorization check.
+	AuthzResult authz_result = 6;
 }
 
 // WorkspaceBuildDetailsKey uniquely identifies a build for a particular
@@ -410,6 +439,8 @@ message WorkspaceBuildDetails {
 	ImageValidationSkipCause image_validation_skip_cause = 9;
 	// build_stage_state is the state for each build stage.
 	BuildStageState build_stage_state = 10;
+	// authz_status is the status of provision permission for the device.
+	DeviceAuthzStatus authz_status = 11;
 }
 
 // ConfigValidationSkipCause enumerates the set of reasons a device can skip the config
