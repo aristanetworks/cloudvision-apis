@@ -89,7 +89,26 @@ SyslogEndpoints
 SyslogSettings
 TemplateConfig
 TemplateKey
-VictorOpsEndpoint</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
+VictorOpsEndpoint</description></item><item><title>bugexposure.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</guid><description>arista/bugexposure.v1/bugexposure.proto
+BugExposure
+BugExposureKey
+Acknowledgement
+HighestExposure
+arista/bugexposure.v1/services.gen.proto
+BugExposureRequest
+BugExposureResponse
+BugExposureStreamRequest
+BugExposureStreamResponse
+MetaResponse
+BugExposureService
+Top
+arista/bugexposure.v1/bugexposure.proto BugExposure BugExposure is the state model that represents the exposure a device has to bugs
+Field Name Type Description key BugExposureKey BugExposureKey is the key of
+BugExposure
+bug_ids fmp.RepeatedInt32 bug_ids is a list of bug alerts affecting the device
+with type Bug
+cve_ids fmp.RepeatedInt32 cve_ids is a list of bug alerts affecting the device
+with type CVE</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
 Action
 ApproveConfig
 Change
@@ -435,7 +454,20 @@ DeviceService
 ProvisionedDeviceService
 Top
 arista/inventory.v1/inventory.proto Device Device describes an onboarded device.
-Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>arista/redirector.v1/redirector.proto
+Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>lifecycle.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</guid><description>arista/lifecycle.v1/lifecycle.proto
+DateAndModels DeviceLifecycleSummary DeviceLifecycleSummaryKey HardwareLifecycleSummary SoftwareEOL arista/lifecycle.v1/services.gen.proto
+DeviceLifecycleSummaryRequest
+DeviceLifecycleSummaryResponse
+DeviceLifecycleSummaryStreamRequest
+DeviceLifecycleSummaryStreamResponse
+MetaResponse
+DeviceLifecycleSummaryService
+Top
+arista/lifecycle.v1/lifecycle.proto DateAndModels DateAndModels has an &amp;ldquo;end of&amp;rdquo; date along with the models that has this exact &amp;ldquo;end of&amp;rdquo; date
+Field Name Type Description date google.protobuf.Timestamp &amp;ldquo;end of&amp;rdquo; date
+models fmp.MapStringInt32 models with this exact &amp;ldquo;end of&amp;rdquo; date
+mapped to its count
+DeviceLifecycleSummary DeviceLifecycleSummary is the state model that represents the lifecycle summary of a device</description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>arista/redirector.v1/redirector.proto
 Assignment AssignmentKey Cluster Clusters arista/redirector.v1/services.gen.proto
 AssignmentRequest
 AssignmentResponse
