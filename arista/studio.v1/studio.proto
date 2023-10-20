@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
-// Arista Networks, Inc. Confidential and Proprietary.
-// Subject to Arista Networks, Inc.'s EULA.
-// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
 
 // NOTE: This is a workspace-aware Resource API.
 // Please see workspace.v1 for more information.
