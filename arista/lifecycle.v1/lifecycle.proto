@@ -1,0 +1,84 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.lifecycle.v1;
+
+option go_package = "arista/resources/arista/lifecycle.v1;lifecycle";
+
+option java_package = "com.arista.lifecycle.v1";
+option java_outer_classname = "Lifecycle";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// DeviceLifecycleSummaryKey is the key type for
+// DeviceLifecycleSummary model
+message DeviceLifecycleSummaryKey {
+    option (fmp.model_key) = true;
+
+    // device_id is the device ID
+    google.protobuf.StringValue device_id = 1;
+}
+
+// SoftwareEOL represents a software end of life
+message SoftwareEOL {
+
+    // version of a SoftwareEOL
+    google.protobuf.StringValue version = 1;
+
+    // end_of_support of a SoftwareEOL
+    google.protobuf.Timestamp end_of_support = 2;
+}
+
+// DateAndModels has an "end of" date along with
+// the models that has this exact "end of" date
+message DateAndModels {
+
+    // "end of" date
+    google.protobuf.Timestamp date = 1;
+
+    // models with this exact "end of" date
+    // mapped to its count
+    fmp.MapStringInt32 models = 2;
+}
+
+// HardwareLifecycleSummary represents a hardware lifecycle summary
+message HardwareLifecycleSummary {
+
+    // end_of_life of a HardwareLifecycleSummary
+    DateAndModels end_of_life = 1;
+
+    // end_of_sale of a HardwareLifecycleSummary
+    DateAndModels end_of_sale = 2;
+
+    // end_of_tac_support of a HardwareLifecycleSummary
+    DateAndModels end_of_tac_support = 3;
+
+    // end_of_hardware_rma_requests of a HardwareLifecycleSummary
+    DateAndModels end_of_hardware_rma_requests = 4;
+}
+
+// DeviceLifecycleSummary is the state model that represents
+// the lifecycle summary of a device
+message DeviceLifecycleSummary {
+    option (fmp.model) = "ro";
+
+    // DeviceLifecycleSummaryKey is the key of
+    // DeviceLifecycleSummary
+    DeviceLifecycleSummaryKey key = 1;
+
+    // software_eol is the software end of life of
+    // a device
+    SoftwareEOL software_eol = 2;
+
+    // hardware_lifecycle_summary is the hardware lifecycle summary
+    // of a device
+    HardwareLifecycleSummary  hardware_lifecycle_summary = 3;
+}

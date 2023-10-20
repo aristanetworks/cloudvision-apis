@@ -1,0 +1,628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.lifecycle.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "DeviceLifecycleSummaryService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/lifecycle/v1/DeviceLifecycleSummary": {
+      "get": {
+        "operationId": "DeviceLifecycleSummaryService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the device ID",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      }
+    },
+    "/api/resources/lifecycle/v1/DeviceLifecycleSummary/all": {
+      "get": {
+        "operationId": "DeviceLifecycleSummaryService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceLifecycleSummaryService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      }
+    },
+    "/api/resources/lifecycle/v1/DeviceLifecycleSummary/metadata": {
+      "get": {
+        "operationId": "DeviceLifecycleSummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceLifecycleSummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      }
+    },
+    "/api/resources/lifecycle/v1/DeviceLifecycleSummary/watch": {
+      "get": {
+        "operationId": "DeviceLifecycleSummaryService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceLifecycleSummaryService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      }
+    },
+    "/api/resources/lifecycle/v1/DeviceLifecycleSummary/watchmetadata": {
+      "get": {
+        "operationId": "DeviceLifecycleSummaryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceLifecycleSummaryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.lifecycle.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.lifecycle.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceLifecycleSummaryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.lifecycle.v1.DateAndModels": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "\"end of\" date"
+        },
+        "models": {
+          "$ref": "#/definitions/fmp.MapStringInt32",
+          "title": "models with this exact \"end of\" date\nmapped to its count"
+        }
+      },
+      "title": "DateAndModels has an \"end of\" date along with\nthe models that has this exact \"end of\" date"
+    },
+    "arista.lifecycle.v1.DeviceLifecycleSummary": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummaryKey",
+          "title": "DeviceLifecycleSummaryKey is the key of\nDeviceLifecycleSummary"
+        },
+        "softwareEol": {
+          "$ref": "#/definitions/arista.lifecycle.v1.SoftwareEOL",
+          "title": "software_eol is the software end of life of\na device"
+        },
+        "hardwareLifecycleSummary": {
+          "$ref": "#/definitions/arista.lifecycle.v1.HardwareLifecycleSummary",
+          "title": "hardware_lifecycle_summary is the hardware lifecycle summary\nof a device"
+        }
+      },
+      "title": "DeviceLifecycleSummary is the state model that represents\nthe lifecycle summary of a device"
+    },
+    "arista.lifecycle.v1.DeviceLifecycleSummaryKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "title": "device_id is the device ID"
+        }
+      },
+      "title": "DeviceLifecycleSummaryKey is the key type for\nDeviceLifecycleSummary model",
+      "required": [
+        "deviceId"
+      ]
+    },
+    "arista.lifecycle.v1.DeviceLifecycleSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceLifecycleSummary instance in this response."
+        }
+      }
+    },
+    "arista.lifecycle.v1.DeviceLifecycleSummaryStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummary"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceLifecycleSummary at end.\n    * Each DeviceLifecycleSummary response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceLifecycleSummary at start, followed by updates until now.\n    * Each DeviceLifecycleSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceLifecycleSummary at start, followed by updates\n    until end.\n    * Each DeviceLifecycleSummary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.lifecycle.v1.DeviceLifecycleSummaryStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DeviceLifecycleSummary",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceLifecycleSummary's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceLifecycleSummary value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.lifecycle.v1.HardwareLifecycleSummary": {
+      "type": "object",
+      "properties": {
+        "endOfLife": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DateAndModels",
+          "title": "end_of_life of a HardwareLifecycleSummary"
+        },
+        "endOfSale": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DateAndModels",
+          "title": "end_of_sale of a HardwareLifecycleSummary"
+        },
+        "endOfTacSupport": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DateAndModels",
+          "title": "end_of_tac_support of a HardwareLifecycleSummary"
+        },
+        "endOfHardwareRmaRequests": {
+          "$ref": "#/definitions/arista.lifecycle.v1.DateAndModels",
+          "title": "end_of_hardware_rma_requests of a HardwareLifecycleSummary"
+        }
+      },
+      "title": "HardwareLifecycleSummary represents a hardware lifecycle summary"
+    },
+    "arista.lifecycle.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.lifecycle.v1.SoftwareEOL": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "version of a SoftwareEOL"
+        },
+        "endOfSupport": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end_of_support of a SoftwareEOL"
+        }
+      },
+      "title": "SoftwareEOL represents a software end of life"
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.MapStringInt32": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The map\u003cstring, int32\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, int32\u003e`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

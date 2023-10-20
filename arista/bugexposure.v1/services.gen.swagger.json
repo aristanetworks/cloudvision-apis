@@ -1,0 +1,635 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.bugexposure.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "BugExposureService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/bugexposure/v1/BugExposure": {
+      "get": {
+        "operationId": "BugExposureService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.BugExposureResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the device ID",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.acknowledgement",
+            "description": "acknowledgement is one of the options for\nAcknowledgement enum\n\n - ACKNOWLEDGEMENT_UNSPECIFIED: Unacknowledged and acknowledged bugs will be computed\n - ACKNOWLEDGEMENT_UNACKNOWLEDGED: Only unacknowledged bugs will be computed\n - ACKNOWLEDGEMENT_ACKNOWLEDGED: Only acknowledged bugs will be computed",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ACKNOWLEDGEMENT_UNSPECIFIED",
+              "ACKNOWLEDGEMENT_UNACKNOWLEDGED",
+              "ACKNOWLEDGEMENT_ACKNOWLEDGED"
+            ],
+            "default": "ACKNOWLEDGEMENT_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      }
+    },
+    "/api/resources/bugexposure/v1/BugExposure/all": {
+      "get": {
+        "operationId": "BugExposureService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.BugExposureStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      },
+      "post": {
+        "operationId": "BugExposureService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.BugExposureStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      }
+    },
+    "/api/resources/bugexposure/v1/BugExposure/metadata": {
+      "get": {
+        "operationId": "BugExposureService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      },
+      "post": {
+        "operationId": "BugExposureService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      }
+    },
+    "/api/resources/bugexposure/v1/BugExposure/watch": {
+      "get": {
+        "operationId": "BugExposureService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.BugExposureStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      },
+      "post": {
+        "operationId": "BugExposureService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.BugExposureStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      }
+    },
+    "/api/resources/bugexposure/v1/BugExposure/watchmetadata": {
+      "get": {
+        "operationId": "BugExposureService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      },
+      "post": {
+        "operationId": "BugExposureService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.bugexposure.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.bugexposure.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.bugexposure.v1.BugExposureStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BugExposureService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.bugexposure.v1.Acknowledgement": {
+      "type": "string",
+      "enum": [
+        "ACKNOWLEDGEMENT_UNSPECIFIED",
+        "ACKNOWLEDGEMENT_UNACKNOWLEDGED",
+        "ACKNOWLEDGEMENT_ACKNOWLEDGED"
+      ],
+      "default": "ACKNOWLEDGEMENT_UNSPECIFIED",
+      "description": "- ACKNOWLEDGEMENT_UNSPECIFIED: Unacknowledged and acknowledged bugs will be computed\n - ACKNOWLEDGEMENT_UNACKNOWLEDGED: Only unacknowledged bugs will be computed\n - ACKNOWLEDGEMENT_ACKNOWLEDGED: Only acknowledged bugs will be computed",
+      "title": "Acknowledgement is an enumeration key\nfor a BugExposure model that defines\nthe acknowledgement state for the\ncomputed bugs"
+    },
+    "arista.bugexposure.v1.BugExposure": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.bugexposure.v1.BugExposureKey",
+          "title": "BugExposureKey is the key of\nBugExposure"
+        },
+        "bugIds": {
+          "$ref": "#/definitions/fmp.RepeatedInt32",
+          "title": "bug_ids is a list of bug alerts affecting the device\nwith type Bug"
+        },
+        "cveIds": {
+          "$ref": "#/definitions/fmp.RepeatedInt32",
+          "title": "cve_ids is a list of bug alerts affecting the device\nwith type CVE"
+        },
+        "bugCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "bug_count is the number of bug alerts\nwith type Bug"
+        },
+        "cveCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "cve_count is the number of bug alerts\nwith type CVE"
+        },
+        "highestBugExposure": {
+          "$ref": "#/definitions/arista.bugexposure.v1.HighestExposure",
+          "title": "highest_bug_exposure is the highest exposure\nwith type Bug"
+        },
+        "highestCveExposure": {
+          "$ref": "#/definitions/arista.bugexposure.v1.HighestExposure",
+          "title": "highest_cve_exposure is the highest exposure\nwith type CVE"
+        }
+      },
+      "title": "BugExposure is the state model that represents\nthe exposure a device has to bugs"
+    },
+    "arista.bugexposure.v1.BugExposureKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "title": "device_id is the device ID"
+        },
+        "acknowledgement": {
+          "$ref": "#/definitions/arista.bugexposure.v1.Acknowledgement",
+          "title": "acknowledgement is one of the options for\nAcknowledgement enum"
+        }
+      },
+      "title": "BugExposureKey is the key type for\nBugExposure model",
+      "required": [
+        "deviceId",
+        "acknowledgement"
+      ]
+    },
+    "arista.bugexposure.v1.BugExposureResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.bugexposure.v1.BugExposure",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nBugExposure instance in this response."
+        }
+      }
+    },
+    "arista.bugexposure.v1.BugExposureStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.bugexposure.v1.BugExposure"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each BugExposure at end.\n    * Each BugExposure response is fully-specified (all fields set).\n  * start: Returns the state of each BugExposure at start, followed by updates until now.\n    * Each BugExposure response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each BugExposure at start, followed by updates\n    until end.\n    * Each BugExposure response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.bugexposure.v1.BugExposureStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.bugexposure.v1.BugExposure",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this BugExposure's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the BugExposure value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.bugexposure.v1.HighestExposure": {
+      "type": "string",
+      "enum": [
+        "HIGHEST_EXPOSURE_UNSPECIFIED",
+        "HIGHEST_EXPOSURE_NONE",
+        "HIGHEST_EXPOSURE_LOW",
+        "HIGHEST_EXPOSURE_HIGH"
+      ],
+      "default": "HIGHEST_EXPOSURE_UNSPECIFIED",
+      "description": "- HIGHEST_EXPOSURE_UNSPECIFIED: If not given this will be the default value\nand it will compute devices with\nany highest exposure\n - HIGHEST_EXPOSURE_NONE: Not exposed to bugs\n - HIGHEST_EXPOSURE_LOW: Highest exposure is to a low priority bug\n - HIGHEST_EXPOSURE_HIGH: Highest exposure is to a high priority bug",
+      "title": "HighestExposure is an enumeration\nthat defines the options for\nhighest exposure"
+    },
+    "arista.bugexposure.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.RepeatedInt32": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The repeated int32 values."
+        }
+      },
+      "description": "Wrapper message for `repeated int32`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
