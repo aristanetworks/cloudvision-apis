@@ -1,0 +1,101 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.bugexposure.v1;
+
+option go_package = "arista/resources/arista/bugexposure.v1;bugexposure";
+
+option java_package = "com.arista.bugexposure.v1";
+option java_outer_classname = "BugExposure";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// Acknowledgement is an enumeration key
+// for a BugExposure model that defines
+// the acknowledgement state for the
+// computed bugs
+enum Acknowledgement {
+
+     // Unacknowledged and acknowledged bugs will be computed
+     ACKNOWLEDGEMENT_UNSPECIFIED = 0;
+
+     // Only unacknowledged bugs will be computed
+     ACKNOWLEDGEMENT_UNACKNOWLEDGED = 1;
+
+     // Only acknowledged bugs will be computed
+     ACKNOWLEDGEMENT_ACKNOWLEDGED = 2;
+}
+
+// BugExposureKey is the key type for
+// BugExposure model
+message BugExposureKey {
+    option (fmp.model_key) = true;
+
+    // device_id is the device ID
+    google.protobuf.StringValue device_id = 1;
+
+    // acknowledgement is one of the options for
+    // Acknowledgement enum
+    Acknowledgement acknowledgement = 2;
+}
+
+// HighestExposure is an enumeration
+// that defines the options for
+// highest exposure
+enum HighestExposure {
+
+    // If not given this will be the default value
+    // and it will compute devices with
+    // any highest exposure
+    HIGHEST_EXPOSURE_UNSPECIFIED = 0;
+
+    // Not exposed to bugs
+    HIGHEST_EXPOSURE_NONE = 1;
+
+    // Highest exposure is to a low priority bug
+    HIGHEST_EXPOSURE_LOW = 2;
+
+    // Highest exposure is to a high priority bug
+    HIGHEST_EXPOSURE_HIGH = 3;
+}
+
+// BugExposure is the state model that represents
+// the exposure a device has to bugs
+message BugExposure {
+    option (fmp.model) = "ro";
+
+    // BugExposureKey is the key of
+    // BugExposure
+    BugExposureKey key = 1;
+
+    // bug_ids is a list of bug alerts affecting the device
+    // with type Bug
+    fmp.RepeatedInt32 bug_ids = 2;
+
+    // cve_ids is a list of bug alerts affecting the device
+    // with type CVE
+    fmp.RepeatedInt32 cve_ids = 3;
+
+    // bug_count is the number of bug alerts
+    // with type Bug
+    google.protobuf.Int32Value bug_count = 4;
+
+    // cve_count is the number of bug alerts
+    // with type CVE
+    google.protobuf.Int32Value cve_count = 5;
+
+    // highest_bug_exposure is the highest exposure
+    // with type Bug
+    HighestExposure highest_bug_exposure = 6;
+
+    // highest_cve_exposure is the highest exposure
+    // with type CVE
+    HighestExposure highest_cve_exposure = 7;
+}

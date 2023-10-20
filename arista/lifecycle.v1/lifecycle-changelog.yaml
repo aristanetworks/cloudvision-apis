@@ -1,0 +1,19 @@
+# Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+# Use of this source code is governed by the Apache License 2.0
+# that can be found in the COPYING file.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+  - date: 2021-06-30
+    description: Change attribute name
+    version: 1.0.2
+    onprem: true
+    cvaas: true
+  - date: 2021-06-25
+    description: Fix models attribute
+    version: 1.0.1
+  - date: 2021-06-10
+    description: Initial revision
+    version: 1.0.0
