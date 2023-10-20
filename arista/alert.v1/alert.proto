@@ -214,6 +214,8 @@ message AzureOAuth {
 	google.protobuf.StringValue tenant_id = 2;
 	// client_secret is a user generated secret key used for auth
 	google.protobuf.StringValue client_secret = 3;
+	// auth_uri is the URI used for OAuth
+	google.protobuf.StringValue auth_uri = 4;
 }
 
 // HttpSettings are the settings to be used when sending various message over a http connection

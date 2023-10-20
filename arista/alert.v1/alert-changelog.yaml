@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2023-10-20
+    description: Adding auth_uri for AzureOAuth option
+    version: 1.7.1
+    onprem: true
+    cvaas: true
   - date: 2023-10-05
     description: Adding DefaultTemplate read-only resource
     version: 1.7.0
