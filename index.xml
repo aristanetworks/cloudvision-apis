@@ -657,6 +657,7 @@ TagService
 Top
 arista/tag.v2/tag.proto Tag Tag holds a merge-preview or the existing merged state (if the workspace ID is &amp;ldquo;&amp;rdquo;) of a tag.
 Field Name Type Description key TagKey key identifies a tag.</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
+AuthzResult
 BuildStageState
 BuildStageState.ValuesEntry
 ConfigValidationResult
@@ -685,6 +686,7 @@ WorkspaceKey
 BuildStage
 BuildState
 ConfigValidationSkipCause
+DeviceAuthzStatus
 ImageValidationSkipCause
 Request
 ResponseCode
@@ -720,4 +722,4 @@ WorkspaceBuildService
 WorkspaceConfigService
 WorkspaceService
 Top
-arista/workspace.v1/workspace.proto BuildStageState BuildStageState holds the state per build stage.</description></item></channel></rss>
+arista/workspace.v1/workspace.proto AuthzResult AuthzResult has the result of the authorization check for workspace changes.</description></item></channel></rss>
