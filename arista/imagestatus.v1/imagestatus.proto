@@ -259,10 +259,12 @@ enum ErrorCode {
     ERROR_CODE_UNSPECIFIED = 0;
     // ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does
     // not support the SKU.
-    ERROR_CODE_SUPPORT_NOT_INTRODUCED = 1;
+    // Deprecated - use WARNING_CODE_SUPPORT_NOT_INTRODUCED
+    ERROR_CODE_SUPPORT_NOT_INTRODUCED = 1 [deprecated=true];
     // ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer
     // supports the SKU.
-    ERROR_CODE_SUPPORT_REMOVED = 2;
+    // Deprecated - use WARNING_CODE_SUPPORT_REMOVED
+    ERROR_CODE_SUPPORT_REMOVED = 2 [deprecated=true];
     // ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device
     // is unreachable during a compliance computation.
     ERROR_CODE_DEVICE_UNREACHABLE = 3;
@@ -343,6 +345,12 @@ enum WarningCode {
     // WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED represents cases where the given EOS has passed
     // its end of life date.
     WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED = 11;
+    // WARNING_CODE_SUPPORT_NOT_INTRODUCED represents cases where the given EOS version does
+    // not support the SKUs.
+    WARNING_CODE_SUPPORT_NOT_INTRODUCED = 12;
+    // WARNING_CODE_SUPPORT_REMOVED represents cases where the given EOS version no longer
+    // supports the SKUs.
+    WARNING_CODE_SUPPORT_REMOVED = 13;
 }
 
 // ImageWarning wraps `WarningCode` enum with a reason string.
