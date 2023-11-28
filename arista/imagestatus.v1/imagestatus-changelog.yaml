@@ -8,6 +8,10 @@
 
 Changes:
     - date: 2023-12-12
+      description: Add a new error code ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE
+      version: 1.6.0
+      cvaas: true
+    - date: 2023-12-12
       description: Add ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED and ERROR_CODE_EOS_SUPPORT_REMOVED
       version: 1.5.0
       cvaas: true

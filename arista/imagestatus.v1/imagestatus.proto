@@ -295,6 +295,9 @@ enum ErrorCode {
     // ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer
     // supports the SKU.
     ERROR_CODE_EOS_SUPPORT_REMOVED = 12;
+    // ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device
+    // does not support the given EOS type.
+    ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE = 13;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.
