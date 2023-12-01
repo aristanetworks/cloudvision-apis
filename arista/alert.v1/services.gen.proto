@@ -18,6 +18,20 @@ import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
+
 message AlertRequest {
 
 	// Time indicates the time for which you are interested in the data.
@@ -75,8 +89,11 @@ message AlertStreamResponse {
 
 service AlertService {
 	rpc GetOne (AlertRequest) returns (AlertResponse);
-	
+
+	rpc GetAll (AlertStreamRequest) returns (stream AlertStreamResponse);
 	rpc Subscribe (AlertStreamRequest) returns (stream AlertStreamResponse);
+
+	rpc SubscribeMeta (AlertStreamRequest) returns (stream MetaResponse);
 }
 
 message AlertConfigRequest {
@@ -156,11 +173,102 @@ message AlertConfigSetResponse {
 
 service AlertConfigService {
 	rpc GetOne (AlertConfigRequest) returns (AlertConfigResponse);
-	
+
+	rpc GetAll (AlertConfigStreamRequest) returns (stream AlertConfigStreamResponse);
 	rpc Subscribe (AlertConfigStreamRequest) returns (stream AlertConfigStreamResponse);
+
+	rpc SubscribeMeta (AlertConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (AlertConfigSetRequest) returns (AlertConfigSetResponse);
-	
-	
+
+
+}
+
+message DefaultTemplateRequest {
+	// Key uniquely identifies a DefaultTemplate instance to retrieve.
+	// This value must be populated.
+	TemplateKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DefaultTemplateResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DefaultTemplate value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DefaultTemplate instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DefaultTemplateSomeRequest {
+	repeated TemplateKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DefaultTemplateSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DefaultTemplate value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
+message DefaultTemplateStreamRequest {
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DefaultTemplate at end.
+	//     * Each DefaultTemplate response is fully-specified (all fields set).
+	//   * start: Returns the state of each DefaultTemplate at start, followed by updates until now.
+	//     * Each DefaultTemplate response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DefaultTemplate at start, followed by updates
+	//     until end.
+	//     * Each DefaultTemplate response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message DefaultTemplateStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	DefaultTemplate value = 1;
+
+	// Time holds the timestamp of this DefaultTemplate's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the DefaultTemplate value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service DefaultTemplateService {
+	rpc GetOne (DefaultTemplateRequest) returns (DefaultTemplateResponse);
+	rpc GetSome (DefaultTemplateSomeRequest) returns (stream DefaultTemplateSomeResponse);
+	rpc GetAll (DefaultTemplateStreamRequest) returns (stream DefaultTemplateStreamResponse);
+	rpc Subscribe (DefaultTemplateStreamRequest) returns (stream DefaultTemplateStreamResponse);
+	rpc GetMeta (DefaultTemplateStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DefaultTemplateStreamRequest) returns (stream MetaResponse);
 }
 
 message TemplateConfigRequest {
@@ -183,6 +291,27 @@ message TemplateConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// TemplateConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message TemplateConfigSomeRequest {
+	repeated TemplateKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message TemplateConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	TemplateConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message TemplateConfigStreamRequest {
@@ -275,6 +404,17 @@ message TemplateConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TemplateConfigDeleteSomeRequest {
+	// key contains a list of TemplateConfig keys to delete
+	repeated TemplateKey keys = 1;
+};
+
+// TemplateConfigDeleteSomeResponse is only sent when there is an error.
+message TemplateConfigDeleteSomeResponse {
+	TemplateKey key = 1;
+	string error = 2;
+};
+
 message TemplateConfigDeleteAllRequest {
 };
 
@@ -291,10 +431,14 @@ message TemplateConfigDeleteAllResponse {
 
 service TemplateConfigService {
 	rpc GetOne (TemplateConfigRequest) returns (TemplateConfigResponse);
+	rpc GetSome (TemplateConfigSomeRequest) returns (stream TemplateConfigSomeResponse);
 	rpc GetAll (TemplateConfigStreamRequest) returns (stream TemplateConfigStreamResponse);
 	rpc Subscribe (TemplateConfigStreamRequest) returns (stream TemplateConfigStreamResponse);
+	rpc GetMeta (TemplateConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (TemplateConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (TemplateConfigSetRequest) returns (TemplateConfigSetResponse);
 	rpc SetSome (TemplateConfigSetSomeRequest) returns (stream TemplateConfigSetSomeResponse);
 	rpc Delete (TemplateConfigDeleteRequest) returns (TemplateConfigDeleteResponse);
+	rpc DeleteSome (TemplateConfigDeleteSomeRequest) returns (stream TemplateConfigDeleteSomeResponse);
 	rpc DeleteAll (TemplateConfigDeleteAllRequest) returns (stream TemplateConfigDeleteAllResponse);
 }

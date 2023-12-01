@@ -7,6 +7,21 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-01-15
+    description: Adding descriptive fields to DefaultTemplate resource
+    version: 1.8.1
+    onprem: true
+    cvaas: true
+  - date: 2023-10-11
+    description: Allow webhook body to be customised
+    version: 1.8.0
+    onprem: true
+    cvaas: true
+  - date: 2023-10-20
+    description: Adding single email templates
+    version: 1.7.2
+    onprem: true
+    cvaas: true
   - date: 2023-10-20
     description: Adding auth_uri for AzureOAuth option
     version: 1.7.1
