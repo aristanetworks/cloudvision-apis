@@ -1,0 +1,76 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.connectivitymonitor.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/connectivitymonitor.v1;connectivitymonitor";
+
+import "google/protobuf/wrappers.proto";
+import "fmp/extensions.proto";
+
+// ProbeKey uniquely identifies a connectivity monitor probe.
+message ProbeKey {
+    option (fmp.model_key) = true;
+    // device_id is the id of the device in the probe.
+    google.protobuf.StringValue device_id = 1;
+    // host is the hostname used in the probe.
+    google.protobuf.StringValue host = 2;
+    // vrf is the name of the VRF in the probe.
+    google.protobuf.StringValue vrf = 3;
+}
+
+// ProbeStatsKey uniquely identifies a connectivity monitor probe's statistics,
+// per source interface.
+message ProbeStatsKey {
+    option (fmp.model_key) = true;
+    // device_id is the id of the device in the probe.
+    google.protobuf.StringValue device_id = 1;
+    // host is the hostname used in the probe.
+    google.protobuf.StringValue host = 2;
+    // vrf is the name of the VRF in the probe.
+    google.protobuf.StringValue vrf = 3;
+    // source_intf is the name of the interface in the probe.
+    google.protobuf.StringValue source_intf = 4;
+}
+
+// Probe is identifying information of a connectivity monitor probe.
+// It is used to retrieve probe information without getting the corresponding stats so that
+// probe information can be displayed without streaming all related data, such as in the UI.
+message Probe {
+    option (fmp.model) = "ro";
+    // key uniquely identifies the connectivity monitor probe.
+    ProbeKey key = 1;
+    // ip_addr is the IP Address of the probe.
+    google.protobuf.StringValue ip_addr = 2;
+    // host_name is the name of the host of the probe.
+    google.protobuf.StringValue host_name = 3;
+    // description is the description of the probe.
+    google.protobuf.StringValue description = 4;
+}
+
+// ProbeStats is the connectivity monitor statistics related to the specified probe.
+message ProbeStats {
+    option (fmp.model) = "ro";
+    // key uniquely identifies the connectivity monitor probe.
+    ProbeStatsKey key = 1;
+    // latency_millis is the latency between the device interface and the host.
+    // Value is in milliseconds.
+    google.protobuf.DoubleValue latency_millis = 2;
+    // jitter_millis is the amount of jitter experienced by requests
+    // between the device interface and host.
+    // Value is in milliseconds.
+    google.protobuf.DoubleValue jitter_millis = 3;
+    // http_response_time_millis is the amount of time taken to respond to a http
+    // request between the device interface and the host.
+    // Value is in milliseconds.
+    google.protobuf.DoubleValue http_response_time_millis = 4;
+    // packet_loss_percent is the amount of packet loss experienced
+    // by requests between the device interface and host.
+    // Value is a percentage.
+    google.protobuf.Int64Value packet_loss_percent = 5;
+    // error is the error reported on the connection.
+    google.protobuf.StringValue error = 6;
+}

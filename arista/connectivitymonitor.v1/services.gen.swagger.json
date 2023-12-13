@@ -1,0 +1,1230 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.connectivitymonitor.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ProbeService"
+    },
+    {
+      "name": "ProbeStatsService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/connectivitymonitor/v1/Probe": {
+      "get": {
+        "operationId": "ProbeService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the id of the device in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.host",
+            "description": "host is the hostname used in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.vrf",
+            "description": "vrf is the name of the VRF in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/Probe/all": {
+      "get": {
+        "operationId": "ProbeService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/Probe/getsome": {
+      "post": {
+        "operationId": "ProbeService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/Probe/metadata": {
+      "get": {
+        "operationId": "ProbeService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/Probe/watch": {
+      "get": {
+        "operationId": "ProbeService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/Probe/watchmetadata": {
+      "get": {
+        "operationId": "ProbeService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats": {
+      "get": {
+        "operationId": "ProbeStatsService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id is the id of the device in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.host",
+            "description": "host is the hostname used in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.vrf",
+            "description": "vrf is the name of the VRF in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.sourceIntf",
+            "description": "source_intf is the name of the interface in the probe.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats/all": {
+      "get": {
+        "operationId": "ProbeStatsService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeStatsService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats/getsome": {
+      "post": {
+        "operationId": "ProbeStatsService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStatsSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats/metadata": {
+      "get": {
+        "operationId": "ProbeStatsService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeStatsService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats/watch": {
+      "get": {
+        "operationId": "ProbeStatsService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeStatsService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    },
+    "/api/resources/connectivitymonitor/v1/ProbeStats/watchmetadata": {
+      "get": {
+        "operationId": "ProbeStatsService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      },
+      "post": {
+        "operationId": "ProbeStatsService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.connectivitymonitor.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.connectivitymonitor.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProbeStatsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.connectivitymonitor.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.Probe": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeKey",
+          "description": "key uniquely identifies the connectivity monitor probe."
+        },
+        "ipAddr": {
+          "type": "string",
+          "description": "ip_addr is the IP Address of the probe."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "host_name is the name of the host of the probe."
+        },
+        "description": {
+          "type": "string",
+          "description": "description is the description of the probe."
+        }
+      },
+      "description": "Probe is identifying information of a connectivity monitor probe.\nIt is used to retrieve probe information without getting the corresponding stats so that\nprobe information can be displayed without streaming all related data, such as in the UI."
+    },
+    "arista.connectivitymonitor.v1.ProbeKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the id of the device in the probe."
+        },
+        "host": {
+          "type": "string",
+          "description": "host is the hostname used in the probe."
+        },
+        "vrf": {
+          "type": "string",
+          "description": "vrf is the name of the VRF in the probe."
+        }
+      },
+      "description": "ProbeKey uniquely identifies a connectivity monitor probe.",
+      "required": [
+        "deviceId",
+        "host",
+        "vrf"
+      ]
+    },
+    "arista.connectivitymonitor.v1.ProbeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.Probe",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nProbe instance in this response."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.Probe",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStats": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsKey",
+          "description": "key uniquely identifies the connectivity monitor probe."
+        },
+        "latencyMillis": {
+          "type": "number",
+          "format": "double",
+          "description": "latency_millis is the latency between the device interface and the host.\nValue is in milliseconds."
+        },
+        "jitterMillis": {
+          "type": "number",
+          "format": "double",
+          "description": "jitter_millis is the amount of jitter experienced by requests\nbetween the device interface and host.\nValue is in milliseconds."
+        },
+        "httpResponseTimeMillis": {
+          "type": "number",
+          "format": "double",
+          "description": "http_response_time_millis is the amount of time taken to respond to a http\nrequest between the device interface and the host.\nValue is in milliseconds."
+        },
+        "packetLossPercent": {
+          "type": "string",
+          "format": "int64",
+          "description": "packet_loss_percent is the amount of packet loss experienced\nby requests between the device interface and host.\nValue is a percentage."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is the error reported on the connection."
+        }
+      },
+      "description": "ProbeStats is the connectivity monitor statistics related to the specified probe."
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the id of the device in the probe."
+        },
+        "host": {
+          "type": "string",
+          "description": "host is the hostname used in the probe."
+        },
+        "vrf": {
+          "type": "string",
+          "description": "vrf is the name of the VRF in the probe."
+        },
+        "sourceIntf": {
+          "type": "string",
+          "description": "source_intf is the name of the interface in the probe."
+        }
+      },
+      "description": "ProbeStatsKey uniquely identifies a connectivity monitor probe's statistics,\nper source interface.",
+      "required": [
+        "deviceId",
+        "host",
+        "vrf",
+        "sourceIntf"
+      ]
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStats",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nProbeStats instance in this response."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStats",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStats"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ProbeStats at end.\n    * Each ProbeStats response is fully-specified (all fields set).\n  * start: Returns the state of each ProbeStats at start, followed by updates until now.\n    * Each ProbeStats response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ProbeStats at start, followed by updates\n    until end.\n    * Each ProbeStats response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStats",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ProbeStats's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ProbeStats value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.Probe"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Probe at end.\n    * Each Probe response is fully-specified (all fields set).\n  * start: Returns the state of each Probe at start, followed by updates until now.\n    * Each Probe response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Probe at start, followed by updates\n    until end.\n    * Each Probe response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.connectivitymonitor.v1.Probe",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Probe's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Probe value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
