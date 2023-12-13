@@ -259,11 +259,11 @@ enum ErrorCode {
     ERROR_CODE_UNSPECIFIED = 0;
     // ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does
     // not support the SKU.
-    // Deprecated - use WARNING_CODE_SUPPORT_NOT_INTRODUCED
+    // Deprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED
     ERROR_CODE_SUPPORT_NOT_INTRODUCED = 1 [deprecated=true];
     // ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer
     // supports the SKU.
-    // Deprecated - use WARNING_CODE_SUPPORT_REMOVED
+    // Deprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED
     ERROR_CODE_SUPPORT_REMOVED = 2 [deprecated=true];
     // ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device
     // is unreachable during a compliance computation.
@@ -289,6 +289,12 @@ enum ErrorCode {
     // ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with
     // CloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.
     ERROR_CODE_EOS_CV_INCOMPATIBLE = 10;
+    // ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does
+    // not support the SKU.
+    ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED = 11;
+    // ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer
+    // supports the SKU.
+    ERROR_CODE_EOS_SUPPORT_REMOVED = 12;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.

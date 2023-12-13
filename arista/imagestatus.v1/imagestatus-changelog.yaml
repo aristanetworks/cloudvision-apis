@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2023-12-12
+      description: Add ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED and ERROR_CODE_EOS_SUPPORT_REMOVED
+      version: 1.5.0
+      cvaas: true
     - date: 2023-11-15
       description: Add WARNING_CODE_SUPPORT_NOT_INTRODUCED and WARNING_CODE_SUPPORT_REMOVED.
                     Deprecate the related error codes
