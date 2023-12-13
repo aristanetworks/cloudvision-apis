@@ -1,0 +1,23 @@
+# Copyright (c) 2022 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2023-11-17
+      description: Add resource to github
+      onprem: true
+      cvaas: true
+      version: 1.0.3
+    - date: 2022-09-12
+      description: Audit Fields for Configlet and ConfigletAssignment
+      version: 1.0.2
+    - date: 2022-09-06
+      description: Replace groups with ChildAssignmentIds
+      version: 1.0.1
+    - date: 2022-05-01
+      description: Initial revision
+      version: 1.0.0

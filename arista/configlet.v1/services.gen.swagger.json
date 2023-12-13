@@ -1,0 +1,2843 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.configlet.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ConfigletService"
+    },
+    {
+      "name": "ConfigletAssignmentService"
+    },
+    {
+      "name": "ConfigletAssignmentConfigService"
+    },
+    {
+      "name": "ConfigletConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/configlet/v1/Configlet": {
+      "get": {
+        "operationId": "ConfigletService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id identifies the workspace within which the static configlet resides\nempty string (\"\") stands for the \"mainline\".",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletId",
+            "description": "configlet_id is the static configlet ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/Configlet/all": {
+      "get": {
+        "operationId": "ConfigletService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/Configlet/getsome": {
+      "post": {
+        "operationId": "ConfigletService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/Configlet/metadata": {
+      "get": {
+        "operationId": "ConfigletService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/Configlet/watch": {
+      "get": {
+        "operationId": "ConfigletService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/Configlet/watchmetadata": {
+      "get": {
+        "operationId": "ConfigletService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment": {
+      "get": {
+        "operationId": "ConfigletAssignmentService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the unique identifier of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletAssignmentId",
+            "description": "configlet_assignment_id is the unique identifier of the configlet_assignment.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment/all": {
+      "get": {
+        "operationId": "ConfigletAssignmentService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment/getsome": {
+      "post": {
+        "operationId": "ConfigletAssignmentService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment/metadata": {
+      "get": {
+        "operationId": "ConfigletAssignmentService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment/watch": {
+      "get": {
+        "operationId": "ConfigletAssignmentService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignment/watchmetadata": {
+      "get": {
+        "operationId": "ConfigletAssignmentService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig": {
+      "get": {
+        "operationId": "ConfigletAssignmentConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the unique identifier of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletAssignmentId",
+            "description": "configlet_assignment_id is the unique identifier of the configlet_assignment.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ConfigletAssignmentConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the unique identifier of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletAssignmentId",
+            "description": "configlet_assignment_id is the unique identifier of the configlet_assignment.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "ConfigletAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the ConfigletAssignmentConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/all": {
+      "get": {
+        "operationId": "ConfigletAssignmentConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ConfigletAssignmentConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/deletesome": {
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of ConfigletAssignmentConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/getsome": {
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/metadata": {
+      "get": {
+        "operationId": "ConfigletAssignmentConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/some": {
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of ConfigletAssignmentConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/watch": {
+      "get": {
+        "operationId": "ConfigletAssignmentConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletAssignmentConfig/watchmetadata": {
+      "get": {
+        "operationId": "ConfigletAssignmentConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletAssignmentConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig": {
+      "get": {
+        "operationId": "ConfigletConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id identifies the workspace within which the static configlet resides\nempty string (\"\") stands for the \"mainline\".",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletId",
+            "description": "configlet_id is the static configlet ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ConfigletConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id identifies the workspace within which the static configlet resides\nempty string (\"\") stands for the \"mainline\".",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.configletId",
+            "description": "configlet_id is the static configlet ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "ConfigletConfig carries the value to set into the datastore.\nSee the documentation on the ConfigletConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/all": {
+      "get": {
+        "operationId": "ConfigletConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "ConfigletConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/deletesome": {
+      "post": {
+        "operationId": "ConfigletConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of ConfigletConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/getsome": {
+      "post": {
+        "operationId": "ConfigletConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/metadata": {
+      "get": {
+        "operationId": "ConfigletConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/some": {
+      "post": {
+        "operationId": "ConfigletConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of ConfigletConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/watch": {
+      "get": {
+        "operationId": "ConfigletConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.ConfigletConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    },
+    "/api/resources/configlet/v1/ConfigletConfig/watchmetadata": {
+      "get": {
+        "operationId": "ConfigletConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigletConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configlet.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configlet.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigletConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.configlet.v1.Configlet": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display_name is the display name of the static configlet."
+        },
+        "description": {
+          "type": "string",
+          "description": "description is the description of the static configlet."
+        },
+        "migratedFrom": {
+          "type": "string",
+          "description": "migrated_from is populated with the source configlet name when migrated\nfrom network provisioning to studio."
+        },
+        "body": {
+          "type": "string",
+          "description": "body is the static configlet body."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created_at is the time when the Configlet was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created_by is the user who created the Configlet."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_modified_at is the time when the Configlet was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last_modified_by is the user who last modified the Configlet."
+        }
+      },
+      "title": "Configlet is the state of a static configlet in a workspace or mainline.\nSubscribe and GetAll do not return the \"body\"\nUse GetOne to get the body of individual configlets"
+    },
+    "arista.configlet.v1.ConfigletAssignment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "configletIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "configlet_ids is the list of configlets which are assigned"
+        },
+        "query": {
+          "type": "string",
+          "title": "query represents the tag query assigned"
+        },
+        "matchPolicy": {
+          "$ref": "#/definitions/arista.configlet.v1.MatchPolicy",
+          "title": "match_policy is the discriminator for the query field"
+        },
+        "childAssignmentIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "list of child assignments"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created_at is the time when the ConfigletAssignment was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created_by is the user who created the ConfigletAssignment."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_modified_at is the time when the ConfigletAssignment\nwas last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last_modified_by is the user who last modified the ConfigletAssignment."
+        }
+      },
+      "title": "ConfigletAssignment is the state of this assignment in a workspace/mainline"
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "configletIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "configlet_ids is the list of configlets to be assigned"
+        },
+        "query": {
+          "type": "string",
+          "title": "query is a tag query string that conforms to the CloudVision\ntag query language. E.g., the query, `\"datacenter:NYC,SFO AND\nsflow:enabled\"`, matches all devices with sflow enabled in\ndata centers NYC and SFO.\nmalformed queries result in an error\ntags not matching devices are ignored"
+        },
+        "remove": {
+          "type": "boolean",
+          "description": "remove indicates whether to remove (`true`) or add (`false`,\nunset) the tag assignments involving the studio identified\nby the key if the encompassing workspace merges. Other data\nfields are not allowed if this field is set to true."
+        },
+        "matchPolicy": {
+          "$ref": "#/definitions/arista.configlet.v1.MatchPolicy",
+          "title": "match_policy is the discriminator for the query field"
+        },
+        "childAssignmentIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "list of child assignments"
+        }
+      },
+      "description": "ConfigletAssignmentConfig are the the inputs to the static configlet studio.\nEach assignment assigns a list of configlets to the devices matching the tag query.\nIndividual assignments can have a list of \"child\" assignments.\nThe totality of these assignments form a list of tree hierarchies.\nUsing the corresponding GUI workflow should help explain this structure.\nWhen traversing a tree and assigning static configlets to devices, the following rules\nare applied:\n1) Tag queries at each level need to resolve to a subset of its parent's queries.\nDevices resolved in child assignments but which do not resolve in that of its parent's\nare skipped.\n2) Match policy determines how the assignment's devices get divied up amongst its children."
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey",
+          "description": "This is the key of the ConfigletAssignmentConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey",
+          "description": "Key echoes back the key of the deleted ConfigletAssignmentConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "ConfigletAssignmentConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletAssignmentConfig instance in this response."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig",
+          "description": "Value carries all the values given in the ConfigletAssignmentConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignmentConfig at end.\n    * Each ConfigletAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignmentConfig at start, followed by updates until now.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignmentConfig at start, followed by updates\n    until end.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ConfigletAssignmentConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ConfigletAssignmentConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the unique identifier of the workspace."
+        },
+        "configletAssignmentId": {
+          "type": "string",
+          "description": "configlet_assignment_id is the unique identifier of the configlet_assignment."
+        }
+      },
+      "title": "ConfigletAssignmentKey uniquely identifies a configlet assignment",
+      "required": [
+        "workspaceId",
+        "configletAssignmentId"
+      ]
+    },
+    "arista.configlet.v1.ConfigletAssignmentResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletAssignment instance in this response."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignment"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignment at end.\n    * Each ConfigletAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignment at start, followed by updates until now.\n    * Each ConfigletAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignment at start, followed by updates\n    until end.\n    * Each ConfigletAssignment response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignment",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ConfigletAssignment's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ConfigletAssignment value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+        },
+        "remove": {
+          "type": "boolean",
+          "description": "remove specifies the static configlet is to be removed from the workspace.\nOther data fields are not allowed when this field is set to true."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display_name is the display name of the static configlet."
+        },
+        "description": {
+          "type": "string",
+          "description": "description is the description of the static configlet."
+        },
+        "migratedFrom": {
+          "type": "string",
+          "description": "migrated_from is populated with the source configlet name when migrated\nfrom network provisioning to studio."
+        },
+        "body": {
+          "type": "string",
+          "description": "body is the static configlet body."
+        }
+      },
+      "description": "ConfigletConfig updates a static configlet in a workspace."
+    },
+    "arista.configlet.v1.ConfigletConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey",
+          "description": "This is the key of the ConfigletConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey",
+          "description": "Key echoes back the key of the deleted ConfigletConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "ConfigletConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.configlet.v1.ConfigletConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletConfig instance in this response."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig",
+          "description": "Value carries all the values given in the ConfigletConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletConfig at end.\n    * Each ConfigletConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletConfig at start, followed by updates until now.\n    * Each ConfigletConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletConfig at start, followed by updates\n    until end.\n    * Each ConfigletConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ConfigletConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ConfigletConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id identifies the workspace within which the static configlet resides\nempty string (\"\") stands for the \"mainline\"."
+        },
+        "configletId": {
+          "type": "string",
+          "description": "configlet_id is the static configlet ID."
+        }
+      },
+      "description": "ConfigletKey uniquely identifies a static configlet.",
+      "required": [
+        "workspaceId",
+        "configletId"
+      ]
+    },
+    "arista.configlet.v1.ConfigletResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.Configlet",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfiglet instance in this response."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.Configlet",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.Configlet"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configlet at end.\n    * Each Configlet response is fully-specified (all fields set).\n  * start: Returns the state of each Configlet at start, followed by updates until now.\n    * Each Configlet response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configlet at start, followed by updates\n    until end.\n    * Each Configlet response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configlet.v1.Configlet",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Configlet's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Configlet value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.configlet.v1.MatchPolicy": {
+      "type": "string",
+      "enum": [
+        "MATCH_POLICY_UNSPECIFIED",
+        "MATCH_POLICY_MATCH_FIRST",
+        "MATCH_POLICY_MATCH_ALL"
+      ],
+      "default": "MATCH_POLICY_UNSPECIFIED",
+      "description": "- MATCH_POLICY_MATCH_FIRST: MATCH_POLICY_MATCH_FIRST dictates that matching devices are used only for the first match amongst its children\n - MATCH_POLICY_MATCH_ALL: MATCH_POLICY_MATCH_ALL dictates that matching devices are used across all children",
+      "title": "MatchPolicy specifies how the tag query of a configlet assignment\nshould be used to resolve devices for its children"
+    },
+    "arista.configlet.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
