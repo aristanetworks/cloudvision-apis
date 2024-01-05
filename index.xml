@@ -537,7 +537,67 @@ AssignmentService
 Top
 arista/redirector.v1/redirector.proto Assignment Assignment returns the information about the regional clusters that the system is assigned to. Each cluster consists of a series of hosts, each of which the client can use to connect.
 Field Name Type Description key AssignmentKey key uniquely identifies the assignment of system_id to the cluster.
-clusters Clusters clusters that the system is assigned to.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
+clusters Clusters clusters that the system is assigned to.</description></item><item><title>serviceaccount.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</guid><description>arista/serviceaccount.v1/serviceaccount.proto
+Account
+AccountConfig
+AccountKey
+Token
+TokenConfig
+TokenKey
+AccountStatus
+arista/serviceaccount.v1/services.gen.proto
+AccountConfigDeleteAllRequest
+AccountConfigDeleteAllResponse
+AccountConfigDeleteRequest
+AccountConfigDeleteResponse
+AccountConfigDeleteSomeRequest
+AccountConfigDeleteSomeResponse
+AccountConfigRequest
+AccountConfigResponse
+AccountConfigSetRequest
+AccountConfigSetResponse
+AccountConfigSetSomeRequest
+AccountConfigSetSomeResponse
+AccountConfigSomeRequest
+AccountConfigSomeResponse
+AccountConfigStreamRequest
+AccountConfigStreamResponse
+AccountRequest
+AccountResponse
+AccountSomeRequest
+AccountSomeResponse
+AccountStreamRequest
+AccountStreamResponse
+MetaResponse
+TokenConfigDeleteAllRequest
+TokenConfigDeleteAllResponse
+TokenConfigDeleteRequest
+TokenConfigDeleteResponse
+TokenConfigDeleteSomeRequest
+TokenConfigDeleteSomeResponse
+TokenConfigRequest
+TokenConfigResponse
+TokenConfigSetRequest
+TokenConfigSetResponse
+TokenConfigSetSomeRequest
+TokenConfigSetSomeResponse
+TokenConfigSomeRequest
+TokenConfigSomeResponse
+TokenConfigStreamRequest
+TokenConfigStreamResponse
+TokenRequest
+TokenResponse
+TokenSomeRequest
+TokenSomeResponse
+TokenStreamRequest
+TokenStreamResponse
+AccountConfigService
+AccountService
+TokenConfigService
+TokenService
+Top
+arista/serviceaccount.v1/serviceaccount.proto Account Account describes a service account.
+Field Name Type Description key AccountKey key uniquely identifies the service account.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
 AssignedTags
 AssignedTagsConfig
 AutofillAction
