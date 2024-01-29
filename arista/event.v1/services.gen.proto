@@ -18,6 +18,20 @@ import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
+
 message EventRequest {
 	// Key uniquely identifies a Event instance to retrieve.
 	// This value must be populated.
@@ -38,6 +52,27 @@ message EventResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Event instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message EventSomeRequest {
+	repeated EventKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message EventSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Event value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message EventStreamRequest {
@@ -84,8 +119,11 @@ message EventStreamResponse {
 
 service EventService {
 	rpc GetOne (EventRequest) returns (EventResponse);
+	rpc GetSome (EventSomeRequest) returns (stream EventSomeResponse);
 	rpc GetAll (EventStreamRequest) returns (stream EventStreamResponse);
 	rpc Subscribe (EventStreamRequest) returns (stream EventStreamResponse);
+	rpc GetMeta (EventStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (EventStreamRequest) returns (stream MetaResponse);
 }
 
 message EventAnnotationConfigRequest {
@@ -108,6 +146,27 @@ message EventAnnotationConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// EventAnnotationConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message EventAnnotationConfigSomeRequest {
+	repeated EventKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message EventAnnotationConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	EventAnnotationConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message EventAnnotationConfigStreamRequest {
@@ -206,6 +265,17 @@ message EventAnnotationConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message EventAnnotationConfigDeleteSomeRequest {
+	// key contains a list of EventAnnotationConfig keys to delete
+	repeated EventKey keys = 1;
+};
+
+// EventAnnotationConfigDeleteSomeResponse is only sent when there is an error.
+message EventAnnotationConfigDeleteSomeResponse {
+	EventKey key = 1;
+	string error = 2;
+};
+
 message EventAnnotationConfigDeleteAllRequest {
 };
 
@@ -222,10 +292,192 @@ message EventAnnotationConfigDeleteAllResponse {
 
 service EventAnnotationConfigService {
 	rpc GetOne (EventAnnotationConfigRequest) returns (EventAnnotationConfigResponse);
+	rpc GetSome (EventAnnotationConfigSomeRequest) returns (stream EventAnnotationConfigSomeResponse);
 	rpc GetAll (EventAnnotationConfigStreamRequest) returns (stream EventAnnotationConfigStreamResponse);
 	rpc Subscribe (EventAnnotationConfigStreamRequest) returns (stream EventAnnotationConfigStreamResponse);
+	rpc GetMeta (EventAnnotationConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (EventAnnotationConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (EventAnnotationConfigSetRequest) returns (EventAnnotationConfigSetResponse);
 	rpc SetSome (EventAnnotationConfigSetSomeRequest) returns (stream EventAnnotationConfigSetSomeResponse);
 	rpc Delete (EventAnnotationConfigDeleteRequest) returns (EventAnnotationConfigDeleteResponse);
+	rpc DeleteSome (EventAnnotationConfigDeleteSomeRequest) returns (stream EventAnnotationConfigDeleteSomeResponse);
 	rpc DeleteAll (EventAnnotationConfigDeleteAllRequest) returns (stream EventAnnotationConfigDeleteAllResponse);
+}
+
+message UserEventCreationConfigRequest {
+	// Key uniquely identifies a UserEventCreationConfig instance to retrieve.
+	// This value must be populated.
+	UserEventCreationKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message UserEventCreationConfigResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	UserEventCreationConfig value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// UserEventCreationConfig instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message UserEventCreationConfigSomeRequest {
+	repeated UserEventCreationKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message UserEventCreationConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	UserEventCreationConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
+message UserEventCreationConfigStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated UserEventCreationConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each UserEventCreationConfig at end.
+	//     * Each UserEventCreationConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each UserEventCreationConfig at start, followed by updates until now.
+	//     * Each UserEventCreationConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each UserEventCreationConfig at start, followed by updates
+	//     until end.
+	//     * Each UserEventCreationConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message UserEventCreationConfigStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	UserEventCreationConfig value = 1;
+
+	// Time holds the timestamp of this UserEventCreationConfig's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the UserEventCreationConfig value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message UserEventCreationConfigSetRequest {
+	// UserEventCreationConfig carries the value to set into the datastore.
+	// See the documentation on the UserEventCreationConfig struct for which fields are required.
+	UserEventCreationConfig value = 1;
+};
+
+message UserEventCreationConfigSetResponse {
+	// Value carries all the values given in the UserEventCreationConfigSetRequest as well
+	// as any server-generated values.
+	UserEventCreationConfig value = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// creation. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message UserEventCreationConfigSetSomeRequest {
+	// value contains a list of UserEventCreationConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated UserEventCreationConfig values = 1;
+};
+
+message UserEventCreationConfigSetSomeResponse {
+	UserEventCreationKey key = 1;
+	string error = 2;
+};
+
+message UserEventCreationConfigDeleteRequest {
+	// Key indicates which UserEventCreationConfig instance to remove.
+	// This field must always be set.
+	UserEventCreationKey key = 1;
+};
+
+message UserEventCreationConfigDeleteResponse {
+	// Key echoes back the key of the deleted UserEventCreationConfig instance.
+	UserEventCreationKey key = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// deletion. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message UserEventCreationConfigDeleteSomeRequest {
+	// key contains a list of UserEventCreationConfig keys to delete
+	repeated UserEventCreationKey keys = 1;
+};
+
+// UserEventCreationConfigDeleteSomeResponse is only sent when there is an error.
+message UserEventCreationConfigDeleteSomeResponse {
+	UserEventCreationKey key = 1;
+	string error = 2;
+};
+
+message UserEventCreationConfigDeleteAllRequest {
+};
+
+message UserEventCreationConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the UserEventCreationConfig instance that failed to be deleted.
+	UserEventCreationKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
+service UserEventCreationConfigService {
+	rpc GetOne (UserEventCreationConfigRequest) returns (UserEventCreationConfigResponse);
+	rpc GetSome (UserEventCreationConfigSomeRequest) returns (stream UserEventCreationConfigSomeResponse);
+	rpc GetAll (UserEventCreationConfigStreamRequest) returns (stream UserEventCreationConfigStreamResponse);
+	rpc Subscribe (UserEventCreationConfigStreamRequest) returns (stream UserEventCreationConfigStreamResponse);
+	rpc GetMeta (UserEventCreationConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (UserEventCreationConfigStreamRequest) returns (stream MetaResponse);
+	rpc Set (UserEventCreationConfigSetRequest) returns (UserEventCreationConfigSetResponse);
+	rpc SetSome (UserEventCreationConfigSetSomeRequest) returns (stream UserEventCreationConfigSetSomeResponse);
+	rpc Delete (UserEventCreationConfigDeleteRequest) returns (UserEventCreationConfigDeleteResponse);
+	rpc DeleteSome (UserEventCreationConfigDeleteSomeRequest) returns (stream UserEventCreationConfigDeleteSomeResponse);
+	rpc DeleteAll (UserEventCreationConfigDeleteAllRequest) returns (stream UserEventCreationConfigDeleteAllResponse);
 }
