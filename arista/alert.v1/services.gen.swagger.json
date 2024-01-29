@@ -16,6 +16,9 @@
       "name": "AlertConfigService"
     },
     {
+      "name": "DefaultTemplateService"
+    },
+    {
       "name": "TemplateConfigService"
     }
   ],
@@ -296,6 +299,446 @@
         ]
       }
     },
+    "/api/resources/alert/v1/DefaultTemplate": {
+      "get": {
+        "operationId": "DefaultTemplateService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.DefaultTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.templateType",
+            "description": "template_type is the enum value to match with the template\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages\n - TEMPLATE_TYPE_EMAIL_SINGLE_HTML: TEMPLATE_TYPE_EMAIL_SINGLE_HTML is the key of the html template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_TEXT: TEMPLATE_TYPE_EMAIL_SINGLE_TEXT is the key of the text template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT: TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT is the key of the subject line template of a sent email\nwhen the single alert per email option is selected\n - TEMPLATE_TYPE_WEBHOOK_SINGLE: TEMPLATE_TYPE_WEBHOOK_SINGLE is the key of the template for webhook message body when the\nsingle_alert option is true\n - TEMPLATE_TYPE_WEBHOOK_MULTIPLE: TEMPLATE_TYPE_WEBHOOK_MULTIPLE is the key of the template for webhook message body when the\nsingle_alert option is false",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "TEMPLATE_TYPE_UNSPECIFIED",
+              "TEMPLATE_TYPE_EMAIL_HTML",
+              "TEMPLATE_TYPE_EMAIL_TEXT",
+              "TEMPLATE_TYPE_SLACK_MESSAGE",
+              "TEMPLATE_TYPE_PUSHOVER_MESSAGE",
+              "TEMPLATE_TYPE_PAGERDUTY_SUMMARY",
+              "TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME",
+              "TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE",
+              "TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE",
+              "TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE",
+              "TEMPLATE_TYPE_EMAIL_SUBJECT",
+              "TEMPLATE_TYPE_SYSLOG_MESSAGE",
+              "TEMPLATE_TYPE_OPSGENIE_MESSAGE",
+              "TEMPLATE_TYPE_ZOOM_MESSAGE",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_HTML",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_TEXT",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT",
+              "TEMPLATE_TYPE_WEBHOOK_SINGLE",
+              "TEMPLATE_TYPE_WEBHOOK_MULTIPLE"
+            ],
+            "default": "TEMPLATE_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/DefaultTemplate/all": {
+      "get": {
+        "operationId": "DefaultTemplateService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.DefaultTemplateStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      },
+      "post": {
+        "operationId": "DefaultTemplateService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.DefaultTemplateStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/DefaultTemplate/getsome": {
+      "post": {
+        "operationId": "DefaultTemplateService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.DefaultTemplateSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.DefaultTemplateSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.alert.v1.TemplateKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/DefaultTemplate/metadata": {
+      "get": {
+        "operationId": "DefaultTemplateService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      },
+      "post": {
+        "operationId": "DefaultTemplateService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/DefaultTemplate/watch": {
+      "get": {
+        "operationId": "DefaultTemplateService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.DefaultTemplateStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      },
+      "post": {
+        "operationId": "DefaultTemplateService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.DefaultTemplateStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/DefaultTemplate/watchmetadata": {
+      "get": {
+        "operationId": "DefaultTemplateService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      },
+      "post": {
+        "operationId": "DefaultTemplateService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DefaultTemplateService"
+        ]
+      }
+    },
     "/api/resources/alert/v1/TemplateConfig": {
       "get": {
         "operationId": "TemplateConfigService_GetOne",
@@ -316,7 +759,7 @@
         "parameters": [
           {
             "name": "key.templateType",
-            "description": "template_type is the enum value to match with the template\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages",
+            "description": "template_type is the enum value to match with the template\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages\n - TEMPLATE_TYPE_EMAIL_SINGLE_HTML: TEMPLATE_TYPE_EMAIL_SINGLE_HTML is the key of the html template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_TEXT: TEMPLATE_TYPE_EMAIL_SINGLE_TEXT is the key of the text template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT: TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT is the key of the subject line template of a sent email\nwhen the single alert per email option is selected\n - TEMPLATE_TYPE_WEBHOOK_SINGLE: TEMPLATE_TYPE_WEBHOOK_SINGLE is the key of the template for webhook message body when the\nsingle_alert option is true\n - TEMPLATE_TYPE_WEBHOOK_MULTIPLE: TEMPLATE_TYPE_WEBHOOK_MULTIPLE is the key of the template for webhook message body when the\nsingle_alert option is false",
             "in": "query",
             "required": true,
             "type": "string",
@@ -334,7 +777,12 @@
               "TEMPLATE_TYPE_EMAIL_SUBJECT",
               "TEMPLATE_TYPE_SYSLOG_MESSAGE",
               "TEMPLATE_TYPE_OPSGENIE_MESSAGE",
-              "TEMPLATE_TYPE_ZOOM_MESSAGE"
+              "TEMPLATE_TYPE_ZOOM_MESSAGE",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_HTML",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_TEXT",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT",
+              "TEMPLATE_TYPE_WEBHOOK_SINGLE",
+              "TEMPLATE_TYPE_WEBHOOK_MULTIPLE"
             ],
             "default": "TEMPLATE_TYPE_UNSPECIFIED"
           },
@@ -370,7 +818,7 @@
         "parameters": [
           {
             "name": "key.templateType",
-            "description": "template_type is the enum value to match with the template\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages",
+            "description": "template_type is the enum value to match with the template\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages\n - TEMPLATE_TYPE_EMAIL_SINGLE_HTML: TEMPLATE_TYPE_EMAIL_SINGLE_HTML is the key of the html template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_TEXT: TEMPLATE_TYPE_EMAIL_SINGLE_TEXT is the key of the text template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT: TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT is the key of the subject line template of a sent email\nwhen the single alert per email option is selected\n - TEMPLATE_TYPE_WEBHOOK_SINGLE: TEMPLATE_TYPE_WEBHOOK_SINGLE is the key of the template for webhook message body when the\nsingle_alert option is true\n - TEMPLATE_TYPE_WEBHOOK_MULTIPLE: TEMPLATE_TYPE_WEBHOOK_MULTIPLE is the key of the template for webhook message body when the\nsingle_alert option is false",
             "in": "query",
             "required": true,
             "type": "string",
@@ -388,7 +836,12 @@
               "TEMPLATE_TYPE_EMAIL_SUBJECT",
               "TEMPLATE_TYPE_SYSLOG_MESSAGE",
               "TEMPLATE_TYPE_OPSGENIE_MESSAGE",
-              "TEMPLATE_TYPE_ZOOM_MESSAGE"
+              "TEMPLATE_TYPE_ZOOM_MESSAGE",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_HTML",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_TEXT",
+              "TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT",
+              "TEMPLATE_TYPE_WEBHOOK_SINGLE",
+              "TEMPLATE_TYPE_WEBHOOK_MULTIPLE"
             ],
             "default": "TEMPLATE_TYPE_UNSPECIFIED"
           }
@@ -544,6 +997,173 @@
         ]
       }
     },
+    "/api/resources/alert/v1/TemplateConfig/deletesome": {
+      "post": {
+        "operationId": "TemplateConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.TemplateConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.TemplateConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of TemplateConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.alert.v1.TemplateKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/TemplateConfig/getsome": {
+      "post": {
+        "operationId": "TemplateConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.TemplateConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.TemplateConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.alert.v1.TemplateKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/TemplateConfig/metadata": {
+      "get": {
+        "operationId": "TemplateConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TemplateConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.TemplateConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      }
+    },
     "/api/resources/alert/v1/TemplateConfig/some": {
       "post": {
         "operationId": "TemplateConfigService_SetSome",
@@ -579,6 +1199,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "type": "object",
                 "$ref": "#/definitions/arista.alert.v1.TemplateConfig"
               }
             }
@@ -651,6 +1272,92 @@
                 }
               },
               "title": "Stream result of arista.alert.v1.TemplateConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.TemplateConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/TemplateConfig/watchmetadata": {
+      "get": {
+        "operationId": "TemplateConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TemplateConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TemplateConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
             }
           },
           "default": {
@@ -815,6 +1522,28 @@
         }
       }
     },
+    "arista.alert.v1.AzureOAuth": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "title": "client_id of the Azure environment"
+        },
+        "tenantId": {
+          "type": "string",
+          "title": "tenant_id of the Azure environment"
+        },
+        "clientSecret": {
+          "type": "string",
+          "title": "client_secret is a user generated secret key used for auth"
+        },
+        "authUri": {
+          "type": "string",
+          "title": "auth_uri is the URI used for OAuth"
+        }
+      },
+      "title": "AzureOAuth contains the settings for the sending of emails on Azure smtp server"
+    },
     "arista.alert.v1.BroadcastGroup": {
       "type": "object",
       "properties": {
@@ -937,6 +1666,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.ConfigError"
           },
           "title": "values is a list of errors"
@@ -1083,6 +1813,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.CueSendgridEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1110,6 +1841,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.CueSNMPEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1137,6 +1869,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.CueSyslogEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1186,6 +1919,94 @@
       },
       "title": "CueSyslogSettings contain the settings for sending alerts with syslog for cue"
     },
+    "arista.alert.v1.DefaultTemplate": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.alert.v1.TemplateKey",
+          "title": "key identifies which template the configuration is for"
+        },
+        "template": {
+          "type": "string",
+          "title": "template is the string template value to be used\nTemplates need to be compatible with their respective parsers\nMessage templates are read and parsed by https://golang.org/pkg/text/template/\nHtml templates are read and parsed by https://golang.org/pkg/html/template/\nTemplates must output valid JSON for certain templates\nTemplates must not fail for any valid input"
+        },
+        "multiAlert": {
+          "type": "boolean",
+          "description": "multi_alert is true if this template uses a multiple alert context and false if a single\nalert context is used."
+        },
+        "description": {
+          "type": "string",
+          "description": "description is a description of the template."
+        },
+        "externalDocumentation": {
+          "type": "string",
+          "description": "external_documentation is a url to any relevant external documentation, or \"\" if there is no\nrelevant documentation."
+        },
+        "outputFormat": {
+          "$ref": "#/definitions/arista.alert.v1.TemplateOutput",
+          "description": "output_format is the expected output format of this template\nAny submitted template will be expected to output text with valid formatting for any input or\nmay fail validation."
+        }
+      },
+      "title": "DefaultTemplate is the system default template which is used when no user template has been set"
+    },
+    "arista.alert.v1.DefaultTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.DefaultTemplate",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDefaultTemplate instance in this response."
+        }
+      }
+    },
+    "arista.alert.v1.DefaultTemplateSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.DefaultTemplate",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.alert.v1.DefaultTemplateStreamRequest": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DefaultTemplate at end.\n    * Each DefaultTemplate response is fully-specified (all fields set).\n  * start: Returns the state of each DefaultTemplate at start, followed by updates until now.\n    * Each DefaultTemplate response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DefaultTemplate at start, followed by updates\n    until end.\n    * Each DefaultTemplate response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.alert.v1.DefaultTemplateStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.DefaultTemplate",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DefaultTemplate's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DefaultTemplate value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
     "arista.alert.v1.EmailEndpoint": {
       "type": "object",
       "properties": {
@@ -1207,6 +2028,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.EmailEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1227,7 +2049,7 @@
         },
         "authUsername": {
           "type": "string",
-          "title": "auth_username the username to use when sending emails"
+          "title": "auth_username the username to use when sending emails\nrequired for all auth methods"
         },
         "authPassword": {
           "type": "string",
@@ -1240,6 +2062,10 @@
         "singleAlertPerEmail": {
           "type": "boolean",
           "title": "single_alert_per_email configures the Alerter such that each alert generates a separate email\nnotification, the email will only have a single notification, the format will also be different"
+        },
+        "azureOAuth": {
+          "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
+          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
         }
       },
       "title": "EmailSettings contain the settings for the sending of emails"
@@ -1284,10 +2110,11 @@
         "ENDPOINT_ERROR_TYPE_CONNECTION_ERROR",
         "ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR",
         "ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR",
-        "ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR"
+        "ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR",
+        "ENDPOINT_ERROR_TYPE_O_AUTH_ERROR"
       ],
       "default": "ENDPOINT_ERROR_TYPE_UNSPECIFIED",
-      "description": "- ENDPOINT_ERROR_TYPE_UNSPECIFIED: ENDPOINT_ERROR_TYPE_UNSPECIFIED is the unspecified enum value\n - ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR: ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR an error in sending HTTP request or reading a HTTP\nresponse\n - ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR: ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR is caused by errors while encoding json\n - ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR: ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR is an error caused by invalid config (missing,\nbad format, etc)\n - ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR: ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR is caused by errors while executing templates\n - ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR: ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR is caused by receiving a negative response from an\nendpoint indicating that the alert was not sent\n - ENDPOINT_ERROR_TYPE_SMTP_ERROR: ENDPOINT_ERROR_TYPE_SMTP_ERROR is caused by errors with SMTP\n - ENDPOINT_ERROR_TYPE_CONNECTION_ERROR: ENDPOINT_ERROR_TYPE_CONNECTION_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR: ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR: ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR is caused by an Alerter rate limit being exceeded\n - ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR: ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR is caused by the number of alerts sent to a sender\nexceeding the built-in limit",
+      "description": "- ENDPOINT_ERROR_TYPE_UNSPECIFIED: ENDPOINT_ERROR_TYPE_UNSPECIFIED is the unspecified enum value\n - ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR: ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR an error in sending HTTP request or reading a HTTP\nresponse\n - ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR: ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR is caused by errors while encoding json\n - ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR: ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR is an error caused by invalid config (missing,\nbad format, etc)\n - ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR: ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR is caused by errors while executing templates\n - ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR: ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR is caused by receiving a negative response from an\nendpoint indicating that the alert was not sent\n - ENDPOINT_ERROR_TYPE_SMTP_ERROR: ENDPOINT_ERROR_TYPE_SMTP_ERROR is caused by errors with SMTP\n - ENDPOINT_ERROR_TYPE_CONNECTION_ERROR: ENDPOINT_ERROR_TYPE_CONNECTION_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR: ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR: ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR is caused by an Alerter rate limit being exceeded\n - ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR: ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR is caused by the number of alerts sent to a sender\nexceeding the built-in limit\n - ENDPOINT_ERROR_TYPE_O_AUTH_ERROR: ENDPOINT_ERROR_TYPE_O_AUTH_ERROR is caused when we failed authenticating using the\nOAuth apis",
       "title": "EndpointErrorType describe the set of possible endpoint types"
     },
     "arista.alert.v1.EndpointErrors": {
@@ -1296,6 +2123,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.EndpointError"
           },
           "title": "values is the list of errors"
@@ -1337,6 +2165,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.GoogleChatEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1420,7 +2249,7 @@
       "properties": {
         "severities": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "title": "severities is a list of severities to filter on,\nif an event does not have one of these severities, it will not match\nValid values are INFO, WARNING, ERROR and CRITICAL"
+          "title": "severities is a list of severities to filter on,\nif an event does not have one of these severities, it will not match\nValid values are DEBUG, INFO, WARNING, ERROR and CRITICAL"
         },
         "devices": {
           "$ref": "#/definitions/fmp.RepeatedString",
@@ -1444,6 +2273,25 @@
         }
       },
       "title": "Matches is a set of restrictions that must be satisfied for a rule to be matched\nEmpty fields are ignored for matching purposes. Condition contents are\nOR'd and then AND'd with the other criteria"
+    },
+    "arista.alert.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
     },
     "arista.alert.v1.MsTeamsEndpoint": {
       "type": "object",
@@ -1469,6 +2317,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.MsTeamsEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1510,6 +2359,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.OpsgenieEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1559,6 +2409,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.PagerdutyEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1631,6 +2482,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.PushoverEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1666,6 +2518,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.Rule"
           },
           "title": "values contains the rules"
@@ -1742,6 +2595,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.SNMPEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1828,6 +2682,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.SendgridEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1955,6 +2810,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.SlackEndpoint"
           },
           "title": "values are the elements of the set"
@@ -1992,6 +2848,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.SyslogEndpoint"
           },
           "title": "values are the elements of the set"
@@ -2085,6 +2942,18 @@
         }
       }
     },
+    "arista.alert.v1.TemplateConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.alert.v1.TemplateKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "TemplateConfigDeleteSomeResponse is only sent when there is an error."
+    },
     "arista.alert.v1.TemplateConfigResponse": {
       "type": "object",
       "properties": {
@@ -2122,6 +2991,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.alert.v1.TemplateConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.TemplateConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -2165,6 +3051,18 @@
         "templateType"
       ]
     },
+    "arista.alert.v1.TemplateOutput": {
+      "type": "string",
+      "enum": [
+        "TEMPLATE_OUTPUT_UNSPECIFIED",
+        "TEMPLATE_OUTPUT_TEXT",
+        "TEMPLATE_OUTPUT_JSON",
+        "TEMPLATE_OUTPUT_HTML"
+      ],
+      "default": "TEMPLATE_OUTPUT_UNSPECIFIED",
+      "description": "- TEMPLATE_OUTPUT_UNSPECIFIED: TEMPLATE_OUTPUT_UNSPECIFIED is the unspecfied value.\n - TEMPLATE_OUTPUT_TEXT: TEMPLATE_OUTPUT_TEXT indicates the the template outputs plain text.\n - TEMPLATE_OUTPUT_JSON: TEMPLATE_OUTPUT_JSON indicates the the template outputs JSON.\n - TEMPLATE_OUTPUT_HTML: TEMPLATE_OUTPUT_HTML indicates the the template outputs HTML.\nThis also indicates that \"html/templates\" will be used instead of \"text/templates\" so that\nhtml characters are automatically escaped from input.",
+      "title": "TemplateOutput is an enum of all of the possible output formats for templates"
+    },
     "arista.alert.v1.TemplateType": {
       "type": "string",
       "enum": [
@@ -2181,10 +3079,15 @@
         "TEMPLATE_TYPE_EMAIL_SUBJECT",
         "TEMPLATE_TYPE_SYSLOG_MESSAGE",
         "TEMPLATE_TYPE_OPSGENIE_MESSAGE",
-        "TEMPLATE_TYPE_ZOOM_MESSAGE"
+        "TEMPLATE_TYPE_ZOOM_MESSAGE",
+        "TEMPLATE_TYPE_EMAIL_SINGLE_HTML",
+        "TEMPLATE_TYPE_EMAIL_SINGLE_TEXT",
+        "TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT",
+        "TEMPLATE_TYPE_WEBHOOK_SINGLE",
+        "TEMPLATE_TYPE_WEBHOOK_MULTIPLE"
       ],
       "default": "TEMPLATE_TYPE_UNSPECIFIED",
-      "description": "- TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages",
+      "description": "- TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED is the unspecified enum value\n - TEMPLATE_TYPE_EMAIL_HTML: TEMPLATE_TYPE_EMAIL_HTML is the key of the html template for sent emails\n - TEMPLATE_TYPE_EMAIL_TEXT: TEMPLATE_TYPE_EMAIL_TEXT is the key of the text template for sent emails\n - TEMPLATE_TYPE_SLACK_MESSAGE: TEMPLATE_TYPE_SLACK_MESSAGE is the key of the message template for sent slack messages\n - TEMPLATE_TYPE_PUSHOVER_MESSAGE: TEMPLATE_TYPE_PUSHOVER_MESSAGE is the key of the message template for sent pushover messages\n - TEMPLATE_TYPE_PAGERDUTY_SUMMARY: TEMPLATE_TYPE_PAGERDUTY_SUMMARY is the key of the summary template for sent pagerduty messages\n - TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME: TEMPLATE_TYPE_VICTOROPS_DISPLAY_NAME is the key of the display name template for sent victorops\nmessages\n - TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE: TEMPLATE_TYPE_VICTOROPS_STATE_MESSAGE is the key of the state message template for sent\nvictorops messages\n - TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE: TEMPLATE_TYPE_GOOGLE_CHAT_MESSAGE is the key of the message template for sent Google chat\nmessages\n - TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE: TEMPLATE_TYPE_MICROSOFT_TEAMS_MESSAGE is the key of the message template for sent Microsoft\nteams messages\n - TEMPLATE_TYPE_EMAIL_SUBJECT: TEMPLATE_TYPE_EMAIL_SUBJECT is the key of the subject line template of a sent email\n - TEMPLATE_TYPE_SYSLOG_MESSAGE: TEMPLATE_TYPE_SYSLOG_MESSAGE is the key of the message template for a syslog message part\n - TEMPLATE_TYPE_OPSGENIE_MESSAGE: TEMPLATE_TYPE_OPSGENIE_MESSAGE is the key of the message template for a opsgenie alert\n - TEMPLATE_TYPE_ZOOM_MESSAGE: TEMPLATE_TYPE_ZOOM_MESSAGE is the key of the message template for sent Zoom messages\n - TEMPLATE_TYPE_EMAIL_SINGLE_HTML: TEMPLATE_TYPE_EMAIL_SINGLE_HTML is the key of the html template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_TEXT: TEMPLATE_TYPE_EMAIL_SINGLE_TEXT is the key of the text template for sent emails when the\nsingle alert per email option is selected\n - TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT: TEMPLATE_TYPE_EMAIL_SINGLE_SUBJECT is the key of the subject line template of a sent email\nwhen the single alert per email option is selected\n - TEMPLATE_TYPE_WEBHOOK_SINGLE: TEMPLATE_TYPE_WEBHOOK_SINGLE is the key of the template for webhook message body when the\nsingle_alert option is true\n - TEMPLATE_TYPE_WEBHOOK_MULTIPLE: TEMPLATE_TYPE_WEBHOOK_MULTIPLE is the key of the template for webhook message body when the\nsingle_alert option is false",
       "title": "TemplateType describes the types of Templates that are usable"
     },
     "arista.alert.v1.VictorOpsEndpoint": {
@@ -2215,6 +3118,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.VictorOpsEndpoint"
           },
           "title": "values are the elements of the set"
@@ -2268,6 +3172,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.WebhookEndpoint"
           },
           "title": "values are the elements of the set"
@@ -2299,6 +3204,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.alert.v1.ZoomEndpoint"
           },
           "title": "values are the elements of the set"
@@ -2391,6 +3297,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }
