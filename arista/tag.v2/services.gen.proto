@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.tag.v2;
-option go_package = "arista/resources/arista/tag.v2;tag";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/tag.v2;tag";
 
 import "arista/tag.v2/tag.proto";
 import "arista/time/time.proto";
@@ -17,6 +17,20 @@ import "arista/subscriptions/subscriptions.proto";
 import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message TagRequest {
 	// Key uniquely identifies a Tag instance to retrieve.
@@ -38,6 +52,27 @@ message TagResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Tag instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message TagSomeRequest {
+	repeated TagKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message TagSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Tag value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message TagStreamRequest {
@@ -84,8 +119,11 @@ message TagStreamResponse {
 
 service TagService {
 	rpc GetOne (TagRequest) returns (TagResponse);
+	rpc GetSome (TagSomeRequest) returns (stream TagSomeResponse);
 	rpc GetAll (TagStreamRequest) returns (stream TagStreamResponse);
 	rpc Subscribe (TagStreamRequest) returns (stream TagStreamResponse);
+	rpc GetMeta (TagStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (TagStreamRequest) returns (stream MetaResponse);
 }
 
 message TagAssignmentRequest {
@@ -108,6 +146,27 @@ message TagAssignmentResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// TagAssignment instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message TagAssignmentSomeRequest {
+	repeated TagAssignmentKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message TagAssignmentSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	TagAssignment value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message TagAssignmentStreamRequest {
@@ -154,8 +213,11 @@ message TagAssignmentStreamResponse {
 
 service TagAssignmentService {
 	rpc GetOne (TagAssignmentRequest) returns (TagAssignmentResponse);
+	rpc GetSome (TagAssignmentSomeRequest) returns (stream TagAssignmentSomeResponse);
 	rpc GetAll (TagAssignmentStreamRequest) returns (stream TagAssignmentStreamResponse);
 	rpc Subscribe (TagAssignmentStreamRequest) returns (stream TagAssignmentStreamResponse);
+	rpc GetMeta (TagAssignmentStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (TagAssignmentStreamRequest) returns (stream MetaResponse);
 }
 
 message TagAssignmentConfigRequest {
@@ -178,6 +240,27 @@ message TagAssignmentConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// TagAssignmentConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message TagAssignmentConfigSomeRequest {
+	repeated TagAssignmentKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message TagAssignmentConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	TagAssignmentConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message TagAssignmentConfigStreamRequest {
@@ -276,6 +359,17 @@ message TagAssignmentConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagAssignmentConfigDeleteSomeRequest {
+	// key contains a list of TagAssignmentConfig keys to delete
+	repeated TagAssignmentKey keys = 1;
+};
+
+// TagAssignmentConfigDeleteSomeResponse is only sent when there is an error.
+message TagAssignmentConfigDeleteSomeResponse {
+	TagAssignmentKey key = 1;
+	string error = 2;
+};
+
 message TagAssignmentConfigDeleteAllRequest {
 };
 
@@ -292,11 +386,15 @@ message TagAssignmentConfigDeleteAllResponse {
 
 service TagAssignmentConfigService {
 	rpc GetOne (TagAssignmentConfigRequest) returns (TagAssignmentConfigResponse);
+	rpc GetSome (TagAssignmentConfigSomeRequest) returns (stream TagAssignmentConfigSomeResponse);
 	rpc GetAll (TagAssignmentConfigStreamRequest) returns (stream TagAssignmentConfigStreamResponse);
 	rpc Subscribe (TagAssignmentConfigStreamRequest) returns (stream TagAssignmentConfigStreamResponse);
+	rpc GetMeta (TagAssignmentConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (TagAssignmentConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (TagAssignmentConfigSetRequest) returns (TagAssignmentConfigSetResponse);
 	rpc SetSome (TagAssignmentConfigSetSomeRequest) returns (stream TagAssignmentConfigSetSomeResponse);
 	rpc Delete (TagAssignmentConfigDeleteRequest) returns (TagAssignmentConfigDeleteResponse);
+	rpc DeleteSome (TagAssignmentConfigDeleteSomeRequest) returns (stream TagAssignmentConfigDeleteSomeResponse);
 	rpc DeleteAll (TagAssignmentConfigDeleteAllRequest) returns (stream TagAssignmentConfigDeleteAllResponse);
 }
 
@@ -320,6 +418,27 @@ message TagConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// TagConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message TagConfigSomeRequest {
+	repeated TagKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message TagConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	TagConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message TagConfigStreamRequest {
@@ -418,6 +537,17 @@ message TagConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message TagConfigDeleteSomeRequest {
+	// key contains a list of TagConfig keys to delete
+	repeated TagKey keys = 1;
+};
+
+// TagConfigDeleteSomeResponse is only sent when there is an error.
+message TagConfigDeleteSomeResponse {
+	TagKey key = 1;
+	string error = 2;
+};
+
 message TagConfigDeleteAllRequest {
 };
 
@@ -434,10 +564,14 @@ message TagConfigDeleteAllResponse {
 
 service TagConfigService {
 	rpc GetOne (TagConfigRequest) returns (TagConfigResponse);
+	rpc GetSome (TagConfigSomeRequest) returns (stream TagConfigSomeResponse);
 	rpc GetAll (TagConfigStreamRequest) returns (stream TagConfigStreamResponse);
 	rpc Subscribe (TagConfigStreamRequest) returns (stream TagConfigStreamResponse);
+	rpc GetMeta (TagConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (TagConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (TagConfigSetRequest) returns (TagConfigSetResponse);
 	rpc SetSome (TagConfigSetSomeRequest) returns (stream TagConfigSetSomeResponse);
 	rpc Delete (TagConfigDeleteRequest) returns (TagConfigDeleteResponse);
+	rpc DeleteSome (TagConfigDeleteSomeRequest) returns (stream TagConfigDeleteSomeResponse);
 	rpc DeleteAll (TagConfigDeleteAllRequest) returns (stream TagConfigDeleteAllResponse);
 }

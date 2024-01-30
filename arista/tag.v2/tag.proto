@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.tag.v2;
 
-option go_package = "arista/resources/arista/tag.v2;tag";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/tag.v2;tag";
 
 import "google/protobuf/wrappers.proto";
 import "fmp/extensions.proto";
