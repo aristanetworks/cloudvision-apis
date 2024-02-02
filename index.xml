@@ -371,6 +371,8 @@ EventNotes.NotesEntry
 EventNotesConfig
 EventNotesConfig.NotesEntry
 EventRead
+UserEventCreationConfig
+UserEventCreationKey
 ComponentType
 EventSeverity
 arista/event.v1/services.gen.proto
@@ -378,25 +380,46 @@ EventAnnotationConfigDeleteAllRequest
 EventAnnotationConfigDeleteAllResponse
 EventAnnotationConfigDeleteRequest
 EventAnnotationConfigDeleteResponse
+EventAnnotationConfigDeleteSomeRequest
+EventAnnotationConfigDeleteSomeResponse
 EventAnnotationConfigRequest
 EventAnnotationConfigResponse
 EventAnnotationConfigSetRequest
 EventAnnotationConfigSetResponse
 EventAnnotationConfigSetSomeRequest
 EventAnnotationConfigSetSomeResponse
+EventAnnotationConfigSomeRequest
+EventAnnotationConfigSomeResponse
 EventAnnotationConfigStreamRequest
 EventAnnotationConfigStreamResponse
 EventRequest
 EventResponse
+EventSomeRequest
+EventSomeResponse
 EventStreamRequest
 EventStreamResponse
+MetaResponse
+UserEventCreationConfigDeleteAllRequest
+UserEventCreationConfigDeleteAllResponse
+UserEventCreationConfigDeleteRequest
+UserEventCreationConfigDeleteResponse
+UserEventCreationConfigDeleteSomeRequest
+UserEventCreationConfigDeleteSomeResponse
+UserEventCreationConfigRequest
+UserEventCreationConfigResponse
+UserEventCreationConfigSetRequest
+UserEventCreationConfigSetResponse
+UserEventCreationConfigSetSomeRequest
+UserEventCreationConfigSetSomeResponse
+UserEventCreationConfigSomeRequest
+UserEventCreationConfigSomeResponse
+UserEventCreationConfigStreamRequest
+UserEventCreationConfigStreamResponse
 EventAnnotationConfigService
 EventService
+UserEventCreationConfigService
 Top
-arista/event.v1/event.proto Event Event is a telemetry event
-Field Name Type Description key EventKey key is the event instance identifier
-severity EventSeverity severity is the severity of the event
-title google.protobuf.StringValue title is the title of the event</description></item><item><title>identityprovider.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</guid><description>arista/identityprovider.v1/identityprovider.proto
+arista/event.v1/event.proto Event Event is a telemetry event</description></item><item><title>identityprovider.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</guid><description>arista/identityprovider.v1/identityprovider.proto
 OAuthConfig
 OAuthKey
 SAMLConfig
