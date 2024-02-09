@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-02-08
+      description: Add a new warning code WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION
+      version: 1.7.0
+      cvaas: true
     - date: 2023-12-12
       description: Add a new error code ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE
       version: 1.6.0

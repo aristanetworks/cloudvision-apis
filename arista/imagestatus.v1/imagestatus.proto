@@ -360,6 +360,9 @@ enum WarningCode {
     // WARNING_CODE_SUPPORT_REMOVED represents cases where the given EOS version no longer
     // supports the SKUs.
     WARNING_CODE_SUPPORT_REMOVED = 13;
+    // WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION represents cases where the running
+    // TerminAttr version is below CloudVision's minimum supported version.
+    WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION = 14;
 }
 
 // ImageWarning wraps `WarningCode` enum with a reason string.
