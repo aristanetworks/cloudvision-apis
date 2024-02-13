@@ -2654,6 +2654,10 @@
         "auth": {
           "$ref": "#/definitions/arista.alert.v1.SNMPAuth",
           "title": "auth is optional authentication settings"
+        },
+        "engineId": {
+          "type": "string",
+          "title": "engine_id is the engine ID that will be used by the Alerter\nThis should be a hexadecimal string, colon separators between bytes will be accepted when\nwriting, but will be absent when reading\noptional: if excluded or left blank, this will be automatically generated"
         }
       },
       "title": "SNMPSettings contain the settings for sending alerts with SNMP"

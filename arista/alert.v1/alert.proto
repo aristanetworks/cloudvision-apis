@@ -376,6 +376,11 @@ message SNMPSettings {
 	google.protobuf.Int32Value version = 4;
 	// auth is optional authentication settings
 	SNMPAuth auth = 5;
+	// engine_id is the engine ID that will be used by the Alerter
+	// This should be a hexadecimal string, colon separators between bytes will be accepted when
+	// writing, but will be absent when reading
+	// optional: if excluded or left blank, this will be automatically generated
+	google.protobuf.StringValue engine_id = 6;
 }
 
 
