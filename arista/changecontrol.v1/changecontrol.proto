@@ -182,6 +182,10 @@ message Stage {
 	// error is any error that occured during the execution
 	// of the stage.
 	google.protobuf.StringValue error = 5;
+	// start_time is the time when status change to Running
+	google.protobuf.Timestamp start_time = 6;
+	// end_time is the time when status change to Completed
+	google.protobuf.Timestamp end_time = 7;
 }
 
 // StageMap is a map from stage ID to `Stage`. This has essentially

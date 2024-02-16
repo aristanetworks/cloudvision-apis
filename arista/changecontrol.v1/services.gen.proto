@@ -18,6 +18,20 @@ import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
+
 message ApproveConfigRequest {
 	// Key uniquely identifies a ApproveConfig instance to retrieve.
 	// This value must be populated.
@@ -40,6 +54,27 @@ message ApproveConfigResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ApproveConfigSomeRequest {
+	repeated ChangeControlKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ApproveConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ApproveConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ApproveConfigStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -50,6 +85,17 @@ message ApproveConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ApproveConfig at end.
+	//     * Each ApproveConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ApproveConfig at start, followed by updates until now.
+	//     * Each ApproveConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ApproveConfig at start, followed by updates
+	//     until end.
+	//     * Each ApproveConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -91,6 +137,21 @@ message ApproveConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ApproveConfigSetSomeRequest {
+	// value contains a list of ApproveConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated ApproveConfig values = 1;
+};
+
+message ApproveConfigSetSomeResponse {
+	ChangeControlKey key = 1;
+	string error = 2;
+};
+
 message ApproveConfigDeleteRequest {
 	// Key indicates which ApproveConfig instance to remove.
 	// This field must always be set.
@@ -110,6 +171,17 @@ message ApproveConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ApproveConfigDeleteSomeRequest {
+	// key contains a list of ApproveConfig keys to delete
+	repeated ChangeControlKey keys = 1;
+};
+
+// ApproveConfigDeleteSomeResponse is only sent when there is an error.
+message ApproveConfigDeleteSomeResponse {
+	ChangeControlKey key = 1;
+	string error = 2;
+};
+
 message ApproveConfigDeleteAllRequest {
 };
 
@@ -126,10 +198,15 @@ message ApproveConfigDeleteAllResponse {
 
 service ApproveConfigService {
 	rpc GetOne (ApproveConfigRequest) returns (ApproveConfigResponse);
+	rpc GetSome (ApproveConfigSomeRequest) returns (stream ApproveConfigSomeResponse);
 	rpc GetAll (ApproveConfigStreamRequest) returns (stream ApproveConfigStreamResponse);
 	rpc Subscribe (ApproveConfigStreamRequest) returns (stream ApproveConfigStreamResponse);
+	rpc GetMeta (ApproveConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ApproveConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (ApproveConfigSetRequest) returns (ApproveConfigSetResponse);
+	rpc SetSome (ApproveConfigSetSomeRequest) returns (stream ApproveConfigSetSomeResponse);
 	rpc Delete (ApproveConfigDeleteRequest) returns (ApproveConfigDeleteResponse);
+	rpc DeleteSome (ApproveConfigDeleteSomeRequest) returns (stream ApproveConfigDeleteSomeResponse);
 	rpc DeleteAll (ApproveConfigDeleteAllRequest) returns (stream ApproveConfigDeleteAllResponse);
 }
 
@@ -155,6 +232,27 @@ message ChangeControlResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ChangeControlSomeRequest {
+	repeated ChangeControlKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ChangeControlSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ChangeControl value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ChangeControlStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -169,6 +267,17 @@ message ChangeControlStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControl at end.
+	//     * Each ChangeControl response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControl at start, followed by updates until now.
+	//     * Each ChangeControl response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControl at start, followed by updates
+	//     until end.
+	//     * Each ChangeControl response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -192,8 +301,11 @@ message ChangeControlStreamResponse {
 
 service ChangeControlService {
 	rpc GetOne (ChangeControlRequest) returns (ChangeControlResponse);
+	rpc GetSome (ChangeControlSomeRequest) returns (stream ChangeControlSomeResponse);
 	rpc GetAll (ChangeControlStreamRequest) returns (stream ChangeControlStreamResponse);
 	rpc Subscribe (ChangeControlStreamRequest) returns (stream ChangeControlStreamResponse);
+	rpc GetMeta (ChangeControlStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ChangeControlStreamRequest) returns (stream MetaResponse);
 }
 
 message ChangeControlConfigRequest {
@@ -218,6 +330,27 @@ message ChangeControlConfigResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ChangeControlConfigSomeRequest {
+	repeated ChangeControlKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ChangeControlConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ChangeControlConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ChangeControlConfigStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -228,6 +361,17 @@ message ChangeControlConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControlConfig at end.
+	//     * Each ChangeControlConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControlConfig at start, followed by updates until now.
+	//     * Each ChangeControlConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControlConfig at start, followed by updates
+	//     until end.
+	//     * Each ChangeControlConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -269,6 +413,21 @@ message ChangeControlConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ChangeControlConfigSetSomeRequest {
+	// value contains a list of ChangeControlConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated ChangeControlConfig values = 1;
+};
+
+message ChangeControlConfigSetSomeResponse {
+	ChangeControlKey key = 1;
+	string error = 2;
+};
+
 message ChangeControlConfigDeleteRequest {
 	// Key indicates which ChangeControlConfig instance to remove.
 	// This field must always be set.
@@ -288,6 +447,17 @@ message ChangeControlConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ChangeControlConfigDeleteSomeRequest {
+	// key contains a list of ChangeControlConfig keys to delete
+	repeated ChangeControlKey keys = 1;
+};
+
+// ChangeControlConfigDeleteSomeResponse is only sent when there is an error.
+message ChangeControlConfigDeleteSomeResponse {
+	ChangeControlKey key = 1;
+	string error = 2;
+};
+
 message ChangeControlConfigDeleteAllRequest {
 };
 
@@ -304,9 +474,14 @@ message ChangeControlConfigDeleteAllResponse {
 
 service ChangeControlConfigService {
 	rpc GetOne (ChangeControlConfigRequest) returns (ChangeControlConfigResponse);
+	rpc GetSome (ChangeControlConfigSomeRequest) returns (stream ChangeControlConfigSomeResponse);
 	rpc GetAll (ChangeControlConfigStreamRequest) returns (stream ChangeControlConfigStreamResponse);
 	rpc Subscribe (ChangeControlConfigStreamRequest) returns (stream ChangeControlConfigStreamResponse);
+	rpc GetMeta (ChangeControlConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ChangeControlConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (ChangeControlConfigSetRequest) returns (ChangeControlConfigSetResponse);
+	rpc SetSome (ChangeControlConfigSetSomeRequest) returns (stream ChangeControlConfigSetSomeResponse);
 	rpc Delete (ChangeControlConfigDeleteRequest) returns (ChangeControlConfigDeleteResponse);
+	rpc DeleteSome (ChangeControlConfigDeleteSomeRequest) returns (stream ChangeControlConfigDeleteSomeResponse);
 	rpc DeleteAll (ChangeControlConfigDeleteAllRequest) returns (stream ChangeControlConfigDeleteAllResponse);
 }
