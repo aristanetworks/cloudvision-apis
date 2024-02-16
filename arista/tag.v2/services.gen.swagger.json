@@ -199,6 +199,127 @@
         ]
       }
     },
+    "/api/resources/tag/v2/Tag/getsome": {
+      "post": {
+        "operationId": "TagService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Tag/metadata": {
+      "get": {
+        "operationId": "TagService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      },
+      "post": {
+        "operationId": "TagService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
     "/api/resources/tag/v2/Tag/watch": {
       "get": {
         "operationId": "TagService_Subscribe",
@@ -261,6 +382,92 @@
                 }
               },
               "title": "Stream result of arista.tag.v2.TagStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Tag/watchmetadata": {
+      "get": {
+        "operationId": "TagService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagService"
+        ]
+      },
+      "post": {
+        "operationId": "TagService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
             }
           },
           "default": {
@@ -466,6 +673,127 @@
         ]
       }
     },
+    "/api/resources/tag/v2/TagAssignment/getsome": {
+      "post": {
+        "operationId": "TagAssignmentService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignment/metadata": {
+      "get": {
+        "operationId": "TagAssignmentService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
     "/api/resources/tag/v2/TagAssignment/watch": {
       "get": {
         "operationId": "TagAssignmentService_Subscribe",
@@ -528,6 +856,92 @@
                 }
               },
               "title": "Stream result of arista.tag.v2.TagAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignment/watchmetadata": {
+      "get": {
+        "operationId": "TagAssignmentService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
             }
           },
           "default": {
@@ -878,6 +1292,173 @@
         ]
       }
     },
+    "/api/resources/tag/v2/TagAssignmentConfig/deletesome": {
+      "post": {
+        "operationId": "TagAssignmentConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of TagAssignmentConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/getsome": {
+      "post": {
+        "operationId": "TagAssignmentConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagAssignmentConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/metadata": {
+      "get": {
+        "operationId": "TagAssignmentConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
     "/api/resources/tag/v2/TagAssignmentConfig/some": {
       "post": {
         "operationId": "TagAssignmentConfigService_SetSome",
@@ -986,6 +1567,92 @@
                 }
               },
               "title": "Stream result of arista.tag.v2.TagAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagAssignmentConfig/watchmetadata": {
+      "get": {
+        "operationId": "TagAssignmentConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagAssignmentConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
             }
           },
           "default": {
@@ -1308,6 +1975,173 @@
         ]
       }
     },
+    "/api/resources/tag/v2/TagConfig/deletesome": {
+      "post": {
+        "operationId": "TagConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of TagConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig/getsome": {
+      "post": {
+        "operationId": "TagConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.TagConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.TagConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.tag.v2.TagKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/TagConfig/metadata": {
+      "get": {
+        "operationId": "TagConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
+    },
     "/api/resources/tag/v2/TagConfig/some": {
       "post": {
         "operationId": "TagConfigService_SetSome",
@@ -1439,6 +2273,92 @@
           "TagConfigService"
         ]
       }
+    },
+    "/api/resources/tag/v2/TagConfig/watchmetadata": {
+      "get": {
+        "operationId": "TagConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TagConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.TagConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TagConfigService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1486,6 +2406,25 @@
       ],
       "default": "ELEMENT_TYPE_UNSPECIFIED",
       "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags."
+    },
+    "arista.tag.v2.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
     },
     "arista.tag.v2.Tag": {
       "type": "object",
@@ -1566,6 +2505,18 @@
         }
       }
     },
+    "arista.tag.v2.TagAssignmentConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "TagAssignmentConfigDeleteSomeResponse is only sent when there is an error."
+    },
     "arista.tag.v2.TagAssignmentConfigResponse": {
       "type": "object",
       "properties": {
@@ -1603,6 +2554,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.tag.v2.TagAssignmentConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1699,6 +2667,23 @@
         }
       }
     },
+    "arista.tag.v2.TagAssignmentSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.tag.v2.TagAssignmentStreamRequest": {
       "type": "object",
       "properties": {
@@ -1785,6 +2770,18 @@
         }
       }
     },
+    "arista.tag.v2.TagConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.TagKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "TagConfigDeleteSomeResponse is only sent when there is an error."
+    },
     "arista.tag.v2.TagConfigResponse": {
       "type": "object",
       "properties": {
@@ -1822,6 +2819,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.tag.v2.TagConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.TagConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1904,6 +2918,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nTag instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.TagSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Tag",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
