@@ -7,6 +7,10 @@ chapter: false
 {{% toc %}}
 
 {{% notice tip %}}
+To generate a service account token please refer to the [authentication](../../../connecting/_index.md#authentication) chapter.
+{{% /notice %}}
+
+{{% notice tip %}}
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
 {{% /notice %}}
 

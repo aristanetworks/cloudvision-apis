@@ -6,6 +6,10 @@ chapter: false
 
 {{% toc %}}
 
+{{% notice tip %}}
+To generate a service account token please refer to the [authentication](../../../connecting/_index.md#authentication) chapter.
+{{% /notice %}}
+
 {{% notice info %}}
 Dashboard Resource APIs are supported from CVP 2021.3.0 (gRPC only) or newer and in CloudVision-as-a-Service.
 The REST endpoint for on-prem is available from 2022.3.0.

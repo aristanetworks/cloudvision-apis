@@ -6,6 +6,10 @@ chapter: false
 
 {{% toc %}}
 
+{{% notice tip %}}
+To generate a service account token please refer to the [authentication](../../../connecting/_index.md#authentication) chapter.
+{{% /notice %}}
+
 {{% notice info %}}
 Endpointlocation Resource APIs are supported from CVP 2021.1.0 or newer and in CloudVision-as-a-Service.
 {{% /notice %}}
@@ -177,7 +181,7 @@ Output:
 ## Get the location of an endpoint based on its IP Address
 
 {{% notice info %}}
-To successfully find the endpoint, the IP address of the endpoint has to exist in either the MAC or ARP or DHCP 
+To successfully find the endpoint, the IP address of the endpoint has to exist in either the MAC or ARP or DHCP
 or inventory tables and in the LLDP neighbor table.
 {{% /notice %}}
 
@@ -275,5 +279,5 @@ Output:
 ### python
 
 The GetAll RPC is not implemented in this resource API, however a combination of cloudvision.Connector
-and the GetOne rAPI can be used to generate a report of all connected endpoints. An example that achieves this can be 
+and the GetOne rAPI can be used to generate a report of all connected endpoints. An example that achieves this can be
 found on the [cloudvision-python](https://github.com/aristanetworks/cloudvision-python/blob/trunk/examples/Connector/get_endpoints_ext.py) repo.

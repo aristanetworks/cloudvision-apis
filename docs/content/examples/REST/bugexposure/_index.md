@@ -6,6 +6,10 @@ chapter: false
 
 {{% toc %}}
 
+{{% notice tip %}}
+To generate a service account token please refer to the [authentication](../../../connecting/_index.md#authentication) chapter.
+{{% /notice %}}
+
 {{% notice info %}}
 BugExposure Resource APIs are supported from CVP 2022.1.0 or newer and in CloudVision-as-a-Service.
 {{% /notice %}}
