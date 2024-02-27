@@ -7,6 +7,17 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-02-13
+      description: Add startTime and endTime for the stage
+      version: 1.0.6
+      onprem: true
+      cvaas: true
+
+    - date: 2022-10-31
+      description: Add device_ids field in ChangeControl state
+      version: 1.0.5
+      cvaas: true
+
     - date: 2021-11-29
       description: Update documentation
       version: 1.0.4
