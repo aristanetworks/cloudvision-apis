@@ -56,12 +56,10 @@ message OAuthConfig {
         // request URL. This is an optional field. If not set, CloudVision determines that
         // mapping roles from the provider is disabled.
         google.protobuf.StringValue roles_scope_name = 9;
-        // bearer_token_introspection_endpoint is the provider instrospection endpoint used in
-        // Bearer Token based login support for CloudVision. This endpoint will be used to verify
-        // the bearer token received when an external application is logging in. This is an
-        // optional field. CloudVision will only support this feature for a single provider per
-        // org, hence only one provider is allowed to have this field set. If not set for any
-        // providers, CloudVision determines that Bearer Token based login support is disabled.
+        // bearer_token_introspection_endpoint is the provider instrospection endpoint used
+        // in Bearer Token based login support for CloudVision. This is an optional field.
+        // If specified, this endpoint will be used to verify bearer tokens generated via
+        // the provider to log in automated user accounts.
         google.protobuf.StringValue bearer_token_introspection_endpoint = 10;
 }
 
