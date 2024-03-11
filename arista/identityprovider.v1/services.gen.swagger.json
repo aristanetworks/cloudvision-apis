@@ -1286,7 +1286,7 @@
         },
         "bearerTokenIntrospectionEndpoint": {
           "type": "string",
-          "description": "bearer_token_introspection_endpoint is the provider instrospection endpoint used in\nBearer Token based login support for CloudVision. This endpoint will be used to verify\nthe bearer token received when an external application is logging in. This is an\noptional field. CloudVision will only support this feature for a single provider per\norg, hence only one provider is allowed to have this field set. If not set for any\nproviders, CloudVision determines that Bearer Token based login support is disabled."
+          "description": "bearer_token_introspection_endpoint is the provider instrospection endpoint used\nin Bearer Token based login support for CloudVision. This is an optional field.\nIf specified, this endpoint will be used to verify bearer tokens generated via\nthe provider to log in automated user accounts."
         },
         "rolesClaimName": {
           "type": "string",

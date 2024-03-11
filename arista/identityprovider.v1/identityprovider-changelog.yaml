@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-03-11
+    description: Update bearer_token_introspection_endpoint field description
+    version: 1.7.1
+    cvaas: true
+    onprem: true
   - date: 2023-08-08
     description: Add username_attrname to saml
     version: 1.7.0
