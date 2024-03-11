@@ -18,6 +18,20 @@ import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
+
 message OAuthConfigRequest {
 	// Key uniquely identifies a OAuthConfig instance to retrieve.
 	// This value must be populated.
@@ -38,6 +52,27 @@ message OAuthConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// OAuthConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message OAuthConfigSomeRequest {
+	repeated OAuthKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message OAuthConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	OAuthConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message OAuthConfigStreamRequest {
@@ -136,6 +171,17 @@ message OAuthConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message OAuthConfigDeleteSomeRequest {
+	// key contains a list of OAuthConfig keys to delete
+	repeated OAuthKey keys = 1;
+};
+
+// OAuthConfigDeleteSomeResponse is only sent when there is an error.
+message OAuthConfigDeleteSomeResponse {
+	OAuthKey key = 1;
+	string error = 2;
+};
+
 message OAuthConfigDeleteAllRequest {
 };
 
@@ -152,11 +198,15 @@ message OAuthConfigDeleteAllResponse {
 
 service OAuthConfigService {
 	rpc GetOne (OAuthConfigRequest) returns (OAuthConfigResponse);
+	rpc GetSome (OAuthConfigSomeRequest) returns (stream OAuthConfigSomeResponse);
 	rpc GetAll (OAuthConfigStreamRequest) returns (stream OAuthConfigStreamResponse);
 	rpc Subscribe (OAuthConfigStreamRequest) returns (stream OAuthConfigStreamResponse);
+	rpc GetMeta (OAuthConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (OAuthConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (OAuthConfigSetRequest) returns (OAuthConfigSetResponse);
 	rpc SetSome (OAuthConfigSetSomeRequest) returns (stream OAuthConfigSetSomeResponse);
 	rpc Delete (OAuthConfigDeleteRequest) returns (OAuthConfigDeleteResponse);
+	rpc DeleteSome (OAuthConfigDeleteSomeRequest) returns (stream OAuthConfigDeleteSomeResponse);
 	rpc DeleteAll (OAuthConfigDeleteAllRequest) returns (stream OAuthConfigDeleteAllResponse);
 }
 
@@ -180,6 +230,27 @@ message SAMLConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// SAMLConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message SAMLConfigSomeRequest {
+	repeated SAMLKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SAMLConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SAMLConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message SAMLConfigStreamRequest {
@@ -278,6 +349,17 @@ message SAMLConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SAMLConfigDeleteSomeRequest {
+	// key contains a list of SAMLConfig keys to delete
+	repeated SAMLKey keys = 1;
+};
+
+// SAMLConfigDeleteSomeResponse is only sent when there is an error.
+message SAMLConfigDeleteSomeResponse {
+	SAMLKey key = 1;
+	string error = 2;
+};
+
 message SAMLConfigDeleteAllRequest {
 };
 
@@ -294,10 +376,14 @@ message SAMLConfigDeleteAllResponse {
 
 service SAMLConfigService {
 	rpc GetOne (SAMLConfigRequest) returns (SAMLConfigResponse);
+	rpc GetSome (SAMLConfigSomeRequest) returns (stream SAMLConfigSomeResponse);
 	rpc GetAll (SAMLConfigStreamRequest) returns (stream SAMLConfigStreamResponse);
 	rpc Subscribe (SAMLConfigStreamRequest) returns (stream SAMLConfigStreamResponse);
+	rpc GetMeta (SAMLConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SAMLConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (SAMLConfigSetRequest) returns (SAMLConfigSetResponse);
 	rpc SetSome (SAMLConfigSetSomeRequest) returns (stream SAMLConfigSetSomeResponse);
 	rpc Delete (SAMLConfigDeleteRequest) returns (SAMLConfigDeleteResponse);
+	rpc DeleteSome (SAMLConfigDeleteSomeRequest) returns (stream SAMLConfigDeleteSomeResponse);
 	rpc DeleteAll (SAMLConfigDeleteAllRequest) returns (stream SAMLConfigDeleteAllResponse);
 }

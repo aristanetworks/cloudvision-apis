@@ -50,11 +50,13 @@ message OAuthConfig {
         // permitted_email_domains are domains of emails that users are allowed to use.
         // This is an optional field. If not set, all domains are accepted by default.
         fmp.RepeatedString permitted_email_domains = 8;
-        // roles_scope_name is the name for a custom scope that includes a custom claim
-        // that holds CloudVision roles in ID Token.
-        // CloudVision appends this value to scope query parameter in the authorization
-        // request URL. This is an optional field. If not set, CloudVision determines that
-        // mapping roles from the provider is disabled.
+        // roles_scope_name is the name for a scope tied to a claim that holds
+        // CloudVision roles in ID Token. CloudVision uses scope values to specify
+        // what access privileges are being requested for id token. CloudVision
+        // appends this value to `scope` query parameter in the authorization request URL.
+        // This is an optional field. If not set, CloudVision determines that
+        // mapping roles from the provider is disabled. If it's set, roles_claim_name
+        // also needs to be set.
         google.protobuf.StringValue roles_scope_name = 9;
         // bearer_token_introspection_endpoint is the provider instrospection endpoint used in
         // Bearer Token based login support for CloudVision. This endpoint will be used to verify
@@ -63,6 +65,12 @@ message OAuthConfig {
         // org, hence only one provider is allowed to have this field set. If not set for any
         // providers, CloudVision determines that Bearer Token based login support is disabled.
         google.protobuf.StringValue bearer_token_introspection_endpoint = 10;
+        // roles_claim_name is the name for a claim that holds CloudVision roles in ID Token.
+        // CloudVision uses this value to look up roles in the ID Token.
+        // This is an optional field. If not set, CloudVision determines that
+        // mapping roles from the provider is disabled. If it's set, roles_scope_name
+        // also needs to be set.
+        google.protobuf.StringValue roles_claim_name = 11;
 }
 
 // SAMLKey contains SAML Provider ID.
@@ -126,4 +134,8 @@ message SAMLConfig {
         // disabled for a given organization using shared Identity Provider if this attribute
         // is not specified.
         google.protobuf.StringValue org_attrname = 10;
+        // username_attrname specifies Attribute name for CloudVision users' username in the
+        // Assertion of SAMLResponse. This is an optional field as long as mapping roles from
+        // provider is not enabled. Once enabled, this field becomes mandatory.
+        google.protobuf.StringValue username_attrname = 11;
 }
