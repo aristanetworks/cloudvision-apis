@@ -298,6 +298,9 @@ enum ErrorCode {
     // ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device
     // does not support the given EOS type.
     ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE = 13;
+    // ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr
+    // version is lower than the embedded TerminAttr version in SWI.
+    ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE = 14;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.

@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-03-06
+      description: Add a new error code ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE
+      version: 1.8.0
+      cvaas: true
     - date: 2024-02-08
       description: Add a new warning code WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION
       version: 1.7.0
