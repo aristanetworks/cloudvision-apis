@@ -1945,6 +1945,10 @@
         "outputFormat": {
           "$ref": "#/definitions/arista.alert.v1.TemplateOutput",
           "description": "output_format is the expected output format of this template\nAny submitted template will be expected to output text with valid formatting for any input or\nmay fail validation."
+        },
+        "displayName": {
+          "type": "string",
+          "title": "display_name is the name that can be displayed to the user for this particular template type"
         }
       },
       "title": "DefaultTemplate is the system default template which is used when no user template has been set"
