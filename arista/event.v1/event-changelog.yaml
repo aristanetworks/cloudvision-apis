@@ -10,6 +10,8 @@ Changes:
     - date: 2024-01-24
       description: Add new DEBUG event severity
       version: 1.1.1
+      cvaas: true
+      onprem: true
     - date: 2023-09-20
       description: Add event creation requests and field timestamp
       version: 1.1.0
