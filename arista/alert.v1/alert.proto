@@ -1055,6 +1055,9 @@ message DefaultTemplate {
 	// Any submitted template will be expected to output text with valid formatting for any input or
 	// may fail validation.
 	TemplateOutput output_format = 6;
+
+	// display_name is the name that can be displayed to the user for this particular template type
+	google.protobuf.StringValue display_name = 7;
 }
 
 
