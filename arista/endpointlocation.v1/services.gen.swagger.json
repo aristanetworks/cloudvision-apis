@@ -148,6 +148,127 @@
         ]
       }
     },
+    "/api/resources/endpointlocation/v1/EndpointLocation/getsome": {
+      "post": {
+        "operationId": "EndpointLocationService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.EndpointLocationSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    },
+    "/api/resources/endpointlocation/v1/EndpointLocation/metadata": {
+      "get": {
+        "operationId": "EndpointLocationService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      },
+      "post": {
+        "operationId": "EndpointLocationService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    },
     "/api/resources/endpointlocation/v1/EndpointLocation/watch": {
       "get": {
         "operationId": "EndpointLocationService_Subscribe",
@@ -210,6 +331,92 @@
                 }
               },
               "title": "Stream result of arista.endpointlocation.v1.EndpointLocationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      }
+    },
+    "/api/resources/endpointlocation/v1/EndpointLocation/watchmetadata": {
+      "get": {
+        "operationId": "EndpointLocationService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "EndpointLocationService"
+        ]
+      },
+      "post": {
+        "operationId": "EndpointLocationService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.endpointlocation.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.endpointlocation.v1.MetaResponse"
             }
           },
           "default": {
@@ -376,6 +583,23 @@
         }
       }
     },
+    "arista.endpointlocation.v1.EndpointLocationSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocation",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.endpointlocation.v1.EndpointLocationStreamRequest": {
       "type": "object",
       "properties": {
@@ -424,10 +648,11 @@
         "EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE",
         "EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE",
         "EXPLANATION_VIRTUAL",
-        "EXPLANATION_WIRELESS_CONNECTION"
+        "EXPLANATION_WIRELESS_CONNECTION",
+        "EXPLANATION_ACCESS_PORT"
       ],
       "default": "EXPLANATION_UNSPECIFIED",
-      "description": "Explanation defines the set of reasons for why a location has a certain likelihood.\nSome explanations apply to queried endpoints while others apply to queried devices\nin the CloudVision device inventory.\n\n - EXPLANATION_UNSPECIFIED: EXPLANATION_UNSPECIFIED is the default unspecified explanation.\n - EXPLANATION_DIRECT_CONNECTION: EXPLANATION_DIRECT_CONNECTION indicates a direct connection to the queried\nendpoint device discovered via LLDP.\n - EXPLANATION_NON_INVENTORY_CONNECTION: EXPLANATION_NON_INVENTORY_CONNECTION indicates a direct connection to at least\none non-inventory device (likely discovered via LLDP).\n - EXPLANATION_NO_CONNECTION: EXPLANATION_NO_CONNECTION indicates that a location has no direct connection to\nany known device.\n - EXPLANATION_INVENTORY_CONNECTION: EXPLANATION_INVENTORY_CONNECTION indicates that all of a location's known connections\nare to devices in the inventory.\n - EXPLANATION_OWN_PORT_INVENTORY_DEVICE: EXPLANATION_OWN_PORT_INVENTORY_DEVICE indicates a location on the queried inventory\ndevice itself.\n - EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE: EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE indicates a direct connection to the\nqueried inventory device discovered via LLDP.\n - EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE: EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE indicates that a location has no direct\nconnection to any known device (for queried inventory devices).\n - EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE: EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE indicates that a location only has\nconnections to other devices besides the queried inventory device.\n - EXPLANATION_VIRTUAL: EXPLANATION_VIRTUAL indicates that a location contains a virtual interface.\n - EXPLANATION_WIRELESS_CONNECTION: EXPLANATION_WIRELESS_CONNECTION indicates a direct connection from a wireless access\npoint in the device inventory to a wireless client."
+      "description": "Explanation defines the set of reasons for why a location has a certain likelihood.\nSome explanations apply to queried endpoints while others apply to queried devices\nin the CloudVision device inventory.\n\n - EXPLANATION_UNSPECIFIED: EXPLANATION_UNSPECIFIED is the default unspecified explanation.\n - EXPLANATION_DIRECT_CONNECTION: EXPLANATION_DIRECT_CONNECTION indicates a direct connection to the queried\nendpoint device discovered via LLDP.\n - EXPLANATION_NON_INVENTORY_CONNECTION: EXPLANATION_NON_INVENTORY_CONNECTION indicates a direct connection to at least\none non-inventory device (likely discovered via LLDP).\n - EXPLANATION_NO_CONNECTION: EXPLANATION_NO_CONNECTION indicates that a location has no direct connection to\nany known device.\n - EXPLANATION_INVENTORY_CONNECTION: EXPLANATION_INVENTORY_CONNECTION indicates that all of a location's known connections\nare to devices in the inventory.\n - EXPLANATION_OWN_PORT_INVENTORY_DEVICE: EXPLANATION_OWN_PORT_INVENTORY_DEVICE indicates a location on the queried inventory\ndevice itself.\n - EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE: EXPLANATION_DIRECT_CONNECTION_INVENTORY_DEVICE indicates a direct connection to the\nqueried inventory device discovered via LLDP.\n - EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE: EXPLANATION_NO_CONNECTION_INVENTORY_DEVICE indicates that a location has no direct\nconnection to any known device (for queried inventory devices).\n - EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE: EXPLANATION_OTHER_CONNECTION_INVENTORY_DEVICE indicates that a location only has\nconnections to other devices besides the queried inventory device.\n - EXPLANATION_VIRTUAL: EXPLANATION_VIRTUAL indicates that a location contains a virtual interface.\n - EXPLANATION_WIRELESS_CONNECTION: EXPLANATION_WIRELESS_CONNECTION indicates a direct connection from a wireless access\npoint in the device inventory to a wireless client.\n - EXPLANATION_ACCESS_PORT: EXPLANATION_ACCESS_PORT indicates that a location is an access port."
     },
     "arista.endpointlocation.v1.ExplanationList": {
       "type": "object",
@@ -621,6 +846,25 @@
       ],
       "default": "MAC_TYPE_UNSPECIFIED",
       "description": "MacType describes how the MAC address was learned on the port location.\n\n - MAC_TYPE_UNSPECIFIED: MAC_TYPE_UNSPECIFIED is the default unspecified MAC type.\n - MAC_TYPE_LEARNED_DYNAMIC: MAC_TYPE_LEARNED_DYNAMIC indicates a MAC that is dynamically learned in hardware.\n - MAC_TYPE_LEARNED_SECURE: MAC_TYPE_LEARNED_SECURE indicates a MAC that is learned in hardware on a port-security protect interface.\n - MAC_TYPE_CONFIGURED_DYNAMIC: MAC_TYPE_CONFIGURED_DYNAMIC indicates a configured dynamic MAC.\n - MAC_TYPE_CONFIGURED_SECURE: MAC_TYPE_CONFIGURED_SECURE indicates a MAC configured on an interface with Port Security: Protect mode enabled\n - MAC_TYPE_CONFIGURED_STATIC: MAC_TYPE_CONFIGURED_STATIC indicates a statically configured MAC.\n - MAC_TYPE_PEER_DYNAMIC: MAC_TYPE_PEER_DYNAMIC indicates a dynamically learned MAC discovered via an MLAG peer.\n - MAC_TYPE_PEER_STATIC: MAC_TYPE_PEER_STATIC indicates a statically configured MAC discovered via an MLAG peer.\n - MAC_TYPE_PEER_SECURE: MAC_TYPE_PEER_SECURE indicates a secure MAC learned from an MLAG peer.\n - MAC_TYPE_LEARNED_REMOTE: MAC_TYPE_LEARNED_REMOTE indicates a MAC learned remotely behind a VxLAN VTEP.\n - MAC_TYPE_CONFIGURED_REMOTE: MAC_TYPE_CONFIGURED_REMOTE indicates a MAC configured behind a VxLAN VTEP.\n - MAC_TYPE_RECEIVED_REMOTE: MAC_TYPE_RECEIVED_REMOTE indicates a MAC received from a VxLAN controller.\n - MAC_TYPE_PEER_LEARNED_REMOTE: MAC_TYPE_PEER_LEARNED_REMOTE indicates a remote MAC learned on a peer VTEP.\n - MAC_TYPE_PEER_CONFIGURED_REMOTE: MAC_TYPE_PEER_CONFIGURED_REMOTE indicates an MLAG peer configured remote MAC.\n - MAC_TYPE_PEER_RECEIVED_REMOTE: MAC_TYPE_PEER_RECEIVED_REMOTE indicates a remote MAC received from a VxLAN controller by the MLAG peer.\n - MAC_TYPE_EVPN_DYNAMIC_REMOTE: MAC_TYPE_EVPN_DYNAMIC_REMOTE indicates an EVPN dynamic remote MAC.\n - MAC_TYPE_EVPN_CONFIGURED_REMOTE: MAC_TYPE_EVPN_CONFIGURED_REMOTE indicates an EVPN configured remote MAC.\n - MAC_TYPE_PEER_EVPN_REMOTE: MAC_TYPE_PEER_EVPN_REMOTE indicates an MLAG peer EVPN remote MAC.\n - MAC_TYPE_CONFIGURED_ROUTER: MAC_TYPE_CONFIGURED_ROUTER indicates a configured MAC used in routing.\n - MAC_TYPE_PEER_ROUTER: MAC_TYPE_PEER_ROUTER indicates an MLAG peer specific router MAC.\n - MAC_TYPE_EVPN_INTF_DYNAMIC: MAC_TYPE_EVPN_INTF_DYNAMIC indicates a MAC advertised by EVPN when a dynamic MAC is learned on ESI (Ethernet Segment Identifier).\n - MAC_TYPE_EVPN_INTF_STATIC: MAC_TYPE_EVPN_INTF_STATIC indicates a MAC configured on EVPN ESI.\n - MAC_TYPE_AUTHENTICATED: MAC_TYPE_AUTHENTICATED indicates a MAC authenticated via 802.1X.\n - MAC_TYPE_PEER_AUTHENTICATED: MAC_TYPE_PEER_AUTHENTICATED indicates a MAC authenticated by 802.1X and learned on an MLAG peer.\n - MAC_TYPE_PENDING_SECURE: MAC_TYPE_PENDING_SECURE indicates a secure MAC in a pending state.\n - MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC: MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC indicates a MAC learned behind VTEP in software in the case of a VxLAN remote MAC.\n - MAC_TYPE_OTHER: MAC_TYPE_OTHER is used for capturing future MAC types."
+    },
+    "arista.endpointlocation.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
     },
     "arista.subscriptions.Operation": {
       "type": "string",
