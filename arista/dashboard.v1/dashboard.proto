@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.dashboard.v1;
 
-option go_package = "arista/resources/arista/dashboard.v1;dashboard";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/dashboard.v1;dashboard";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
