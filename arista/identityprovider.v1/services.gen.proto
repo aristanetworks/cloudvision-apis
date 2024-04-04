@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.identityprovider.v1;
-option go_package = "arista/resources/arista/identityprovider.v1;identityprovider";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/identityprovider.v1;identityprovider";
 
 import "arista/identityprovider.v1/identityprovider.proto";
 import "arista/time/time.proto";
@@ -183,10 +183,15 @@ message OAuthConfigDeleteSomeResponse {
 };
 
 message OAuthConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated OAuthConfig partial_eq_filter = 1;
 };
 
 message OAuthConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -361,10 +366,15 @@ message SAMLConfigDeleteSomeResponse {
 };
 
 message SAMLConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated SAMLConfig partial_eq_filter = 1;
 };
 
 message SAMLConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;

@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.identityprovider.v1;
 
-option go_package = "arista/resources/arista/identityprovider.v1;identityprovider";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/identityprovider.v1;identityprovider";
 
 import "google/protobuf/wrappers.proto";
 
