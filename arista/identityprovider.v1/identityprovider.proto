@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.identityprovider.v1;
 
-option go_package = "arista/resources/arista/identityprovider.v1;identityprovider";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/identityprovider.v1;identityprovider";
 
 import "google/protobuf/wrappers.proto";
 
@@ -58,12 +58,10 @@ message OAuthConfig {
         // mapping roles from the provider is disabled. If it's set, roles_claim_name
         // also needs to be set.
         google.protobuf.StringValue roles_scope_name = 9;
-        // bearer_token_introspection_endpoint is the provider instrospection endpoint used in
-        // Bearer Token based login support for CloudVision. This endpoint will be used to verify
-        // the bearer token received when an external application is logging in. This is an
-        // optional field. CloudVision will only support this feature for a single provider per
-        // org, hence only one provider is allowed to have this field set. If not set for any
-        // providers, CloudVision determines that Bearer Token based login support is disabled.
+        // bearer_token_introspection_endpoint is the provider instrospection endpoint used
+        // in Bearer Token based login support for CloudVision. This is an optional field.
+        // If specified, this endpoint will be used to verify bearer tokens generated via
+        // the provider to log in automated user accounts.
         google.protobuf.StringValue bearer_token_introspection_endpoint = 10;
         // roles_claim_name is the name for a claim that holds CloudVision roles in ID Token.
         // CloudVision uses this value to look up roles in the ID Token.

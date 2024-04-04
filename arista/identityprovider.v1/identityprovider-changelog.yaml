@@ -7,18 +7,25 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-04-04
+    description: Update APIs
+    version: 1.7.2
+    cvaas: true
+    onprem: true
+  - date: 2024-03-11
+    description: Update bearer_token_introspection_endpoint field description
+    version: 1.7.1
+    cvaas: true
+    onprem: true
   - date: 2023-08-08
     description: Add username_attrname to saml
     version: 1.7.0
-    cvaas: true
-    onprem: true
   - date: 2023-06-22
     description: Add roles_claim_name to oauth
     version: 1.6.0
   - date: 2023-04-07
     description: Add org_attrname to saml
     version: 1.5.0
-    cvaas: true
   - date: 2023-03-17
     description: Add bearer_token_introspection_endpoint to oauth
     version: 1.4.0
