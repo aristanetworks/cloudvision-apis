@@ -29,7 +29,7 @@
 syntax = "proto3";
 
 package arista.workspace.v1;
-option go_package = "arista/resources/arista/workspace.v1;workspace";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/workspace.v1;workspace";
 
 import "arista/workspace.v1/workspace.proto";
 import "arista/time/time.proto";
@@ -37,6 +37,20 @@ import "arista/subscriptions/subscriptions.proto";
 import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message WorkspaceRequest {
 	// Key uniquely identifies a Workspace instance to retrieve.
@@ -58,6 +72,27 @@ message WorkspaceResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Workspace instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSomeRequest {
+	repeated WorkspaceKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Workspace value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message WorkspaceStreamRequest {
@@ -104,8 +139,11 @@ message WorkspaceStreamResponse {
 
 service WorkspaceService {
 	rpc GetOne (WorkspaceRequest) returns (WorkspaceResponse);
+	rpc GetSome (WorkspaceSomeRequest) returns (stream WorkspaceSomeResponse);
 	rpc GetAll (WorkspaceStreamRequest) returns (stream WorkspaceStreamResponse);
 	rpc Subscribe (WorkspaceStreamRequest) returns (stream WorkspaceStreamResponse);
+	rpc GetMeta (WorkspaceStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceStreamRequest) returns (stream MetaResponse);
 }
 
 message WorkspaceBuildRequest {
@@ -128,6 +166,27 @@ message WorkspaceBuildResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// WorkspaceBuild instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceBuildSomeRequest {
+	repeated WorkspaceBuildKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceBuildSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceBuild value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message WorkspaceBuildStreamRequest {
@@ -174,8 +233,11 @@ message WorkspaceBuildStreamResponse {
 
 service WorkspaceBuildService {
 	rpc GetOne (WorkspaceBuildRequest) returns (WorkspaceBuildResponse);
+	rpc GetSome (WorkspaceBuildSomeRequest) returns (stream WorkspaceBuildSomeResponse);
 	rpc GetAll (WorkspaceBuildStreamRequest) returns (stream WorkspaceBuildStreamResponse);
 	rpc Subscribe (WorkspaceBuildStreamRequest) returns (stream WorkspaceBuildStreamResponse);
+	rpc GetMeta (WorkspaceBuildStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceBuildStreamRequest) returns (stream MetaResponse);
 }
 
 message WorkspaceBuildDetailsRequest {
@@ -198,6 +260,27 @@ message WorkspaceBuildDetailsResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// WorkspaceBuildDetails instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceBuildDetailsSomeRequest {
+	repeated WorkspaceBuildDetailsKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceBuildDetailsSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceBuildDetails value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message WorkspaceBuildDetailsStreamRequest {
@@ -244,8 +327,11 @@ message WorkspaceBuildDetailsStreamResponse {
 
 service WorkspaceBuildDetailsService {
 	rpc GetOne (WorkspaceBuildDetailsRequest) returns (WorkspaceBuildDetailsResponse);
+	rpc GetSome (WorkspaceBuildDetailsSomeRequest) returns (stream WorkspaceBuildDetailsSomeResponse);
 	rpc GetAll (WorkspaceBuildDetailsStreamRequest) returns (stream WorkspaceBuildDetailsStreamResponse);
 	rpc Subscribe (WorkspaceBuildDetailsStreamRequest) returns (stream WorkspaceBuildDetailsStreamResponse);
+	rpc GetMeta (WorkspaceBuildDetailsStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceBuildDetailsStreamRequest) returns (stream MetaResponse);
 }
 
 message WorkspaceConfigRequest {
@@ -268,6 +354,27 @@ message WorkspaceConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// WorkspaceConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceConfigSomeRequest {
+	repeated WorkspaceKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message WorkspaceConfigStreamRequest {
@@ -366,11 +473,27 @@ message WorkspaceConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message WorkspaceConfigDeleteSomeRequest {
+	// key contains a list of WorkspaceConfig keys to delete
+	repeated WorkspaceKey keys = 1;
+};
+
+// WorkspaceConfigDeleteSomeResponse is only sent when there is an error.
+message WorkspaceConfigDeleteSomeResponse {
+	WorkspaceKey key = 1;
+	string error = 2;
+};
+
 message WorkspaceConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated WorkspaceConfig partial_eq_filter = 1;
 };
 
 message WorkspaceConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -382,10 +505,14 @@ message WorkspaceConfigDeleteAllResponse {
 
 service WorkspaceConfigService {
 	rpc GetOne (WorkspaceConfigRequest) returns (WorkspaceConfigResponse);
+	rpc GetSome (WorkspaceConfigSomeRequest) returns (stream WorkspaceConfigSomeResponse);
 	rpc GetAll (WorkspaceConfigStreamRequest) returns (stream WorkspaceConfigStreamResponse);
 	rpc Subscribe (WorkspaceConfigStreamRequest) returns (stream WorkspaceConfigStreamResponse);
+	rpc GetMeta (WorkspaceConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (WorkspaceConfigSetRequest) returns (WorkspaceConfigSetResponse);
 	rpc SetSome (WorkspaceConfigSetSomeRequest) returns (stream WorkspaceConfigSetSomeResponse);
 	rpc Delete (WorkspaceConfigDeleteRequest) returns (WorkspaceConfigDeleteResponse);
+	rpc DeleteSome (WorkspaceConfigDeleteSomeRequest) returns (stream WorkspaceConfigDeleteSomeResponse);
 	rpc DeleteAll (WorkspaceConfigDeleteAllRequest) returns (stream WorkspaceConfigDeleteAllResponse);
 }

@@ -26,7 +26,7 @@ syntax = "proto3";
 
 package arista.workspace.v1;
 
-option go_package = "arista/resources/arista/workspace.v1;workspace";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/workspace.v1;workspace";
 
 import "fmp/extensions.proto";
 import "fmp/wrappers.proto";
