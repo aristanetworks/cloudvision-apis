@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.dashboard.v1;
-option go_package = "arista/resources/arista/dashboard.v1;dashboard";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/dashboard.v1;dashboard";
 
 import "arista/dashboard.v1/dashboard.proto";
 import "arista/time/time.proto";
@@ -17,6 +17,20 @@ import "arista/subscriptions/subscriptions.proto";
 import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message DashboardRequest {
 	// Key uniquely identifies a Dashboard instance to retrieve.
@@ -38,6 +52,27 @@ message DashboardResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Dashboard instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message DashboardSomeRequest {
+	repeated DashboardKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DashboardSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Dashboard value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message DashboardStreamRequest {
@@ -88,8 +123,11 @@ message DashboardStreamResponse {
 
 service DashboardService {
 	rpc GetOne (DashboardRequest) returns (DashboardResponse);
+	rpc GetSome (DashboardSomeRequest) returns (stream DashboardSomeResponse);
 	rpc GetAll (DashboardStreamRequest) returns (stream DashboardStreamResponse);
 	rpc Subscribe (DashboardStreamRequest) returns (stream DashboardStreamResponse);
+	rpc GetMeta (DashboardStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DashboardStreamRequest) returns (stream MetaResponse);
 }
 
 message DashboardConfigRequest {
@@ -112,6 +150,27 @@ message DashboardConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// DashboardConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message DashboardConfigSomeRequest {
+	repeated DashboardKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DashboardConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DashboardConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message DashboardConfigStreamRequest {
@@ -210,11 +269,27 @@ message DashboardConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DashboardConfigDeleteSomeRequest {
+	// key contains a list of DashboardConfig keys to delete
+	repeated DashboardKey keys = 1;
+};
+
+// DashboardConfigDeleteSomeResponse is only sent when there is an error.
+message DashboardConfigDeleteSomeResponse {
+	DashboardKey key = 1;
+	string error = 2;
+};
+
 message DashboardConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated DashboardConfig partial_eq_filter = 1;
 };
 
 message DashboardConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -226,11 +301,15 @@ message DashboardConfigDeleteAllResponse {
 
 service DashboardConfigService {
 	rpc GetOne (DashboardConfigRequest) returns (DashboardConfigResponse);
+	rpc GetSome (DashboardConfigSomeRequest) returns (stream DashboardConfigSomeResponse);
 	rpc GetAll (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
 	rpc Subscribe (DashboardConfigStreamRequest) returns (stream DashboardConfigStreamResponse);
+	rpc GetMeta (DashboardConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DashboardConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (DashboardConfigSetRequest) returns (DashboardConfigSetResponse);
 	rpc SetSome (DashboardConfigSetSomeRequest) returns (stream DashboardConfigSetSomeResponse);
 	rpc Delete (DashboardConfigDeleteRequest) returns (DashboardConfigDeleteResponse);
+	rpc DeleteSome (DashboardConfigDeleteSomeRequest) returns (stream DashboardConfigDeleteSomeResponse);
 	rpc DeleteAll (DashboardConfigDeleteAllRequest) returns (stream DashboardConfigDeleteAllResponse);
 }
 
@@ -318,7 +397,10 @@ message GlobalDashboardConfigSetResponse {
 service GlobalDashboardConfigService {
 	rpc GetOne (GlobalDashboardConfigRequest) returns (GlobalDashboardConfigResponse);
 	
+	rpc GetAll (GlobalDashboardConfigStreamRequest) returns (stream GlobalDashboardConfigStreamResponse);
 	rpc Subscribe (GlobalDashboardConfigStreamRequest) returns (stream GlobalDashboardConfigStreamResponse);
+	
+	rpc SubscribeMeta (GlobalDashboardConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (GlobalDashboardConfigSetRequest) returns (GlobalDashboardConfigSetResponse);
 	
 	
