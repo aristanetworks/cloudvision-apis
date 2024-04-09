@@ -10,7 +10,6 @@ Changes:
     - date: 2020-04-09
       description: Initial revision
       version: 1.0.0
-      cvaas: true
     - date: 2020-04-24
       description: Added MacType and changed learnedTs to protobuf timestamp
       version: 1.0.1
@@ -74,5 +73,14 @@ Changes:
     - date: 2023-04-24
       description: Added MAC_TYPE_SOFTWARE_LEARNED_DYNAMIC to correspond with softwareLearnedDynamicMac type in MAC tables
       version: 1.8.0
+    - date: 2023-04-24
+      description: Added EXPLANATION_ACCESS_PORT to schema
+      version: 1.8.1
       onprem: true
       cvaas: true
+    - date: 2024-03-28
+      description: Update Available APIs
+      version: 1.8.2
+      onprem: true
+      cvaas: true
+

@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.endpointlocation.v1;
 
-option go_package = "arista/resources/arista/endpointlocation.v1;endpointlocation";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/endpointlocation.v1;endpointlocation";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -190,6 +190,8 @@ enum Explanation {
     // EXPLANATION_WIRELESS_CONNECTION indicates a direct connection from a wireless access
     // point in the device inventory to a wireless client.
     EXPLANATION_WIRELESS_CONNECTION = 10;
+    // EXPLANATION_ACCESS_PORT indicates that a location is an access port.
+    EXPLANATION_ACCESS_PORT = 11;
 }
 
 // ExplanationList is a list of Explanation.
