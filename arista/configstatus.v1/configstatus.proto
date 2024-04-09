@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.configstatus.v1;
 
-option go_package = "arista/resources/arista/configstatus.v1;configstatus";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/configstatus.v1;configstatus";
 
 option java_package = "com.arista.configstatus.v1";
 option java_outer_classname = "Configstatus";

@@ -7,10 +7,13 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-03-28
+    description: Update APIs
+    version: 1.0.6
+    cvaas: true
   - date: 2022-10-31
     description: Add ConfigSources definition
     version: 1.0.5
-    cvaas: true
   - date: 2022-01-10
     description: Add a_parent_line_num field in DiffEntry
     version: 1.0.4

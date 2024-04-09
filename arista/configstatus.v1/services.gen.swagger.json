@@ -212,6 +212,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/ConfigDiff/getsome": {
+      "post": {
+        "operationId": "ConfigDiffService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.ConfigDiffSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigDiffService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/ConfigDiff/metadata": {
+      "get": {
+        "operationId": "ConfigDiffService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigDiffService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigDiffService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigDiffService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/ConfigDiff/watch": {
       "get": {
         "operationId": "ConfigDiffService_Subscribe",
@@ -274,6 +395,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.ConfigDiffStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigDiffService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/ConfigDiff/watchmetadata": {
+      "get": {
+        "operationId": "ConfigDiffService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigDiffService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigDiffService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -436,6 +643,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/Configuration/getsome": {
+      "post": {
+        "operationId": "ConfigurationService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.ConfigurationSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.ConfigurationSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigurationService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/Configuration/metadata": {
+      "get": {
+        "operationId": "ConfigurationService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigurationService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigurationService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigurationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigurationService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/Configuration/watch": {
       "get": {
         "operationId": "ConfigurationService_Subscribe",
@@ -498,6 +826,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.ConfigurationStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigurationStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConfigurationService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/Configuration/watchmetadata": {
+      "get": {
+        "operationId": "ConfigurationService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ConfigurationService"
+        ]
+      },
+      "post": {
+        "operationId": "ConfigurationService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -660,6 +1074,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/SecurityProfile/getsome": {
+      "post": {
+        "operationId": "SecurityProfileService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.SecurityProfileSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfile/metadata": {
+      "get": {
+        "operationId": "SecurityProfileService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/SecurityProfile/watch": {
       "get": {
         "operationId": "SecurityProfileService_Subscribe",
@@ -722,6 +1257,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.SecurityProfileStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfile/watchmetadata": {
+      "get": {
+        "operationId": "SecurityProfileService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -920,6 +1541,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/SecurityProfileDiff/getsome": {
+      "post": {
+        "operationId": "SecurityProfileDiffService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.SecurityProfileDiffSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfileDiff/metadata": {
+      "get": {
+        "operationId": "SecurityProfileDiffService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileDiffService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/SecurityProfileDiff/watch": {
       "get": {
         "operationId": "SecurityProfileDiffService_Subscribe",
@@ -982,6 +1724,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.SecurityProfileDiffStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfileDiff/watchmetadata": {
+      "get": {
+        "operationId": "SecurityProfileDiffService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileDiffService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -1131,6 +1959,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/SecurityProfileDiffSummary/getsome": {
+      "post": {
+        "operationId": "SecurityProfileDiffSummaryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummarySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.SecurityProfileDiffSummarySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffSummaryService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfileDiffSummary/metadata": {
+      "get": {
+        "operationId": "SecurityProfileDiffSummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileDiffSummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffSummaryService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/SecurityProfileDiffSummary/watch": {
       "get": {
         "operationId": "SecurityProfileDiffSummaryService_Subscribe",
@@ -1193,6 +2142,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.SecurityProfileDiffSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffSummaryService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/SecurityProfileDiffSummary/watchmetadata": {
+      "get": {
+        "operationId": "SecurityProfileDiffSummaryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecurityProfileDiffSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SecurityProfileDiffSummaryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -1342,6 +2377,127 @@
         ]
       }
     },
+    "/api/resources/configstatus/v1/Summary/getsome": {
+      "post": {
+        "operationId": "SummaryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.SummarySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.SummarySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/Summary/metadata": {
+      "get": {
+        "operationId": "SummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
     "/api/resources/configstatus/v1/Summary/watch": {
       "get": {
         "operationId": "SummaryService_Subscribe",
@@ -1404,6 +2560,92 @@
                 }
               },
               "title": "Stream result of arista.configstatus.v1.SummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.configstatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/api/resources/configstatus/v1/Summary/watchmetadata": {
+      "get": {
+        "operationId": "SummaryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.configstatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.configstatus.v1.MetaResponse"
             }
           },
           "default": {
@@ -1497,19 +2739,37 @@
         }
       }
     },
+    "arista.configstatus.v1.ConfigDiffSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigDiff",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.ConfigDiffStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigDiff"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigDiff at end.\n    * Each ConfigDiff response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigDiff at start, followed by updates until now.\n    * Each ConfigDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigDiff at start, followed by updates\n    until end.\n    * Each ConfigDiff response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1677,19 +2937,37 @@
         }
       }
     },
+    "arista.configstatus.v1.ConfigurationSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.Configuration",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.ConfigurationStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.Configuration"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configuration at end.\n    * Each Configuration response is fully-specified (all fields set).\n  * start: Returns the state of each Configuration at start, followed by updates until now.\n    * Each Configuration response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configuration at start, followed by updates\n    until end.\n    * Each Configuration response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1717,6 +2995,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.DiffEntry"
           }
         }
@@ -1781,6 +3060,25 @@
       "default": "DIFF_OP_UNSPECIFIED",
       "description": "- DIFF_OP_NOP: NOP indicates no change. A and B are identical at this line\n - DIFF_OP_IGNORE: IGNORE indicates a line that's ignored in either A or B.\nOne of a_line_num or b_line_num will be -1\n - DIFF_OP_ADD: ADD is an addition of a line from A\n - DIFF_OP_DELETE: DELETE is deletion of a line from B\n - DIFF_OP_CHANGE: CHANGE is a modification to a line in A",
       "title": "DiffOp is the operation to a line from one side of diff to get to another"
+    },
+    "arista.configstatus.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
     },
     "arista.configstatus.v1.SecurityProfile": {
       "type": "object",
@@ -1872,19 +3170,37 @@
         }
       }
     },
+    "arista.configstatus.v1.SecurityProfileDiffSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiff",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileDiffStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiff"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiff at end.\n    * Each SecurityProfileDiff response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiff at start, followed by updates until now.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiff at start, followed by updates\n    until end.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1934,19 +3250,37 @@
         }
       }
     },
+    "arista.configstatus.v1.SecurityProfileDiffSummarySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileDiffSummaryStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummary"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiffSummary at end.\n    * Each SecurityProfileDiffSummary response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiffSummary at start, followed by updates until now.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiffSummary at start, followed by updates\n    until end.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -1982,19 +3316,37 @@
         }
       }
     },
+    "arista.configstatus.v1.SecurityProfileSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.SecurityProfile",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfile"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfile at end.\n    * Each SecurityProfile response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfile at start, followed by updates until now.\n    * Each SecurityProfile response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfile at start, followed by updates\n    until end.\n    * Each SecurityProfile response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -2054,19 +3406,37 @@
         }
       }
     },
+    "arista.configstatus.v1.SummarySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.configstatus.v1.Summary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.configstatus.v1.SummaryStreamRequest": {
       "type": "object",
       "properties": {
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.Summary"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
         }
       }
     },
@@ -2135,6 +3505,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }

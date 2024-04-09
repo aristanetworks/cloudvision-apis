@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.configstatus.v1;
-option go_package = "arista/resources/arista/configstatus.v1;configstatus";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/configstatus.v1;configstatus";
 
 option java_package = "com.arista.configstatus.v1";
 option java_outer_classname = "ConfigstatusServices";
@@ -19,6 +19,21 @@ import "arista/configstatus.v1/configstatus.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message ConfigDiffRequest {
 	// Key uniquely identifies a ConfigDiff instance to retrieve.
@@ -42,6 +57,27 @@ message ConfigDiffResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ConfigDiffSomeRequest {
+	repeated ConfigDiffKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ConfigDiffSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ConfigDiff value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ConfigDiffStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -52,6 +88,17 @@ message ConfigDiffStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ConfigDiff at end.
+	//     * Each ConfigDiff response is fully-specified (all fields set).
+	//   * start: Returns the state of each ConfigDiff at start, followed by updates until now.
+	//     * Each ConfigDiff response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ConfigDiff at start, followed by updates
+	//     until end.
+	//     * Each ConfigDiff response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -75,8 +122,11 @@ message ConfigDiffStreamResponse {
 
 service ConfigDiffService {
 	rpc GetOne (ConfigDiffRequest) returns (ConfigDiffResponse);
+	rpc GetSome (ConfigDiffSomeRequest) returns (stream ConfigDiffSomeResponse);
 	rpc GetAll (ConfigDiffStreamRequest) returns (stream ConfigDiffStreamResponse);
 	rpc Subscribe (ConfigDiffStreamRequest) returns (stream ConfigDiffStreamResponse);
+	rpc GetMeta (ConfigDiffStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ConfigDiffStreamRequest) returns (stream MetaResponse);
 }
 
 message ConfigurationRequest {
@@ -101,6 +151,27 @@ message ConfigurationResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ConfigurationSomeRequest {
+	repeated ConfigKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ConfigurationSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Configuration value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ConfigurationStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -111,6 +182,17 @@ message ConfigurationStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Configuration at end.
+	//     * Each Configuration response is fully-specified (all fields set).
+	//   * start: Returns the state of each Configuration at start, followed by updates until now.
+	//     * Each Configuration response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Configuration at start, followed by updates
+	//     until end.
+	//     * Each Configuration response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -134,8 +216,11 @@ message ConfigurationStreamResponse {
 
 service ConfigurationService {
 	rpc GetOne (ConfigurationRequest) returns (ConfigurationResponse);
+	rpc GetSome (ConfigurationSomeRequest) returns (stream ConfigurationSomeResponse);
 	rpc GetAll (ConfigurationStreamRequest) returns (stream ConfigurationStreamResponse);
 	rpc Subscribe (ConfigurationStreamRequest) returns (stream ConfigurationStreamResponse);
+	rpc GetMeta (ConfigurationStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ConfigurationStreamRequest) returns (stream MetaResponse);
 }
 
 message SecurityProfileRequest {
@@ -160,6 +245,27 @@ message SecurityProfileResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SecurityProfileSomeRequest {
+	repeated ConfigKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfile value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message SecurityProfileStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -170,6 +276,17 @@ message SecurityProfileStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfile at end.
+	//     * Each SecurityProfile response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfile at start, followed by updates until now.
+	//     * Each SecurityProfile response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfile at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfile response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -193,8 +310,11 @@ message SecurityProfileStreamResponse {
 
 service SecurityProfileService {
 	rpc GetOne (SecurityProfileRequest) returns (SecurityProfileResponse);
+	rpc GetSome (SecurityProfileSomeRequest) returns (stream SecurityProfileSomeResponse);
 	rpc GetAll (SecurityProfileStreamRequest) returns (stream SecurityProfileStreamResponse);
 	rpc Subscribe (SecurityProfileStreamRequest) returns (stream SecurityProfileStreamResponse);
+	rpc GetMeta (SecurityProfileStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SecurityProfileStreamRequest) returns (stream MetaResponse);
 }
 
 message SecurityProfileDiffRequest {
@@ -219,6 +339,27 @@ message SecurityProfileDiffResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SecurityProfileDiffSomeRequest {
+	repeated ConfigDiffKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfileDiff value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message SecurityProfileDiffStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -229,6 +370,17 @@ message SecurityProfileDiffStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfileDiff at end.
+	//     * Each SecurityProfileDiff response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfileDiff at start, followed by updates until now.
+	//     * Each SecurityProfileDiff response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfileDiff at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfileDiff response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -252,8 +404,11 @@ message SecurityProfileDiffStreamResponse {
 
 service SecurityProfileDiffService {
 	rpc GetOne (SecurityProfileDiffRequest) returns (SecurityProfileDiffResponse);
+	rpc GetSome (SecurityProfileDiffSomeRequest) returns (stream SecurityProfileDiffSomeResponse);
 	rpc GetAll (SecurityProfileDiffStreamRequest) returns (stream SecurityProfileDiffStreamResponse);
 	rpc Subscribe (SecurityProfileDiffStreamRequest) returns (stream SecurityProfileDiffStreamResponse);
+	rpc GetMeta (SecurityProfileDiffStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SecurityProfileDiffStreamRequest) returns (stream MetaResponse);
 }
 
 message SecurityProfileDiffSummaryRequest {
@@ -278,6 +433,27 @@ message SecurityProfileDiffSummaryResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SecurityProfileDiffSummarySomeRequest {
+	repeated SummaryKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecurityProfileDiffSummarySomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecurityProfileDiffSummary value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message SecurityProfileDiffSummaryStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -288,6 +464,17 @@ message SecurityProfileDiffSummaryStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfileDiffSummary at end.
+	//     * Each SecurityProfileDiffSummary response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfileDiffSummary at start, followed by updates until now.
+	//     * Each SecurityProfileDiffSummary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfileDiffSummary at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfileDiffSummary response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -311,8 +498,11 @@ message SecurityProfileDiffSummaryStreamResponse {
 
 service SecurityProfileDiffSummaryService {
 	rpc GetOne (SecurityProfileDiffSummaryRequest) returns (SecurityProfileDiffSummaryResponse);
+	rpc GetSome (SecurityProfileDiffSummarySomeRequest) returns (stream SecurityProfileDiffSummarySomeResponse);
 	rpc GetAll (SecurityProfileDiffSummaryStreamRequest) returns (stream SecurityProfileDiffSummaryStreamResponse);
 	rpc Subscribe (SecurityProfileDiffSummaryStreamRequest) returns (stream SecurityProfileDiffSummaryStreamResponse);
+	rpc GetMeta (SecurityProfileDiffSummaryStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SecurityProfileDiffSummaryStreamRequest) returns (stream MetaResponse);
 }
 
 message SummaryRequest {
@@ -337,6 +527,27 @@ message SummaryResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message SummarySomeRequest {
+	repeated SummaryKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SummarySomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Summary value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message SummaryStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -347,6 +558,17 @@ message SummaryStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Summary at end.
+	//     * Each Summary response is fully-specified (all fields set).
+	//   * start: Returns the state of each Summary at start, followed by updates until now.
+	//     * Each Summary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Summary at start, followed by updates
+	//     until end.
+	//     * Each Summary response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -370,6 +592,9 @@ message SummaryStreamResponse {
 
 service SummaryService {
 	rpc GetOne (SummaryRequest) returns (SummaryResponse);
+	rpc GetSome (SummarySomeRequest) returns (stream SummarySomeResponse);
 	rpc GetAll (SummaryStreamRequest) returns (stream SummaryStreamResponse);
 	rpc Subscribe (SummaryStreamRequest) returns (stream SummaryStreamResponse);
+	rpc GetMeta (SummaryStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SummaryStreamRequest) returns (stream MetaResponse);
 }
