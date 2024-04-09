@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-03-28
+      description: Update available APIs
+      version: 1.0.2
+      cvaas: true
     - date: 2022-12-15
       description: Open Sourcing
       version: 1.0.1

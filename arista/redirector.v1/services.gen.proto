@@ -9,12 +9,27 @@
 syntax = "proto3";
 
 package arista.redirector.v1;
-option go_package = "arista/resources/arista/redirector.v1;redirector";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/redirector.v1;redirector";
 
 import "arista/redirector.v1/redirector.proto";
 import "arista/time/time.proto";
 import "arista/subscriptions/subscriptions.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message AssignmentRequest {
 	// Key uniquely identifies a Assignment instance to retrieve.
@@ -38,6 +53,27 @@ message AssignmentResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message AssignmentSomeRequest {
+	repeated AssignmentKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AssignmentSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Assignment value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message AssignmentStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -48,6 +84,17 @@ message AssignmentStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Assignment at end.
+	//     * Each Assignment response is fully-specified (all fields set).
+	//   * start: Returns the state of each Assignment at start, followed by updates until now.
+	//     * Each Assignment response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Assignment at start, followed by updates
+	//     until end.
+	//     * Each Assignment response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -71,6 +118,9 @@ message AssignmentStreamResponse {
 
 service AssignmentService {
 	rpc GetOne (AssignmentRequest) returns (AssignmentResponse);
+	rpc GetSome (AssignmentSomeRequest) returns (stream AssignmentSomeResponse);
 	rpc GetAll (AssignmentStreamRequest) returns (stream AssignmentStreamResponse);
 	rpc Subscribe (AssignmentStreamRequest) returns (stream AssignmentStreamResponse);
+	rpc GetMeta (AssignmentStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AssignmentStreamRequest) returns (stream MetaResponse);
 }

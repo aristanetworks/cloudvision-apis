@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.redirector.v1;
 
-option go_package = "arista/resources/arista/redirector.v1;redirector";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/redirector.v1;redirector";
 
 import "google/protobuf/wrappers.proto";
 
