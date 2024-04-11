@@ -327,16 +327,22 @@ DashboardConfigDeleteAllRequest
 DashboardConfigDeleteAllResponse
 DashboardConfigDeleteRequest
 DashboardConfigDeleteResponse
+DashboardConfigDeleteSomeRequest
+DashboardConfigDeleteSomeResponse
 DashboardConfigRequest
 DashboardConfigResponse
 DashboardConfigSetRequest
 DashboardConfigSetResponse
 DashboardConfigSetSomeRequest
 DashboardConfigSetSomeResponse
+DashboardConfigSomeRequest
+DashboardConfigSomeResponse
 DashboardConfigStreamRequest
 DashboardConfigStreamResponse
 DashboardRequest
 DashboardResponse
+DashboardSomeRequest
+DashboardSomeResponse
 DashboardStreamRequest
 DashboardStreamResponse
 GlobalDashboardConfigRequest
@@ -345,13 +351,13 @@ GlobalDashboardConfigSetRequest
 GlobalDashboardConfigSetResponse
 GlobalDashboardConfigStreamRequest
 GlobalDashboardConfigStreamResponse
+MetaResponse
 DashboardConfigService
 DashboardService
 GlobalDashboardConfigService
 Top
 arista/dashboard.v1/dashboard.proto Dashboard Dashboard state contains all dashboard data.
-Field Name Type Description key DashboardKey key is the unique identifier. It will always be defined.
-created_at google.protobuf.Timestamp created_at represents the date the dashboard was first created.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
+Field Name Type Description key DashboardKey key is the unique identifier. It will always be defined.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
 Device
 DeviceInfo
 DeviceMap
