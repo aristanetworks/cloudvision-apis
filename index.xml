@@ -380,8 +380,11 @@ MacType
 arista/endpointlocation.v1/services.gen.proto
 EndpointLocationRequest
 EndpointLocationResponse
+EndpointLocationSomeRequest
+EndpointLocationSomeResponse
 EndpointLocationStreamRequest
 EndpointLocationStreamResponse
+MetaResponse
 EndpointLocationService
 Top
 arista/endpointlocation.v1/endpointlocation.proto Device Device holds information for a device matching a search term.
