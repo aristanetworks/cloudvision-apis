@@ -618,8 +618,11 @@ DeviceLifecycleSummary DeviceLifecycleSummary is the state model that represents
 Assignment AssignmentKey Cluster Clusters arista/redirector.v1/services.gen.proto
 AssignmentRequest
 AssignmentResponse
+AssignmentSomeRequest
+AssignmentSomeResponse
 AssignmentStreamRequest
 AssignmentStreamResponse
+MetaResponse
 AssignmentService
 Top
 arista/redirector.v1/redirector.proto Assignment Assignment returns the information about the regional clusters that the system is assigned to. Each cluster consists of a series of hosts, each of which the client can use to connect.
