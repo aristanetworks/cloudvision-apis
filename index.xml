@@ -261,26 +261,39 @@ ErrorCode
 arista/configstatus.v1/services.gen.proto
 ConfigDiffRequest
 ConfigDiffResponse
+ConfigDiffSomeRequest
+ConfigDiffSomeResponse
 ConfigDiffStreamRequest
 ConfigDiffStreamResponse
 ConfigurationRequest
 ConfigurationResponse
+ConfigurationSomeRequest
+ConfigurationSomeResponse
 ConfigurationStreamRequest
 ConfigurationStreamResponse
+MetaResponse
 SecurityProfileDiffRequest
 SecurityProfileDiffResponse
+SecurityProfileDiffSomeRequest
+SecurityProfileDiffSomeResponse
 SecurityProfileDiffStreamRequest
 SecurityProfileDiffStreamResponse
 SecurityProfileDiffSummaryRequest
 SecurityProfileDiffSummaryResponse
+SecurityProfileDiffSummarySomeRequest
+SecurityProfileDiffSummarySomeResponse
 SecurityProfileDiffSummaryStreamRequest
 SecurityProfileDiffSummaryStreamResponse
 SecurityProfileRequest
 SecurityProfileResponse
+SecurityProfileSomeRequest
+SecurityProfileSomeResponse
 SecurityProfileStreamRequest
 SecurityProfileStreamResponse
 SummaryRequest
 SummaryResponse
+SummarySomeRequest
+SummarySomeResponse
 SummaryStreamRequest
 SummaryStreamResponse
 ConfigDiffService
@@ -289,8 +302,7 @@ SecurityProfileDiffService
 SecurityProfileDiffSummaryService
 SecurityProfileService
 SummaryService
-Top
-arista/configstatus.v1/configstatus.proto ConfigDiff Field Name Type Description key ConfigDiffKey Key represents config diff key</description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>arista/connectivitymonitor.v1/connectivitymonitor.proto
+Top</description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>arista/connectivitymonitor.v1/connectivitymonitor.proto
 Probe ProbeKey ProbeStats ProbeStatsKey arista/connectivitymonitor.v1/services.gen.proto
 MetaResponse
 ProbeRequest
