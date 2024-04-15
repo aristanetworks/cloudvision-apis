@@ -185,24 +185,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -610,24 +598,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1042,24 +1018,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1549,16 +1513,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of WorkspaceConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1595,24 +1554,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1716,16 +1663,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of WorkspaceConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
-              }
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigSetSomeRequest"
             }
           }
         ],
@@ -2685,10 +2627,11 @@
         "IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
         "IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE",
         "IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED",
-        "IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED"
+        "IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED",
+        "IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE"
       ],
       "default": "IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
-      "description": "ImageValidationSkipCause enumerates the set of reasons a device can skip the image\nvalidation stage.\n\n - IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED: IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is\nunspecified.\n - IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE: IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED: IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was\nskipped because the device has no image changes in the workspace."
+      "description": "ImageValidationSkipCause enumerates the set of reasons a device can skip the image\nvalidation stage.\n\n - IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED: IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is\nunspecified.\n - IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE: IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED: IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was\nskipped because the device has no image changes in the workspace.\n - IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE: IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE indicates that the stage was\nskipped because the device has no proposed software changes in the workspace."
     },
     "arista.workspace.v1.InputError": {
       "type": "object",
@@ -2953,6 +2896,19 @@
       },
       "description": "Workspace holds the status of a workspace."
     },
+    "arista.workspace.v1.WorkspaceBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceBuild": {
       "type": "object",
       "properties": {
@@ -2978,6 +2934,19 @@
         }
       },
       "description": "WorkspaceBuild holds the details for a build of a workspace."
+    },
+    "arista.workspace.v1.WorkspaceBuildBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.workspace.v1.WorkspaceBuildDetails": {
       "type": "object",
@@ -3029,6 +2998,19 @@
       },
       "description": "WorkspaceBuildDetails holds the details for a build of a device in a workspace."
     },
+    "arista.workspace.v1.WorkspaceBuildDetailsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceBuildDetailsKey": {
       "type": "object",
       "properties": {
@@ -3063,6 +3045,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceBuildDetails instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceBuildDetailsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -3150,6 +3149,23 @@
         }
       }
     },
+    "arista.workspace.v1.WorkspaceBuildSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceBuildSomeResponse": {
       "type": "object",
       "properties": {
@@ -3228,6 +3244,19 @@
       },
       "description": "WorkspaceConfig holds the configuration of a workspace."
     },
+    "arista.workspace.v1.WorkspaceConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
@@ -3262,6 +3291,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+          },
+          "title": "key contains a list of WorkspaceConfig keys to delete"
         }
       }
     },
@@ -3306,6 +3348,19 @@
         }
       }
     },
+    "arista.workspace.v1.WorkspaceConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
+          },
+          "description": "value contains a list of WorkspaceConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.workspace.v1.WorkspaceConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -3314,6 +3369,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -3393,6 +3465,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspace instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

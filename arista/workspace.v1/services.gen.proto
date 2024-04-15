@@ -137,6 +137,45 @@ message WorkspaceStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message WorkspaceBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Workspace partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Workspace at end.
+	//     * Each Workspace response is fully-specified (all fields set).
+	//   * start: Returns the state of each Workspace at start, followed by updates until now.
+	//     * Each Workspace response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Workspace at start, followed by updates
+	//     until end.
+	//     * Each Workspace response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceStreamResponse responses = 1;
+};
+
 service WorkspaceService {
 	rpc GetOne (WorkspaceRequest) returns (WorkspaceResponse);
 	rpc GetSome (WorkspaceSomeRequest) returns (stream WorkspaceSomeResponse);
@@ -144,6 +183,8 @@ service WorkspaceService {
 	rpc Subscribe (WorkspaceStreamRequest) returns (stream WorkspaceStreamResponse);
 	rpc GetMeta (WorkspaceStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (WorkspaceStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (WorkspaceBatchedStreamRequest) returns (stream WorkspaceBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceBatchedStreamRequest) returns (stream WorkspaceBatchedStreamResponse);
 }
 
 message WorkspaceBuildRequest {
@@ -231,6 +272,45 @@ message WorkspaceBuildStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message WorkspaceBuildBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceBuild partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceBuild at end.
+	//     * Each WorkspaceBuild response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceBuild at start, followed by updates until now.
+	//     * Each WorkspaceBuild response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceBuild at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceBuild response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceBuildBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceBuildStreamResponse responses = 1;
+};
+
 service WorkspaceBuildService {
 	rpc GetOne (WorkspaceBuildRequest) returns (WorkspaceBuildResponse);
 	rpc GetSome (WorkspaceBuildSomeRequest) returns (stream WorkspaceBuildSomeResponse);
@@ -238,6 +318,8 @@ service WorkspaceBuildService {
 	rpc Subscribe (WorkspaceBuildStreamRequest) returns (stream WorkspaceBuildStreamResponse);
 	rpc GetMeta (WorkspaceBuildStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (WorkspaceBuildStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (WorkspaceBuildBatchedStreamRequest) returns (stream WorkspaceBuildBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceBuildBatchedStreamRequest) returns (stream WorkspaceBuildBatchedStreamResponse);
 }
 
 message WorkspaceBuildDetailsRequest {
@@ -325,6 +407,45 @@ message WorkspaceBuildDetailsStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message WorkspaceBuildDetailsBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceBuildDetails partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceBuildDetails at end.
+	//     * Each WorkspaceBuildDetails response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceBuildDetails at start, followed by updates until now.
+	//     * Each WorkspaceBuildDetails response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceBuildDetails at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceBuildDetailsBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceBuildDetailsStreamResponse responses = 1;
+};
+
 service WorkspaceBuildDetailsService {
 	rpc GetOne (WorkspaceBuildDetailsRequest) returns (WorkspaceBuildDetailsResponse);
 	rpc GetSome (WorkspaceBuildDetailsSomeRequest) returns (stream WorkspaceBuildDetailsSomeResponse);
@@ -332,6 +453,8 @@ service WorkspaceBuildDetailsService {
 	rpc Subscribe (WorkspaceBuildDetailsStreamRequest) returns (stream WorkspaceBuildDetailsStreamResponse);
 	rpc GetMeta (WorkspaceBuildDetailsStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (WorkspaceBuildDetailsStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (WorkspaceBuildDetailsBatchedStreamRequest) returns (stream WorkspaceBuildDetailsBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceBuildDetailsBatchedStreamRequest) returns (stream WorkspaceBuildDetailsBatchedStreamResponse);
 }
 
 message WorkspaceConfigRequest {
@@ -417,6 +540,45 @@ message WorkspaceConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message WorkspaceConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceConfig at end.
+	//     * Each WorkspaceConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceConfig at start, followed by updates until now.
+	//     * Each WorkspaceConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceConfig at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceConfigStreamResponse responses = 1;
 };
 
 message WorkspaceConfigSetRequest {
@@ -515,4 +677,6 @@ service WorkspaceConfigService {
 	rpc Delete (WorkspaceConfigDeleteRequest) returns (WorkspaceConfigDeleteResponse);
 	rpc DeleteSome (WorkspaceConfigDeleteSomeRequest) returns (stream WorkspaceConfigDeleteSomeResponse);
 	rpc DeleteAll (WorkspaceConfigDeleteAllRequest) returns (stream WorkspaceConfigDeleteAllResponse);
+	rpc GetAllBatched (WorkspaceConfigBatchedStreamRequest) returns (stream WorkspaceConfigBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceConfigBatchedStreamRequest) returns (stream WorkspaceConfigBatchedStreamResponse);
 }

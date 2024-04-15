@@ -478,4 +478,7 @@ enum ImageValidationSkipCause {
 	// IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was
 	// skipped because the device has no image changes in the workspace.
 	IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED = 3;
+	// IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE indicates that the stage was
+	// skipped because the device has no proposed software changes in the workspace.
+	IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE = 4;
 }
