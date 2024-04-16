@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -12,7 +12,7 @@
 syntax = "proto3";
 
 package arista.studio.v1;
-option go_package = "arista/resources/arista/studio.v1;studio";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/studio.v1;studio";
 
 import "arista/studio.v1/studio.proto";
 import "arista/time/time.proto";
@@ -20,6 +20,20 @@ import "arista/subscriptions/subscriptions.proto";
 import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message AssignedTagsRequest {
 	// Key uniquely identifies a AssignedTags instance to retrieve.
@@ -41,6 +55,27 @@ message AssignedTagsResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// AssignedTags instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message AssignedTagsSomeRequest {
+	repeated StudioKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AssignedTagsSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AssignedTags value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message AssignedTagsStreamRequest {
@@ -87,8 +122,11 @@ message AssignedTagsStreamResponse {
 
 service AssignedTagsService {
 	rpc GetOne (AssignedTagsRequest) returns (AssignedTagsResponse);
+	rpc GetSome (AssignedTagsSomeRequest) returns (stream AssignedTagsSomeResponse);
 	rpc GetAll (AssignedTagsStreamRequest) returns (stream AssignedTagsStreamResponse);
 	rpc Subscribe (AssignedTagsStreamRequest) returns (stream AssignedTagsStreamResponse);
+	rpc GetMeta (AssignedTagsStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AssignedTagsStreamRequest) returns (stream MetaResponse);
 }
 
 message AssignedTagsConfigRequest {
@@ -111,6 +149,27 @@ message AssignedTagsConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// AssignedTagsConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message AssignedTagsConfigSomeRequest {
+	repeated StudioKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AssignedTagsConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AssignedTagsConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message AssignedTagsConfigStreamRequest {
@@ -209,11 +268,27 @@ message AssignedTagsConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message AssignedTagsConfigDeleteSomeRequest {
+	// key contains a list of AssignedTagsConfig keys to delete
+	repeated StudioKey keys = 1;
+};
+
+// AssignedTagsConfigDeleteSomeResponse is only sent when there is an error.
+message AssignedTagsConfigDeleteSomeResponse {
+	StudioKey key = 1;
+	string error = 2;
+};
+
 message AssignedTagsConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated AssignedTagsConfig partial_eq_filter = 1;
 };
 
 message AssignedTagsConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -225,11 +300,15 @@ message AssignedTagsConfigDeleteAllResponse {
 
 service AssignedTagsConfigService {
 	rpc GetOne (AssignedTagsConfigRequest) returns (AssignedTagsConfigResponse);
+	rpc GetSome (AssignedTagsConfigSomeRequest) returns (stream AssignedTagsConfigSomeResponse);
 	rpc GetAll (AssignedTagsConfigStreamRequest) returns (stream AssignedTagsConfigStreamResponse);
 	rpc Subscribe (AssignedTagsConfigStreamRequest) returns (stream AssignedTagsConfigStreamResponse);
+	rpc GetMeta (AssignedTagsConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AssignedTagsConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (AssignedTagsConfigSetRequest) returns (AssignedTagsConfigSetResponse);
 	rpc SetSome (AssignedTagsConfigSetSomeRequest) returns (stream AssignedTagsConfigSetSomeResponse);
 	rpc Delete (AssignedTagsConfigDeleteRequest) returns (AssignedTagsConfigDeleteResponse);
+	rpc DeleteSome (AssignedTagsConfigDeleteSomeRequest) returns (stream AssignedTagsConfigDeleteSomeResponse);
 	rpc DeleteAll (AssignedTagsConfigDeleteAllRequest) returns (stream AssignedTagsConfigDeleteAllResponse);
 }
 
@@ -253,6 +332,27 @@ message AutofillActionResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// AutofillAction instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message AutofillActionSomeRequest {
+	repeated AutofillActionKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AutofillActionSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AutofillAction value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message AutofillActionStreamRequest {
@@ -299,8 +399,11 @@ message AutofillActionStreamResponse {
 
 service AutofillActionService {
 	rpc GetOne (AutofillActionRequest) returns (AutofillActionResponse);
+	rpc GetSome (AutofillActionSomeRequest) returns (stream AutofillActionSomeResponse);
 	rpc GetAll (AutofillActionStreamRequest) returns (stream AutofillActionStreamResponse);
 	rpc Subscribe (AutofillActionStreamRequest) returns (stream AutofillActionStreamResponse);
+	rpc GetMeta (AutofillActionStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AutofillActionStreamRequest) returns (stream MetaResponse);
 }
 
 message AutofillActionConfigRequest {
@@ -323,6 +426,27 @@ message AutofillActionConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// AutofillActionConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message AutofillActionConfigSomeRequest {
+	repeated AutofillActionKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AutofillActionConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AutofillActionConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message AutofillActionConfigStreamRequest {
@@ -421,11 +545,27 @@ message AutofillActionConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message AutofillActionConfigDeleteSomeRequest {
+	// key contains a list of AutofillActionConfig keys to delete
+	repeated AutofillActionKey keys = 1;
+};
+
+// AutofillActionConfigDeleteSomeResponse is only sent when there is an error.
+message AutofillActionConfigDeleteSomeResponse {
+	AutofillActionKey key = 1;
+	string error = 2;
+};
+
 message AutofillActionConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated AutofillActionConfig partial_eq_filter = 1;
 };
 
 message AutofillActionConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -437,11 +577,15 @@ message AutofillActionConfigDeleteAllResponse {
 
 service AutofillActionConfigService {
 	rpc GetOne (AutofillActionConfigRequest) returns (AutofillActionConfigResponse);
+	rpc GetSome (AutofillActionConfigSomeRequest) returns (stream AutofillActionConfigSomeResponse);
 	rpc GetAll (AutofillActionConfigStreamRequest) returns (stream AutofillActionConfigStreamResponse);
 	rpc Subscribe (AutofillActionConfigStreamRequest) returns (stream AutofillActionConfigStreamResponse);
+	rpc GetMeta (AutofillActionConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AutofillActionConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (AutofillActionConfigSetRequest) returns (AutofillActionConfigSetResponse);
 	rpc SetSome (AutofillActionConfigSetSomeRequest) returns (stream AutofillActionConfigSetSomeResponse);
 	rpc Delete (AutofillActionConfigDeleteRequest) returns (AutofillActionConfigDeleteResponse);
+	rpc DeleteSome (AutofillActionConfigDeleteSomeRequest) returns (stream AutofillActionConfigDeleteSomeResponse);
 	rpc DeleteAll (AutofillActionConfigDeleteAllRequest) returns (stream AutofillActionConfigDeleteAllResponse);
 }
 
@@ -465,6 +609,27 @@ message InputsResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Inputs instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message InputsSomeRequest {
+	repeated InputsKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message InputsSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Inputs value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message InputsStreamRequest {
@@ -511,8 +676,11 @@ message InputsStreamResponse {
 
 service InputsService {
 	rpc GetOne (InputsRequest) returns (InputsResponse);
+	rpc GetSome (InputsSomeRequest) returns (stream InputsSomeResponse);
 	rpc GetAll (InputsStreamRequest) returns (stream InputsStreamResponse);
 	rpc Subscribe (InputsStreamRequest) returns (stream InputsStreamResponse);
+	rpc GetMeta (InputsStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (InputsStreamRequest) returns (stream MetaResponse);
 }
 
 message InputsConfigRequest {
@@ -535,6 +703,27 @@ message InputsConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// InputsConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message InputsConfigSomeRequest {
+	repeated InputsKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message InputsConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	InputsConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message InputsConfigStreamRequest {
@@ -633,11 +822,27 @@ message InputsConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message InputsConfigDeleteSomeRequest {
+	// key contains a list of InputsConfig keys to delete
+	repeated InputsKey keys = 1;
+};
+
+// InputsConfigDeleteSomeResponse is only sent when there is an error.
+message InputsConfigDeleteSomeResponse {
+	InputsKey key = 1;
+	string error = 2;
+};
+
 message InputsConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated InputsConfig partial_eq_filter = 1;
 };
 
 message InputsConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -649,11 +854,15 @@ message InputsConfigDeleteAllResponse {
 
 service InputsConfigService {
 	rpc GetOne (InputsConfigRequest) returns (InputsConfigResponse);
+	rpc GetSome (InputsConfigSomeRequest) returns (stream InputsConfigSomeResponse);
 	rpc GetAll (InputsConfigStreamRequest) returns (stream InputsConfigStreamResponse);
 	rpc Subscribe (InputsConfigStreamRequest) returns (stream InputsConfigStreamResponse);
+	rpc GetMeta (InputsConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (InputsConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (InputsConfigSetRequest) returns (InputsConfigSetResponse);
 	rpc SetSome (InputsConfigSetSomeRequest) returns (stream InputsConfigSetSomeResponse);
 	rpc Delete (InputsConfigDeleteRequest) returns (InputsConfigDeleteResponse);
+	rpc DeleteSome (InputsConfigDeleteSomeRequest) returns (stream InputsConfigDeleteSomeResponse);
 	rpc DeleteAll (InputsConfigDeleteAllRequest) returns (stream InputsConfigDeleteAllResponse);
 }
 
@@ -677,6 +886,27 @@ message SecretInputResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// SecretInput instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message SecretInputSomeRequest {
+	repeated InputsKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message SecretInputSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	SecretInput value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message SecretInputStreamRequest {
@@ -723,8 +953,11 @@ message SecretInputStreamResponse {
 
 service SecretInputService {
 	rpc GetOne (SecretInputRequest) returns (SecretInputResponse);
+	rpc GetSome (SecretInputSomeRequest) returns (stream SecretInputSomeResponse);
 	rpc GetAll (SecretInputStreamRequest) returns (stream SecretInputStreamResponse);
 	rpc Subscribe (SecretInputStreamRequest) returns (stream SecretInputStreamResponse);
+	rpc GetMeta (SecretInputStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (SecretInputStreamRequest) returns (stream MetaResponse);
 }
 
 message StudioRequest {
@@ -747,6 +980,27 @@ message StudioResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// Studio instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message StudioSomeRequest {
+	repeated StudioKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Studio value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message StudioStreamRequest {
@@ -793,8 +1047,11 @@ message StudioStreamResponse {
 
 service StudioService {
 	rpc GetOne (StudioRequest) returns (StudioResponse);
+	rpc GetSome (StudioSomeRequest) returns (stream StudioSomeResponse);
 	rpc GetAll (StudioStreamRequest) returns (stream StudioStreamResponse);
 	rpc Subscribe (StudioStreamRequest) returns (stream StudioStreamResponse);
+	rpc GetMeta (StudioStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (StudioStreamRequest) returns (stream MetaResponse);
 }
 
 message StudioConfigRequest {
@@ -817,6 +1074,27 @@ message StudioConfigResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// StudioConfig instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message StudioConfigSomeRequest {
+	repeated StudioKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	StudioConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message StudioConfigStreamRequest {
@@ -915,11 +1193,27 @@ message StudioConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message StudioConfigDeleteSomeRequest {
+	// key contains a list of StudioConfig keys to delete
+	repeated StudioKey keys = 1;
+};
+
+// StudioConfigDeleteSomeResponse is only sent when there is an error.
+message StudioConfigDeleteSomeResponse {
+	StudioKey key = 1;
+	string error = 2;
+};
+
 message StudioConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated StudioConfig partial_eq_filter = 1;
 };
 
 message StudioConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -931,11 +1225,15 @@ message StudioConfigDeleteAllResponse {
 
 service StudioConfigService {
 	rpc GetOne (StudioConfigRequest) returns (StudioConfigResponse);
+	rpc GetSome (StudioConfigSomeRequest) returns (stream StudioConfigSomeResponse);
 	rpc GetAll (StudioConfigStreamRequest) returns (stream StudioConfigStreamResponse);
 	rpc Subscribe (StudioConfigStreamRequest) returns (stream StudioConfigStreamResponse);
+	rpc GetMeta (StudioConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (StudioConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (StudioConfigSetRequest) returns (StudioConfigSetResponse);
 	rpc SetSome (StudioConfigSetSomeRequest) returns (stream StudioConfigSetSomeResponse);
 	rpc Delete (StudioConfigDeleteRequest) returns (StudioConfigDeleteResponse);
+	rpc DeleteSome (StudioConfigDeleteSomeRequest) returns (stream StudioConfigDeleteSomeResponse);
 	rpc DeleteAll (StudioConfigDeleteAllRequest) returns (stream StudioConfigDeleteAllResponse);
 }
 
@@ -959,6 +1257,27 @@ message StudioSummaryResponse {
 	// Time carries the (UTC) timestamp of the last-modification of the
 	// StudioSummary instance in this response.
 	google.protobuf.Timestamp time = 2;
+};
+
+message StudioSummarySomeRequest {
+	repeated StudioKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioSummarySomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	StudioSummary value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
 };
 
 message StudioSummaryStreamRequest {
@@ -1005,642 +1324,9 @@ message StudioSummaryStreamResponse {
 
 service StudioSummaryService {
 	rpc GetOne (StudioSummaryRequest) returns (StudioSummaryResponse);
+	rpc GetSome (StudioSummarySomeRequest) returns (stream StudioSummarySomeResponse);
 	rpc GetAll (StudioSummaryStreamRequest) returns (stream StudioSummaryStreamResponse);
 	rpc Subscribe (StudioSummaryStreamRequest) returns (stream StudioSummaryStreamResponse);
-}
-
-message TopologyInputRequest {
-	// Key uniquely identifies a TopologyInput instance to retrieve.
-	// This value must be populated.
-	TopologyInputKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyInput value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyInput instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyInput partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyInput at end.
-	//     * Each TopologyInput response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyInput at start, followed by updates until now.
-	//     * Each TopologyInput response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyInput at start, followed by updates
-	//     until end.
-	//     * Each TopologyInput response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyInputStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyInput value = 1;
-
-	// Time holds the timestamp of this TopologyInput's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyInput value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-service TopologyInputService {
-	rpc GetOne (TopologyInputRequest) returns (TopologyInputResponse);
-	rpc GetAll (TopologyInputStreamRequest) returns (stream TopologyInputStreamResponse);
-	rpc Subscribe (TopologyInputStreamRequest) returns (stream TopologyInputStreamResponse);
-}
-
-message TopologyInputConfigRequest {
-	// Key uniquely identifies a TopologyInputConfig instance to retrieve.
-	// This value must be populated.
-	TopologyInputKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputConfigResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyInputConfig value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyInputConfig instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputConfigStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyInputConfig partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyInputConfig at end.
-	//     * Each TopologyInputConfig response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyInputConfig at start, followed by updates until now.
-	//     * Each TopologyInputConfig response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyInputConfig at start, followed by updates
-	//     until end.
-	//     * Each TopologyInputConfig response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyInputConfigStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyInputConfig value = 1;
-
-	// Time holds the timestamp of this TopologyInputConfig's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyInputConfig value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-message TopologyInputConfigSetRequest {
-	// TopologyInputConfig carries the value to set into the datastore.
-	// See the documentation on the TopologyInputConfig struct for which fields are required.
-	TopologyInputConfig value = 1;
-};
-
-message TopologyInputConfigSetResponse {
-	// Value carries all the values given in the TopologyInputConfigSetRequest as well
-	// as any server-generated values.
-	TopologyInputConfig value = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// creation. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputConfigSetSomeRequest {
-	// value contains a list of TopologyInputConfig values to write.
-	// It is possible to provide more values than can fit within either:
-	//     - the maxiumum send size of the client
-	//     - the maximum receive size of the server
-	// If this error occurs you must reduce the number of values sent.
-	// See gRPC "maximum message size" documentation for more information.
-	repeated TopologyInputConfig values = 1;
-};
-
-message TopologyInputConfigSetSomeResponse {
-	TopologyInputKey key = 1;
-	string error = 2;
-};
-
-message TopologyInputConfigDeleteRequest {
-	// Key indicates which TopologyInputConfig instance to remove.
-	// This field must always be set.
-	TopologyInputKey key = 1;
-};
-
-message TopologyInputConfigDeleteResponse {
-	// Key echoes back the key of the deleted TopologyInputConfig instance.
-	TopologyInputKey key = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// deletion. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyInputConfigDeleteAllRequest {
-};
-
-message TopologyInputConfigDeleteAllResponse {
-	// This describes the class of delete error.
-	fmp.DeleteError type = 1;
-	// This indicates the error message from the delete failure.
-	google.protobuf.StringValue error = 2;
-	// This is the key of the TopologyInputConfig instance that failed to be deleted.
-	TopologyInputKey key = 3;
-	// Time indicates the (UTC) timestamp when the key was being deleted.
-	google.protobuf.Timestamp time = 4;
-};
-
-service TopologyInputConfigService {
-	rpc GetOne (TopologyInputConfigRequest) returns (TopologyInputConfigResponse);
-	rpc GetAll (TopologyInputConfigStreamRequest) returns (stream TopologyInputConfigStreamResponse);
-	rpc Subscribe (TopologyInputConfigStreamRequest) returns (stream TopologyInputConfigStreamResponse);
-	rpc Set (TopologyInputConfigSetRequest) returns (TopologyInputConfigSetResponse);
-	rpc SetSome (TopologyInputConfigSetSomeRequest) returns (stream TopologyInputConfigSetSomeResponse);
-	rpc Delete (TopologyInputConfigDeleteRequest) returns (TopologyInputConfigDeleteResponse);
-	rpc DeleteAll (TopologyInputConfigDeleteAllRequest) returns (stream TopologyInputConfigDeleteAllResponse);
-}
-
-message TopologyUpdateRequest {
-	// Key uniquely identifies a TopologyUpdate instance to retrieve.
-	// This value must be populated.
-	TopologyUpdateKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyUpdate value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyUpdate instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyUpdate partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyUpdate at end.
-	//     * Each TopologyUpdate response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyUpdate at start, followed by updates until now.
-	//     * Each TopologyUpdate response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyUpdate at start, followed by updates
-	//     until end.
-	//     * Each TopologyUpdate response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyUpdateStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyUpdate value = 1;
-
-	// Time holds the timestamp of this TopologyUpdate's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyUpdate value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-service TopologyUpdateService {
-	rpc GetOne (TopologyUpdateRequest) returns (TopologyUpdateResponse);
-	rpc GetAll (TopologyUpdateStreamRequest) returns (stream TopologyUpdateStreamResponse);
-	rpc Subscribe (TopologyUpdateStreamRequest) returns (stream TopologyUpdateStreamResponse);
-}
-
-message TopologyUpdateConfigRequest {
-	// Key uniquely identifies a TopologyUpdateConfig instance to retrieve.
-	// This value must be populated.
-	TopologyUpdateKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateConfigResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyUpdateConfig value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyUpdateConfig instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateConfigStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyUpdateConfig partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyUpdateConfig at end.
-	//     * Each TopologyUpdateConfig response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyUpdateConfig at start, followed by updates until now.
-	//     * Each TopologyUpdateConfig response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyUpdateConfig at start, followed by updates
-	//     until end.
-	//     * Each TopologyUpdateConfig response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyUpdateConfigStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyUpdateConfig value = 1;
-
-	// Time holds the timestamp of this TopologyUpdateConfig's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyUpdateConfig value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-message TopologyUpdateConfigSetRequest {
-	// TopologyUpdateConfig carries the value to set into the datastore.
-	// See the documentation on the TopologyUpdateConfig struct for which fields are required.
-	TopologyUpdateConfig value = 1;
-};
-
-message TopologyUpdateConfigSetResponse {
-	// Value carries all the values given in the TopologyUpdateConfigSetRequest as well
-	// as any server-generated values.
-	TopologyUpdateConfig value = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// creation. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateConfigSetSomeRequest {
-	// value contains a list of TopologyUpdateConfig values to write.
-	// It is possible to provide more values than can fit within either:
-	//     - the maxiumum send size of the client
-	//     - the maximum receive size of the server
-	// If this error occurs you must reduce the number of values sent.
-	// See gRPC "maximum message size" documentation for more information.
-	repeated TopologyUpdateConfig values = 1;
-};
-
-message TopologyUpdateConfigSetSomeResponse {
-	TopologyUpdateKey key = 1;
-	string error = 2;
-};
-
-message TopologyUpdateConfigDeleteRequest {
-	// Key indicates which TopologyUpdateConfig instance to remove.
-	// This field must always be set.
-	TopologyUpdateKey key = 1;
-};
-
-message TopologyUpdateConfigDeleteResponse {
-	// Key echoes back the key of the deleted TopologyUpdateConfig instance.
-	TopologyUpdateKey key = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// deletion. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateConfigDeleteAllRequest {
-};
-
-message TopologyUpdateConfigDeleteAllResponse {
-	// This describes the class of delete error.
-	fmp.DeleteError type = 1;
-	// This indicates the error message from the delete failure.
-	google.protobuf.StringValue error = 2;
-	// This is the key of the TopologyUpdateConfig instance that failed to be deleted.
-	TopologyUpdateKey key = 3;
-	// Time indicates the (UTC) timestamp when the key was being deleted.
-	google.protobuf.Timestamp time = 4;
-};
-
-service TopologyUpdateConfigService {
-	rpc GetOne (TopologyUpdateConfigRequest) returns (TopologyUpdateConfigResponse);
-	rpc GetAll (TopologyUpdateConfigStreamRequest) returns (stream TopologyUpdateConfigStreamResponse);
-	rpc Subscribe (TopologyUpdateConfigStreamRequest) returns (stream TopologyUpdateConfigStreamResponse);
-	rpc Set (TopologyUpdateConfigSetRequest) returns (TopologyUpdateConfigSetResponse);
-	rpc SetSome (TopologyUpdateConfigSetSomeRequest) returns (stream TopologyUpdateConfigSetSomeResponse);
-	rpc Delete (TopologyUpdateConfigDeleteRequest) returns (TopologyUpdateConfigDeleteResponse);
-	rpc DeleteAll (TopologyUpdateConfigDeleteAllRequest) returns (stream TopologyUpdateConfigDeleteAllResponse);
-}
-
-message TopologyUpdateSyncRequest {
-	// Key uniquely identifies a TopologyUpdateSync instance to retrieve.
-	// This value must be populated.
-	WorkspaceKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyUpdateSync value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyUpdateSync instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyUpdateSync partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyUpdateSync at end.
-	//     * Each TopologyUpdateSync response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyUpdateSync at start, followed by updates until now.
-	//     * Each TopologyUpdateSync response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyUpdateSync at start, followed by updates
-	//     until end.
-	//     * Each TopologyUpdateSync response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyUpdateSyncStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyUpdateSync value = 1;
-
-	// Time holds the timestamp of this TopologyUpdateSync's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyUpdateSync value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-service TopologyUpdateSyncService {
-	rpc GetOne (TopologyUpdateSyncRequest) returns (TopologyUpdateSyncResponse);
-	rpc GetAll (TopologyUpdateSyncStreamRequest) returns (stream TopologyUpdateSyncStreamResponse);
-	rpc Subscribe (TopologyUpdateSyncStreamRequest) returns (stream TopologyUpdateSyncStreamResponse);
-}
-
-message TopologyUpdateSyncConfigRequest {
-	// Key uniquely identifies a TopologyUpdateSyncConfig instance to retrieve.
-	// This value must be populated.
-	WorkspaceKey key = 1;
-
-	// Time indicates the time for which you are interested in the data.
-	// If no time is given, the server will use the time at which it makes the request.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncConfigResponse {
-	// Value is the value requested.
-	// This structure will be fully-populated as it exists in the datastore. If
-	// optional fields were not given at creation, these fields will be empty or
-	// set to default values.
-	TopologyUpdateSyncConfig value = 1;
-
-	// Time carries the (UTC) timestamp of the last-modification of the
-	// TopologyUpdateSyncConfig instance in this response.
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncConfigStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated TopologyUpdateSyncConfig partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each TopologyUpdateSyncConfig at end.
-	//     * Each TopologyUpdateSyncConfig response is fully-specified (all fields set).
-	//   * start: Returns the state of each TopologyUpdateSyncConfig at start, followed by updates until now.
-	//     * Each TopologyUpdateSyncConfig response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each TopologyUpdateSyncConfig at start, followed by updates
-	//     until end.
-	//     * Each TopologyUpdateSyncConfig response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-};
-
-message TopologyUpdateSyncConfigStreamResponse {
-	// Value is a value deemed relevant to the initiating request.
-	// This structure will always have its key-field populated. Which other fields are
-	// populated, and why, depends on the value of Operation and what triggered this notification.
-	TopologyUpdateSyncConfig value = 1;
-
-	// Time holds the timestamp of this TopologyUpdateSyncConfig's last modification.
-	google.protobuf.Timestamp time = 2;
-
-	// Operation indicates how the TopologyUpdateSyncConfig value in this response should be considered.
-	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
-	// once all initial data is streamed and the client begins to receive modification updates,
-	// you should not see INITIAL again.
-	arista.subscriptions.Operation type = 3;
-};
-
-message TopologyUpdateSyncConfigSetRequest {
-	// TopologyUpdateSyncConfig carries the value to set into the datastore.
-	// See the documentation on the TopologyUpdateSyncConfig struct for which fields are required.
-	TopologyUpdateSyncConfig value = 1;
-};
-
-message TopologyUpdateSyncConfigSetResponse {
-	// Value carries all the values given in the TopologyUpdateSyncConfigSetRequest as well
-	// as any server-generated values.
-	TopologyUpdateSyncConfig value = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// creation. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncConfigSetSomeRequest {
-	// value contains a list of TopologyUpdateSyncConfig values to write.
-	// It is possible to provide more values than can fit within either:
-	//     - the maxiumum send size of the client
-	//     - the maximum receive size of the server
-	// If this error occurs you must reduce the number of values sent.
-	// See gRPC "maximum message size" documentation for more information.
-	repeated TopologyUpdateSyncConfig values = 1;
-};
-
-message TopologyUpdateSyncConfigSetSomeResponse {
-	WorkspaceKey key = 1;
-	string error = 2;
-};
-
-message TopologyUpdateSyncConfigDeleteRequest {
-	// Key indicates which TopologyUpdateSyncConfig instance to remove.
-	// This field must always be set.
-	WorkspaceKey key = 1;
-};
-
-message TopologyUpdateSyncConfigDeleteResponse {
-	// Key echoes back the key of the deleted TopologyUpdateSyncConfig instance.
-	WorkspaceKey key = 1;
-
-	// Time indicates the (UTC) timestamp at which the system recognizes the
-	// deletion. The only guarantees made about this timestamp are:
-	//
-	//    - it is after the time the request was received
-	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
-	//
-	google.protobuf.Timestamp time = 2;
-};
-
-message TopologyUpdateSyncConfigDeleteAllRequest {
-};
-
-message TopologyUpdateSyncConfigDeleteAllResponse {
-	// This describes the class of delete error.
-	fmp.DeleteError type = 1;
-	// This indicates the error message from the delete failure.
-	google.protobuf.StringValue error = 2;
-	// This is the key of the TopologyUpdateSyncConfig instance that failed to be deleted.
-	WorkspaceKey key = 3;
-	// Time indicates the (UTC) timestamp when the key was being deleted.
-	google.protobuf.Timestamp time = 4;
-};
-
-service TopologyUpdateSyncConfigService {
-	rpc GetOne (TopologyUpdateSyncConfigRequest) returns (TopologyUpdateSyncConfigResponse);
-	rpc GetAll (TopologyUpdateSyncConfigStreamRequest) returns (stream TopologyUpdateSyncConfigStreamResponse);
-	rpc Subscribe (TopologyUpdateSyncConfigStreamRequest) returns (stream TopologyUpdateSyncConfigStreamResponse);
-	rpc Set (TopologyUpdateSyncConfigSetRequest) returns (TopologyUpdateSyncConfigSetResponse);
-	rpc SetSome (TopologyUpdateSyncConfigSetSomeRequest) returns (stream TopologyUpdateSyncConfigSetSomeResponse);
-	rpc Delete (TopologyUpdateSyncConfigDeleteRequest) returns (TopologyUpdateSyncConfigDeleteResponse);
-	rpc DeleteAll (TopologyUpdateSyncConfigDeleteAllRequest) returns (stream TopologyUpdateSyncConfigDeleteAllResponse);
+	rpc GetMeta (StudioSummaryStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (StudioSummaryStreamRequest) returns (stream MetaResponse);
 }

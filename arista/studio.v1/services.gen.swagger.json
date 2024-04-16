@@ -38,24 +38,6 @@
     },
     {
       "name": "StudioSummaryService"
-    },
-    {
-      "name": "TopologyInputService"
-    },
-    {
-      "name": "TopologyInputConfigService"
-    },
-    {
-      "name": "TopologyUpdateService"
-    },
-    {
-      "name": "TopologyUpdateConfigService"
-    },
-    {
-      "name": "TopologyUpdateSyncService"
-    },
-    {
-      "name": "TopologyUpdateSyncConfigService"
     }
   ],
   "schemes": [
@@ -200,6 +182,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/AssignedTags/getsome": {
+      "post": {
+        "operationId": "AssignedTagsService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AssignedTagsSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AssignedTagsSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTags/metadata": {
+      "get": {
+        "operationId": "AssignedTagsService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsService"
+        ]
+      },
+      "post": {
+        "operationId": "AssignedTagsService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/AssignedTags/watch": {
       "get": {
         "operationId": "AssignedTagsService_Subscribe",
@@ -262,6 +365,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.AssignedTagsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTags/watchmetadata": {
+      "get": {
+        "operationId": "AssignedTagsService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsService"
+        ]
+      },
+      "post": {
+        "operationId": "AssignedTagsService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -514,6 +703,219 @@
         ]
       }
     },
+    "/api/resources/studio/v1/AssignedTagsConfig/deletesome": {
+      "post": {
+        "operationId": "AssignedTagsConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AssignedTagsConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of AssignedTagsConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTagsConfig/getsome": {
+      "post": {
+        "operationId": "AssignedTagsConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AssignedTagsConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTagsConfig/metadata": {
+      "get": {
+        "operationId": "AssignedTagsConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "AssignedTagsConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTagsConfig/some": {
+      "post": {
+        "operationId": "AssignedTagsConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AssignedTagsConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of AssignedTagsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/AssignedTagsConfig/watch": {
       "get": {
         "operationId": "AssignedTagsConfigService_Subscribe",
@@ -576,6 +978,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.AssignedTagsConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AssignedTagsConfig/watchmetadata": {
+      "get": {
+        "operationId": "AssignedTagsConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AssignedTagsConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "AssignedTagsConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -739,6 +1227,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/AutofillAction/getsome": {
+      "post": {
+        "operationId": "AutofillActionService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AutofillActionSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AutofillActionSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillAction/metadata": {
+      "get": {
+        "operationId": "AutofillActionService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AutofillActionService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/AutofillAction/watch": {
       "get": {
         "operationId": "AutofillActionService_Subscribe",
@@ -801,6 +1410,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.AutofillActionStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillAction/watchmetadata": {
+      "get": {
+        "operationId": "AutofillActionService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AutofillActionService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -1067,6 +1762,219 @@
         ]
       }
     },
+    "/api/resources/studio/v1/AutofillActionConfig/deletesome": {
+      "post": {
+        "operationId": "AutofillActionConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AutofillActionConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of AutofillActionConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillActionConfig/getsome": {
+      "post": {
+        "operationId": "AutofillActionConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AutofillActionConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillActionConfig/metadata": {
+      "get": {
+        "operationId": "AutofillActionConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "AutofillActionConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillActionConfig/some": {
+      "post": {
+        "operationId": "AutofillActionConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.AutofillActionConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of AutofillActionConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.AutofillActionConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/AutofillActionConfig/watch": {
       "get": {
         "operationId": "AutofillActionConfigService_Subscribe",
@@ -1129,6 +2037,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.AutofillActionConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/AutofillActionConfig/watchmetadata": {
+      "get": {
+        "operationId": "AutofillActionConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AutofillActionConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "AutofillActionConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -1296,6 +2290,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/Inputs/getsome": {
+      "post": {
+        "operationId": "InputsService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.InputsSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.InputsSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.InputsKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/Inputs/metadata": {
+      "get": {
+        "operationId": "InputsService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsService"
+        ]
+      },
+      "post": {
+        "operationId": "InputsService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.InputsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InputsService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/Inputs/watch": {
       "get": {
         "operationId": "InputsService_Subscribe",
@@ -1358,6 +2473,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.InputsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.InputsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InputsService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/Inputs/watchmetadata": {
+      "get": {
+        "operationId": "InputsService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsService"
+        ]
+      },
+      "post": {
+        "operationId": "InputsService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -1632,6 +2833,219 @@
         ]
       }
     },
+    "/api/resources/studio/v1/InputsConfig/deletesome": {
+      "post": {
+        "operationId": "InputsConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.InputsConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.InputsConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of InputsConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.InputsKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/InputsConfig/getsome": {
+      "post": {
+        "operationId": "InputsConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.InputsConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.InputsConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.InputsKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/InputsConfig/metadata": {
+      "get": {
+        "operationId": "InputsConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "InputsConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/InputsConfig/some": {
+      "post": {
+        "operationId": "InputsConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.InputsConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.InputsConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of InputsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.InputsConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/InputsConfig/watch": {
       "get": {
         "operationId": "InputsConfigService_Subscribe",
@@ -1694,6 +3108,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.InputsConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/InputsConfig/watchmetadata": {
+      "get": {
+        "operationId": "InputsConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "InputsConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "InputsConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -1861,6 +3361,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/SecretInput/getsome": {
+      "post": {
+        "operationId": "SecretInputService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.SecretInputSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.SecretInputSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.InputsKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecretInputService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/SecretInput/metadata": {
+      "get": {
+        "operationId": "SecretInputService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecretInputService"
+        ]
+      },
+      "post": {
+        "operationId": "SecretInputService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.SecretInputStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecretInputService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/SecretInput/watch": {
       "get": {
         "operationId": "SecretInputService_Subscribe",
@@ -1923,6 +3544,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.SecretInputStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.SecretInputStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SecretInputService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/SecretInput/watchmetadata": {
+      "get": {
+        "operationId": "SecretInputService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SecretInputService"
+        ]
+      },
+      "post": {
+        "operationId": "SecretInputService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -2079,6 +3786,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/Studio/getsome": {
+      "post": {
+        "operationId": "StudioService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.StudioSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.StudioSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/Studio/metadata": {
+      "get": {
+        "operationId": "StudioService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioService"
+        ]
+      },
+      "post": {
+        "operationId": "StudioService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.StudioStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StudioService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/Studio/watch": {
       "get": {
         "operationId": "StudioService_Subscribe",
@@ -2141,6 +3969,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.StudioStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.StudioStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StudioService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/Studio/watchmetadata": {
+      "get": {
+        "operationId": "StudioService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioService"
+        ]
+      },
+      "post": {
+        "operationId": "StudioService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -2393,6 +4307,219 @@
         ]
       }
     },
+    "/api/resources/studio/v1/StudioConfig/deletesome": {
+      "post": {
+        "operationId": "StudioConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.StudioConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.StudioConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "description": "key contains a list of StudioConfig keys to delete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/StudioConfig/getsome": {
+      "post": {
+        "operationId": "StudioConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.StudioConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.StudioConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/StudioConfig/metadata": {
+      "get": {
+        "operationId": "StudioConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "StudioConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/StudioConfig/some": {
+      "post": {
+        "operationId": "StudioConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.StudioConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.StudioConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "values",
+            "description": "value contains a list of StudioConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioConfig"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/StudioConfig/watch": {
       "get": {
         "operationId": "StudioConfigService_Subscribe",
@@ -2455,6 +4582,92 @@
                 }
               },
               "title": "Stream result of arista.studio.v1.StudioConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/StudioConfig/watchmetadata": {
+      "get": {
+        "operationId": "StudioConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "StudioConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -2611,6 +4824,127 @@
         ]
       }
     },
+    "/api/resources/studio/v1/StudioSummary/getsome": {
+      "post": {
+        "operationId": "StudioSummaryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.studio.v1.StudioSummarySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.studio.v1.StudioSummarySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/arista.studio.v1.StudioKey"
+              }
+            }
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioSummaryService"
+        ]
+      }
+    },
+    "/api/resources/studio/v1/StudioSummary/metadata": {
+      "get": {
+        "operationId": "StudioSummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "StudioSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "StudioSummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StudioSummaryService"
+        ]
+      }
+    },
     "/api/resources/studio/v1/StudioSummary/watch": {
       "get": {
         "operationId": "StudioSummaryService_Subscribe",
@@ -2697,55 +5031,9 @@
         ]
       }
     },
-    "/api/resources/studio/v1/TopologyInput": {
+    "/api/resources/studio/v1/StudioSummary/watchmetadata": {
       "get": {
-        "operationId": "TopologyInputService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "device_id identifies the device uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyInputService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyInput/all": {
-      "get": {
-        "operationId": "TopologyInputService_GetAll",
+        "operationId": "StudioSummaryService_SubscribeMeta",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -2753,13 +5041,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamResponse"
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/google.rpc.Status"
                 }
               },
-              "title": "Stream result of arista.studio.v1.TopologyInputStreamResponse"
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -2786,11 +5074,11 @@
           }
         ],
         "tags": [
-          "TopologyInputService"
+          "StudioSummaryService"
         ]
       },
       "post": {
-        "operationId": "TopologyInputService_GetAll2",
+        "operationId": "StudioSummaryService_SubscribeMeta2",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -2798,13 +5086,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamResponse"
+                  "$ref": "#/definitions/arista.studio.v1.MetaResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/google.rpc.Status"
                 }
               },
-              "title": "Stream result of arista.studio.v1.TopologyInputStreamResponse"
+              "title": "Stream result of arista.studio.v1.MetaResponse"
             }
           },
           "default": {
@@ -2820,1455 +5108,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamRequest"
+              "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamRequest"
             }
           }
         ],
         "tags": [
-          "TopologyInputService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyInput/watch": {
-      "get": {
-        "operationId": "TopologyInputService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyInputService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyInputService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyInputService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyInputConfig": {
-      "get": {
-        "operationId": "TopologyInputConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "device_id identifies the device uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyInputConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.deviceId",
-            "description": "device_id identifies the device uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyInputConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "value",
-            "description": "TopologyInputConfig carries the value to set into the datastore.\nSee the documentation on the TopologyInputConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfig"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyInputConfig/all": {
-      "get": {
-        "operationId": "TopologyInputConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyInputConfigService_DeleteAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigDeleteAllResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputConfigDeleteAllResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyInputConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyInputConfig/watch": {
-      "get": {
-        "operationId": "TopologyInputConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyInputConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyInputConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyInputConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyInputConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdate": {
-      "get": {
-        "operationId": "TopologyUpdateService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.updateId",
-            "description": "update_id identifies the update uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdate/all": {
-      "get": {
-        "operationId": "TopologyUpdateService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdate/watch": {
-      "get": {
-        "operationId": "TopologyUpdateService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateConfig": {
-      "get": {
-        "operationId": "TopologyUpdateConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.updateId",
-            "description": "update_id identifies the update uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyUpdateConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.updateId",
-            "description": "update_id identifies the update uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "value",
-            "description": "TopologyUpdateConfig carries the value to set into the datastore.\nSee the documentation on the TopologyUpdateConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfig"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateConfig/all": {
-      "get": {
-        "operationId": "TopologyUpdateConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyUpdateConfigService_DeleteAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigDeleteAllResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateConfigDeleteAllResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateConfig/watch": {
-      "get": {
-        "operationId": "TopologyUpdateConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSync": {
-      "get": {
-        "operationId": "TopologyUpdateSyncService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSync/all": {
-      "get": {
-        "operationId": "TopologyUpdateSyncService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateSyncService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSync/watch": {
-      "get": {
-        "operationId": "TopologyUpdateSyncService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateSyncService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSyncConfig": {
-      "get": {
-        "operationId": "TopologyUpdateSyncConfigService_GetOne",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyUpdateSyncConfigService_Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigDeleteResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "key.workspaceId",
-            "description": "workspace_id identifies the workspace uniquely.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateSyncConfigService_Set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigSetResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "value",
-            "description": "TopologyUpdateSyncConfig carries the value to set into the datastore.\nSee the documentation on the TopologyUpdateSyncConfig struct for which fields are required.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfig"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSyncConfig/all": {
-      "get": {
-        "operationId": "TopologyUpdateSyncConfigService_GetAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      },
-      "delete": {
-        "operationId": "TopologyUpdateSyncConfigService_DeleteAll",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigDeleteAllResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncConfigDeleteAllResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateSyncConfigService_GetAll2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      }
-    },
-    "/api/resources/studio/v1/TopologyUpdateSyncConfig/watch": {
-      "get": {
-        "operationId": "TopologyUpdateSyncConfigService_Subscribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "time.start",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "time.end",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
-        ]
-      },
-      "post": {
-        "operationId": "TopologyUpdateSyncConfigService_Subscribe2",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/google.rpc.Status"
-                }
-              },
-              "title": "Stream result of arista.studio.v1.TopologyUpdateSyncConfigStreamResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfigStreamRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TopologyUpdateSyncConfigService"
+          "StudioSummaryService"
         ]
       }
     }
@@ -4329,7 +5174,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -4360,6 +5205,18 @@
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
         }
       }
+    },
+    "arista.studio.v1.AssignedTagsConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.studio.v1.StudioKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "AssignedTagsConfigDeleteSomeResponse is only sent when there is an error."
     },
     "arista.studio.v1.AssignedTagsConfigResponse": {
       "type": "object",
@@ -4398,6 +5255,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.AssignedTagsConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4447,6 +5321,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nAssignedTags instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.AssignedTagsSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.AssignedTags",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4556,7 +5447,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -4587,6 +5478,18 @@
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
         }
       }
+    },
+    "arista.studio.v1.AutofillActionConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "AutofillActionConfigDeleteSomeResponse is only sent when there is an error."
     },
     "arista.studio.v1.AutofillActionConfigResponse": {
       "type": "object",
@@ -4625,6 +5528,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.AutofillActionConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.AutofillActionConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4700,6 +5620,23 @@
         }
       }
     },
+    "arista.studio.v1.AutofillActionSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.AutofillAction",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.studio.v1.AutofillActionStreamRequest": {
       "type": "object",
       "properties": {
@@ -4756,7 +5693,8 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/arista.studio.v1.AutofillArgumentProvider"
-          }
+          },
+          "description": "values is a map of dynamic argument name to argument provider information."
         }
       },
       "description": "AutofillArgumentProviders is a map of dynamic argument name to argument provider information."
@@ -4770,7 +5708,7 @@
         "AUTOFILL_PROVIDER_TYPE_LINKED"
       ],
       "default": "AUTOFILL_PROVIDER_TYPE_UNSPECIFIED",
-      "description": "AutofillProviderType describes the set of possible provided argument types.\n\n - AUTOFILL_PROVIDER_TYPE_USER_SPECIFIED: AUTOFILL_PROVIDER_TYPE_USER_SPECIFIED is when an argument is to be\nprovided at runtime by the user.\n - AUTOFILL_PROVIDER_TYPE_PREDEFINED: AUTOFILL_PROVIDER_TYPE_PREDEFINED is when an argument has a predefined value.\n - AUTOFILL_PROVIDER_TYPE_LINKED: AUTOFILL_PROVIDER_TYPE_LINKED is when an argument is linked to another studio input field."
+      "description": "AutofillProviderType describes the set of possible provided argument types.\n\n - AUTOFILL_PROVIDER_TYPE_UNSPECIFIED: AUTOFILL_PROVIDER_TYPE_UNSPECIFIED indicates that no provider type is specified.\n - AUTOFILL_PROVIDER_TYPE_USER_SPECIFIED: AUTOFILL_PROVIDER_TYPE_USER_SPECIFIED is when an argument is to be\nprovided at runtime by the user.\n - AUTOFILL_PROVIDER_TYPE_PREDEFINED: AUTOFILL_PROVIDER_TYPE_PREDEFINED is when an argument has a predefined value.\n - AUTOFILL_PROVIDER_TYPE_LINKED: AUTOFILL_PROVIDER_TYPE_LINKED is when an argument is linked to another studio input field."
     },
     "arista.studio.v1.BooleanInputFieldProps": {
       "type": "object",
@@ -4796,31 +5734,54 @@
       },
       "description": "CollectionInputFieldProps defines the set of properties for a single\ncollection field in a studio input schema."
     },
-    "arista.studio.v1.DeviceInfo": {
+    "arista.studio.v1.Entities": {
       "type": "object",
       "properties": {
-        "deviceId": {
-          "type": "string",
-          "description": "device_id identifies the device uniquely."
-        },
-        "modelName": {
-          "type": "string",
-          "description": "model_name indicates the model of the device."
-        },
-        "macAddress": {
-          "$ref": "#/definitions/fmp.MACAddress",
-          "description": "mac_address indicates the MAC address of the device."
-        },
-        "hostname": {
-          "type": "string",
-          "description": "hostname indicates the hostname of the device."
-        },
-        "interfaceInfos": {
-          "$ref": "#/definitions/arista.studio.v1.InterfaceInfos",
-          "description": "interfaces_infos contains a list of the device's interfaces."
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.studio.v1.Entity"
+          },
+          "description": "values is a map from entity type name to entity\nThe possible keys to this map are ENTITY_TYPE_STUDIO,\nENTITY_TYPE_INPUTS, ENTITY_TYPE_ASSIGNED_TAGS,\nENTITY_TYPE_BUILD_HOOK and ENTITY_TYPE_AUTOFILL_ACTION."
         }
       },
-      "description": "DeviceInfo contains device properties."
+      "description": "Entities is a list of Entity."
+    },
+    "arista.studio.v1.Entity": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/arista.studio.v1.EntityType",
+          "description": "EntityType is the type of the entity."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_modified_at is the time at which the entity was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last_modified_by is the name of the user that last modified the entity."
+        },
+        "removed": {
+          "type": "boolean",
+          "description": "removed indicates if the entity is removed."
+        }
+      },
+      "description": "Entity holds the basic information of an entity."
+    },
+    "arista.studio.v1.EntityType": {
+      "type": "string",
+      "enum": [
+        "ENTITY_TYPE_UNSPECIFIED",
+        "ENTITY_TYPE_STUDIO",
+        "ENTITY_TYPE_INPUTS",
+        "ENTITY_TYPE_ASSIGNED_TAGS",
+        "ENTITY_TYPE_BUILD_HOOK",
+        "ENTITY_TYPE_AUTOFILL_ACTION"
+      ],
+      "default": "ENTITY_TYPE_UNSPECIFIED",
+      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type."
     },
     "arista.studio.v1.FloatInputFieldProps": {
       "type": "object",
@@ -4935,7 +5896,7 @@
         "INPUT_FIELD_TYPE_TAG_MATCHER"
       ],
       "default": "INPUT_FIELD_TYPE_UNSPECIFIED",
-      "description": "InputFieldType defines the set of possible data types for\nvalues that can be input into a studio.\n\n - INPUT_FIELD_TYPE_BOOLEAN: INPUT_FIELD_TYPE_BOOLEAN is the data type for a boolean value.\n - INPUT_FIELD_TYPE_INTEGER: INPUT_FIELD_TYPE_INTEGER is the data type for an integer value.\n - INPUT_FIELD_TYPE_FLOAT: INPUT_FIELD_TYPE_FLOAT is the data type for a float value.\n - INPUT_FIELD_TYPE_STRING: INPUT_FIELD_TYPE_STRING is the data type for a string value.\n - INPUT_FIELD_TYPE_GROUP: INPUT_FIELD_TYPE_GROUP is the data type for an unordered group of\ninputs of any type. This type is used in cases where inputs are\nrequired to be consolidated into an object for use in the template\nor to attach multiple inputs under a resolver or collection.\n - INPUT_FIELD_TYPE_COLLECTION: INPUT_FIELD_TYPE_COLLECTION is the data type for an ordered collection\nof inputs of the same type. This type is used in cases where multiple\ninput values of the same type should be given for a field, and where\nordering matters.\n - INPUT_FIELD_TYPE_RESOLVER: INPUT_FIELD_TYPE_RESOLVER is the data type for an input that allows\nits member input to be assigned based on a tag query match. This\ntype is used in cases where the input value is conditional on a\ndevice or a group of devices. The query is resolved at run-time\nand each affected device is given the value that corresponds to\nthe tag it is assigned to.\n - INPUT_FIELD_TYPE_TAG_MATCHER: INPUT_FIELD_TYPE_TAG_MATCHER is the data type for an input that allows\nan unordered set of devices or interfaces to be selected. The set of\ndevices or interfaces that are to be selected are specified by a tag\nquery, resolved at run-time."
+      "description": "InputFieldType defines the set of possible data types for\nvalues that can be input into a studio.\n\n - INPUT_FIELD_TYPE_UNSPECIFIED: INPUT_FIELD_TYPE_UNSPECIFIED indicates an unspecified input data type.\n - INPUT_FIELD_TYPE_BOOLEAN: INPUT_FIELD_TYPE_BOOLEAN is the data type for a boolean value.\n - INPUT_FIELD_TYPE_INTEGER: INPUT_FIELD_TYPE_INTEGER is the data type for an integer value.\n - INPUT_FIELD_TYPE_FLOAT: INPUT_FIELD_TYPE_FLOAT is the data type for a float value.\n - INPUT_FIELD_TYPE_STRING: INPUT_FIELD_TYPE_STRING is the data type for a string value.\n - INPUT_FIELD_TYPE_GROUP: INPUT_FIELD_TYPE_GROUP is the data type for an unordered group of\ninputs of any type. This type is used in cases where inputs are\nrequired to be consolidated into an object for use in the template\nor to attach multiple inputs under a resolver or collection.\n - INPUT_FIELD_TYPE_COLLECTION: INPUT_FIELD_TYPE_COLLECTION is the data type for an ordered collection\nof inputs of the same type. This type is used in cases where multiple\ninput values of the same type should be given for a field, and where\nordering matters.\n - INPUT_FIELD_TYPE_RESOLVER: INPUT_FIELD_TYPE_RESOLVER is the data type for an input that allows\nits member input to be assigned based on a tag query match. This\ntype is used in cases where the input value is conditional on a\ndevice or a group of devices. The query is resolved at run-time\nand each affected device is given the value that corresponds to\nthe tag it is assigned to.\n - INPUT_FIELD_TYPE_TAG_MATCHER: INPUT_FIELD_TYPE_TAG_MATCHER is the data type for an input that allows\nan unordered set of devices or interfaces to be selected. The set of\ndevices or interfaces that are to be selected are specified by a tag\nquery, resolved at run-time."
     },
     "arista.studio.v1.InputFields": {
       "type": "object",
@@ -5019,7 +5980,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -5050,6 +6011,18 @@
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
         }
       }
+    },
+    "arista.studio.v1.InputsConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.studio.v1.InputsKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "InputsConfigDeleteSomeResponse is only sent when there is an error."
     },
     "arista.studio.v1.InputsConfigResponse": {
       "type": "object",
@@ -5088,6 +6061,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.InputsConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.InputsConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5163,6 +6153,23 @@
         }
       }
     },
+    "arista.studio.v1.InputsSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.Inputs",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.studio.v1.InputsStreamRequest": {
       "type": "object",
       "properties": {
@@ -5225,42 +6232,6 @@
       },
       "description": "IntegerInputFieldProps defines the set of properties for a single\ninteger field in a studio input schema."
     },
-    "arista.studio.v1.InterfaceInfo": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name is the name of an interface."
-        },
-        "neighborDeviceId": {
-          "type": "string",
-          "description": "neighbor_device_id indicates the device ID of the neighbor to which\nthis interface is connected."
-        },
-        "neighborInterfaceName": {
-          "type": "string",
-          "description": "neighbor_device_name indicates the interface on the neighbor to which\nthis interface is connected."
-        },
-        "topologyOperation": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyOperation",
-          "description": "topology_operation indicates the type of operation to the interface."
-        }
-      },
-      "description": "InterfaceInfo contains interface properties."
-    },
-    "arista.studio.v1.InterfaceInfos": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.InterfaceInfo"
-          },
-          "description": "values is a list of InterfaceInfo."
-        }
-      },
-      "description": "InterfaceInfos is a list of InterfaceInfo."
-    },
     "arista.studio.v1.Layout": {
       "type": "object",
       "properties": {
@@ -5271,6 +6242,25 @@
       },
       "description": "Layout specifies the display properties for input fields. This\nis intended for UI usage only."
     },
+    "arista.studio.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
     "arista.studio.v1.ResolverFieldDisplayMode": {
       "type": "string",
       "enum": [
@@ -5279,7 +6269,7 @@
         "RESOLVER_FIELD_DISPLAY_MODE_SPARSE"
       ],
       "default": "RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED",
-      "description": "ResolverFieldDisplayMode defines the set of ways in which the matching\ndevices or interfaces should be displayed on the UI.\n\n - RESOLVER_FIELD_DISPLAY_MODE_ALL: RESOLVER_FIELD_DISPLAY_MODE_ALL instructs the UI to show all\nmatching devices or interfaces, including ones that have no\ninputs.\n - RESOLVER_FIELD_DISPLAY_MODE_SPARSE: RESOLVER_FIELD_DISPLAY_MODE_SPARSE instructs the UI to show\nonly matching devices or interfaces that have inputs."
+      "description": "ResolverFieldDisplayMode defines the set of ways in which the matching\ndevices or interfaces should be displayed on the UI.\n\n - RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED: RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED indicates an unspecified resolver display mode.\n - RESOLVER_FIELD_DISPLAY_MODE_ALL: RESOLVER_FIELD_DISPLAY_MODE_ALL instructs the UI to show all\nmatching devices or interfaces, including ones that have no\ninputs.\n - RESOLVER_FIELD_DISPLAY_MODE_SPARSE: RESOLVER_FIELD_DISPLAY_MODE_SPARSE instructs the UI to show\nonly matching devices or interfaces that have inputs."
     },
     "arista.studio.v1.ResolverFieldInputMode": {
       "type": "string",
@@ -5291,7 +6281,7 @@
         "RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG"
       ],
       "default": "RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED",
-      "description": "ResolverFieldInputMode defines the set of ways a resolver tag query\ncan be specified in a studio.\n\n - RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG: RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG allows devices to be\nselected based on a single tag label.\n - RESOLVER_FIELD_INPUT_MODE_SINGLE_INTERFACE_TAG: RESOLVER_FIELD_INPUT_MODE_SINGLE_INTERFACE_TAG allows interfaces\nto be selected based on a single tag label.\n - RESOLVER_FIELD_INPUT_MODE_MULTI_DEVICE_TAG: RESOLVER_FIELD_INPUT_MODE_MULTI_DEVICE_TAG allows devices to be\nselected based on any tag label.\n - RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG: RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG allows interfaces\nto be selected based on any tag label."
+      "description": "ResolverFieldInputMode defines the set of ways a resolver tag query\ncan be specified in a studio.\n\n - RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED: RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED indicates an unspecified resolver input mode.\n - RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG: RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG allows devices to be\nselected based on a single tag label.\n - RESOLVER_FIELD_INPUT_MODE_SINGLE_INTERFACE_TAG: RESOLVER_FIELD_INPUT_MODE_SINGLE_INTERFACE_TAG allows interfaces\nto be selected based on a single tag label.\n - RESOLVER_FIELD_INPUT_MODE_MULTI_DEVICE_TAG: RESOLVER_FIELD_INPUT_MODE_MULTI_DEVICE_TAG allows devices to be\nselected based on any tag label.\n - RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG: RESOLVER_FIELD_INPUT_MODE_MULTI_INTERFACE_TAG allows interfaces\nto be selected based on any tag label."
     },
     "arista.studio.v1.ResolverInputFieldProps": {
       "type": "object",
@@ -5344,6 +6334,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecretInput instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.SecretInputSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.SecretInput",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5448,7 +6455,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "display_name is the name of this studio as displayed on the UI."
+          "description": "display_name is the name of this studio as displayed on the UI.\nThis and remaining fields are config fields, with workspace changes applied on top of\nmainline. This resource will be present in the workspace only if\nthe studio is modified (via the `StudioConfig` resource)."
         },
         "description": {
           "type": "string",
@@ -5461,6 +6468,10 @@
         "inputSchema": {
           "$ref": "#/definitions/arista.studio.v1.InputSchema",
           "description": "input_schema is the schema for the studio inputs that are processed\nby `template`."
+        },
+        "fromPackage": {
+          "type": "string",
+          "description": "from_package indicates that this studio was created by a package, and can only be modified\nby the packaging service."
         }
       },
       "description": "Studio holds the active state for a studio."
@@ -5478,7 +6489,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "display_name is the name of this studio as displayed on the UI."
+          "description": "display_name is the name of this studio as displayed on the UI.\nThis and remaining fields are config fields, with workspace changes to be applied\non top of mainline. The corresponding `Studio` will be present\nin the workspace only if the studio is modified (via this resource)."
         },
         "description": {
           "type": "string",
@@ -5500,7 +6511,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -5531,6 +6542,18 @@
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
         }
       }
+    },
+    "arista.studio.v1.StudioConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.studio.v1.StudioKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "StudioConfigDeleteSomeResponse is only sent when there is an error."
     },
     "arista.studio.v1.StudioConfigResponse": {
       "type": "object",
@@ -5569,6 +6592,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.StudioConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.StudioConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5639,6 +6679,23 @@
         }
       }
     },
+    "arista.studio.v1.StudioSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.Studio",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "arista.studio.v1.StudioStreamRequest": {
       "type": "object",
       "properties": {
@@ -5691,7 +6748,15 @@
         },
         "immutable": {
           "type": "boolean",
-          "description": "immutable indicates if read-write studio management\naccess over a given studio is granted or not. \nIf studio is immutable, its display name, description,\nschema and template cannot be modified."
+          "description": "immutable indicates if read-write studio management\naccess over a given studio is granted or not.\nIf studio is immutable, its display name, description,\nschema and template cannot be modified."
+        },
+        "entities": {
+          "$ref": "#/definitions/arista.studio.v1.Entities",
+          "description": "entities indicate all the entities of the studio."
+        },
+        "inUse": {
+          "type": "boolean",
+          "description": "in_use indicates that the studio is in use, i.e. there are non-empty inputs,\nand assigned to some devices, either in a given workspace, or in mainline."
         }
       },
       "description": "StudioSummary holds basic information about a studio."
@@ -5707,6 +6772,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudioSummary instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.StudioSummarySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.studio.v1.StudioSummary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5755,7 +6837,7 @@
         "TAG_MATCHER_FIELD_MODE_MULTI_INTERFACE_TAG"
       ],
       "default": "TAG_MATCHER_FIELD_MODE_UNSPECIFIED",
-      "description": "TagMatcherFieldMode defines the set of ways a tag query for matching\ndevice or interfaces can be specified in a studio.\n\n - TAG_MATCHER_FIELD_MODE_SINGLE_DEVICE_TAG: TAG_MATCHER_FIELD_MODE_SINGLE_DEVICE_TAG allows devices to be\nselected based on a single tag label.\n - TAG_MATCHER_FIELD_MODE_SINGLE_INTERFACE_TAG: TAG_MATCHER_FIELD_MODE_SINGLE_INTERFACE_TAG allows interfaces\nto be selected based on a single tag label.\n - TAG_MATCHER_FIELD_MODE_MULTI_DEVICE_TAG: TAG_MATCHER_FIELD_MODE_MULTI_DEVICE_TAG allows devices to be\nselected based on any tag label.\n - TAG_MATCHER_FIELD_MODE_MULTI_INTERFACE_TAG: TAG_MATCHER_FIELD_MODE_MULTI_INTERFACE_TAG allows interfaces\nto be selected based on any tag label."
+      "description": "TagMatcherFieldMode defines the set of ways a tag query for matching\ndevice or interfaces can be specified in a studio.\n\n - TAG_MATCHER_FIELD_MODE_UNSPECIFIED: TAG_MATCHER_FIELD_MODE_UNSPECIFIED indicates an unspecified tag matcher mode.\n - TAG_MATCHER_FIELD_MODE_SINGLE_DEVICE_TAG: TAG_MATCHER_FIELD_MODE_SINGLE_DEVICE_TAG allows devices to be\nselected based on a single tag label.\n - TAG_MATCHER_FIELD_MODE_SINGLE_INTERFACE_TAG: TAG_MATCHER_FIELD_MODE_SINGLE_INTERFACE_TAG allows interfaces\nto be selected based on a single tag label.\n - TAG_MATCHER_FIELD_MODE_MULTI_DEVICE_TAG: TAG_MATCHER_FIELD_MODE_MULTI_DEVICE_TAG allows devices to be\nselected based on any tag label.\n - TAG_MATCHER_FIELD_MODE_MULTI_INTERFACE_TAG: TAG_MATCHER_FIELD_MODE_MULTI_INTERFACE_TAG allows interfaces\nto be selected based on any tag label."
     },
     "arista.studio.v1.TagMatcherInputFieldProps": {
       "type": "object",
@@ -5802,670 +6884,7 @@
         "TEMPLATE_TYPE_GO"
       ],
       "default": "TEMPLATE_TYPE_UNSPECIFIED",
-      "description": "TemplateType defines the set of supported languages that can\nbe used in studio templates.\n\n - TEMPLATE_TYPE_MAKO: TEMPLATE_TYPE_MAKO is the Mako templating language for Python.\nMore information: https://www.makotemplates.org\n - TEMPLATE_TYPE_JINJA: TEMPLATE_TYPE_JINJA is the Jinja templating language for Python.\nMore information: https://palletsprojects.com/p/jinja\n - TEMPLATE_TYPE_GO: TEMPLATE_TYPE_GO is the Go templating language.\nMore information: https://pkg.go.dev/text/template\n\nNOTE: Not all template functions are supported for this type."
-    },
-    "arista.studio.v1.TopologyElement": {
-      "type": "string",
-      "enum": [
-        "TOPOLOGY_ELEMENT_UNSPECIFIED",
-        "TOPOLOGY_ELEMENT_DEVICE",
-        "TOPOLOGY_ELEMENT_INTERFACE",
-        "TOPOLOGY_ELEMENT_CONNECTION"
-      ],
-      "default": "TOPOLOGY_ELEMENT_UNSPECIFIED",
-      "description": "TopologyElememt defines the fundamental types of elements in topology.\n\n - TOPOLOGY_ELEMENT_DEVICE: TOPOLOGY_ELEMENT_DEVICE indicates a device.\n - TOPOLOGY_ELEMENT_INTERFACE: TOPOLOGY_ELEMENT_INTERFACE indicates an interface.\n - TOPOLOGY_ELEMENT_CONNECTION: TOPOLOGY_ELEMENT_CONNECTION indicates a connection."
-    },
-    "arista.studio.v1.TopologyInput": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputKey",
-          "description": "key uniquely identifies the device in a given workspace."
-        },
-        "deviceInfo": {
-          "$ref": "#/definitions/arista.studio.v1.DeviceInfo",
-          "description": "device_info contains device properties."
-        }
-      },
-      "description": "TopologyInput is the state of a mainline and accepted topology inputs."
-    },
-    "arista.studio.v1.TopologyInputConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputKey",
-          "description": "key uniquely identifies the device ID for a given workspace."
-        },
-        "deviceInfo": {
-          "$ref": "#/definitions/arista.studio.v1.DeviceInfo",
-          "description": "device_info contains device properties."
-        }
-      },
-      "description": "TopologyInputConfig is the desired topology input for a device."
-    },
-    "arista.studio.v1.TopologyInputConfigDeleteAllResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
-        },
-        "error": {
-          "type": "string",
-          "description": "This indicates the error message from the delete failure."
-        },
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputKey",
-          "description": "This is the key of the TopologyInputConfig instance that failed to be deleted."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputKey",
-          "description": "Key echoes back the key of the deleted TopologyInputConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyInputConfig instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputConfig",
-          "description": "Value carries all the values given in the TopologyInputConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigSetSomeResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputKey"
-        },
-        "error": {
-          "type": "string"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyInputConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyInputConfig at end.\n    * Each TopologyInputConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyInputConfig at start, followed by updates until now.\n    * Each TopologyInputConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyInputConfig at start, followed by updates\n    until end.\n    * Each TopologyInputConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInputConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyInputConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyInputConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputKey": {
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "workspace_id identifies the workspace uniquely."
-        },
-        "deviceId": {
-          "type": "string",
-          "description": "device_id identifies the device uniquely."
-        }
-      },
-      "description": "TopologyInputKey is the set of inputs that uniquely identify\nthe device for a workspace.",
-      "required": [
-        "workspaceId",
-        "deviceId"
-      ]
-    },
-    "arista.studio.v1.TopologyInputResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInput",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyInput instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyInput"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyInput at end.\n    * Each TopologyInput response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyInput at start, followed by updates until now.\n    * Each TopologyInput response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyInput at start, followed by updates\n    until end.\n    * Each TopologyInput response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyInputStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyInput",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyInput's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyInput value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyOperation": {
-      "type": "string",
-      "enum": [
-        "TOPOLOGY_OPERATION_UNSPECIFIED",
-        "TOPOLOGY_OPERATION_ADDED",
-        "TOPOLOGY_OPERATION_MODIFIED",
-        "TOPOLOGY_OPERATION_REMOVED"
-      ],
-      "default": "TOPOLOGY_OPERATION_UNSPECIFIED",
-      "description": "TopologyOperation defines the operations that may be performed on the topology.\n\n - TOPOLOGY_OPERATION_ADDED: TOPOLOGY_OPERATION_ADDED indicates addition of a TopologyElement.\n - TOPOLOGY_OPERATION_MODIFIED: TOPOLOGY_OPERATION_MODIFIED indicates modification of a TopologyElement.\n - TOPOLOGY_OPERATION_REMOVED: TOPOLOGY_OPERATION_REMOVED indicates removal of a TopologyElement."
-    },
-    "arista.studio.v1.TopologyUpdate": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateKey",
-          "description": "key uniquely identifies the update."
-        },
-        "topologyElement": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyElement",
-          "description": "topology_element indicates the type of a network element."
-        },
-        "topologyOperation": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyOperation",
-          "description": "topology_operation indicates the type of operation on the topology update."
-        },
-        "status": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStatus",
-          "description": "status indicates the status of the topology update."
-        },
-        "description": {
-          "type": "string",
-          "description": "description describes the topology update in short."
-        }
-      },
-      "description": "TopologyUpdate represents an update on to the workspace."
-    },
-    "arista.studio.v1.TopologyUpdateConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateKey",
-          "description": "key uniquely identifies the update."
-        },
-        "status": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateStatus",
-          "description": "status indicates the status of the topology update."
-        }
-      },
-      "description": "TopologyUpdateConfig contains the acceptance status of a TopologyUpdate."
-    },
-    "arista.studio.v1.TopologyUpdateConfigDeleteAllResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
-        },
-        "error": {
-          "type": "string",
-          "description": "This indicates the error message from the delete failure."
-        },
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateKey",
-          "description": "This is the key of the TopologyUpdateConfig instance that failed to be deleted."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateKey",
-          "description": "Key echoes back the key of the deleted TopologyUpdateConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyUpdateConfig instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfig",
-          "description": "Value carries all the values given in the TopologyUpdateConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigSetSomeResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateKey"
-        },
-        "error": {
-          "type": "string"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyUpdateConfig at end.\n    * Each TopologyUpdateConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyUpdateConfig at start, followed by updates until now.\n    * Each TopologyUpdateConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyUpdateConfig at start, followed by updates\n    until end.\n    * Each TopologyUpdateConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyUpdateConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyUpdateConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateKey": {
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "workspace_id identifies the workspace uniquely."
-        },
-        "updateId": {
-          "type": "string",
-          "description": "update_id identifies the update uniquely."
-        }
-      },
-      "description": "TopologyUpdateKey uniquely identifies a workspace topology update.",
-      "required": [
-        "workspaceId",
-        "updateId"
-      ]
-    },
-    "arista.studio.v1.TopologyUpdateResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdate",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyUpdate instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateStatus": {
-      "type": "string",
-      "enum": [
-        "TOPOLOGY_UPDATE_STATUS_UNSPECIFIED",
-        "TOPOLOGY_UPDATE_STATUS_NEW",
-        "TOPOLOGY_UPDATE_STATUS_ACCEPTED",
-        "TOPOLOGY_UPDATE_STATUS_IGNORED"
-      ],
-      "default": "TOPOLOGY_UPDATE_STATUS_UNSPECIFIED",
-      "description": "TopologyUpdateStatus defines the set of statuses that apply to individual topology updates.\n\n - TOPOLOGY_UPDATE_STATUS_NEW: TOPOLOGY_UPDATE_STATUS_NEW indicates the update is new.\n - TOPOLOGY_UPDATE_STATUS_ACCEPTED: TOPOLOGY_UPDATE_STATUS_ACCEPTED indicates the update is accepted.\n - TOPOLOGY_UPDATE_STATUS_IGNORED: TOPOLOGY_UPDATE_STATUS_IGNORED indicates the update is ignored."
-    },
-    "arista.studio.v1.TopologyUpdateStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyUpdate"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyUpdate at end.\n    * Each TopologyUpdate response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyUpdate at start, followed by updates until now.\n    * Each TopologyUpdate response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyUpdate at start, followed by updates\n    until end.\n    * Each TopologyUpdate response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdate",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyUpdate's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyUpdate value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSync": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.WorkspaceKey",
-          "description": "key uniquely identifies the workspace."
-        },
-        "syncTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "sync_time indicates the time up to which the live topology is synchronized.\nAll updates that happened up to this timestamp will be accepted."
-        }
-      },
-      "description": "TopologyUpdateSync model represents the state of topology updates,\nwhich consists of the time up to which updates are accepted."
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfig": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.WorkspaceKey",
-          "description": "key uniquely identifies the workspace."
-        },
-        "syncTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "sync_time indicates the desired synchronization time with the live topology.\nIf the sync_time indicated in the config takes effect without error,\nit will appear in the state model, and then all updates that occurred up to\nand including the timestamp in the state model will be accepted."
-        }
-      },
-      "description": "TopologyUpdateSyncConfig model represents a point in time all updates\nare to be accepted."
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigDeleteAllResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
-        },
-        "error": {
-          "type": "string",
-          "description": "This indicates the error message from the delete failure."
-        },
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.WorkspaceKey",
-          "description": "This is the key of the TopologyUpdateSyncConfig instance that failed to be deleted."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.WorkspaceKey",
-          "description": "Key echoes back the key of the deleted TopologyUpdateSyncConfig instance."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfig",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyUpdateSyncConfig instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigSetResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfig",
-          "description": "Value carries all the values given in the TopologyUpdateSyncConfigSetRequest as well\nas any server-generated values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
-          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigSetSomeResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "$ref": "#/definitions/arista.studio.v1.WorkspaceKey"
-        },
-        "error": {
-          "type": "string"
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfig"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyUpdateSyncConfig at end.\n    * Each TopologyUpdateSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyUpdateSyncConfig at start, followed by updates until now.\n    * Each TopologyUpdateSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyUpdateSyncConfig at start, followed by updates\n    until end.\n    * Each TopologyUpdateSyncConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncConfigStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSyncConfig",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyUpdateSyncConfig's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyUpdateSyncConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSync",
-          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTopologyUpdateSync instance in this response."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncStreamRequest": {
-      "type": "object",
-      "properties": {
-        "partialEqFilter": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSync"
-          },
-          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
-        },
-        "time": {
-          "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TopologyUpdateSync at end.\n    * Each TopologyUpdateSync response is fully-specified (all fields set).\n  * start: Returns the state of each TopologyUpdateSync at start, followed by updates until now.\n    * Each TopologyUpdateSync response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TopologyUpdateSync at start, followed by updates\n    until end.\n    * Each TopologyUpdateSync response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
-        }
-      }
-    },
-    "arista.studio.v1.TopologyUpdateSyncStreamResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/arista.studio.v1.TopologyUpdateSync",
-          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time holds the timestamp of this TopologyUpdateSync's last modification."
-        },
-        "type": {
-          "$ref": "#/definitions/arista.subscriptions.Operation",
-          "description": "Operation indicates how the TopologyUpdateSync value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
-        }
-      }
-    },
-    "arista.studio.v1.WorkspaceKey": {
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "workspace_id identifies the workspace uniquely."
-        }
-      },
-      "description": "WorkspaceKey uniquely identifies the workspace.",
-      "required": [
-        "workspaceId"
-      ]
+      "description": "TemplateType defines the set of supported languages that can\nbe used in studio templates.\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED indicates an unspecified template type.\n - TEMPLATE_TYPE_MAKO: TEMPLATE_TYPE_MAKO is the Mako templating language for Python.\nMore information: https://www.makotemplates.org\n - TEMPLATE_TYPE_JINJA: TEMPLATE_TYPE_JINJA is the Jinja templating language for Python.\nMore information: https://palletsprojects.com/p/jinja\n - TEMPLATE_TYPE_GO: TEMPLATE_TYPE_GO is the Go templating language.\nMore information: https://pkg.go.dev/text/template\n\nNOTE: Not all template functions are supported for this type."
     },
     "arista.subscriptions.Operation": {
       "type": "string",
@@ -6502,14 +6921,6 @@
       ],
       "default": "DELETE_ERROR_UNSPECIFIED",
       "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
-    },
-    "fmp.MACAddress": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        }
-      }
     },
     "fmp.RepeatedFloat": {
       "type": "object",

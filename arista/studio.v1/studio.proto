@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -8,11 +8,10 @@ syntax = "proto3";
 
 package arista.studio.v1;
 
-option go_package = "arista/resources/arista/studio.v1;studio";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/studio.v1;studio";
 
 import "fmp/extensions.proto";
 import "fmp/wrappers.proto";
-import "fmp/yang.proto";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -44,12 +43,10 @@ message StudioConfig {
 	// workspace merges. Other data fields are not allowed if this
 	// field is set to true.
 	google.protobuf.BoolValue remove = 2;
-
-	// Below are config fields, with workspace changes to be applied
+	// display_name is the name of this studio as displayed on the UI.
+	// This and remaining fields are config fields, with workspace changes to be applied
 	// on top of mainline. The corresponding `Studio` will be present
 	// in the workspace only if the studio is modified (via this resource).
-
-	// display_name is the name of this studio as displayed on the UI.
 	google.protobuf.StringValue display_name = 3;
 	// description is a brief description of the studio.
 	google.protobuf.StringValue description = 4;
@@ -66,16 +63,58 @@ message StudioSummary {
 	option (fmp.model) = "ro";
 
 	// key uniquely identifies the studio.
-	StudioKey key =1;
+	StudioKey key = 1;
 	// display_name is the name of this studio as displayed on the UI.
 	google.protobuf.StringValue display_name = 2;
 	// description is a brief description of the studio.
 	google.protobuf.StringValue description = 3;
 	// immutable indicates if read-write studio management
-	// access over a given studio is granted or not. 
+	// access over a given studio is granted or not.
 	// If studio is immutable, its display name, description,
 	// schema and template cannot be modified.
 	google.protobuf.BoolValue immutable = 4;
+	// entities indicate all the entities of the studio.
+	Entities entities = 5;
+	// in_use indicates that the studio is in use, i.e. there are non-empty inputs,
+	// and assigned to some devices, either in a given workspace, or in mainline.
+	google.protobuf.BoolValue in_use = 6;
+}
+
+// Entity holds the basic information of an entity.
+message Entity {
+	// EntityType is the type of the entity.
+	EntityType entity_type = 1;
+	// last_modified_at is the time at which the entity was last modified.
+	google.protobuf.Timestamp last_modified_at = 2;
+	// last_modified_by is the name of the user that last modified the entity.
+	google.protobuf.StringValue last_modified_by = 3;
+	// removed indicates if the entity is removed.
+	google.protobuf.BoolValue removed = 4;
+}
+
+// Entities is a list of Entity.
+message Entities {
+	// values is a map from entity type name to entity
+	// The possible keys to this map are ENTITY_TYPE_STUDIO,
+	// ENTITY_TYPE_INPUTS, ENTITY_TYPE_ASSIGNED_TAGS,
+	// ENTITY_TYPE_BUILD_HOOK and ENTITY_TYPE_AUTOFILL_ACTION.
+	map<string, Entity> values = 1;
+}
+
+// EntityType enumerates the set of entity types.
+enum EntityType {
+	// ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.
+	ENTITY_TYPE_UNSPECIFIED = 0;
+	// ENTITY_TYPE_STUDIO indicates the Studio entity type.
+	ENTITY_TYPE_STUDIO = 1;
+	// ENTITY_TYPE_INPUTS indicates the Inputs entity type.
+	ENTITY_TYPE_INPUTS = 2;
+	// ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.
+	ENTITY_TYPE_ASSIGNED_TAGS = 3;
+	// ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.
+	ENTITY_TYPE_BUILD_HOOK = 4;
+	// ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.
+	ENTITY_TYPE_AUTOFILL_ACTION = 5;
 }
 
 // Studio holds the active state for a studio.
@@ -92,12 +131,10 @@ message Studio {
 	google.protobuf.Timestamp  last_modified_at = 4;
 	// last_modified_by is the name of the user that last modified the studio.
 	google.protobuf.StringValue last_modified_by = 5;
-
-	// Below are config fields, with workspace changes applied on top of
+	// display_name is the name of this studio as displayed on the UI.
+	// This and remaining fields are config fields, with workspace changes applied on top of
 	// mainline. This resource will be present in the workspace only if
 	// the studio is modified (via the `StudioConfig` resource).
-
-	// display_name is the name of this studio as displayed on the UI.
 	google.protobuf.StringValue display_name = 6;
 	// description is a brief description of the studio.
 	google.protobuf.StringValue description = 7;
@@ -108,6 +145,9 @@ message Studio {
 	// by `template`.
 	InputSchema input_schema = 9;
 	reserved 10;
+	// from_package indicates that this studio was created by a package, and can only be modified
+	// by the packaging service.
+	google.protobuf.StringValue from_package = 11;
 }
 
 // AssignedTagsConfig holds a configuration to assign a studio to a set of devices
@@ -196,7 +236,7 @@ message InputsConfig {
 	// inputs is the value of the input field at the path as a
 	// JSON string. It can be the value for a simple or complex
 	// input field.
-	// 
+	//
 	// Simple types (booleans, integers, floats, strings) map to
 	// their JSON equivalents.
 	//
@@ -249,6 +289,7 @@ message Inputs {
 // TemplateType defines the set of supported languages that can
 // be used in studio templates.
 enum TemplateType {
+	// TEMPLATE_TYPE_UNSPECIFIED indicates an unspecified template type.
 	TEMPLATE_TYPE_UNSPECIFIED = 0;
 	// TEMPLATE_TYPE_MAKO is the Mako templating language for Python.
 	// More information: https://www.makotemplates.org
@@ -274,6 +315,7 @@ message Template {
 // InputFieldType defines the set of possible data types for
 // values that can be input into a studio.
 enum InputFieldType {
+	// INPUT_FIELD_TYPE_UNSPECIFIED indicates an unspecified input data type.
 	INPUT_FIELD_TYPE_UNSPECIFIED = 0;
 	// INPUT_FIELD_TYPE_BOOLEAN is the data type for a boolean value.
 	INPUT_FIELD_TYPE_BOOLEAN = 1;
@@ -311,6 +353,7 @@ enum InputFieldType {
 // ResolverFieldInputMode defines the set of ways a resolver tag query
 // can be specified in a studio.
 enum ResolverFieldInputMode {
+	// RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED indicates an unspecified resolver input mode.
 	RESOLVER_FIELD_INPUT_MODE_UNSPECIFIED = 0;
 	// RESOLVER_FIELD_INPUT_MODE_SINGLE_DEVICE_TAG allows devices to be
 	// selected based on a single tag label.
@@ -329,6 +372,7 @@ enum ResolverFieldInputMode {
 // ResolverFieldDisplayMode defines the set of ways in which the matching
 // devices or interfaces should be displayed on the UI.
 enum ResolverFieldDisplayMode {
+	// RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED indicates an unspecified resolver display mode.
 	RESOLVER_FIELD_DISPLAY_MODE_UNSPECIFIED = 0;
 	// RESOLVER_FIELD_DISPLAY_MODE_ALL instructs the UI to show all
 	// matching devices or interfaces, including ones that have no
@@ -342,6 +386,7 @@ enum ResolverFieldDisplayMode {
 // TagMatcherFieldMode defines the set of ways a tag query for matching
 // device or interfaces can be specified in a studio.
 enum TagMatcherFieldMode {
+	// TAG_MATCHER_FIELD_MODE_UNSPECIFIED indicates an unspecified tag matcher mode.
 	TAG_MATCHER_FIELD_MODE_UNSPECIFIED = 0;
 	// TAG_MATCHER_FIELD_MODE_SINGLE_DEVICE_TAG allows devices to be
 	// selected based on a single tag label.
@@ -620,165 +665,6 @@ message SecretInput {
 	google.protobuf.StringValue plain_text = 2;
 }
 
-// TopologyElememt defines the fundamental types of elements in topology.
-enum TopologyElement {
-	TOPOLOGY_ELEMENT_UNSPECIFIED = 0;
-	// TOPOLOGY_ELEMENT_DEVICE indicates a device.
-	TOPOLOGY_ELEMENT_DEVICE = 1;
-	// TOPOLOGY_ELEMENT_INTERFACE indicates an interface.
-	TOPOLOGY_ELEMENT_INTERFACE = 2;
-	// TOPOLOGY_ELEMENT_CONNECTION indicates a connection.
-	TOPOLOGY_ELEMENT_CONNECTION = 3;
-}
-
-// TopologyOperation defines the operations that may be performed on the topology.
-enum TopologyOperation {
-	TOPOLOGY_OPERATION_UNSPECIFIED = 0;
-	// TOPOLOGY_OPERATION_ADDED indicates addition of a TopologyElement.
-	TOPOLOGY_OPERATION_ADDED = 1;
-	// TOPOLOGY_OPERATION_MODIFIED indicates modification of a TopologyElement.
-	TOPOLOGY_OPERATION_MODIFIED = 2;
-	// TOPOLOGY_OPERATION_REMOVED indicates removal of a TopologyElement.
-	TOPOLOGY_OPERATION_REMOVED = 3;
-}
-
-// TopologyUpdateStatus defines the set of statuses that apply to individual topology updates.
-enum TopologyUpdateStatus {
-	TOPOLOGY_UPDATE_STATUS_UNSPECIFIED = 0;
-	// TOPOLOGY_UPDATE_STATUS_NEW indicates the update is new.
-	TOPOLOGY_UPDATE_STATUS_NEW = 1;
-	// TOPOLOGY_UPDATE_STATUS_ACCEPTED indicates the update is accepted.
-	TOPOLOGY_UPDATE_STATUS_ACCEPTED = 2;
-	// TOPOLOGY_UPDATE_STATUS_IGNORED indicates the update is ignored.
-	TOPOLOGY_UPDATE_STATUS_IGNORED = 3;
-}
-
-// DeviceInfo contains device properties.
-message DeviceInfo {
-	// device_id identifies the device uniquely.
-	google.protobuf.StringValue device_id = 1;
-	// model_name indicates the model of the device.
-	google.protobuf.StringValue model_name = 2;
-	// mac_address indicates the MAC address of the device.
-	fmp.MACAddress mac_address = 3;
-	// hostname indicates the hostname of the device.
-	google.protobuf.StringValue hostname = 4;
-	// interfaces_infos contains a list of the device's interfaces.
-	InterfaceInfos interface_infos = 5;
-}
-
-// InterfaceInfo contains interface properties.
-message InterfaceInfo {
-	// name is the name of an interface.
-	google.protobuf.StringValue name = 1;
-	// neighbor_device_id indicates the device ID of the neighbor to which
-	// this interface is connected.
-	google.protobuf.StringValue neighbor_device_id = 2;
-	// neighbor_device_name indicates the interface on the neighbor to which
-	// this interface is connected.
-	google.protobuf.StringValue neighbor_interface_name = 3;
-	// topology_operation indicates the type of operation to the interface.
-	TopologyOperation topology_operation = 4;
-}
-
-// InterfaceInfos is a list of InterfaceInfo.
-message InterfaceInfos {
-	// values is a list of InterfaceInfo.
-	repeated InterfaceInfo values = 1;
-}
-
-// TopologyInputKey is the set of inputs that uniquely identify
-// the device for a workspace.
-message TopologyInputKey{
-	option (fmp.model_key) = true;
-	// workspace_id identifies the workspace uniquely.
-	google.protobuf.StringValue workspace_id = 1;
-	// device_id identifies the device uniquely.
-	google.protobuf.StringValue device_id = 2;
-}
-
-// TopologyInputConfig is the desired topology input for a device.
-message TopologyInputConfig {
-	option (fmp.model) = "rw";
-	// key uniquely identifies the device ID for a given workspace.
-	TopologyInputKey key = 1;
-	// device_info contains device properties.
-	DeviceInfo device_info = 2;
-}
-
-// TopologyInput is the state of a mainline and accepted topology inputs.
-message TopologyInput {
-	option (fmp.model) = "ro";
-	// key uniquely identifies the device in a given workspace.
-	TopologyInputKey key = 1;
-	// device_info contains device properties.
-	DeviceInfo device_info = 2;
-}
-
-// TopologyUpdateKey uniquely identifies a workspace topology update.
-message TopologyUpdateKey {
-	option (fmp.model_key) = true;
-	// workspace_id identifies the workspace uniquely.
-	google.protobuf.StringValue workspace_id = 1;
-	// update_id identifies the update uniquely.
-	google.protobuf.StringValue update_id = 2;
-}
-
-// TopologyUpdateConfig contains the acceptance status of a TopologyUpdate.
-message TopologyUpdateConfig {
-	option (fmp.model) = "rw";
-	// key uniquely identifies the update.
-	TopologyUpdateKey key = 1;
-	// status indicates the status of the topology update.
-	TopologyUpdateStatus status = 2;
-}
-
-// TopologyUpdate represents an update on to the workspace.
-message TopologyUpdate {
-	option (fmp.model) = "ro";
-	// key uniquely identifies the update.
-	TopologyUpdateKey key = 1;
-	// topology_element indicates the type of a network element.
-	TopologyElement topology_element = 2;
-	// topology_operation indicates the type of operation on the topology update.
-	TopologyOperation topology_operation = 3;
-	// status indicates the status of the topology update.
-	TopologyUpdateStatus status = 4;
-	// description describes the topology update in short.
-	google.protobuf.StringValue description = 5;
-}
-
-// WorkspaceKey uniquely identifies the workspace.
-message WorkspaceKey {
-	option (fmp.model_key) = true;
-	// workspace_id identifies the workspace uniquely.
-	google.protobuf.StringValue workspace_id = 1;
-}
-
-// TopologyUpdateSyncConfig model represents a point in time all updates
-// are to be accepted.
-message TopologyUpdateSyncConfig {
-	option (fmp.model) = "rw";
-	// key uniquely identifies the workspace.
-	WorkspaceKey key = 1;
-	// sync_time indicates the desired synchronization time with the live topology.
-	// If the sync_time indicated in the config takes effect without error,
-	// it will appear in the state model, and then all updates that occurred up to
-	// and including the timestamp in the state model will be accepted.
-	google.protobuf.Timestamp sync_time = 2;
-}
-
-// TopologyUpdateSync model represents the state of topology updates,
-// which consists of the time up to which updates are accepted.
-message TopologyUpdateSync {
-	option (fmp.model) = "ro";
-	// key uniquely identifies the workspace.
-	WorkspaceKey key = 1;
-	// sync_time indicates the time up to which the live topology is synchronized.
-	// All updates that happened up to this timestamp will be accepted.
-	google.protobuf.Timestamp sync_time = 2;
-}
-
 // AutofillActionKey identifies an autofill action.
 message AutofillActionKey {
 	option (fmp.model_key) = true;
@@ -848,6 +734,7 @@ message AutofillAction {
 
 // AutofillArgumentProviders is a map of dynamic argument name to argument provider information.
 message AutofillArgumentProviders {
+	// values is a map of dynamic argument name to argument provider information.
 	map<string, AutofillArgumentProvider> values = 1;
 }
 
@@ -869,6 +756,7 @@ message AutofillArgumentProvider {
 
 // AutofillProviderType describes the set of possible provided argument types.
 enum AutofillProviderType {
+	// AUTOFILL_PROVIDER_TYPE_UNSPECIFIED indicates that no provider type is specified.
 	AUTOFILL_PROVIDER_TYPE_UNSPECIFIED = 0;
 	// AUTOFILL_PROVIDER_TYPE_USER_SPECIFIED is when an argument is to be
 	// provided at runtime by the user.
