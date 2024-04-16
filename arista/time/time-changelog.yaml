@@ -10,3 +10,4 @@ Changes:
     - date: 2021-07-10
       description: Adding changelog where there wasn't one previously
       version: 1.0.0
+      cvaas: true
