@@ -166,6 +166,8 @@ enum StageStatus {
     // alone but rather this status plus the stage error. That is, no
     // error implies success and some error implies failure.
     STAGE_STATUS_COMPLETED = 2;
+    // STAGE_STATUS_NOT_STARTED means the stage has not been started.
+    STAGE_STATUS_NOT_STARTED = 3;
 }
 
 // Stage holds the configuration and status of a stage.
@@ -258,6 +260,9 @@ enum ChangeControlStatus {
      // a reset of the schedule flag by the system, and an error on the change
      // control reporting the details of the failure.
      CHANGE_CONTROL_STATUS_SCHEDULED = 3;
+     // CHANGE_CONTROL_STATUS_NOT_STARTED means the change control has not been
+     // started. This would include approved and not approved change controls.
+     CHANGE_CONTROL_STATUS_NOT_STARTED = 4;
 }
 
 // Filter is used to filter changecontrols for requested device ids.
