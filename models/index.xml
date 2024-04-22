@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo 0.125.0</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>arista/alert.v1/alert.proto
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Models on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/models/</link><description>Recent content in Models on Arista Networks FMP APIs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/models/index.xml" rel="self" type="application/rss+xml"/><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>arista/alert.v1/alert.proto
 Alert
 AlertConfig
 AzureOAuth
@@ -675,7 +675,9 @@ AutofillArgumentProviders
 AutofillArgumentProviders.ValuesEntry
 BooleanInputFieldProps
 CollectionInputFieldProps
-DeviceInfo
+Entities
+Entities.ValuesEntry
+Entity
 FloatInputFieldProps
 GroupInputFieldProps
 InputField
@@ -686,8 +688,6 @@ Inputs
 InputsConfig
 InputsKey
 IntegerInputFieldProps
-InterfaceInfo
-InterfaceInfos
 Layout
 ResolverInputFieldProps
 SecretInput
@@ -698,41 +698,41 @@ StudioKey
 StudioSummary
 TagMatcherInputFieldProps
 Template
-TopologyInput
-TopologyInputConfig
-TopologyInputKey
-TopologyUpdate
-TopologyUpdateConfig
-TopologyUpdateKey
-TopologyUpdateSync
-TopologyUpdateSyncConfig
-WorkspaceKey
 AutofillProviderType
+EntityType
 InputFieldType
 ResolverFieldDisplayMode
 ResolverFieldInputMode
 TagMatcherFieldMode
 TemplateType
-TopologyElement
-TopologyOperation
-TopologyUpdateStatus
 arista/studio.v1/services.gen.proto
 AssignedTagsConfigDeleteAllRequest
 AssignedTagsConfigDeleteAllResponse
 AssignedTagsConfigDeleteRequest
 AssignedTagsConfigDeleteResponse
+AssignedTagsConfigDeleteSomeRequest
+AssignedTagsConfigDeleteSomeResponse
 AssignedTagsConfigRequest
 AssignedTagsConfigResponse
 AssignedTagsConfigSetRequest
 AssignedTagsConfigSetResponse
 AssignedTagsConfigSetSomeRequest
 AssignedTagsConfigSetSomeResponse
+AssignedTagsConfigSomeRequest
+AssignedTagsConfigSomeResponse
 AssignedTagsConfigStreamRequest
 AssignedTagsConfigStreamResponse
 AssignedTagsRequest
 AssignedTagsResponse
+AssignedTagsSomeRequest
+AssignedTagsSomeResponse
 AssignedTagsStreamRequest
-AssignedTagsStreamResponse</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
+AssignedTagsStreamResponse
+AutofillActionConfigDeleteAllRequest
+AutofillActionConfigDeleteAllResponse
+AutofillActionConfigDeleteRequest
+AutofillActionConfigDeleteResponse
+AutofillActionConfigDeleteSomeRequest</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
 arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
