@@ -7,6 +7,12 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-03-19
+      description: add CHANGE_CONTROL_STATUS_NOT_STARTED enum
+      version: 1.0.7
+      onprem: true
+      cvaas: true
+
     - date: 2024-02-13
       description: Add startTime and endTime for the stage
       version: 1.0.6
