@@ -5778,10 +5778,12 @@
         "ENTITY_TYPE_INPUTS",
         "ENTITY_TYPE_ASSIGNED_TAGS",
         "ENTITY_TYPE_BUILD_HOOK",
-        "ENTITY_TYPE_AUTOFILL_ACTION"
+        "ENTITY_TYPE_AUTOFILL_ACTION",
+        "ENTITY_TYPE_CONFIGLET",
+        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT"
       ],
       "default": "ENTITY_TYPE_UNSPECIFIED",
-      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type."
+      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment entity type."
     },
     "arista.studio.v1.FloatInputFieldProps": {
       "type": "object",
