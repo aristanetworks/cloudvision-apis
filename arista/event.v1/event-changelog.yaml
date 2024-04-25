@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-04-25
+      description: Drop event_type field from UserEventCreationConfig
+      version: 1.1.2
+      cvaas: true
+      onprem: true
     - date: 2024-01-24
       description: Add new DEBUG event severity
       version: 1.1.1
