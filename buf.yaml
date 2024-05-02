@@ -1,10 +1,9 @@
-build:
-  roots:
-    - .
+version: v1
 lint:
   use:
     - DEFAULT
   except:
+    - FILE_LOWER_SNAKE_CASE
     - PACKAGE_DIRECTORY_MATCH
     - RPC_REQUEST_RESPONSE_UNIQUE
     - RPC_REQUEST_STANDARD_NAME
@@ -26,3 +25,18 @@ lint:
 breaking:
   use:
     - FILE
+  ignore:
+    - buf.yaml
+    - arista/tag.v1
+    - arista/alert.v1
+    - arista/bugexposure.v1
+    - arista/changecontrol.v1
+    - arista/event.v1
+    - arista/imagestatus.v1
+    - arista/imagestatus.v1
+    - arista/inventory.v1
+    - arista/lifecycle.v1
+    - arista/serviceaccount.v1
+    - arista/subscriptions
+    - arista/time
+
