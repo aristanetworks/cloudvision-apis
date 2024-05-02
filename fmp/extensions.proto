@@ -19,10 +19,12 @@ extend google.protobuf.MessageOptions {
     bool     no_default_filter = 51426;
     bool     require_set_key = 51427;
     string   unkeyed_model = 51428;
+    bool     paginated = 51429;
 }
 
 extend google.protobuf.FieldOptions {
     string   child_resource = 51449;
+    string 	 sortable = 51450;
 }
 
 extend google.protobuf.FileOptions {
