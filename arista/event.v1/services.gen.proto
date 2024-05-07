@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.event.v1;
-option go_package = "arista/resources/arista/event.v1;event";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/event.v1;event";
 
 import "arista/event.v1/event.proto";
 import "arista/time/time.proto";
@@ -277,10 +277,15 @@ message EventAnnotationConfigDeleteSomeResponse {
 };
 
 message EventAnnotationConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated EventAnnotationConfig partial_eq_filter = 1;
 };
 
 message EventAnnotationConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -455,10 +460,15 @@ message UserEventCreationConfigDeleteSomeResponse {
 };
 
 message UserEventCreationConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated UserEventCreationConfig partial_eq_filter = 1;
 };
 
 message UserEventCreationConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;

@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.event.v1;
 
-option go_package = "arista/resources/arista/event.v1;event";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/event.v1;event";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -215,8 +215,6 @@ message UserEventCreationConfig {
   google.protobuf.StringValue title = 3;
   // description is the description of the event
   google.protobuf.StringValue description = 4;
-  // event_type is the type of the event
-  google.protobuf.StringValue event_type = 5;
   // rule_id is the label of the rule associated with the event
   google.protobuf.StringValue rule_id = 6;
   // components is the components on which the event occurred

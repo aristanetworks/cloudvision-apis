@@ -1793,7 +1793,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -2182,10 +2182,6 @@
           "type": "string",
           "title": "description is the description of the event"
         },
-        "eventType": {
-          "type": "string",
-          "title": "event_type is the type of the event"
-        },
         "ruleId": {
           "type": "string",
           "title": "rule_id is the label of the rule associated with the event"
@@ -2207,7 +2203,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
