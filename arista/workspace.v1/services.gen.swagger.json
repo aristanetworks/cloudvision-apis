@@ -2602,10 +2602,11 @@
         "CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
         "CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE",
         "CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED",
-        "CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED"
+        "CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED",
+        "CONFIG_VALIDATION_SKIP_CAUSE_NO_CONFIG_SOURCES"
       ],
       "default": "CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
-      "description": "ConfigValidationSkipCause enumerates the set of reasons a device can skip the config\nvalidation stage.\n\n - CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED: CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates config validation skip cause is\nunspecified.\n - CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE: CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED: CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED indicates that the stage was\nskipped because the device has no configuration changes in the workspace."
+      "description": "ConfigValidationSkipCause enumerates the set of reasons a device can skip the config\nvalidation stage.\n\n - CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED: CONFIG_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates config validation skip cause is\nunspecified.\n - CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE: CONFIG_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED: CONFIG_VALIDATION_SKIP_CAUSE_CONFIG_UNCHANGED indicates that the stage was\nskipped because the device has no configuration changes in the workspace.\n - CONFIG_VALIDATION_SKIP_CAUSE_NO_CONFIG_SOURCES: CONFIG_VALIDATION_SKIP_CAUSE_NO_CONFIG_SOURCES indicates that the stage was\nskipped because the device has no config sources in the workspace."
     },
     "arista.workspace.v1.ConfigletBuildResult": {
       "type": "object",
