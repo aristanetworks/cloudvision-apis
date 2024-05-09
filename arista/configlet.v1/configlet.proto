@@ -63,6 +63,10 @@ message Configlet {
 	google.protobuf.Timestamp  last_modified_at = 8;
 	// last_modified_by is the user who last modified the Configlet.
 	google.protobuf.StringValue last_modified_by = 9;
+	// digest is the sha256 hash of the configlet body encoded in hexadecimal.
+	google.protobuf.StringValue digest = 10;
+	// size of configlet of body in bytes.
+	google.protobuf.Int64Value size = 11;
 }
 
 // ConfigletConfig updates a static configlet in a workspace.

@@ -371,10 +371,15 @@ message ConfigletAssignmentConfigDeleteSomeResponse {
 };
 
 message ConfigletAssignmentConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated ConfigletAssignmentConfig partial_eq_filter = 1;
 };
 
 message ConfigletAssignmentConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -549,10 +554,15 @@ message ConfigletConfigDeleteSomeResponse {
 };
 
 message ConfigletConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated ConfigletConfig partial_eq_filter = 1;
 };
 
 message ConfigletConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
