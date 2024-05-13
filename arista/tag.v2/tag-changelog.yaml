@@ -4,6 +4,12 @@
 # FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
 
 Changes:
+    - date: 2024-05-13
+      description: Update Batched GetAll/Subscribe verbs
+      version: 2.0.5
+      onprem: true
+      cvaas: true
+
     - date: 2024-02-15
       description: Regenerate service to update with new verbs
       version: 2.0.4
@@ -13,23 +19,15 @@ Changes:
     - date: 2022-10-26
       description: Rename ElementSubTypeHost as ElementSubTypeWorkLoadServer
       version: 2.0.3
-      onprem: true
-      cvaas: true
 
     - date: 2022-08-11
       description: Add ElementSubType enum and External CreatorType
       version: 2.0.2
-      onprem: true
-      cvaas: true
 
     - date: 2022-05-11
       description: Add creator type to TagAssignment
       version: 2.0.1
-      onprem: true
-      cvaas: true
 
     - date: 2021-05-03
       description: Initial revision
       version: 2.0.0
-      onprem: true
-      cvaas: true
