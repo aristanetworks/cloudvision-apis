@@ -900,6 +900,12 @@ ResponseStatus
 WorkspaceState
 arista/workspace.v1/services.gen.proto
 MetaResponse
+WorkspaceBatchedStreamRequest
+WorkspaceBatchedStreamResponse
+WorkspaceBuildBatchedStreamRequest
+WorkspaceBuildBatchedStreamResponse
+WorkspaceBuildDetailsBatchedStreamRequest
+WorkspaceBuildDetailsBatchedStreamResponse
 WorkspaceBuildDetailsRequest
 WorkspaceBuildDetailsResponse
 WorkspaceBuildDetailsSomeRequest
@@ -912,6 +918,8 @@ WorkspaceBuildSomeRequest
 WorkspaceBuildSomeResponse
 WorkspaceBuildStreamRequest
 WorkspaceBuildStreamResponse
+WorkspaceConfigBatchedStreamRequest
+WorkspaceConfigBatchedStreamResponse
 WorkspaceConfigDeleteAllRequest
 WorkspaceConfigDeleteAllResponse
 WorkspaceConfigDeleteRequest
@@ -922,12 +930,4 @@ WorkspaceConfigRequest
 WorkspaceConfigResponse
 WorkspaceConfigSetRequest
 WorkspaceConfigSetResponse
-WorkspaceConfigSetSomeRequest
-WorkspaceConfigSetSomeResponse
-WorkspaceConfigSomeRequest
-WorkspaceConfigSomeResponse
-WorkspaceConfigStreamRequest
-WorkspaceConfigStreamResponse
-WorkspaceRequest
-WorkspaceResponse
-WorkspaceSomeRequest</description></item></channel></rss>
+WorkspaceConfigSetSomeRequest</description></item></channel></rss>
