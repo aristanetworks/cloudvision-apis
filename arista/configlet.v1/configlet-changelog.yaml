@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-05-09
+      description: Add configlet body hash
+      onprem: true
+      cvaas: true
+      version: 1.0.4
     - date: 2023-11-17
       description: Add resource to github
       onprem: true
