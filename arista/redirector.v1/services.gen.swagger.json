@@ -176,24 +176,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.redirector.v1.AssignmentKey"
-              }
+              "$ref": "#/definitions/arista.redirector.v1.AssignmentSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -457,6 +445,19 @@
       },
       "description": "Assignment returns the information about the regional clusters that the\nsystem is assigned to. Each cluster consists of a series of hosts, each of\nwhich the client can use to connect."
     },
+    "arista.redirector.v1.AssignmentBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.redirector.v1.AssignmentStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.redirector.v1.AssignmentKey": {
       "type": "object",
       "properties": {
@@ -481,6 +482,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nAssignment instance in this response."
+        }
+      }
+    },
+    "arista.redirector.v1.AssignmentSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.redirector.v1.AssignmentKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

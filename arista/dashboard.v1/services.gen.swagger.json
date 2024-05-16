@@ -182,24 +182,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
-              }
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -689,16 +677,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of DashboardConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
-              }
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigDeleteSomeRequest"
             }
           }
         ],
@@ -735,24 +718,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
-              }
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -856,16 +827,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of DashboardConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
-              }
+              "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigSetSomeRequest"
             }
           }
         ],
@@ -1241,6 +1207,19 @@
       },
       "description": "Dashboard state contains all dashboard data."
     },
+    "arista.dashboard.v1.DashboardBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.dashboard.v1.DashboardConfig": {
       "type": "object",
       "properties": {
@@ -1262,6 +1241,19 @@
         }
       },
       "description": "DashboardConfig includes all user-editable dashboard fields."
+    },
+    "arista.dashboard.v1.DashboardConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.dashboard.v1.DashboardConfigDeleteAllResponse": {
       "type": "object",
@@ -1297,6 +1289,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
+          },
+          "title": "key contains a list of DashboardConfig keys to delete"
         }
       }
     },
@@ -1341,6 +1346,19 @@
         }
       }
     },
+    "arista.dashboard.v1.DashboardConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardConfig"
+          },
+          "description": "value contains a list of DashboardConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.dashboard.v1.DashboardConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -1349,6 +1367,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.dashboard.v1.DashboardConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -1453,6 +1488,23 @@
         }
       }
     },
+    "arista.dashboard.v1.DashboardSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.DashboardKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.dashboard.v1.DashboardSomeResponse": {
       "type": "object",
       "properties": {
@@ -1548,6 +1600,19 @@
         }
       },
       "description": "GlobalDashboardConfig holds global configs related to Dashboards."
+    },
+    "arista.dashboard.v1.GlobalDashboardConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.dashboard.v1.GlobalDashboardConfigResponse": {
       "type": "object",

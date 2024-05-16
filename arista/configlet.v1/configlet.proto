@@ -65,7 +65,7 @@ message Configlet {
 	google.protobuf.StringValue last_modified_by = 9;
 	// digest is the sha256 hash of the configlet body encoded in hexadecimal.
 	google.protobuf.StringValue digest = 10;
-	// size of configlet of body in bytes.
+	// size of configlet body in bytes.
 	google.protobuf.Int64Value size = 11;
 }
 

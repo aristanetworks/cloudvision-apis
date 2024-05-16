@@ -192,24 +192,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -617,24 +605,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1138,16 +1114,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of ConfigletAssignmentConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1184,24 +1155,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1305,16 +1264,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of ConfigletAssignmentConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigSetSomeRequest"
             }
           }
         ],
@@ -1751,16 +1705,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of ConfigletConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1797,24 +1746,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1918,16 +1855,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of ConfigletConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig"
-              }
+              "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigSetSomeRequest"
             }
           }
         ],
@@ -2149,6 +2081,15 @@
         "lastModifiedBy": {
           "type": "string",
           "description": "last_modified_by is the user who last modified the Configlet."
+        },
+        "digest": {
+          "type": "string",
+          "description": "digest is the sha256 hash of the configlet body encoded in hexadecimal."
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "description": "size of configlet body in bytes."
         }
       },
       "title": "Configlet is the state of a static configlet in a workspace or mainline.\nSubscribe and GetAll do not return the \"body\"\nUse GetOne to get the body of individual configlets"
@@ -2202,6 +2143,19 @@
       },
       "title": "ConfigletAssignment is the state of this assignment in a workspace/mainline"
     },
+    "arista.configlet.v1.ConfigletAssignmentBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletAssignmentConfig": {
       "type": "object",
       "properties": {
@@ -2237,12 +2191,25 @@
       },
       "description": "ConfigletAssignmentConfig are the the inputs to the static configlet studio.\nEach assignment assigns a list of configlets to the devices matching the tag query.\nIndividual assignments can have a list of \"child\" assignments.\nThe totality of these assignments form a list of tree hierarchies.\nUsing the corresponding GUI workflow should help explain this structure.\nWhen traversing a tree and assigning static configlets to devices, the following rules\nare applied:\n1) Tag queries at each level need to resolve to a subset of its parent's queries.\nDevices resolved in child assignments but which do not resolve in that of its parent's\nare skipped.\n2) Match policy determines how the assignment's devices get divied up amongst its children."
     },
+    "arista.configlet.v1.ConfigletAssignmentConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletAssignmentConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -2271,6 +2238,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+          },
+          "title": "key contains a list of ConfigletAssignmentConfig keys to delete"
         }
       }
     },
@@ -2315,6 +2295,19 @@
         }
       }
     },
+    "arista.configlet.v1.ConfigletAssignmentConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfig"
+          },
+          "description": "value contains a list of ConfigletAssignmentConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletAssignmentConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -2323,6 +2316,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletAssignmentConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2410,6 +2420,23 @@
         }
       }
     },
+    "arista.configlet.v1.ConfigletAssignmentSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletAssignmentSomeResponse": {
       "type": "object",
       "properties": {
@@ -2462,6 +2489,19 @@
         }
       }
     },
+    "arista.configlet.v1.ConfigletBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletConfig": {
       "type": "object",
       "properties": {
@@ -2491,12 +2531,25 @@
       },
       "description": "ConfigletConfig updates a static configlet in a workspace."
     },
+    "arista.configlet.v1.ConfigletConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -2525,6 +2578,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+          },
+          "title": "key contains a list of ConfigletConfig keys to delete"
         }
       }
     },
@@ -2569,6 +2635,19 @@
         }
       }
     },
+    "arista.configlet.v1.ConfigletConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletConfig"
+          },
+          "description": "value contains a list of ConfigletConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.configlet.v1.ConfigletConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -2577,6 +2656,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2661,6 +2757,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfiglet instance in this response."
+        }
+      }
+    },
+    "arista.configlet.v1.ConfigletSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

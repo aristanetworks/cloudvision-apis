@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-05-09
+    description: Update GetSome, SetSome, DeleteSome REST endpoints
+    version: 1.9.0
+    onprem: true
+    cvaas: true
   - date: 2024-03-06
     description: Add DefaultTemplate.display_name
     version: 1.8.3

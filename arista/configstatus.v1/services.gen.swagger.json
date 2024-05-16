@@ -240,24 +240,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -671,24 +659,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.ConfigurationSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1102,24 +1078,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1569,24 +1533,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1987,24 +1939,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummarySomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -2405,24 +2345,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
-              }
+              "$ref": "#/definitions/arista.configstatus.v1.SummarySomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -2685,6 +2613,19 @@
         }
       }
     },
+    "arista.configstatus.v1.ConfigDiffBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.ConfigDiffKey": {
       "type": "object",
       "properties": {
@@ -2736,6 +2677,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigDiff instance in this response."
+        }
+      }
+    },
+    "arista.configstatus.v1.ConfigDiffSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2923,6 +2881,19 @@
       },
       "title": "Configuration represents device's CLI configuration"
     },
+    "arista.configstatus.v1.ConfigurationBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigurationStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.ConfigurationResponse": {
       "type": "object",
       "properties": {
@@ -2934,6 +2905,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfiguration instance in this response."
+        }
+      }
+    },
+    "arista.configstatus.v1.ConfigurationSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -3094,6 +3082,19 @@
       },
       "description": "SecurityProfile holds the EOS configuration for the security profile."
     },
+    "arista.configstatus.v1.SecurityProfileBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileComplianceSummary": {
       "type": "object",
       "properties": {
@@ -3156,6 +3157,19 @@
       },
       "description": "SecurityProfileDiff holds the security profile configuration diff."
     },
+    "arista.configstatus.v1.SecurityProfileDiffBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileDiffResponse": {
       "type": "object",
       "properties": {
@@ -3167,6 +3181,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecurityProfileDiff instance in this response."
+        }
+      }
+    },
+    "arista.configstatus.v1.SecurityProfileDiffSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -3236,6 +3267,19 @@
       },
       "description": "SecurityProfileDiffSummary holds device compliance summary w.r.t security profile."
     },
+    "arista.configstatus.v1.SecurityProfileDiffSummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileDiffSummaryResponse": {
       "type": "object",
       "properties": {
@@ -3247,6 +3291,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecurityProfileDiffSummary instance in this response."
+        }
+      }
+    },
+    "arista.configstatus.v1.SecurityProfileDiffSummarySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -3316,6 +3377,23 @@
         }
       }
     },
+    "arista.configstatus.v1.SecurityProfileSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.configstatus.v1.SecurityProfileSomeResponse": {
       "type": "object",
       "properties": {
@@ -3379,6 +3457,19 @@
         }
       }
     },
+    "arista.configstatus.v1.SummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.configstatus.v1.SummaryKey": {
       "type": "object",
       "properties": {
@@ -3403,6 +3494,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSummary instance in this response."
+        }
+      }
+    },
+    "arista.configstatus.v1.SummarySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

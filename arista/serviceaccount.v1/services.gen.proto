@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Use of this source code is governed by the Apache License 2.0
 // that can be found in the COPYING file.
 
@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.serviceaccount.v1;
-option go_package = "arista/resources/arista/serviceaccount.v1;serviceaccount";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/serviceaccount.v1;serviceaccount";
 
 import "arista/serviceaccount.v1/serviceaccount.proto";
 import "arista/time/time.proto";
@@ -277,10 +277,15 @@ message AccountConfigDeleteSomeResponse {
 };
 
 message AccountConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated AccountConfig partial_eq_filter = 1;
 };
 
 message AccountConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -549,10 +554,15 @@ message TokenConfigDeleteSomeResponse {
 };
 
 message TokenConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated TokenConfig partial_eq_filter = 1;
 };
 
 message TokenConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;

@@ -7,16 +7,14 @@
 # New entries go on top.
 
 Changes:
-    - date: 2024-04-25
-      description: Drop event_type field from UserEventCreationConfig
-      version: 1.1.2
+    - date: 2024-05-09
+      description: Update GetSome, SetSome, DeleteSome REST endpoints
+      version: 1.2.0
       cvaas: true
       onprem: true
     - date: 2024-01-24
       description: Add new DEBUG event severity
       version: 1.1.1
-      cvaas: true
-      onprem: true
     - date: 2023-09-20
       description: Add event creation requests and field timestamp
       version: 1.1.0
@@ -26,7 +24,6 @@ Changes:
     - date: 2023-04-17
       description: Add field rule_id
       version: 1.0.8
-      cvaas: true
     - date: 2022-07-28
       description: Add additional component types
       version: 1.0.7

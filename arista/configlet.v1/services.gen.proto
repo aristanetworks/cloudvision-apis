@@ -117,6 +117,45 @@ message ConfigletStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ConfigletBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Configlet partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Configlet at end.
+	//     * Each Configlet response is fully-specified (all fields set).
+	//   * start: Returns the state of each Configlet at start, followed by updates until now.
+	//     * Each Configlet response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Configlet at start, followed by updates
+	//     until end.
+	//     * Each Configlet response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigletBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigletStreamResponse responses = 1;
+};
+
 service ConfigletService {
 	rpc GetOne (ConfigletRequest) returns (ConfigletResponse);
 	rpc GetSome (ConfigletSomeRequest) returns (stream ConfigletSomeResponse);
@@ -124,6 +163,8 @@ service ConfigletService {
 	rpc Subscribe (ConfigletStreamRequest) returns (stream ConfigletStreamResponse);
 	rpc GetMeta (ConfigletStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (ConfigletStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ConfigletBatchedStreamRequest) returns (stream ConfigletBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigletBatchedStreamRequest) returns (stream ConfigletBatchedStreamResponse);
 }
 
 message ConfigletAssignmentRequest {
@@ -211,6 +252,45 @@ message ConfigletAssignmentStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ConfigletAssignmentBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ConfigletAssignment partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ConfigletAssignment at end.
+	//     * Each ConfigletAssignment response is fully-specified (all fields set).
+	//   * start: Returns the state of each ConfigletAssignment at start, followed by updates until now.
+	//     * Each ConfigletAssignment response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ConfigletAssignment at start, followed by updates
+	//     until end.
+	//     * Each ConfigletAssignment response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigletAssignmentBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigletAssignmentStreamResponse responses = 1;
+};
+
 service ConfigletAssignmentService {
 	rpc GetOne (ConfigletAssignmentRequest) returns (ConfigletAssignmentResponse);
 	rpc GetSome (ConfigletAssignmentSomeRequest) returns (stream ConfigletAssignmentSomeResponse);
@@ -218,6 +298,8 @@ service ConfigletAssignmentService {
 	rpc Subscribe (ConfigletAssignmentStreamRequest) returns (stream ConfigletAssignmentStreamResponse);
 	rpc GetMeta (ConfigletAssignmentStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (ConfigletAssignmentStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ConfigletAssignmentBatchedStreamRequest) returns (stream ConfigletAssignmentBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigletAssignmentBatchedStreamRequest) returns (stream ConfigletAssignmentBatchedStreamResponse);
 }
 
 message ConfigletAssignmentConfigRequest {
@@ -303,6 +385,45 @@ message ConfigletAssignmentConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message ConfigletAssignmentConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ConfigletAssignmentConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ConfigletAssignmentConfig at end.
+	//     * Each ConfigletAssignmentConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ConfigletAssignmentConfig at start, followed by updates until now.
+	//     * Each ConfigletAssignmentConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ConfigletAssignmentConfig at start, followed by updates
+	//     until end.
+	//     * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigletAssignmentConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigletAssignmentConfigStreamResponse responses = 1;
 };
 
 message ConfigletAssignmentConfigSetRequest {
@@ -401,6 +522,8 @@ service ConfigletAssignmentConfigService {
 	rpc Delete (ConfigletAssignmentConfigDeleteRequest) returns (ConfigletAssignmentConfigDeleteResponse);
 	rpc DeleteSome (ConfigletAssignmentConfigDeleteSomeRequest) returns (stream ConfigletAssignmentConfigDeleteSomeResponse);
 	rpc DeleteAll (ConfigletAssignmentConfigDeleteAllRequest) returns (stream ConfigletAssignmentConfigDeleteAllResponse);
+	rpc GetAllBatched (ConfigletAssignmentConfigBatchedStreamRequest) returns (stream ConfigletAssignmentConfigBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigletAssignmentConfigBatchedStreamRequest) returns (stream ConfigletAssignmentConfigBatchedStreamResponse);
 }
 
 message ConfigletConfigRequest {
@@ -486,6 +609,45 @@ message ConfigletConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message ConfigletConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ConfigletConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ConfigletConfig at end.
+	//     * Each ConfigletConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ConfigletConfig at start, followed by updates until now.
+	//     * Each ConfigletConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ConfigletConfig at start, followed by updates
+	//     until end.
+	//     * Each ConfigletConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigletConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigletConfigStreamResponse responses = 1;
 };
 
 message ConfigletConfigSetRequest {
@@ -584,4 +746,6 @@ service ConfigletConfigService {
 	rpc Delete (ConfigletConfigDeleteRequest) returns (ConfigletConfigDeleteResponse);
 	rpc DeleteSome (ConfigletConfigDeleteSomeRequest) returns (stream ConfigletConfigDeleteSomeResponse);
 	rpc DeleteAll (ConfigletConfigDeleteAllRequest) returns (stream ConfigletConfigDeleteAllResponse);
+	rpc GetAllBatched (ConfigletConfigBatchedStreamRequest) returns (stream ConfigletConfigBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigletConfigBatchedStreamRequest) returns (stream ConfigletConfigBatchedStreamResponse);
 }

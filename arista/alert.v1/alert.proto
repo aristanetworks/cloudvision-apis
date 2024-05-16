@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.alert.v1;
 
-option go_package = "arista/resources/arista/alert.v1;alert";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/alert.v1;alert";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";

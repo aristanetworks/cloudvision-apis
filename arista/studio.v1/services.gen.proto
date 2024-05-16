@@ -120,6 +120,45 @@ message AssignedTagsStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message AssignedTagsBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated AssignedTags partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each AssignedTags at end.
+	//     * Each AssignedTags response is fully-specified (all fields set).
+	//   * start: Returns the state of each AssignedTags at start, followed by updates until now.
+	//     * Each AssignedTags response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each AssignedTags at start, followed by updates
+	//     until end.
+	//     * Each AssignedTags response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message AssignedTagsBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated AssignedTagsStreamResponse responses = 1;
+};
+
 service AssignedTagsService {
 	rpc GetOne (AssignedTagsRequest) returns (AssignedTagsResponse);
 	rpc GetSome (AssignedTagsSomeRequest) returns (stream AssignedTagsSomeResponse);
@@ -127,6 +166,8 @@ service AssignedTagsService {
 	rpc Subscribe (AssignedTagsStreamRequest) returns (stream AssignedTagsStreamResponse);
 	rpc GetMeta (AssignedTagsStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (AssignedTagsStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (AssignedTagsBatchedStreamRequest) returns (stream AssignedTagsBatchedStreamResponse);
+	rpc SubscribeBatched (AssignedTagsBatchedStreamRequest) returns (stream AssignedTagsBatchedStreamResponse);
 }
 
 message AssignedTagsConfigRequest {
@@ -212,6 +253,45 @@ message AssignedTagsConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message AssignedTagsConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated AssignedTagsConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each AssignedTagsConfig at end.
+	//     * Each AssignedTagsConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each AssignedTagsConfig at start, followed by updates until now.
+	//     * Each AssignedTagsConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each AssignedTagsConfig at start, followed by updates
+	//     until end.
+	//     * Each AssignedTagsConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message AssignedTagsConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated AssignedTagsConfigStreamResponse responses = 1;
 };
 
 message AssignedTagsConfigSetRequest {
@@ -310,6 +390,8 @@ service AssignedTagsConfigService {
 	rpc Delete (AssignedTagsConfigDeleteRequest) returns (AssignedTagsConfigDeleteResponse);
 	rpc DeleteSome (AssignedTagsConfigDeleteSomeRequest) returns (stream AssignedTagsConfigDeleteSomeResponse);
 	rpc DeleteAll (AssignedTagsConfigDeleteAllRequest) returns (stream AssignedTagsConfigDeleteAllResponse);
+	rpc GetAllBatched (AssignedTagsConfigBatchedStreamRequest) returns (stream AssignedTagsConfigBatchedStreamResponse);
+	rpc SubscribeBatched (AssignedTagsConfigBatchedStreamRequest) returns (stream AssignedTagsConfigBatchedStreamResponse);
 }
 
 message AutofillActionRequest {
@@ -397,6 +479,45 @@ message AutofillActionStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message AutofillActionBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated AutofillAction partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each AutofillAction at end.
+	//     * Each AutofillAction response is fully-specified (all fields set).
+	//   * start: Returns the state of each AutofillAction at start, followed by updates until now.
+	//     * Each AutofillAction response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each AutofillAction at start, followed by updates
+	//     until end.
+	//     * Each AutofillAction response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message AutofillActionBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated AutofillActionStreamResponse responses = 1;
+};
+
 service AutofillActionService {
 	rpc GetOne (AutofillActionRequest) returns (AutofillActionResponse);
 	rpc GetSome (AutofillActionSomeRequest) returns (stream AutofillActionSomeResponse);
@@ -404,6 +525,8 @@ service AutofillActionService {
 	rpc Subscribe (AutofillActionStreamRequest) returns (stream AutofillActionStreamResponse);
 	rpc GetMeta (AutofillActionStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (AutofillActionStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (AutofillActionBatchedStreamRequest) returns (stream AutofillActionBatchedStreamResponse);
+	rpc SubscribeBatched (AutofillActionBatchedStreamRequest) returns (stream AutofillActionBatchedStreamResponse);
 }
 
 message AutofillActionConfigRequest {
@@ -489,6 +612,45 @@ message AutofillActionConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message AutofillActionConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated AutofillActionConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each AutofillActionConfig at end.
+	//     * Each AutofillActionConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each AutofillActionConfig at start, followed by updates until now.
+	//     * Each AutofillActionConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each AutofillActionConfig at start, followed by updates
+	//     until end.
+	//     * Each AutofillActionConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message AutofillActionConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated AutofillActionConfigStreamResponse responses = 1;
 };
 
 message AutofillActionConfigSetRequest {
@@ -587,6 +749,8 @@ service AutofillActionConfigService {
 	rpc Delete (AutofillActionConfigDeleteRequest) returns (AutofillActionConfigDeleteResponse);
 	rpc DeleteSome (AutofillActionConfigDeleteSomeRequest) returns (stream AutofillActionConfigDeleteSomeResponse);
 	rpc DeleteAll (AutofillActionConfigDeleteAllRequest) returns (stream AutofillActionConfigDeleteAllResponse);
+	rpc GetAllBatched (AutofillActionConfigBatchedStreamRequest) returns (stream AutofillActionConfigBatchedStreamResponse);
+	rpc SubscribeBatched (AutofillActionConfigBatchedStreamRequest) returns (stream AutofillActionConfigBatchedStreamResponse);
 }
 
 message InputsRequest {
@@ -674,6 +838,45 @@ message InputsStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message InputsBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Inputs partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Inputs at end.
+	//     * Each Inputs response is fully-specified (all fields set).
+	//   * start: Returns the state of each Inputs at start, followed by updates until now.
+	//     * Each Inputs response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Inputs at start, followed by updates
+	//     until end.
+	//     * Each Inputs response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message InputsBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated InputsStreamResponse responses = 1;
+};
+
 service InputsService {
 	rpc GetOne (InputsRequest) returns (InputsResponse);
 	rpc GetSome (InputsSomeRequest) returns (stream InputsSomeResponse);
@@ -681,6 +884,8 @@ service InputsService {
 	rpc Subscribe (InputsStreamRequest) returns (stream InputsStreamResponse);
 	rpc GetMeta (InputsStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (InputsStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (InputsBatchedStreamRequest) returns (stream InputsBatchedStreamResponse);
+	rpc SubscribeBatched (InputsBatchedStreamRequest) returns (stream InputsBatchedStreamResponse);
 }
 
 message InputsConfigRequest {
@@ -766,6 +971,45 @@ message InputsConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message InputsConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated InputsConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each InputsConfig at end.
+	//     * Each InputsConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each InputsConfig at start, followed by updates until now.
+	//     * Each InputsConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each InputsConfig at start, followed by updates
+	//     until end.
+	//     * Each InputsConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message InputsConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated InputsConfigStreamResponse responses = 1;
 };
 
 message InputsConfigSetRequest {
@@ -864,6 +1108,8 @@ service InputsConfigService {
 	rpc Delete (InputsConfigDeleteRequest) returns (InputsConfigDeleteResponse);
 	rpc DeleteSome (InputsConfigDeleteSomeRequest) returns (stream InputsConfigDeleteSomeResponse);
 	rpc DeleteAll (InputsConfigDeleteAllRequest) returns (stream InputsConfigDeleteAllResponse);
+	rpc GetAllBatched (InputsConfigBatchedStreamRequest) returns (stream InputsConfigBatchedStreamResponse);
+	rpc SubscribeBatched (InputsConfigBatchedStreamRequest) returns (stream InputsConfigBatchedStreamResponse);
 }
 
 message SecretInputRequest {
@@ -951,6 +1197,45 @@ message SecretInputStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message SecretInputBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecretInput partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecretInput at end.
+	//     * Each SecretInput response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecretInput at start, followed by updates until now.
+	//     * Each SecretInput response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecretInput at start, followed by updates
+	//     until end.
+	//     * Each SecretInput response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message SecretInputBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated SecretInputStreamResponse responses = 1;
+};
+
 service SecretInputService {
 	rpc GetOne (SecretInputRequest) returns (SecretInputResponse);
 	rpc GetSome (SecretInputSomeRequest) returns (stream SecretInputSomeResponse);
@@ -958,6 +1243,8 @@ service SecretInputService {
 	rpc Subscribe (SecretInputStreamRequest) returns (stream SecretInputStreamResponse);
 	rpc GetMeta (SecretInputStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (SecretInputStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (SecretInputBatchedStreamRequest) returns (stream SecretInputBatchedStreamResponse);
+	rpc SubscribeBatched (SecretInputBatchedStreamRequest) returns (stream SecretInputBatchedStreamResponse);
 }
 
 message StudioRequest {
@@ -1045,6 +1332,45 @@ message StudioStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message StudioBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Studio partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Studio at end.
+	//     * Each Studio response is fully-specified (all fields set).
+	//   * start: Returns the state of each Studio at start, followed by updates until now.
+	//     * Each Studio response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Studio at start, followed by updates
+	//     until end.
+	//     * Each Studio response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message StudioBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated StudioStreamResponse responses = 1;
+};
+
 service StudioService {
 	rpc GetOne (StudioRequest) returns (StudioResponse);
 	rpc GetSome (StudioSomeRequest) returns (stream StudioSomeResponse);
@@ -1052,6 +1378,8 @@ service StudioService {
 	rpc Subscribe (StudioStreamRequest) returns (stream StudioStreamResponse);
 	rpc GetMeta (StudioStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (StudioStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (StudioBatchedStreamRequest) returns (stream StudioBatchedStreamResponse);
+	rpc SubscribeBatched (StudioBatchedStreamRequest) returns (stream StudioBatchedStreamResponse);
 }
 
 message StudioConfigRequest {
@@ -1137,6 +1465,45 @@ message StudioConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message StudioConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated StudioConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each StudioConfig at end.
+	//     * Each StudioConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each StudioConfig at start, followed by updates until now.
+	//     * Each StudioConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each StudioConfig at start, followed by updates
+	//     until end.
+	//     * Each StudioConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message StudioConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated StudioConfigStreamResponse responses = 1;
 };
 
 message StudioConfigSetRequest {
@@ -1235,6 +1602,8 @@ service StudioConfigService {
 	rpc Delete (StudioConfigDeleteRequest) returns (StudioConfigDeleteResponse);
 	rpc DeleteSome (StudioConfigDeleteSomeRequest) returns (stream StudioConfigDeleteSomeResponse);
 	rpc DeleteAll (StudioConfigDeleteAllRequest) returns (stream StudioConfigDeleteAllResponse);
+	rpc GetAllBatched (StudioConfigBatchedStreamRequest) returns (stream StudioConfigBatchedStreamResponse);
+	rpc SubscribeBatched (StudioConfigBatchedStreamRequest) returns (stream StudioConfigBatchedStreamResponse);
 }
 
 message StudioSummaryRequest {
@@ -1322,6 +1691,45 @@ message StudioSummaryStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message StudioSummaryBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated StudioSummary partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each StudioSummary at end.
+	//     * Each StudioSummary response is fully-specified (all fields set).
+	//   * start: Returns the state of each StudioSummary at start, followed by updates until now.
+	//     * Each StudioSummary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each StudioSummary at start, followed by updates
+	//     until end.
+	//     * Each StudioSummary response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message StudioSummaryBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated StudioSummaryStreamResponse responses = 1;
+};
+
 service StudioSummaryService {
 	rpc GetOne (StudioSummaryRequest) returns (StudioSummaryResponse);
 	rpc GetSome (StudioSummarySomeRequest) returns (stream StudioSummarySomeResponse);
@@ -1329,4 +1737,6 @@ service StudioSummaryService {
 	rpc Subscribe (StudioSummaryStreamRequest) returns (stream StudioSummaryStreamResponse);
 	rpc GetMeta (StudioSummaryStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (StudioSummaryStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (StudioSummaryBatchedStreamRequest) returns (stream StudioSummaryBatchedStreamResponse);
+	rpc SubscribeBatched (StudioSummaryBatchedStreamRequest) returns (stream StudioSummaryBatchedStreamResponse);
 }

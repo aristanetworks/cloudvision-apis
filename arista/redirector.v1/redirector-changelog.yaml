@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-05-09
+      description: Update GetSome REST endpoint
+      version: 1.1.0
+      cvaas: true
     - date: 2024-03-28
       description: Update available APIs
       version: 1.0.2

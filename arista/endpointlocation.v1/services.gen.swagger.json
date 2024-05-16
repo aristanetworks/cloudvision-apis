@@ -176,24 +176,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey"
-              }
+              "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -556,6 +544,19 @@
       },
       "description": "EndpointLocation is the entrypoint to searching for\nendpoints."
     },
+    "arista.endpointlocation.v1.EndpointLocationBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.endpointlocation.v1.EndpointLocationKey": {
       "type": "object",
       "properties": {
@@ -580,6 +581,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nEndpointLocation instance in this response."
+        }
+      }
+    },
+    "arista.endpointlocation.v1.EndpointLocationSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.endpointlocation.v1.EndpointLocationKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

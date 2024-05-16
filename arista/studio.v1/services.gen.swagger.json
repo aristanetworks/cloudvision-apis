@@ -210,24 +210,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -731,16 +719,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of AssignedTagsConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigDeleteSomeRequest"
             }
           }
         ],
@@ -777,24 +760,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -898,16 +869,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of AssignedTagsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfig"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigSetSomeRequest"
             }
           }
         ],
@@ -1255,24 +1221,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1790,16 +1744,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of AutofillActionConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1836,24 +1785,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1957,16 +1894,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of AutofillActionConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.AutofillActionConfig"
-              }
+              "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigSetSomeRequest"
             }
           }
         ],
@@ -2318,24 +2250,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.InputsKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.InputsSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -2861,16 +2781,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of InputsConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.InputsKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.InputsConfigDeleteSomeRequest"
             }
           }
         ],
@@ -2907,24 +2822,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.InputsKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.InputsConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -3028,16 +2931,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of InputsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.InputsConfig"
-              }
+              "$ref": "#/definitions/arista.studio.v1.InputsConfigSetSomeRequest"
             }
           }
         ],
@@ -3389,24 +3287,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.InputsKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.SecretInputSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -3814,24 +3700,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.StudioSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -4335,16 +4209,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of StudioConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.StudioConfigDeleteSomeRequest"
             }
           }
         ],
@@ -4381,24 +4250,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.StudioConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -4502,16 +4359,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of StudioConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioConfig"
-              }
+              "$ref": "#/definitions/arista.studio.v1.StudioConfigSetSomeRequest"
             }
           }
         ],
@@ -4852,24 +4704,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.studio.v1.StudioKey"
-              }
+              "$ref": "#/definitions/arista.studio.v1.StudioSummarySomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -5151,6 +4991,19 @@
       },
       "description": "AssignedTags can be used to retrieve additional metadata about a\nstudio's `AssignedTagsConfig`."
     },
+    "arista.studio.v1.AssignedTagsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AssignedTagsConfig": {
       "type": "object",
       "properties": {
@@ -5168,6 +5021,19 @@
         }
       },
       "description": "AssignedTagsConfig holds a configuration to assign a studio to a set of devices\nmatching a tag query."
+    },
+    "arista.studio.v1.AssignedTagsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AssignedTagsConfigDeleteAllResponse": {
       "type": "object",
@@ -5203,6 +5069,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.studio.v1.AssignedTagsConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          },
+          "title": "key contains a list of AssignedTagsConfig keys to delete"
         }
       }
     },
@@ -5247,6 +5126,19 @@
         }
       }
     },
+    "arista.studio.v1.AssignedTagsConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfig"
+          },
+          "description": "value contains a list of AssignedTagsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.studio.v1.AssignedTagsConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -5255,6 +5147,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.AssignedTagsConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -5321,6 +5230,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nAssignedTags instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.AssignedTagsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -5416,6 +5342,19 @@
       },
       "description": "AutofillAction can be used to retrieve additional metadata about an autofill action."
     },
+    "arista.studio.v1.AutofillActionBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AutofillActionConfig": {
       "type": "object",
       "properties": {
@@ -5441,6 +5380,19 @@
         }
       },
       "description": "AutofillActionConfig contains configuration information for an autofill action."
+    },
+    "arista.studio.v1.AutofillActionConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AutofillActionConfigDeleteAllResponse": {
       "type": "object",
@@ -5476,6 +5428,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.studio.v1.AutofillActionConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+          },
+          "title": "key contains a list of AutofillActionConfig keys to delete"
         }
       }
     },
@@ -5520,6 +5485,19 @@
         }
       }
     },
+    "arista.studio.v1.AutofillActionConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfig"
+          },
+          "description": "value contains a list of AutofillActionConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.studio.v1.AutofillActionConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -5528,6 +5506,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.AutofillActionConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -5617,6 +5612,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nAutofillAction instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.AutofillActionSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -5783,7 +5795,7 @@
         "ENTITY_TYPE_CONFIGLET_ASSIGNMENT"
       ],
       "default": "ENTITY_TYPE_UNSPECIFIED",
-      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment entity type."
+      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic config studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static config studio."
     },
     "arista.studio.v1.FloatInputFieldProps": {
       "type": "object",
@@ -5959,6 +5971,19 @@
       },
       "description": "Inputs is used to retrieve the existing inputs to a studio."
     },
+    "arista.studio.v1.InputsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.InputsConfig": {
       "type": "object",
       "properties": {
@@ -5976,6 +6001,19 @@
         }
       },
       "description": "InputsConfig is used to input values into a studio.\n\nNOTE: Setting an input at a higher path overwrite any prior\n`Set`s at lower paths. E.g.,\n\n1. Set `[\"A\", \"X\"]` to `\"foo\"`\n2. Set `[\"A\", \"Y\"]` to `\"bar\"`\n3. Set `[\"A\"]` to `{\"X\": \"bar\"}`\n\nThe resulting inputs would be:\n```\n{ \"A\": { \"X\": \"bar\" } }\n```"
+    },
+    "arista.studio.v1.InputsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.InputsConfigDeleteAllResponse": {
       "type": "object",
@@ -6011,6 +6049,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.studio.v1.InputsConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsKey"
+          },
+          "title": "key contains a list of InputsConfig keys to delete"
         }
       }
     },
@@ -6055,6 +6106,19 @@
         }
       }
     },
+    "arista.studio.v1.InputsConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsConfig"
+          },
+          "description": "value contains a list of InputsConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.studio.v1.InputsConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -6063,6 +6127,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.InputsConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -6152,6 +6233,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nInputs instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.InputsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -6325,6 +6423,19 @@
       },
       "description": "SecretInput can be used to retrieve the unmasked value of\na secret in a studio."
     },
+    "arista.studio.v1.SecretInputBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.SecretInputResponse": {
       "type": "object",
       "properties": {
@@ -6336,6 +6447,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecretInput instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.SecretInputSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -6478,6 +6606,19 @@
       },
       "description": "Studio holds the active state for a studio."
     },
+    "arista.studio.v1.StudioBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioConfig": {
       "type": "object",
       "properties": {
@@ -6507,6 +6648,19 @@
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."
+    },
+    "arista.studio.v1.StudioConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.StudioConfigDeleteAllResponse": {
       "type": "object",
@@ -6542,6 +6696,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.studio.v1.StudioConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          },
+          "title": "key contains a list of StudioConfig keys to delete"
         }
       }
     },
@@ -6586,6 +6753,19 @@
         }
       }
     },
+    "arista.studio.v1.StudioConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioConfig"
+          },
+          "description": "value contains a list of StudioConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.studio.v1.StudioConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -6594,6 +6774,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.studio.v1.StudioConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -6681,6 +6878,23 @@
         }
       }
     },
+    "arista.studio.v1.StudioSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.studio.v1.StudioSomeResponse": {
       "type": "object",
       "properties": {
@@ -6763,6 +6977,19 @@
       },
       "description": "StudioSummary holds basic information about a studio."
     },
+    "arista.studio.v1.StudioSummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioSummaryResponse": {
       "type": "object",
       "properties": {
@@ -6774,6 +7001,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudioSummary instance in this response."
+        }
+      }
+    },
+    "arista.studio.v1.StudioSummarySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

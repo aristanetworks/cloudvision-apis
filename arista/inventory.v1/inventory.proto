@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.inventory.v1;
 
-option go_package = "arista/resources/arista/inventory.v1;inventory";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/inventory.v1;inventory";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";

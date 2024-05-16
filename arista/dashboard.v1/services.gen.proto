@@ -121,6 +121,49 @@ message DashboardStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message DashboardBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Dashboard partial_eq_filter = 1;
+	// For each Dashboard in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given Dashboard is streamed to the user.
+	repeated Filter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Dashboard at end.
+	//     * Each Dashboard response is fully-specified (all fields set).
+	//   * start: Returns the state of each Dashboard at start, followed by updates until now.
+	//     * Each Dashboard response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Dashboard at start, followed by updates
+	//     until end.
+	//     * Each Dashboard response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DashboardBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DashboardStreamResponse responses = 1;
+};
+
 service DashboardService {
 	rpc GetOne (DashboardRequest) returns (DashboardResponse);
 	rpc GetSome (DashboardSomeRequest) returns (stream DashboardSomeResponse);
@@ -128,6 +171,8 @@ service DashboardService {
 	rpc Subscribe (DashboardStreamRequest) returns (stream DashboardStreamResponse);
 	rpc GetMeta (DashboardStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (DashboardStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (DashboardBatchedStreamRequest) returns (stream DashboardBatchedStreamResponse);
+	rpc SubscribeBatched (DashboardBatchedStreamRequest) returns (stream DashboardBatchedStreamResponse);
 }
 
 message DashboardConfigRequest {
@@ -213,6 +258,45 @@ message DashboardConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message DashboardConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DashboardConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DashboardConfig at end.
+	//     * Each DashboardConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DashboardConfig at start, followed by updates until now.
+	//     * Each DashboardConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DashboardConfig at start, followed by updates
+	//     until end.
+	//     * Each DashboardConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DashboardConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DashboardConfigStreamResponse responses = 1;
 };
 
 message DashboardConfigSetRequest {
@@ -311,6 +395,8 @@ service DashboardConfigService {
 	rpc Delete (DashboardConfigDeleteRequest) returns (DashboardConfigDeleteResponse);
 	rpc DeleteSome (DashboardConfigDeleteSomeRequest) returns (stream DashboardConfigDeleteSomeResponse);
 	rpc DeleteAll (DashboardConfigDeleteAllRequest) returns (stream DashboardConfigDeleteAllResponse);
+	rpc GetAllBatched (DashboardConfigBatchedStreamRequest) returns (stream DashboardConfigBatchedStreamResponse);
+	rpc SubscribeBatched (DashboardConfigBatchedStreamRequest) returns (stream DashboardConfigBatchedStreamResponse);
 }
 
 message GlobalDashboardConfigRequest {
@@ -374,6 +460,45 @@ message GlobalDashboardConfigStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message GlobalDashboardConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated GlobalDashboardConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each GlobalDashboardConfig at end.
+	//     * Each GlobalDashboardConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.
+	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates
+	//     until end.
+	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message GlobalDashboardConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated GlobalDashboardConfigStreamResponse responses = 1;
+};
+
 message GlobalDashboardConfigSetRequest {
 	// GlobalDashboardConfig carries the value to set into the datastore.
 	// See the documentation on the GlobalDashboardConfig struct for which fields are required.
@@ -404,4 +529,6 @@ service GlobalDashboardConfigService {
 	rpc Set (GlobalDashboardConfigSetRequest) returns (GlobalDashboardConfigSetResponse);
 	
 	
+	rpc GetAllBatched (GlobalDashboardConfigBatchedStreamRequest) returns (stream GlobalDashboardConfigBatchedStreamResponse);
+	rpc SubscribeBatched (GlobalDashboardConfigBatchedStreamRequest) returns (stream GlobalDashboardConfigBatchedStreamResponse);
 }

@@ -120,6 +120,45 @@ message ConfigDiffStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ConfigDiffBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ConfigDiff partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ConfigDiff at end.
+	//     * Each ConfigDiff response is fully-specified (all fields set).
+	//   * start: Returns the state of each ConfigDiff at start, followed by updates until now.
+	//     * Each ConfigDiff response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ConfigDiff at start, followed by updates
+	//     until end.
+	//     * Each ConfigDiff response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigDiffBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigDiffStreamResponse responses = 1;
+};
+
 service ConfigDiffService {
 	rpc GetOne (ConfigDiffRequest) returns (ConfigDiffResponse);
 	rpc GetSome (ConfigDiffSomeRequest) returns (stream ConfigDiffSomeResponse);
@@ -127,6 +166,8 @@ service ConfigDiffService {
 	rpc Subscribe (ConfigDiffStreamRequest) returns (stream ConfigDiffStreamResponse);
 	rpc GetMeta (ConfigDiffStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (ConfigDiffStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ConfigDiffBatchedStreamRequest) returns (stream ConfigDiffBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigDiffBatchedStreamRequest) returns (stream ConfigDiffBatchedStreamResponse);
 }
 
 message ConfigurationRequest {
@@ -214,6 +255,45 @@ message ConfigurationStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ConfigurationBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Configuration partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Configuration at end.
+	//     * Each Configuration response is fully-specified (all fields set).
+	//   * start: Returns the state of each Configuration at start, followed by updates until now.
+	//     * Each Configuration response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Configuration at start, followed by updates
+	//     until end.
+	//     * Each Configuration response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ConfigurationBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ConfigurationStreamResponse responses = 1;
+};
+
 service ConfigurationService {
 	rpc GetOne (ConfigurationRequest) returns (ConfigurationResponse);
 	rpc GetSome (ConfigurationSomeRequest) returns (stream ConfigurationSomeResponse);
@@ -221,6 +301,8 @@ service ConfigurationService {
 	rpc Subscribe (ConfigurationStreamRequest) returns (stream ConfigurationStreamResponse);
 	rpc GetMeta (ConfigurationStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (ConfigurationStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ConfigurationBatchedStreamRequest) returns (stream ConfigurationBatchedStreamResponse);
+	rpc SubscribeBatched (ConfigurationBatchedStreamRequest) returns (stream ConfigurationBatchedStreamResponse);
 }
 
 message SecurityProfileRequest {
@@ -308,6 +390,45 @@ message SecurityProfileStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message SecurityProfileBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfile partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfile at end.
+	//     * Each SecurityProfile response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfile at start, followed by updates until now.
+	//     * Each SecurityProfile response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfile at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfile response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message SecurityProfileBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated SecurityProfileStreamResponse responses = 1;
+};
+
 service SecurityProfileService {
 	rpc GetOne (SecurityProfileRequest) returns (SecurityProfileResponse);
 	rpc GetSome (SecurityProfileSomeRequest) returns (stream SecurityProfileSomeResponse);
@@ -315,6 +436,8 @@ service SecurityProfileService {
 	rpc Subscribe (SecurityProfileStreamRequest) returns (stream SecurityProfileStreamResponse);
 	rpc GetMeta (SecurityProfileStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (SecurityProfileStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (SecurityProfileBatchedStreamRequest) returns (stream SecurityProfileBatchedStreamResponse);
+	rpc SubscribeBatched (SecurityProfileBatchedStreamRequest) returns (stream SecurityProfileBatchedStreamResponse);
 }
 
 message SecurityProfileDiffRequest {
@@ -402,6 +525,45 @@ message SecurityProfileDiffStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message SecurityProfileDiffBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfileDiff partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfileDiff at end.
+	//     * Each SecurityProfileDiff response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfileDiff at start, followed by updates until now.
+	//     * Each SecurityProfileDiff response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfileDiff at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfileDiff response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message SecurityProfileDiffBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated SecurityProfileDiffStreamResponse responses = 1;
+};
+
 service SecurityProfileDiffService {
 	rpc GetOne (SecurityProfileDiffRequest) returns (SecurityProfileDiffResponse);
 	rpc GetSome (SecurityProfileDiffSomeRequest) returns (stream SecurityProfileDiffSomeResponse);
@@ -409,6 +571,8 @@ service SecurityProfileDiffService {
 	rpc Subscribe (SecurityProfileDiffStreamRequest) returns (stream SecurityProfileDiffStreamResponse);
 	rpc GetMeta (SecurityProfileDiffStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (SecurityProfileDiffStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (SecurityProfileDiffBatchedStreamRequest) returns (stream SecurityProfileDiffBatchedStreamResponse);
+	rpc SubscribeBatched (SecurityProfileDiffBatchedStreamRequest) returns (stream SecurityProfileDiffBatchedStreamResponse);
 }
 
 message SecurityProfileDiffSummaryRequest {
@@ -496,6 +660,45 @@ message SecurityProfileDiffSummaryStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message SecurityProfileDiffSummaryBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated SecurityProfileDiffSummary partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each SecurityProfileDiffSummary at end.
+	//     * Each SecurityProfileDiffSummary response is fully-specified (all fields set).
+	//   * start: Returns the state of each SecurityProfileDiffSummary at start, followed by updates until now.
+	//     * Each SecurityProfileDiffSummary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each SecurityProfileDiffSummary at start, followed by updates
+	//     until end.
+	//     * Each SecurityProfileDiffSummary response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message SecurityProfileDiffSummaryBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated SecurityProfileDiffSummaryStreamResponse responses = 1;
+};
+
 service SecurityProfileDiffSummaryService {
 	rpc GetOne (SecurityProfileDiffSummaryRequest) returns (SecurityProfileDiffSummaryResponse);
 	rpc GetSome (SecurityProfileDiffSummarySomeRequest) returns (stream SecurityProfileDiffSummarySomeResponse);
@@ -503,6 +706,8 @@ service SecurityProfileDiffSummaryService {
 	rpc Subscribe (SecurityProfileDiffSummaryStreamRequest) returns (stream SecurityProfileDiffSummaryStreamResponse);
 	rpc GetMeta (SecurityProfileDiffSummaryStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (SecurityProfileDiffSummaryStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (SecurityProfileDiffSummaryBatchedStreamRequest) returns (stream SecurityProfileDiffSummaryBatchedStreamResponse);
+	rpc SubscribeBatched (SecurityProfileDiffSummaryBatchedStreamRequest) returns (stream SecurityProfileDiffSummaryBatchedStreamResponse);
 }
 
 message SummaryRequest {
@@ -590,6 +795,45 @@ message SummaryStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message SummaryBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Summary partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Summary at end.
+	//     * Each Summary response is fully-specified (all fields set).
+	//   * start: Returns the state of each Summary at start, followed by updates until now.
+	//     * Each Summary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Summary at start, followed by updates
+	//     until end.
+	//     * Each Summary response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message SummaryBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated SummaryStreamResponse responses = 1;
+};
+
 service SummaryService {
 	rpc GetOne (SummaryRequest) returns (SummaryResponse);
 	rpc GetSome (SummarySomeRequest) returns (stream SummarySomeResponse);
@@ -597,4 +841,6 @@ service SummaryService {
 	rpc Subscribe (SummaryStreamRequest) returns (stream SummaryStreamResponse);
 	rpc GetMeta (SummaryStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (SummaryStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (SummaryBatchedStreamRequest) returns (stream SummaryBatchedStreamResponse);
+	rpc SubscribeBatched (SummaryBatchedStreamRequest) returns (stream SummaryBatchedStreamResponse);
 }
