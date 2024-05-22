@@ -148,6 +148,115 @@
         ]
       }
     },
+    "/api/resources/imagestatus/v1/Summary/getsome": {
+      "post": {
+        "operationId": "SummaryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.SummarySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.SummarySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummarySomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/api/resources/imagestatus/v1/Summary/metadata": {
+      "get": {
+        "operationId": "SummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
     "/api/resources/imagestatus/v1/Summary/watch": {
       "get": {
         "operationId": "SummaryService_Subscribe",
@@ -233,6 +342,92 @@
           "SummaryService"
         ]
       }
+    },
+    "/api/resources/imagestatus/v1/Summary/watchmetadata": {
+      "get": {
+        "operationId": "SummaryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.imagestatus.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.imagestatus.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -289,10 +484,17 @@
         "ERROR_CODE_VALIDATION_FAILED",
         "ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED",
         "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED",
-        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED"
+        "ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED",
+        "ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE",
+        "ERROR_CODE_TA_CV_INCOMPATIBLE",
+        "ERROR_CODE_EOS_CV_INCOMPATIBLE",
+        "ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED",
+        "ERROR_CODE_EOS_SUPPORT_REMOVED",
+        "ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE",
+        "ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE"
       ],
       "default": "ERROR_CODE_UNSPECIFIED",
-      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor."
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor.\n - ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE: ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and\nTerminAttr architecture are incompatible.\n - ERROR_CODE_TA_CV_INCOMPATIBLE: ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with\nCloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.\n - ERROR_CODE_EOS_CV_INCOMPATIBLE: ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with\nCloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.\n - ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED: ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_EOS_SUPPORT_REMOVED: ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE: ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device\ndoes not support the given EOS type.\n - ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr\nversion is lower than the embedded TerminAttr version in SWI."
     },
     "arista.imagestatus.v1.Extension": {
       "type": "object",
@@ -316,6 +518,14 @@
         "installed": {
           "$ref": "#/definitions/arista.imagestatus.v1.ExtensionInstallStatus",
           "description": "installed indicates whether the extension is installed, not\ninstalled or force installed."
+        },
+        "statusDetail": {
+          "type": "string",
+          "description": "status_detail gives the details behind installation of the extension."
+        },
+        "isEmbedded": {
+          "type": "boolean",
+          "description": "is_embedded indicates whether the extension is embedded in the EOS swi\nor not."
         }
       },
       "description": "Extension provides information of the running/designed extensions."
@@ -407,6 +617,32 @@
         }
       },
       "description": "ImageErrors is the list of errors reported by CVP when handling image\nvalidations."
+    },
+    "arista.imagestatus.v1.ImageMetadata": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "version is the version of the EOS image."
+        },
+        "release": {
+          "type": "string",
+          "description": "release is the release name of the EOS image."
+        },
+        "flavor": {
+          "type": "string",
+          "description": "flavor is the flavor information of the EOS image.\ndefault flavor is DEFAULT. Other flavors can be DPE, 2GB, etc."
+        },
+        "variant": {
+          "type": "string",
+          "description": "variant is the variant information of the EOS image.\npossible values: INT or US."
+        },
+        "arch": {
+          "type": "string",
+          "description": "arch is the architecture of the EOS image."
+        }
+      },
+      "description": "ImageMetadata provides information regarding the software image."
     },
     "arista.imagestatus.v1.ImageSummary": {
       "type": "object",
@@ -502,6 +738,25 @@
       },
       "description": "ImageWarnings is the list of warnings reported by CVP when handling image\nvalidations."
     },
+    "arista.imagestatus.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
     "arista.imagestatus.v1.RebootRequired": {
       "type": "object",
       "properties": {
@@ -540,6 +795,10 @@
         "version": {
           "type": "string",
           "description": "version is the version of the EOS image."
+        },
+        "metadata": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageMetadata",
+          "description": "metadata  is the metadata of EOS image."
         }
       },
       "description": "SoftwareImage provides information of the running/designed EOS image."
@@ -597,6 +856,19 @@
       },
       "description": "Summary represents the device image summary."
     },
+    "arista.imagestatus.v1.SummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.imagestatus.v1.SummaryKey": {
       "type": "object",
       "properties": {
@@ -621,6 +893,40 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nSummary instance in this response."
+        }
+      }
+    },
+    "arista.imagestatus.v1.SummarySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.SummaryKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.imagestatus.v1.SummarySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.imagestatus.v1.Summary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -685,10 +991,15 @@
         "WARNING_CODE_EOS_CV_INCOMPATIBLE",
         "WARNING_CODE_EOS_ARCH_UNKNOWN",
         "WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE",
-        "WARNING_CODE_ARCH_INCOMPATIBLE"
+        "WARNING_CODE_ARCH_INCOMPATIBLE",
+        "WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED",
+        "WARNING_CODE_SUPPORT_NOT_INTRODUCED",
+        "WARNING_CODE_SUPPORT_REMOVED",
+        "WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION",
+        "WARNING_CODE_TA_STUDIO_INCOMPATIBLE"
       ],
       "default": "WARNING_CODE_UNSPECIFIED",
-      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent."
+      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\nDeprecated - use ERROR_CODE_TA_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\nDeprecated - use ERROR_CODE_EOS_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent. Deprecated.\n - WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED: WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED represents cases where the given EOS has passed\nits end of life date.\n - WARNING_CODE_SUPPORT_NOT_INTRODUCED: WARNING_CODE_SUPPORT_NOT_INTRODUCED represents cases where the given EOS version does\nnot support the SKUs.\n - WARNING_CODE_SUPPORT_REMOVED: WARNING_CODE_SUPPORT_REMOVED represents cases where the given EOS version no longer\nsupports the SKUs.\n - WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION: WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION represents cases where the running\nTerminAttr version is below CloudVision's minimum supported version.\n - WARNING_CODE_TA_STUDIO_INCOMPATIBLE: WARNING_CODE_TA_STUDIO_INCOMPATIBLE represents cases where the TerminAttr is incompatible\nwith Software Management Studio."
     },
     "arista.subscriptions.Operation": {
       "type": "string",
