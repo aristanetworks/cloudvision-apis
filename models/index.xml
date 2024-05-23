@@ -508,8 +508,13 @@ ExtensionInstallStatus
 SoftwareComplianceCode
 WarningCode
 arista/imagestatus.v1/services.gen.proto
+MetaResponse
+SummaryBatchedStreamRequest
+SummaryBatchedStreamResponse
 SummaryRequest
 SummaryResponse
+SummarySomeRequest
+SummarySomeResponse
 SummaryStreamRequest
 SummaryStreamResponse
 SummaryService
