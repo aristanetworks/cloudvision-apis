@@ -301,6 +301,9 @@ enum ErrorCode {
     // ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr
     // version is lower than the embedded TerminAttr version in SWI.
     ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE = 14;
+    // ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE represents the case where a 2GB-device is incompatible
+    // with a non-2GB EOS or a non-2GB device is incompatible with a 2GB-EOS.
+    ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE = 15;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.
