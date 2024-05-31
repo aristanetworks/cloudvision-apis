@@ -131,6 +131,8 @@ TimestampFlagConfig
 ChangeControlStatus
 StageStatus
 arista/changecontrol.v1/services.gen.proto
+ApproveConfigBatchedStreamRequest
+ApproveConfigBatchedStreamResponse
 ApproveConfigDeleteAllRequest
 ApproveConfigDeleteAllResponse
 ApproveConfigDeleteRequest
@@ -147,6 +149,10 @@ ApproveConfigSomeRequest
 ApproveConfigSomeResponse
 ApproveConfigStreamRequest
 ApproveConfigStreamResponse
+ChangeControlBatchedStreamRequest
+ChangeControlBatchedStreamResponse
+ChangeControlConfigBatchedStreamRequest
+ChangeControlConfigBatchedStreamResponse
 ChangeControlConfigDeleteAllRequest
 ChangeControlConfigDeleteAllResponse
 ChangeControlConfigDeleteRequest
@@ -170,11 +176,7 @@ ChangeControlSomeResponse
 ChangeControlStreamRequest
 ChangeControlStreamResponse
 MetaResponse
-ApproveConfigService
-ChangeControlConfigService
-ChangeControlService
-Top
-arista/changecontrol.v1/changecontrol.proto Action Action is an action to perform during the execution of a stage of a change control.</description></item><item><title>configlet.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</guid><description>arista/configlet.v1/configlet.proto
+ApproveConfigService</description></item><item><title>configlet.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</guid><description>arista/configlet.v1/configlet.proto
 Configlet
 ConfigletAssignment
 ConfigletAssignmentConfig
@@ -184,6 +186,10 @@ ConfigletKey
 Filter
 MatchPolicy
 arista/configlet.v1/services.gen.proto
+ConfigletAssignmentBatchedStreamRequest
+ConfigletAssignmentBatchedStreamResponse
+ConfigletAssignmentConfigBatchedStreamRequest
+ConfigletAssignmentConfigBatchedStreamResponse
 ConfigletAssignmentConfigDeleteAllRequest
 ConfigletAssignmentConfigDeleteAllResponse
 ConfigletAssignmentConfigDeleteRequest
@@ -206,6 +212,10 @@ ConfigletAssignmentSomeRequest
 ConfigletAssignmentSomeResponse
 ConfigletAssignmentStreamRequest
 ConfigletAssignmentStreamResponse
+ConfigletBatchedStreamRequest
+ConfigletBatchedStreamResponse
+ConfigletConfigBatchedStreamRequest
+ConfigletConfigBatchedStreamResponse
 ConfigletConfigDeleteAllRequest
 ConfigletConfigDeleteAllResponse
 ConfigletConfigDeleteRequest
@@ -259,12 +269,16 @@ ConfigType
 DiffOp
 ErrorCode
 arista/configstatus.v1/services.gen.proto
+ConfigDiffBatchedStreamRequest
+ConfigDiffBatchedStreamResponse
 ConfigDiffRequest
 ConfigDiffResponse
 ConfigDiffSomeRequest
 ConfigDiffSomeResponse
 ConfigDiffStreamRequest
 ConfigDiffStreamResponse
+ConfigurationBatchedStreamRequest
+ConfigurationBatchedStreamResponse
 ConfigurationRequest
 ConfigurationResponse
 ConfigurationSomeRequest
@@ -272,12 +286,18 @@ ConfigurationSomeResponse
 ConfigurationStreamRequest
 ConfigurationStreamResponse
 MetaResponse
+SecurityProfileBatchedStreamRequest
+SecurityProfileBatchedStreamResponse
+SecurityProfileDiffBatchedStreamRequest
+SecurityProfileDiffBatchedStreamResponse
 SecurityProfileDiffRequest
 SecurityProfileDiffResponse
 SecurityProfileDiffSomeRequest
 SecurityProfileDiffSomeResponse
 SecurityProfileDiffStreamRequest
 SecurityProfileDiffStreamResponse
+SecurityProfileDiffSummaryBatchedStreamRequest
+SecurityProfileDiffSummaryBatchedStreamResponse
 SecurityProfileDiffSummaryRequest
 SecurityProfileDiffSummaryResponse
 SecurityProfileDiffSummarySomeRequest
@@ -290,25 +310,19 @@ SecurityProfileSomeRequest
 SecurityProfileSomeResponse
 SecurityProfileStreamRequest
 SecurityProfileStreamResponse
-SummaryRequest
-SummaryResponse
-SummarySomeRequest
-SummarySomeResponse
-SummaryStreamRequest
-SummaryStreamResponse
-ConfigDiffService
-ConfigurationService
-SecurityProfileDiffService
-SecurityProfileDiffSummaryService
-SecurityProfileService
-SummaryService
-Top</description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>arista/connectivitymonitor.v1/connectivitymonitor.proto
+SummaryBatchedStreamRequest
+SummaryBatchedStreamResponse
+SummaryRequest</description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>arista/connectivitymonitor.v1/connectivitymonitor.proto
 Probe ProbeKey ProbeStats ProbeStatsKey arista/connectivitymonitor.v1/services.gen.proto
 MetaResponse
+ProbeBatchedStreamRequest
+ProbeBatchedStreamResponse
 ProbeRequest
 ProbeResponse
 ProbeSomeRequest
 ProbeSomeResponse
+ProbeStatsBatchedStreamRequest
+ProbeStatsBatchedStreamResponse
 ProbeStatsRequest
 ProbeStatsResponse
 ProbeStatsSomeRequest
@@ -323,6 +337,10 @@ Top
 arista/connectivitymonitor.v1/connectivitymonitor.proto Probe Probe is identifying information of a connectivity monitor probe. It is used to retrieve probe information without getting the corresponding stats so that probe information can be displayed without streaming all related data, such as in the UI.
 Field Name Type Description key ProbeKey key uniquely identifies the connectivity monitor probe.</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
 Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget WidgetStyles Widgets arista/dashboard.v1/services.gen.proto
+DashboardBatchedStreamRequest
+DashboardBatchedStreamResponse
+DashboardConfigBatchedStreamRequest
+DashboardConfigBatchedStreamResponse
 DashboardConfigDeleteAllRequest
 DashboardConfigDeleteAllResponse
 DashboardConfigDeleteRequest
@@ -345,6 +363,8 @@ DashboardSomeRequest
 DashboardSomeResponse
 DashboardStreamRequest
 DashboardStreamResponse
+GlobalDashboardConfigBatchedStreamRequest
+GlobalDashboardConfigBatchedStreamResponse
 GlobalDashboardConfigRequest
 GlobalDashboardConfigResponse
 GlobalDashboardConfigSetRequest
@@ -357,7 +377,7 @@ DashboardService
 GlobalDashboardConfigService
 Top
 arista/dashboard.v1/dashboard.proto Dashboard Dashboard state contains all dashboard data.
-Field Name Type Description key DashboardKey key is the unique identifier. It will always be defined.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
+Field Name Type Description key DashboardKey key is the unique identifier.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
 Device
 DeviceInfo
 DeviceMap
@@ -378,6 +398,8 @@ IdentifierType
 Likelihood
 MacType
 arista/endpointlocation.v1/services.gen.proto
+EndpointLocationBatchedStreamRequest
+EndpointLocationBatchedStreamResponse
 EndpointLocationRequest
 EndpointLocationResponse
 EndpointLocationSomeRequest
@@ -463,6 +485,8 @@ SAMLKey
 ProtocolBinding
 arista/identityprovider.v1/services.gen.proto
 MetaResponse
+OAuthConfigBatchedStreamRequest
+OAuthConfigBatchedStreamResponse
 OAuthConfigDeleteAllRequest
 OAuthConfigDeleteAllResponse
 OAuthConfigDeleteRequest
@@ -479,6 +503,8 @@ OAuthConfigSomeRequest
 OAuthConfigSomeResponse
 OAuthConfigStreamRequest
 OAuthConfigStreamResponse
+SAMLConfigBatchedStreamRequest
+SAMLConfigBatchedStreamResponse
 SAMLConfigDeleteAllRequest
 SAMLConfigDeleteAllResponse
 SAMLConfigDeleteRequest
@@ -499,8 +525,7 @@ OAuthConfigService
 SAMLConfigService
 Top
 arista/identityprovider.v1/identityprovider.proto OAuthConfig OAuthConfig holds the configuration for an OAuth provider.
-Field Name Type Description key OAuthKey key is the ID of the OAuth provider.
-endpoint google.protobuf.StringValue endpoint is the URL that identifies an OAuth authorization server.</description></item><item><title>imagestatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</guid><description>arista/imagestatus.v1/imagestatus.proto
+Field Name Type Description key OAuthKey key is the ID of the OAuth provider.</description></item><item><title>imagestatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</guid><description>arista/imagestatus.v1/imagestatus.proto
 ComplianceStatus
 ComplianceStatusBySup
 ComplianceStatusBySup.ValuesEntry
@@ -562,51 +587,57 @@ OnboardingStatus
 ProvisioningStatus
 StreamingStatus
 arista/inventory.v1/services.gen.proto
+DeviceBatchedStreamRequest
+DeviceBatchedStreamResponse
+DeviceDecommissioningBatchedStreamRequest
+DeviceDecommissioningBatchedStreamResponse
+DeviceDecommissioningConfigBatchedStreamRequest
+DeviceDecommissioningConfigBatchedStreamResponse
 DeviceDecommissioningConfigDeleteAllRequest
 DeviceDecommissioningConfigDeleteAllResponse
 DeviceDecommissioningConfigDeleteRequest
 DeviceDecommissioningConfigDeleteResponse
+DeviceDecommissioningConfigDeleteSomeRequest
+DeviceDecommissioningConfigDeleteSomeResponse
 DeviceDecommissioningConfigRequest
 DeviceDecommissioningConfigResponse
 DeviceDecommissioningConfigSetRequest
 DeviceDecommissioningConfigSetResponse
+DeviceDecommissioningConfigSetSomeRequest
+DeviceDecommissioningConfigSetSomeResponse
+DeviceDecommissioningConfigSomeRequest
+DeviceDecommissioningConfigSomeResponse
 DeviceDecommissioningConfigStreamRequest
 DeviceDecommissioningConfigStreamResponse
 DeviceDecommissioningRequest
 DeviceDecommissioningResponse
+DeviceDecommissioningSomeRequest
+DeviceDecommissioningSomeResponse
 DeviceDecommissioningStreamRequest
 DeviceDecommissioningStreamResponse
+DeviceOnboardingBatchedStreamRequest
+DeviceOnboardingBatchedStreamResponse
+DeviceOnboardingConfigBatchedStreamRequest
+DeviceOnboardingConfigBatchedStreamResponse
 DeviceOnboardingConfigDeleteAllRequest
 DeviceOnboardingConfigDeleteAllResponse
 DeviceOnboardingConfigDeleteRequest
 DeviceOnboardingConfigDeleteResponse
+DeviceOnboardingConfigDeleteSomeRequest
+DeviceOnboardingConfigDeleteSomeResponse
 DeviceOnboardingConfigRequest
 DeviceOnboardingConfigResponse
 DeviceOnboardingConfigSetRequest
 DeviceOnboardingConfigSetResponse
+DeviceOnboardingConfigSetSomeRequest
+DeviceOnboardingConfigSetSomeResponse
+DeviceOnboardingConfigSomeRequest
+DeviceOnboardingConfigSomeResponse
 DeviceOnboardingConfigStreamRequest
 DeviceOnboardingConfigStreamResponse
 DeviceOnboardingRequest
 DeviceOnboardingResponse
-DeviceOnboardingStreamRequest
-DeviceOnboardingStreamResponse
-DeviceRequest
-DeviceResponse
-DeviceStreamRequest
-DeviceStreamResponse
-ProvisionedDeviceRequest
-ProvisionedDeviceResponse
-ProvisionedDeviceStreamRequest
-ProvisionedDeviceStreamResponse
-DeviceDecommissioningConfigService
-DeviceDecommissioningService
-DeviceOnboardingConfigService
-DeviceOnboardingService
-DeviceService
-ProvisionedDeviceService
-Top
-arista/inventory.v1/inventory.proto Device Device describes an onboarded device.
-Field Name Type Description key DeviceKey key uniquely identifies the device.</description></item><item><title>lifecycle.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</guid><description>arista/lifecycle.v1/lifecycle.proto
+DeviceOnboardingSomeRequest</description></item><item><title>lifecycle.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</guid><description>arista/lifecycle.v1/lifecycle.proto
 DateAndModels DeviceLifecycleSummary DeviceLifecycleSummaryKey HardwareLifecycleSummary SoftwareEOL arista/lifecycle.v1/services.gen.proto
 DeviceLifecycleSummaryRequest
 DeviceLifecycleSummaryResponse
@@ -621,6 +652,8 @@ models fmp.MapStringInt32 models with this exact &amp;ldquo;end of&amp;rdquo; da
 mapped to its count
 DeviceLifecycleSummary DeviceLifecycleSummary is the state model that represents the lifecycle summary of a device</description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>arista/redirector.v1/redirector.proto
 Assignment AssignmentKey Cluster Clusters arista/redirector.v1/services.gen.proto
+AssignmentBatchedStreamRequest
+AssignmentBatchedStreamResponse
 AssignmentRequest
 AssignmentResponse
 AssignmentSomeRequest
@@ -734,6 +767,10 @@ ResolverFieldInputMode
 TagMatcherFieldMode
 TemplateType
 arista/studio.v1/services.gen.proto
+AssignedTagsBatchedStreamRequest
+AssignedTagsBatchedStreamResponse
+AssignedTagsConfigBatchedStreamRequest
+AssignedTagsConfigBatchedStreamResponse
 AssignedTagsConfigDeleteAllRequest
 AssignedTagsConfigDeleteAllResponse
 AssignedTagsConfigDeleteRequest
@@ -756,11 +793,7 @@ AssignedTagsSomeRequest
 AssignedTagsSomeResponse
 AssignedTagsStreamRequest
 AssignedTagsStreamResponse
-AutofillActionConfigDeleteAllRequest
-AutofillActionConfigDeleteAllResponse
-AutofillActionConfigDeleteRequest
-AutofillActionConfigDeleteResponse
-AutofillActionConfigDeleteSomeRequest</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
+AutofillActionBatchedStreamRequest</description></item><item><title>tag.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v1/</guid><description>**DEPRECATED: This API is no longer supported.
 arista/tag.v1/tag.proto
 DeviceTag
 DeviceTagAssignmentConfig
