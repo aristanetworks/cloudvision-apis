@@ -22,7 +22,7 @@ The REST endpoint for on-prem is available from 2022.3.0.
 dashboard.v1
 ============
 
-## Get a specific dashboard
+## Get the status of a specific dashboard
 
 ### curl
 
@@ -30,6 +30,56 @@ dashboard.v1
 curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` \
   'https://192.0.2.79/api/resources/dashboard/v1/Dashboard?key.dashboardId=125125'
 ```
+
+{{% notice tip %}}
+You cannot use the result of this output to create a dashboard without removing the status-only related fields.
+{{% /notice %}}
+
+## Get the configuration of a specific dashboard
+
+### curl
+
+```bash
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/dashboard/v1/DashboardConfig?key.dashboardId=125125'
+```
+
+Result:
+
+```json
+{
+  "value": {
+    "key": {
+      "dashboardId": "a6ad9e70-66aa-4faa-a0ca-9e7deee29ac4"
+    },
+    "name": "RAM",
+    "description": "",
+    "widgets": {
+      "values": [
+        {
+          "id": "8327188b-a8c5-420e-a6ff-9209e700ab58",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 10
+          },
+          "type": "aql-query-widget",
+          "inputs": "{\"expression\":\"let info = `*:Kernel/proc/meminfo` | map(merge(_value))\\n\\nmerge(`analytics:DatasetInfo/Devices`) | \\\\\\nwhere(dictHasKey(info, _key)) | \\\\\\nmap(info[_key]) | \\\\\\nmap(dictHasKey(_value, \\\"memTotal\\\") ? (_value[\\\"memTotal\\\"] - _value[\\\"memAvailable\\\"]) / _value[\\\"memTotal\\\"] * 100 : 0)\",\"graphConfig\":{\"mapToHostname\":true},\"visualization\":\"barGraph\"}",
+          "location": "main",
+          "parent": ""
+        }
+      ]
+    }
+  },
+  "time": "2022-11-08T02:07:05.218Z"
+}
+```
+
+The `value` key of the result of the DashboardConfig call can then be used to create a dashboard on another CloudVision instance.
 
 ## Get all dashboard configurations
 
@@ -46,12 +96,12 @@ curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.
 
 ```bash
 curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` \
-  'https://www.arista.io/api/resources/dashboard/v1/DashboardConfig' -d "`cat bgp-peering.json`"
+  'https://www.arista.io/api/resources/dashboard/v1/DashboardConfig' -d @bgp-peering.json
 ```
 
 Input file:
 
-```
+```json
 {
   "key": {
     "dashboard_id": "dd328b0c-279f-4d75-841c-c7489cd6f7fe"
@@ -93,6 +143,64 @@ Input file:
     ]
   }
 }
+```
+
+### Quick Import/Export example with cURL
+
+Export from instance 1:
+
+```shell
+curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.tok` \
+  'https://192.0.2.79/api/resources/dashboard/v1/DashboardConfig?key.dashboardId=125125' | jq .value > networkmonitoring.json
+```
+
+Import to instance 2:
+
+```bash
+curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token.tok` \
+  'https://www.arista.io/api/resources/dashboard/v1/DashboardConfig' -d @networkmonitoring.json
+```
+
+### Quick Import/Export example with python
+
+The following example will download a dashboard from an on-prem instance and upload it to a CVaaS tenant:
+
+```python
+import requests
+
+# Read bearer token for 192.0.2.79
+with open('token1.tok', 'r') as file:
+    bearer_token1 = file.read().strip()
+
+# Connect to the first API and retrieve the dashboard
+dashboard_id = "CHANGEME"
+api_url = f"http://192.0.2.79/api/resources/dashboard/v1/DashboardConfig?key.dashboardId={dashboard_id}"
+
+headers1 = {
+    'Authorization': f'Bearer {bearer_token1}'
+}
+
+response1 = requests.get(api_url, headers=headers1, verify=False)
+dashboard_data = response1.json()
+
+# Read bearer token for www.arista.io
+with open('token2.tok', 'r') as file:
+    bearer_token2 = file.read().strip()
+
+# Connect to www.arista.io and upload the dashboard
+# Note that the correct regional CVaaS URL should be used if your tenant is not on us-central1-a
+upload_url = 'https://www.arista.io/api/resources/dashboard/v1/DashboardConfig'
+
+headers2 = {
+    'Authorization': f'Bearer {bearer_token2}'
+}
+
+response2 = requests.post(upload_url, headers=headers2, json=dashboard_data["value"])
+
+if response2.status_code == 200:
+    print('Dashboard uploaded successfully!')
+else:
+    print('Failed to upload the dashboard.')
 ```
 
 ## Delete a dashboard
