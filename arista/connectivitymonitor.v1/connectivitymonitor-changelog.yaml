@@ -4,11 +4,14 @@
 # FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
 
 Changes:
+    - date: 2024-05-09
+      description: Update GetSome REST endpoint
+      version: 1.2.0
+      cvaas: true
+      onprem: true
     - date: 2023-04-24
       description: Add config fields to connectivity monitor probes
       version: 1.1.0
-      onprem: true
-      cvaas: true
     - date: 2022-11-05
       description: Initial revision
       version: 1.0.0

@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.inventory.v1;
-option go_package = "arista/resources/arista/inventory.v1;inventory";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/inventory.v1;inventory";
 
 import "arista/inventory.v1/inventory.proto";
 import "arista/time/time.proto";
@@ -17,6 +17,20 @@ import "arista/subscriptions/subscriptions.proto";
 import "fmp/deletes.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message MetaResponse {
+	// Time holds the timestamp of the last item included in the metadata calculation.
+	google.protobuf.Timestamp time = 1;
+
+	// Operation indicates how the value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 2;
+
+	// Count is the number of items present under the conditions of the request.
+	google.protobuf.UInt32Value count = 3;
+};
 
 message DeviceRequest {
 	// Key uniquely identifies a Device instance to retrieve.
@@ -40,6 +54,27 @@ message DeviceResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceSomeRequest {
+	repeated DeviceKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Device value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message DeviceStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -50,6 +85,17 @@ message DeviceStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Device at end.
+	//     * Each Device response is fully-specified (all fields set).
+	//   * start: Returns the state of each Device at start, followed by updates until now.
+	//     * Each Device response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Device at start, followed by updates
+	//     until end.
+	//     * Each Device response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -71,10 +117,54 @@ message DeviceStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message DeviceBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Device partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Device at end.
+	//     * Each Device response is fully-specified (all fields set).
+	//   * start: Returns the state of each Device at start, followed by updates until now.
+	//     * Each Device response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Device at start, followed by updates
+	//     until end.
+	//     * Each Device response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DeviceBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DeviceStreamResponse responses = 1;
+};
+
 service DeviceService {
 	rpc GetOne (DeviceRequest) returns (DeviceResponse);
+	rpc GetSome (DeviceSomeRequest) returns (stream DeviceSomeResponse);
 	rpc GetAll (DeviceStreamRequest) returns (stream DeviceStreamResponse);
 	rpc Subscribe (DeviceStreamRequest) returns (stream DeviceStreamResponse);
+	rpc GetMeta (DeviceStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DeviceStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (DeviceBatchedStreamRequest) returns (stream DeviceBatchedStreamResponse);
+	rpc SubscribeBatched (DeviceBatchedStreamRequest) returns (stream DeviceBatchedStreamResponse);
 }
 
 message DeviceDecommissioningRequest {
@@ -99,6 +189,27 @@ message DeviceDecommissioningResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceDecommissioningSomeRequest {
+	repeated UUIDKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceDecommissioning value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message DeviceDecommissioningStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -109,6 +220,17 @@ message DeviceDecommissioningStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceDecommissioning at end.
+	//     * Each DeviceDecommissioning response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceDecommissioning at start, followed by updates until now.
+	//     * Each DeviceDecommissioning response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceDecommissioning at start, followed by updates
+	//     until end.
+	//     * Each DeviceDecommissioning response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -130,10 +252,54 @@ message DeviceDecommissioningStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message DeviceDecommissioningBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceDecommissioning partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceDecommissioning at end.
+	//     * Each DeviceDecommissioning response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceDecommissioning at start, followed by updates until now.
+	//     * Each DeviceDecommissioning response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceDecommissioning at start, followed by updates
+	//     until end.
+	//     * Each DeviceDecommissioning response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DeviceDecommissioningBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DeviceDecommissioningStreamResponse responses = 1;
+};
+
 service DeviceDecommissioningService {
 	rpc GetOne (DeviceDecommissioningRequest) returns (DeviceDecommissioningResponse);
+	rpc GetSome (DeviceDecommissioningSomeRequest) returns (stream DeviceDecommissioningSomeResponse);
 	rpc GetAll (DeviceDecommissioningStreamRequest) returns (stream DeviceDecommissioningStreamResponse);
 	rpc Subscribe (DeviceDecommissioningStreamRequest) returns (stream DeviceDecommissioningStreamResponse);
+	rpc GetMeta (DeviceDecommissioningStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DeviceDecommissioningStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (DeviceDecommissioningBatchedStreamRequest) returns (stream DeviceDecommissioningBatchedStreamResponse);
+	rpc SubscribeBatched (DeviceDecommissioningBatchedStreamRequest) returns (stream DeviceDecommissioningBatchedStreamResponse);
 }
 
 message DeviceDecommissioningConfigRequest {
@@ -158,6 +324,27 @@ message DeviceDecommissioningConfigResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceDecommissioningConfigSomeRequest {
+	repeated UUIDKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceDecommissioningConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceDecommissioningConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message DeviceDecommissioningConfigStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -168,6 +355,17 @@ message DeviceDecommissioningConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceDecommissioningConfig at end.
+	//     * Each DeviceDecommissioningConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceDecommissioningConfig at start, followed by updates until now.
+	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceDecommissioningConfig at start, followed by updates
+	//     until end.
+	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -187,6 +385,45 @@ message DeviceDecommissioningConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message DeviceDecommissioningConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceDecommissioningConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceDecommissioningConfig at end.
+	//     * Each DeviceDecommissioningConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceDecommissioningConfig at start, followed by updates until now.
+	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceDecommissioningConfig at start, followed by updates
+	//     until end.
+	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DeviceDecommissioningConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DeviceDecommissioningConfigStreamResponse responses = 1;
 };
 
 message DeviceDecommissioningConfigSetRequest {
@@ -209,6 +446,21 @@ message DeviceDecommissioningConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceDecommissioningConfigSetSomeRequest {
+	// value contains a list of DeviceDecommissioningConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated DeviceDecommissioningConfig values = 1;
+};
+
+message DeviceDecommissioningConfigSetSomeResponse {
+	UUIDKey key = 1;
+	string error = 2;
+};
+
 message DeviceDecommissioningConfigDeleteRequest {
 	// Key indicates which DeviceDecommissioningConfig instance to remove.
 	// This field must always be set.
@@ -228,11 +480,27 @@ message DeviceDecommissioningConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceDecommissioningConfigDeleteSomeRequest {
+	// key contains a list of DeviceDecommissioningConfig keys to delete
+	repeated UUIDKey keys = 1;
+};
+
+// DeviceDecommissioningConfigDeleteSomeResponse is only sent when there is an error.
+message DeviceDecommissioningConfigDeleteSomeResponse {
+	UUIDKey key = 1;
+	string error = 2;
+};
+
 message DeviceDecommissioningConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated DeviceDecommissioningConfig partial_eq_filter = 1;
 };
 
 message DeviceDecommissioningConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -244,11 +512,18 @@ message DeviceDecommissioningConfigDeleteAllResponse {
 
 service DeviceDecommissioningConfigService {
 	rpc GetOne (DeviceDecommissioningConfigRequest) returns (DeviceDecommissioningConfigResponse);
+	rpc GetSome (DeviceDecommissioningConfigSomeRequest) returns (stream DeviceDecommissioningConfigSomeResponse);
 	rpc GetAll (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
 	rpc Subscribe (DeviceDecommissioningConfigStreamRequest) returns (stream DeviceDecommissioningConfigStreamResponse);
+	rpc GetMeta (DeviceDecommissioningConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DeviceDecommissioningConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (DeviceDecommissioningConfigSetRequest) returns (DeviceDecommissioningConfigSetResponse);
+	rpc SetSome (DeviceDecommissioningConfigSetSomeRequest) returns (stream DeviceDecommissioningConfigSetSomeResponse);
 	rpc Delete (DeviceDecommissioningConfigDeleteRequest) returns (DeviceDecommissioningConfigDeleteResponse);
+	rpc DeleteSome (DeviceDecommissioningConfigDeleteSomeRequest) returns (stream DeviceDecommissioningConfigDeleteSomeResponse);
 	rpc DeleteAll (DeviceDecommissioningConfigDeleteAllRequest) returns (stream DeviceDecommissioningConfigDeleteAllResponse);
+	rpc GetAllBatched (DeviceDecommissioningConfigBatchedStreamRequest) returns (stream DeviceDecommissioningConfigBatchedStreamResponse);
+	rpc SubscribeBatched (DeviceDecommissioningConfigBatchedStreamRequest) returns (stream DeviceDecommissioningConfigBatchedStreamResponse);
 }
 
 message DeviceOnboardingRequest {
@@ -273,6 +548,27 @@ message DeviceOnboardingResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceOnboardingSomeRequest {
+	repeated UUIDKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceOnboarding value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message DeviceOnboardingStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -283,6 +579,17 @@ message DeviceOnboardingStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceOnboarding at end.
+	//     * Each DeviceOnboarding response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceOnboarding at start, followed by updates until now.
+	//     * Each DeviceOnboarding response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceOnboarding at start, followed by updates
+	//     until end.
+	//     * Each DeviceOnboarding response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -304,10 +611,54 @@ message DeviceOnboardingStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message DeviceOnboardingBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceOnboarding partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceOnboarding at end.
+	//     * Each DeviceOnboarding response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceOnboarding at start, followed by updates until now.
+	//     * Each DeviceOnboarding response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceOnboarding at start, followed by updates
+	//     until end.
+	//     * Each DeviceOnboarding response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DeviceOnboardingBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DeviceOnboardingStreamResponse responses = 1;
+};
+
 service DeviceOnboardingService {
 	rpc GetOne (DeviceOnboardingRequest) returns (DeviceOnboardingResponse);
+	rpc GetSome (DeviceOnboardingSomeRequest) returns (stream DeviceOnboardingSomeResponse);
 	rpc GetAll (DeviceOnboardingStreamRequest) returns (stream DeviceOnboardingStreamResponse);
 	rpc Subscribe (DeviceOnboardingStreamRequest) returns (stream DeviceOnboardingStreamResponse);
+	rpc GetMeta (DeviceOnboardingStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DeviceOnboardingStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (DeviceOnboardingBatchedStreamRequest) returns (stream DeviceOnboardingBatchedStreamResponse);
+	rpc SubscribeBatched (DeviceOnboardingBatchedStreamRequest) returns (stream DeviceOnboardingBatchedStreamResponse);
 }
 
 message DeviceOnboardingConfigRequest {
@@ -332,6 +683,27 @@ message DeviceOnboardingConfigResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceOnboardingConfigSomeRequest {
+	repeated UUIDKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message DeviceOnboardingConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	DeviceOnboardingConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message DeviceOnboardingConfigStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -342,6 +714,17 @@ message DeviceOnboardingConfigStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceOnboardingConfig at end.
+	//     * Each DeviceOnboardingConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceOnboardingConfig at start, followed by updates until now.
+	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceOnboardingConfig at start, followed by updates
+	//     until end.
+	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -361,6 +744,45 @@ message DeviceOnboardingConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message DeviceOnboardingConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated DeviceOnboardingConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each DeviceOnboardingConfig at end.
+	//     * Each DeviceOnboardingConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each DeviceOnboardingConfig at start, followed by updates until now.
+	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each DeviceOnboardingConfig at start, followed by updates
+	//     until end.
+	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message DeviceOnboardingConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated DeviceOnboardingConfigStreamResponse responses = 1;
 };
 
 message DeviceOnboardingConfigSetRequest {
@@ -383,6 +805,21 @@ message DeviceOnboardingConfigSetResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceOnboardingConfigSetSomeRequest {
+	// value contains a list of DeviceOnboardingConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated DeviceOnboardingConfig values = 1;
+};
+
+message DeviceOnboardingConfigSetSomeResponse {
+	UUIDKey key = 1;
+	string error = 2;
+};
+
 message DeviceOnboardingConfigDeleteRequest {
 	// Key indicates which DeviceOnboardingConfig instance to remove.
 	// This field must always be set.
@@ -402,11 +839,27 @@ message DeviceOnboardingConfigDeleteResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message DeviceOnboardingConfigDeleteSomeRequest {
+	// key contains a list of DeviceOnboardingConfig keys to delete
+	repeated UUIDKey keys = 1;
+};
+
+// DeviceOnboardingConfigDeleteSomeResponse is only sent when there is an error.
+message DeviceOnboardingConfigDeleteSomeResponse {
+	UUIDKey key = 1;
+	string error = 2;
+};
+
 message DeviceOnboardingConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated DeviceOnboardingConfig partial_eq_filter = 1;
 };
 
 message DeviceOnboardingConfigDeleteAllResponse {
 	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
 	fmp.DeleteError type = 1;
 	// This indicates the error message from the delete failure.
 	google.protobuf.StringValue error = 2;
@@ -418,11 +871,18 @@ message DeviceOnboardingConfigDeleteAllResponse {
 
 service DeviceOnboardingConfigService {
 	rpc GetOne (DeviceOnboardingConfigRequest) returns (DeviceOnboardingConfigResponse);
+	rpc GetSome (DeviceOnboardingConfigSomeRequest) returns (stream DeviceOnboardingConfigSomeResponse);
 	rpc GetAll (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
 	rpc Subscribe (DeviceOnboardingConfigStreamRequest) returns (stream DeviceOnboardingConfigStreamResponse);
+	rpc GetMeta (DeviceOnboardingConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (DeviceOnboardingConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (DeviceOnboardingConfigSetRequest) returns (DeviceOnboardingConfigSetResponse);
+	rpc SetSome (DeviceOnboardingConfigSetSomeRequest) returns (stream DeviceOnboardingConfigSetSomeResponse);
 	rpc Delete (DeviceOnboardingConfigDeleteRequest) returns (DeviceOnboardingConfigDeleteResponse);
+	rpc DeleteSome (DeviceOnboardingConfigDeleteSomeRequest) returns (stream DeviceOnboardingConfigDeleteSomeResponse);
 	rpc DeleteAll (DeviceOnboardingConfigDeleteAllRequest) returns (stream DeviceOnboardingConfigDeleteAllResponse);
+	rpc GetAllBatched (DeviceOnboardingConfigBatchedStreamRequest) returns (stream DeviceOnboardingConfigBatchedStreamResponse);
+	rpc SubscribeBatched (DeviceOnboardingConfigBatchedStreamRequest) returns (stream DeviceOnboardingConfigBatchedStreamResponse);
 }
 
 message ProvisionedDeviceRequest {
@@ -447,6 +907,27 @@ message ProvisionedDeviceResponse {
 	google.protobuf.Timestamp time = 2;
 };
 
+message ProvisionedDeviceSomeRequest {
+	repeated DeviceKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ProvisionedDeviceSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ProvisionedDevice value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
 message ProvisionedDeviceStreamRequest {
 	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
 	// This requires all provided fields to be equal to the response.
@@ -457,6 +938,17 @@ message ProvisionedDeviceStreamRequest {
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ProvisionedDevice at end.
+	//     * Each ProvisionedDevice response is fully-specified (all fields set).
+	//   * start: Returns the state of each ProvisionedDevice at start, followed by updates until now.
+	//     * Each ProvisionedDevice response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ProvisionedDevice at start, followed by updates
+	//     until end.
+	//     * Each ProvisionedDevice response at start is fully-specified, but updates until end may
+	//       be partial.
 	//
 	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
@@ -478,8 +970,52 @@ message ProvisionedDeviceStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ProvisionedDeviceBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ProvisionedDevice partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ProvisionedDevice at end.
+	//     * Each ProvisionedDevice response is fully-specified (all fields set).
+	//   * start: Returns the state of each ProvisionedDevice at start, followed by updates until now.
+	//     * Each ProvisionedDevice response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ProvisionedDevice at start, followed by updates
+	//     until end.
+	//     * Each ProvisionedDevice response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ProvisionedDeviceBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ProvisionedDeviceStreamResponse responses = 1;
+};
+
 service ProvisionedDeviceService {
 	rpc GetOne (ProvisionedDeviceRequest) returns (ProvisionedDeviceResponse);
+	rpc GetSome (ProvisionedDeviceSomeRequest) returns (stream ProvisionedDeviceSomeResponse);
 	rpc GetAll (ProvisionedDeviceStreamRequest) returns (stream ProvisionedDeviceStreamResponse);
 	rpc Subscribe (ProvisionedDeviceStreamRequest) returns (stream ProvisionedDeviceStreamResponse);
+	rpc GetMeta (ProvisionedDeviceStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ProvisionedDeviceStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ProvisionedDeviceBatchedStreamRequest) returns (stream ProvisionedDeviceBatchedStreamResponse);
+	rpc SubscribeBatched (ProvisionedDeviceBatchedStreamRequest) returns (stream ProvisionedDeviceBatchedStreamResponse);
 }

@@ -83,4 +83,8 @@ Changes:
       version: 1.8.2
       onprem: true
       cvaas: true
-
+    - date: 2024-05-09
+      description: Update GetSome REST endpoints
+      version: 1.9.0
+      onprem: true
+      cvaas: true

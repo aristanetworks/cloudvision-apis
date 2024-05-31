@@ -185,24 +185,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -692,16 +680,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of AccountConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountConfigDeleteSomeRequest"
             }
           }
         ],
@@ -738,24 +721,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -859,16 +830,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of AccountConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.AccountConfig"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountConfigSetSomeRequest"
             }
           }
         ],
@@ -1202,24 +1168,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1709,16 +1663,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of TokenConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1755,24 +1704,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1876,16 +1813,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of TokenConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.serviceaccount.v1.TokenConfig"
-              }
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenConfigSetSomeRequest"
             }
           }
         ],
@@ -2126,7 +2058,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -2155,6 +2087,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
+          },
+          "title": "key contains a list of AccountConfig keys to delete"
         }
       }
     },
@@ -2199,6 +2144,19 @@
         }
       }
     },
+    "arista.serviceaccount.v1.AccountConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountConfig"
+          },
+          "description": "value contains a list of AccountConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.serviceaccount.v1.AccountConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -2207,6 +2165,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2286,6 +2261,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nAccount instance in this response."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2433,7 +2425,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/fmp.DeleteError",
-          "description": "This describes the class of delete error."
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
         },
         "error": {
           "type": "string",
@@ -2462,6 +2454,19 @@
           "format": "date-time",
           "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
           "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
+          },
+          "title": "key contains a list of TokenConfig keys to delete"
         }
       }
     },
@@ -2506,6 +2511,19 @@
         }
       }
     },
+    "arista.serviceaccount.v1.TokenConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.TokenConfig"
+          },
+          "description": "value contains a list of TokenConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.serviceaccount.v1.TokenConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -2514,6 +2532,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2593,6 +2628,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nToken instance in this response."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.TokenKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

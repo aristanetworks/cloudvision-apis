@@ -193,24 +193,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeKey"
-              }
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -632,24 +620,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsKey"
-              }
+              "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -940,6 +916,19 @@
       },
       "description": "Probe is identifying information of a connectivity monitor probe.\nIt is used to retrieve probe information without getting the corresponding stats so that\nprobe information can be displayed without streaming all related data, such as in the UI."
     },
+    "arista.connectivitymonitor.v1.ProbeBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.connectivitymonitor.v1.ProbeKey": {
       "type": "object",
       "properties": {
@@ -974,6 +963,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nProbe instance in this response."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -1028,6 +1034,19 @@
       },
       "description": "ProbeStats is the connectivity monitor statistics related to the specified probe."
     },
+    "arista.connectivitymonitor.v1.ProbeStatsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.connectivitymonitor.v1.ProbeStatsKey": {
       "type": "object",
       "properties": {
@@ -1067,6 +1086,23 @@
           "type": "string",
           "format": "date-time",
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nProbeStats instance in this response."
+        }
+      }
+    },
+    "arista.connectivitymonitor.v1.ProbeStatsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.connectivitymonitor.v1.ProbeStatsKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

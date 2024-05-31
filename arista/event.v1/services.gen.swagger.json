@@ -190,24 +190,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.EventKey"
-              }
+              "$ref": "#/definitions/arista.event.v1.EventSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -713,16 +701,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of EventAnnotationConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.EventKey"
-              }
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigDeleteSomeRequest"
             }
           }
         ],
@@ -759,24 +742,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.EventKey"
-              }
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -880,16 +851,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of EventAnnotationConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig"
-              }
+              "$ref": "#/definitions/arista.event.v1.EventAnnotationConfigSetSomeRequest"
             }
           }
         ],
@@ -1312,16 +1278,11 @@
         },
         "parameters": [
           {
-            "name": "keys",
-            "description": "key contains a list of UserEventCreationConfig keys to delete",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.UserEventCreationKey"
-              }
+              "$ref": "#/definitions/arista.event.v1.UserEventCreationConfigDeleteSomeRequest"
             }
           }
         ],
@@ -1358,24 +1319,12 @@
         },
         "parameters": [
           {
-            "name": "keys",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.UserEventCreationKey"
-              }
+              "$ref": "#/definitions/arista.event.v1.UserEventCreationConfigSomeRequest"
             }
-          },
-          {
-            "name": "time",
-            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1479,16 +1428,11 @@
         },
         "parameters": [
           {
-            "name": "values",
-            "description": "value contains a list of UserEventCreationConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information.",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/arista.event.v1.UserEventCreationConfig"
-              }
+              "$ref": "#/definitions/arista.event.v1.UserEventCreationConfigSetSomeRequest"
             }
           }
         ],
@@ -1825,6 +1769,19 @@
         }
       }
     },
+    "arista.event.v1.EventAnnotationConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.EventKey"
+          },
+          "title": "key contains a list of EventAnnotationConfig keys to delete"
+        }
+      }
+    },
     "arista.event.v1.EventAnnotationConfigDeleteSomeResponse": {
       "type": "object",
       "properties": {
@@ -1866,6 +1823,19 @@
         }
       }
     },
+    "arista.event.v1.EventAnnotationConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.EventAnnotationConfig"
+          },
+          "description": "value contains a list of EventAnnotationConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.event.v1.EventAnnotationConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -1874,6 +1844,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.event.v1.EventAnnotationConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.EventKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },
@@ -2092,6 +2079,23 @@
       "description": "- EVENT_SEVERITY_UNSPECIFIED: EVENT_SEVERITY_UNSPECIFIED is the default value, if the severity is not specified.\n - EVENT_SEVERITY_INFO: EVENT_SEVERITY_INFO is used for generally useful information.\n - EVENT_SEVERITY_WARNING: EVENT_SEVERITY_WARNING is used for potentially harmful conditions.\n - EVENT_SEVERITY_ERROR: EVENT_SEVERITY_ERROR is used for errors events that may allow for continued functioning.\n - EVENT_SEVERITY_CRITICAL: EVENT_SEVERITY_CRITICAL is used to designate severe errors that impede functioning.\n - EVENT_SEVERITY_DEBUG: EVENT_SEVERITY_DEBUG is used for debugging useful information.",
       "title": "EventSeverity is the severity level of the event"
     },
+    "arista.event.v1.EventSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.EventKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
     "arista.event.v1.EventSomeResponse": {
       "type": "object",
       "properties": {
@@ -2235,6 +2239,19 @@
         }
       }
     },
+    "arista.event.v1.UserEventCreationConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.UserEventCreationKey"
+          },
+          "title": "key contains a list of UserEventCreationConfig keys to delete"
+        }
+      }
+    },
     "arista.event.v1.UserEventCreationConfigDeleteSomeResponse": {
       "type": "object",
       "properties": {
@@ -2276,6 +2293,19 @@
         }
       }
     },
+    "arista.event.v1.UserEventCreationConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.UserEventCreationConfig"
+          },
+          "description": "value contains a list of UserEventCreationConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
     "arista.event.v1.UserEventCreationConfigSetSomeResponse": {
       "type": "object",
       "properties": {
@@ -2284,6 +2314,23 @@
         },
         "error": {
           "type": "string"
+        }
+      }
+    },
+    "arista.event.v1.UserEventCreationConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.UserEventCreationKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
         }
       }
     },

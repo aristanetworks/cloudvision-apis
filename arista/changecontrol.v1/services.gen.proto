@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.changecontrol.v1;
-option go_package = "arista/resources/arista/changecontrol.v1;changecontrol";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/changecontrol.v1;changecontrol";
 
 import "arista/changecontrol.v1/changecontrol.proto";
 import "arista/time/time.proto";
@@ -117,6 +117,45 @@ message ApproveConfigStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ApproveConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ApproveConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ApproveConfig at end.
+	//     * Each ApproveConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ApproveConfig at start, followed by updates until now.
+	//     * Each ApproveConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ApproveConfig at start, followed by updates
+	//     until end.
+	//     * Each ApproveConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ApproveConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ApproveConfigStreamResponse responses = 1;
+};
+
 message ApproveConfigSetRequest {
 	// ApproveConfig carries the value to set into the datastore.
 	// See the documentation on the ApproveConfig struct for which fields are required.
@@ -213,6 +252,8 @@ service ApproveConfigService {
 	rpc Delete (ApproveConfigDeleteRequest) returns (ApproveConfigDeleteResponse);
 	rpc DeleteSome (ApproveConfigDeleteSomeRequest) returns (stream ApproveConfigDeleteSomeResponse);
 	rpc DeleteAll (ApproveConfigDeleteAllRequest) returns (stream ApproveConfigDeleteAllResponse);
+	rpc GetAllBatched (ApproveConfigBatchedStreamRequest) returns (stream ApproveConfigBatchedStreamResponse);
+	rpc SubscribeBatched (ApproveConfigBatchedStreamRequest) returns (stream ApproveConfigBatchedStreamResponse);
 }
 
 message ChangeControlRequest {
@@ -304,6 +345,49 @@ message ChangeControlStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
+message ChangeControlBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ChangeControl partial_eq_filter = 1;
+	// For each ChangeControl in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ChangeControl is streamed to the user.
+	Filter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControl at end.
+	//     * Each ChangeControl response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControl at start, followed by updates until now.
+	//     * Each ChangeControl response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControl at start, followed by updates
+	//     until end.
+	//     * Each ChangeControl response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ChangeControlBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ChangeControlStreamResponse responses = 1;
+};
+
 service ChangeControlService {
 	rpc GetOne (ChangeControlRequest) returns (ChangeControlResponse);
 	rpc GetSome (ChangeControlSomeRequest) returns (stream ChangeControlSomeResponse);
@@ -311,6 +395,8 @@ service ChangeControlService {
 	rpc Subscribe (ChangeControlStreamRequest) returns (stream ChangeControlStreamResponse);
 	rpc GetMeta (ChangeControlStreamRequest) returns (MetaResponse);
 	rpc SubscribeMeta (ChangeControlStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ChangeControlBatchedStreamRequest) returns (stream ChangeControlBatchedStreamResponse);
+	rpc SubscribeBatched (ChangeControlBatchedStreamRequest) returns (stream ChangeControlBatchedStreamResponse);
 }
 
 message ChangeControlConfigRequest {
@@ -396,6 +482,45 @@ message ChangeControlConfigStreamResponse {
 	// once all initial data is streamed and the client begins to receive modification updates,
 	// you should not see INITIAL again.
 	arista.subscriptions.Operation type = 3;
+};
+
+message ChangeControlConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ChangeControlConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControlConfig at end.
+	//     * Each ChangeControlConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControlConfig at start, followed by updates until now.
+	//     * Each ChangeControlConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControlConfig at start, followed by updates
+	//     until end.
+	//     * Each ChangeControlConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ChangeControlConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ChangeControlConfigStreamResponse responses = 1;
 };
 
 message ChangeControlConfigSetRequest {
@@ -494,4 +619,6 @@ service ChangeControlConfigService {
 	rpc Delete (ChangeControlConfigDeleteRequest) returns (ChangeControlConfigDeleteResponse);
 	rpc DeleteSome (ChangeControlConfigDeleteSomeRequest) returns (stream ChangeControlConfigDeleteSomeResponse);
 	rpc DeleteAll (ChangeControlConfigDeleteAllRequest) returns (stream ChangeControlConfigDeleteAllResponse);
+	rpc GetAllBatched (ChangeControlConfigBatchedStreamRequest) returns (stream ChangeControlConfigBatchedStreamResponse);
+	rpc SubscribeBatched (ChangeControlConfigBatchedStreamRequest) returns (stream ChangeControlConfigBatchedStreamResponse);
 }
