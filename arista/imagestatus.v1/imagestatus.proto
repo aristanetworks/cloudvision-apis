@@ -372,6 +372,9 @@ enum WarningCode {
     // WARNING_CODE_TA_STUDIO_INCOMPATIBLE represents cases where the TerminAttr is incompatible
     // with Software Management Studio.
     WARNING_CODE_TA_STUDIO_INCOMPATIBLE = 15;
+    // WARNING_CODE_BUGALERTS_DATA_MISSING represents cases where some of the BugAlerts data
+    // under Aeris analytics dataset is missing.
+    WARNING_CODE_BUGALERTS_DATA_MISSING = 16;
 }
 
 // ImageWarning wraps `WarningCode` enum with a reason string.

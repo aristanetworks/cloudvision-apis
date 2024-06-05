@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-06-05
+      description: Add a new warning code WARNING_CODE_BUGALERTS_DATA_MISSING
+      version: 1.12.0
+      cvaas: true
     - date: 2024-06-03
       description: Add a new error code ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE
       version: 1.11.0
