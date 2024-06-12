@@ -9,6 +9,7 @@ package arista.alert.v1;
 option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/alert.v1;alert";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
 
 import "fmp/extensions.proto";
@@ -584,6 +585,8 @@ message Rule {
 	google.protobuf.BoolValue continue_checks = 3;
 	// comment is a comment to include that will be displayed in the alert
 	google.protobuf.StringValue comment = 4;
+	// suppress_for is a time duration that a rule will be debounced for after being called
+	google.protobuf.Duration suppress_for = 5;
 }
 
 // Matches is a set of restrictions that must be satisfied for a rule to be matched

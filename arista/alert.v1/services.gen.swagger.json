@@ -1373,19 +1373,6 @@
       },
       "title": "Alert is the current status of the alert system"
     },
-    "arista.alert.v1.AlertBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.alert.v1.AlertStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.alert.v1.AlertConfig": {
       "type": "object",
       "properties": {
@@ -1403,19 +1390,6 @@
         }
       },
       "title": "AlertConfig is the configuration for sending alerts"
-    },
-    "arista.alert.v1.AlertConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.alert.v1.AlertConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.alert.v1.AlertConfigResponse": {
       "type": "object",
@@ -2534,6 +2508,10 @@
         "comment": {
           "type": "string",
           "title": "comment is a comment to include that will be displayed in the alert"
+        },
+        "suppressFor": {
+          "type": "string",
+          "title": "suppress_for is a time duration that a rule will be debounced for after being called"
         }
       },
       "title": "Rule is a rule to send to a certain broadcast group"
