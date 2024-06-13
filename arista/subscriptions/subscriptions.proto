@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package arista.subscriptions;
-option go_package = "arista/resources/arista/subscriptions";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/subscriptions";
 
 enum Operation {
     UNSPECIFIED = 0;

@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package arista.time;
-option go_package = "arista/resources/arista/time";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/time";
 
 import "google/protobuf/timestamp.proto";
 
