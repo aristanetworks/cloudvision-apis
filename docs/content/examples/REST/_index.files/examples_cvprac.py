@@ -66,53 +66,6 @@ def get_active_devices(client):
             continue
     return devices
 
-def get_all_device_tags(client):
-    tag_url = '/api/resources/tag/v1/DeviceTag/all'
-    tag_data = client.get(tag_url)
-    tags = []
-    for tag in tag_data['data']:
-        tags.append({tag['result']['value']['key']['label']:tag['result']['value']['key']['value']})
-    return tags
-
-def get_all_interface_tags(client):
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
-    tags = client.get(tag_url)
-    return tags['data']
-
-def filter_interface_tag(client, dId=None, ifId=None, label=None, value=None):
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
-    payload = {
-                "partialEqFilter": [
-                    {"key": {"deviceId": dId, "interfaceId": ifId, "label": label, "value": value}}
-                ]
-            }
-    response = client.post(tag_url, data=payload)
-    return response
-
-def create_itag(client, label, value):
-    tag_url = '/api/resources/tag/v1/InterfaceTagConfig'
-    payload = {"key":{"label":label,"value":value}}
-    response = client.post(tag_url, data=payload)
-    return response
-
-def assign_itag(client, dId, ifId, label, value):
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig'
-    payload = {"key":{"label":label, "value":value, "deviceId": dId, "interfaceId": ifId}}
-    response = client.post(tag_url, data=payload)
-    return response
-
-def create_dtag(client, label, value):
-    tag_url = '/api/resources/tag/v1/DeviceTagConfig'
-    payload = {"key":{"label":label,"value":value}}
-    response = client.post(tag_url, data=payload)
-    return response
-
-def assign_dtag(client, dId, label, value):
-    tag_url = '/api/resources/tag/v1/DeviceTagAssignmentConfig'
-    payload = {"key":{"label":label, "value":value, "deviceId": dId}}
-    response = client.post(tag_url, data=payload)
-    return response
-
 ### Uncomment the below functions/print statement to test
 
 # ### Get all active events
@@ -156,35 +109,3 @@ def assign_dtag(client, dId, label, value):
 # ### Get the inventory
 # print ('=== Inventory ===')
 # print(get_active_devices(clnt))
-
-# ### Get all devie tags
-# print('=== Device Tags ===' )
-# for tag in get_all_device_tags(clnt):
-#     print (tag)
-
-# ### Get all interface tag assignments
-# print(get_all_interface_tags(clnt))
-
-# ### Get all interfaces that have a tag with a specific value on a device
-# print(filter_interface_tag(clnt, dId="JPE14070534", value="speed40Gbps"))
-
-# ### Get all tags for an interface of a device
-# print(filter_interface_tag(clnt, dId="JPE14070534", ifId="Ethernet1"))
-
-# ### Get all interfaces that have a specific tag assigned
-# print(filter_interface_tag(clnt, dId="JPE14070534", label="lldp_hostname"))
-
-# ### Create an interface tag
-# create_itag(clnt, "lldp_chassis", "50:08:00:0d:00:48")
-
-# ### Assign an interface tag
-# assign_itag(clnt, "JPE14070534", "Ethernet4", "lldp_chassis", "50:08:00:0d:00:38")
-
-# ### Create a device tag
-# create_dtag(clnt, "topology_hint_pod", "ire-pod11")
-
-# ### Assign an interface tag
-# assign_dtag(clnt, "JPE14070534", "topology_hint_pod", "ire-pod11" )
-
-
-
