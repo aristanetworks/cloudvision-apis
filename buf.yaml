@@ -27,7 +27,6 @@ breaking:
     - FILE
   ignore:
     - buf.yaml
-    - arista/tag.v1
     - arista/alert.v1
     - arista/bugexposure.v1
     - arista/changecontrol.v1

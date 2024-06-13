@@ -80,69 +80,6 @@ def get_active_devices():
             continue
     return devices
 
-def get_all_device_tags():
-    tag_url = '/api/resources/tag/v1/DeviceTag/all'
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.get(url, headers=head, verify=False)
-    tag_data = json_decoder(response.text)
-    tags = []
-    for tag in tag_data:
-        tags.append({tag['result']['value']['key']['label']:tag['result']['value']['key']['value']})
-    return tags
-
-def get_all_interface_tags():
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.get(url, headers=head, verify=False)
-    tags = json_decoder(response.text)
-    return tags
-
-def filter_interface_tag(dId=None, ifId=None, label=None, value=None):
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig/all'
-    payload = {
-                "partialEqFilter": [
-                    {"key": {"deviceId": dId, "interfaceId": ifId, "label": label, "value": value}}
-                ]
-            }
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.post(url, headers=head, data=json.dumps(payload), verify=False)
-    return response.text
-
-def create_itag(label, value):
-    tag_url = '/api/resources/tag/v1/InterfaceTagConfig'
-    payload = {"key":{"label":label, "value":value}}
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.post(url, headers=head, data=json.dumps(payload), verify=False)
-    return response
-
-def assign_itag(dId, ifId, label, value):
-    tag_url = '/api/resources/tag/v1/InterfaceTagAssignmentConfig'
-    payload = {"key":{"label":label, "value":value, "deviceId": dId, "interfaceId": ifId}}
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.post(url, headers=head, data=json.dumps(payload), verify=False)
-    return response
-
-def create_dtag(label, value):
-    tag_url = '/api/resources/tag/v1/DeviceTagConfig'
-    payload = {"key":{"label":label, "value":value}}
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.post(url, headers=head, data=json.dumps(payload), verify=False)
-    return response
-
-def assign_dtag(dId, label, value):
-    tag_url = '/api/resources/tag/v1/DeviceTagAssignmentConfig'
-    payload = {"key":{"label":label, "value":value, "deviceId": dId}}
-    url = cvp_url + tag_url
-    head = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.post(url, headers=head, data=json.dumps(payload), verify=False)
-    return response
-
 ### Uncomment the below functions/print statement to test
 
 # ### Get all active events
@@ -163,30 +100,3 @@ def assign_dtag(dId, label, value):
 # ### Get all Low Disk Space events
 # get_events_by_type("LOW_DEVICE_DISK_SPACE")
 # print(get_active_devices())
-
-# ### Get all device tags
-# pp(get_all_device_tags())
-
-# ### Get all interface tags
-# pp(get_all_interface_tags())
-
-# ### Get all interfaces that have a tag with a specific value on a device
-# print(filter_interface_tag(dId="JPE14070534", value="speed40Gbps"))
-
-# ### Get all tags for an interface of a device
-# print(filter_interface_tag(dId="JPE14070534", ifId="Ethernet1"))
-
-# ### Get all interfaces that have a specific tag assigned
-# print(filter_interface_tag(dId="JPE14070534", label="lldp_hostname"))
-
-# ### Create an interface tag
-# create_itag("lldp_chassis", "50:08:00:0d:00:48")
-
-# ### Assign an interface tag
-# assign_itag("JPE14070534", "Ethernet3", "lldp_chassis", "50:08:00:0d:00:48")
-
-# ### Create a device tag
-# create_dtag("topology_hint_pod", "ire-pod11")
-
-# ### Assign an interface tag
-# assign_dtag("JPE14070534", "topology_hint_pod", "ire-pod11")
