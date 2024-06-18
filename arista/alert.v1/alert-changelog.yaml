@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-06-12
+    description: Update Rule struct with debouncing field
+    version: 1.9.1
+    onprem: true
+    cvaas: true
   - date: 2024-05-09
     description: Update GetSome, SetSome, DeleteSome REST endpoints
     version: 1.9.0

@@ -9,7 +9,7 @@
 syntax = "proto3";
 
 package arista.bugexposure.v1;
-option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/bugexposure.v1;bugexposure";
+option go_package = "arista/resources/arista/bugexposure.v1;bugexposure";
 
 option java_package = "com.arista.bugexposure.v1";
 option java_outer_classname = "BugExposureServices";
