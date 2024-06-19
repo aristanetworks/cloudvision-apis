@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-06-17
+    description: Add Azure OAuth settings for webhook
+    version: 1.10.0
+    onprem: true
+    cvaas: true
   - date: 2024-06-12
     description: Update Rule struct with debouncing field
     version: 1.9.1

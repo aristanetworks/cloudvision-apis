@@ -1505,7 +1505,11 @@
         },
         "authUri": {
           "type": "string",
-          "title": "auth_uri is the URI used for OAuth"
+          "title": "auth_uri is the URI used for OAuth\nthis should always be https://login.microsoftonline.com/ unless using a very custom\nset up, where the Azure enviroment is not running on microsoft servers"
+        },
+        "scopes": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "scopes are the scopes that auth is granted for"
         }
       },
       "title": "AzureOAuth contains the settings for the sending of emails on Azure smtp server"
@@ -2065,7 +2069,7 @@
         },
         "azureOAuth": {
           "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
-          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
+          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username, scopes is not required as we use https://outlook.office365.com/.default"
         }
       },
       "title": "EmailSettings contain the settings for the sending of emails"
@@ -2790,6 +2794,10 @@
         "zoom": {
           "$ref": "#/definitions/arista.alert.v1.ZoomSettings",
           "title": "zoom is the global default settings for zoom"
+        },
+        "webhook": {
+          "$ref": "#/definitions/arista.alert.v1.WebhookSettings",
+          "title": "webhook is the auth settings for webhook"
         }
       },
       "title": "Settings portion of config, a list of default global settings used by broadcast groups"
@@ -3225,7 +3233,11 @@
         },
         "singleAlert": {
           "type": "boolean",
-          "description": "single_alert is a boolean flag that will cause an individual webhook message to be sent per\nalert when true.\n\nWebhook does not have a settings override"
+          "description": "single_alert is a boolean flag that will cause an individual webhook message to be sent per\nalert when true."
+        },
+        "settingsOverride": {
+          "$ref": "#/definitions/arista.alert.v1.WebhookSettings",
+          "title": "settings_override is the override for the webhook global endpoint settings"
         }
       },
       "title": "WebhookEndpoint contains the required information for an alert to be sent to a webhook endpoint"
@@ -3243,6 +3255,16 @@
         }
       },
       "title": "WebhookEndpoints is a set of webhook endpoints"
+    },
+    "arista.alert.v1.WebhookSettings": {
+      "type": "object",
+      "properties": {
+        "azureOAuth": {
+          "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
+          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
+        }
+      },
+      "title": "WebhookSettings contain the settings for sending alerts to a Webhook"
     },
     "arista.alert.v1.ZoomEndpoint": {
       "type": "object",

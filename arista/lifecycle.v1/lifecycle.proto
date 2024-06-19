@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package arista.lifecycle.v1;
 
-option go_package = "arista/resources/arista/lifecycle.v1;lifecycle";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/lifecycle.v1;lifecycle";
 
 option java_package = "com.arista.lifecycle.v1";
 option java_outer_classname = "Lifecycle";
