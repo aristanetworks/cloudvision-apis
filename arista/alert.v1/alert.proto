@@ -183,6 +183,8 @@ message Settings {
 	google.protobuf.BoolValue hide_tags = 18;
 	// zoom is the global default settings for zoom
 	ZoomSettings zoom = 19;
+	// webhook is the auth settings for webhook
+	WebhookSettings webhook = 20;
 }
 
 
@@ -203,7 +205,7 @@ message EmailSettings {
 	// notification, the email will only have a single notification, the format will also be different
 	google.protobuf.BoolValue single_alert_per_email = 6;
 	// azure_o_auth used for auth when using an Azure smtp server
-	// uses auth_username
+	// uses auth_username, scopes is not required as we use https://outlook.office365.com/.default
 	AzureOAuth azure_o_auth = 7;
 }
 
@@ -216,7 +218,11 @@ message AzureOAuth {
 	// client_secret is a user generated secret key used for auth
 	google.protobuf.StringValue client_secret = 3;
 	// auth_uri is the URI used for OAuth
+	// this should always be https://login.microsoftonline.com/ unless using a very custom
+	// set up, where the Azure enviroment is not running on microsoft servers
 	google.protobuf.StringValue auth_uri = 4;
+	// scopes are the scopes that auth is granted for
+	fmp.RepeatedString scopes = 5;
 }
 
 // HttpSettings are the settings to be used when sending various message over a http connection
@@ -288,6 +294,13 @@ message GoogleChatSettings {
 message MsTeamsSettings {
 	// url is the url of the webhook to send alerts to
 	google.protobuf.StringValue url = 1;
+}
+
+// WebhookSettings contain the settings for sending alerts to a Webhook
+message WebhookSettings {
+	// azure_o_auth used for auth when using an Azure smtp server
+	// uses auth_username
+	AzureOAuth azure_o_auth = 1;
 }
 
 
@@ -795,7 +808,8 @@ message WebhookEndpoint {
 	// single_alert is a boolean flag that will cause an individual webhook message to be sent per
 	// alert when true.
 	google.protobuf.BoolValue single_alert = 5;
-	// Webhook does not have a settings override
+	// settings_override is the override for the webhook global endpoint settings
+	WebhookSettings settings_override = 6;
 }
 
 

@@ -87,48 +87,11 @@ message AlertStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
-message AlertBatchedStreamRequest {
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each Alert at end.
-	//     * Each Alert response is fully-specified (all fields set).
-	//   * start: Returns the state of each Alert at start, followed by updates until now.
-	//     * Each Alert response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each Alert at start, followed by updates
-	//     until end.
-	//     * Each Alert response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-
-	// MaxMessages limits the maximum number of messages that can be contained in one batch.
-	// MaxMessages is required to be at least 1.
-	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
-	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
-	google.protobuf.UInt32Value max_messages = 4;
-};
-
-message AlertBatchedStreamResponse {
-	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
-	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
-	repeated AlertStreamResponse responses = 1;
-};
-
 service AlertService {
 	rpc GetOne (AlertRequest) returns (AlertResponse);
-	
 	rpc GetAll (AlertStreamRequest) returns (stream AlertStreamResponse);
 	rpc Subscribe (AlertStreamRequest) returns (stream AlertStreamResponse);
-	
 	rpc SubscribeMeta (AlertStreamRequest) returns (stream MetaResponse);
-	rpc GetAllBatched (AlertBatchedStreamRequest) returns (stream AlertBatchedStreamResponse);
-	rpc SubscribeBatched (AlertBatchedStreamRequest) returns (stream AlertBatchedStreamResponse);
 }
 
 message AlertConfigRequest {
@@ -186,39 +149,6 @@ message AlertConfigStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
-message AlertConfigBatchedStreamRequest {
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each AlertConfig at end.
-	//     * Each AlertConfig response is fully-specified (all fields set).
-	//   * start: Returns the state of each AlertConfig at start, followed by updates until now.
-	//     * Each AlertConfig response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each AlertConfig at start, followed by updates
-	//     until end.
-	//     * Each AlertConfig response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-
-	// MaxMessages limits the maximum number of messages that can be contained in one batch.
-	// MaxMessages is required to be at least 1.
-	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
-	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
-	google.protobuf.UInt32Value max_messages = 4;
-};
-
-message AlertConfigBatchedStreamResponse {
-	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
-	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
-	repeated AlertConfigStreamResponse responses = 1;
-};
-
 message AlertConfigSetRequest {
 	// AlertConfig carries the value to set into the datastore.
 	// See the documentation on the AlertConfig struct for which fields are required.
@@ -241,16 +171,11 @@ message AlertConfigSetResponse {
 
 service AlertConfigService {
 	rpc GetOne (AlertConfigRequest) returns (AlertConfigResponse);
-	
 	rpc GetAll (AlertConfigStreamRequest) returns (stream AlertConfigStreamResponse);
 	rpc Subscribe (AlertConfigStreamRequest) returns (stream AlertConfigStreamResponse);
-	
 	rpc SubscribeMeta (AlertConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (AlertConfigSetRequest) returns (AlertConfigSetResponse);
 	
-	
-	rpc GetAllBatched (AlertConfigBatchedStreamRequest) returns (stream AlertConfigBatchedStreamResponse);
-	rpc SubscribeBatched (AlertConfigBatchedStreamRequest) returns (stream AlertConfigBatchedStreamResponse);
 }
 
 message DefaultTemplateRequest {
