@@ -44,6 +44,7 @@ message Filter {
 // Use GetOne to get the body of individual configlets
 message Configlet {
 	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "Filter";
 	ConfigletKey key = 1;
 
 	// display_name is the display name of the static configlet.
@@ -72,6 +73,7 @@ message Configlet {
 // ConfigletConfig updates a static configlet in a workspace.
 message ConfigletConfig {
 	option (fmp.model) = "rw";
+	option (fmp.custom_filter) = "Filter";
 	ConfigletKey key = 1;
 
 	// remove specifies the static configlet is to be removed from the workspace.
