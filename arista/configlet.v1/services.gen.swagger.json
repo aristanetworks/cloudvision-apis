@@ -106,6 +106,13 @@
         },
         "parameters": [
           {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -224,6 +231,13 @@
         },
         "parameters": [
           {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -300,6 +314,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -386,6 +407,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -1590,6 +1618,13 @@
         },
         "parameters": [
           {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1633,6 +1668,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
         "tags": [
           "ConfigletConfigService"
         ]
@@ -1778,6 +1822,13 @@
         },
         "parameters": [
           {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1896,6 +1947,13 @@
         },
         "parameters": [
           {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1981,6 +2039,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.includeBody",
+            "description": "include_body specifies the static configlet body is to be included.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -2704,6 +2769,10 @@
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
+        "filter": {
+          "$ref": "#/definitions/arista.configlet.v1.Filter",
+          "description": "For each ConfigletConfig in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given ConfigletConfig is streamed to the user."
+        },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
           "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletConfig at end.\n    * Each ConfigletConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletConfig at start, followed by updates until now.\n    * Each ConfigletConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletConfig at start, followed by updates\n    until end.\n    * Each ConfigletConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
@@ -2805,6 +2874,10 @@
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
+        "filter": {
+          "$ref": "#/definitions/arista.configlet.v1.Filter",
+          "description": "For each Configlet in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Configlet is streamed to the user."
+        },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
           "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configlet at end.\n    * Each Configlet response is fully-specified (all fields set).\n  * start: Returns the state of each Configlet at start, followed by updates until now.\n    * Each Configlet response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configlet at start, followed by updates\n    until end.\n    * Each Configlet response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
@@ -2828,6 +2901,16 @@
           "description": "Operation indicates how the Configlet value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.configlet.v1.Filter": {
+      "type": "object",
+      "properties": {
+        "includeBody": {
+          "type": "boolean",
+          "description": "include_body specifies the static configlet body is to be included."
+        }
+      },
+      "description": "Filter is used to filter static configlets."
     },
     "arista.configlet.v1.MatchPolicy": {
       "type": "string",

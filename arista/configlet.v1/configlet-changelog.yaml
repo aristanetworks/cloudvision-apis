@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-05-20
+      description: Add configlet body filter
+      onprem: true
+      cvaas: true
+      version: 1.1.1
     - date: 2024-05-16
       description: Update GetSome, SetSome, DeleteSome REST endpoints
       onprem: true

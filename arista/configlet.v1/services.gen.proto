@@ -82,6 +82,10 @@ message ConfigletStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated Configlet partial_eq_filter = 1;
+	// For each Configlet in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given Configlet is streamed to the user.
+	Filter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -124,6 +128,10 @@ message ConfigletBatchedStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated Configlet partial_eq_filter = 1;
+	// For each Configlet in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given Configlet is streamed to the user.
+	Filter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -576,6 +584,10 @@ message ConfigletConfigStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated ConfigletConfig partial_eq_filter = 1;
+	// For each ConfigletConfig in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ConfigletConfig is streamed to the user.
+	Filter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -618,6 +630,10 @@ message ConfigletConfigBatchedStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated ConfigletConfig partial_eq_filter = 1;
+	// For each ConfigletConfig in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ConfigletConfig is streamed to the user.
+	Filter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -720,6 +736,10 @@ message ConfigletConfigDeleteAllRequest {
 	// This requires all provided fields to be equal to the response.
 	// A filtered DeleteAll will use GetAll with filter to find things to delete.
 	repeated ConfigletConfig partial_eq_filter = 1;
+	// For each ConfigletConfig in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ConfigletConfig will be deleted.
+	Filter filter = 2;
 };
 
 message ConfigletConfigDeleteAllResponse {
