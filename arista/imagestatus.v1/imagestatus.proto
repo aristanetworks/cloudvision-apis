@@ -246,11 +246,14 @@ message Summary {
     // summary is the image diff summary.
     ImageSummary summary = 2;
     // errors are the image errors encountered while validating the image. These are
-    // displayed on the change control review page (for changes made outside the workspace).
+    // displayed on the workspace build results page.
     ImageErrors errors = 3;
     // warnings are the image warnings encountered while validating the image. These are
-    // displayed on the change control review page (for changes made outside the workspace).
+    // displayed on the workspace build results page.
     ImageWarnings warnings = 4;
+    // infos are the image infos encountered while validating the image. These are
+    // displayed on the workspace build results page.
+    ImageInfos infos = 5;
 }
 
 // ErrorCode indicates errors produced during image validations.
@@ -392,4 +395,29 @@ message ImageWarning {
 message ImageWarnings {
     // values is a list of image warnings.
     repeated ImageWarning values = 1;
+}
+
+// InfoCode indicates info messages produced during image validations.
+enum InfoCode {
+    // INFO_CODE_UNSPECIFIED indicates info code is unspecified.
+    INFO_CODE_UNSPECIFIED = 0;
+    // INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance
+    // release is available for download.
+    INFO_CODE_NEWER_VERSION_AVAILABLE = 1;
+}
+
+// ImageInfo wraps `InfoCode` enum with a reason string.
+message ImageInfo {
+    // sku represents the name of the sku.
+    google.protobuf.StringValue sku = 1;
+    // info_code is the info code.
+    InfoCode info_code = 2;
+    // info_msg provides a description of the info.
+    google.protobuf.StringValue info_msg = 3;
+}
+
+// ImageInfos is the list of info messages reported by CVP when handling image validations.
+message ImageInfos {
+    // values is a list of image infos.
+    repeated ImageInfo values = 1;
 }

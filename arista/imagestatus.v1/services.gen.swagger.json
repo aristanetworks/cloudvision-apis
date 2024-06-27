@@ -619,6 +619,38 @@
       },
       "description": "ImageErrors is the list of errors reported by CVP when handling image\nvalidations."
     },
+    "arista.imagestatus.v1.ImageInfo": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "infoCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.InfoCode",
+          "description": "info_code is the info code."
+        },
+        "infoMsg": {
+          "type": "string",
+          "description": "info_msg provides a description of the info."
+        }
+      },
+      "description": "ImageInfo wraps `InfoCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageInfos": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageInfo"
+          },
+          "description": "values is a list of image infos."
+        }
+      },
+      "description": "ImageInfos is the list of info messages reported by CVP when handling image validations."
+    },
     "arista.imagestatus.v1.ImageMetadata": {
       "type": "object",
       "properties": {
@@ -739,6 +771,15 @@
       },
       "description": "ImageWarnings is the list of warnings reported by CVP when handling image\nvalidations."
     },
+    "arista.imagestatus.v1.InfoCode": {
+      "type": "string",
+      "enum": [
+        "INFO_CODE_UNSPECIFIED",
+        "INFO_CODE_NEWER_VERSION_AVAILABLE"
+      ],
+      "default": "INFO_CODE_UNSPECIFIED",
+      "description": "InfoCode indicates info messages produced during image validations.\n\n - INFO_CODE_UNSPECIFIED: INFO_CODE_UNSPECIFIED indicates info code is unspecified.\n - INFO_CODE_NEWER_VERSION_AVAILABLE: INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance\nrelease is available for download."
+    },
     "arista.imagestatus.v1.MetaResponse": {
       "type": "object",
       "properties": {
@@ -848,11 +889,15 @@
         },
         "errors": {
           "$ref": "#/definitions/arista.imagestatus.v1.ImageErrors",
-          "description": "errors are the image errors encountered while validating the image. These are\ndisplayed on the change control review page (for changes made outside the workspace)."
+          "description": "errors are the image errors encountered while validating the image. These are\ndisplayed on the workspace build results page."
         },
         "warnings": {
           "$ref": "#/definitions/arista.imagestatus.v1.ImageWarnings",
-          "description": "warnings are the image warnings encountered while validating the image. These are\ndisplayed on the change control review page (for changes made outside the workspace)."
+          "description": "warnings are the image warnings encountered while validating the image. These are\ndisplayed on the workspace build results page."
+        },
+        "infos": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageInfos",
+          "description": "infos are the image infos encountered while validating the image. These are\ndisplayed on the workspace build results page."
         }
       },
       "description": "Summary represents the device image summary."
