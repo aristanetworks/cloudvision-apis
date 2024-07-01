@@ -307,6 +307,9 @@ enum ErrorCode {
     // ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE represents the case where a 2GB-device is incompatible
     // with a non-2GB EOS or a non-2GB device is incompatible with a 2GB-EOS.
     ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE = 15;
+    // ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE represents the case where the given extension
+    // version doesn't support the given EOS version.
+    ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE = 16;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.
