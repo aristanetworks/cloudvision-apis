@@ -514,6 +514,8 @@ ExtensionDiffsBySup.ValuesEntry
 Extensions
 ImageError
 ImageErrors
+ImageInfo
+ImageInfos
 ImageMetadata
 ImageSummary
 ImageWarning
@@ -530,6 +532,7 @@ TerminAttrDiffsBySup.ValuesEntry
 DiffOp
 ErrorCode
 ExtensionInstallStatus
+InfoCode
 SoftwareComplianceCode
 WarningCode
 arista/imagestatus.v1/services.gen.proto
@@ -545,8 +548,7 @@ SummaryStreamResponse
 SummaryService
 Top
 arista/imagestatus.v1/imagestatus.proto ComplianceStatus ComplianceStatus indicates compliance status for software image, terminattr and extensions.
-Field Name Type Description software_image_compliance_code SoftwareComplianceCode software_image_compliance_code is the compliance code for images.
-terminattr_compliance_code SoftwareComplianceCode terminattr_compliance_code is the compliance code for TerminAttr.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
+Field Name Type Description software_image_compliance_code SoftwareComplianceCode software_image_compliance_code is the compliance code for images.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
 Device
 DeviceConfiguration
 DeviceConfiguration.OptionsEntry
