@@ -2076,10 +2076,11 @@
         "ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED",
         "ERROR_CODE_EOS_SUPPORT_REMOVED",
         "ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE",
-        "ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE"
+        "ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE",
+        "ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE"
       ],
       "default": "ERROR_CODE_UNSPECIFIED",
-      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor.\n - ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE: ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and\nTerminAttr architecture are incompatible.\n - ERROR_CODE_TA_CV_INCOMPATIBLE: ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with\nCloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.\n - ERROR_CODE_EOS_CV_INCOMPATIBLE: ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with\nCloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.\n - ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED: ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_EOS_SUPPORT_REMOVED: ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE: ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device\ndoes not support the given EOS type.\n - ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr\nversion is lower than the embedded TerminAttr version in SWI."
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor.\n - ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE: ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and\nTerminAttr architecture are incompatible.\n - ERROR_CODE_TA_CV_INCOMPATIBLE: ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with\nCloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.\n - ERROR_CODE_EOS_CV_INCOMPATIBLE: ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with\nCloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.\n - ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED: ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_EOS_SUPPORT_REMOVED: ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE: ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device\ndoes not support the given EOS type.\n - ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr\nversion is lower than the embedded TerminAttr version in SWI.\n - ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE: ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE represents the case where a 2GB-device is incompatible\nwith a non-2GB EOS or a non-2GB device is incompatible with a 2GB-EOS."
     },
     "arista.imagestatus.v1.Extension": {
       "type": "object",
@@ -2203,6 +2204,38 @@
       },
       "description": "ImageErrors is the list of errors reported by CVP when handling image\nvalidations."
     },
+    "arista.imagestatus.v1.ImageInfo": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku."
+        },
+        "infoCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.InfoCode",
+          "description": "info_code is the info code."
+        },
+        "infoMsg": {
+          "type": "string",
+          "description": "info_msg provides a description of the info."
+        }
+      },
+      "description": "ImageInfo wraps `InfoCode` enum with a reason string."
+    },
+    "arista.imagestatus.v1.ImageInfos": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.imagestatus.v1.ImageInfo"
+          },
+          "description": "values is a list of image infos."
+        }
+      },
+      "description": "ImageInfos is the list of info messages reported by CVP when handling image validations."
+    },
     "arista.imagestatus.v1.ImageMetadata": {
       "type": "object",
       "properties": {
@@ -2323,6 +2356,15 @@
       },
       "description": "ImageWarnings is the list of warnings reported by CVP when handling image\nvalidations."
     },
+    "arista.imagestatus.v1.InfoCode": {
+      "type": "string",
+      "enum": [
+        "INFO_CODE_UNSPECIFIED",
+        "INFO_CODE_NEWER_VERSION_AVAILABLE"
+      ],
+      "default": "INFO_CODE_UNSPECIFIED",
+      "description": "InfoCode indicates info messages produced during image validations.\n\n - INFO_CODE_UNSPECIFIED: INFO_CODE_UNSPECIFIED indicates info code is unspecified.\n - INFO_CODE_NEWER_VERSION_AVAILABLE: INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance\nrelease is available for download."
+    },
     "arista.imagestatus.v1.RebootRequired": {
       "type": "object",
       "properties": {
@@ -2430,10 +2472,12 @@
         "WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED",
         "WARNING_CODE_SUPPORT_NOT_INTRODUCED",
         "WARNING_CODE_SUPPORT_REMOVED",
-        "WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION"
+        "WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION",
+        "WARNING_CODE_TA_STUDIO_INCOMPATIBLE",
+        "WARNING_CODE_BUGALERTS_DATA_MISSING"
       ],
       "default": "WARNING_CODE_UNSPECIFIED",
-      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\nDeprecated - use ERROR_CODE_TA_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\nDeprecated - use ERROR_CODE_EOS_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent. Deprecated.\n - WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED: WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED represents cases where the given EOS has passed\nits end of life date.\n - WARNING_CODE_SUPPORT_NOT_INTRODUCED: WARNING_CODE_SUPPORT_NOT_INTRODUCED represents cases where the given EOS version does\nnot support the SKUs.\n - WARNING_CODE_SUPPORT_REMOVED: WARNING_CODE_SUPPORT_REMOVED represents cases where the given EOS version no longer\nsupports the SKUs.\n - WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION: WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION represents cases where the running\nTerminAttr version is below CloudVision's minimum supported version."
+      "description": "WarningCode indicates warnings produced during image validations.\n\n - WARNING_CODE_UNSPECIFIED: WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.\n - WARNING_CODE_NOT_APPLICABLE: WARNING_CODE_NOT_APPLICABLE represents cases where EOS \u003c-\u003e SKU/TA compatibility\nis not applicable for non physical switches like vEos.\n - WARNING_CODE_SKUINFO_UNAVAILABLE: WARNING_CODE_SKUINFO_UNAVAILABLE represents case where\ninformation about certain skus is missing.\n - WARNING_CODE_DEVICE_SKU_UNAVAILABLE: WARNING_CODE_DEVICE_SKU_UNAVAILABLE represents unavailability of skus for an EOS Device.\n - WARNING_CODE_SWI_UNKNOWN: WARNING_CODE_SWI_UNKNOWN represents cases where EOS version is not found in release database.\n - WARNING_CODE_TA_EOS_INCOMPATIBLE: WARNING_CODE_TA_EOS_INCOMPATIBLE represents cases where TA and EOS are not compatible.\nTA is lower than embedded TA in swi or given TA is unsupported by the EOS.\n - WARNING_CODE_TA_CV_INCOMPATIBLE: WARNING_CODE_TA_CV_INCOMPATIBLE represents cases where TA is incompatible with CV.\nTA is lower than minimum supported TA on CV.\nDeprecated - use ERROR_CODE_TA_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_CV_INCOMPATIBLE: WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet\nsupported by CV. Given EOS is outside range of CV's minimum and maximum EOS.\nDeprecated - use ERROR_CODE_EOS_CV_INCOMPATIBLE.\n - WARNING_CODE_EOS_ARCH_UNKNOWN: WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is\nnot valid for EOS.\n - WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: WARNING_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents cases where TA extension is lower\nin version than embedded TA in SWI.\n - WARNING_CODE_ARCH_INCOMPATIBLE: WARNING_CODE_ARCH_INCOMPATIBLE represents cases where EOS arch and TA arch are\ndifferent. Deprecated.\n - WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED: WARNING_CODE_EOS_END_OF_LIFE_DATE_PASSED represents cases where the given EOS has passed\nits end of life date.\n - WARNING_CODE_SUPPORT_NOT_INTRODUCED: WARNING_CODE_SUPPORT_NOT_INTRODUCED represents cases where the given EOS version does\nnot support the SKUs.\n - WARNING_CODE_SUPPORT_REMOVED: WARNING_CODE_SUPPORT_REMOVED represents cases where the given EOS version no longer\nsupports the SKUs.\n - WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION: WARNING_CODE_RUNNING_TA_BELOW_MIN_SUPPORTED_VERSION represents cases where the running\nTerminAttr version is below CloudVision's minimum supported version.\n - WARNING_CODE_TA_STUDIO_INCOMPATIBLE: WARNING_CODE_TA_STUDIO_INCOMPATIBLE represents cases where the TerminAttr is incompatible\nwith Software Management Studio.\n - WARNING_CODE_BUGALERTS_DATA_MISSING: WARNING_CODE_BUGALERTS_DATA_MISSING represents cases where some of the BugAlerts data\nunder Aeris analytics dataset is missing."
     },
     "arista.subscriptions.Operation": {
       "type": "string",
@@ -2617,6 +2661,10 @@
         "imageInputError": {
           "type": "string",
           "description": "image_input_error indicates any errors in image inputs."
+        },
+        "infos": {
+          "$ref": "#/definitions/arista.imagestatus.v1.ImageInfos",
+          "description": "infos are any info messages about the generated image."
         }
       },
       "description": "ImageValidationResult holds the result of an image validation stage."

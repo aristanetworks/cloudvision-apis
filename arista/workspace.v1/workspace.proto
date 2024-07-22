@@ -336,6 +336,8 @@ message ImageValidationResult {
 	arista.imagestatus.v1.ImageWarnings warnings = 3;
 	// image_input_error indicates any errors in image inputs.
 	google.protobuf.StringValue image_input_error = 4;
+	// infos are any info messages about the generated image.
+	arista.imagestatus.v1.ImageInfos infos = 5;
 }
 
 // BuildStageState holds the state per build stage.
