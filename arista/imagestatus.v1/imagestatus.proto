@@ -310,6 +310,9 @@ enum ErrorCode {
     // ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE represents the case where the given extension
     // version doesn't support the given EOS version.
     ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE = 16;
+    // ERROR_CODE_ARCH_UNSUPPORTED represents the case where the given image architecture is not
+    // supported by CloudVision.
+    ERROR_CODE_ARCH_UNSUPPORTED = 17;
 }
 
 // ImageError wraps `ErrorCode` enum with a reason string.
