@@ -340,6 +340,17 @@ message ImageValidationResult {
 	arista.imagestatus.v1.ImageInfos infos = 5;
 }
 
+// ConfigSyncResult holds the result of config sync operation.
+message ConfigSyncResult {
+	// summary is a summary of the changes to the running config.
+	arista.configstatus.v1.ConfigSummary summary = 1;
+	// errors are any errors detected during sync.
+	arista.configstatus.v1.ConfigErrors errors = 2;
+	// config_sources identify the entities that generated the designed config.
+	arista.configstatus.v1.ConfigSources config_sources = 3;
+ }
+
+
 // BuildStageState holds the state per build stage.
 message BuildStageState {
 	// values is a map from build stage to build state.
@@ -443,6 +454,10 @@ message WorkspaceBuildDetails {
 	BuildStageState build_stage_state = 10;
 	// authz_status is the status of provision permission for the device.
 	DeviceAuthzStatus authz_status = 11;
+	// config_sync_result is the result of the config sync.
+	ConfigSyncResult config_sync_result = 12;
+	// config_sync_skip_cause is the reason for skipping the config sync.
+	ConfigSyncSkipCause config_sync_skip_cause = 13;
 }
 
 // ConfigValidationSkipCause enumerates the set of reasons a device can skip the config
@@ -484,3 +499,46 @@ enum ImageValidationSkipCause {
 	// skipped because the device has no proposed software changes in the workspace.
 	IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE = 4;
 }
+
+// ConfigSyncSkipCause enumerates the set of reasons a device can skip config sync.
+enum ConfigSyncSkipCause {
+	// CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED indicates that config sync skip cause is
+        // unspecified.
+	CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED = 0;
+	// CONFIG_SYNC_SKIP_CAUSE_INACTIVE indicates that config sync is skipped because
+        // device is not streaming.
+	CONFIG_SYNC_SKIP_CAUSE_INACTIVE = 1;
+	// CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED indicates that config sync is skipped
+        // because device is pre-provisioned.
+	CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED = 2;
+	// CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE indicates that config sync is skipped
+        // because device is in compliance.
+	CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE = 3;
+ }
+
+// WorkspaceSyncKey uniquely identifies sync operations to be performed
+// in a workspace.
+message WorkspaceSyncKey {
+	option (fmp.model_key) = true;
+	// workspace_id is the ID of the workspace.
+	google.protobuf.StringValue workspace_id = 1;
+	// sync_operation is type of sync operation to be performed on devices.
+	SyncOperation sync_operation = 2;
+}
+
+// WorkspaceSyncConfig holds the list of devices to be synced in workspace.
+message WorkspaceSyncConfig {
+	option (fmp.model) = "rw";
+	// key uniquely identifies sync operations to be performed in workspace.
+	WorkspaceSyncKey key = 1;
+	// device_ids is the list of device Ids to be synced in the workspace.
+	fmp.RepeatedString device_ids = 2;
+}
+
+// SyncOperation enumerates sync operations.
+enum SyncOperation {
+	// SYNC_OPERATION_UNSPECIFIED indicates unspecified sync operation.
+	SYNC_OPERATION_UNSPECIFIED = 0;
+	// SYNC_OPERATION_CONFIG indicates config sync operation.
+	SYNC_OPERATION_CONFIG = 1;
+ }

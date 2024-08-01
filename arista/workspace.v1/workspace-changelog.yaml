@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-07-29
+      description: Add device sync config
+      version: 1.3.5
+      cvaas: true
     - date: 2024-07-22
       description: Add infos (arista.imagestatus.v1.ImageInfos) to ImageValidationResult
       version: 1.3.4

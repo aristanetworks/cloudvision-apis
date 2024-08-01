@@ -680,3 +680,227 @@ service WorkspaceConfigService {
 	rpc GetAllBatched (WorkspaceConfigBatchedStreamRequest) returns (stream WorkspaceConfigBatchedStreamResponse);
 	rpc SubscribeBatched (WorkspaceConfigBatchedStreamRequest) returns (stream WorkspaceConfigBatchedStreamResponse);
 }
+
+message WorkspaceSyncConfigRequest {
+	// Key uniquely identifies a WorkspaceSyncConfig instance to retrieve.
+	// This value must be populated.
+	WorkspaceSyncKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSyncConfigResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceSyncConfig value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceSyncConfig instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSyncConfigSomeRequest {
+	repeated WorkspaceSyncKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSyncConfigSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceSyncConfig value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
+message WorkspaceSyncConfigStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceSyncConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceSyncConfig at end.
+	//     * Each WorkspaceSyncConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceSyncConfig at start, followed by updates until now.
+	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceSyncConfig at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message WorkspaceSyncConfigStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	WorkspaceSyncConfig value = 1;
+
+	// Time holds the timestamp of this WorkspaceSyncConfig's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the WorkspaceSyncConfig value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message WorkspaceSyncConfigBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceSyncConfig partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceSyncConfig at end.
+	//     * Each WorkspaceSyncConfig response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceSyncConfig at start, followed by updates until now.
+	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceSyncConfig at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceSyncConfigBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceSyncConfigStreamResponse responses = 1;
+};
+
+message WorkspaceSyncConfigSetRequest {
+	// WorkspaceSyncConfig carries the value to set into the datastore.
+	// See the documentation on the WorkspaceSyncConfig struct for which fields are required.
+	WorkspaceSyncConfig value = 1;
+};
+
+message WorkspaceSyncConfigSetResponse {
+	// Value carries all the values given in the WorkspaceSyncConfigSetRequest as well
+	// as any server-generated values.
+	WorkspaceSyncConfig value = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// creation. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==CreatedAt will include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSyncConfigSetSomeRequest {
+	// value contains a list of WorkspaceSyncConfig values to write.
+	// It is possible to provide more values than can fit within either:
+	//     - the maxiumum send size of the client
+	//     - the maximum receive size of the server
+	// If this error occurs you must reduce the number of values sent.
+	// See gRPC "maximum message size" documentation for more information.
+	repeated WorkspaceSyncConfig values = 1;
+};
+
+message WorkspaceSyncConfigSetSomeResponse {
+	WorkspaceSyncKey key = 1;
+	string error = 2;
+};
+
+message WorkspaceSyncConfigDeleteRequest {
+	// Key indicates which WorkspaceSyncConfig instance to remove.
+	// This field must always be set.
+	WorkspaceSyncKey key = 1;
+};
+
+message WorkspaceSyncConfigDeleteResponse {
+	// Key echoes back the key of the deleted WorkspaceSyncConfig instance.
+	WorkspaceSyncKey key = 1;
+
+	// Time indicates the (UTC) timestamp at which the system recognizes the
+	// deletion. The only guarantees made about this timestamp are:
+	//
+	//    - it is after the time the request was received
+	//    - a time-ranged query with StartTime==DeletedAt will not include this instance.
+	//
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceSyncConfigDeleteSomeRequest {
+	// key contains a list of WorkspaceSyncConfig keys to delete
+	repeated WorkspaceSyncKey keys = 1;
+};
+
+// WorkspaceSyncConfigDeleteSomeResponse is only sent when there is an error.
+message WorkspaceSyncConfigDeleteSomeResponse {
+	WorkspaceSyncKey key = 1;
+	string error = 2;
+};
+
+message WorkspaceSyncConfigDeleteAllRequest {
+	// PartialEqFilter provides a way to server-side filter a DeleteAll.
+	// This requires all provided fields to be equal to the response.
+	// A filtered DeleteAll will use GetAll with filter to find things to delete.
+	repeated WorkspaceSyncConfig partial_eq_filter = 1;
+};
+
+message WorkspaceSyncConfigDeleteAllResponse {
+	// This describes the class of delete error.
+	// A DeleteAllResponse is only sent when there is an error.
+	fmp.DeleteError type = 1;
+	// This indicates the error message from the delete failure.
+	google.protobuf.StringValue error = 2;
+	// This is the key of the WorkspaceSyncConfig instance that failed to be deleted.
+	WorkspaceSyncKey key = 3;
+	// Time indicates the (UTC) timestamp when the key was being deleted.
+	google.protobuf.Timestamp time = 4;
+};
+
+service WorkspaceSyncConfigService {
+	rpc GetOne (WorkspaceSyncConfigRequest) returns (WorkspaceSyncConfigResponse);
+	rpc GetSome (WorkspaceSyncConfigSomeRequest) returns (stream WorkspaceSyncConfigSomeResponse);
+	rpc GetAll (WorkspaceSyncConfigStreamRequest) returns (stream WorkspaceSyncConfigStreamResponse);
+	rpc Subscribe (WorkspaceSyncConfigStreamRequest) returns (stream WorkspaceSyncConfigStreamResponse);
+	rpc GetMeta (WorkspaceSyncConfigStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceSyncConfigStreamRequest) returns (stream MetaResponse);
+	rpc Set (WorkspaceSyncConfigSetRequest) returns (WorkspaceSyncConfigSetResponse);
+	rpc SetSome (WorkspaceSyncConfigSetSomeRequest) returns (stream WorkspaceSyncConfigSetSomeResponse);
+	rpc Delete (WorkspaceSyncConfigDeleteRequest) returns (WorkspaceSyncConfigDeleteResponse);
+	rpc DeleteSome (WorkspaceSyncConfigDeleteSomeRequest) returns (stream WorkspaceSyncConfigDeleteSomeResponse);
+	rpc DeleteAll (WorkspaceSyncConfigDeleteAllRequest) returns (stream WorkspaceSyncConfigDeleteAllResponse);
+	rpc GetAllBatched (WorkspaceSyncConfigBatchedStreamRequest) returns (stream WorkspaceSyncConfigBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceSyncConfigBatchedStreamRequest) returns (stream WorkspaceSyncConfigBatchedStreamResponse);
+}

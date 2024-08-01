@@ -20,6 +20,9 @@
     },
     {
       "name": "WorkspaceConfigService"
+    },
+    {
+      "name": "WorkspaceSyncConfigService"
     }
   ],
   "schemes": [
@@ -1847,6 +1850,607 @@
           "WorkspaceConfigService"
         ]
       }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig": {
+      "get": {
+        "operationId": "WorkspaceSyncConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.syncOperation",
+            "description": "sync_operation is type of sync operation to be performed on devices.\n\n - SYNC_OPERATION_UNSPECIFIED: SYNC_OPERATION_UNSPECIFIED indicates unspecified sync operation.\n - SYNC_OPERATION_CONFIG: SYNC_OPERATION_CONFIG indicates config sync operation.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SYNC_OPERATION_UNSPECIFIED",
+              "SYNC_OPERATION_CONFIG"
+            ],
+            "default": "SYNC_OPERATION_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkspaceSyncConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the ID of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.syncOperation",
+            "description": "sync_operation is type of sync operation to be performed on devices.\n\n - SYNC_OPERATION_UNSPECIFIED: SYNC_OPERATION_UNSPECIFIED indicates unspecified sync operation.\n - SYNC_OPERATION_CONFIG: SYNC_OPERATION_CONFIG indicates config sync operation.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SYNC_OPERATION_UNSPECIFIED",
+              "SYNC_OPERATION_CONFIG"
+            ],
+            "default": "SYNC_OPERATION_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "WorkspaceSyncConfig carries the value to set into the datastore.\nSee the documentation on the WorkspaceSyncConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/all": {
+      "get": {
+        "operationId": "WorkspaceSyncConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkspaceSyncConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/deletesome": {
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/getsome": {
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/metadata": {
+      "get": {
+        "operationId": "WorkspaceSyncConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/some": {
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/watch": {
+      "get": {
+        "operationId": "WorkspaceSyncConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceSyncConfig/watchmetadata": {
+      "get": {
+        "operationId": "WorkspaceSyncConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceSyncConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceSyncConfigService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2077,10 +2681,11 @@
         "ERROR_CODE_EOS_SUPPORT_REMOVED",
         "ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE",
         "ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE",
-        "ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE"
+        "ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE",
+        "ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE"
       ],
       "default": "ERROR_CODE_UNSPECIFIED",
-      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor.\n - ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE: ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and\nTerminAttr architecture are incompatible.\n - ERROR_CODE_TA_CV_INCOMPATIBLE: ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with\nCloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.\n - ERROR_CODE_EOS_CV_INCOMPATIBLE: ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with\nCloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.\n - ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED: ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_EOS_SUPPORT_REMOVED: ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE: ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device\ndoes not support the given EOS type.\n - ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr\nversion is lower than the embedded TerminAttr version in SWI.\n - ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE: ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE represents the case where a 2GB-device is incompatible\nwith a non-2GB EOS or a non-2GB device is incompatible with a 2GB-EOS."
+      "description": "ErrorCode indicates errors produced during image validations.\n\n - ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED indicates error code is unspecified.\n - ERROR_CODE_SUPPORT_NOT_INTRODUCED: ERROR_CODE_SUPPORT_NOT_INTRODUCED represents case where the given EOS version does\nnot support the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED\n - ERROR_CODE_SUPPORT_REMOVED: ERROR_CODE_SUPPORT_REMOVED represents case where the given EOS version no longer\nsupports the SKU.\nDeprecated - use ERROR_CODE_EOS_SUPPORT_REMOVED\n - ERROR_CODE_DEVICE_UNREACHABLE: ERROR_CODE_DEVICE_UNREACHABLE represents the case where the device\nis unreachable during a compliance computation.\n - ERROR_CODE_VALIDATION_FAILED: ERROR_CODE_VALIDATION_FAILED represents case where the validations checks\nfailed.\n - ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED: ERROR_CODE_GET_PROPOSED_IMAGE_INFO_FAILED represents case where we are\nunable to get proposed image information for a device.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_ACTIVE_SUPERVISOR_FAILED represents case where we\nfail to get running image information from an active supervisor.\n - ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED: ERROR_CODE_GET_RUNNING_IMAGE_INFO_FROM_PEER_SUPERVISOR_FAILED represents case when we\nfail to get information from peer supervisor.\n - ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE: ERROR_CODE_EOS_TA_ARCHITECTURE_INCOMPATIBLE represents the case where EOS architecture and\nTerminAttr architecture are incompatible.\n - ERROR_CODE_TA_CV_INCOMPATIBLE: ERROR_CODE_TA_CV_INCOMPATIBLE represents the case where TerminAttr is incompatible with\nCloudVision; i.e., the TerminAttr version is below CloudVision's minimum supported version.\n - ERROR_CODE_EOS_CV_INCOMPATIBLE: ERROR_CODE_EOS_CV_INCOMPATIBLE represents the case where the EOS version is incompatible with\nCloudVision; i.e., the EOS version is outside of CloudVision's supported range of versions.\n - ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED: ERROR_CODE_EOS_SUPPORT_NOT_INTRODUCED represents the case where the given EOS version does\nnot support the SKU.\n - ERROR_CODE_EOS_SUPPORT_REMOVED: ERROR_CODE_EOS_SUPPORT_REMOVED represents the case where the given EOS version no longer\nsupports the SKU.\n - ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE: ERROR_CODE_PHYSICAL_DEVICE_EOS_INCOMPATIBLE represents the case where the physical device\ndoes not support the given EOS type.\n - ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE: ERROR_CODE_TA_EMBEDDEDEXT_INCOMPATIBLE represents the case where the extension TerminAttr\nversion is lower than the embedded TerminAttr version in SWI.\n - ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE: ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE represents the case where a 2GB-device is incompatible\nwith a non-2GB EOS or a non-2GB device is incompatible with a 2GB-EOS.\n - ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE: ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE represents the case where the given extension\nversion doesn't support the given EOS version."
     },
     "arista.imagestatus.v1.Extension": {
       "type": "object",
@@ -2560,6 +3165,35 @@
       "default": "BUILD_STATE_UNSPECIFIED",
       "description": "BuildState enumerates the set of states that a BuildStage can be in during a\nworkspace build cycle.\n\n - BUILD_STATE_UNSPECIFIED: BUILD_STATE_UNSPECIFIED indicates unspecified build state.\n - BUILD_STATE_IN_PROGRESS: BUILD_STATE_IN_PROGRESS indicates that the BuildStage was started but has\nnot yet completed.\n - BUILD_STATE_CANCELED: BUILD_STATE_CANCELED indicates that the BuildStage was started but then\nstopped before completion.\n - BUILD_STATE_SUCCESS: BUILD_STATE_SUCCESS indicates that the BuildStage was started and ran to\ncompletion successfully.\n - BUILD_STATE_FAIL: BUILD_STATE_FAIL indicates that the BuildStage was started and ran to\ncompletion unsuccessfully.\n - BUILD_STATE_SKIPPED: BUILD_STATE_SKIPPED indicates that the BuildStage was not run."
     },
+    "arista.workspace.v1.ConfigSyncResult": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary",
+          "description": "summary is a summary of the changes to the running config."
+        },
+        "errors": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigErrors",
+          "description": "errors are any errors detected during sync."
+        },
+        "configSources": {
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSources",
+          "description": "config_sources identify the entities that generated the designed config."
+        }
+      },
+      "description": "ConfigSyncResult holds the result of config sync operation."
+    },
+    "arista.workspace.v1.ConfigSyncSkipCause": {
+      "type": "string",
+      "enum": [
+        "CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED",
+        "CONFIG_SYNC_SKIP_CAUSE_INACTIVE",
+        "CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED",
+        "CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE"
+      ],
+      "default": "CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED",
+      "description": "ConfigSyncSkipCause enumerates the set of reasons a device can skip config sync.\n\n - CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED: CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED indicates that config sync skip cause is\nunspecified.\n - CONFIG_SYNC_SKIP_CAUSE_INACTIVE: CONFIG_SYNC_SKIP_CAUSE_INACTIVE indicates that config sync is skipped because\ndevice is not streaming.\n - CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED indicates that config sync is skipped\nbecause device is pre-provisioned.\n - CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE: CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE indicates that config sync is skipped\nbecause device is in compliance."
+    },
     "arista.workspace.v1.ConfigValidationResult": {
       "type": "object",
       "properties": {
@@ -2842,6 +3476,15 @@
       },
       "description": "Responses is a collection of responses for completed requests."
     },
+    "arista.workspace.v1.SyncOperation": {
+      "type": "string",
+      "enum": [
+        "SYNC_OPERATION_UNSPECIFIED",
+        "SYNC_OPERATION_CONFIG"
+      ],
+      "default": "SYNC_OPERATION_UNSPECIFIED",
+      "description": "SyncOperation enumerates sync operations.\n\n - SYNC_OPERATION_UNSPECIFIED: SYNC_OPERATION_UNSPECIFIED indicates unspecified sync operation.\n - SYNC_OPERATION_CONFIG: SYNC_OPERATION_CONFIG indicates config sync operation."
+    },
     "arista.workspace.v1.TemplateError": {
       "type": "object",
       "properties": {
@@ -3042,6 +3685,14 @@
         "authzStatus": {
           "$ref": "#/definitions/arista.workspace.v1.DeviceAuthzStatus",
           "description": "authz_status is the status of provision permission for the device."
+        },
+        "configSyncResult": {
+          "$ref": "#/definitions/arista.workspace.v1.ConfigSyncResult",
+          "description": "config_sync_result is the result of the config sync."
+        },
+        "configSyncSkipCause": {
+          "$ref": "#/definitions/arista.workspace.v1.ConfigSyncSkipCause",
+          "description": "config_sync_skip_cause is the reason for skipping the config sync."
         }
       },
       "description": "WorkspaceBuildDetails holds the details for a build of a device in a workspace."
@@ -3597,6 +4248,235 @@
           "description": "Operation indicates how the Workspace value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey",
+          "description": "key uniquely identifies sync operations to be performed in workspace."
+        },
+        "deviceIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "device_ids is the list of device Ids to be synced in the workspace."
+        }
+      },
+      "description": "WorkspaceSyncConfig holds the list of devices to be synced in workspace."
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey",
+          "description": "This is the key of the WorkspaceSyncConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey",
+          "description": "Key echoes back the key of the deleted WorkspaceSyncConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
+          },
+          "title": "key contains a list of WorkspaceSyncConfig keys to delete"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "WorkspaceSyncConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceSyncConfig instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig",
+          "description": "Value carries all the values given in the WorkspaceSyncConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig"
+          },
+          "description": "value contains a list of WorkspaceSyncConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceSyncConfig at end.\n    * Each WorkspaceSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceSyncConfig at start, followed by updates until now.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceSyncConfig at start, followed by updates\n    until end.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this WorkspaceSyncConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the WorkspaceSyncConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceSyncKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the ID of the workspace."
+        },
+        "syncOperation": {
+          "$ref": "#/definitions/arista.workspace.v1.SyncOperation",
+          "description": "sync_operation is type of sync operation to be performed on devices."
+        }
+      },
+      "description": "WorkspaceSyncKey uniquely identifies sync operations to be performed\nin a workspace.",
+      "required": [
+        "workspaceId",
+        "syncOperation"
+      ]
     },
     "fmp.DeleteError": {
       "type": "string",
