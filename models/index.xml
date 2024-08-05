@@ -844,6 +844,7 @@ Top</description></item><item><title>workspace.v1</title><link>https://aristanet
 AuthzResult
 BuildStageState
 BuildStageState.ValuesEntry
+ConfigSyncResult
 ConfigValidationResult
 ConfigletBuildResult
 ConfigletBuildResults
@@ -867,14 +868,18 @@ WorkspaceBuildDetailsKey
 WorkspaceBuildKey
 WorkspaceConfig
 WorkspaceKey
+WorkspaceSyncConfig
+WorkspaceSyncKey
 BuildStage
 BuildState
+ConfigSyncSkipCause
 ConfigValidationSkipCause
 DeviceAuthzStatus
 ImageValidationSkipCause
 Request
 ResponseCode
 ResponseStatus
+SyncOperation
 WorkspaceState
 arista/workspace.v1/services.gen.proto
 MetaResponse
@@ -903,9 +908,4 @@ WorkspaceConfigDeleteAllResponse
 WorkspaceConfigDeleteRequest
 WorkspaceConfigDeleteResponse
 WorkspaceConfigDeleteSomeRequest
-WorkspaceConfigDeleteSomeResponse
-WorkspaceConfigRequest
-WorkspaceConfigResponse
-WorkspaceConfigSetRequest
-WorkspaceConfigSetResponse
-WorkspaceConfigSetSomeRequest</description></item></channel></rss>
+WorkspaceConfigDeleteSomeResponse</description></item></channel></rss>
