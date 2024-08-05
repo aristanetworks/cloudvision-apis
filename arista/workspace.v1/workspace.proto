@@ -478,6 +478,9 @@ enum ConfigValidationSkipCause {
 	// CONFIG_VALIDATION_SKIP_CAUSE_NO_CONFIG_SOURCES indicates that the stage was
 	// skipped because the device has no config sources in the workspace.
 	CONFIG_VALIDATION_SKIP_CAUSE_NO_CONFIG_SOURCES = 4;
+	// CONFIG_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED indicates that the stage was
+	// skipped because the device is decommissioned in the workspace.
+	CONFIG_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED = 5;
 }
 
 // ImageValidationSkipCause enumerates the set of reasons a device can skip the image
