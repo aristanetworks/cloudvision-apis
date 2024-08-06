@@ -547,6 +547,10 @@
         "b": {
           "$ref": "#/definitions/arista.imagestatus.v1.Extension",
           "description": "b is the extension on the b side (right hand side)."
+        },
+        "textCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "title": "text_code is the color in the diff view page."
         }
       },
       "description": "ExtensionDiff is the diff for the running/designed extensions."
@@ -861,6 +865,10 @@
         "b": {
           "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
           "description": "b is the software image on the b side (right hand side)."
+        },
+        "textCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "title": "text_code is the color in the diff view page."
         }
       },
       "description": "SoftwareImageDiff is the diff for the running/designed images."

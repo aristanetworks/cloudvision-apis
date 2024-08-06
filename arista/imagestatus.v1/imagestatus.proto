@@ -153,6 +153,8 @@ message SoftwareImageDiff {
     SoftwareImage a = 2;
     // b is the software image on the b side (right hand side).
     SoftwareImage b = 3;
+    // text_code is the color in the diff view page.
+    DiffOp text_code = 4;
 }
 
 // SoftwareImageDiffsBySup is software image diff information for each
@@ -171,6 +173,8 @@ message ExtensionDiff {
     Extension a = 2;
     // b is the extension on the b side (right hand side).
     Extension b = 3;
+    // text_code is the color in the diff view page.
+    DiffOp text_code = 4;
 }
 
 // TerminAttrDiffsBySup is the terminattr diff information for each supervisor.

@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-08-05
+      description: Add a new field text_code for GetImageDiffV3
+      version: 1.16.0
+      cvaas: true
     - date: 2024-07-22
       description: Add a new error code ERROR_CODE_ARCH_UNSUPPORTED
       version: 1.15.0
