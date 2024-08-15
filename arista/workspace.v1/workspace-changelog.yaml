@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-08-05
+      description: Add RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE to ResponseCode
+      version: 1.3.7
+      cvaas: true
     - date: 2024-07-30
       description: Add device decommissioned skip cause to ConfigValidationSkipCause
       version: 1.3.6

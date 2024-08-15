@@ -127,6 +127,9 @@ enum ResponseCode {
 	// RESPONSE_CODE_INACTIVE_DEVICES_EXIST indicates that there are devices that have inactive
 	// streaming status.
 	RESPONSE_CODE_INACTIVE_DEVICES_EXIST = 1;
+	// RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE indicates that the decommission process is
+	// incomplete for devices.
+	RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE = 2;
 }
 
 // Responses is a collection of responses for completed requests.

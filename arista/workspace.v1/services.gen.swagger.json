@@ -3450,10 +3450,11 @@
       "type": "string",
       "enum": [
         "RESPONSE_CODE_UNSPECIFIED",
-        "RESPONSE_CODE_INACTIVE_DEVICES_EXIST"
+        "RESPONSE_CODE_INACTIVE_DEVICES_EXIST",
+        "RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE"
       ],
       "default": "RESPONSE_CODE_UNSPECIFIED",
-      "description": "ResponseCode is a code for a Response indicating a particular scenario.\n\n - RESPONSE_CODE_UNSPECIFIED: RESPONSE_CODE_UNSPECIFIED indicates unspecified response code.\n - RESPONSE_CODE_INACTIVE_DEVICES_EXIST: RESPONSE_CODE_INACTIVE_DEVICES_EXIST indicates that there are devices that have inactive\nstreaming status."
+      "description": "ResponseCode is a code for a Response indicating a particular scenario.\n\n - RESPONSE_CODE_UNSPECIFIED: RESPONSE_CODE_UNSPECIFIED indicates unspecified response code.\n - RESPONSE_CODE_INACTIVE_DEVICES_EXIST: RESPONSE_CODE_INACTIVE_DEVICES_EXIST indicates that there are devices that have inactive\nstreaming status.\n - RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE: RESPONSE_CODE_DECOMMISSION_DEVICES_INCOMPLETE indicates that the decommission process is\nincomplete for devices."
     },
     "arista.workspace.v1.ResponseStatus": {
       "type": "string",
