@@ -88,3 +88,8 @@ Changes:
       version: 1.9.0
       onprem: true
       cvaas: true
+    - date: 2024-08-15
+      description: Deprecate wifi-related fields
+      version: 1.10.0
+      onprem: true
+      cvaas: true
