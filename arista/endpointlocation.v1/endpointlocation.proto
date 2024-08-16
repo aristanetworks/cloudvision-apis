@@ -103,7 +103,8 @@ enum IdentifierType {
     // IDENTIFIER_TYPE_HOSTNAME indicates a hostname identifier.
     IDENTIFIER_TYPE_HOSTNAME = 6;
     // IDENTIFIER_TYPE_USERNAME indicates a username identifier.
-    IDENTIFIER_TYPE_USERNAME = 7;
+    // Deprecated - do not return usernames of wifi endpoints anymore
+    IDENTIFIER_TYPE_USERNAME = 7 [deprecated=true];
     // IDENTIFIER_TYPE_OTHER is used for an unknown identifier.
     IDENTIFIER_TYPE_OTHER = 99999;
 }
@@ -128,7 +129,8 @@ enum IdentifierSource {
     IDENTIFIER_SOURCE_DHCP = 6;
     // IDENTIFIER_SOURCE_WIFI indicates a WiFi endpoint that was learned through
     // a wireless manager.
-    IDENTIFIER_SOURCE_WIFI = 7;
+    // Deprecated - do not support searches for wifi endpoints anymore
+    IDENTIFIER_SOURCE_WIFI = 7 [deprecated=true];
 }
 
 // IdentifierSourceList is a list of IdentifierSource.
@@ -239,12 +241,13 @@ enum DeviceType {
     DEVICE_TYPE_UNSPECIFIED = 0;
     // DEVICE_TYPE_INVENTORY indicates a device in the CloudVision inventory.
     DEVICE_TYPE_INVENTORY = 1;
-    // DEVICE_TYPE_ENDPOINT indicates a non-WiFi endpoint that does not exist
+    // DEVICE_TYPE_ENDPOINT indicates an endpoint that does not exist
     // in the CloudVision inventory.
     DEVICE_TYPE_ENDPOINT = 2;
     // DEVICE_TYPE_WIFI_ENDPOINT indicates a WiFi client/endpoint that does not
     // exist in the CloudVision inventory.
-    DEVICE_TYPE_WIFI_ENDPOINT = 3;
+    // Deprecated - do not support searches for wifi endpoints anymore
+    DEVICE_TYPE_WIFI_ENDPOINT = 3 [deprecated=true];
 }
 
 // DeviceStatus is the network status of a device.
