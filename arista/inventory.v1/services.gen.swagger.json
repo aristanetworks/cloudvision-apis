@@ -2955,6 +2955,10 @@
         "force": {
           "type": "boolean",
           "description": "force is a flag that indicates if the decommission is to be forced.\nNormally, if there are pending or in-progress tasks associated with the device\nthe decommission would fail. In case of a forced decommission, such blocking\ntasks would be ignored and decommissioning will be continued."
+        },
+        "userName": {
+          "type": "string",
+          "description": "user_name is username of the user who decommissioned the device."
         }
       },
       "description": "DeviceDecommissioningConfig describes a device decommissioning request.\n\"Decommissioning\" refers to the process of stopping device streaming to\nCloudVision and removing it from CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceDecommissioningConfig sends a decommissioning request with\n   a UUID that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the decommissioning procedure\n   and tracking the status of the decommissioning attempt.\n4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the\n   same UUID to see the status of the request."

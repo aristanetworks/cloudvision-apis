@@ -16,6 +16,7 @@ import "fmp/inet.proto";
 
 // StreamingStatus defines the status of telemetry streaming for a device.
 enum StreamingStatus {
+    // STREAMING_STATUS_UNSPECIFIED indicates the device streaming telemetry status is unspecified.
     STREAMING_STATUS_UNSPECIFIED = 0;
     // STREAMING_STATUS_INACTIVE indicates the device is not streaming telemetry.
     STREAMING_STATUS_INACTIVE = 1;
@@ -26,6 +27,7 @@ enum StreamingStatus {
 // OnboardingStatus defines the set of possible states in the onboarding process
 // for a device.
 enum OnboardingStatus {
+    // ONBOARDING_STATUS_UNSPECIFIED indicates onboarding status is unspecified.
     ONBOARDING_STATUS_UNSPECIFIED = 0;
     // ONBOARDING_STATUS_IN_PROGRESS indicates onboarding is in progress.
     ONBOARDING_STATUS_IN_PROGRESS = 1;
@@ -38,6 +40,7 @@ enum OnboardingStatus {
 // DecommissioningStatus defines the set of possible states in the decommissioning
 // process for a device.
 enum DecommissioningStatus {
+    // DECOMMISSIONING_STATUS_UNSPECIFIED indicates decommissioning status is unspecified.
     DECOMMISSIONING_STATUS_UNSPECIFIED = 0;
     // DECOMMISSIONING_STATUS_IN_PROGRESS indicates decommissioning is in progress.
     DECOMMISSIONING_STATUS_IN_PROGRESS = 1;
@@ -50,6 +53,7 @@ enum DecommissioningStatus {
 // ProvisioningStatus defines the set of possible states in the provisioning
 // process for a device.
 enum ProvisioningStatus {
+    // PROVISIONING_STATUS_UNSPECIFIED indicates provisioning status is unspecified.
     PROVISIONING_STATUS_UNSPECIFIED = 0;
     // PROVISIONING_STATUS_IN_PROGRESS indicates provisioning is in progress.
     PROVISIONING_STATUS_IN_PROGRESS = 1;
@@ -164,9 +168,11 @@ message DeviceDecommissioningConfig {
     // the decommission would fail. In case of a forced decommission, such blocking
     // tasks would be ignored and decommissioning will be continued.
     google.protobuf.BoolValue force = 3;
+    // user_name is name of the user who decommissioned the device.
+    google.protobuf.StringValue user_name = 4;
 }
 
-// DeviceOnboarding describes the status of a decommissioning process.
+// DeviceDecommissioning describes the status of a decommissioning process.
 message DeviceDecommissioning {
     option (fmp.model) = "ro";
 
