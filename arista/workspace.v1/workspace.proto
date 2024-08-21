@@ -520,6 +520,12 @@ enum ConfigSyncSkipCause {
 	// CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE indicates that config sync is skipped
         // because device is in compliance.
 	CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE = 3;
+        // CONFIG_SYNC_SKIP_CAUSE_NO_CONFIG_SOURCES indicates that the sync was
+        // skipped because the device has no config sources.
+	CONFIG_SYNC_SKIP_CAUSE_NO_CONFIG_SOURCES = 4;
+	// CONFIG_SYNC_SKIP_CAUSE_DEVICE_DECOMMISSIONED indicates that sync was
+        // skipped because the device is decommissioned in the workspace.
+	CONFIG_SYNC_SKIP_CAUSE_DEVICE_DECOMMISSIONED = 5;
  }
 
 // WorkspaceSyncKey uniquely identifies sync operations to be performed

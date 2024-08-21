@@ -2736,6 +2736,10 @@
         "b": {
           "$ref": "#/definitions/arista.imagestatus.v1.Extension",
           "description": "b is the extension on the b side (right hand side)."
+        },
+        "textCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "text_code is the color in the diff view page."
         }
       },
       "description": "ExtensionDiff is the diff for the running/designed extensions."
@@ -3031,6 +3035,10 @@
         "b": {
           "$ref": "#/definitions/arista.imagestatus.v1.SoftwareImage",
           "description": "b is the software image on the b side (right hand side)."
+        },
+        "textCode": {
+          "$ref": "#/definitions/arista.imagestatus.v1.DiffOp",
+          "description": "text_code is the color in the diff view page."
         }
       },
       "description": "SoftwareImageDiff is the diff for the running/designed images."
@@ -3190,10 +3198,12 @@
         "CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED",
         "CONFIG_SYNC_SKIP_CAUSE_INACTIVE",
         "CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED",
-        "CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE"
+        "CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE",
+        "CONFIG_SYNC_SKIP_CAUSE_NO_CONFIG_SOURCES",
+        "CONFIG_SYNC_SKIP_CAUSE_DEVICE_DECOMMISSIONED"
       ],
       "default": "CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED",
-      "description": "ConfigSyncSkipCause enumerates the set of reasons a device can skip config sync.\n\n - CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED: CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED indicates that config sync skip cause is\nunspecified.\n - CONFIG_SYNC_SKIP_CAUSE_INACTIVE: CONFIG_SYNC_SKIP_CAUSE_INACTIVE indicates that config sync is skipped because\ndevice is not streaming.\n - CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED indicates that config sync is skipped\nbecause device is pre-provisioned.\n - CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE: CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE indicates that config sync is skipped\nbecause device is in compliance."
+      "description": "ConfigSyncSkipCause enumerates the set of reasons a device can skip config sync.\n\n - CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED: CONFIG_SYNC_SKIP_CAUSE_UNSPECIFIED indicates that config sync skip cause is\nunspecified.\n - CONFIG_SYNC_SKIP_CAUSE_INACTIVE: CONFIG_SYNC_SKIP_CAUSE_INACTIVE indicates that config sync is skipped because\ndevice is not streaming.\n - CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED: CONFIG_SYNC_SKIP_CAUSE_PRE_PROVISIONED indicates that config sync is skipped\nbecause device is pre-provisioned.\n - CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE: CONFIG_SYNC_SKIP_CAUSE_IN_COMPLIANCE indicates that config sync is skipped\nbecause device is in compliance.\n - CONFIG_SYNC_SKIP_CAUSE_NO_CONFIG_SOURCES: CONFIG_SYNC_SKIP_CAUSE_NO_CONFIG_SOURCES indicates that the sync was\nskipped because the device has no config sources.\n - CONFIG_SYNC_SKIP_CAUSE_DEVICE_DECOMMISSIONED: CONFIG_SYNC_SKIP_CAUSE_DEVICE_DECOMMISSIONED indicates that sync was\nskipped because the device is decommissioned in the workspace."
     },
     "arista.workspace.v1.ConfigValidationResult": {
       "type": "object",
