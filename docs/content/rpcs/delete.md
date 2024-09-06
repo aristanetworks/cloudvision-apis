@@ -1,7 +1,7 @@
 ---
 title: Delete
-weight: 14
-pre: "<b>e. </b>"
+weight: 16
+pre: "<b>g. </b>"
 ---
 
 `Delete` deletes a resource and returns the time the delete became effective.

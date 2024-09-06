@@ -1,7 +1,7 @@
 ---
 title: GetAll
-weight: 11
-pre: "<b>b. </b>"
+weight: 12
+pre: "<b>c. </b>"
 ---
 
 

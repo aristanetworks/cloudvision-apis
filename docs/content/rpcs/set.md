@@ -1,14 +1,14 @@
 ---
 title: Set
-weight: 13
-pre: "<b>d. </b>"
+weight: 14
+pre: "<b>e. </b>"
 ---
 
 `Set` updates a resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.
 
 {{% notice note %}}
-The `Key` field is required to be fully-specified because `Set` needs to identify exactly-one
-resource to delete.
+The `Value` field is required to be fully-specified because `Set` needs to identify exactly-one
+resource to update.
 {{% /notice %}}
 
 

@@ -1,7 +1,7 @@
 ---
 title: Subscribe
-weight: 12
-pre: "<b>c. </b>"
+weight: 13
+pre: "<b>d. </b>"
 ---
 
 `Subscribe` first returns the initial state (fully-specified messages) and then any received updates.
