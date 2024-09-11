@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+  - date: 2024-08-15
+    description: Add hierarchy config source type
+    version: 1.1.1
+    cvaas: true
   - date: 2024-05-09
     description: Update GetSome REST endpoint
     version: 1.1.0

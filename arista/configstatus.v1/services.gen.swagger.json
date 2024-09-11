@@ -58,14 +58,14 @@
         "parameters": [
           {
             "name": "key.aDeviceId",
-            "description": "A_device_id is the serial number of the device on A side (left hand side)",
+            "description": "a_device_id is the serial number of the device on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.aType",
-            "description": "A_type is the config type on A side (left hand side)",
+            "description": "a_type is the config type on A side (left hand side)\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -78,7 +78,7 @@
           },
           {
             "name": "key.aTime",
-            "description": "A_time is the time at which to fetch config on A side (left hand side)",
+            "description": "a_time is the time at which to fetch config on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -86,14 +86,14 @@
           },
           {
             "name": "key.bDeviceId",
-            "description": "B_device_id is the serial number of the device on B side (right hand side)",
+            "description": "b_device_id is the serial number of the device on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.bType",
-            "description": "B_type is the config type on B side (right hand side)",
+            "description": "b_type is the config type on B side (right hand side)\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -106,7 +106,7 @@
           },
           {
             "name": "key.bTime",
-            "description": "B_time is the time at which to fetch config on B side (right hand side)",
+            "description": "b_time is the time at which to fetch config on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -513,14 +513,14 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device",
+            "description": "device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.type",
-            "description": "Type describes the config type",
+            "description": "type describes the config type\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -932,14 +932,14 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device",
+            "description": "device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.type",
-            "description": "Type describes the config type",
+            "description": "type describes the config type\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1351,14 +1351,14 @@
         "parameters": [
           {
             "name": "key.aDeviceId",
-            "description": "A_device_id is the serial number of the device on A side (left hand side)",
+            "description": "a_device_id is the serial number of the device on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.aType",
-            "description": "A_type is the config type on A side (left hand side)",
+            "description": "a_type is the config type on A side (left hand side)\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1371,7 +1371,7 @@
           },
           {
             "name": "key.aTime",
-            "description": "A_time is the time at which to fetch config on A side (left hand side)",
+            "description": "a_time is the time at which to fetch config on A side (left hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1379,14 +1379,14 @@
           },
           {
             "name": "key.bDeviceId",
-            "description": "B_device_id is the serial number of the device on B side (right hand side)",
+            "description": "b_device_id is the serial number of the device on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "key.bType",
-            "description": "B_type is the config type on B side (right hand side)",
+            "description": "b_type is the config type on B side (right hand side)\n\n - CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1399,7 +1399,7 @@
           },
           {
             "name": "key.bTime",
-            "description": "B_time is the time at which to fetch config on B side (right hand side)",
+            "description": "b_time is the time at which to fetch config on B side (right hand side)",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1806,7 +1806,7 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device",
+            "description": "device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
@@ -2212,7 +2212,7 @@
         "parameters": [
           {
             "name": "key.deviceId",
-            "description": "Device_id is the serial number of the device",
+            "description": "device_id is the serial number of the device",
             "in": "query",
             "required": true,
             "type": "string"
@@ -2605,13 +2605,14 @@
       "properties": {
         "key": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffKey",
-          "title": "Key represents config diff key"
+          "title": "key represents config diff key"
         },
         "uri": {
           "type": "string",
-          "title": "Uri represents the HTTP URI client can use to GET config diff and associated errors"
+          "title": "uri represents the HTTP URI client can use to GET config diff and associated errors"
         }
-      }
+      },
+      "title": "ConfigDiff - specifies the diff request"
     },
     "arista.configstatus.v1.ConfigDiffBatchedStreamResponse": {
       "type": "object",
@@ -2631,29 +2632,29 @@
       "properties": {
         "aDeviceId": {
           "type": "string",
-          "title": "A_device_id is the serial number of the device on A side (left hand side)"
+          "title": "a_device_id is the serial number of the device on A side (left hand side)"
         },
         "aType": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "A_type is the config type on A side (left hand side)"
+          "title": "a_type is the config type on A side (left hand side)"
         },
         "aTime": {
           "type": "string",
           "format": "date-time",
-          "title": "A_time is the time at which to fetch config on A side (left hand side)"
+          "title": "a_time is the time at which to fetch config on A side (left hand side)"
         },
         "bDeviceId": {
           "type": "string",
-          "title": "B_device_id is the serial number of the device on B side (right hand side)"
+          "title": "b_device_id is the serial number of the device on B side (right hand side)"
         },
         "bType": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "B_type is the config type on B side (right hand side)"
+          "title": "b_type is the config type on B side (right hand side)"
         },
         "bTime": {
           "type": "string",
           "format": "date-time",
-          "title": "B_time is the time at which to fetch config on B side (right hand side)"
+          "title": "b_time is the time at which to fetch config on B side (right hand side)"
         }
       },
       "title": "ConfigDiffKey uniquely identifies a configuration diff request",
@@ -2757,7 +2758,7 @@
         "CONFIG_FILTER_CODE_UNMANAGED_LINE"
       ],
       "default": "CONFIG_FILTER_CODE_UNSPECIFIED",
-      "description": "- CONFIG_FILTER_CODE_UNSPECIFIED: UNSPECIFIED indicates config line did not match any partial config management (PCM) filter\n - CONFIG_FILTER_CODE_MANAGED_LINE: MANAGED_LINE indicates config line matches managed PCM filter hence is managed\n - CONFIG_FILTER_CODE_UNMANAGED_LINE: UNMANAGED_LINE indicates config line matches unmanaged PCM filter hence is not managed",
+      "description": "- CONFIG_FILTER_CODE_UNSPECIFIED: CONFIG_FILTER_CODE_UNSPECIFIED uninitialized\n - CONFIG_FILTER_CODE_MANAGED_LINE: CONFIG_FILTER_CODE_MANAGED_LINE indicates config line matches managed PCM filter hence is managed\n - CONFIG_FILTER_CODE_UNMANAGED_LINE: CONFIG_FILTER_CODE_UNMANAGED_LINE indicates config line matches unmanaged PCM filter hence is not managed",
       "title": "ConfigFilterCode indicates if a config line matches PCM filter(s)"
     },
     "arista.configstatus.v1.ConfigKey": {
@@ -2765,11 +2766,11 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "title": "Device_id is the serial number of the device"
+          "title": "device_id is the serial number of the device"
         },
         "type": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigType",
-          "title": "Type describes the config type"
+          "title": "type describes the config type"
         }
       },
       "description": "ConfigKey uniquely identifies a config request.",
@@ -2782,68 +2783,69 @@
       "type": "object",
       "properties": {
         "sync": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode",
+          "title": "sync - state of DC vs RC"
         },
         "nopLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code no-operation"
+          "title": "nop_lines - Number of lines with code no-operation"
         },
         "ignoredLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code IGNORE"
+          "title": "ignored_lines - Number of lines with code IGNORE"
         },
         "addedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code ADD"
+          "title": "added_lines - Number of lines with code ADD"
         },
         "deletedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code DELETE"
+          "title": "deleted_lines - Number of lines with code DELETE"
         },
         "changedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code CHANGE"
+          "title": "changed_lines - Number of lines with code CHANGE"
         },
         "designedConfigErrors": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of designed config errors"
+          "title": "designed_config_errors - Number of designed config errors"
         },
         "designedConfigWarnings": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of designed config warnings"
+          "title": "designed_config_warnings - Number of designed config warnings"
         },
         "runningConfigUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "Timestamp at which running config is updated"
+          "title": "running_config_update_time - Timestamp at which running config is updated"
         },
         "designedConfigUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "Timestamp at which designed config is updated"
+          "title": "designed_config_update_time - Timestamp at which designed config is updated"
         },
         "runningConfigUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET running config and associated errors"
+          "title": "running_config_uri - The HTTP URI client can use to GET running config and associated errors"
         },
         "designedConfigUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET designed config and associated errors"
+          "title": "designed_config_uri - The HTTP URI client can use to GET designed config and associated errors"
         },
         "diffUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET config diff and associated errors"
+          "title": "diff_uri - The HTTP URI client can use to GET config diff and associated errors"
         },
         "digest": {
           "type": "string",
-          "description": "Digest (SHA-256) of the config diff."
+          "description": "digest (SHA-256) of the config diff."
         }
       },
       "description": "ConfigSummary represents device configuration summary."
@@ -2856,7 +2858,7 @@
         "CONFIG_SYNC_CODE_OUT_OF_SYNC"
       ],
       "default": "CONFIG_SYNC_CODE_UNSPECIFIED",
-      "description": "- CONFIG_SYNC_CODE_IN_SYNC: IN_SYNC indicates designed config and running config are identical\n - CONFIG_SYNC_CODE_OUT_OF_SYNC: OUT_OF_SYNC indicates designed config and running config are not identical",
+      "description": "- CONFIG_SYNC_CODE_UNSPECIFIED: CONFIG_SYNC_CODE_UNSPECIFIED uninitialized\n - CONFIG_SYNC_CODE_IN_SYNC: CONFIG_SYNC_CODE_IN_SYNC indicates designed config and running config are identical\n - CONFIG_SYNC_CODE_OUT_OF_SYNC: CONFIG_SYNC_CODE_OUT_OF_SYNC indicates designed config and running config are not identical",
       "title": "ConfigSyncCode indicates config synchronization status"
     },
     "arista.configstatus.v1.ConfigType": {
@@ -2866,17 +2868,20 @@
         "CONFIG_TYPE_RUNNING_CONFIG",
         "CONFIG_TYPE_DESIGNED_CONFIG"
       ],
-      "default": "CONFIG_TYPE_UNSPECIFIED"
+      "default": "CONFIG_TYPE_UNSPECIFIED",
+      "description": "- CONFIG_TYPE_UNSPECIFIED: CONFIG_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_TYPE_RUNNING_CONFIG: CONFIG_TYPE_RUNNING_CONFIG uninitialized value\n - CONFIG_TYPE_DESIGNED_CONFIG: CONFIG_TYPE_DESIGNED_CONFIG uninitialized value",
+      "title": "ConfigType - specifies type of config"
     },
     "arista.configstatus.v1.Configuration": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigKey"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigKey",
+          "title": "key specifies the device and type of config"
         },
         "uri": {
           "type": "string",
-          "title": "Uri represents the HTTP URI client can use to GET config body and associated errors"
+          "title": "uri represents the HTTP URI client can use to GET config body and associated errors"
         }
       },
       "title": "Configuration represents device's CLI configuration"
@@ -2985,7 +2990,8 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.DiffEntry"
-          }
+          },
+          "title": "values - list of diff entries"
         }
       },
       "title": "DiffEntries indicates potential multiple lines of config diff"
@@ -2994,43 +3000,44 @@
       "type": "object",
       "properties": {
         "op": {
-          "$ref": "#/definitions/arista.configstatus.v1.DiffOp"
+          "$ref": "#/definitions/arista.configstatus.v1.DiffOp",
+          "title": "op - type of diff"
         },
         "aLineNum": {
           "type": "integer",
           "format": "int32",
-          "title": "line number in A this diff applies to"
+          "title": "a_line_num - line number in A this diff applies to"
         },
         "bLineNum": {
           "type": "integer",
           "format": "int32",
-          "title": "line number in B this diff applies to"
+          "title": "b_line_num - line number in B this diff applies to"
         },
         "bParentLineNum": {
           "type": "integer",
           "format": "int32",
-          "title": "line number of the parent command in B"
+          "title": "b_parent_line_num line number of the parent command in B"
         },
         "aLine": {
           "type": "string",
-          "title": "content of config line in A"
+          "title": "a_line content of config line in A"
         },
         "bLine": {
           "type": "string",
-          "title": "content of config line in B"
+          "title": "b_line content of config line in B"
         },
         "aFilterCode": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigFilterCode",
-          "title": "Config filter code of the line in A"
+          "title": "a_filter_code Config filter code of the line in A"
         },
         "bFilterCode": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigFilterCode",
-          "title": "Config filter code of the line in B"
+          "title": "b_filter_code Config filter code of the line in B"
         },
         "aParentLineNum": {
           "type": "integer",
           "format": "int32",
-          "title": "line number of the parent command in A"
+          "title": "a_parent_line_num line number of the parent command in A"
         }
       },
       "title": "DiffEntry represents one entry in a Diff"
@@ -3046,7 +3053,7 @@
         "DIFF_OP_CHANGE"
       ],
       "default": "DIFF_OP_UNSPECIFIED",
-      "description": "- DIFF_OP_NOP: NOP indicates no change. A and B are identical at this line\n - DIFF_OP_IGNORE: IGNORE indicates a line that's ignored in either A or B.\nOne of a_line_num or b_line_num will be -1\n - DIFF_OP_ADD: ADD is an addition of a line from A\n - DIFF_OP_DELETE: DELETE is deletion of a line from B\n - DIFF_OP_CHANGE: CHANGE is a modification to a line in A",
+      "description": "- DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED uninitialized\n - DIFF_OP_NOP: DIFF_OP_NOP indicates no change. A and B are identical at this line\n - DIFF_OP_IGNORE: DIFF_OP_IGNORE indicates a line that's ignored in either A or B.\nOne of a_line_num or b_line_num will be -1\n - DIFF_OP_ADD: DIFF_OP_ADD is an addition of a line from A\n - DIFF_OP_DELETE: DIFF_OP_DELETE is deletion of a line from B\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE is a modification to a line in A",
       "title": "DiffOp is the operation to a line from one side of diff to get to another"
     },
     "arista.configstatus.v1.MetaResponse": {
@@ -3099,7 +3106,8 @@
       "type": "object",
       "properties": {
         "sync": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode",
+          "title": "sync - sync state of the device"
         },
         "nopLines": {
           "type": "integer",
@@ -3450,12 +3458,15 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configstatus.v1.SummaryKey"
+          "$ref": "#/definitions/arista.configstatus.v1.SummaryKey",
+          "title": "key spefies the device"
         },
         "summary": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSummary",
+          "title": "summary - diff summary of the device"
         }
-      }
+      },
+      "title": "Summary - Describes the device's diff summary"
     },
     "arista.configstatus.v1.SummaryBatchedStreamResponse": {
       "type": "object",
@@ -3475,7 +3486,7 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "title": "Device_id is the serial number of the device"
+          "title": "device_id is the serial number of the device"
         }
       },
       "title": "SummaryKey uniquely identifies a device summary request",
