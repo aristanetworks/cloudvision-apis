@@ -1,934 +1,3138 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/</link><description>Recent content on Arista Networks FMP APIs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/index.xml" rel="self" type="application/rss+xml"/><item><title>Existing Clients</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</guid><description>Arista provides and maintains the following clients:
-Language Repository Go https://github.com/aristanetworks/cloudvision-go Python https://github.com/aristanetworks/cloudvision-python</description></item><item><title>Creating a Client</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</guid><description>A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.
-The main gRPC site has tutorials for generating clients in many languages:
-Java Node Ruby C#/.Net &amp;hellip; and more There is also an expansive ecosystem, so plenty of languages are supported.
-Tooling In general, there are two main components to generating a language binding:
-protoc: The protobuf compiler which call the language-specific generator typically installed via a package manager (apt, yum, brew, etc) protoc-gen-{language}: The language-specific generator typically installed with the language&amp;rsquo;s dependency manager, build tool, etc Generating Regardless of language, client generation generally follows a pattern of:</description></item><item><title>Error Handling</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</guid><description>Errors returned by the API follow the gRPC status code guidelines. This provides many niceties:
-Language-native idioms (exceptions, return codes, etc.) Easily mappable to HTTP error codes (used for HTTP access to RPCs) Uses metadata rather than a global schema for more detailed errors Example: Go Unary RPCs resp, err := example.GetOne(ExampleConfigRequest{Key: key}) if err != nil { log.Printf(&amp;#34;failed to get %+v: %s\n&amp;#34;, key, err) return err } Streaming RPCs stream, err := example.</description></item><item><title>Filtering</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</guid><description>Filtering is provided through a default and an (optional) additional model-specific mechanism. By default, all models support &amp;ldquo;partial equality filtering&amp;rdquo;. Models that provide a custom filtering method will document this filter-message in its model documentation.
-Partial-Equality Filters Unless intentionally disabled (and sufficiently documented), services provide a default filtering mechanism. The input type is the same as the model you are filtering, and if you wish to filter on a given field you set that field to non-nil.</description></item><item><title>GetOne</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</guid><description>GetOne returns a single instance of a resource.
-The Key field is required to be fully-specified because GetOne needs to identify exactly-one resource to fetch.
-RPC Definition The protobuf definition of GetOne is defined as such (for ExampleConfig):
-rpc GetOne (ExampleConfigRequest) returns (ExampleConfigResponse); Request Type The generated request for a model (ExampleConfig, here) looks like so:
-message ExampleConfigRequest { // Key uniquely identifies a ExampleConfig instance to retrieve. // This value must be populated (non-null) and all fields set.</description></item><item><title>GetAll</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</guid><description>GetAll fetches (and optionally filters) all resource instances.
-For the filtering options available, see the Filtering section. These filtering options are the same for Subscribe.
-This RPC is effectively a full-table-scan so the time to complete depends on the amount of data the resource reflects. However, being a streaming API, this RPC will return the first message as soon as it is available without any buffering.
-RPC Definition The protobuf definition of GetAll is defined as such (for ExampleConfig):</description></item><item><title>Subscribe</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/subscribe/</guid><description>Subscribe first returns the initial state (fully-specified messages) and then any received updates.
-The first messages received are effectively the result of a GetAll). Once existing state has been sent to the client, any changes to resource entities are streamed back to the client. The update messages will represent what was updated and can either be a diff/partial or a fully-specified model.
-Any filters apply both to the initial state and updates.</description></item><item><title>Set</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</guid><description>Set updates a resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.
-The Key field is required to be fully-specified because Set needs to identify exactly-one resource to delete.
-The endpoint returns the time the Set becomes effective internally and the service&amp;rsquo;s known-state of the resource.
-A *SetResponse will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This echo will be the original update-request at a minimum, and may include more data.</description></item><item><title>Delete</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</guid><description>Delete deletes a resource and returns the time the delete became effective.
-The Key field is required to be fully-specified because Delete needs to identify exactly-one resource to delete.
-RPC Definition The protobuf definition of GetOne is defined as such (for ExampleConfig):
-rpc Delete (ExampleConfigDeleteRequest) returns (ExampleConfigDeleteResponse); Request Type The generated request for a model (ExampleConfig, here) looks like so:
-message ExampleConfigDeleteRequest { // Key indicates which ExampleConfig instance to remove.</description></item><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>arista/alert.v1/alert.proto
-Alert
-AlertConfig
-AzureOAuth
-BroadcastGroup
-BroadcastGroups
-BroadcastGroups.ValuesEntry
-ConfigError
-ConfigErrors
-CueData
-CueData.ValuesEntry
-CueSNMPAuth
-CueSNMPEndpoint
-CueSNMPSettings
-CueSendgridEndpoint
-CueSendgridEndpoints
-CueSendgridSettings
-CueSnmpEndpoints
-CueSyslogEndpoint
-CueSyslogEndpoints
-CueSyslogSettings
-DefaultTemplate
-EmailEndpoint
-EmailEndpoints
-EmailSettings
-EndpointError
-EndpointErrors
-EventList
-GoogleChatEndpoint
-GoogleChatEndpoints
-GoogleChatSettings
-HeaderValues
-HttpHeaders
-HttpHeaders.ValuesEntry
-HttpSettings
-InhibitionSettings
-InhibitionSettings.ValuesEntry
-Matches
-MsTeamsEndpoint
-MsTeamsEndpoints
-MsTeamsSettings
-OpsgenieEndpoint
-OpsgenieEndpoints
-OpsgenieSettings
-PagerdutyEndpoint
-PagerdutyEndpoints
-PagerdutySettings
-Priorities
-PushoverEndpoint
-PushoverEndpoints
-Rule
-Rules
-SNMPAuth
-SNMPEndpoint
-SNMPEndpoints
-SNMPSettings
-SendgridEndpoint
-SendgridEndpoints
-SendgridSettings
-Settings
-SlackEndpoint
-SlackEndpoints
-SlackSettings
-SyslogEndpoint
-SyslogEndpoints
-SyslogSettings
-TemplateConfig
-TemplateKey
-VictorOpsEndpoint</description></item><item><title>bugexposure.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</guid><description>arista/bugexposure.v1/bugexposure.proto
-BugExposure
-BugExposureKey
-Acknowledgement
-HighestExposure
-arista/bugexposure.v1/services.gen.proto
-BugExposureRequest
-BugExposureResponse
-BugExposureStreamRequest
-BugExposureStreamResponse
-MetaResponse
-BugExposureService
-Top
-arista/bugexposure.v1/bugexposure.proto BugExposure BugExposure is the state model that represents the exposure a device has to bugs
-Field Name Type Description key BugExposureKey BugExposureKey is the key of
-BugExposure
-bug_ids fmp.RepeatedInt32 bug_ids is a list of bug alerts affecting the device
-with type Bug
-cve_ids fmp.RepeatedInt32 cve_ids is a list of bug alerts affecting the device
-with type CVE</description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>arista/changecontrol.v1/changecontrol.proto
-Action
-ApproveConfig
-Change
-ChangeConfig
-ChangeControl
-ChangeControlConfig
-ChangeControlKey
-Filter
-Flag
-FlagConfig
-RepeatedRepeatedString
-Stage
-StageConfig
-StageConfigMap
-StageConfigMap.ValuesEntry
-StageMap
-StageMap.ValuesEntry
-TimestampFlag
-TimestampFlagConfig
-ChangeControlStatus
-StageStatus
-arista/changecontrol.v1/services.gen.proto
-ApproveConfigBatchedStreamRequest
-ApproveConfigBatchedStreamResponse
-ApproveConfigDeleteAllRequest
-ApproveConfigDeleteAllResponse
-ApproveConfigDeleteRequest
-ApproveConfigDeleteResponse
-ApproveConfigDeleteSomeRequest
-ApproveConfigDeleteSomeResponse
-ApproveConfigRequest
-ApproveConfigResponse
-ApproveConfigSetRequest
-ApproveConfigSetResponse
-ApproveConfigSetSomeRequest
-ApproveConfigSetSomeResponse
-ApproveConfigSomeRequest
-ApproveConfigSomeResponse
-ApproveConfigStreamRequest
-ApproveConfigStreamResponse
-ChangeControlBatchedStreamRequest
-ChangeControlBatchedStreamResponse
-ChangeControlConfigBatchedStreamRequest
-ChangeControlConfigBatchedStreamResponse
-ChangeControlConfigDeleteAllRequest
-ChangeControlConfigDeleteAllResponse
-ChangeControlConfigDeleteRequest
-ChangeControlConfigDeleteResponse
-ChangeControlConfigDeleteSomeRequest
-ChangeControlConfigDeleteSomeResponse
-ChangeControlConfigRequest
-ChangeControlConfigResponse
-ChangeControlConfigSetRequest
-ChangeControlConfigSetResponse
-ChangeControlConfigSetSomeRequest
-ChangeControlConfigSetSomeResponse
-ChangeControlConfigSomeRequest
-ChangeControlConfigSomeResponse
-ChangeControlConfigStreamRequest
-ChangeControlConfigStreamResponse
-ChangeControlRequest
-ChangeControlResponse
-ChangeControlSomeRequest
-ChangeControlSomeResponse
-ChangeControlStreamRequest
-ChangeControlStreamResponse
-MetaResponse
-ApproveConfigService</description></item><item><title>configlet.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</guid><description>arista/configlet.v1/configlet.proto
-Configlet
-ConfigletAssignment
-ConfigletAssignmentConfig
-ConfigletAssignmentKey
-ConfigletConfig
-ConfigletKey
-Filter
-MatchPolicy
-arista/configlet.v1/services.gen.proto
-ConfigletAssignmentBatchedStreamRequest
-ConfigletAssignmentBatchedStreamResponse
-ConfigletAssignmentConfigBatchedStreamRequest
-ConfigletAssignmentConfigBatchedStreamResponse
-ConfigletAssignmentConfigDeleteAllRequest
-ConfigletAssignmentConfigDeleteAllResponse
-ConfigletAssignmentConfigDeleteRequest
-ConfigletAssignmentConfigDeleteResponse
-ConfigletAssignmentConfigDeleteSomeRequest
-ConfigletAssignmentConfigDeleteSomeResponse
-ConfigletAssignmentConfigRequest
-ConfigletAssignmentConfigResponse
-ConfigletAssignmentConfigSetRequest
-ConfigletAssignmentConfigSetResponse
-ConfigletAssignmentConfigSetSomeRequest
-ConfigletAssignmentConfigSetSomeResponse
-ConfigletAssignmentConfigSomeRequest
-ConfigletAssignmentConfigSomeResponse
-ConfigletAssignmentConfigStreamRequest
-ConfigletAssignmentConfigStreamResponse
-ConfigletAssignmentRequest
-ConfigletAssignmentResponse
-ConfigletAssignmentSomeRequest
-ConfigletAssignmentSomeResponse
-ConfigletAssignmentStreamRequest
-ConfigletAssignmentStreamResponse
-ConfigletBatchedStreamRequest
-ConfigletBatchedStreamResponse
-ConfigletConfigBatchedStreamRequest
-ConfigletConfigBatchedStreamResponse
-ConfigletConfigDeleteAllRequest
-ConfigletConfigDeleteAllResponse
-ConfigletConfigDeleteRequest
-ConfigletConfigDeleteResponse
-ConfigletConfigDeleteSomeRequest
-ConfigletConfigDeleteSomeResponse
-ConfigletConfigRequest
-ConfigletConfigResponse
-ConfigletConfigSetRequest
-ConfigletConfigSetResponse
-ConfigletConfigSetSomeRequest
-ConfigletConfigSetSomeResponse
-ConfigletConfigSomeRequest
-ConfigletConfigSomeResponse
-ConfigletConfigStreamRequest
-ConfigletConfigStreamResponse
-ConfigletRequest
-ConfigletResponse
-ConfigletSomeRequest
-ConfigletSomeResponse
-ConfigletStreamRequest
-ConfigletStreamResponse
-MetaResponse
-ConfigletAssignmentConfigService
-ConfigletAssignmentService
-ConfigletConfigService
-ConfigletService
-Top
-arista/configlet.v1/configlet.proto Configlet Configlet is the state of a static configlet in a workspace or mainline.</description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>arista/configstatus.v1/configstatus.proto
-ConfigDiff
-ConfigDiffKey
-ConfigError
-ConfigErrors
-ConfigKey
-ConfigSource
-ConfigSources
-ConfigSummary
-Configuration
-DiffEntries
-DiffEntry
-SecurityProfile
-SecurityProfileComplianceSummary
-SecurityProfileDiff
-SecurityProfileDiffSummary
-Summary
-SummaryKey
-ConfigFilterCode
-ConfigSourceType
-ConfigSyncCode
-ConfigType
-DiffOp
-ErrorCode
-arista/configstatus.v1/services.gen.proto
-ConfigDiffBatchedStreamRequest
-ConfigDiffBatchedStreamResponse
-ConfigDiffRequest
-ConfigDiffResponse
-ConfigDiffSomeRequest
-ConfigDiffSomeResponse
-ConfigDiffStreamRequest
-ConfigDiffStreamResponse
-ConfigurationBatchedStreamRequest
-ConfigurationBatchedStreamResponse
-ConfigurationRequest
-ConfigurationResponse
-ConfigurationSomeRequest
-ConfigurationSomeResponse
-ConfigurationStreamRequest
-ConfigurationStreamResponse
-MetaResponse
-SecurityProfileBatchedStreamRequest
-SecurityProfileBatchedStreamResponse
-SecurityProfileDiffBatchedStreamRequest
-SecurityProfileDiffBatchedStreamResponse
-SecurityProfileDiffRequest
-SecurityProfileDiffResponse
-SecurityProfileDiffSomeRequest
-SecurityProfileDiffSomeResponse
-SecurityProfileDiffStreamRequest
-SecurityProfileDiffStreamResponse
-SecurityProfileDiffSummaryBatchedStreamRequest
-SecurityProfileDiffSummaryBatchedStreamResponse
-SecurityProfileDiffSummaryRequest
-SecurityProfileDiffSummaryResponse
-SecurityProfileDiffSummarySomeRequest
-SecurityProfileDiffSummarySomeResponse
-SecurityProfileDiffSummaryStreamRequest
-SecurityProfileDiffSummaryStreamResponse
-SecurityProfileRequest
-SecurityProfileResponse
-SecurityProfileSomeRequest
-SecurityProfileSomeResponse
-SecurityProfileStreamRequest
-SecurityProfileStreamResponse
-SummaryBatchedStreamRequest
-SummaryBatchedStreamResponse
-SummaryRequest</description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>arista/connectivitymonitor.v1/connectivitymonitor.proto
-Probe ProbeKey ProbeStats ProbeStatsKey arista/connectivitymonitor.v1/services.gen.proto
-MetaResponse
-ProbeBatchedStreamRequest
-ProbeBatchedStreamResponse
-ProbeRequest
-ProbeResponse
-ProbeSomeRequest
-ProbeSomeResponse
-ProbeStatsBatchedStreamRequest
-ProbeStatsBatchedStreamResponse
-ProbeStatsRequest
-ProbeStatsResponse
-ProbeStatsSomeRequest
-ProbeStatsSomeResponse
-ProbeStatsStreamRequest
-ProbeStatsStreamResponse
-ProbeStreamRequest
-ProbeStreamResponse
-ProbeService
-ProbeStatsService
-Top
-arista/connectivitymonitor.v1/connectivitymonitor.proto Probe Probe is identifying information of a connectivity monitor probe. It is used to retrieve probe information without getting the corresponding stats so that probe information can be displayed without streaming all related data, such as in the UI.
-Field Name Type Description key ProbeKey key uniquely identifies the connectivity monitor probe.</description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>arista/dashboard.v1/dashboard.proto
-Dashboard DashboardConfig DashboardKey DashboardMetadata Dimensions Filter GlobalDashboardConfig Position Widget WidgetStyles Widgets arista/dashboard.v1/services.gen.proto
-DashboardBatchedStreamRequest
-DashboardBatchedStreamResponse
-DashboardConfigBatchedStreamRequest
-DashboardConfigBatchedStreamResponse
-DashboardConfigDeleteAllRequest
-DashboardConfigDeleteAllResponse
-DashboardConfigDeleteRequest
-DashboardConfigDeleteResponse
-DashboardConfigDeleteSomeRequest
-DashboardConfigDeleteSomeResponse
-DashboardConfigRequest
-DashboardConfigResponse
-DashboardConfigSetRequest
-DashboardConfigSetResponse
-DashboardConfigSetSomeRequest
-DashboardConfigSetSomeResponse
-DashboardConfigSomeRequest
-DashboardConfigSomeResponse
-DashboardConfigStreamRequest
-DashboardConfigStreamResponse
-DashboardRequest
-DashboardResponse
-DashboardSomeRequest
-DashboardSomeResponse
-DashboardStreamRequest
-DashboardStreamResponse
-GlobalDashboardConfigBatchedStreamRequest
-GlobalDashboardConfigBatchedStreamResponse
-GlobalDashboardConfigRequest
-GlobalDashboardConfigResponse
-GlobalDashboardConfigSetRequest
-GlobalDashboardConfigSetResponse
-GlobalDashboardConfigStreamRequest
-GlobalDashboardConfigStreamResponse
-MetaResponse
-DashboardConfigService
-DashboardService
-GlobalDashboardConfigService
-Top
-arista/dashboard.v1/dashboard.proto Dashboard Dashboard state contains all dashboard data.
-Field Name Type Description key DashboardKey key is the unique identifier.</description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>arista/endpointlocation.v1/endpointlocation.proto
-Device
-DeviceInfo
-DeviceMap
-DeviceMap.ValuesEntry
-EndpointLocation
-EndpointLocationKey
-ExplanationList
-Identifier
-IdentifierList
-IdentifierSourceList
-Location
-LocationList
-DeviceStatus
-DeviceType
-Explanation
-IdentifierSource
-IdentifierType
-Likelihood
-MacType
-arista/endpointlocation.v1/services.gen.proto
-EndpointLocationBatchedStreamRequest
-EndpointLocationBatchedStreamResponse
-EndpointLocationRequest
-EndpointLocationResponse
-EndpointLocationSomeRequest
-EndpointLocationSomeResponse
-EndpointLocationStreamRequest
-EndpointLocationStreamResponse
-MetaResponse
-EndpointLocationService
-Top
-arista/endpointlocation.v1/endpointlocation.proto Device Device holds information for a device matching a search term.
-Field Name Type Description identifier_list IdentifierList identifier_list holds the unique identifiers for the device.
-device_type DeviceType device_type is the broad category of the device.
-location_list LocationList location_list is the list of possible locations of the device.</description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>arista/event.v1/event.proto
-Event
-EventAck
-EventAnnotationConfig
-EventComponent
-EventComponent.ComponentsEntry
-EventComponents
-EventData
-EventData.DataEntry
-EventKey
-EventNote
-EventNoteConfig
-EventNotes
-EventNotes.NotesEntry
-EventNotesConfig
-EventNotesConfig.NotesEntry
-EventRead
-UserEventCreationConfig
-UserEventCreationKey
-ComponentType
-EventSeverity
-arista/event.v1/services.gen.proto
-EventAnnotationConfigDeleteAllRequest
-EventAnnotationConfigDeleteAllResponse
-EventAnnotationConfigDeleteRequest
-EventAnnotationConfigDeleteResponse
-EventAnnotationConfigDeleteSomeRequest
-EventAnnotationConfigDeleteSomeResponse
-EventAnnotationConfigRequest
-EventAnnotationConfigResponse
-EventAnnotationConfigSetRequest
-EventAnnotationConfigSetResponse
-EventAnnotationConfigSetSomeRequest
-EventAnnotationConfigSetSomeResponse
-EventAnnotationConfigSomeRequest
-EventAnnotationConfigSomeResponse
-EventAnnotationConfigStreamRequest
-EventAnnotationConfigStreamResponse
-EventRequest
-EventResponse
-EventSomeRequest
-EventSomeResponse
-EventStreamRequest
-EventStreamResponse
-MetaResponse
-UserEventCreationConfigDeleteAllRequest
-UserEventCreationConfigDeleteAllResponse
-UserEventCreationConfigDeleteRequest
-UserEventCreationConfigDeleteResponse
-UserEventCreationConfigDeleteSomeRequest
-UserEventCreationConfigDeleteSomeResponse
-UserEventCreationConfigRequest
-UserEventCreationConfigResponse
-UserEventCreationConfigSetRequest
-UserEventCreationConfigSetResponse
-UserEventCreationConfigSetSomeRequest
-UserEventCreationConfigSetSomeResponse
-UserEventCreationConfigSomeRequest
-UserEventCreationConfigSomeResponse
-UserEventCreationConfigStreamRequest
-UserEventCreationConfigStreamResponse
-EventAnnotationConfigService
-EventService
-UserEventCreationConfigService
-Top
-arista/event.v1/event.proto Event Event is a telemetry event</description></item><item><title>identityprovider.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</guid><description>arista/identityprovider.v1/identityprovider.proto
-OAuthConfig
-OAuthKey
-SAMLConfig
-SAMLKey
-ProtocolBinding
-arista/identityprovider.v1/services.gen.proto
-MetaResponse
-OAuthConfigBatchedStreamRequest
-OAuthConfigBatchedStreamResponse
-OAuthConfigDeleteAllRequest
-OAuthConfigDeleteAllResponse
-OAuthConfigDeleteRequest
-OAuthConfigDeleteResponse
-OAuthConfigDeleteSomeRequest
-OAuthConfigDeleteSomeResponse
-OAuthConfigRequest
-OAuthConfigResponse
-OAuthConfigSetRequest
-OAuthConfigSetResponse
-OAuthConfigSetSomeRequest
-OAuthConfigSetSomeResponse
-OAuthConfigSomeRequest
-OAuthConfigSomeResponse
-OAuthConfigStreamRequest
-OAuthConfigStreamResponse
-SAMLConfigBatchedStreamRequest
-SAMLConfigBatchedStreamResponse
-SAMLConfigDeleteAllRequest
-SAMLConfigDeleteAllResponse
-SAMLConfigDeleteRequest
-SAMLConfigDeleteResponse
-SAMLConfigDeleteSomeRequest
-SAMLConfigDeleteSomeResponse
-SAMLConfigRequest
-SAMLConfigResponse
-SAMLConfigSetRequest
-SAMLConfigSetResponse
-SAMLConfigSetSomeRequest
-SAMLConfigSetSomeResponse
-SAMLConfigSomeRequest
-SAMLConfigSomeResponse
-SAMLConfigStreamRequest
-SAMLConfigStreamResponse
-OAuthConfigService
-SAMLConfigService
-Top
-arista/identityprovider.v1/identityprovider.proto OAuthConfig OAuthConfig holds the configuration for an OAuth provider.
-Field Name Type Description key OAuthKey key is the ID of the OAuth provider.</description></item><item><title>imagestatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</guid><description>arista/imagestatus.v1/imagestatus.proto
-ComplianceStatus
-ComplianceStatusBySup
-ComplianceStatusBySup.ValuesEntry
-Extension
-ExtensionDiff
-ExtensionDiffs
-ExtensionDiffsBySup
-ExtensionDiffsBySup.ValuesEntry
-Extensions
-ImageError
-ImageErrors
-ImageInfo
-ImageInfos
-ImageMetadata
-ImageSummary
-ImageWarning
-ImageWarnings
-RebootRequired
-SoftwareImage
-SoftwareImageDiff
-SoftwareImageDiffsBySup
-SoftwareImageDiffsBySup.ValuesEntry
-Summary
-SummaryKey
-TerminAttrDiffsBySup
-TerminAttrDiffsBySup.ValuesEntry
-DiffOp
-ErrorCode
-ExtensionInstallStatus
-InfoCode
-SoftwareComplianceCode
-WarningCode
-arista/imagestatus.v1/services.gen.proto
-MetaResponse
-SummaryBatchedStreamRequest
-SummaryBatchedStreamResponse
-SummaryRequest
-SummaryResponse
-SummarySomeRequest
-SummarySomeResponse
-SummaryStreamRequest
-SummaryStreamResponse
-SummaryService
-Top
-arista/imagestatus.v1/imagestatus.proto ComplianceStatus ComplianceStatus indicates compliance status for software image, terminattr and extensions.
-Field Name Type Description software_image_compliance_code SoftwareComplianceCode software_image_compliance_code is the compliance code for images.</description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>arista/inventory.v1/inventory.proto
-Device
-DeviceConfiguration
-DeviceConfiguration.OptionsEntry
-DeviceDecommissioning
-DeviceDecommissioningConfig
-DeviceKey
-DeviceOnboarding
-DeviceOnboardingConfig
-ExtendedAttributes
-ExtendedAttributes.FeatureEnabledEntry
-ProvisionedDevice
-UUIDKey
-DecommissioningStatus
-OnboardingStatus
-ProvisioningStatus
-StreamingStatus
-arista/inventory.v1/services.gen.proto
-DeviceBatchedStreamRequest
-DeviceBatchedStreamResponse
-DeviceDecommissioningBatchedStreamRequest
-DeviceDecommissioningBatchedStreamResponse
-DeviceDecommissioningConfigBatchedStreamRequest
-DeviceDecommissioningConfigBatchedStreamResponse
-DeviceDecommissioningConfigDeleteAllRequest
-DeviceDecommissioningConfigDeleteAllResponse
-DeviceDecommissioningConfigDeleteRequest
-DeviceDecommissioningConfigDeleteResponse
-DeviceDecommissioningConfigDeleteSomeRequest
-DeviceDecommissioningConfigDeleteSomeResponse
-DeviceDecommissioningConfigRequest
-DeviceDecommissioningConfigResponse
-DeviceDecommissioningConfigSetRequest
-DeviceDecommissioningConfigSetResponse
-DeviceDecommissioningConfigSetSomeRequest
-DeviceDecommissioningConfigSetSomeResponse
-DeviceDecommissioningConfigSomeRequest
-DeviceDecommissioningConfigSomeResponse
-DeviceDecommissioningConfigStreamRequest
-DeviceDecommissioningConfigStreamResponse
-DeviceDecommissioningRequest
-DeviceDecommissioningResponse
-DeviceDecommissioningSomeRequest
-DeviceDecommissioningSomeResponse
-DeviceDecommissioningStreamRequest
-DeviceDecommissioningStreamResponse
-DeviceOnboardingBatchedStreamRequest
-DeviceOnboardingBatchedStreamResponse
-DeviceOnboardingConfigBatchedStreamRequest
-DeviceOnboardingConfigBatchedStreamResponse
-DeviceOnboardingConfigDeleteAllRequest
-DeviceOnboardingConfigDeleteAllResponse
-DeviceOnboardingConfigDeleteRequest
-DeviceOnboardingConfigDeleteResponse
-DeviceOnboardingConfigDeleteSomeRequest
-DeviceOnboardingConfigDeleteSomeResponse
-DeviceOnboardingConfigRequest
-DeviceOnboardingConfigResponse
-DeviceOnboardingConfigSetRequest
-DeviceOnboardingConfigSetResponse
-DeviceOnboardingConfigSetSomeRequest
-DeviceOnboardingConfigSetSomeResponse
-DeviceOnboardingConfigSomeRequest
-DeviceOnboardingConfigSomeResponse
-DeviceOnboardingConfigStreamRequest
-DeviceOnboardingConfigStreamResponse
-DeviceOnboardingRequest
-DeviceOnboardingResponse
-DeviceOnboardingSomeRequest</description></item><item><title>lifecycle.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</guid><description>arista/lifecycle.v1/lifecycle.proto
-DateAndModels DeviceLifecycleSummary DeviceLifecycleSummaryKey HardwareLifecycleSummary SoftwareEOL arista/lifecycle.v1/services.gen.proto
-DeviceLifecycleSummaryRequest
-DeviceLifecycleSummaryResponse
-DeviceLifecycleSummaryStreamRequest
-DeviceLifecycleSummaryStreamResponse
-MetaResponse
-DeviceLifecycleSummaryService
-Top
-arista/lifecycle.v1/lifecycle.proto DateAndModels DateAndModels has an &amp;ldquo;end of&amp;rdquo; date along with the models that has this exact &amp;ldquo;end of&amp;rdquo; date
-Field Name Type Description date google.protobuf.Timestamp &amp;ldquo;end of&amp;rdquo; date
-models fmp.MapStringInt32 models with this exact &amp;ldquo;end of&amp;rdquo; date
-mapped to its count
-DeviceLifecycleSummary DeviceLifecycleSummary is the state model that represents the lifecycle summary of a device</description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>arista/redirector.v1/redirector.proto
-Assignment AssignmentKey Cluster Clusters arista/redirector.v1/services.gen.proto
-AssignmentBatchedStreamRequest
-AssignmentBatchedStreamResponse
-AssignmentRequest
-AssignmentResponse
-AssignmentSomeRequest
-AssignmentSomeResponse
-AssignmentStreamRequest
-AssignmentStreamResponse
-MetaResponse
-AssignmentService
-Top
-arista/redirector.v1/redirector.proto Assignment Assignment returns the information about the regional clusters that the system is assigned to. Each cluster consists of a series of hosts, each of which the client can use to connect.
-Field Name Type Description key AssignmentKey key uniquely identifies the assignment of system_id to the cluster.
-clusters Clusters clusters that the system is assigned to.</description></item><item><title>serviceaccount.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</guid><description>arista/serviceaccount.v1/serviceaccount.proto
-Account
-AccountConfig
-AccountKey
-Token
-TokenConfig
-TokenKey
-AccountStatus
-arista/serviceaccount.v1/services.gen.proto
-AccountConfigDeleteAllRequest
-AccountConfigDeleteAllResponse
-AccountConfigDeleteRequest
-AccountConfigDeleteResponse
-AccountConfigDeleteSomeRequest
-AccountConfigDeleteSomeResponse
-AccountConfigRequest
-AccountConfigResponse
-AccountConfigSetRequest
-AccountConfigSetResponse
-AccountConfigSetSomeRequest
-AccountConfigSetSomeResponse
-AccountConfigSomeRequest
-AccountConfigSomeResponse
-AccountConfigStreamRequest
-AccountConfigStreamResponse
-AccountRequest
-AccountResponse
-AccountSomeRequest
-AccountSomeResponse
-AccountStreamRequest
-AccountStreamResponse
-MetaResponse
-TokenConfigDeleteAllRequest
-TokenConfigDeleteAllResponse
-TokenConfigDeleteRequest
-TokenConfigDeleteResponse
-TokenConfigDeleteSomeRequest
-TokenConfigDeleteSomeResponse
-TokenConfigRequest
-TokenConfigResponse
-TokenConfigSetRequest
-TokenConfigSetResponse
-TokenConfigSetSomeRequest
-TokenConfigSetSomeResponse
-TokenConfigSomeRequest
-TokenConfigSomeResponse
-TokenConfigStreamRequest
-TokenConfigStreamResponse
-TokenRequest
-TokenResponse
-TokenSomeRequest
-TokenSomeResponse
-TokenStreamRequest
-TokenStreamResponse
-AccountConfigService
-AccountService
-TokenConfigService
-TokenService
-Top
-arista/serviceaccount.v1/serviceaccount.proto Account Account describes a service account.
-Field Name Type Description key AccountKey key uniquely identifies the service account.</description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>arista/studio.v1/studio.proto
-AssignedTags
-AssignedTagsConfig
-AutofillAction
-AutofillActionConfig
-AutofillActionKey
-AutofillArgumentProvider
-AutofillArgumentProviders
-AutofillArgumentProviders.ValuesEntry
-BooleanInputFieldProps
-CollectionInputFieldProps
-Entities
-Entities.ValuesEntry
-Entity
-FloatInputFieldProps
-GroupInputFieldProps
-InputField
-InputFields
-InputFields.ValuesEntry
-InputSchema
-Inputs
-InputsConfig
-InputsKey
-IntegerInputFieldProps
-Layout
-ResolverInputFieldProps
-SecretInput
-StringInputFieldProps
-Studio
-StudioConfig
-StudioKey
-StudioSummary
-TagMatcherInputFieldProps
-Template
-AutofillProviderType
-EntityType
-InputFieldType
-ResolverFieldDisplayMode
-ResolverFieldInputMode
-TagMatcherFieldMode
-TemplateType
-arista/studio.v1/services.gen.proto
-AssignedTagsBatchedStreamRequest
-AssignedTagsBatchedStreamResponse
-AssignedTagsConfigBatchedStreamRequest
-AssignedTagsConfigBatchedStreamResponse
-AssignedTagsConfigDeleteAllRequest
-AssignedTagsConfigDeleteAllResponse
-AssignedTagsConfigDeleteRequest
-AssignedTagsConfigDeleteResponse
-AssignedTagsConfigDeleteSomeRequest
-AssignedTagsConfigDeleteSomeResponse
-AssignedTagsConfigRequest
-AssignedTagsConfigResponse
-AssignedTagsConfigSetRequest
-AssignedTagsConfigSetResponse
-AssignedTagsConfigSetSomeRequest
-AssignedTagsConfigSetSomeResponse
-AssignedTagsConfigSomeRequest
-AssignedTagsConfigSomeResponse
-AssignedTagsConfigStreamRequest
-AssignedTagsConfigStreamResponse
-AssignedTagsRequest
-AssignedTagsResponse
-AssignedTagsSomeRequest
-AssignedTagsSomeResponse
-AssignedTagsStreamRequest
-AssignedTagsStreamResponse
-AutofillActionBatchedStreamRequest</description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>arista/tag.v2/tag.proto
-Tag
-TagAssignment
-TagAssignmentConfig
-TagAssignmentKey
-TagConfig
-TagKey
-CreatorType
-ElementSubType
-ElementType
-arista/tag.v2/services.gen.proto
-MetaResponse
-TagAssignmentBatchedStreamRequest
-TagAssignmentBatchedStreamResponse
-TagAssignmentConfigBatchedStreamRequest
-TagAssignmentConfigBatchedStreamResponse
-TagAssignmentConfigDeleteAllRequest
-TagAssignmentConfigDeleteAllResponse
-TagAssignmentConfigDeleteRequest
-TagAssignmentConfigDeleteResponse
-TagAssignmentConfigDeleteSomeRequest
-TagAssignmentConfigDeleteSomeResponse
-TagAssignmentConfigRequest
-TagAssignmentConfigResponse
-TagAssignmentConfigSetRequest
-TagAssignmentConfigSetResponse
-TagAssignmentConfigSetSomeRequest
-TagAssignmentConfigSetSomeResponse
-TagAssignmentConfigSomeRequest
-TagAssignmentConfigSomeResponse
-TagAssignmentConfigStreamRequest
-TagAssignmentConfigStreamResponse
-TagAssignmentRequest
-TagAssignmentResponse
-TagAssignmentSomeRequest
-TagAssignmentSomeResponse
-TagAssignmentStreamRequest
-TagAssignmentStreamResponse
-TagBatchedStreamRequest
-TagBatchedStreamResponse
-TagConfigBatchedStreamRequest
-TagConfigBatchedStreamResponse
-TagConfigDeleteAllRequest
-TagConfigDeleteAllResponse
-TagConfigDeleteRequest
-TagConfigDeleteResponse
-TagConfigDeleteSomeRequest
-TagConfigDeleteSomeResponse
-TagConfigRequest
-TagConfigResponse
-TagConfigSetRequest
-TagConfigSetResponse
-TagConfigSetSomeRequest
-TagConfigSetSomeResponse
-TagConfigSomeRequest
-TagConfigSomeResponse
-TagConfigStreamRequest
-TagConfigStreamResponse
-TagRequest
-TagResponse
-TagSomeRequest
-TagSomeResponse
-TagStreamRequest
-TagStreamResponse
-TagAssignmentConfigService
-TagAssignmentService
-TagConfigService
-TagService
-Top</description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>arista/workspace.v1/workspace.proto
-AuthzResult
-BuildStageState
-BuildStageState.ValuesEntry
-ConfigSyncResult
-ConfigValidationResult
-ConfigletBuildResult
-ConfigletBuildResults
-ConfigletBuildResults.ValuesEntry
-ImageValidationResult
-InputError
-InputErrors
-InputValidationResult
-InputValidationResults
-InputValidationResults.ValuesEntry
-RequestParams
-Response
-Responses
-Responses.ValuesEntry
-TemplateError
-TemplateErrors
-Workspace
-WorkspaceBuild
-WorkspaceBuildDetails
-WorkspaceBuildDetailsKey
-WorkspaceBuildKey
-WorkspaceConfig
-WorkspaceKey
-WorkspaceSyncConfig
-WorkspaceSyncKey
-BuildStage
-BuildState
-ConfigSyncSkipCause
-ConfigValidationSkipCause
-DeviceAuthzStatus
-ImageValidationSkipCause
-Request
-ResponseCode
-ResponseStatus
-SyncOperation
-WorkspaceState
-arista/workspace.v1/services.gen.proto
-MetaResponse
-WorkspaceBatchedStreamRequest
-WorkspaceBatchedStreamResponse
-WorkspaceBuildBatchedStreamRequest
-WorkspaceBuildBatchedStreamResponse
-WorkspaceBuildDetailsBatchedStreamRequest
-WorkspaceBuildDetailsBatchedStreamResponse
-WorkspaceBuildDetailsRequest
-WorkspaceBuildDetailsResponse
-WorkspaceBuildDetailsSomeRequest
-WorkspaceBuildDetailsSomeResponse
-WorkspaceBuildDetailsStreamRequest
-WorkspaceBuildDetailsStreamResponse
-WorkspaceBuildRequest
-WorkspaceBuildResponse
-WorkspaceBuildSomeRequest
-WorkspaceBuildSomeResponse
-WorkspaceBuildStreamRequest
-WorkspaceBuildStreamResponse
-WorkspaceConfigBatchedStreamRequest
-WorkspaceConfigBatchedStreamResponse
-WorkspaceConfigDeleteAllRequest
-WorkspaceConfigDeleteAllResponse
-WorkspaceConfigDeleteRequest
-WorkspaceConfigDeleteResponse
-WorkspaceConfigDeleteSomeRequest
-WorkspaceConfigDeleteSomeResponse</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/</link><description>Recent content on Arista Networks FMP APIs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/index.xml" rel="self" type="application/rss+xml"/><item><title>Existing Clients</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</guid><description>&lt;p>Arista provides and maintains the following clients:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Language&lt;/th>
+ &lt;th style="text-align: left">Repository&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Go&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="https://github.com/aristanetworks/cloudvision-go">https://github.com/aristanetworks/cloudvision-go&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Python&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="https://github.com/aristanetworks/cloudvision-python">https://github.com/aristanetworks/cloudvision-python&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item><item><title>Creating a Client</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</guid><description>&lt;p>A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.&lt;/p>
+&lt;p>The main gRPC site has tutorials for generating clients in many languages:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/java/basics/">Java&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/node/basics/">Node&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/ruby/basics/">Ruby&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/csharp/basics/">C#/.Net&lt;/a>&lt;/li>
+&lt;li>&amp;hellip; and more&lt;/li>
+&lt;/ul>
+&lt;p>There is also an expansive ecosystem, so plenty of languages are supported.&lt;/p>
+&lt;h3 id="tooling">Tooling&lt;/h3>
+&lt;p>In general, there are two main components to generating a language binding:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>protoc&lt;/code>: The protobuf compiler which call the language-specific generator
+&lt;ul>
+&lt;li>typically installed via a package manager (&lt;code>apt&lt;/code>, &lt;code>yum&lt;/code>, &lt;code>brew&lt;/code>, etc)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>protoc-gen-{language}&lt;/code>: The language-specific generator
+&lt;ul>
+&lt;li>typically installed with the language&amp;rsquo;s dependency manager, build tool, etc&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="generating">Generating&lt;/h3>
+&lt;p>Regardless of language, client generation generally follows a pattern of:&lt;/p></description></item><item><title>Error Handling</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/errors/</guid><description>&lt;p>Errors returned by the API follow the &lt;a href="https://github.com/grpc/grpc/blob/master/doc/statuscodes.md">gRPC status code&lt;/a> guidelines. This provides many niceties:&lt;/p>
+&lt;ol>
+&lt;li>Language-native idioms (exceptions, return codes, etc.)&lt;/li>
+&lt;li>Easily mappable to HTTP error codes (used for HTTP access to RPCs)&lt;/li>
+&lt;li>Uses metadata rather than a global schema for more detailed errors&lt;/li>
+&lt;/ol>
+&lt;h3 id="example-go">Example: Go&lt;/h3>
+&lt;h4 id="unary-rpcs">Unary RPCs&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">resp&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">example&lt;/span>.&lt;span style="color:#a6e22e">GetOne&lt;/span>(&lt;span style="color:#a6e22e">ExampleConfigRequest&lt;/span>{&lt;span style="color:#a6e22e">Key&lt;/span>: &lt;span style="color:#a6e22e">key&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;failed to get %+v: %s\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">key&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="streaming-rpcs">Streaming RPCs&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">stream&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">example&lt;/span>.&lt;span style="color:#a6e22e">GetAll&lt;/span>(&lt;span style="color:#a6e22e">ExampleConfigStreamRequest&lt;/span>{&lt;span style="color:#f92672">...&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatalf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;failed to initialize GetAll stream: %s&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">value&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">stream&lt;/span>.&lt;span style="color:#a6e22e">Recv&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// all done
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// stream was broken due to error
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatalf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;stream was interrupted: %s&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%+v\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">value&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="example-python">Example: Python&lt;/h3>
+&lt;h4 id="unary-rpcs-1">Unary RPCs&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> response &lt;span style="color:#f92672">=&lt;/span> example_stub&lt;span style="color:#f92672">.&lt;/span>Set(ExampleConfigSetRequest(&lt;span style="color:#f92672">...&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">except&lt;/span> grpc&lt;span style="color:#f92672">.&lt;/span>RpcError &lt;span style="color:#66d9ef">as&lt;/span> e:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Set failed: &lt;/span>&lt;span style="color:#e6db74">{0}&lt;/span>&lt;span style="color:#e6db74">: &lt;/span>&lt;span style="color:#e6db74">{1}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(e&lt;span style="color:#f92672">.&lt;/span>code(), e&lt;span style="color:#f92672">.&lt;/span>details()))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> e
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="streaming-rpcs-1">Streaming RPCs&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> resource &lt;span style="color:#f92672">in&lt;/span> example_stub&lt;span style="color:#f92672">.&lt;/span>GetAll(ExampleConfigStreamRequest(&lt;span style="color:#f92672">...&lt;/span>)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># process resource&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">except&lt;/span> grpc&lt;span style="color:#f92672">.&lt;/span>RpcError &lt;span style="color:#66d9ef">as&lt;/span> e:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;GetAll failed: &lt;/span>&lt;span style="color:#e6db74">{0}&lt;/span>&lt;span style="color:#e6db74">: &lt;/span>&lt;span style="color:#e6db74">{1}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(e&lt;span style="color:#f92672">.&lt;/span>code(), e&lt;span style="color:#f92672">.&lt;/span>details()))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> e
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Filtering</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/filtering/</guid><description>&lt;p>Filtering is provided through a default and an (optional) additional model-specific mechanism. By default, all models support &amp;ldquo;partial equality filtering&amp;rdquo;. Models that provide a custom filtering method will document this filter-message in its model documentation.&lt;/p>
+&lt;h3 id="partial-equality-filters">Partial-Equality Filters&lt;/h3>
+&lt;p>Unless intentionally disabled (and sufficiently documented), services provide a default filtering mechanism. The input type is the same as the model you are filtering, and if you wish to filter on a given field you set that field to non-nil.&lt;/p></description></item><item><title>GetOne</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getone/</guid><description>&lt;p>&lt;code>GetOne&lt;/code> returns a single instance of a resource.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Key&lt;/code> field is required to be fully-specified because &lt;code>GetOne&lt;/code> needs to identify exactly-one
+resource to fetch.&lt;/p>
+&lt;/div>
+
+&lt;h4 id="rpc-definition">RPC Definition&lt;/h4>
+&lt;p>The protobuf definition of &lt;code>GetOne&lt;/code> is defined as such (for &lt;code>ExampleConfig&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">rpc&lt;/span> GetOne (ExampleConfigRequest) &lt;span style="color:#66d9ef">returns&lt;/span> (ExampleConfigResponse);&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="request-type">Request Type&lt;/h4>
+&lt;p>The generated request for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">message&lt;/span> &lt;span style="color:#a6e22e">ExampleConfigRequest&lt;/span> {&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> &lt;span style="color:#75715e">// Key uniquely identifies a ExampleConfig instance to retrieve.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// This value must be populated (non-null) and all fields set.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> ExampleKey key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> &lt;span style="color:#75715e">// Time indicates the time for which you are interested in the data.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// If no time is given, the server will use the time at which it makes the request.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">//
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// This time is used as an upper-bound. The returned value may have been set at
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// an earlier time, however, it was the value as of the supplied time.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> google.protobuf.Timestamp time &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>;&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>}&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="response-type">Response Type&lt;/h4>
+&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>GetAll</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</guid><description>&lt;p>&lt;code>GetAll&lt;/code> fetches (and optionally filters) all resource instances.&lt;/p>
+&lt;p>For the filtering options available, see the &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/filtering">Filtering&lt;/a> section.
+These filtering options are the same for &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/subscribe">Subscribe&lt;/a>.&lt;/p>
+&lt;p>This RPC is effectively a full-table-scan so the time to complete depends on the amount of data
+the resource reflects. However, being a streaming API, this RPC will return the first message as
+soon as it is available without any buffering.&lt;/p>
+&lt;h4 id="rpc-definition">RPC Definition&lt;/h4>
+&lt;p>The protobuf definition of &lt;code>GetAll&lt;/code> is defined as such (for &lt;code>ExampleConfig&lt;/code>):&lt;/p></description></item><item><title>Subscribe</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/subscribe/</guid><description>&lt;p>&lt;code>Subscribe&lt;/code> first returns the initial state (fully-specified messages) and then any received updates.&lt;/p>
+&lt;p>The first messages received are effectively the result of a &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/getall">GetAll&lt;/a>).
+Once existing state has been sent to the client, any changes to resource entities are streamed back to the client. The
+&lt;em>update&lt;/em> messages will represent what was updated and can either be a diff/partial or a fully-specified model.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>Any &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/filtering">filters&lt;/a> apply both to the initial state and updates.&lt;/p></description></item><item><title>Set</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</guid><description>&lt;p>&lt;code>Set&lt;/code> updates a resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Key&lt;/code> field is required to be fully-specified because &lt;code>Set&lt;/code> needs to identify exactly-one
+resource to delete.&lt;/p>
+&lt;/div>
+
+
+&lt;div class="notices note" >&lt;p>The endpoint returns the time the &lt;code>Set&lt;/code> becomes effective internally and the service&amp;rsquo;s known-state of the resource.&lt;/p>
+&lt;/div>
+
+&lt;p>A &lt;code>*SetResponse&lt;/code> will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This echo will be the original update-request at a minimum, and may include more data.This allows services to do fast, write-only, updates to internal storage. If the service needs to query existing state first then more data can be provided to the client. If you need a full model after a &lt;code>Set&lt;/code> operation, you can issue a &lt;code>GetOne&lt;/code> with the returned &lt;code>time&lt;/code>.&lt;/p></description></item><item><title>Delete</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</guid><description>&lt;p>&lt;code>Delete&lt;/code> deletes a resource and returns the time the delete became effective.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Key&lt;/code> field is required to be fully-specified because &lt;code>Delete&lt;/code> needs to identify exactly-one
+resource to delete.&lt;/p>
+&lt;/div>
+
+&lt;h4 id="rpc-definition">RPC Definition&lt;/h4>
+&lt;p>The protobuf definition of &lt;code>GetOne&lt;/code> is defined as such (for &lt;code>ExampleConfig&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">rpc&lt;/span> Delete (ExampleConfigDeleteRequest) &lt;span style="color:#66d9ef">returns&lt;/span> (ExampleConfigDeleteResponse);&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="request-type">Request Type&lt;/h4>
+&lt;p>The generated request for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">message&lt;/span> &lt;span style="color:#a6e22e">ExampleConfigDeleteRequest&lt;/span> {&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> &lt;span style="color:#75715e">// Key indicates which ExampleConfig instance to remove.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// This field must always be set.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> ExampleKey key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>};&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="response-type">Response Type&lt;/h4>
+&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/alert.v1/alert.proto">arista/alert.v1/alert.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#alert">Alert&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#alertconfig">AlertConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#azureoauth">AzureOAuth&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#broadcastgroup">BroadcastGroup&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#broadcastgroups">BroadcastGroups&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">BroadcastGroups.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configerror">ConfigError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configerrors">ConfigErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuedata">CueData&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">CueData.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesnmpauth">CueSNMPAuth&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesnmpendpoint">CueSNMPEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesnmpsettings">CueSNMPSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesendgridendpoint">CueSendgridEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesendgridendpoints">CueSendgridEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesendgridsettings">CueSendgridSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesnmpendpoints">CueSnmpEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesyslogendpoint">CueSyslogEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesyslogendpoints">CueSyslogEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#cuesyslogsettings">CueSyslogSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#defaulttemplate">DefaultTemplate&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#emailendpoint">EmailEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#emailendpoints">EmailEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#emailsettings">EmailSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointerror">EndpointError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointerrors">EndpointErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventlist">EventList&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#googlechatendpoint">GoogleChatEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#googlechatendpoints">GoogleChatEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#googlechatsettings">GoogleChatSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#headervalues">HeaderValues&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#httpheaders">HttpHeaders&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">HttpHeaders.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#httpsettings">HttpSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inhibitionsettings">InhibitionSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">InhibitionSettings.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#matches">Matches&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#msteamsendpoint">MsTeamsEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#msteamsendpoints">MsTeamsEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#msteamssettings">MsTeamsSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#opsgenieendpoint">OpsgenieEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#opsgenieendpoints">OpsgenieEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#opsgeniesettings">OpsgenieSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#pagerdutyendpoint">PagerdutyEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#pagerdutyendpoints">PagerdutyEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#pagerdutysettings">PagerdutySettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#priorities">Priorities&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#pushoverendpoint">PushoverEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#pushoverendpoints">PushoverEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#rule">Rule&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#rules">Rules&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#snmpauth">SNMPAuth&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#snmpendpoint">SNMPEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#snmpendpoints">SNMPEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#snmpsettings">SNMPSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#sendgridendpoint">SendgridEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#sendgridendpoints">SendgridEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#sendgridsettings">SendgridSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#settings">Settings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#slackendpoint">SlackEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#slackendpoints">SlackEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#slacksettings">SlackSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#syslogendpoint">SyslogEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#syslogendpoints">SyslogEndpoints&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#syslogsettings">SyslogSettings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#templateconfig">TemplateConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#templatekey">TemplateKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#victoropsendpoint">VictorOpsEndpoint&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#victoropsendpoints">VictorOpsEndpoints&lt;/a>&lt;/p></description></item><item><title>bugexposure.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/bugexposure.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/bugexposure.v1/bugexposure.proto">arista/bugexposure.v1/bugexposure.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#bugexposure">BugExposure&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#bugexposurekey">BugExposureKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.bugexposure.v1.Acknowledgement">Acknowledgement&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.bugexposure.v1.HighestExposure">HighestExposure&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/bugexposure.v1/services.gen.proto">arista/bugexposure.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#bugexposurerequest">BugExposureRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#bugexposureresponse">BugExposureResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#bugexposurestreamrequest">BugExposureStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#bugexposurestreamresponse">BugExposureStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.bugexposure.v1.BugExposureService">BugExposureService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/bugexposure.v1/bugexposure.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristabugexposurev1bugexposureproto">arista/bugexposure.v1/bugexposure.proto&lt;/h2>
+&lt;p>&lt;a name="arista.bugexposure.v1.BugExposure">&lt;/a>&lt;/p>
+&lt;h3 id="bugexposure">BugExposure&lt;/h3>
+&lt;p>BugExposure is the state model that represents
+the exposure a device has to bugs&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#bugexposurekey">BugExposureKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>BugExposureKey is the key of&lt;/p>&lt;p>BugExposure&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>bug_ids&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">fmp.RepeatedInt32&lt;/td>
+ &lt;td style="text-align: left">&lt;p>bug_ids is a list of bug alerts affecting the device&lt;/p>&lt;p>with type Bug&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>cve_ids&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">fmp.RepeatedInt32&lt;/td>
+ &lt;td style="text-align: left">&lt;p>cve_ids is a list of bug alerts affecting the device&lt;/p></description></item><item><title>changecontrol.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/changecontrol.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/changecontrol.v1/changecontrol.proto">arista/changecontrol.v1/changecontrol.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#action">Action&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfig">ApproveConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#change">Change&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changeconfig">ChangeConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrol">ChangeControl&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfig">ChangeControlConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolkey">ChangeControlKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#filter">Filter&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#flag">Flag&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#flagconfig">FlagConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#repeatedrepeatedstring">RepeatedRepeatedString&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#stage">Stage&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#stageconfig">StageConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#stageconfigmap">StageConfigMap&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">StageConfigMap.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#stagemap">StageMap&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">StageMap.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#timestampflag">TimestampFlag&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#timestampflagconfig">TimestampFlagConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.changecontrol.v1.ChangeControlStatus">ChangeControlStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.changecontrol.v1.StageStatus">StageStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/changecontrol.v1/services.gen.proto">arista/changecontrol.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigbatchedstreamrequest">ApproveConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigbatchedstreamresponse">ApproveConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeleteallrequest">ApproveConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeleteallresponse">ApproveConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeleterequest">ApproveConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeleteresponse">ApproveConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeletesomerequest">ApproveConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigdeletesomeresponse">ApproveConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigrequest">ApproveConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigresponse">ApproveConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsetrequest">ApproveConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsetresponse">ApproveConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsetsomerequest">ApproveConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsetsomeresponse">ApproveConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsomerequest">ApproveConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigsomeresponse">ApproveConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigstreamrequest">ApproveConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#approveconfigstreamresponse">ApproveConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolbatchedstreamrequest">ChangeControlBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolbatchedstreamresponse">ChangeControlBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigbatchedstreamrequest">ChangeControlConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigbatchedstreamresponse">ChangeControlConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeleteallrequest">ChangeControlConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeleteallresponse">ChangeControlConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeleterequest">ChangeControlConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeleteresponse">ChangeControlConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeletesomerequest">ChangeControlConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigdeletesomeresponse">ChangeControlConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigrequest">ChangeControlConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigresponse">ChangeControlConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsetrequest">ChangeControlConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsetresponse">ChangeControlConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsetsomerequest">ChangeControlConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsetsomeresponse">ChangeControlConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsomerequest">ChangeControlConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigsomeresponse">ChangeControlConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigstreamrequest">ChangeControlConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolconfigstreamresponse">ChangeControlConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolrequest">ChangeControlRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolresponse">ChangeControlResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolsomerequest">ChangeControlSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolsomeresponse">ChangeControlSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolstreamrequest">ChangeControlStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#changecontrolstreamresponse">ChangeControlStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.changecontrol.v1.ApproveConfigService">ApproveConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.changecontrol.v1.ChangeControlConfigService">ChangeControlConfigService&lt;/a>&lt;/p></description></item><item><title>configlet.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configlet.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/configlet.v1/configlet.proto">arista/configlet.v1/configlet.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#configlet">Configlet&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignment">ConfigletAssignment&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfig">ConfigletAssignmentConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentkey">ConfigletAssignmentKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfig">ConfigletConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletkey">ConfigletKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#filter">Filter&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configlet.v1.MatchPolicy">MatchPolicy&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/configlet.v1/services.gen.proto">arista/configlet.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentbatchedstreamrequest">ConfigletAssignmentBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentbatchedstreamresponse">ConfigletAssignmentBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigbatchedstreamrequest">ConfigletAssignmentConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigbatchedstreamresponse">ConfigletAssignmentConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeleteallrequest">ConfigletAssignmentConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeleteallresponse">ConfigletAssignmentConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeleterequest">ConfigletAssignmentConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeleteresponse">ConfigletAssignmentConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeletesomerequest">ConfigletAssignmentConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigdeletesomeresponse">ConfigletAssignmentConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigrequest">ConfigletAssignmentConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigresponse">ConfigletAssignmentConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsetrequest">ConfigletAssignmentConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsetresponse">ConfigletAssignmentConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsetsomerequest">ConfigletAssignmentConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsetsomeresponse">ConfigletAssignmentConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsomerequest">ConfigletAssignmentConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigsomeresponse">ConfigletAssignmentConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigstreamrequest">ConfigletAssignmentConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentconfigstreamresponse">ConfigletAssignmentConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentrequest">ConfigletAssignmentRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentresponse">ConfigletAssignmentResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentsomerequest">ConfigletAssignmentSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentsomeresponse">ConfigletAssignmentSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentstreamrequest">ConfigletAssignmentStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletassignmentstreamresponse">ConfigletAssignmentStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletbatchedstreamrequest">ConfigletBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletbatchedstreamresponse">ConfigletBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigbatchedstreamrequest">ConfigletConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigbatchedstreamresponse">ConfigletConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeleteallrequest">ConfigletConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeleteallresponse">ConfigletConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeleterequest">ConfigletConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeleteresponse">ConfigletConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeletesomerequest">ConfigletConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigdeletesomeresponse">ConfigletConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigrequest">ConfigletConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigresponse">ConfigletConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsetrequest">ConfigletConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsetresponse">ConfigletConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsetsomerequest">ConfigletConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsetsomeresponse">ConfigletConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsomerequest">ConfigletConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigsomeresponse">ConfigletConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigstreamrequest">ConfigletConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletconfigstreamresponse">ConfigletConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletrequest">ConfigletRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletresponse">ConfigletResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletsomerequest">ConfigletSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletsomeresponse">ConfigletSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletstreamrequest">ConfigletStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletstreamresponse">ConfigletStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configlet.v1.ConfigletAssignmentConfigService">ConfigletAssignmentConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configlet.v1.ConfigletAssignmentService">ConfigletAssignmentService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configlet.v1.ConfigletConfigService">ConfigletConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configlet.v1.ConfigletService">ConfigletService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/configlet.v1/configlet.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaconfigletv1configletproto">arista/configlet.v1/configlet.proto&lt;/h2>
+&lt;p>&lt;a name="arista.configlet.v1.Configlet">&lt;/a>&lt;/p></description></item><item><title>configstatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/configstatus.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/configstatus.v1/configstatus.proto">arista/configstatus.v1/configstatus.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#configdiff">ConfigDiff&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffkey">ConfigDiffKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configerror">ConfigError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configerrors">ConfigErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configkey">ConfigKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configsource">ConfigSource&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configsources">ConfigSources&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configsummary">ConfigSummary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configuration">Configuration&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#diffentries">DiffEntries&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#diffentry">DiffEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofile">SecurityProfile&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilecompliancesummary">SecurityProfileComplianceSummary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediff">SecurityProfileDiff&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummary">SecurityProfileDiffSummary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summary">Summary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarykey">SummaryKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.ConfigFilterCode">ConfigFilterCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.ConfigSourceType">ConfigSourceType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.ConfigSyncCode">ConfigSyncCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.ConfigType">ConfigType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.DiffOp">DiffOp&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.configstatus.v1.ErrorCode">ErrorCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/configstatus.v1/services.gen.proto">arista/configstatus.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#configdiffbatchedstreamrequest">ConfigDiffBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffbatchedstreamresponse">ConfigDiffBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffrequest">ConfigDiffRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffresponse">ConfigDiffResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffsomerequest">ConfigDiffSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffsomeresponse">ConfigDiffSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffstreamrequest">ConfigDiffStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configdiffstreamresponse">ConfigDiffStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationbatchedstreamrequest">ConfigurationBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationbatchedstreamresponse">ConfigurationBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationrequest">ConfigurationRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationresponse">ConfigurationResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationsomerequest">ConfigurationSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationsomeresponse">ConfigurationSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationstreamrequest">ConfigurationStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configurationstreamresponse">ConfigurationStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilebatchedstreamrequest">SecurityProfileBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilebatchedstreamresponse">SecurityProfileBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffbatchedstreamrequest">SecurityProfileDiffBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffbatchedstreamresponse">SecurityProfileDiffBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffrequest">SecurityProfileDiffRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffresponse">SecurityProfileDiffResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsomerequest">SecurityProfileDiffSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsomeresponse">SecurityProfileDiffSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffstreamrequest">SecurityProfileDiffStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffstreamresponse">SecurityProfileDiffStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarybatchedstreamrequest">SecurityProfileDiffSummaryBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarybatchedstreamresponse">SecurityProfileDiffSummaryBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummaryrequest">SecurityProfileDiffSummaryRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummaryresponse">SecurityProfileDiffSummaryResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarysomerequest">SecurityProfileDiffSummarySomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarysomeresponse">SecurityProfileDiffSummarySomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarystreamrequest">SecurityProfileDiffSummaryStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilediffsummarystreamresponse">SecurityProfileDiffSummaryStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilerequest">SecurityProfileRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofileresponse">SecurityProfileResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilesomerequest">SecurityProfileSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilesomeresponse">SecurityProfileSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilestreamrequest">SecurityProfileStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#securityprofilestreamresponse">SecurityProfileStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarybatchedstreamrequest">SummaryBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarybatchedstreamresponse">SummaryBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summaryrequest">SummaryRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summaryresponse">SummaryResponse&lt;/a>&lt;/p></description></item><item><title>connectivitymonitor.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/connectivitymonitor.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/connectivitymonitor.v1/connectivitymonitor.proto">arista/connectivitymonitor.v1/connectivitymonitor.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#probe">Probe&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#probekey">ProbeKey&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#probestats">ProbeStats&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#probestatskey">ProbeStatsKey&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/connectivitymonitor.v1/services.gen.proto">arista/connectivitymonitor.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probebatchedstreamrequest">ProbeBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probebatchedstreamresponse">ProbeBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#proberequest">ProbeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#proberesponse">ProbeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probesomerequest">ProbeSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probesomeresponse">ProbeSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsbatchedstreamrequest">ProbeStatsBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsbatchedstreamresponse">ProbeStatsBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsrequest">ProbeStatsRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsresponse">ProbeStatsResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatssomerequest">ProbeStatsSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatssomeresponse">ProbeStatsSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsstreamrequest">ProbeStatsStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestatsstreamresponse">ProbeStatsStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestreamrequest">ProbeStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#probestreamresponse">ProbeStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.connectivitymonitor.v1.ProbeService">ProbeService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.connectivitymonitor.v1.ProbeStatsService">ProbeStatsService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/connectivitymonitor.v1/connectivitymonitor.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaconnectivitymonitorv1connectivitymonitorproto">arista/connectivitymonitor.v1/connectivitymonitor.proto&lt;/h2>
+&lt;p>&lt;a name="arista.connectivitymonitor.v1.Probe">&lt;/a>&lt;/p>
+&lt;h3 id="probe">Probe&lt;/h3>
+&lt;p>Probe is identifying information of a connectivity monitor probe.
+It is used to retrieve probe information without getting the corresponding stats so that
+probe information can be displayed without streaming all related data, such as in the UI.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#probekey">ProbeKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>key uniquely identifies the connectivity monitor probe.&lt;/p></description></item><item><title>dashboard.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/dashboard.v1/dashboard.proto">arista/dashboard.v1/dashboard.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#dashboard">Dashboard&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#dashboardconfig">DashboardConfig&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#dashboardkey">DashboardKey&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#dashboardmetadata">DashboardMetadata&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#dimensions">Dimensions&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#filter">Filter&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#globaldashboardconfig">GlobalDashboardConfig&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#position">Position&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#widget">Widget&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#widgetstyles">WidgetStyles&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#widgets">Widgets&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/dashboard.v1/services.gen.proto">arista/dashboard.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#dashboardbatchedstreamrequest">DashboardBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardbatchedstreamresponse">DashboardBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigbatchedstreamrequest">DashboardConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigbatchedstreamresponse">DashboardConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeleteallrequest">DashboardConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeleteallresponse">DashboardConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeleterequest">DashboardConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeleteresponse">DashboardConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeletesomerequest">DashboardConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigdeletesomeresponse">DashboardConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigrequest">DashboardConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigresponse">DashboardConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsetrequest">DashboardConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsetresponse">DashboardConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsetsomerequest">DashboardConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsetsomeresponse">DashboardConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsomerequest">DashboardConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigsomeresponse">DashboardConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigstreamrequest">DashboardConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardconfigstreamresponse">DashboardConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardrequest">DashboardRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardresponse">DashboardResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardsomerequest">DashboardSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardsomeresponse">DashboardSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardstreamrequest">DashboardStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dashboardstreamresponse">DashboardStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigbatchedstreamrequest">GlobalDashboardConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigbatchedstreamresponse">GlobalDashboardConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigrequest">GlobalDashboardConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigresponse">GlobalDashboardConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigsetrequest">GlobalDashboardConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigsetresponse">GlobalDashboardConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigstreamrequest">GlobalDashboardConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#globaldashboardconfigstreamresponse">GlobalDashboardConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.dashboard.v1.DashboardConfigService">DashboardConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.dashboard.v1.DashboardService">DashboardService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.dashboard.v1.GlobalDashboardConfigService">GlobalDashboardConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/dashboard.v1/dashboard.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristadashboardv1dashboardproto">arista/dashboard.v1/dashboard.proto&lt;/h2>
+&lt;p>&lt;a name="arista.dashboard.v1.Dashboard">&lt;/a>&lt;/p>
+&lt;h3 id="dashboard">Dashboard&lt;/h3>
+&lt;p>Dashboard state contains all dashboard data.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#dashboardkey">DashboardKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>key is the unique identifier. It will always be defined.&lt;/p></description></item><item><title>endpointlocation.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/endpointlocation.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/endpointlocation.v1/endpointlocation.proto">arista/endpointlocation.v1/endpointlocation.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#device">Device&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceinfo">DeviceInfo&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicemap">DeviceMap&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">DeviceMap.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocation">EndpointLocation&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationkey">EndpointLocationKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#explanationlist">ExplanationList&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#identifier">Identifier&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#identifierlist">IdentifierList&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#identifiersourcelist">IdentifierSourceList&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#location">Location&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#locationlist">LocationList&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.DeviceStatus">DeviceStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.DeviceType">DeviceType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.Explanation">Explanation&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.IdentifierSource">IdentifierSource&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.IdentifierType">IdentifierType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.Likelihood">Likelihood&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.MacType">MacType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/endpointlocation.v1/services.gen.proto">arista/endpointlocation.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationbatchedstreamrequest">EndpointLocationBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationbatchedstreamresponse">EndpointLocationBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationrequest">EndpointLocationRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationresponse">EndpointLocationResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationsomerequest">EndpointLocationSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationsomeresponse">EndpointLocationSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationstreamrequest">EndpointLocationStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#endpointlocationstreamresponse">EndpointLocationStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.endpointlocation.v1.EndpointLocationService">EndpointLocationService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/endpointlocation.v1/endpointlocation.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaendpointlocationv1endpointlocationproto">arista/endpointlocation.v1/endpointlocation.proto&lt;/h2>
+&lt;p>&lt;a name="arista.endpointlocation.v1.Device">&lt;/a>&lt;/p>
+&lt;h3 id="device">Device&lt;/h3>
+&lt;p>Device holds information for a device matching a search term.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>identifier_list&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#identifierlist">IdentifierList&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>identifier_list holds the unique identifiers for the device.&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>device_type&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#devicetype">DeviceType&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>device_type is the broad category of the device.&lt;/p></description></item><item><title>event.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/event.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/event.v1/event.proto">arista/event.v1/event.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#event">Event&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventack">EventAck&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfig">EventAnnotationConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventcomponent">EventComponent&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#componentsentry">EventComponent.ComponentsEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventcomponents">EventComponents&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventdata">EventData&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#dataentry">EventData.DataEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventkey">EventKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventnote">EventNote&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventnoteconfig">EventNoteConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventnotes">EventNotes&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#notesentry">EventNotes.NotesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventnotesconfig">EventNotesConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#notesentry">EventNotesConfig.NotesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventread">EventRead&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfig">UserEventCreationConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationkey">UserEventCreationKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.event.v1.ComponentType">ComponentType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.event.v1.EventSeverity">EventSeverity&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/event.v1/services.gen.proto">arista/event.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeleteallrequest">EventAnnotationConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeleteallresponse">EventAnnotationConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeleterequest">EventAnnotationConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeleteresponse">EventAnnotationConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeletesomerequest">EventAnnotationConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigdeletesomeresponse">EventAnnotationConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigrequest">EventAnnotationConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigresponse">EventAnnotationConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsetrequest">EventAnnotationConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsetresponse">EventAnnotationConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsetsomerequest">EventAnnotationConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsetsomeresponse">EventAnnotationConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsomerequest">EventAnnotationConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigsomeresponse">EventAnnotationConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigstreamrequest">EventAnnotationConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventannotationconfigstreamresponse">EventAnnotationConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventrequest">EventRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventresponse">EventResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventsomerequest">EventSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventsomeresponse">EventSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventstreamrequest">EventStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#eventstreamresponse">EventStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeleteallrequest">UserEventCreationConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeleteallresponse">UserEventCreationConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeleterequest">UserEventCreationConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeleteresponse">UserEventCreationConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeletesomerequest">UserEventCreationConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigdeletesomeresponse">UserEventCreationConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigrequest">UserEventCreationConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigresponse">UserEventCreationConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsetrequest">UserEventCreationConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsetresponse">UserEventCreationConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsetsomerequest">UserEventCreationConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsetsomeresponse">UserEventCreationConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsomerequest">UserEventCreationConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigsomeresponse">UserEventCreationConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigstreamrequest">UserEventCreationConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#usereventcreationconfigstreamresponse">UserEventCreationConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.event.v1.EventAnnotationConfigService">EventAnnotationConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.event.v1.EventService">EventService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.event.v1.UserEventCreationConfigService">UserEventCreationConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/event.v1/event.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaeventv1eventproto">arista/event.v1/event.proto&lt;/h2>
+&lt;p>&lt;a name="arista.event.v1.Event">&lt;/a>&lt;/p>
+&lt;h3 id="event">Event&lt;/h3>
+&lt;p>Event is a telemetry event&lt;/p></description></item><item><title>identityprovider.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/identityprovider.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/identityprovider.v1/identityprovider.proto">arista/identityprovider.v1/identityprovider.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfig">OAuthConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthkey">OAuthKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfig">SAMLConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlkey">SAMLKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.identityprovider.v1.ProtocolBinding">ProtocolBinding&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/identityprovider.v1/services.gen.proto">arista/identityprovider.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigbatchedstreamrequest">OAuthConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigbatchedstreamresponse">OAuthConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeleteallrequest">OAuthConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeleteallresponse">OAuthConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeleterequest">OAuthConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeleteresponse">OAuthConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeletesomerequest">OAuthConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigdeletesomeresponse">OAuthConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigrequest">OAuthConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigresponse">OAuthConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsetrequest">OAuthConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsetresponse">OAuthConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsetsomerequest">OAuthConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsetsomeresponse">OAuthConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsomerequest">OAuthConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigsomeresponse">OAuthConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigstreamrequest">OAuthConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#oauthconfigstreamresponse">OAuthConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigbatchedstreamrequest">SAMLConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigbatchedstreamresponse">SAMLConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeleteallrequest">SAMLConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeleteallresponse">SAMLConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeleterequest">SAMLConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeleteresponse">SAMLConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeletesomerequest">SAMLConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigdeletesomeresponse">SAMLConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigrequest">SAMLConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigresponse">SAMLConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsetrequest">SAMLConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsetresponse">SAMLConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsetsomerequest">SAMLConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsetsomeresponse">SAMLConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsomerequest">SAMLConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigsomeresponse">SAMLConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigstreamrequest">SAMLConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#samlconfigstreamresponse">SAMLConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.identityprovider.v1.OAuthConfigService">OAuthConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.identityprovider.v1.SAMLConfigService">SAMLConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/identityprovider.v1/identityprovider.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaidentityproviderv1identityproviderproto">arista/identityprovider.v1/identityprovider.proto&lt;/h2>
+&lt;p>&lt;a name="arista.identityprovider.v1.OAuthConfig">&lt;/a>&lt;/p>
+&lt;h3 id="oauthconfig">OAuthConfig&lt;/h3>
+&lt;p>OAuthConfig holds the configuration for an OAuth provider.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#oauthkey">OAuthKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>key is the ID of the OAuth provider.&lt;/p></description></item><item><title>imagestatus.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/imagestatus.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/imagestatus.v1/imagestatus.proto">arista/imagestatus.v1/imagestatus.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#compliancestatus">ComplianceStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#compliancestatusbysup">ComplianceStatusBySup&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">ComplianceStatusBySup.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extension">Extension&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extensiondiff">ExtensionDiff&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extensiondiffs">ExtensionDiffs&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extensiondiffsbysup">ExtensionDiffsBySup&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">ExtensionDiffsBySup.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extensions">Extensions&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imageerror">ImageError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imageerrors">ImageErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imageinfo">ImageInfo&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imageinfos">ImageInfos&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imagemetadata">ImageMetadata&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imagesummary">ImageSummary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imagewarning">ImageWarning&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imagewarnings">ImageWarnings&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#rebootrequired">RebootRequired&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#softwareimage">SoftwareImage&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#softwareimagediff">SoftwareImageDiff&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#softwareimagediffsbysup">SoftwareImageDiffsBySup&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">SoftwareImageDiffsBySup.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summary">Summary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarykey">SummaryKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#terminattrdiffsbysup">TerminAttrDiffsBySup&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">TerminAttrDiffsBySup.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.DiffOp">DiffOp&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.ErrorCode">ErrorCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.ExtensionInstallStatus">ExtensionInstallStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.InfoCode">InfoCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.SoftwareComplianceCode">SoftwareComplianceCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.WarningCode">WarningCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/imagestatus.v1/services.gen.proto">arista/imagestatus.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarybatchedstreamrequest">SummaryBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarybatchedstreamresponse">SummaryBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summaryrequest">SummaryRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summaryresponse">SummaryResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarysomerequest">SummarySomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarysomeresponse">SummarySomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarystreamrequest">SummaryStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#summarystreamresponse">SummaryStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.imagestatus.v1.SummaryService">SummaryService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/imagestatus.v1/imagestatus.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaimagestatusv1imagestatusproto">arista/imagestatus.v1/imagestatus.proto&lt;/h2>
+&lt;p>&lt;a name="arista.imagestatus.v1.ComplianceStatus">&lt;/a>&lt;/p>
+&lt;h3 id="compliancestatus">ComplianceStatus&lt;/h3>
+&lt;p>ComplianceStatus indicates compliance status for software image, terminattr
+and extensions.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>software_image_compliance_code&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#softwarecompliancecode">SoftwareComplianceCode&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>software_image_compliance_code is the compliance code for images.&lt;/p></description></item><item><title>inventory.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/inventory.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/inventory.v1/inventory.proto">arista/inventory.v1/inventory.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#device">Device&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceconfiguration">DeviceConfiguration&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#optionsentry">DeviceConfiguration.OptionsEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioning">DeviceDecommissioning&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfig">DeviceDecommissioningConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicekey">DeviceKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboarding">DeviceOnboarding&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfig">DeviceOnboardingConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#extendedattributes">ExtendedAttributes&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#featureenabledentry">ExtendedAttributes.FeatureEnabledEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#provisioneddevice">ProvisionedDevice&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#uuidkey">UUIDKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.inventory.v1.DecommissioningStatus">DecommissioningStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.inventory.v1.OnboardingStatus">OnboardingStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.inventory.v1.ProvisioningStatus">ProvisioningStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.inventory.v1.StreamingStatus">StreamingStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/inventory.v1/services.gen.proto">arista/inventory.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#devicebatchedstreamrequest">DeviceBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicebatchedstreamresponse">DeviceBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningbatchedstreamrequest">DeviceDecommissioningBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningbatchedstreamresponse">DeviceDecommissioningBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigbatchedstreamrequest">DeviceDecommissioningConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigbatchedstreamresponse">DeviceDecommissioningConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeleteallrequest">DeviceDecommissioningConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeleteallresponse">DeviceDecommissioningConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeleterequest">DeviceDecommissioningConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeleteresponse">DeviceDecommissioningConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeletesomerequest">DeviceDecommissioningConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigdeletesomeresponse">DeviceDecommissioningConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigrequest">DeviceDecommissioningConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigresponse">DeviceDecommissioningConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsetrequest">DeviceDecommissioningConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsetresponse">DeviceDecommissioningConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsetsomerequest">DeviceDecommissioningConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsetsomeresponse">DeviceDecommissioningConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsomerequest">DeviceDecommissioningConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigsomeresponse">DeviceDecommissioningConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigstreamrequest">DeviceDecommissioningConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningconfigstreamresponse">DeviceDecommissioningConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningrequest">DeviceDecommissioningRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningresponse">DeviceDecommissioningResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningsomerequest">DeviceDecommissioningSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningsomeresponse">DeviceDecommissioningSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningstreamrequest">DeviceDecommissioningStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicedecommissioningstreamresponse">DeviceDecommissioningStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingbatchedstreamrequest">DeviceOnboardingBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingbatchedstreamresponse">DeviceOnboardingBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigbatchedstreamrequest">DeviceOnboardingConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigbatchedstreamresponse">DeviceOnboardingConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeleteallrequest">DeviceOnboardingConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeleteallresponse">DeviceOnboardingConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeleterequest">DeviceOnboardingConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeleteresponse">DeviceOnboardingConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeletesomerequest">DeviceOnboardingConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigdeletesomeresponse">DeviceOnboardingConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigrequest">DeviceOnboardingConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigresponse">DeviceOnboardingConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsetrequest">DeviceOnboardingConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsetresponse">DeviceOnboardingConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsetsomerequest">DeviceOnboardingConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsetsomeresponse">DeviceOnboardingConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsomerequest">DeviceOnboardingConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigsomeresponse">DeviceOnboardingConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigstreamrequest">DeviceOnboardingConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingconfigstreamresponse">DeviceOnboardingConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingrequest">DeviceOnboardingRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingresponse">DeviceOnboardingResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingsomerequest">DeviceOnboardingSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#deviceonboardingsomeresponse">DeviceOnboardingSomeResponse&lt;/a>&lt;/p></description></item><item><title>lifecycle.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/lifecycle.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/lifecycle.v1/lifecycle.proto">arista/lifecycle.v1/lifecycle.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#dateandmodels">DateAndModels&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#devicelifecyclesummary">DeviceLifecycleSummary&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#devicelifecyclesummarykey">DeviceLifecycleSummaryKey&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#hardwarelifecyclesummary">HardwareLifecycleSummary&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#softwareeol">SoftwareEOL&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/lifecycle.v1/services.gen.proto">arista/lifecycle.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#devicelifecyclesummaryrequest">DeviceLifecycleSummaryRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicelifecyclesummaryresponse">DeviceLifecycleSummaryResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicelifecyclesummarystreamrequest">DeviceLifecycleSummaryStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#devicelifecyclesummarystreamresponse">DeviceLifecycleSummaryStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.lifecycle.v1.DeviceLifecycleSummaryService">DeviceLifecycleSummaryService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/lifecycle.v1/lifecycle.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristalifecyclev1lifecycleproto">arista/lifecycle.v1/lifecycle.proto&lt;/h2>
+&lt;p>&lt;a name="arista.lifecycle.v1.DateAndModels">&lt;/a>&lt;/p>
+&lt;h3 id="dateandmodels">DateAndModels&lt;/h3>
+&lt;p>DateAndModels has an &amp;ldquo;end of&amp;rdquo; date along with
+the models that has this exact &amp;ldquo;end of&amp;rdquo; date&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>date&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">google.protobuf.Timestamp&lt;/td>
+ &lt;td style="text-align: left">&lt;p>&amp;ldquo;end of&amp;rdquo; date&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>models&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">fmp.MapStringInt32&lt;/td>
+ &lt;td style="text-align: left">&lt;p>models with this exact &amp;ldquo;end of&amp;rdquo; date&lt;/p>&lt;p>mapped to its count&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>&lt;a name="arista.lifecycle.v1.DeviceLifecycleSummary">&lt;/a>&lt;/p>
+&lt;h3 id="devicelifecyclesummary">DeviceLifecycleSummary&lt;/h3>
+&lt;p>DeviceLifecycleSummary is the state model that represents
+the lifecycle summary of a device&lt;/p></description></item><item><title>redirector.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/redirector.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/redirector.v1/redirector.proto">arista/redirector.v1/redirector.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#assignment">Assignment&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#assignmentkey">AssignmentKey&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#cluster">Cluster&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#clusters">Clusters&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/redirector.v1/services.gen.proto">arista/redirector.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#assignmentbatchedstreamrequest">AssignmentBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentbatchedstreamresponse">AssignmentBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentrequest">AssignmentRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentresponse">AssignmentResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentsomerequest">AssignmentSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentsomeresponse">AssignmentSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentstreamrequest">AssignmentStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignmentstreamresponse">AssignmentStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.redirector.v1.AssignmentService">AssignmentService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/redirector.v1/redirector.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaredirectorv1redirectorproto">arista/redirector.v1/redirector.proto&lt;/h2>
+&lt;p>&lt;a name="arista.redirector.v1.Assignment">&lt;/a>&lt;/p>
+&lt;h3 id="assignment">Assignment&lt;/h3>
+&lt;p>Assignment returns the information about the regional clusters that the
+system is assigned to. Each cluster consists of a series of hosts, each of
+which the client can use to connect.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#assignmentkey">AssignmentKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>key uniquely identifies the assignment of system_id to the cluster.&lt;/p>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>clusters&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#clusters">Clusters&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>clusters that the system is assigned to.&lt;/p></description></item><item><title>serviceaccount.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/serviceaccount.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/serviceaccount.v1/serviceaccount.proto">arista/serviceaccount.v1/serviceaccount.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#account">Account&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfig">AccountConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountkey">AccountKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#token">Token&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfig">TokenConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenkey">TokenKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.serviceaccount.v1.AccountStatus">AccountStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/serviceaccount.v1/services.gen.proto">arista/serviceaccount.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeleteallrequest">AccountConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeleteallresponse">AccountConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeleterequest">AccountConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeleteresponse">AccountConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeletesomerequest">AccountConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigdeletesomeresponse">AccountConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigrequest">AccountConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigresponse">AccountConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsetrequest">AccountConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsetresponse">AccountConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsetsomerequest">AccountConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsetsomeresponse">AccountConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsomerequest">AccountConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigsomeresponse">AccountConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigstreamrequest">AccountConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountconfigstreamresponse">AccountConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountrequest">AccountRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountresponse">AccountResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountsomerequest">AccountSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountsomeresponse">AccountSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountstreamrequest">AccountStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#accountstreamresponse">AccountStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeleteallrequest">TokenConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeleteallresponse">TokenConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeleterequest">TokenConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeleteresponse">TokenConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeletesomerequest">TokenConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigdeletesomeresponse">TokenConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigrequest">TokenConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigresponse">TokenConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsetrequest">TokenConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsetresponse">TokenConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsetsomerequest">TokenConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsetsomeresponse">TokenConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsomerequest">TokenConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigsomeresponse">TokenConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigstreamrequest">TokenConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenconfigstreamresponse">TokenConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenrequest">TokenRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenresponse">TokenResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokensomerequest">TokenSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokensomeresponse">TokenSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenstreamrequest">TokenStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tokenstreamresponse">TokenStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.serviceaccount.v1.AccountConfigService">AccountConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.serviceaccount.v1.AccountService">AccountService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.serviceaccount.v1.TokenConfigService">TokenConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.serviceaccount.v1.TokenService">TokenService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/serviceaccount.v1/serviceaccount.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristaserviceaccountv1serviceaccountproto">arista/serviceaccount.v1/serviceaccount.proto&lt;/h2>
+&lt;p>&lt;a name="arista.serviceaccount.v1.Account">&lt;/a>&lt;/p>
+&lt;h3 id="account">Account&lt;/h3>
+&lt;p>Account describes a service account.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Field Name&lt;/th>
+ &lt;th style="text-align: left">Type&lt;/th>
+ &lt;th style="text-align: left">Description&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;strong>key&lt;/strong>&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="#accountkey">AccountKey&lt;/a>&lt;/td>
+ &lt;td style="text-align: left">&lt;p>key uniquely identifies the service account.&lt;/p></description></item><item><title>studio.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/studio.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/studio.v1/studio.proto">arista/studio.v1/studio.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#assignedtags">AssignedTags&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfig">AssignedTagsConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillaction">AutofillAction&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillactionconfig">AutofillActionConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillactionkey">AutofillActionKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillargumentprovider">AutofillArgumentProvider&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillargumentproviders">AutofillArgumentProviders&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">AutofillArgumentProviders.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#booleaninputfieldprops">BooleanInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#collectioninputfieldprops">CollectionInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#entities">Entities&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">Entities.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#entity">Entity&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#floatinputfieldprops">FloatInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#groupinputfieldprops">GroupInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputfield">InputField&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputfields">InputFields&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">InputFields.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputschema">InputSchema&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputs">Inputs&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputsconfig">InputsConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputskey">InputsKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#integerinputfieldprops">IntegerInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#layout">Layout&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#resolverinputfieldprops">ResolverInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#secretinput">SecretInput&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#stringinputfieldprops">StringInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#studio">Studio&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#studioconfig">StudioConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#studiokey">StudioKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#studiosummary">StudioSummary&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagmatcherinputfieldprops">TagMatcherInputFieldProps&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#template">Template&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.AutofillProviderType">AutofillProviderType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.EntityType">EntityType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.InputFieldType">InputFieldType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.ResolverFieldDisplayMode">ResolverFieldDisplayMode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.ResolverFieldInputMode">ResolverFieldInputMode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.TagMatcherFieldMode">TagMatcherFieldMode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.studio.v1.TemplateType">TemplateType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/studio.v1/services.gen.proto">arista/studio.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsbatchedstreamrequest">AssignedTagsBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsbatchedstreamresponse">AssignedTagsBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigbatchedstreamrequest">AssignedTagsConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigbatchedstreamresponse">AssignedTagsConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeleteallrequest">AssignedTagsConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeleteallresponse">AssignedTagsConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeleterequest">AssignedTagsConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeleteresponse">AssignedTagsConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeletesomerequest">AssignedTagsConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigdeletesomeresponse">AssignedTagsConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigrequest">AssignedTagsConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigresponse">AssignedTagsConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsetrequest">AssignedTagsConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsetresponse">AssignedTagsConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsetsomerequest">AssignedTagsConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsetsomeresponse">AssignedTagsConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsomerequest">AssignedTagsConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigsomeresponse">AssignedTagsConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigstreamrequest">AssignedTagsConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsconfigstreamresponse">AssignedTagsConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsrequest">AssignedTagsRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsresponse">AssignedTagsResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagssomerequest">AssignedTagsSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagssomeresponse">AssignedTagsSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsstreamrequest">AssignedTagsStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#assignedtagsstreamresponse">AssignedTagsStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillactionbatchedstreamrequest">AutofillActionBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#autofillactionbatchedstreamresponse">AutofillActionBatchedStreamResponse&lt;/a>&lt;/p></description></item><item><title>tag.v2</title><link>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/tag.v2/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/tag.v2/tag.proto">arista/tag.v2/tag.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#tag">Tag&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignment">TagAssignment&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfig">TagAssignmentConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentkey">TagAssignmentKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfig">TagConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagkey">TagKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.CreatorType">CreatorType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.ElementSubType">ElementSubType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.ElementType">ElementType&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/tag.v2/services.gen.proto">arista/tag.v2/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentbatchedstreamrequest">TagAssignmentBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentbatchedstreamresponse">TagAssignmentBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigbatchedstreamrequest">TagAssignmentConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigbatchedstreamresponse">TagAssignmentConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeleteallrequest">TagAssignmentConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeleteallresponse">TagAssignmentConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeleterequest">TagAssignmentConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeleteresponse">TagAssignmentConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeletesomerequest">TagAssignmentConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigdeletesomeresponse">TagAssignmentConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigrequest">TagAssignmentConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigresponse">TagAssignmentConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsetrequest">TagAssignmentConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsetresponse">TagAssignmentConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsetsomerequest">TagAssignmentConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsetsomeresponse">TagAssignmentConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsomerequest">TagAssignmentConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigsomeresponse">TagAssignmentConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigstreamrequest">TagAssignmentConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentconfigstreamresponse">TagAssignmentConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentrequest">TagAssignmentRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentresponse">TagAssignmentResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentsomerequest">TagAssignmentSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentsomeresponse">TagAssignmentSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentstreamrequest">TagAssignmentStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagassignmentstreamresponse">TagAssignmentStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagbatchedstreamrequest">TagBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagbatchedstreamresponse">TagBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigbatchedstreamrequest">TagConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigbatchedstreamresponse">TagConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeleteallrequest">TagConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeleteallresponse">TagConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeleterequest">TagConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeleteresponse">TagConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeletesomerequest">TagConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigdeletesomeresponse">TagConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigrequest">TagConfigRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigresponse">TagConfigResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsetrequest">TagConfigSetRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsetresponse">TagConfigSetResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsetsomerequest">TagConfigSetSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsetsomeresponse">TagConfigSetSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsomerequest">TagConfigSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigsomeresponse">TagConfigSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigstreamrequest">TagConfigStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagconfigstreamresponse">TagConfigStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagrequest">TagRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagresponse">TagResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagsomerequest">TagSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagsomeresponse">TagSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagstreamrequest">TagStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#tagstreamresponse">TagStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.TagAssignmentConfigService">TagAssignmentConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.TagAssignmentService">TagAssignmentService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.TagConfigService">TagConfigService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.tag.v2.TagService">TagService&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a name="arista/tag.v2/tag.proto">&lt;/a>&lt;/p>
+&lt;p align="right">&lt;a href="#top">Top&lt;/a>&lt;/p>
+&lt;h2 id="aristatagv2tagproto">arista/tag.v2/tag.proto&lt;/h2>
+&lt;p>&lt;a name="arista.tag.v2.Tag">&lt;/a>&lt;/p></description></item><item><title>workspace.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/workspace.v1/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#arista/workspace.v1/workspace.proto">arista/workspace.v1/workspace.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#authzresult">AuthzResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#buildstagestate">BuildStageState&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">BuildStageState.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configsyncresult">ConfigSyncResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configvalidationresult">ConfigValidationResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletbuildresult">ConfigletBuildResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#configletbuildresults">ConfigletBuildResults&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">ConfigletBuildResults.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#imagevalidationresult">ImageValidationResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputerror">InputError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputerrors">InputErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputvalidationresult">InputValidationResult&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#inputvalidationresults">InputValidationResults&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">InputValidationResults.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#requestparams">RequestParams&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#response">Response&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#responses">Responses&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#valuesentry">Responses.ValuesEntry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#templateerror">TemplateError&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#templateerrors">TemplateErrors&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspace">Workspace&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuild">WorkspaceBuild&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetails">WorkspaceBuildDetails&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailskey">WorkspaceBuildDetailsKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildkey">WorkspaceBuildKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfig">WorkspaceConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacekey">WorkspaceKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacesyncconfig">WorkspaceSyncConfig&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacesynckey">WorkspaceSyncKey&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.BuildStage">BuildStage&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.BuildState">BuildState&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.ConfigSyncSkipCause">ConfigSyncSkipCause&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.ConfigValidationSkipCause">ConfigValidationSkipCause&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.DeviceAuthzStatus">DeviceAuthzStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.ImageValidationSkipCause">ImageValidationSkipCause&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.Request">Request&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.ResponseCode">ResponseCode&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.ResponseStatus">ResponseStatus&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.SyncOperation">SyncOperation&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista.workspace.v1.WorkspaceState">WorkspaceState&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#arista/workspace.v1/services.gen.proto">arista/workspace.v1/services.gen.proto&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="#metaresponse">MetaResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebatchedstreamrequest">WorkspaceBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebatchedstreamresponse">WorkspaceBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildbatchedstreamrequest">WorkspaceBuildBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildbatchedstreamresponse">WorkspaceBuildBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsbatchedstreamrequest">WorkspaceBuildDetailsBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsbatchedstreamresponse">WorkspaceBuildDetailsBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsrequest">WorkspaceBuildDetailsRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsresponse">WorkspaceBuildDetailsResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailssomerequest">WorkspaceBuildDetailsSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailssomeresponse">WorkspaceBuildDetailsSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsstreamrequest">WorkspaceBuildDetailsStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuilddetailsstreamresponse">WorkspaceBuildDetailsStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildrequest">WorkspaceBuildRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildresponse">WorkspaceBuildResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildsomerequest">WorkspaceBuildSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildsomeresponse">WorkspaceBuildSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildstreamrequest">WorkspaceBuildStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspacebuildstreamresponse">WorkspaceBuildStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigbatchedstreamrequest">WorkspaceConfigBatchedStreamRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigbatchedstreamresponse">WorkspaceConfigBatchedStreamResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeleteallrequest">WorkspaceConfigDeleteAllRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeleteallresponse">WorkspaceConfigDeleteAllResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeleterequest">WorkspaceConfigDeleteRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeleteresponse">WorkspaceConfigDeleteResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeletesomerequest">WorkspaceConfigDeleteSomeRequest&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigdeletesomeresponse">WorkspaceConfigDeleteSomeResponse&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#workspaceconfigrequest">WorkspaceConfigRequest&lt;/a>&lt;/p></description></item></channel></rss>

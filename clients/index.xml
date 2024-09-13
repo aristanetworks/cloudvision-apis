@@ -1,6 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clients on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/</link><description>Recent content in Clients on Arista Networks FMP APIs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/clients/index.xml" rel="self" type="application/rss+xml"/><item><title>Existing Clients</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</guid><description>Arista provides and maintains the following clients:
-Language Repository Go https://github.com/aristanetworks/cloudvision-go Python https://github.com/aristanetworks/cloudvision-python</description></item><item><title>Creating a Client</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</guid><description>A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.
-The main gRPC site has tutorials for generating clients in many languages:
-Java Node Ruby C#/.Net &amp;hellip; and more There is also an expansive ecosystem, so plenty of languages are supported.
-Tooling In general, there are two main components to generating a language binding:
-protoc: The protobuf compiler which call the language-specific generator typically installed via a package manager (apt, yum, brew, etc) protoc-gen-{language}: The language-specific generator typically installed with the language&amp;rsquo;s dependency manager, build tool, etc Generating Regardless of language, client generation generally follows a pattern of:</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Clients on Arista Networks FMP APIs</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/</link><description>Recent content in Clients on Arista Networks FMP APIs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://aristanetworks.github.io/cloudvision-apis/clients/index.xml" rel="self" type="application/rss+xml"/><item><title>Existing Clients</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/existing/</guid><description>&lt;p>Arista provides and maintains the following clients:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Language&lt;/th>
+ &lt;th style="text-align: left">Repository&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Go&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="https://github.com/aristanetworks/cloudvision-go">https://github.com/aristanetworks/cloudvision-go&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Python&lt;/td>
+ &lt;td style="text-align: left">&lt;a href="https://github.com/aristanetworks/cloudvision-python">https://github.com/aristanetworks/cloudvision-python&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item><item><title>Creating a Client</title><link>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/clients/creating/</guid><description>&lt;p>A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.&lt;/p>
+&lt;p>The main gRPC site has tutorials for generating clients in many languages:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/java/basics/">Java&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/node/basics/">Node&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/ruby/basics/">Ruby&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://grpc.io/docs/languages/csharp/basics/">C#/.Net&lt;/a>&lt;/li>
+&lt;li>&amp;hellip; and more&lt;/li>
+&lt;/ul>
+&lt;p>There is also an expansive ecosystem, so plenty of languages are supported.&lt;/p>
+&lt;h3 id="tooling">Tooling&lt;/h3>
+&lt;p>In general, there are two main components to generating a language binding:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>protoc&lt;/code>: The protobuf compiler which call the language-specific generator
+&lt;ul>
+&lt;li>typically installed via a package manager (&lt;code>apt&lt;/code>, &lt;code>yum&lt;/code>, &lt;code>brew&lt;/code>, etc)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>protoc-gen-{language}&lt;/code>: The language-specific generator
+&lt;ul>
+&lt;li>typically installed with the language&amp;rsquo;s dependency manager, build tool, etc&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="generating">Generating&lt;/h3>
+&lt;p>Regardless of language, client generation generally follows a pattern of:&lt;/p></description></item></channel></rss>
