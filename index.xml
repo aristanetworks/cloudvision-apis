@@ -111,7 +111,21 @@ resource to fetch.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> google.protobuf.Timestamp time &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>;&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>}&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="response-type">Response Type&lt;/h4>
-&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>GetAll</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</guid><description>&lt;p>&lt;code>GetAll&lt;/code> fetches (and optionally filters) all resource instances.&lt;/p>
+&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>GetSome</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getsome/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getsome/</guid><description>&lt;p>&lt;code>GetSome&lt;/code> returns multiple instances of a resource.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>GetSome is supported on all keyed resources.&lt;br>
+However, in certain releases, this may have been missing. See Support section below for details.&lt;/p>
+&lt;/div>
+
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Keys&lt;/code> field is required to be fully-specified because &lt;code>GetSome&lt;/code> needs to identify resources to fetch.&lt;/p>
+&lt;/div>
+
+&lt;h4 id="rpc-definition">RPC Definition&lt;/h4>
+&lt;p>The protobuf definition of &lt;code>GetSome&lt;/code> is defined as such (for &lt;code>ExampleConfig&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">rpc&lt;/span> GetSome (ExampleConfigSomeRequest) &lt;span style="color:#66d9ef">returns&lt;/span> (stream ExampleConfigSomeResponse);&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="request-type">Request Type&lt;/h4>
+&lt;p>The generated request for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>GetAll</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/getall/</guid><description>&lt;p>&lt;code>GetAll&lt;/code> fetches (and optionally filters) all resource instances.&lt;/p>
 &lt;p>For the filtering options available, see the &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/filtering">Filtering&lt;/a> section.
 These filtering options are the same for &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/subscribe">Subscribe&lt;/a>.&lt;/p>
 &lt;p>This RPC is effectively a full-table-scan so the time to complete depends on the amount of data
@@ -125,15 +139,26 @@ Once existing state has been sent to the client, any changes to resource entitie
 
 &lt;div class="notices note" >&lt;p>Any &lt;a href="https://aristanetworks.github.io/cloudvision-apis/cloudvision-apis/rpcs/filtering">filters&lt;/a> apply both to the initial state and updates.&lt;/p></description></item><item><title>Set</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/set/</guid><description>&lt;p>&lt;code>Set&lt;/code> updates a resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.&lt;/p>
 
-&lt;div class="notices note" >&lt;p>The &lt;code>Key&lt;/code> field is required to be fully-specified because &lt;code>Set&lt;/code> needs to identify exactly-one
-resource to delete.&lt;/p>
+&lt;div class="notices note" >&lt;p>The &lt;code>Value&lt;/code> field is required to be fully-specified because &lt;code>Set&lt;/code> needs to identify exactly-one
+resource to update.&lt;/p>
 &lt;/div>
 
 
 &lt;div class="notices note" >&lt;p>The endpoint returns the time the &lt;code>Set&lt;/code> becomes effective internally and the service&amp;rsquo;s known-state of the resource.&lt;/p>
 &lt;/div>
 
-&lt;p>A &lt;code>*SetResponse&lt;/code> will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This echo will be the original update-request at a minimum, and may include more data.This allows services to do fast, write-only, updates to internal storage. If the service needs to query existing state first then more data can be provided to the client. If you need a full model after a &lt;code>Set&lt;/code> operation, you can issue a &lt;code>GetOne&lt;/code> with the returned &lt;code>time&lt;/code>.&lt;/p></description></item><item><title>Delete</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</guid><description>&lt;p>&lt;code>Delete&lt;/code> deletes a resource and returns the time the delete became effective.&lt;/p>
+&lt;p>A &lt;code>*SetResponse&lt;/code> will contain an &amp;ldquo;echo&amp;rdquo; of the resource. This echo will be the original update-request at a minimum, and may include more data.This allows services to do fast, write-only, updates to internal storage. If the service needs to query existing state first then more data can be provided to the client. If you need a full model after a &lt;code>Set&lt;/code> operation, you can issue a &lt;code>GetOne&lt;/code> with the returned &lt;code>time&lt;/code>.&lt;/p></description></item><item><title>SetSome</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/setsome/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/setsome/</guid><description>&lt;p>&lt;code>SetSome&lt;/code> updates multiple instances of a keyed resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>SetSome is supported on all keyed resources.&lt;br>
+However, in certain releases, this may have been missing. See Support section below for details.&lt;/p>
+&lt;/div>
+
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Values&lt;/code> field is required to be fully-specified because &lt;code>SetSome&lt;/code> needs to identify
+resources to update.&lt;/p>
+&lt;/div>
+
+&lt;p>A &lt;code>*SetSomeResponse&lt;/code> will &amp;ldquo;echo&amp;rdquo; back the key of a resource that failed to set. It will also contain an error description on why the resource failed to set.&lt;/p></description></item><item><title>Delete</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/delete/</guid><description>&lt;p>&lt;code>Delete&lt;/code> deletes a resource and returns the time the delete became effective.&lt;/p>
 
 &lt;div class="notices note" >&lt;p>The &lt;code>Key&lt;/code> field is required to be fully-specified because &lt;code>Delete&lt;/code> needs to identify exactly-one
 resource to delete.&lt;/p>
@@ -150,7 +175,18 @@ resource to delete.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> ExampleKey key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>};&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="response-type">Response Type&lt;/h4>
-&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>&lt;ul>
+&lt;p>The generated response for a model (&lt;code>ExampleConfig&lt;/code>, here) looks like so:&lt;/p></description></item><item><title>DeleteSome</title><link>https://aristanetworks.github.io/cloudvision-apis/rpcs/deletesome/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/rpcs/deletesome/</guid><description>&lt;p>&lt;code>DeleteSome&lt;/code> deletes a resource and streams back the resources that failed to be deleted and a description for the failure.&lt;/p>
+
+&lt;div class="notices note" >&lt;p>DeleteSome is supported on all keyed resources.&lt;br>
+However, in certain releases, this may have been missing. See Support section below for details.&lt;/p>
+&lt;/div>
+
+
+&lt;div class="notices note" >&lt;p>The &lt;code>Keys&lt;/code> field is required to be fully-specified because &lt;code>DeleteSome&lt;/code> needs to identify resources to delete.&lt;/p>
+&lt;/div>
+
+&lt;h4 id="rpc-definition">RPC Definition&lt;/h4>
+&lt;p>The protobuf definition of &lt;code>DeleteSome&lt;/code> is defined as such (for &lt;code>ExampleConfig&lt;/code>):&lt;/p></description></item><item><title>alert.v1</title><link>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aristanetworks.github.io/cloudvision-apis/models/alert.v1/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>&lt;a href="#arista/alert.v1/alert.proto">arista/alert.v1/alert.proto&lt;/a>&lt;/p>
 &lt;ul>
