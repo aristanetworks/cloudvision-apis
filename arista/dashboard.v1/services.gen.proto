@@ -460,45 +460,6 @@ message GlobalDashboardConfigStreamResponse {
 	arista.subscriptions.Operation type = 3;
 };
 
-message GlobalDashboardConfigBatchedStreamRequest {
-	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
-	// This requires all provided fields to be equal to the response.
-	//
-	// While transparent to users, this field also allows services to optimize internal
-	// subscriptions if filter(s) are sufficiently specific.
-	repeated GlobalDashboardConfig partial_eq_filter = 1;
-
-	// TimeRange allows limiting response data to within a specified time window.
-	// If this field is populated, at least one of the two time fields are required.
-	//
-	// For GetAll, the fields start and end can be used as follows:
-	//
-	//   * end: Returns the state of each GlobalDashboardConfig at end.
-	//     * Each GlobalDashboardConfig response is fully-specified (all fields set).
-	//   * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.
-	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.
-	//   * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates
-	//     until end.
-	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may
-	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
-	arista.time.TimeBounds time = 3;
-
-	// MaxMessages limits the maximum number of messages that can be contained in one batch.
-	// MaxMessages is required to be at least 1.
-	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
-	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
-	google.protobuf.UInt32Value max_messages = 4;
-};
-
-message GlobalDashboardConfigBatchedStreamResponse {
-	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
-	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
-	repeated GlobalDashboardConfigStreamResponse responses = 1;
-};
-
 message GlobalDashboardConfigSetRequest {
 	// GlobalDashboardConfig carries the value to set into the datastore.
 	// See the documentation on the GlobalDashboardConfig struct for which fields are required.
@@ -521,14 +482,9 @@ message GlobalDashboardConfigSetResponse {
 
 service GlobalDashboardConfigService {
 	rpc GetOne (GlobalDashboardConfigRequest) returns (GlobalDashboardConfigResponse);
-	
 	rpc GetAll (GlobalDashboardConfigStreamRequest) returns (stream GlobalDashboardConfigStreamResponse);
 	rpc Subscribe (GlobalDashboardConfigStreamRequest) returns (stream GlobalDashboardConfigStreamResponse);
-	
 	rpc SubscribeMeta (GlobalDashboardConfigStreamRequest) returns (stream MetaResponse);
 	rpc Set (GlobalDashboardConfigSetRequest) returns (GlobalDashboardConfigSetResponse);
 	
-	
-	rpc GetAllBatched (GlobalDashboardConfigBatchedStreamRequest) returns (stream GlobalDashboardConfigBatchedStreamResponse);
-	rpc SubscribeBatched (GlobalDashboardConfigBatchedStreamRequest) returns (stream GlobalDashboardConfigBatchedStreamResponse);
 }
