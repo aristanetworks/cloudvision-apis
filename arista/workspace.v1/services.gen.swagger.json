@@ -3386,6 +3386,10 @@
         "otherErrors": {
           "$ref": "#/definitions/fmp.RepeatedString",
           "description": "other_errors are other miscellaneous errors."
+        },
+        "inputValueWarnings": {
+          "$ref": "#/definitions/arista.workspace.v1.InputErrors",
+          "description": "input_value_warnings are warnings for values assigned to fields in the input schema."
         }
       },
       "description": "InputValidationResult holds the result of an input validation build stage."
@@ -3497,6 +3501,16 @@
         }
       },
       "description": "Responses is a collection of responses for completed requests."
+    },
+    "arista.workspace.v1.StudioBuildDetails": {
+      "type": "object",
+      "properties": {
+        "inputValidationResults": {
+          "$ref": "#/definitions/arista.workspace.v1.InputValidationResults",
+          "description": "input_validation_results is a map from studio ID to InputValidationResult."
+        }
+      },
+      "description": "StudioBuildDetails is a collection of per studio results that are not specific to a device."
     },
     "arista.workspace.v1.SyncOperation": {
       "type": "string",
@@ -3644,6 +3658,10 @@
         "authzResult": {
           "$ref": "#/definitions/arista.workspace.v1.AuthzResult",
           "description": "authz_result has the result of authorization check."
+        },
+        "studioBuildDetails": {
+          "$ref": "#/definitions/arista.workspace.v1.StudioBuildDetails",
+          "description": "studio_build_details has per studio results that are not specific to a device."
         }
       },
       "description": "WorkspaceBuild holds the details for a build of a workspace."

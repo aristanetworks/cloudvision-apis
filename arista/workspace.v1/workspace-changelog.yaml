@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-10-04
+      description: Add per studio results for non devices to WorkspaceBuild
+      version: 1.3.10
+      cvaas: true
     - date: 2024-09-20
       description: Add device decommissioned skip cause to ImageValidation
       version: 1.3.9

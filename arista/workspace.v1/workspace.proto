@@ -268,6 +268,8 @@ message InputValidationResult {
 	InputErrors input_value_errors = 2;
 	// other_errors are other miscellaneous errors.
 	fmp.RepeatedString other_errors = 3;
+	// input_value_warnings are warnings for values assigned to fields in the input schema.
+	InputErrors input_value_warnings = 4;
 }
 
 // InputValidationResults is a collection of InputValidationResult (one per studio).
@@ -398,6 +400,12 @@ message WorkspaceBuildKey {
 	google.protobuf.StringValue build_id = 2;
 }
 
+// StudioBuildDetails is a collection of per studio results that are not specific to a device.
+message StudioBuildDetails{
+	// input_validation_results is a map from studio ID to InputValidationResult.
+	InputValidationResults input_validation_results = 1;
+}
+
 // WorkspaceBuild holds the details for a build of a workspace.
 message WorkspaceBuild {
 	option (fmp.model) = "ro";
@@ -414,6 +422,8 @@ message WorkspaceBuild {
 	google.protobuf.StringValue built_by = 5;
 	// authz_result has the result of authorization check.
 	AuthzResult authz_result = 6;
+	// studio_build_details has per studio results that are not specific to a device.
+	StudioBuildDetails studio_build_details = 7;
 }
 
 // WorkspaceBuildDetailsKey uniquely identifies a build for a particular
