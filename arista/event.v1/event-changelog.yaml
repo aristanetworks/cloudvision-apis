@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-09-26
+      description: Add delete_time field to Event
+      version: 1.2.1
+      cvaas: true
+      onprem: true
     - date: 2024-05-09
       description: Update GetSome, SetSome, DeleteSome REST endpoints
       version: 1.2.0

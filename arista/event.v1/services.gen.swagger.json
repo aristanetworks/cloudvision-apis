@@ -1686,6 +1686,11 @@
         "ruleId": {
           "type": "string",
           "title": "rule_id is the label of the rule associated with the event"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "delete_time is the time of the event deletion"
         }
       },
       "title": "Event is a telemetry event"
