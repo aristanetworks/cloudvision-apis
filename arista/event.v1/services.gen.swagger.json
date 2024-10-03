@@ -1690,7 +1690,7 @@
         "deleteTime": {
           "type": "string",
           "format": "date-time",
-          "title": "delete_time is the time of the event deletion"
+          "title": "delete_time is the time when the event ended.\nIt is nil if event is still ongoing"
         }
       },
       "title": "Event is a telemetry event"

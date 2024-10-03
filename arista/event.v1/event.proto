@@ -191,7 +191,8 @@ message Event {
   EventRead read = 11;
   // rule_id is the label of the rule associated with the event
   google.protobuf.StringValue rule_id = 12;
-  // delete_time is the time of the event deletion
+  // delete_time is the time when the event ended.
+  // It is nil if event is still ongoing
   google.protobuf.Timestamp delete_time = 13;
 }
 
