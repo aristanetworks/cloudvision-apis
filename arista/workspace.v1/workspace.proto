@@ -504,6 +504,9 @@ enum ImageValidationSkipCause {
 	// IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE indicates that the stage was
 	// skipped because the device has no proposed software changes in the workspace.
 	IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE = 4;
+	// IMAGE_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED indicates that the stage was
+	// skipped because the device is decommissioned.
+	IMAGE_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED = 5;
 }
 
 // ConfigSyncSkipCause enumerates the set of reasons a device can skip config sync.

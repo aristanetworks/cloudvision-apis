@@ -2458,19 +2458,21 @@
       "type": "object",
       "properties": {
         "errorCode": {
-          "$ref": "#/definitions/arista.configstatus.v1.ErrorCode"
+          "$ref": "#/definitions/arista.configstatus.v1.ErrorCode",
+          "description": "error_code - type of error."
         },
         "errorMsg": {
-          "type": "string"
+          "type": "string",
+          "title": "error_msg - details of error"
         },
         "lineNum": {
           "type": "integer",
           "format": "int32",
-          "title": "Line_num represents line number, if any"
+          "title": "line_num represents line number, if any"
         },
         "configletName": {
           "type": "string",
-          "description": "Configlet_name represents the originating configlet name. Configlet_name\nand line_num point to the line where config warning or config error originate."
+          "description": "configlet_name represents the originating configlet name. Configlet_name\nand line_num point to the line where config warning or config error originate."
         }
       },
       "title": "ConfigError represents errors reported by CVP when handling device configuration"
@@ -2483,19 +2485,22 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigError"
-          }
+          },
+          "title": "values - list of errors"
         }
-      }
+      },
+      "title": "ConfigErrors list of errors"
     },
     "arista.configstatus.v1.ConfigSource": {
       "type": "object",
       "properties": {
         "sourceType": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSourceType"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSourceType",
+          "title": "source_type - app type of the config snippet"
         },
         "sourceId": {
           "type": "string",
-          "title": "source_id identifier to distinguish between multiple instances of the source type\nsource_id is :\n\tconfiglet name for CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET\n\tstudio id for CONFIG_SOURCE_TYPE_STUDIO\n\tconfiglet id for CONFIG_SOURCE_TYPE_STUDIO_STATIC"
+          "title": "source_id identifier to distinguish between multiple instances of the source type\nsource_id is :\n\tconfiglet name for CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET\n\tstudio id for CONFIG_SOURCE_TYPE_STUDIO\n\tconfiglet id for CONFIG_SOURCE_TYPE_STUDIO_STATIC\n\tFixtureInstance id for CONFIG_SOURCE_TYPE_HIERARCHY"
         }
       },
       "title": "ConfigSource describes an individual source of the proposed/designed config"
@@ -2506,10 +2511,11 @@
         "CONFIG_SOURCE_TYPE_UNSPECIFIED",
         "CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET",
         "CONFIG_SOURCE_TYPE_STUDIO",
-        "CONFIG_SOURCE_TYPE_STUDIO_STATIC"
+        "CONFIG_SOURCE_TYPE_STUDIO_STATIC",
+        "CONFIG_SOURCE_TYPE_HIERARCHY"
       ],
       "default": "CONFIG_SOURCE_TYPE_UNSPECIFIED",
-      "description": "- CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET: CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET - configlet created from\nthe network provisioning workflow.\n - CONFIG_SOURCE_TYPE_STUDIO: CONFIG_SOURCE_TYPE_STUDIO - config generated from a regular studio\n - CONFIG_SOURCE_TYPE_STUDIO_STATIC: SCONFIG_SOURCE_TYPE_STUDIO_STATIC - static config from studios framework",
+      "description": "- CONFIG_SOURCE_TYPE_UNSPECIFIED: CONFIG_SOURCE_TYPE_UNSPECIFIED uninitialized value\n - CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET: CONFIG_SOURCE_TYPE_NETWORK_PROVISIONING_CONFIGLET - configlet created from\nthe network provisioning workflow.\n - CONFIG_SOURCE_TYPE_STUDIO: CONFIG_SOURCE_TYPE_STUDIO - config generated from a regular studio\n - CONFIG_SOURCE_TYPE_STUDIO_STATIC: CONFIG_SOURCE_TYPE_STUDIO_STATIC - static config from studios framework\n - CONFIG_SOURCE_TYPE_HIERARCHY: CONFIG_SOURCE_TYPE_HIERARCHY - config from the hierarchy frameork",
       "title": "ConfigSourceType indicates the type of source for the proposed/designed configuration\nfor the device"
     },
     "arista.configstatus.v1.ConfigSources": {
@@ -2520,7 +2526,8 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigSource"
-          }
+          },
+          "title": "values - ordered list of all the config snippets present in DC"
         }
       },
       "title": "ConfigSources is the list of sources of the proposed/designed config"
@@ -2529,68 +2536,69 @@
       "type": "object",
       "properties": {
         "sync": {
-          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode"
+          "$ref": "#/definitions/arista.configstatus.v1.ConfigSyncCode",
+          "title": "sync - state of DC vs RC"
         },
         "nopLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code no-operation"
+          "title": "nop_lines - Number of lines with code no-operation"
         },
         "ignoredLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code IGNORE"
+          "title": "ignored_lines - Number of lines with code IGNORE"
         },
         "addedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code ADD"
+          "title": "added_lines - Number of lines with code ADD"
         },
         "deletedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code DELETE"
+          "title": "deleted_lines - Number of lines with code DELETE"
         },
         "changedLines": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of lines with code CHANGE"
+          "title": "changed_lines - Number of lines with code CHANGE"
         },
         "designedConfigErrors": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of designed config errors"
+          "title": "designed_config_errors - Number of designed config errors"
         },
         "designedConfigWarnings": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of designed config warnings"
+          "title": "designed_config_warnings - Number of designed config warnings"
         },
         "runningConfigUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "Timestamp at which running config is updated"
+          "title": "running_config_update_time - Timestamp at which running config is updated"
         },
         "designedConfigUpdateTime": {
           "type": "string",
           "format": "date-time",
-          "title": "Timestamp at which designed config is updated"
+          "title": "designed_config_update_time - Timestamp at which designed config is updated"
         },
         "runningConfigUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET running config and associated errors"
+          "title": "running_config_uri - The HTTP URI client can use to GET running config and associated errors"
         },
         "designedConfigUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET designed config and associated errors"
+          "title": "designed_config_uri - The HTTP URI client can use to GET designed config and associated errors"
         },
         "diffUri": {
           "type": "string",
-          "title": "The HTTP URI client can use to GET config diff and associated errors"
+          "title": "diff_uri - The HTTP URI client can use to GET config diff and associated errors"
         },
         "digest": {
           "type": "string",
-          "description": "Digest (SHA-256) of the config diff."
+          "description": "digest (SHA-256) of the config diff."
         }
       },
       "description": "ConfigSummary represents device configuration summary."
@@ -2603,7 +2611,7 @@
         "CONFIG_SYNC_CODE_OUT_OF_SYNC"
       ],
       "default": "CONFIG_SYNC_CODE_UNSPECIFIED",
-      "description": "- CONFIG_SYNC_CODE_IN_SYNC: IN_SYNC indicates designed config and running config are identical\n - CONFIG_SYNC_CODE_OUT_OF_SYNC: OUT_OF_SYNC indicates designed config and running config are not identical",
+      "description": "- CONFIG_SYNC_CODE_UNSPECIFIED: CONFIG_SYNC_CODE_UNSPECIFIED uninitialized\n - CONFIG_SYNC_CODE_IN_SYNC: CONFIG_SYNC_CODE_IN_SYNC indicates designed config and running config are identical\n - CONFIG_SYNC_CODE_OUT_OF_SYNC: CONFIG_SYNC_CODE_OUT_OF_SYNC indicates designed config and running config are not identical",
       "title": "ConfigSyncCode indicates config synchronization status"
     },
     "arista.configstatus.v1.ErrorCode": {
@@ -2617,7 +2625,7 @@
         "ERROR_CODE_INTERNAL"
       ],
       "default": "ERROR_CODE_UNSPECIFIED",
-      "description": "- ERROR_CODE_DEVICE_WARNING: DEVICE_WARNING indicates device warning\n - ERROR_CODE_DEVICE_ERROR: DEVICE_ERROR indicates device error\n - ERROR_CODE_UNREACHABLE_DEVICE: UNREACHABLE_DEVICE indicates the device cannot be reached\n - ERROR_CODE_CONFIG_FILTER_ERROR: CONFIG_FILTER_ERROR indicates error from partial config management filters\n - ERROR_CODE_INTERNAL: INTERNAL indicates internal errors",
+      "description": "- ERROR_CODE_UNSPECIFIED: ERROR_CODE_UNSPECIFIED uninitialized value\n - ERROR_CODE_DEVICE_WARNING: ERROR_CODE_DEVICE_WARNING indicates device warning\n - ERROR_CODE_DEVICE_ERROR: ERROR_CODE_DEVICE_ERROR indicates device error\n - ERROR_CODE_UNREACHABLE_DEVICE: ERROR_CODE_UNREACHABLE_DEVICE indicates the device cannot be reached\n - ERROR_CODE_CONFIG_FILTER_ERROR: ERROR_CODE_CONFIG_FILTER_ERROR indicates error from partial config management filters\n - ERROR_CODE_INTERNAL: ERROR_CODE_INTERNAL indicates internal errors",
       "title": "ErrorCode indicates warnings and errors produced during computing config"
     },
     "arista.imagestatus.v1.ComplianceStatus": {
@@ -3322,10 +3330,11 @@
         "IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE",
         "IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED",
         "IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED",
-        "IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE"
+        "IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE",
+        "IMAGE_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED"
       ],
       "default": "IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED",
-      "description": "ImageValidationSkipCause enumerates the set of reasons a device can skip the image\nvalidation stage.\n\n - IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED: IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is\nunspecified.\n - IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE: IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED: IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was\nskipped because the device has no image changes in the workspace.\n - IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE: IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE indicates that the stage was\nskipped because the device has no proposed software changes in the workspace."
+      "description": "ImageValidationSkipCause enumerates the set of reasons a device can skip the image\nvalidation stage.\n\n - IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED: IMAGE_VALIDATION_SKIP_CAUSE_UNSPECIFIED indicates image validation skip cause is\nunspecified.\n - IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE: IMAGE_VALIDATION_SKIP_CAUSE_INACTIVE indicates that the stage was skipped\nbecause the device is not streaming.\n - IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED: IMAGE_VALIDATION_SKIP_CAUSE_PRE_PROVISIONED indicates that the stage was\nskipped because the device is pre-provisioned.\n - IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED: IMAGE_VALIDATION_SKIP_CAUSE_IMAGE_UNCHANGED indicates that the stage was\nskipped because the device has no image changes in the workspace.\n - IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE: IMAGE_VALIDATION_SKIP_CAUSE_NO_PROPOSED_SOFTWARE indicates that the stage was\nskipped because the device has no proposed software changes in the workspace.\n - IMAGE_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED: IMAGE_VALIDATION_SKIP_CAUSE_DEVICE_DECOMMISSIONED indicates that the stage was\nskipped because the device is decommissioned."
     },
     "arista.workspace.v1.InputError": {
       "type": "object",
