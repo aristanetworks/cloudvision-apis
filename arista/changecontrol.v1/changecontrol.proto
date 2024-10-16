@@ -158,6 +158,7 @@ message ChangeControlConfig {
 
 // StageStatus defines the possible execution statuses of a stage.
 enum StageStatus {
+    // STAGE_STATUS_UNSPECIFIED means unknown stage status.
     STAGE_STATUS_UNSPECIFIED = 0;
     // STAGE_STATUS_RUNNING means the stage has begun execution.
     STAGE_STATUS_RUNNING = 1;
@@ -245,6 +246,7 @@ message TimestampFlag {
 // ChangeControlStatus defines the possible execution statuses of
 // a change control.
 enum ChangeControlStatus {
+     // CHANGE_CONTROL_STATUS_UNSPECIFIED means the change control status is unknown.
      CHANGE_CONTROL_STATUS_UNSPECIFIED = 0;
      // CHANGE_CONTROL_STATUS_RUNNING means the change control has begun
      // execution.
@@ -271,6 +273,13 @@ message Filter {
 	// in the changecontrol state model.
 	// At least one of the provided device ids must be present in CC devices field.
 	fmp.RepeatedString device_ids = 1;
+}
+
+// DeviceToStageMap is a map of a device ID and its list of corresponding stages.
+message DeviceToStageMap {
+	// values maps the device ID with the stages which are associated with a device
+	// in a changecontrol state model.
+	map<string, fmp.RepeatedString> values = 1;
 }
 
 // ChangeControl holds the configuration and status of a change control.
@@ -302,6 +311,11 @@ message ChangeControl {
 	TimestampFlag schedule = 7;
 	// device_ids is a list of device IDs on which the change control will operate.
 	fmp.RepeatedString device_ids = 8;
+	// device_id_to_stage_ids is a map of device IDs to the stages present in the
+	// specified Change state.
+	// This is not affected by the device ID based custom filtering and will contain
+	// info about all the devices associated with a CC ID.
+	DeviceToStageMap device_id_to_stage_ids = 9;
 }
 
 // ApproveConfig is used to configure the approval of a change control.

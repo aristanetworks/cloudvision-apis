@@ -7,6 +7,12 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-10-09
+      description: add device_id_to_stage_ids map
+      version: 1.1.1
+      cvaas: true
+      onprem: true
+
     - date: 2024-05-09
       description: Update GetSome, SetSome, DeleteSome REST endpoints
       version: 1.1.0

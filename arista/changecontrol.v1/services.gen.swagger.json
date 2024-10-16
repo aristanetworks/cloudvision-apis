@@ -1957,6 +1957,10 @@
         "deviceIds": {
           "$ref": "#/definitions/fmp.RepeatedString",
           "description": "device_ids is a list of device IDs on which the change control will operate."
+        },
+        "deviceIdToStageIds": {
+          "$ref": "#/definitions/arista.changecontrol.v1.DeviceToStageMap",
+          "description": "device_id_to_stage_ids is a map of device IDs to the stages present in the\nspecified Change state.\nThis is not affected by the device ID based custom filtering and will contain\ninfo about all the devices associated with a CC ID."
         }
       },
       "description": "ChangeControl holds the configuration and status of a change control."
@@ -2264,7 +2268,7 @@
         "CHANGE_CONTROL_STATUS_NOT_STARTED"
       ],
       "default": "CHANGE_CONTROL_STATUS_UNSPECIFIED",
-      "description": "ChangeControlStatus defines the possible execution statuses of\na change control.\n\n - CHANGE_CONTROL_STATUS_RUNNING: CHANGE_CONTROL_STATUS_RUNNING means the change control has begun\nexecution.\n - CHANGE_CONTROL_STATUS_COMPLETED: CHANGE_CONTROL_STATUS_COMPLETED means the change control has ceased\nexecution. Success/failure of a change control cannot be inferred\nfrom this status alone but rather this status plus the change control\nerror. That is, no error implies success and some error implies failure.\n - CHANGE_CONTROL_STATUS_SCHEDULED: CHANGE_CONTROL_STATUS_SCHEDULED means the change control has been\nscheduled for execution at some time. Any failure that occurs during\nthis process will cause a transition back to the unspecified status,\na reset of the schedule flag by the system, and an error on the change\ncontrol reporting the details of the failure.\n - CHANGE_CONTROL_STATUS_NOT_STARTED: CHANGE_CONTROL_STATUS_NOT_STARTED means the change control has not been\nstarted. This would include approved and not approved change controls."
+      "description": "ChangeControlStatus defines the possible execution statuses of\na change control.\n\n - CHANGE_CONTROL_STATUS_UNSPECIFIED: CHANGE_CONTROL_STATUS_UNSPECIFIED means the change control status is unknown.\n - CHANGE_CONTROL_STATUS_RUNNING: CHANGE_CONTROL_STATUS_RUNNING means the change control has begun\nexecution.\n - CHANGE_CONTROL_STATUS_COMPLETED: CHANGE_CONTROL_STATUS_COMPLETED means the change control has ceased\nexecution. Success/failure of a change control cannot be inferred\nfrom this status alone but rather this status plus the change control\nerror. That is, no error implies success and some error implies failure.\n - CHANGE_CONTROL_STATUS_SCHEDULED: CHANGE_CONTROL_STATUS_SCHEDULED means the change control has been\nscheduled for execution at some time. Any failure that occurs during\nthis process will cause a transition back to the unspecified status,\na reset of the schedule flag by the system, and an error on the change\ncontrol reporting the details of the failure.\n - CHANGE_CONTROL_STATUS_NOT_STARTED: CHANGE_CONTROL_STATUS_NOT_STARTED means the change control has not been\nstarted. This would include approved and not approved change controls."
     },
     "arista.changecontrol.v1.ChangeControlStreamRequest": {
       "type": "object",
@@ -2304,6 +2308,19 @@
           "description": "Operation indicates how the ChangeControl value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.changecontrol.v1.DeviceToStageMap": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/fmp.RepeatedString"
+          },
+          "description": "values maps the device ID with the stages which are associated with a device\nin a changecontrol state model."
+        }
+      },
+      "description": "DeviceToStageMap is a map of a device ID and its list of corresponding stages."
     },
     "arista.changecontrol.v1.Filter": {
       "type": "object",
@@ -2474,7 +2491,7 @@
         "STAGE_STATUS_NOT_STARTED"
       ],
       "default": "STAGE_STATUS_UNSPECIFIED",
-      "description": "StageStatus defines the possible execution statuses of a stage.\n\n - STAGE_STATUS_RUNNING: STAGE_STATUS_RUNNING means the stage has begun execution.\n - STAGE_STATUS_COMPLETED: STAGE_STATUS_COMPLETED means the stage has ceased execution.\nSuccess/failure of a stage cannot be inferred from this status\nalone but rather this status plus the stage error. That is, no\nerror implies success and some error implies failure.\n - STAGE_STATUS_NOT_STARTED: STAGE_STATUS_NOT_STARTED means the stage has not been started."
+      "description": "StageStatus defines the possible execution statuses of a stage.\n\n - STAGE_STATUS_UNSPECIFIED: STAGE_STATUS_UNSPECIFIED means unknown stage status.\n - STAGE_STATUS_RUNNING: STAGE_STATUS_RUNNING means the stage has begun execution.\n - STAGE_STATUS_COMPLETED: STAGE_STATUS_COMPLETED means the stage has ceased execution.\nSuccess/failure of a stage cannot be inferred from this status\nalone but rather this status plus the stage error. That is, no\nerror implies success and some error implies failure.\n - STAGE_STATUS_NOT_STARTED: STAGE_STATUS_NOT_STARTED means the stage has not been started."
     },
     "arista.changecontrol.v1.TimestampFlag": {
       "type": "object",
