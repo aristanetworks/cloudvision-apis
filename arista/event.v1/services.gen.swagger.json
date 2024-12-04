@@ -1691,6 +1691,10 @@
           "type": "string",
           "format": "date-time",
           "title": "delete_time is the time when the event ended.\nIt is nil if event is still ongoing"
+        },
+        "metadata": {
+          "$ref": "#/definitions/arista.event.v1.EventMetadata",
+          "title": "metadata is the metadata tag key and value pairs of the event"
         }
       },
       "title": "Event is a telemetry event"
@@ -1984,6 +1988,30 @@
         "key",
         "timestamp"
       ]
+    },
+    "arista.event.v1.EventMetadata": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.event.v1.EventMetadataGroup"
+          },
+          "title": "values contains a list of metadata tag groups for the event"
+        }
+      },
+      "title": "EventMetadata is a list of all metadata tag groups for an event"
+    },
+    "arista.event.v1.EventMetadataGroup": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "title": "values contains a collection of metadata tag key and value pairs"
+        }
+      },
+      "title": "EventMetadataGroup is a single metadata tag group for an event"
     },
     "arista.event.v1.EventNote": {
       "type": "object",
@@ -2439,6 +2467,19 @@
       ],
       "default": "DELETE_ERROR_UNSPECIFIED",
       "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.MapStringString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The map\u003cstring, string\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, string\u003e`."
     },
     "google.protobuf.Any": {
       "type": "object",
