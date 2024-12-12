@@ -20,6 +20,8 @@ enum ElementType {
 	ELEMENT_TYPE_DEVICE = 1;
 	// ELEMENT_TYPE_INTERFACE is used for interface tags.
 	ELEMENT_TYPE_INTERFACE = 2;
+	// ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.
+	ELEMENT_TYPE_VIRTUAL = 3;
 }
 
 // ElementSubType enumerates the sub-types of network elements that can
@@ -30,7 +32,7 @@ enum ElementSubType {
 	// ELEMENT_SUB_TYPE_DEVICE is used for EOS or
 	// third-party devices discovered via LLDP/SNMP.
 	ELEMENT_SUB_TYPE_DEVICE = 1;
-  // ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.
+  	// ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.
 	ELEMENT_SUB_TYPE_VDS = 2;
 	// ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server
 	// tags (such as VMWare ESXi host).
@@ -41,6 +43,11 @@ enum ElementSubType {
 	// A VM is a software computer that, like a physical computer,
 	// runs an operating system and applications.
 	ELEMENT_SUB_TYPE_VM = 4;
+	// ELEMENT_SUB_TYPE_APPLICATION is used for application tags.
+	// An application is defined as a set of services where each service provides
+	// a subset of the application’s functionality. An application can exist without
+	// a service but not vice-versa.
+	ELEMENT_SUB_TYPE_APPLICATION = 5;
 }
 
 // TagKey uniquely identifies a tag.
@@ -111,6 +118,9 @@ message TagAssignmentKey {
 	//
 	// ELEMENT_TYPE_DEVICE: device_id
 	// ELEMENT_TYPE_INTERFACE: device_id, interface_id
+	// ELEMENT_TYPE_VIRTUAL:
+	//		primary_entity_id -> application_id
+	//		secondary_entity_id -> service_id
 	ElementType element_type = 2;
 	// label is the label of a tag.
 	google.protobuf.StringValue label = 3;
@@ -122,6 +132,11 @@ message TagAssignmentKey {
 	google.protobuf.StringValue interface_id = 6;
 	// element_sub_type is the element sub-type of a tag.
 	ElementSubType element_sub_type = 7;
+
+   	// primary_entity_id holds unique identifiers of an application/device.
+	google.protobuf.StringValue primary_entity_id = 8;
+	// secondary_entity_id holds unique identifier of a service/interface.
+	google.protobuf.StringValue secondary_entity_id = 9;
 }
 
 // TagAssignmentConfig holds a configuration for an assignment
