@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-12-16
+      description: Added from_package field to studio summary
+      version: 1.8.0
+      cvaas: true
+
     - date: 2024-05-09
       description: Update GetSome, SetSome, DeleteSome REST endpoints
       version: 1.7.0

@@ -5764,7 +5764,7 @@
       "properties": {
         "entityType": {
           "$ref": "#/definitions/arista.studio.v1.EntityType",
-          "description": "EntityType is the type of the entity."
+          "description": "entity_type is the type of the entity."
         },
         "lastModifiedAt": {
           "type": "string",
@@ -6973,6 +6973,10 @@
         "inUse": {
           "type": "boolean",
           "description": "in_use indicates that the studio is in use, i.e. there are non-empty inputs,\nand assigned to some devices, either in a given workspace, or in mainline."
+        },
+        "fromPackage": {
+          "type": "string",
+          "description": "from_package indicates that this studio was created by a package, and can only be modified\nby the packaging service."
         }
       },
       "description": "StudioSummary holds basic information about a studio."

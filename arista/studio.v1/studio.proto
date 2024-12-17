@@ -78,11 +78,14 @@ message StudioSummary {
 	// in_use indicates that the studio is in use, i.e. there are non-empty inputs,
 	// and assigned to some devices, either in a given workspace, or in mainline.
 	google.protobuf.BoolValue in_use = 6;
+	// from_package indicates that this studio was created by a package, and can only be modified
+	// by the packaging service. It stores packageID.
+	google.protobuf.StringValue from_package = 7;
 }
 
 // Entity holds the basic information of an entity.
 message Entity {
-	// EntityType is the type of the entity.
+	// entity_type is the type of the entity.
 	EntityType entity_type = 1;
 	// last_modified_at is the time at which the entity was last modified.
 	google.protobuf.Timestamp last_modified_at = 2;
