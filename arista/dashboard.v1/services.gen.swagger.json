@@ -1601,19 +1601,6 @@
       },
       "description": "GlobalDashboardConfig holds global configs related to Dashboards."
     },
-    "arista.dashboard.v1.GlobalDashboardConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.dashboard.v1.GlobalDashboardConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.dashboard.v1.GlobalDashboardConfigResponse": {
       "type": "object",
       "properties": {
