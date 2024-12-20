@@ -1654,6 +1654,19 @@
       },
       "description": "Action is an action to perform during the execution of\na stage of a change control. Available actions can be\nfetched using the \"action\" services."
     },
+    "arista.changecontrol.v1.ActionSteps": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.changecontrol.v1.StepInfo"
+          },
+          "description": "values maps each action step's execution sequence to its status information,\nrepresented by StepInfo."
+        }
+      },
+      "description": "ActionSteps tracks the status of each step within an action."
+    },
     "arista.changecontrol.v1.ApproveConfig": {
       "type": "object",
       "properties": {
@@ -2428,12 +2441,16 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "start_time is the time when status change to Running"
+          "description": "start_time is the time when status change to Running."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "title": "end_time is the time when status change to Completed"
+          "description": "end_time is the time when status change to Completed."
+        },
+        "steps": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ActionSteps",
+          "description": "steps represents the granular steps and their statuses\nassociated with an action."
         }
       },
       "description": "Stage holds the configuration and status of a stage."
@@ -2492,6 +2509,41 @@
       ],
       "default": "STAGE_STATUS_UNSPECIFIED",
       "description": "StageStatus defines the possible execution statuses of a stage.\n\n - STAGE_STATUS_UNSPECIFIED: STAGE_STATUS_UNSPECIFIED means unknown stage status.\n - STAGE_STATUS_RUNNING: STAGE_STATUS_RUNNING means the stage has begun execution.\n - STAGE_STATUS_COMPLETED: STAGE_STATUS_COMPLETED means the stage has ceased execution.\nSuccess/failure of a stage cannot be inferred from this status\nalone but rather this status plus the stage error. That is, no\nerror implies success and some error implies failure.\n - STAGE_STATUS_NOT_STARTED: STAGE_STATUS_NOT_STARTED means the stage has not been started."
+    },
+    "arista.changecontrol.v1.StepInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name represents the name of the step."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.changecontrol.v1.StepStatus",
+          "description": "status represents the present execution status of the step."
+        },
+        "error": {
+          "type": "string",
+          "description": "error captures any error that occurred."
+        },
+        "message": {
+          "type": "string",
+          "description": "message represents any relevant information associated with the step."
+        }
+      },
+      "description": "StepInfo contains the status details of an action step."
+    },
+    "arista.changecontrol.v1.StepStatus": {
+      "type": "string",
+      "enum": [
+        "STEP_STATUS_UNSPECIFIED",
+        "STEP_STATUS_NOT_STARTED",
+        "STEP_STATUS_RUNNING",
+        "STEP_STATUS_FINISHED",
+        "STEP_STATUS_SKIPPED",
+        "STEP_STATUS_FAILED"
+      ],
+      "default": "STEP_STATUS_UNSPECIFIED",
+      "description": "StepStatus defines the possible execution statuses of a step within an action.\n\n - STEP_STATUS_UNSPECIFIED: STEP_STATUS_UNSPECIFIED represents an unspecified state for a step within\nan action. Currently it is reserved for some future utility.\n - STEP_STATUS_NOT_STARTED: STEP_STATUS_NOT_STARTED represents that the step has not started execution.\n - STEP_STATUS_RUNNING: STEP_STATUS_RUNNING represents that the step is under execution.\n - STEP_STATUS_FINISHED: STEP_STATUS_FINISHED represents that the step has finished execution.\n - STEP_STATUS_SKIPPED: STEP_STATUS_SKIPPED represents that the step has been skipped from execution.\n - STEP_STATUS_FAILED: STEP_STATUS_FAILED represents that the step has failed its execution."
     },
     "arista.changecontrol.v1.TimestampFlag": {
       "type": "object",

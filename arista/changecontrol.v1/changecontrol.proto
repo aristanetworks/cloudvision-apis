@@ -171,6 +171,42 @@ enum StageStatus {
     STAGE_STATUS_NOT_STARTED = 3;
 }
 
+// StepStatus defines the possible execution statuses of a step within an action.
+enum StepStatus {
+    // STEP_STATUS_UNSPECIFIED represents an unspecified state for a step within
+    // an action. Currently it is reserved for some future utility.
+    STEP_STATUS_UNSPECIFIED = 0;
+    // STEP_STATUS_NOT_STARTED represents that the step has not started execution.
+    STEP_STATUS_NOT_STARTED = 1;
+    // STEP_STATUS_RUNNING represents that the step is under execution.
+    STEP_STATUS_RUNNING = 2;
+    // STEP_STATUS_FINISHED represents that the step has finished execution.
+    STEP_STATUS_FINISHED = 3;
+    // STEP_STATUS_SKIPPED represents that the step has been skipped from execution.
+    STEP_STATUS_SKIPPED = 4;
+    // STEP_STATUS_FAILED represents that the step has failed its execution.
+    STEP_STATUS_FAILED = 5;
+}
+
+// StepInfo contains the status details of an action step.
+message StepInfo {
+	// name represents the name of the step.
+	google.protobuf.StringValue name = 1;
+	// status represents the present execution status of the step.
+	StepStatus status = 2;
+	// error captures any error that occurred.
+	google.protobuf.StringValue error = 3;
+	// message represents any relevant information associated with the step.
+	google.protobuf.StringValue message = 4;
+}
+
+// ActionSteps tracks the status of each step within an action.
+message ActionSteps {
+	// values maps each action step's execution sequence to its status information,
+	// represented by StepInfo.
+	map<string, StepInfo> values = 1;
+}
+
 // Stage holds the configuration and status of a stage.
 message Stage {
 	// name is the name of the stage.
@@ -185,10 +221,13 @@ message Stage {
 	// error is any error that occured during the execution
 	// of the stage.
 	google.protobuf.StringValue error = 5;
-	// start_time is the time when status change to Running
+	// start_time is the time when status change to Running.
 	google.protobuf.Timestamp start_time = 6;
-	// end_time is the time when status change to Completed
+	// end_time is the time when status change to Completed.
 	google.protobuf.Timestamp end_time = 7;
+	// steps represents the granular steps and their statuses
+	// associated with an action.
+	ActionSteps steps = 8;
 }
 
 // StageMap is a map from stage ID to `Stage`. This has essentially
