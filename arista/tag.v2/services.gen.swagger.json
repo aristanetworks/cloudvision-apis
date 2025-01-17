@@ -2368,6 +2368,10 @@
         "creatorType": {
           "$ref": "#/definitions/arista.tag.v2.CreatorType",
           "description": "creator_type is the creator type of the tag."
+        },
+        "assigned": {
+          "type": "boolean",
+          "description": "assigned indicates whether the tag is assigned\n(true) or not (false)."
         }
       },
       "description": "Tag holds a merge-preview or the existing merged state (if the\nworkspace ID is \"\") of a tag."
