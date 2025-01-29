@@ -329,6 +329,9 @@ message ConfigValidationResult {
 	arista.configstatus.v1.ConfigErrors warnings = 3;
 	// config_sources identify the entities that generated the config.
 	arista.configstatus.v1.ConfigSources config_sources = 4;
+	// only_filter_inputs_changed indicates there is a change in filters
+	// but no change in the config or no config sources found.
+	google.protobuf.BoolValue only_filter_inputs_changed = 5;
 }
 
 // ImageValidationResult holds the result of an image validation stage.

@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-01-02
+      description: Add OnlyFilterInputsChanged to ConfigValidationResult
+      version: 1.3.11
+      cvaas: true
     - date: 2024-10-04
       description: Add per studio results for non devices to WorkspaceBuild
       version: 1.3.10

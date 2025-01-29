@@ -3231,6 +3231,10 @@
         "configSources": {
           "$ref": "#/definitions/arista.configstatus.v1.ConfigSources",
           "description": "config_sources identify the entities that generated the config."
+        },
+        "onlyFilterInputsChanged": {
+          "type": "boolean",
+          "description": "only_filter_inputs_changed indicates there is a change in filters\nbut no change in the config or no config sources found."
         }
       },
       "description": "ConfigValidationResult holds the result of a config validation stage."
