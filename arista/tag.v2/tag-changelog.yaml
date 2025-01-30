@@ -4,6 +4,12 @@
 # FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
 
 Changes:
+    - date: 2024-12-09
+      description: Add support for virtual elements like applications/services
+      version: 2.0.6
+      onprem: true
+      cvaas: true
+
     - date: 2024-05-13
       description: Update Batched GetAll/Subscribe verbs
       version: 2.0.5
