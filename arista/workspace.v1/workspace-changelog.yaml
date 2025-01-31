@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-01-06
+      description: Add device replaced skip cause to config and image validation
+      version: 1.3.12
+      cvaas: true
     - date: 2025-01-02
       description: Add OnlyFilterInputsChanged to ConfigValidationResult
       version: 1.3.11
