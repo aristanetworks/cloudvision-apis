@@ -59,15 +59,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -87,7 +86,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -96,8 +95,7 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -509,15 +507,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\nELEMENT_TYPE_VIRTUAL:\n\t\tprimary_entity_id -\u003e application_id\n\t\tsecondary_entity_id -\u003e service_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -551,7 +548,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -560,24 +557,9 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
-          },
-          {
-            "name": "key.primaryEntityId",
-            "description": "primary_entity_id holds unique identifiers of an application/device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.secondaryEntityId",
-            "description": "secondary_entity_id holds unique identifier of a service/interface.",
-            "in": "query",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "time",
@@ -987,15 +969,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\nELEMENT_TYPE_VIRTUAL:\n\t\tprimary_entity_id -\u003e application_id\n\t\tsecondary_entity_id -\u003e service_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -1029,7 +1010,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1038,24 +1019,9 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
-          },
-          {
-            "name": "key.primaryEntityId",
-            "description": "primary_entity_id holds unique identifiers of an application/device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.secondaryEntityId",
-            "description": "secondary_entity_id holds unique identifier of a service/interface.",
-            "in": "query",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "time",
@@ -1096,15 +1062,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\nELEMENT_TYPE_VIRTUAL:\n\t\tprimary_entity_id -\u003e application_id\n\t\tsecondary_entity_id -\u003e service_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the element type of a tag. What should\nbe set per element type:\n\nELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -1138,7 +1103,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1147,24 +1112,9 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
-          },
-          {
-            "name": "key.primaryEntityId",
-            "description": "primary_entity_id holds unique identifiers of an application/device.",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key.secondaryEntityId",
-            "description": "secondary_entity_id holds unique identifier of a service/interface.",
-            "in": "query",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -1708,15 +1658,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -1736,7 +1685,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1745,8 +1694,7 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -1789,15 +1737,14 @@
           },
           {
             "name": "key.elementType",
-            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "description": "element_type is the category of network element to which\nthis tag can be assigned.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.",
             "in": "query",
             "required": true,
             "type": "string",
             "enum": [
               "ELEMENT_TYPE_UNSPECIFIED",
               "ELEMENT_TYPE_DEVICE",
-              "ELEMENT_TYPE_INTERFACE",
-              "ELEMENT_TYPE_VIRTUAL"
+              "ELEMENT_TYPE_INTERFACE"
             ],
             "default": "ELEMENT_TYPE_UNSPECIFIED"
           },
@@ -1817,7 +1764,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1826,8 +1773,7 @@
               "ELEMENT_SUB_TYPE_DEVICE",
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-              "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_VM"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           }
@@ -2378,22 +2324,20 @@
         "ELEMENT_SUB_TYPE_DEVICE",
         "ELEMENT_SUB_TYPE_VDS",
         "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
-        "ELEMENT_SUB_TYPE_VM",
-        "ELEMENT_SUB_TYPE_APPLICATION"
+        "ELEMENT_SUB_TYPE_VM"
       ],
       "default": "ELEMENT_SUB_TYPE_UNSPECIFIED",
-      "description": "ElementSubType enumerates the sub-types of network elements that can\nbe associated with tags.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa."
+      "description": "ElementSubType enumerates the sub-types of network elements that can\nbe associated with tags.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications."
     },
     "arista.tag.v2.ElementType": {
       "type": "string",
       "enum": [
         "ELEMENT_TYPE_UNSPECIFIED",
         "ELEMENT_TYPE_DEVICE",
-        "ELEMENT_TYPE_INTERFACE",
-        "ELEMENT_TYPE_VIRTUAL"
+        "ELEMENT_TYPE_INTERFACE"
       ],
       "default": "ELEMENT_TYPE_UNSPECIFIED",
-      "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags."
+      "description": "ElementType enumerates the types of network elements that can\nbe associated with tags.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags."
     },
     "arista.tag.v2.MetaResponse": {
       "type": "object",
@@ -2675,7 +2619,7 @@
         },
         "elementType": {
           "$ref": "#/definitions/arista.tag.v2.ElementType",
-          "description": "ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id\nELEMENT_TYPE_VIRTUAL:\n\t\tprimary_entity_id -\u003e application_id\n\t\tsecondary_entity_id -\u003e service_id",
+          "description": "ELEMENT_TYPE_DEVICE: device_id\nELEMENT_TYPE_INTERFACE: device_id, interface_id",
           "title": "element_type is the element type of a tag. What should\nbe set per element type:"
         },
         "label": {
@@ -2697,14 +2641,6 @@
         "elementSubType": {
           "$ref": "#/definitions/arista.tag.v2.ElementSubType",
           "description": "element_sub_type is the element sub-type of a tag."
-        },
-        "primaryEntityId": {
-          "type": "string",
-          "description": "primary_entity_id holds unique identifiers of an application/device."
-        },
-        "secondaryEntityId": {
-          "type": "string",
-          "description": "secondary_entity_id holds unique identifier of a service/interface."
         }
       },
       "description": "TagAssignmentKey uniquely identifies an assignment between\na tag and a network element.",
@@ -2715,9 +2651,7 @@
         "value",
         "deviceId",
         "interfaceId",
-        "elementSubType",
-        "primaryEntityId",
-        "secondaryEntityId"
+        "elementSubType"
       ]
     },
     "arista.tag.v2.TagAssignmentResponse": {
