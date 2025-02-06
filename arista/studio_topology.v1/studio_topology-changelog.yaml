@@ -1,0 +1,41 @@
+# Copyright (c) 2024 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2025-02-01
+      description: Release APIs
+      version: 1.0.7
+      cvaas: true
+
+    - date: 2025-01-28
+      description: Add Device ID parameter to Updates message
+      version: 1.0.6
+
+    - date: 2024-09-24
+      description: Add Replace resource
+      version: 1.0.5
+
+    - date: 2024-05-13
+      description: Add Decommission resource
+      version: 1.0.4
+
+    - date: 2024-05-07
+      description: Remove UpdateSync, InterfaceInput, DeviceInput resource
+      version: 1.0.3
+
+    - date: 2024-04-23
+      description: Add DecommissionConfig resource
+      version: 1.0.2
+
+    - date: 2024-04-15
+      description: Add RevertConfig resource
+      version: 1.0.1
+
+    - date: 2024-03-04
+      description: Initial revision
+      version: 1.0.0
