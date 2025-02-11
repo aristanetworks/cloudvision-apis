@@ -161,6 +161,10 @@ message WorkspaceConfig {
 	Request request = 4;
 	// request_params specify the parameters for `request`.
 	RequestParams request_params = 5;
+	// exclude_network_provisioning excludes Network Provisioning components from
+	// build and from designed config on submit. This field is set to true in the
+	// workspace in which migration to Studios is initiated from the UI.
+	google.protobuf.BoolValue exclude_network_provisioning = 6;
 }
 
 // Workspace holds the status of a workspace.
@@ -200,6 +204,9 @@ message Workspace {
 	google.protobuf.StringValue display_name = 13;
 	// description is a brief description of the workspace.
 	google.protobuf.StringValue description = 14;
+	// exclude_network_provisioning indicates whether the workspace is
+	// configured to exclude Network Provisioning.
+	google.protobuf.BoolValue exclude_network_provisioning = 15;
 }
 
 // BuildState enumerates the set of states that a BuildStage can be in during a

@@ -3689,6 +3689,10 @@
         "description": {
           "type": "string",
           "description": "description is a brief description of the workspace."
+        },
+        "excludeNetworkProvisioning": {
+          "type": "boolean",
+          "description": "exclude_network_provisioning indicates whether the workspace is\nconfigured to exclude Network Provisioning."
         }
       },
       "description": "Workspace holds the status of a workspace."
@@ -4053,6 +4057,10 @@
         "requestParams": {
           "$ref": "#/definitions/arista.workspace.v1.RequestParams",
           "description": "request_params specify the parameters for `request`."
+        },
+        "excludeNetworkProvisioning": {
+          "type": "boolean",
+          "description": "exclude_network_provisioning excludes Network Provisioning components from\nbuild and from designed config on submit. This field is set to true in the\nworkspace in which migration to Studios is initiated from the UI."
         }
       },
       "description": "WorkspaceConfig holds the configuration of a workspace."
