@@ -97,6 +97,9 @@ message Tag {
 	TagKey key = 1;
 	// creator_type is the creator type of the tag.
 	CreatorType creator_type = 2;
+	// assigned indicates whether the tag is assigned
+	// (true) or not (false).
+	google.protobuf.BoolValue assigned = 3;
 }
 
 // TagAssignmentKey uniquely identifies an assignment between

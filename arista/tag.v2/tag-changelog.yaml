@@ -4,6 +4,12 @@
 # FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
 
 Changes:
+    - date: 2025-01-17
+      description: Add assigned to Tag
+      version: 2.0.6
+      onprem: true
+      cvaas: true
+
     - date: 2024-05-13
       description: Update Batched GetAll/Subscribe verbs
       version: 2.0.5
