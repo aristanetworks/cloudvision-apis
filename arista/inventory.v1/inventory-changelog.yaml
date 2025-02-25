@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-03-03
+      description: Add field ipv6_address in ProvisionedDevice
+      version: 1.1.2
+      cvaas: true
+      onprem: true
     - date: 2024-08-13
       description: Add field user_name in DeviceDecommissioningConfig
       version: 1.1.1
