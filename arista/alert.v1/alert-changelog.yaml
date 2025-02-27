@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2025-02-27
+    description: Add user_principal_name for Microsoft Graph Send Mail endpoint
+    version: 1.12.1
+    onprem: true
+    cvaas: true
   - date: 2025-01-15
     description: Add SenderStatus model
     version: 1.12.0
