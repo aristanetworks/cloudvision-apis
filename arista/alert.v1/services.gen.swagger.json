@@ -19,6 +19,9 @@
       "name": "DefaultTemplateService"
     },
     {
+      "name": "SenderStatusService"
+    },
+    {
       "name": "TemplateConfigService"
     }
   ],
@@ -724,6 +727,440 @@
         ],
         "tags": [
           "DefaultTemplateService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus": {
+      "get": {
+        "operationId": "SenderStatusService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.broadcastGroupName",
+            "description": "broadcast_group_name is the name of the broadcast group which was being used,\nempty string if not group specific.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.endpointType",
+            "description": "endpoint_type indicates the target to which an attempt to send an alert was made\nor is \"unknown\" if not endpoint-specific (eg: slack, opsgenie).\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ENDPOINT_TYPE_UNSPECIFIED",
+              "ENDPOINT_TYPE_EMAIL",
+              "ENDPOINT_TYPE_SLACK",
+              "ENDPOINT_TYPE_VICTOROPS",
+              "ENDPOINT_TYPE_PAGERDUTY",
+              "ENDPOINT_TYPE_PUSHOVER",
+              "ENDPOINT_TYPE_OPSGENIE",
+              "ENDPOINT_TYPE_GOOGLE_CHAT",
+              "ENDPOINT_TYPE_MICROSOFT_TEAMS",
+              "ENDPOINT_TYPE_WEBHOOK",
+              "ENDPOINT_TYPE_SYSLOG",
+              "ENDPOINT_TYPE_CUE_SYSLOG",
+              "ENDPOINT_TYPE_SENDGRID",
+              "ENDPOINT_TYPE_CUE_SENDGRID",
+              "ENDPOINT_TYPE_SNMP",
+              "ENDPOINT_TYPE_CUE_SNMP",
+              "ENDPOINT_TYPE_ZOOM",
+              "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL"
+            ],
+            "default": "ENDPOINT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus/all": {
+      "get": {
+        "operationId": "SenderStatusService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.SenderStatusStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      },
+      "post": {
+        "operationId": "SenderStatusService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.SenderStatusStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus/getsome": {
+      "post": {
+        "operationId": "SenderStatusService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.SenderStatusSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.SenderStatusSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus/metadata": {
+      "get": {
+        "operationId": "SenderStatusService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      },
+      "post": {
+        "operationId": "SenderStatusService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus/watch": {
+      "get": {
+        "operationId": "SenderStatusService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.SenderStatusStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      },
+      "post": {
+        "operationId": "SenderStatusService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.SenderStatusStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      }
+    },
+    "/api/resources/alert/v1/SenderStatus/watchmetadata": {
+      "get": {
+        "operationId": "SenderStatusService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
+        ]
+      },
+      "post": {
+        "operationId": "SenderStatusService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.alert.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.alert.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SenderStatusService"
         ]
       }
     },
@@ -1580,6 +2017,10 @@
         "zoom": {
           "$ref": "#/definitions/arista.alert.v1.ZoomEndpoints",
           "title": "zoom is a set of zoom endpoints to send alerts to as part of this group"
+        },
+        "msGraphSendMail": {
+          "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailEndpoints",
+          "title": "ms_graph_send_mail is a set of Microsoft Graph sendMail endpoints to send alerts to\nas part of this group"
         }
       },
       "title": "BroadcastGroup is a series of endpoints that alerts are sent to if routed there by a rule\nNo restriction on the number of types of endpoints that can be defined"
@@ -2118,8 +2559,7 @@
         "ENDPOINT_ERROR_TYPE_O_AUTH_ERROR"
       ],
       "default": "ENDPOINT_ERROR_TYPE_UNSPECIFIED",
-      "description": "- ENDPOINT_ERROR_TYPE_UNSPECIFIED: ENDPOINT_ERROR_TYPE_UNSPECIFIED is the unspecified enum value\n - ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR: ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR an error in sending HTTP request or reading a HTTP\nresponse\n - ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR: ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR is caused by errors while encoding json\n - ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR: ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR is an error caused by invalid config (missing,\nbad format, etc)\n - ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR: ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR is caused by errors while executing templates\n - ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR: ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR is caused by receiving a negative response from an\nendpoint indicating that the alert was not sent\n - ENDPOINT_ERROR_TYPE_SMTP_ERROR: ENDPOINT_ERROR_TYPE_SMTP_ERROR is caused by errors with SMTP\n - ENDPOINT_ERROR_TYPE_CONNECTION_ERROR: ENDPOINT_ERROR_TYPE_CONNECTION_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR: ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR: ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR is caused by an Alerter rate limit being exceeded\n - ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR: ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR is caused by the number of alerts sent to a sender\nexceeding the built-in limit\n - ENDPOINT_ERROR_TYPE_O_AUTH_ERROR: ENDPOINT_ERROR_TYPE_O_AUTH_ERROR is caused when we failed authenticating using the\nOAuth apis",
-      "title": "EndpointErrorType describe the set of possible endpoint types"
+      "description": "EndpointErrorType describes the set of possible endpoint error types.\n\n - ENDPOINT_ERROR_TYPE_UNSPECIFIED: ENDPOINT_ERROR_TYPE_UNSPECIFIED is the unspecified enum value\n - ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR: ENDPOINT_ERROR_TYPE_HTTP_POST_ERROR an error in sending HTTP request or reading a HTTP\nresponse\n - ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR: ENDPOINT_ERROR_TYPE_JSON_MARSHAL_ERROR is caused by errors while encoding json\n - ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR: ENDPOINT_ERROR_TYPE_INVALID_CONFIG_ERROR is an error caused by invalid config (missing,\nbad format, etc)\n - ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR: ENDPOINT_ERROR_TYPE_TEMPLATE_ERROR is caused by errors while executing templates\n - ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR: ENDPOINT_ERROR_TYPE_BAD_RESPONSE_ERROR is caused by receiving a negative response from an\nendpoint indicating that the alert was not sent\n - ENDPOINT_ERROR_TYPE_SMTP_ERROR: ENDPOINT_ERROR_TYPE_SMTP_ERROR is caused by errors with SMTP\n - ENDPOINT_ERROR_TYPE_CONNECTION_ERROR: ENDPOINT_ERROR_TYPE_CONNECTION_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR: ENDPOINT_ERROR_TYPE_TIMEOUT_ERROR is caused by errors with a connection\n - ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR: ENDPOINT_ERROR_TYPE_RATE_LIMIT_ERROR is caused by an Alerter rate limit being exceeded\n - ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR: ENDPOINT_ERROR_TYPE_ALERT_CAP_ERROR is caused by the number of alerts sent to a sender\nexceeding the built-in limit\n - ENDPOINT_ERROR_TYPE_O_AUTH_ERROR: ENDPOINT_ERROR_TYPE_O_AUTH_ERROR is caused when we failed authenticating using the\nOAuth apis"
     },
     "arista.alert.v1.EndpointErrors": {
       "type": "object",
@@ -2134,6 +2574,69 @@
         }
       },
       "title": "EndpointErrors is a set of errors related to sending of alerts"
+    },
+    "arista.alert.v1.EndpointType": {
+      "type": "string",
+      "enum": [
+        "ENDPOINT_TYPE_UNSPECIFIED",
+        "ENDPOINT_TYPE_EMAIL",
+        "ENDPOINT_TYPE_SLACK",
+        "ENDPOINT_TYPE_VICTOROPS",
+        "ENDPOINT_TYPE_PAGERDUTY",
+        "ENDPOINT_TYPE_PUSHOVER",
+        "ENDPOINT_TYPE_OPSGENIE",
+        "ENDPOINT_TYPE_GOOGLE_CHAT",
+        "ENDPOINT_TYPE_MICROSOFT_TEAMS",
+        "ENDPOINT_TYPE_WEBHOOK",
+        "ENDPOINT_TYPE_SYSLOG",
+        "ENDPOINT_TYPE_CUE_SYSLOG",
+        "ENDPOINT_TYPE_SENDGRID",
+        "ENDPOINT_TYPE_CUE_SENDGRID",
+        "ENDPOINT_TYPE_SNMP",
+        "ENDPOINT_TYPE_CUE_SNMP",
+        "ENDPOINT_TYPE_ZOOM",
+        "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL"
+      ],
+      "default": "ENDPOINT_TYPE_UNSPECIFIED",
+      "description": "EndpointType describes the set of possible endpoint types.\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type."
+    },
+    "arista.alert.v1.EventIdentifier": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the event key."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time is the time of event generation."
+        },
+        "alerterRuleIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alerter_rule_index is the index of an alerter rule (don't confuse with generation rule)\nthat was used to match the receiver and event.\nThe rule index changes dynamically whenever a config change is issued."
+        },
+        "firing": {
+          "type": "boolean",
+          "description": "firing is true if event is ongoing and false if event has finished."
+        }
+      },
+      "description": "EventIdentifier consists of the minimal information required\nto uniquely match which event triggered an alert and due to which rule."
+    },
+    "arista.alert.v1.EventIdentifiers": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.EventIdentifier"
+          },
+          "description": "values is a list of event identifiers."
+        }
+      },
+      "description": "EventIdentifiers is a list of EventIdentifier messages."
     },
     "arista.alert.v1.EventList": {
       "type": "object",
@@ -2296,6 +2799,56 @@
           "description": "Count is the number of items present under the conditions of the request."
         }
       }
+    },
+    "arista.alert.v1.MsGraphSendMailEndpoint": {
+      "type": "object",
+      "properties": {
+        "sendResolved": {
+          "type": "boolean",
+          "title": "send_resolved send alerts when events are resolved along with when they are triggered"
+        },
+        "to": {
+          "type": "string",
+          "title": "to address to send email to"
+        },
+        "httpOverride": {
+          "$ref": "#/definitions/arista.alert.v1.HttpSettings",
+          "title": "http_override is the override of the global http settings"
+        },
+        "settingsOverride": {
+          "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailSettings",
+          "title": "settings_override is the override for the microsoft graph send mail global endpoint settings"
+        }
+      },
+      "title": "MsGraphSendMailEndpoint contains the required information for an alert to be sent to the \nmicrosft graph send mail api"
+    },
+    "arista.alert.v1.MsGraphSendMailEndpoints": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailEndpoint"
+          },
+          "title": "values are the elements of the set"
+        }
+      },
+      "title": "MsGraphSendMailEndpoints is a set of microsoft graph send mail endpoints"
+    },
+    "arista.alert.v1.MsGraphSendMailSettings": {
+      "type": "object",
+      "properties": {
+        "singleAlertPerEmail": {
+          "type": "boolean",
+          "title": "single_alert_per_email configures the Alerter such that each alert generates a separate email\nnotification, the email will only have a single notification, the format will also be different"
+        },
+        "azureOAuth": {
+          "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
+          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
+        }
+      },
+      "title": "MsGraphSendMailSettings contain the settings for sending alerts to a Microsoft Graph sendMail"
     },
     "arista.alert.v1.MsTeamsEndpoint": {
       "type": "object",
@@ -2670,6 +3223,156 @@
       },
       "title": "SNMPSettings contain the settings for sending alerts with SNMP"
     },
+    "arista.alert.v1.SenderStatus": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.alert.v1.SenderStatusKey",
+          "description": "key uniquely identifies the instance of sender status."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "success indicates whether the send succeeded or not."
+        },
+        "configIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "config_index is the index of the config on the broadcast group or -1 if not applicable\ne.g.: if there are two email configs in one broadcast group,\nthen the indices for each are 0 and 1.\nConfig indices are counted per type."
+        },
+        "remainingRetries": {
+          "type": "integer",
+          "format": "int64",
+          "description": "remaining_retries is the number of remaining attempts to send a particular alert."
+        },
+        "errorType": {
+          "$ref": "#/definitions/arista.alert.v1.EndpointErrorType",
+          "description": "error_type is the type of error. This allows custom handling of different error types."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "error_message is a user-friendly error message."
+        },
+        "events": {
+          "$ref": "#/definitions/arista.alert.v1.EventIdentifiers",
+          "description": "events is a list of events triggering the alert."
+        }
+      },
+      "description": "SenderStatus provides information about the status of particular send."
+    },
+    "arista.alert.v1.SenderStatusBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.alert.v1.SenderStatusKey": {
+      "type": "object",
+      "properties": {
+        "broadcastGroupName": {
+          "type": "string",
+          "description": "broadcast_group_name is the name of the broadcast group which was being used,\nempty string if not group specific."
+        },
+        "endpointType": {
+          "$ref": "#/definitions/arista.alert.v1.EndpointType",
+          "description": "endpoint_type indicates the target to which an attempt to send an alert was made\nor is \"unknown\" if not endpoint-specific (eg: slack, opsgenie)."
+        }
+      },
+      "description": "SenderStatusKey defines the unique key for SenderStatus.",
+      "required": [
+        "broadcastGroupName",
+        "endpointType"
+      ]
+    },
+    "arista.alert.v1.SenderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.SenderStatus",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSenderStatus instance in this response."
+        }
+      }
+    },
+    "arista.alert.v1.SenderStatusSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.SenderStatusKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.alert.v1.SenderStatusSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.SenderStatus",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.alert.v1.SenderStatusStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.SenderStatus"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SenderStatus at end.\n    * Each SenderStatus response is fully-specified (all fields set).\n  * start: Returns the state of each SenderStatus at start, followed by updates until now.\n    * Each SenderStatus response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SenderStatus at start, followed by updates\n    until end.\n    * Each SenderStatus response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.alert.v1.SenderStatusStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.alert.v1.SenderStatus",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this SenderStatus's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the SenderStatus value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
     "arista.alert.v1.SendgridEndpoint": {
       "type": "object",
       "properties": {
@@ -2798,6 +3501,10 @@
         "webhook": {
           "$ref": "#/definitions/arista.alert.v1.WebhookSettings",
           "title": "webhook is the auth settings for webhook"
+        },
+        "msGraphSendMail": {
+          "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailSettings",
+          "title": "ms_graph_send_mail is the settings for Microsoft Graph sendMail"
         }
       },
       "title": "Settings portion of config, a list of default global settings used by broadcast groups"

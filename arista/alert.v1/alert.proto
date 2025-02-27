@@ -83,6 +83,62 @@ enum ConfigErrorType {
 	CONFIG_ERROR_TYPE_INVALID_TYPE = 7;
 }
 
+// SenderStatusKey defines the unique key for SenderStatus.
+message SenderStatusKey {
+	option (fmp.model_key) = true;
+
+	// broadcast_group_name is the name of the broadcast group which was being used,
+	// empty string if not group specific.
+	google.protobuf.StringValue broadcast_group_name = 1;
+	// endpoint_type indicates the target to which an attempt to send an alert was made
+	// or is "unknown" if not endpoint-specific (eg: slack, opsgenie).
+	EndpointType endpoint_type = 2;
+}
+
+// SenderStatus provides information about the status of particular send.
+message SenderStatus {
+	option (fmp.model) = "ro";
+
+	// key uniquely identifies the instance of sender status.
+	SenderStatusKey key = 1;
+
+	// success indicates whether the send succeeded or not.
+	google.protobuf.BoolValue success = 2;
+	// config_index is the index of the config on the broadcast group or -1 if not applicable
+	// e.g.: if there are two email configs in one broadcast group,
+	// then the indices for each are 0 and 1.
+	// Config indices are counted per type.
+	google.protobuf.Int32Value config_index = 3;
+	// remaining_retries is the number of remaining attempts to send a particular alert.
+	google.protobuf.UInt32Value remaining_retries = 4;
+	// error_type is the type of error. This allows custom handling of different error types.
+	EndpointErrorType error_type = 5;
+	// error_message is a user-friendly error message.
+	google.protobuf.StringValue error_message = 6;
+	// events is a list of events triggering the alert.
+	EventIdentifiers events = 7;
+}
+
+// EventIdentifiers is a list of EventIdentifier messages.
+message EventIdentifiers {
+	// values is a list of event identifiers.
+	repeated EventIdentifier values = 1;
+}
+
+// EventIdentifier consists of the minimal information required
+// to uniquely match which event triggered an alert and due to which rule.
+message EventIdentifier {
+	// key is the event key.
+	google.protobuf.StringValue key = 1;
+	// time is the time of event generation.
+	google.protobuf.Timestamp time = 2;
+	// alerter_rule_index is the index of an alerter rule (don't confuse with generation rule)
+	// that was used to match the receiver and event.
+	// The rule index changes dynamically whenever a config change is issued.
+	google.protobuf.Int32Value alerter_rule_index = 3;
+	// firing is true if event is ongoing and false if event has finished.
+	google.protobuf.BoolValue firing = 4;
+}
 
 // EndpointErrors is a set of errors related to sending of alerts
 message EndpointErrors {
@@ -108,7 +164,47 @@ message EndpointError {
 	google.protobuf.StringValue error = 5;
 }
 
-// EndpointErrorType describe the set of possible endpoint types
+// EndpointType describes the set of possible endpoint types.
+enum EndpointType {
+	// ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.
+	ENDPOINT_TYPE_UNSPECIFIED = 0;
+	// ENDPOINT_TYPE_EMAIL represents the email endpoint type.
+	ENDPOINT_TYPE_EMAIL = 1;
+	// ENDPOINT_TYPE_SLACK represents the Slack endpoint type.
+	ENDPOINT_TYPE_SLACK = 2;
+	// ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.
+	ENDPOINT_TYPE_VICTOROPS = 3;
+	// ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.
+	ENDPOINT_TYPE_PAGERDUTY = 4;
+	// ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.
+	ENDPOINT_TYPE_PUSHOVER = 5;
+	// ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.
+	ENDPOINT_TYPE_OPSGENIE = 6;
+	// ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.
+	ENDPOINT_TYPE_GOOGLE_CHAT = 7;
+	// ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.
+	ENDPOINT_TYPE_MICROSOFT_TEAMS = 8;
+	// ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.
+	ENDPOINT_TYPE_WEBHOOK = 9;
+	// ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.
+	ENDPOINT_TYPE_SYSLOG = 10;
+	// ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.
+	ENDPOINT_TYPE_CUE_SYSLOG = 11;
+	// ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.
+	ENDPOINT_TYPE_SENDGRID = 12;
+	// ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.
+	ENDPOINT_TYPE_CUE_SENDGRID = 13;
+	// ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.
+	ENDPOINT_TYPE_SNMP = 14;
+	// ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.
+	ENDPOINT_TYPE_CUE_SNMP = 15;
+	// ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.
+	ENDPOINT_TYPE_ZOOM = 16;
+	// ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.
+	ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL = 17;
+}
+
+// EndpointErrorType describes the set of possible endpoint error types.
 enum EndpointErrorType {
 	// ENDPOINT_ERROR_TYPE_UNSPECIFIED is the unspecified enum value
 	ENDPOINT_ERROR_TYPE_UNSPECIFIED = 0;
@@ -185,6 +281,8 @@ message Settings {
 	ZoomSettings zoom = 19;
 	// webhook is the auth settings for webhook
 	WebhookSettings webhook = 20;
+	// ms_graph_send_mail is the settings for Microsoft Graph sendMail
+	MsGraphSendMailSettings ms_graph_send_mail = 21;
 }
 
 
@@ -301,6 +399,16 @@ message WebhookSettings {
 	// azure_o_auth used for auth when using an Azure smtp server
 	// uses auth_username
 	AzureOAuth azure_o_auth = 1;
+}
+
+// MsGraphSendMailSettings contain the settings for sending alerts to a Microsoft Graph sendMail
+message MsGraphSendMailSettings {
+	// single_alert_per_email configures the Alerter such that each alert generates a separate email
+	// notification, the email will only have a single notification, the format will also be different
+	google.protobuf.BoolValue single_alert_per_email = 1;
+	// azure_o_auth used for auth when using an Azure smtp server
+	// uses auth_username
+	AzureOAuth azure_o_auth = 2;
 }
 
 
@@ -667,6 +775,9 @@ message BroadcastGroup {
 	CueSendgridEndpoints cue_sendgrid = 15;
 	// zoom is a set of zoom endpoints to send alerts to as part of this group
 	ZoomEndpoints zoom = 16;
+	// ms_graph_send_mail is a set of Microsoft Graph sendMail endpoints to send alerts to
+	// as part of this group
+	MsGraphSendMailEndpoints ms_graph_send_mail = 17;
 }
 
 
@@ -781,6 +892,12 @@ message ZoomEndpoints {
 	repeated ZoomEndpoint values = 1;
 }
 
+// MsGraphSendMailEndpoints is a set of microsoft graph send mail endpoints
+message MsGraphSendMailEndpoints {
+	// values are the elements of the set
+	repeated MsGraphSendMailEndpoint values = 1;
+}
+
 
 // EmailEndpoint contains the required information for an alert to be sent to an email endpoint
 message EmailEndpoint{
@@ -810,6 +927,19 @@ message WebhookEndpoint {
 	google.protobuf.BoolValue single_alert = 5;
 	// settings_override is the override for the webhook global endpoint settings
 	WebhookSettings settings_override = 6;
+}
+
+// MsGraphSendMailEndpoint contains the required information for an alert to be sent to the
+// microsft graph send mail api
+message MsGraphSendMailEndpoint {
+	// send_resolved send alerts when events are resolved along with when they are triggered
+	google.protobuf.BoolValue send_resolved = 1;
+	// to address to send email to
+	google.protobuf.StringValue to = 2;
+	// http_override is the override of the global http settings
+	HttpSettings http_override = 3;
+	// settings_override is the override for the microsoft graph send mail global endpoint settings
+	MsGraphSendMailSettings settings_override = 4;
 }
 
 

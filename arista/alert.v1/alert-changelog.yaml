@@ -7,6 +7,16 @@
 # New entries go on top.
 
 Changes:
+  - date: 2025-01-15
+    description: Add SenderStatus model
+    version: 1.12.0
+    onprem: true
+    cvaas: true
+  - date: 2024-07-03
+    description: Add Microsoft Graph Send Mail endpoint
+    version: 1.11.0
+    onprem: true
+    cvaas: true
   - date: 2024-06-17
     description: Add Azure OAuth settings for webhook
     version: 1.10.0
