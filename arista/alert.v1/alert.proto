@@ -409,6 +409,8 @@ message MsGraphSendMailSettings {
 	// azure_o_auth used for auth when using an Azure smtp server
 	// uses auth_username
 	AzureOAuth azure_o_auth = 2;
+	// user_principal_name is the user used to send from
+	google.protobuf.StringValue user_principal_name = 3;
 }
 
 
@@ -929,7 +931,7 @@ message WebhookEndpoint {
 	WebhookSettings settings_override = 6;
 }
 
-// MsGraphSendMailEndpoint contains the required information for an alert to be sent to the
+// MsGraphSendMailEndpoint contains the required information for an alert to be sent to the 
 // microsft graph send mail api
 message MsGraphSendMailEndpoint {
 	// send_resolved send alerts when events are resolved along with when they are triggered

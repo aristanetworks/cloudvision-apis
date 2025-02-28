@@ -2846,6 +2846,10 @@
         "azureOAuth": {
           "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
           "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "title": "user_principal_name is the user used to send from"
         }
       },
       "title": "MsGraphSendMailSettings contain the settings for sending alerts to a Microsoft Graph sendMail"
