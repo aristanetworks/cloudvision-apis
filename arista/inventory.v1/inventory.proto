@@ -156,6 +156,9 @@ message DeviceOnboarding {
 //    and tracking the status of the decommissioning attempt.
 // 4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the
 //    same UUID to see the status of the request.
+//
+// NOTE: this operation does not remove references to the decommissioned device from
+// Studios and Tags. See `DecommissionConfig` in `arista.studio_topology.v1`.
 message DeviceDecommissioningConfig {
     option (fmp.model) = "rw";
 
@@ -239,4 +242,6 @@ message ProvisionedDevice {
    // which indicates that the device does not yet belong to a group. At this point,
    // a user may set it to an existing group.
    google.protobuf.StringValue provisioning_group_name = 6;
+   // ipv6_address is the IPV6 address of the device.
+   fmp.IPAddress ipv6_address = 7;
 }

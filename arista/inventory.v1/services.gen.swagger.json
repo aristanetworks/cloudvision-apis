@@ -2827,7 +2827,7 @@
         "DECOMMISSIONING_STATUS_SUCCESS"
       ],
       "default": "DECOMMISSIONING_STATUS_UNSPECIFIED",
-      "description": "DecommissioningStatus defines the set of possible states in the decommissioning\nprocess for a device.\n\n - DECOMMISSIONING_STATUS_IN_PROGRESS: DECOMMISSIONING_STATUS_IN_PROGRESS indicates decommissioning is in progress.\n - DECOMMISSIONING_STATUS_FAILURE: DECOMMISSIONING_STATUS_FAILURE indicates decommissioning failed.\n - DECOMMISSIONING_STATUS_SUCCESS: DECOMMISSIONING_STATUS_SUCCESS indicates decommissioning succeeded."
+      "description": "DecommissioningStatus defines the set of possible states in the decommissioning\nprocess for a device.\n\n - DECOMMISSIONING_STATUS_UNSPECIFIED: DECOMMISSIONING_STATUS_UNSPECIFIED indicates decommissioning status is unspecified.\n - DECOMMISSIONING_STATUS_IN_PROGRESS: DECOMMISSIONING_STATUS_IN_PROGRESS indicates decommissioning is in progress.\n - DECOMMISSIONING_STATUS_FAILURE: DECOMMISSIONING_STATUS_FAILURE indicates decommissioning failed.\n - DECOMMISSIONING_STATUS_SUCCESS: DECOMMISSIONING_STATUS_SUCCESS indicates decommissioning succeeded."
     },
     "arista.inventory.v1.Device": {
       "type": "object",
@@ -2926,7 +2926,7 @@
           "description": "status_message contains information on the status of the decommissioning attempt,\nif any. This is generally an unstructured log message that is for display\npurposes only (its structure and contents may change)."
         }
       },
-      "description": "DeviceOnboarding describes the status of a decommissioning process."
+      "description": "DeviceDecommissioning describes the status of a decommissioning process."
     },
     "arista.inventory.v1.DeviceDecommissioningBatchedStreamResponse": {
       "type": "object",
@@ -2958,10 +2958,10 @@
         },
         "userName": {
           "type": "string",
-          "description": "user_name is username of the user who decommissioned the device."
+          "description": "user_name is name of the user who decommissioned the device."
         }
       },
-      "description": "DeviceDecommissioningConfig describes a device decommissioning request.\n\"Decommissioning\" refers to the process of stopping device streaming to\nCloudVision and removing it from CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceDecommissioningConfig sends a decommissioning request with\n   a UUID that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the decommissioning procedure\n   and tracking the status of the decommissioning attempt.\n4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the\n   same UUID to see the status of the request."
+      "description": "DeviceDecommissioningConfig describes a device decommissioning request.\n\"Decommissioning\" refers to the process of stopping device streaming to\nCloudVision and removing it from CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceDecommissioningConfig sends a decommissioning request with\n   a UUID that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the decommissioning procedure\n   and tracking the status of the decommissioning attempt.\n4. The user may do a GetOne or Subscribe on DeviceDecommissioning using the\n   same UUID to see the status of the request.\n\nNOTE: this operation does not remove references to the decommissioned device from\nStudios and Tags. See `DecommissionConfig` in `arista.studio_topology.v1`."
     },
     "arista.inventory.v1.DeviceDecommissioningConfigBatchedStreamResponse": {
       "type": "object",
@@ -3721,7 +3721,7 @@
         "ONBOARDING_STATUS_SUCCESS"
       ],
       "default": "ONBOARDING_STATUS_UNSPECIFIED",
-      "description": "OnboardingStatus defines the set of possible states in the onboarding process\nfor a device.\n\n - ONBOARDING_STATUS_IN_PROGRESS: ONBOARDING_STATUS_IN_PROGRESS indicates onboarding is in progress.\n - ONBOARDING_STATUS_FAILURE: ONBOARDING_STATUS_FAILURE indicates onboarding failed.\n - ONBOARDING_STATUS_SUCCESS: ONBOARDING_STATUS_SUCCESS indicates onboarding succeeded."
+      "description": "OnboardingStatus defines the set of possible states in the onboarding process\nfor a device.\n\n - ONBOARDING_STATUS_UNSPECIFIED: ONBOARDING_STATUS_UNSPECIFIED indicates onboarding status is unspecified.\n - ONBOARDING_STATUS_IN_PROGRESS: ONBOARDING_STATUS_IN_PROGRESS indicates onboarding is in progress.\n - ONBOARDING_STATUS_FAILURE: ONBOARDING_STATUS_FAILURE indicates onboarding failed.\n - ONBOARDING_STATUS_SUCCESS: ONBOARDING_STATUS_SUCCESS indicates onboarding succeeded."
     },
     "arista.inventory.v1.ProvisionedDevice": {
       "type": "object",
@@ -3749,6 +3749,10 @@
         "provisioningGroupName": {
           "type": "string",
           "description": "provisioning_group_name is the name of the group (also known as a container)\nto which the device belongs. Any provisioning operation performed on this\ngroup will also be performed on this device. If the device is not yet provisioned,\nthis will not be set. Once it is provisioned, this will be set to \"undefined_container\"\nwhich indicates that the device does not yet belong to a group. At this point,\na user may set it to an existing group."
+        },
+        "ipv6Address": {
+          "$ref": "#/definitions/fmp.IPAddress",
+          "description": "ipv6_address is the IPV6 address of the device."
         }
       },
       "description": "ProvisionedDevice describes the provisioning status of an onboarded device\nif the onboarded device is configured for provisioning."
@@ -3858,7 +3862,7 @@
         "PROVISIONING_STATUS_SUCCESS"
       ],
       "default": "PROVISIONING_STATUS_UNSPECIFIED",
-      "description": "ProvisioningStatus defines the set of possible states in the provisioning\nprocess for a device.\n\n - PROVISIONING_STATUS_IN_PROGRESS: PROVISIONING_STATUS_IN_PROGRESS indicates provisioning is in progress.\n - PROVISIONING_STATUS_FAILURE: PROVISIONING_STATUS_FAILURE indicates provisioning failed.\n - PROVISIONING_STATUS_SUCCESS: PROVISIONING_STATUS_SUCCESS indicates provisioning succeeded."
+      "description": "ProvisioningStatus defines the set of possible states in the provisioning\nprocess for a device.\n\n - PROVISIONING_STATUS_UNSPECIFIED: PROVISIONING_STATUS_UNSPECIFIED indicates provisioning status is unspecified.\n - PROVISIONING_STATUS_IN_PROGRESS: PROVISIONING_STATUS_IN_PROGRESS indicates provisioning is in progress.\n - PROVISIONING_STATUS_FAILURE: PROVISIONING_STATUS_FAILURE indicates provisioning failed.\n - PROVISIONING_STATUS_SUCCESS: PROVISIONING_STATUS_SUCCESS indicates provisioning succeeded."
     },
     "arista.inventory.v1.StreamingStatus": {
       "type": "string",
@@ -3868,7 +3872,7 @@
         "STREAMING_STATUS_ACTIVE"
       ],
       "default": "STREAMING_STATUS_UNSPECIFIED",
-      "description": "StreamingStatus defines the status of telemetry streaming for a device.\n\n - STREAMING_STATUS_INACTIVE: STREAMING_STATUS_INACTIVE indicates the device is not streaming telemetry.\n - STREAMING_STATUS_ACTIVE: STREAMING_STATUS_ACTIVE indicates the device is streaming telemetry."
+      "description": "StreamingStatus defines the status of telemetry streaming for a device.\n\n - STREAMING_STATUS_UNSPECIFIED: STREAMING_STATUS_UNSPECIFIED indicates the device streaming telemetry status is unspecified.\n - STREAMING_STATUS_INACTIVE: STREAMING_STATUS_INACTIVE indicates the device is not streaming telemetry.\n - STREAMING_STATUS_ACTIVE: STREAMING_STATUS_ACTIVE indicates the device is streaming telemetry."
     },
     "arista.inventory.v1.UUIDKey": {
       "type": "object",
