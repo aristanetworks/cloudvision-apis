@@ -3394,9 +3394,9 @@
           "$ref": "#/definitions/fmp.RepeatedString",
           "description": "other_errors are other miscellaneous errors."
         },
-        "inputValueWarnings": {
-          "$ref": "#/definitions/arista.workspace.v1.InputErrors",
-          "description": "input_value_warnings are warnings for values assigned to fields in the input schema."
+        "inputWarnings": {
+          "$ref": "#/definitions/arista.workspace.v1.InputWarnings",
+          "description": "input_warnings are warnings for values assigned to fields in the input schema."
         }
       },
       "description": "InputValidationResult holds the result of an input validation build stage."
@@ -3413,6 +3413,42 @@
         }
       },
       "description": "InputValidationResults is a collection of InputValidationResult (one per studio)."
+    },
+    "arista.workspace.v1.InputWarning": {
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "description": "field_id is the ID of the input field."
+        },
+        "path": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "path is the path leading up to the input field."
+        },
+        "members": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "members are the members of the input field (if it is a group)."
+        },
+        "message": {
+          "type": "string",
+          "description": "message is the warning message."
+        }
+      },
+      "description": "InputWarning holds the details for a warning on a studio input field or value."
+    },
+    "arista.workspace.v1.InputWarnings": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.InputWarning"
+          },
+          "description": "values is a list of InputWarning."
+        }
+      },
+      "description": "InputWarnings is a list of InputWarning."
     },
     "arista.workspace.v1.MetaResponse": {
       "type": "object",

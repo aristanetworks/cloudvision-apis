@@ -260,6 +260,24 @@ message InputErrors {
 	repeated InputError values = 1;
 }
 
+// InputWarning holds the details for a warning on a studio input field or value.
+message InputWarning {
+	// field_id is the ID of the input field.
+	google.protobuf.StringValue field_id = 1;
+	// path is the path leading up to the input field.
+	fmp.RepeatedString path = 2;
+	// members are the members of the input field (if it is a group).
+	fmp.RepeatedString members = 3;
+	// message is the warning message.
+	google.protobuf.StringValue message = 4;
+}
+
+// InputWarnings is a list of InputWarning.
+message InputWarnings {
+	// values is a list of InputWarning.
+	repeated InputWarning values = 1;
+}
+
 // InputValidationResult holds the result of an input validation build stage.
 message InputValidationResult {
 	// input_schema_errors are errors for fields in the input schema.
@@ -268,8 +286,9 @@ message InputValidationResult {
 	InputErrors input_value_errors = 2;
 	// other_errors are other miscellaneous errors.
 	fmp.RepeatedString other_errors = 3;
-	// input_value_warnings are warnings for values assigned to fields in the input schema.
-	InputErrors input_value_warnings = 4;
+	reserved 4;
+	// input_warnings are warnings for values assigned to fields in the input schema.
+	InputWarnings input_warnings = 5;
 }
 
 // InputValidationResults is a collection of InputValidationResult (one per studio).

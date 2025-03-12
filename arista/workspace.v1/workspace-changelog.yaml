@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-03-12
+      description: Add input_warnings to InputValidationResult and deprecate input_value_warnings
+      version: 1.3.13
+      cvaas: true
     - date: 2025-01-06
       description: Add device replaced skip cause to config and image validation
       version: 1.3.12
