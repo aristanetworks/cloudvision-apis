@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-03-03
+      description: Reinstate a deprecated warning code WARNING_CODE_EOS_CV_INCOMPATIBLE.
+                    Ensure comments conform to standards
+      version: 1.17.0
+      cvaas: true
     - date: 2024-08-05
       description: Add a new field text_code for GetImageDiffV3
       version: 1.16.0

@@ -340,7 +340,7 @@ message ImageErrors {
 enum WarningCode {
     // WARNING_CODE_UNSPECIFIED indicates warning code is unspecified.
     WARNING_CODE_UNSPECIFIED = 0;
-    // WARNING_CODE_NOT_APPLICABLE represents cases where EOS <-> SKU/TA compatibility
+    // WARNING_CODE_NOT_APPLICABLE represents cases where EOS < - > SKU/TA compatibility
     // is not applicable for non physical switches like vEos.
     WARNING_CODE_NOT_APPLICABLE = 1;
     // WARNING_CODE_SKUINFO_UNAVAILABLE represents case where
@@ -357,10 +357,9 @@ enum WarningCode {
     // TA is lower than minimum supported TA on CV.
     // Deprecated - use ERROR_CODE_TA_CV_INCOMPATIBLE.
     WARNING_CODE_TA_CV_INCOMPATIBLE = 6 [deprecated=true];
-    // WARNING_CODE_EOS_CV_INCOMPATIBLE represents cases where EOS is no longer or not yet
-    // supported by CV. Given EOS is outside range of CV's minimum and maximum EOS.
-    // Deprecated - use ERROR_CODE_EOS_CV_INCOMPATIBLE.
-    WARNING_CODE_EOS_CV_INCOMPATIBLE = 7 [deprecated=true];
+    // WARNING_CODE_EOS_CV_INCOMPATIBLE indicates that EOS is not yet supported by CV.
+    // The given EOS exceeds CV's maximum supported EOS version.
+    WARNING_CODE_EOS_CV_INCOMPATIBLE = 7;
     // WARNING_CODE_EOS_ARCH_UNKNOWN represents cases where the specified architecture is
     // not valid for EOS.
     WARNING_CODE_EOS_ARCH_UNKNOWN = 8;
