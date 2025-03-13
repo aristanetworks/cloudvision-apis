@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-03-13
+      description: Updated description for error code ERROR_CODE_EOS_CV_INCOMPATIBLE
+      version: 1.18.0
+      cvaas: true
     - date: 2025-03-03
       description: Reinstate a deprecated warning code WARNING_CODE_EOS_CV_INCOMPATIBLE.
                     Ensure comments conform to standards
