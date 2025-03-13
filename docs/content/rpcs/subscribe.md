@@ -1,7 +1,5 @@
 ---
-title: Subscribe
-weight: 13
-pre: "<b>d. </b>"
+title: "Subscribe"
 ---
 
 `Subscribe` first returns the initial state (fully-specified messages) and then any received updates.
@@ -10,9 +8,9 @@ The first messages received are effectively the result of a [GetAll](/cloudvisio
 Once existing state has been sent to the client, any changes to resource entities are streamed back to the client. The
 _update_ messages will represent what was updated and can either be a diff/partial or a fully-specified model.
 
-{{% notice note %}}
+:::note
 Any [filters](/cloudvision-apis/rpcs/filtering) apply both to the initial state and updates.
-{{% /notice %}}
+:::
 
 Clients can determine whether a given message is part of the initial `GetAll` or an update via the
 `arista.subscriptions.Operation` enum field on the `StreamResponse` type for the given resource. This enum can

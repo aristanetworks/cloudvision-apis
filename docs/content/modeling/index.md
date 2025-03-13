@@ -1,6 +1,5 @@
 ---
-title: Modeling
-weight: 1
+title: "Modeling"
 ---
 
 Resources are modeled in [Protobuf](https://developers.google.com/protocol-buffers) and accessed over [gRPC](https://grpc.io/) with a standardized set of RPCs (discussed in later sections). These models are divided into two types:
@@ -43,9 +42,9 @@ While the config request is an input to deriving the state, there are other (pos
 
 Subscribing to State (ideally, with a filter) allows the client to wait for any asynchronous processing.
 
-![State-Config Data Flow](/cloudvision-apis/images/config-state-flow.svg)
+![State-Config Data Flow](/images/config-state-flow.png)
 
-All responses from [RPCs](/cloudvision-apis/rpcs/) include a timestamp. This timestamp should be viewed as the time at
+All responses from [RPCs](/cloudvision-apis/docs/content/rpcs/) include a timestamp. This timestamp should be viewed as the time at
 which the system durably stored an action (whether config or state). Thus, all state requests will return a
 timestamp >= than that of the config that initiated the action.
 
@@ -56,7 +55,7 @@ To make partial updates (both by users into the system as well as updates from t
 
 For example:
 
-```proto
+```protobuf
 message Nullability {
     // This value will contain "" when not set by the user/system.
     // It is not possible to know whether "" is the intended value, or simply omitted.
@@ -74,7 +73,7 @@ A list of the available wrapper types can be seen [here](https://developers.goog
 
 ## Keys
 
-All models (whether config or state) contain a _key_ message.
+All models (except unkeyed models) contain a _key_ message.
 
 This key contains the minimal set of data needed to uniquely identify a given model entity. Model keys may be as simple as a single string (say, a name) or as complex as containing references to a datacenter, device, interface, or any combination of them. The complexity of the key depends entirely on the model at hand.
 

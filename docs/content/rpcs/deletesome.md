@@ -1,19 +1,17 @@
 ---
-title: DeleteSome
-weight: 17
-pre: "<b>h. </b>"
+title: "DeleteSome"
 ---
 
 `DeleteSome` deletes a resource and streams back the resources that failed to be deleted and a description for the failure.
 
-{{% notice note %}}
+:::note
 DeleteSome is supported on all keyed resources.\
 However, in certain releases, this may have been missing. See Support section below for details.
-{{% /notice %}}
+:::
 
-{{% notice note %}}
+:::note
 The `Keys` field is required to be fully-specified because `DeleteSome` needs to identify resources to delete.
-{{% /notice %}}
+:::
 
 #### RPC Definition
 

@@ -1,15 +1,13 @@
 ---
-title: Delete
-weight: 16
-pre: "<b>g. </b>"
+title: "Delete"
 ---
 
 `Delete` deletes a resource and returns the time the delete became effective.
 
-{{% notice note %}}
+:::note
 The `Key` field is required to be fully-specified because `Delete` needs to identify exactly-one
 resource to delete.
-{{% /notice %}}
+:::
 
 #### RPC Definition
 

@@ -116,3 +116,50 @@ code {
 #TableOfContents {
     max-height: fit-content;
 }
+
+.navbar {
+    background-color: #27569b !important;
+    color: white !important;
+}
+
+.footer {
+    background-color: #27569b;
+}
+
+.highlight-item {
+    font-weight: bold
+}
+
+.theme-doc-version-badge {
+    display: none;
+}
+
+html[data-theme='dark'] code {
+    background-color: #444 !important;
+    color: #e6e6e6 !important;
+    border-radius: 4px;
+    padding: 2px 4px;
+  }
+
+
+html[data-theme='dark'] p {
+    color: #cdc9c9 !important;
+  }
+
+html[data-theme='dark'] h1,
+html[data-theme='dark'] h2,
+html[data-theme='dark'] h3,
+html[data-theme='dark'] h4,
+html[data-theme='dark'] h5,
+html[data-theme='dark'] h6 {
+    color: #f3eeee !important; 
+}
+
+
+html[data-theme='dark'] li {
+    color: #cdc9c9 !important;
+}
+
+html[data-theme='dark'] table {
+    color: #cdc9c9 !important;
+}

@@ -1,22 +1,23 @@
 ---
-title: Endpointlocation
-weight: 100
-chapter: false
+title: "Endpointlocation"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice info %}}
+:::info
 Endpointlocation Resource APIs are supported from CVP 2021.1.0 or newer and in CloudVision-as-a-Service.
-{{% /notice %}}
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 endpointlocation.v1
 ===================
@@ -180,10 +181,10 @@ Output:
 
 ## Get the location of an endpoint based on its IP Address
 
-{{% notice info %}}
+:::info
 To successfully find the endpoint, the IP address of the endpoint has to exist in either the MAC or ARP or DHCP
 or inventory tables and in the LLDP neighbor table.
-{{% /notice %}}
+:::
 
 ### curl
 

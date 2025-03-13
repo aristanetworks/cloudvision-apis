@@ -1,16 +1,14 @@
 ---
-title: GetOne
-weight: 10
-pre: "<b>a. </b>"
+title: "GetOne"
 ---
 
 
 `GetOne` returns a single instance of a resource.
 
-{{% notice note %}}
+:::note
 The `Key` field is required to be fully-specified because `GetOne` needs to identify exactly-one
 resource to fetch.
-{{% /notice %}}
+:::
 
 #### RPC Definition
 

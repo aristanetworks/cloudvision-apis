@@ -1,7 +1,5 @@
 ---
-title: Error Handling
-weight: 2
-pre: "<b>- </b>"
+title: "Error Handling"
 ---
 
 Errors returned by the API follow the [gRPC status code](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md) guidelines. This provides many niceties:

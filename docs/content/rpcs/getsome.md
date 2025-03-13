@@ -1,20 +1,18 @@
 ---
-title: GetSome
-weight: 11
-pre: "<b>b. </b>"
+title: "GetSome"
 ---
 
 
 `GetSome` returns multiple instances of a resource.
 
-{{% notice note %}}
+:::note
 GetSome is supported on all keyed resources.\
 However, in certain releases, this may have been missing. See Support section below for details.
-{{% /notice %}}
+:::
 
-{{% notice note %}}
+:::note
 The `Keys` field is required to be fully-specified because `GetSome` needs to identify resources to fetch.
-{{% /notice %}}
+:::
 
 #### RPC Definition
 

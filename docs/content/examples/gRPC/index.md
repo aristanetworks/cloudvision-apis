@@ -1,13 +1,11 @@
 ---
-title: gRPC
-weight: 100
-chapter: false
+title: "gRPC"
 ---
 
-{{% notice tip %}}
+:::tip
 For troubleshooting the following trace can be added before the `grpcurl` command:
 `GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info`
-{{% /notice %}}
+:::
 
 # gRPC API examples
 
@@ -66,7 +64,7 @@ grpcurl  -H "Authorization: Bearer <token>" \
 
 Result:
 
-```
+```protobuf
 arista.event.v1.EventAnnotationConfigService
 arista.event.v1.EventService
 ```
@@ -82,7 +80,7 @@ grpcurl  -H "Authorization: Bearer <token>" \
 
 Result:
 
-```
+```protobuf
 arista.event.v1.EventService.GetAll
 arista.event.v1.EventService.GetOne
 arista.event.v1.EventService.Subscribe
@@ -99,7 +97,7 @@ grpcurl  -H "Authorization: Bearer <token>" \
 
 Result:
 
-```
+```protobuf
 arista.event.v1.EventService.GetAll is a method:
 rpc GetAll ( .arista.event.v1.EventStreamRequest ) returns ( stream .arista.event.v1.EventStreamResponse );
 ```
@@ -116,7 +114,7 @@ grpcurl -plaintext -msg-template -H "Authorization: Bearer <token>" \
 
 Result:
 
-```
+```protobuf
 arista.event.v1.EventStreamRequest is a message:
 message EventStreamRequest {
   // PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
@@ -194,7 +192,7 @@ grpcurl  -H "Authorization: Bearer <token>" \
 
 Result:
 
-```
+```protobuf
 arista.event.v1.EventSeverity is an enum:
 // EventSeverity is the severity level of the event
 enum EventSeverity {
@@ -212,7 +210,7 @@ We can apply server-side filters using `partialEqFilter` or `partial_eq_filter` 
  
 Some of the variables are enums which means we can use both the variant and the discriminant, as in the below two examples we can get all ERROR severity events by setting severity to ​​`EVENT_SEVERITY_ERROR` or to `3`, both would yield the same result:
 
-```
+```bash
 grpcurl -H "Authorization: Bearer <token>" \
    -import-path $GOPATH/src/github.com/cloudvision-apis/ \
    -proto $GOPATH/src/github.com/cloudvision-apis/arista/event.v1/services.gen.proto \
@@ -221,7 +219,7 @@ grpcurl -H "Authorization: Bearer <token>" \
 
 or
 
-```
+```bash
 grpcurl -H 'Authorization: Bearer <token>' \
    -import-path $GOPATH/src/github.com/cloudvision-apis/ \
    -proto $GOPATH/src/github.com/cloudvision-apis/arista/event.v1/services.gen.proto \

@@ -3,38 +3,79 @@ name: github pages
 on:
   push:
     branches:
-    - trunk
+      - trunk
+    tags:
+      - '**'
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@master
-      with:
-        submodules: true
+    - name: Checkout repository
+      uses: actions/checkout@master
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        hugo-version: 'latest'
+        node-version: '18'
 
     - name: Install Protoc
       uses: arduino/setup-protoc@master
 
     - name: Install Golang (for protoc-gen-doc)
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v4
       with:
-        go-version: '^1.17.6'
+        go-version: 'stable'
 
     - name: Install protoc-gen-doc
       run: go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
 
-    - name: Generate Docs
-      run: make -C docs
+    - name: Install dependencies
+      working-directory: docs
+      run: npm install
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2.4.0
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./docs/public
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages
+        fetch-depth: 0
+
+    - name: Retrieve previous version files from gh-pages
+      run: |
+        cp gh-pages/versions.json docs/versions.json || true
+        cp -r gh-pages/versioned_docs docs/ || true
+        cp -r gh-pages/versioned_sidebars docs/ || true
+
+    - name: Generate Docs
+      working-directory: docs
+      run: make
+
+    - name: Generate Versioned Docs
+      working-directory: docs
+      run: make version
+
+    - name: Build Docusaurus Site
+      working-directory: docs
+      run: npx docusaurus build
+
+    - name: Update version files in gh-pages branch
+      run: |
+        if [ -f gh-pages/versions.json ]; then
+          jq -s 'add | unique' gh-pages/versions.json docs/versions.json > gh-pages/versions.json
+        else
+          cp docs/versions.json gh-pages/versions.json
+        fi
+        mkdir -p gh-pages/versioned_docs
+        cp -r docs/versioned_docs/* gh-pages/versioned_docs/ || true
+        mkdir -p gh-pages/versioned_sidebars
+        cp -r docs/versioned_sidebars/* gh-pages/versioned_sidebars/ || true
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: ./docs/build
+        keep_files: true
+        

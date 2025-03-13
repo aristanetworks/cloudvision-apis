@@ -1,18 +1,19 @@
 ---
-title: Events
-weight: 100
-chapter: false
+title: "Events"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 Events
 ================================
@@ -91,10 +92,10 @@ Result:
 }
 ```
 
-{{% notice note %}}
+:::note
 The `time` key here shows the state of the resource at a given time,
 `key.timestmap` is part of the key for that an event.
-{{% /notice %}}
+:::
 
 ### cvprac
 
@@ -120,9 +121,9 @@ get_event("bf931ff01f5c5a2","2021-04-01T18:14:53Z")
 Get events between two dates
 --------------------------------
 
-{{% notice note %}}
+:::note
 When fetching a state from NetDB between two arbitrary dates, the result returned will contain data that existed between those two dates and not just data that was created between those dates. For instance if BGP events are queried between 2021-03-24 09:00 and 2021-03-24 10:00 the result will contain events that were active in the range of 9 AM to 10 AM. If there were events that started before 9 AM and were not resolved (still active) at that time, the result will contain those events too.
-{{% /notice %}}
+:::
 
 ### curl
 
@@ -221,9 +222,9 @@ get_events_t1_t2("2021-03-24T09:00:00Z", "2021-03-24T10:00:00Z")
 Get all INFO severity events
 --------------------------------
 
-{{% notice note %}}
+:::note
 To apply filters on events, the POST method has to be used.
-{{% /notice %}}
+:::
 
 ### curl
 
@@ -429,9 +430,9 @@ Result:
 }
 ```
 
-{{% notice note %}}
+:::note
 If the `partialEqFilter` would've had two dictionaries inside the list, e.g.:
 `[{"eventType":"LOW_DEVICE_DISK_SPACE"},{"severity":"EVENT_SEVERITY_ERROR"}]}'` the filtering
 would've used an OR operation instead of AND, meaning that all events that have
 `eventType`=`"LOW_DEVICE_DISK_SPACE"` and all events that have ERROR severity would've been printed.
-{{% /notice %}}
+:::

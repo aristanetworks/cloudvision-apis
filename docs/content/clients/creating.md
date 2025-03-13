@@ -1,6 +1,5 @@
 ---
-title: Creating a Client
-weight: 2
+title: "Creating a Client"
 ---
 
 A major advantage to Protobuf (and gRPC) is the ability to generate language bindings reliably and dependably.

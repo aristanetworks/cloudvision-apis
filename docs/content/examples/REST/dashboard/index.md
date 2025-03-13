@@ -1,23 +1,24 @@
 ---
-title: Dashboard
-weight: 100
-chapter: false
+title: "Dashboard"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice info %}}
+:::info
 Dashboard Resource APIs are supported from CVP 2021.3.0 (gRPC only) or newer and in CloudVision-as-a-Service.
 The REST endpoint for on-prem is available from 2022.3.0.
-{{% /notice %}}
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 dashboard.v1
 ============
@@ -31,9 +32,9 @@ curl -sS -kX GET --header 'Accept: application/json' -b access_token=`cat token.
   'https://192.0.2.79/api/resources/dashboard/v1/Dashboard?key.dashboardId=125125'
 ```
 
-{{% notice tip %}}
+:::tip
 You cannot use the result of this output to create a dashboard without removing the status-only related fields.
-{{% /notice %}}
+:::
 
 ## Get the configuration of a specific dashboard
 

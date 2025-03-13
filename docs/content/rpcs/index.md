@@ -1,6 +1,5 @@
 ---
-title: Uniform RPCs
-weight: 2
+title: "Uniform RPCs"
 ---
 
 As stated previously, APIs are accesible over [gRPC](https://grpc.io/) with a standardized set of RPCs.

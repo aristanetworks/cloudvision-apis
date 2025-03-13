@@ -1,18 +1,19 @@
 ---
-title: Inventory
-weight: 100
-chapter: false
+title: "Inventory"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 Device
 ================================================
@@ -190,10 +191,10 @@ Output:
 
 ## Onboard a device
 
-{{% notice note %}}
+:::note
 The service account's name has to match the username logged in on the CVP UI and that same username has to be allowed on the device.
 The user should be logged in on the UI when using the the DeviceOnboarding APIs.
-{{% /notice %}}
+:::
 
 ### curl
 

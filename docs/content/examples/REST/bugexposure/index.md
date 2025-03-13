@@ -1,22 +1,23 @@
 ---
-title: Bugexposure
-weight: 100
-chapter: false
+title: "Bugexposure"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice info %}}
+:::info
 BugExposure Resource APIs are supported from CVP 2022.1.0 or newer and in CloudVision-as-a-Service.
-{{% /notice %}}
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 Bugexposure.v1
 ================================
@@ -169,7 +170,7 @@ curl -sS -kX POST --header 'Accept: application/json' -b access_token=`cat token
 Output:
 
 
-```
+```json
 [
   {
     "value": {

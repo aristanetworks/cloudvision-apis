@@ -1,7 +1,5 @@
 ---
-title: Filtering
-weight: 3
-pre: "<b>- </b>"
+title: "Filtering"
 ---
 
 Filtering is provided through a default and an (optional) additional model-specific mechanism. By default, all models support "partial equality filtering". Models that provide a custom filtering method will document this filter-message in its model documentation.
@@ -31,7 +29,7 @@ Models are allowed to also contain an "implementation specific" filter which can
 
 This filter type will be defined in the protobuf definition. This type should be well documented in the protobuf as well as generated documentation.
 
-```
+```protobuf
 message CustomFilteredStreamRequest {
   ...
 

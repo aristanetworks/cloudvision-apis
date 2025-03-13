@@ -1,13 +1,14 @@
-REPOROOT=../
+REPOROOT=..
 PROTODIRS=$(shell find $(REPOROOT)/arista -name "*.v*" -type d -exec basename {} \;)
 DOCTARGETS=$(patsubst %,%.md,$(PROTODIRS))
+VERSION_TAG=$(shell git tag -l | tr -d '\n')
 
 .PHONY: default
 default: docs
 
 .PHONY: docs
 docs: $(DOCTARGETS)
-	hugo --gc --minify --cleanDestinationDir
+	@echo "Documentation Markdown files generated for Docusaurus."
 
 %.md: FULLNAME = $(basename $@)
 %.md: NAME = $(basename $(FULLNAME))
@@ -16,9 +17,15 @@ docs: $(DOCTARGETS)
 %.md: DEST = content/models/$(FULLNAME).md
 %.md:
 	@echo "--- generating "$@" from "$(PROTO)"..."
-	protoc -I $(REPOROOT) \
-		--doc_out=content/models --doc_opt=./model.tmpl,$(FULLNAME).body \
-		$(PROTO) $(SERVICES)
-	echo "---\ntitle: $(FULLNAME)\n---\n\n" > $(DEST)
-	cat content/models/$(FULLNAME).body >> $(DEST)
-	rm content/models/$(FULLNAME).body
+	@mkdir -p $(dir $(DEST))
+	go run generate_markdown.go -root $(REPOROOT) -in $(PROTO) -out $(DEST)
+
+.PHONY: start
+start:
+	@echo "Starting Docusaurus with version $(VERSION_TAG)"
+	@VERSION_TAG=$(VERSION_TAG) npx docusaurus start
+
+.PHONY: version
+version:
+	@echo "Creating new Docusaurus versions from tags: $(VERSION_TAG)"
+	@echo $(VERSION_TAG) | xargs -t -d ' ' -I {} npx docusaurus docs:version {}

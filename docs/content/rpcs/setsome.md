@@ -1,20 +1,18 @@
 ---
-title: SetSome
-weight: 15
-pre: "<b>f. </b>"
+title: "SetSome"
 ---
 
-`SetSome` updates multiple instances of a keyed resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request. 
+`SetSome` updates multiple instances of a keyed resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.
 
-{{% notice note %}}
+:::note
 SetSome is supported on all keyed resources.\
 However, in certain releases, this may have been missing. See Support section below for details.
-{{% /notice %}}
+:::
 
-{{% notice note %}}
-The `Values` field is required to be fully-specified because `SetSome` needs to identify 
+:::note
+The `Values` field is required to be fully-specified because `SetSome` needs to identify
 resources to update.
-{{% /notice %}}
+:::
 
 A `*SetSomeResponse` will "echo" back the key of a resource that failed to set. It will also contain an error description on why the resource failed to set.
 

@@ -7,6 +7,18 @@
   {{end}}
 {{end}}
 
+
+#### Available Services
+{{range .Files}}
+  {{- if .Services }}
+    {{- range .Services }}
+&nbsp;&nbsp;&nbsp;&nbsp;[{{.Name}}](#{{lower .Name}}){{"\n"}}
+    {{- end }}
+  {{- end }}
+{{end}}
+
+
+
 {{range .Files}}
 {{$file_name := .Name}}- [{{.Name}}](#{{lower .Name}})
   {{- if .Messages }}

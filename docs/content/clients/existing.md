@@ -1,6 +1,5 @@
 ---
-title: Existing Clients
-weight: 1
+title: "Existing Clients"
 ---
 
 Arista provides and maintains the following clients:

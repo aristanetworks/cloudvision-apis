@@ -1,18 +1,19 @@
 ---
-title: Tags
-weight: 100
-chapter: false
+title: "Tags"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 # Tags
 
@@ -153,9 +154,9 @@ Result:
 {"value":{"key":{"workspaceId":"testTag"},"request":"REQUEST_SUBMIT","requestParams":{"requestId":"s1"}},"time":"2021-09-02T18:00:13.680Z"}%
 ```
 
-{{% notice note %}}
+:::note
 Tag creation and assignment can be done in separate workspaces.
-{{% /notice %}}
+:::
 
 ### Create and assign interface tag
 
@@ -227,9 +228,9 @@ Result:
 {"value":{"key":{"workspaceId":"testIntfTag"},"request":"REQUEST_SUBMIT","requestParams":{"requestId":"s1"}},"time":"2021-09-02T18:00:13.680Z"}%
 ```
 
-{{% notice note %}}
+:::note
 Tag creation and assignment can be done in separate workspaces.
-{{% /notice %}}
+:::
 
 ### Unassign a device or interface tag
 

@@ -12,9 +12,9 @@ These APIs allow access to fleet-wide data access and control, forming a managem
 Functionality is defined in a data-oriented (rather than action-oriented) form.
 Designing the APIs to use state-synchronization confers some desirable traits:
 
-{{% notice note %}}
+:::note
 For more information on modelling, see the [Modeling](/cloudvision-apis/modeling) page.
-{{% /notice %}}
+:::
 
 #### Uniform APIs
 
@@ -50,10 +50,10 @@ come up, and then they’ll do the right thing.
 By modelling in `protobuf` and exposing `gRPC` RPCs, this data and management is accessible from nearly any
 environment in [nearly any language](https://grpc.io/docs/languages/).
 
-{{% notice note %}}
-For Arista-supported clients, see the [Existing Clients](/cloudvision-apis/clients/existing) page.<br/>
-Alternatively, a basic guide on [creating your own](/cloudvision-apis/clients/creating).
-{{% /notice %}}
+:::note
+For Arista-supported clients, see the [Existing Clients](/cloudvision-apis/docs/clients/existing) page.<br/>
+Alternatively, a basic guide on [creating your own](/cloudvision-apis/docs/clients/creating).
+:::
 
 In addition to pure-gRPC clients, HTTP REST mappings are easily generated through the great gRPC ecosystem.
 Thus, APIs can be utilized from nearly anywhere.
@@ -65,10 +65,10 @@ Another benefit of using `protobuf` and `gRPC` is the vast ecosystem surrounding
 While portable client-generation is useful a well-supported ecosystem provides even more tooling.
 
 
-{{% notice note %}}
+:::note
 This list is not extensive, nor an endorsement of any project.
 Many more tools can be found on the [awesome-grpc](https://github.com/grpc-ecosystem/awesome-grpc) page.
-{{% /notice %}}
+:::
 
 * GUIs
     - [BloomRPC](https://github.com/uw-labs/bloomrpc)

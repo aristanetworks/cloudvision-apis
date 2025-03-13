@@ -1,28 +1,29 @@
 ---
-title: Change Control
-weight: 100
-chapter: false
+title: "Change Control"
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+
 ---
 
-{{% toc %}}
+<!-- {{% toc %}} -->
 
-{{% notice tip %}}
-To generate a service account token please refer to the [authentication](../../../connecting/#token-based-authentication) chapter.
-{{% /notice %}}
+:::tip
+To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+:::
 
-{{% notice info %}}
+:::info
 Change Control Resource APIs are supported from CVP 2021.2.0 or newer and in CloudVision-as-a-Service.
-{{% /notice %}}
+:::
 
-{{% notice tip %}}
+:::tip
 [jq](https://stedolan.github.io/jq/) can be used to easily format and parse the outputs.
-{{% /notice %}}
+:::
 
 # changeControl.v1
 
-{{% notice note %}}
+:::note
 A change can be only be in unapproved state if it was approved initially. Change Controls which have never been approved will have the status of `Pending Approval`
-{{% /notice %}}
+:::
 
 ## Get the approval state for a specific change control
 
@@ -260,9 +261,9 @@ Output:
 
 ### curl
 
-{{% notice info %}}
+:::info
 Change control scheduling using Resource APIs is only supported in 2022.1.0 or newer.
-{{% /notice %}}
+:::
 
 The below example shows how to schedule a Change Control at 2:07 AM on 2021-12-23:
 
@@ -276,9 +277,9 @@ Output:
 {"value":{"key":{"id":"5821c7c1-e276-4387-b60a"}, "schedule":{"value":"2021-12-23T01:49:00Z", "notes":"CC schedule via curl"}}, "time":"2021-12-23T01:47:32.521200888Z"}
 ```
 
-{{% notice note %}}
+:::note
 A scheduled change will be only successfully executed if the change was approved.
-{{% /notice %}}
+:::
 
 Fetching the state of a scheduled change which wasn't approved before execution time will result in the following error:
 

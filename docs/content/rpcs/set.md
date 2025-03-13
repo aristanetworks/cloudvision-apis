@@ -1,20 +1,18 @@
 ---
-title: Set
-weight: 14
-pre: "<b>e. </b>"
+title: "Set"
 ---
 
 `Set` updates a resource. Updates can be whole or partial (see: nullable fields) using only fields populated in the request.
 
-{{% notice note %}}
+:::note
 The `Value` field is required to be fully-specified because `Set` needs to identify exactly-one
 resource to update.
-{{% /notice %}}
+:::
 
 
-{{% notice note %}}
+:::note
 The endpoint returns the time the `Set` becomes effective internally and the service's known-state of the resource.
-{{% /notice %}}
+:::
 
 A `*SetResponse` will contain an "echo" of the resource. This echo will be the original update-request at a minimum, and may include more data.This allows services to do fast, write-only, updates to internal storage. If the service needs to query existing state first then more data can be provided to the client. If you need a full model after a `Set` operation, you can issue a `GetOne` with the returned `time`.
 
