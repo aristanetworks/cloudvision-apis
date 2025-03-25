@@ -418,6 +418,32 @@ message StudioBuildDetails{
 	InputValidationResults input_validation_results = 1;
 }
 
+// HierarchyBuildStatusCode enumerates the various statuses for a build.
+// duplicated from hierarchy.v1.BuildStatus
+enum HierarchyBuildStatusCode {
+  // HIERARCHY_BUILD_STATUS_CODE_UNSPECIFIED is the default value indicating an unspecified build status.
+  HIERARCHY_BUILD_STATUS_CODE_UNSPECIFIED = 0;
+  // HIERARCHY_BUILD_STATUS_CODE_RUNNING indicates that the build is running.
+  HIERARCHY_BUILD_STATUS_CODE_RUNNING = 1;
+  // HIERARCHY_BUILD_STATUS_CODE_SUCCESS indicates that the build has completed successfully
+  // without any errors.
+  HIERARCHY_BUILD_STATUS_CODE_SUCCESS = 2;
+  // HIERARCHY_BUILD_STATUS_CODE_FAILURE indicates that the build has completed unsuccesfully
+  // with errors.
+  HIERARCHY_BUILD_STATUS_CODE_FAILURE = 3;
+  // HIERARCHY_BUILD_STATUS_CODE_CANCELED indicates that the build was canceled.
+  HIERARCHY_BUILD_STATUS_CODE_CANCELED = 4;
+}
+
+// HierarchyBuildStatus reference to the hierarchy build part of this workspace build
+message HierarchyBuildStatus{
+	// build_id is the reference to the hierarchy build.
+	// It uniquely identifies the hierarchy build
+	google.protobuf.StringValue build_id = 1;
+	// build_status ststus of the build on its completion
+	HierarchyBuildStatusCode  build_status = 2;
+}
+
 // WorkspaceBuildKey uniquely identifies a build for a workspace.
 message WorkspaceBuildKey {
 	option (fmp.model_key) = true;
@@ -446,6 +472,8 @@ message WorkspaceBuild {
 	AuthzResult authz_result = 6;
 	// studio_build_details has per studio results that are not specific to a device.
 	StudioBuildDetails studio_build_details = 7;
+	// hierarchy_build_status from the hierarchy build part of this workspace build
+	HierarchyBuildStatus hierarchy_build_status = 8;
 }
 
 // WorkspaceBuildDetailsKey uniquely identifies a build for a particular
