@@ -12,6 +12,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
 
 // EventSeverity is the severity level of the event
 enum EventSeverity {
@@ -164,6 +165,18 @@ message EventNotes {
   map<int64, EventNote> notes = 1;
 }
 
+// EventMetadataGroup is a single metadata tag group for an event
+message EventMetadataGroup {
+  // values contains a collection of metadata tag key and value pairs
+  fmp.MapStringString values = 1;
+}
+
+// EventMetadata is a list of all metadata tag groups for an event
+message EventMetadata {
+  // values contains a list of metadata tag groups for the event
+  repeated EventMetadataGroup values = 1;
+}
+
 // Event is a telemetry event
 message Event {
   option (fmp.model) = "ro";
@@ -194,6 +207,8 @@ message Event {
   // delete_time is the time when the event ended.
   // It is nil if event is still ongoing
   google.protobuf.Timestamp delete_time = 13;
+  // metadata is the metadata tag key and value pairs of the event
+  EventMetadata metadata = 14;
 }
 
 // UserEventCreationKey uniquely identifies a user event request.

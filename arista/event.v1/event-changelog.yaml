@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2024-12-03
+      description: Add field metadata to Event
+      version: 1.3.0
+      cvaas: true
+      onprem: true
     - date: 2024-10-02
       description: Change delete_time comment
       version: 1.2.2
