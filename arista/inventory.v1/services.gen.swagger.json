@@ -3313,6 +3313,10 @@
         "deviceConfig": {
           "$ref": "#/definitions/arista.inventory.v1.DeviceConfiguration",
           "description": "device_config is the configuration for a third-party device."
+        },
+        "profileName": {
+          "type": "string",
+          "description": "profile_name specifies the name of the TerminAttr profile which includes the\ncustom TerminAttr configuration to be applied to the device while onboarding."
         }
       },
       "description": "DeviceOnboardingConfig describes a device onboarding request. \"Onboarding\"\nrefers to the process of initiating device streaming to CloudVision and\nadding the streaming device to CloudVision's inventory.\n\nThe request flow works as follows:\n\n1. Set on DeviceOnboardingConfig sends an onboarding request with a UUID\n   that the user is responsible for generating.\n2. Once the server receives the request, it validates and records it.\n3. Then, the server processes it, initiating the onboarding procedure and\n   tracking the status of the onboarding attempt.\n4. The user may do a GetOne or Subscribe on DeviceOnboarding using the same\n   UUID to see the status of the request."
