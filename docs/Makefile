@@ -1,7 +1,8 @@
 REPOROOT=..
 PROTODIRS=$(shell find $(REPOROOT)/arista -name "*.v*" -type d -exec basename {} \;)
 DOCTARGETS=$(patsubst %,%.md,$(PROTODIRS))
-VERSION_TAG=$(shell git tag -l | tr -d '\n')
+
+VERSION=$(shell git describe --tags --abbrev=0 || git rev-parse --abbrev-ref HEAD)
 
 .PHONY: default
 default: docs
@@ -22,10 +23,10 @@ docs: $(DOCTARGETS)
 
 .PHONY: start
 start:
-	@echo "Starting Docusaurus with version $(VERSION_TAG)"
-	@VERSION_TAG=$(VERSION_TAG) npx docusaurus start
+	@echo "Starting Docusaurus with version $(VERSION)"
+	@VERSION_TAG=$(VERSION) npx docusaurus start
 
 .PHONY: version
 version:
-	@echo "Creating new Docusaurus versions from tags: $(VERSION_TAG)"
-	@echo $(VERSION_TAG) | xargs -t -d ' ' -I {} npx docusaurus docs:version {}
+	@echo "Creating new Docusaurus versions from tags: $(VERSION)"
+	npx docusaurus docs:version $(VERSION)

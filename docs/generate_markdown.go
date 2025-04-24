@@ -134,10 +134,12 @@ import ShowVersion from '@site/src/components/ShowVersion';
 	}
 	defer output.Close()
 
+	sanitized := strings.ReplaceAll(string(body), "<->", "\\<-\\>")
+
 	return t.Execute(output, MarkdownTemplateData{
 		Title:   filepath.Base(filepath.Dir(inputFile)),
 		Version: version,
-		Body:    string(body),
+		Body:    sanitized,
 	})
 }
 
