@@ -1,3 +1,7 @@
+---
+slug: /
+---
+
 # CloudVision APIs
 
 Cloudvision APIs are state based, resource-oriented APIs modeled in [Protobuf](https://developers.google.com/protocol-buffers)
@@ -51,8 +55,8 @@ By modelling in `protobuf` and exposing `gRPC` RPCs, this data and management is
 environment in [nearly any language](https://grpc.io/docs/languages/).
 
 :::note
-For Arista-supported clients, see the [Existing Clients](/cloudvision-apis/docs/clients/existing) page.<br/>
-Alternatively, a basic guide on [creating your own](/cloudvision-apis/docs/clients/creating).
+For Arista-supported clients, see the [Existing Clients](/cloudvision-apis/clients/existing) page.<br/>
+Alternatively, a basic guide on [creating your own](/cloudvision-apis/clients/creating).
 :::
 
 In addition to pure-gRPC clients, HTTP REST mappings are easily generated through the great gRPC ecosystem.

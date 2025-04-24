@@ -44,7 +44,7 @@ Subscribing to State (ideally, with a filter) allows the client to wait for any 
 
 ![State-Config Data Flow](/images/config-state-flow.png)
 
-All responses from [RPCs](/cloudvision-apis/docs/content/rpcs/) include a timestamp. This timestamp should be viewed as the time at
+All responses from [RPCs](/cloudvision-apis/rpcs/) include a timestamp. This timestamp should be viewed as the time at
 which the system durably stored an action (whether config or state). Thus, all state requests will return a
 timestamp >= than that of the config that initiated the action.
 

@@ -17,17 +17,6 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  plugins: [
-    async function customPlugin(context, options) {
-      return {
-        name: 'custom-docusaurus-redirect-plugin',
-        async contentLoaded({ actions }) {
-          const { setGlobalData } = actions;
-          setGlobalData({ defaultRoute: '/docs' });
-        },
-      };
-    },
-  ],
   presets: [
     [
       'classic',
@@ -35,7 +24,7 @@ const config: Config = {
         docs: {
           path: 'content',
           sidebarPath: require.resolve('./sidebars.ts'),
-          routeBasePath: 'docs',
+          routeBasePath: '/',
           lastVersion: 'current',
           versions: {
             current: {

@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 <!-- {{% toc %}} -->
 
 :::tip
-To generate a service account token please refer to the [authentication](/docs/connecting/#token-based-authentication) chapter.
+To generate a service account token please refer to the [authentication](/connecting/#token-based-authentication) chapter.
 :::
 
 :::tip
