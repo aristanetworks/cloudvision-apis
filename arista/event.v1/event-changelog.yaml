@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-05-06
+      description: Add maintenance mode filter
+      version: 1.4.0
+      cvaas: true
+      onprem: true
     - date: 2024-12-03
       description: Add field metadata to Event
       version: 1.3.0

@@ -180,6 +180,7 @@ message EventMetadata {
 // Event is a telemetry event
 message Event {
   option (fmp.model) = "ro";
+  option (fmp.custom_filter) = "EventFilter";
   // key is the event instance identifier
   EventKey key = 1;
   // severity is the severity of the event
@@ -239,4 +240,24 @@ message UserEventCreationConfig {
   EventComponents components = 7;
   // start_time is the time point at which the event occurred
   google.protobuf.Timestamp start_time = 8;
+}
+
+// MaintenanceModeFilter specifies filtering options for events based on whether they were
+// generated while the source was in maintenance mode.
+enum MaintenanceModeFilter {
+  // MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.
+  // This returns all events, whether they were generated during maintenance mode or not.
+  MAINTENANCE_MODE_FILTER_UNSPECIFIED = 0;
+  // MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated
+  // during maintenance mode.
+  MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE = 1;
+  // MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated
+  // during maintenance mode.
+  MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE = 2;
+}
+
+// EventFilter serves as a custom filter to events.
+message EventFilter {
+  // maintenance_mode_filter specifies how maintenance mode events should be filtered.
+  MaintenanceModeFilter maintenance_mode_filter = 1;
 }

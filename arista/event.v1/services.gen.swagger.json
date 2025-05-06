@@ -104,6 +104,19 @@
         },
         "parameters": [
           {
+            "name": "filter.maintenanceModeFilter",
+            "description": "maintenance_mode_filter specifies how maintenance mode events should be filtered.\n\n - MAINTENANCE_MODE_FILTER_UNSPECIFIED: MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.\nThis returns all events, whether they were generated during maintenance mode or not.\n - MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated\nduring maintenance mode.\n - MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated\nduring maintenance mode.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+              "MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE",
+              "MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE"
+            ],
+            "default": "MAINTENANCE_MODE_FILTER_UNSPECIFIED"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -222,6 +235,19 @@
         },
         "parameters": [
           {
+            "name": "filter.maintenanceModeFilter",
+            "description": "maintenance_mode_filter specifies how maintenance mode events should be filtered.\n\n - MAINTENANCE_MODE_FILTER_UNSPECIFIED: MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.\nThis returns all events, whether they were generated during maintenance mode or not.\n - MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated\nduring maintenance mode.\n - MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated\nduring maintenance mode.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+              "MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE",
+              "MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE"
+            ],
+            "default": "MAINTENANCE_MODE_FILTER_UNSPECIFIED"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -298,6 +324,19 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.maintenanceModeFilter",
+            "description": "maintenance_mode_filter specifies how maintenance mode events should be filtered.\n\n - MAINTENANCE_MODE_FILTER_UNSPECIFIED: MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.\nThis returns all events, whether they were generated during maintenance mode or not.\n - MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated\nduring maintenance mode.\n - MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated\nduring maintenance mode.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+              "MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE",
+              "MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE"
+            ],
+            "default": "MAINTENANCE_MODE_FILTER_UNSPECIFIED"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -384,6 +423,19 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.maintenanceModeFilter",
+            "description": "maintenance_mode_filter specifies how maintenance mode events should be filtered.\n\n - MAINTENANCE_MODE_FILTER_UNSPECIFIED: MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.\nThis returns all events, whether they were generated during maintenance mode or not.\n - MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated\nduring maintenance mode.\n - MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated\nduring maintenance mode.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+              "MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE",
+              "MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE"
+            ],
+            "default": "MAINTENANCE_MODE_FILTER_UNSPECIFIED"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -1969,6 +2021,16 @@
       },
       "title": "EventData is additional event data"
     },
+    "arista.event.v1.EventFilter": {
+      "type": "object",
+      "properties": {
+        "maintenanceModeFilter": {
+          "$ref": "#/definitions/arista.event.v1.MaintenanceModeFilter",
+          "description": "maintenance_mode_filter specifies how maintenance mode events should be filtered."
+        }
+      },
+      "description": "EventFilter serves as a custom filter to events."
+    },
     "arista.event.v1.EventKey": {
       "type": "object",
       "properties": {
@@ -2157,6 +2219,10 @@
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
+        "filter": {
+          "$ref": "#/definitions/arista.event.v1.EventFilter",
+          "description": "For each Event in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Event is streamed to the user."
+        },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
           "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Event at end.\n    * Each Event response is fully-specified (all fields set).\n  * start: Returns the state of each Event at start, followed by updates until now.\n    * Each Event response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Event at start, followed by updates\n    until end.\n    * Each Event response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
@@ -2180,6 +2246,16 @@
           "description": "Operation indicates how the Event value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.event.v1.MaintenanceModeFilter": {
+      "type": "string",
+      "enum": [
+        "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+        "MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE",
+        "MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE"
+      ],
+      "default": "MAINTENANCE_MODE_FILTER_UNSPECIFIED",
+      "description": "MaintenanceModeFilter specifies filtering options for events based on whether they were\ngenerated while the source was in maintenance mode.\n\n - MAINTENANCE_MODE_FILTER_UNSPECIFIED: MAINTENANCE_MODE_FILTER_UNSPECIFIED is the default value when no filter is specified.\nThis returns all events, whether they were generated during maintenance mode or not.\n - MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_NON_MAINTENANCE_MODE is used to exclude events generated\nduring maintenance mode.\n - MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE: MAINTENANCE_MODE_FILTER_ONLY_MAINTENANCE_MODE is used to return only events generated\nduring maintenance mode."
     },
     "arista.event.v1.MetaResponse": {
       "type": "object",
