@@ -52,6 +52,141 @@ message MetaResponse {
 	google.protobuf.UInt32Value count = 3;
 };
 
+message StudioGeneratedConfigurationRequest {
+	// Key uniquely identifies a StudioGeneratedConfiguration instance to retrieve.
+	// This value must be populated.
+	StudioGeneratedConfigurationKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioGeneratedConfigurationResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	StudioGeneratedConfiguration value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// StudioGeneratedConfiguration instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioGeneratedConfigurationSomeRequest {
+	repeated StudioGeneratedConfigurationKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message StudioGeneratedConfigurationSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	StudioGeneratedConfiguration value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	google.protobuf.Timestamp time = 3;
+};
+
+message StudioGeneratedConfigurationStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated StudioGeneratedConfiguration partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each StudioGeneratedConfiguration at end.
+	//     * Each StudioGeneratedConfiguration response is fully-specified (all fields set).
+	//   * start: Returns the state of each StudioGeneratedConfiguration at start, followed by updates until now.
+	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each StudioGeneratedConfiguration at start, followed by updates
+	//     until end.
+	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message StudioGeneratedConfigurationStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	StudioGeneratedConfiguration value = 1;
+
+	// Time holds the timestamp of this StudioGeneratedConfiguration's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the StudioGeneratedConfiguration value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message StudioGeneratedConfigurationBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated StudioGeneratedConfiguration partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each StudioGeneratedConfiguration at end.
+	//     * Each StudioGeneratedConfiguration response is fully-specified (all fields set).
+	//   * start: Returns the state of each StudioGeneratedConfiguration at start, followed by updates until now.
+	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each StudioGeneratedConfiguration at start, followed by updates
+	//     until end.
+	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message StudioGeneratedConfigurationBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated StudioGeneratedConfigurationStreamResponse responses = 1;
+};
+
+service StudioGeneratedConfigurationService {
+	rpc GetOne (StudioGeneratedConfigurationRequest) returns (StudioGeneratedConfigurationResponse);
+	rpc GetSome (StudioGeneratedConfigurationSomeRequest) returns (stream StudioGeneratedConfigurationSomeResponse);
+	rpc GetAll (StudioGeneratedConfigurationStreamRequest) returns (stream StudioGeneratedConfigurationStreamResponse);
+	rpc Subscribe (StudioGeneratedConfigurationStreamRequest) returns (stream StudioGeneratedConfigurationStreamResponse);
+	rpc GetMeta (StudioGeneratedConfigurationStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (StudioGeneratedConfigurationStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (StudioGeneratedConfigurationBatchedStreamRequest) returns (stream StudioGeneratedConfigurationBatchedStreamResponse);
+	rpc SubscribeBatched (StudioGeneratedConfigurationBatchedStreamRequest) returns (stream StudioGeneratedConfigurationBatchedStreamResponse);
+}
+
 message WorkspaceRequest {
 	// Key uniquely identifies a Workspace instance to retrieve.
 	// This value must be populated.
@@ -171,7 +306,7 @@ message WorkspaceBatchedStreamRequest {
 
 message WorkspaceBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated WorkspaceStreamResponse responses = 1;
 };
@@ -306,7 +441,7 @@ message WorkspaceBuildBatchedStreamRequest {
 
 message WorkspaceBuildBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated WorkspaceBuildStreamResponse responses = 1;
 };
@@ -441,7 +576,7 @@ message WorkspaceBuildDetailsBatchedStreamRequest {
 
 message WorkspaceBuildDetailsBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated WorkspaceBuildDetailsStreamResponse responses = 1;
 };
@@ -576,7 +711,7 @@ message WorkspaceConfigBatchedStreamRequest {
 
 message WorkspaceConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated WorkspaceConfigStreamResponse responses = 1;
 };
@@ -800,7 +935,7 @@ message WorkspaceSyncConfigBatchedStreamRequest {
 
 message WorkspaceSyncConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated WorkspaceSyncConfigStreamResponse responses = 1;
 };
