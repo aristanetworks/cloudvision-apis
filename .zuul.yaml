@@ -1,0 +1,3 @@
+- project:
+    name: cloudvision-apis
+    queue: cvp-queue
