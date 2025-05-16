@@ -66,8 +66,6 @@ message AlertStreamRequest {
 	//     until end.
 	//     * Each Alert response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -128,8 +126,6 @@ message AlertConfigStreamRequest {
 	//     until end.
 	//     * Each AlertConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -218,6 +214,8 @@ message DefaultTemplateSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DefaultTemplate instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -236,8 +234,6 @@ message DefaultTemplateStreamRequest {
 	//     until end.
 	//     * Each DefaultTemplate response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -272,8 +268,6 @@ message DefaultTemplateBatchedStreamRequest {
 	//     until end.
 	//     * Each DefaultTemplate response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -285,7 +279,7 @@ message DefaultTemplateBatchedStreamRequest {
 
 message DefaultTemplateBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DefaultTemplateStreamResponse responses = 1;
 };
@@ -341,6 +335,8 @@ message SenderStatusSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// SenderStatus instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -365,8 +361,6 @@ message SenderStatusStreamRequest {
 	//     until end.
 	//     * Each SenderStatus response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -407,8 +401,6 @@ message SenderStatusBatchedStreamRequest {
 	//     until end.
 	//     * Each SenderStatus response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -420,7 +412,7 @@ message SenderStatusBatchedStreamRequest {
 
 message SenderStatusBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated SenderStatusStreamResponse responses = 1;
 };
@@ -476,6 +468,8 @@ message TemplateConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// TemplateConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -494,8 +488,6 @@ message TemplateConfigStreamRequest {
 	//     until end.
 	//     * Each TemplateConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -530,8 +522,6 @@ message TemplateConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each TemplateConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -543,7 +533,7 @@ message TemplateConfigBatchedStreamRequest {
 
 message TemplateConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated TemplateConfigStreamResponse responses = 1;
 };

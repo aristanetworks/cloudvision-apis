@@ -202,6 +202,8 @@ enum EndpointType {
 	ENDPOINT_TYPE_ZOOM = 16;
 	// ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.
 	ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL = 17;
+	// ENDPOINT_TYPE_CV_ACTION represents the Actions of the Cloud Vision Portal endpoint type.
+	ENDPOINT_TYPE_CV_ACTION = 18;
 }
 
 // EndpointErrorType describes the set of possible endpoint error types.
@@ -283,6 +285,8 @@ message Settings {
 	WebhookSettings webhook = 20;
 	// ms_graph_send_mail is the settings for Microsoft Graph sendMail
 	MsGraphSendMailSettings ms_graph_send_mail = 21;
+	// cv_action is the global default settings for CloudVision Action
+	CvActionSettings cv_action = 22;
 }
 
 
@@ -673,6 +677,9 @@ message ZoomSettings {
 	google.protobuf.StringValue verification_token = 2;
 }
 
+// CvActionSettings contain the settings for sending alerts to CloudVision Action
+message CvActionSettings {
+}
 
 // InhibitionSettings allows certain event types to be suppressed while other event types are active
 message InhibitionSettings {
@@ -780,6 +787,10 @@ message BroadcastGroup {
 	// ms_graph_send_mail is a set of Microsoft Graph sendMail endpoints to send alerts to
 	// as part of this group
 	MsGraphSendMailEndpoints ms_graph_send_mail = 17;
+	// cv_action is a set of Cloud Vision Portal Action endpoints to send alerts to as part
+	// of this group. If the field is present during a Set call, all the Actions are set
+	// to authenticate as the calling user.
+	CvActionEndpoints cv_action = 18;
 }
 
 
@@ -900,6 +911,11 @@ message MsGraphSendMailEndpoints {
 	repeated MsGraphSendMailEndpoint values = 1;
 }
 
+// CvActionEndpoints is a set of Cloud Vision Portal Action endpoints
+message CvActionEndpoints {
+	// values are the elements of the set
+	repeated CvActionEndpoint values = 1;
+}
 
 // EmailEndpoint contains the required information for an alert to be sent to an email endpoint
 message EmailEndpoint{
@@ -931,7 +947,7 @@ message WebhookEndpoint {
 	WebhookSettings settings_override = 6;
 }
 
-// MsGraphSendMailEndpoint contains the required information for an alert to be sent to the 
+// MsGraphSendMailEndpoint contains the required information for an alert to be sent to the
 // microsft graph send mail api
 message MsGraphSendMailEndpoint {
 	// send_resolved send alerts when events are resolved along with when they are triggered
@@ -1097,6 +1113,33 @@ message ZoomEndpoint {
 	// settings_override is the override for the zoom global endpoint settings
 	ZoomSettings settings_override = 3;
 }
+
+
+// CvActionEndpoint contains the required information for an alert to run CloudVision Actions
+// (e.g. python scripts).
+message CvActionEndpoint {
+	// on_firing are the CloudVision Actions to be executed sequentially, one after another,
+	// when an event is triggered.
+	CvActions on_firing = 1;
+	// on_resolving are the CloudVision Actions to be executed sequentially, one after another,
+	// when an event resolves.
+	CvActions on_resolving = 2;
+}
+
+
+// CvActions is a list of CloudVision Actions to be executed sequentially, one after another.
+message CvActions {
+	// values is a list of CloudVision Actions to be executed.
+	repeated CvAction values = 1;
+}
+
+
+// CvAction is a single CloudVision Action to be executed.
+message CvAction {
+	// action_id identifies the Action to run. Presently one cannot specify its arguments.
+	google.protobuf.StringValue action_id = 1;
+}
+
 
 // TemplateType describes the types of Templates that are usable
 enum TemplateType {

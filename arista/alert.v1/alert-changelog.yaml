@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2025-05-15
+    description: Add CvAction endpoint
+    version: 1.13.0
+    onprem: true
+    cvaas: true
   - date: 2025-03-03
     description: Updating generated Golang and Python code in cloudvision-go and cloudvision-python
     version: 1.12.2
