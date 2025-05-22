@@ -123,6 +123,9 @@ message DeviceOnboardingConfig {
     google.protobuf.StringValue device_type = 3;
     // device_config is the configuration for a third-party device.
     DeviceConfiguration device_config = 4;
+    // profile_name specifies the name of the TerminAttr profile which includes the
+    // custom TerminAttr configuration to be applied to the device while onboarding.
+    google.protobuf.StringValue profile_name = 5;
 }
 
 // DeviceOnboarding describes the status of an onboarding process.
