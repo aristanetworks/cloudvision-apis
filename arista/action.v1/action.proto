@@ -1,0 +1,225 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.action.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/action.v1;action";
+
+import "fmp/extensions.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+// ActionAudit contains additional information for the Action state model.
+message ActionAudit {
+	// created_at records the time when the action was originally created.
+	google.protobuf.Timestamp created_at = 1;
+	// created_by records the user who created the action.
+	google.protobuf.StringValue created_by = 2;
+	// last_modified_at records the time when the action was most recently modified.
+	google.protobuf.Timestamp  last_modified_at = 3;
+	// last_modified_by records the user who most recently modified the action.
+	google.protobuf.StringValue last_modified_by = 4;
+	// from_package indicates that this action was created by a package, and can only be modified
+	// by the packaging service.
+	google.protobuf.StringValue from_package = 5;
+}
+
+// ActionKey is the model key of an action.
+message ActionKey {
+	option (fmp.model_key) = true;
+	// id uniquely identifies the action. Although chosen by the caller, it is recommended
+	// to be a random UUID.
+	google.protobuf.StringValue id = 1;
+}
+
+// ActionLanguage is the language of an action.
+enum ActionLanguage {
+	// ACTION_LANGUAGE_UNSPECIFIED is the default value for this type.
+	ACTION_LANGUAGE_UNSPECIFIED = 0;
+	// ACTION_LANGUAGE_PYTHON_2 indicates that the action body follows Python 2.x syntax.
+	ACTION_LANGUAGE_PYTHON_2 = 1 [deprecated = true];
+	// ACTION_LANGUAGE_PYTHON_3 indicates that the action body follows Python 3.x syntax.
+	ACTION_LANGUAGE_PYTHON_3 = 2;
+	// ACTION_LANGUAGE_GO_TEMPLATE indicates that the action body is a Go language template
+	// (e.g. as used in ZTP).
+	ACTION_LANGUAGE_GO_TEMPLATE = 3;
+}
+
+// ActionType is the type of an action.
+enum ActionType {
+	// ACTION_TYPE_UNSPECIFIED is the default value for this type.
+	ACTION_TYPE_UNSPECIFIED = 0;
+	// ACTION_TYPE_CHANGECONTROL_CUSTOM indicates a scripted action that can be used as part of
+	// a change control.
+	ACTION_TYPE_CHANGECONTROL_CUSTOM = 1;
+	// ACTION_TYPE_CHANGECONTROL_BUILT_IN indicates a built-in action with no scripted component
+	// which can be used as part of a change control.
+	ACTION_TYPE_CHANGECONTROL_BUILT_IN = 2;
+	// ACTION_TYPE_STUDIO_AUTOFILL is an action which can be bound to an input in a studio.
+	ACTION_TYPE_STUDIO_AUTOFILL = 3;
+	// ACTION_TYPE_PACKAGING_INSTALL_HOOK is a type of Action which can run during package lifecycle
+	// events (e.g. pre-install or post-uninstall) to handle any migration or configuration changes
+	// that need to happen for a Package to be (un)installed successfully.
+	ACTION_TYPE_PACKAGING_INSTALL_HOOK = 4;
+	// ACTION_TYPE_ZTP_BOOTSTRAP is a type of Action which can be used to bootstrap a device.
+	ACTION_TYPE_ZTP_BOOTSTRAP = 5;
+	// ACTION_TYPE_STUDIO_BUILD_HOOK is a type of Action which can run at various points in a
+	// workspace build pipeline (e.g. workspace pre-build, studio pre-render), facilitating
+	// customization of the workspace build beyond the standard process. Build hooks in a given
+	// stage can express dependencies on each other which allows ordering of the actions' execution.
+	//
+	// For ACTION_TYPE_STUDIO_BUILD_HOOK each hook invocation will provide the following
+	// arguments:
+	//
+	// * WorkspaceID (mandatory): the ID of the Workspace
+	// * StudioID (optional, if running in the context of a Studio): the ID of the Studio
+	ACTION_TYPE_STUDIO_BUILD_HOOK = 6;
+}
+
+// ActionArgDefinition is the definition of an argument (static or dynamic).
+message ActionArgDefinition {
+	// required indicates that this argument must always be set when calling the action.
+	google.protobuf.BoolValue required = 1;
+	// default is the default value for this argument. If set to null, there is no default
+	// value.
+	ActionArgValue default = 2;
+	// description is a user-friendly description of the argument.
+	google.protobuf.StringValue description = 3;
+	// hidden can be set to true to indicate that the value of this argument can be set, but not
+	// retrieved from this API.
+	google.protobuf.BoolValue hidden = 4;
+}
+
+// ActionSchema is the schema of an action. Corresponds to the definition of multiple
+// arguments.
+message ActionSchema {
+	// values is a map of argument name to its defintion.
+	map<string, ActionArgDefinition> values = 1;
+}
+
+// ActionCore contains the core fields of an action.
+message ActionCore {
+	// name is the user-friendly name of the action.
+	google.protobuf.StringValue name = 1;
+	// type is the specific type of the action.
+	ActionType type = 2;
+	// description is a user-friendly description of the action.
+	google.protobuf.StringValue description = 3;
+	// static_args defines arguments which can be permanently changed for subsequent runs
+	// of this action (set ActionArgConfig to accomplish that). The names of arguments in
+	// static_args cannot also appear in dynamic_args.
+	ActionSchema static_args = 4;
+	// dynamic_args defines arguments which are scoped to a specific run of the action.
+	// The names of arguments in dynamic_args cannot also appear in static_args.
+	ActionSchema dynamic_args = 5;
+}
+
+// Action is the state model of an action.
+message Action {
+	option (fmp.model) = "ro";
+	// key uniquely identifies the action.
+	ActionKey key = 1;
+	// core contains some common attributes (state/config) of the action.
+	ActionCore core = 2;
+	// audit contains meta information about the action.
+	ActionAudit audit = 3;
+	// language specifies the language of the action body, if applicable.
+	ActionLanguage language = 4;
+	// body contains the action code (script), if applicable.
+	google.protobuf.StringValue body = 5;
+}
+
+// ActionConfig is the config of an action. Unimplemented for builtin actions
+message ActionConfig {
+	option (fmp.model) = "rw";
+	// key uniquely identifies the action.
+	ActionKey key = 1;
+	// core contains some common attributes (state/config) of the action.
+	ActionCore core = 2;
+	// language specifies the language of the action body, if applicable.
+	ActionLanguage language = 3;
+	// body contains the action code (script), if applicable.
+	google.protobuf.StringValue body = 4;
+}
+
+// ActionArgValue contains the value of one argument of an action.
+message ActionArgValue {
+	// value is the string value to set the argument for runtime.
+	google.protobuf.StringValue value = 1;
+}
+
+// ActionArgValues contains the values of the arguments of an action.
+message ActionArgValues {
+	// values is a map of arg name to value.
+	map<string, ActionArgValue> values = 1;
+}
+
+// ActionArgConfig is the model for the definition of static arguments
+message ActionArgConfig {
+	option (fmp.model) = "rw";
+
+	// key uniquely identifies the action to which the arguments apply.
+	ActionKey key = 1;
+	// static_args contains the arguments that are to be applied to all subsequent runs
+	// of the action. Argument names and values must adhere to the ActionSchema static_args.
+	//
+	// When retrieving values of the arguments that had been set, but which are defined as
+	// `hidden` in ActionSchema static_args, fake hardcoded values are returned instead
+	// of the real values.
+	ActionArgValues static_args = 2;
+}
+
+// ActionRunKey is the model key that can uniquely identify an action run.
+message ActionRunKey {
+	option (fmp.model_key) = true;
+	// run_id uniquely identifies an action run
+	google.protobuf.StringValue run_id = 1;
+}
+
+// ActionRunConfig is the configuration of a single execution of an action. Creating a record under
+// a new key triggers a run. Attempting to set again an existing entry is an error.
+message ActionRunConfig {
+	option (fmp.model) = "rw";
+	// key uniquely identifies the ActionRunConfig and the corresponding ActionRun.
+	ActionRunKey key = 1;
+	// action_id uniquely identifies the Action being run.
+	google.protobuf.StringValue action_id = 2;
+	// dynamic_args contains the values of dynamic arguments defined for the action.
+	ActionArgValues dynamic_args = 3;
+}
+
+// ActionRun is the state of a single run (single execution) of an action.
+message ActionRun {
+	option (fmp.model) = "ro";
+	// key uniquely identifies the ActionRun and the corresponding ActionRunConfig.
+	ActionRunKey key = 1;
+	// action_id uniquely identifies the Action being run.
+	google.protobuf.StringValue action_id = 2;
+	// created_at records the time when the action run has been requested.
+	google.protobuf.Timestamp created_at = 3;
+	// created_by records the user who requested the action execution.
+	google.protobuf.StringValue created_by = 4;
+	// Reserved for additional future Timestamps, to keep their tags in sequence.
+	reserved 5, 6, 7;
+	// finished_at records the time when the action finished running.
+	google.protobuf.Timestamp finished_at = 8;
+	// is_finished is true only when the action has finished running and the fields `code`,
+	// `output`, `error`, and `finished_at` are assigned their final values.
+	google.protobuf.BoolValue is_finished = 9;
+	// code contains the exit code of the action.
+	//
+	// The `code` may be ignored if `error` is empty or nil.
+	google.protobuf.Int32Value code = 10;
+	// output contains the output produced by the action, truncated to the first 100,000 bytes.
+	google.protobuf.StringValue output = 11;
+	// error contains a failure description for unsuccessful runs, either caused by the body
+	// or by the execution environment.
+	//
+	// Often it is a python traceback which contains multiple newline characters.
+	// Maximum size is 100,000 bytes.
+	google.protobuf.StringValue error = 12;
+}
