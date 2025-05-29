@@ -4,6 +4,12 @@
 # FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
 
 Changes:
+    - date: 2025-05-29
+      description: Add Element model
+      version: 2.1.0
+      onprem: true
+      cvaas: true
+
     - date: 2025-03-18
       description: Add support for virtual elements like applications/services
       version: 2.0.7
