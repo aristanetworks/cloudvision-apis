@@ -1,0 +1,1952 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.softwaremanagement.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ReleasesService"
+    },
+    {
+      "name": "RepositoryService"
+    },
+    {
+      "name": "RepositoryConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/softwaremanagement/v1/Releases": {
+      "get": {
+        "operationId": "ReleasesService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.ReleasesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ReleasesService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Releases/watch": {
+      "get": {
+        "operationId": "ReleasesService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.ReleasesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.ReleasesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ReleasesService"
+        ]
+      },
+      "post": {
+        "operationId": "ReleasesService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.ReleasesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.ReleasesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.ReleasesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ReleasesService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository": {
+      "get": {
+        "operationId": "RepositoryService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "description": "name is a unique identifier that will be used to identify the image or extension in\nCloudVision",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository/all": {
+      "get": {
+        "operationId": "RepositoryService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository/getsome": {
+      "post": {
+        "operationId": "RepositoryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositorySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositorySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositorySomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository/metadata": {
+      "get": {
+        "operationId": "RepositoryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository/watch": {
+      "get": {
+        "operationId": "RepositoryService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/Repository/watchmetadata": {
+      "get": {
+        "operationId": "RepositoryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig": {
+      "get": {
+        "operationId": "RepositoryConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "description": "name is a unique identifier that will be used to identify the image or extension in\nCloudVision",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "RepositoryConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "description": "name is a unique identifier that will be used to identify the image or extension in\nCloudVision",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "RepositoryConfig carries the value to set into the datastore.\nSee the documentation on the RepositoryConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/all": {
+      "get": {
+        "operationId": "RepositoryConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "RepositoryConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/deletesome": {
+      "post": {
+        "operationId": "RepositoryConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/getsome": {
+      "post": {
+        "operationId": "RepositoryConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/metadata": {
+      "get": {
+        "operationId": "RepositoryConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/some": {
+      "post": {
+        "operationId": "RepositoryConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/watch": {
+      "get": {
+        "operationId": "RepositoryConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    },
+    "/api/resources/softwaremanagement/v1/RepositoryConfig/watchmetadata": {
+      "get": {
+        "operationId": "RepositoryConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "RepositoryConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.softwaremanagement.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.softwaremanagement.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RepositoryConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.softwaremanagement.v1.Arch": {
+      "type": "string",
+      "enum": [
+        "ARCH_UNSPECIFIED",
+        "ARCH_NO_ARCH",
+        "ARCH_I386",
+        "ARCH_I686",
+        "ARCH_X86_64",
+        "ARCH_AARCH64"
+      ],
+      "default": "ARCH_UNSPECIFIED",
+      "description": "Arch is an enum used to specify the target architecture of an image or extension.\n\n - ARCH_UNSPECIFIED: ARCH_UNSPECIFIED indicates an unknown or unspecified architecture\n - ARCH_NO_ARCH: ARCH_NO_ARCH indicates that the software is architecture agnostic\n - ARCH_I386: ARCH_I386 indicates that the software is intended for the i386 architecture\n - ARCH_I686: ARCH_I686 indicates that the software is intended for the i686 architecture\n - ARCH_X86_64: ARCH_X86_64 indicates that the software is intended to be run on 64-bit platforms\n - ARCH_AARCH64: ARCH_AARCH64 indicates that the software is intended to be run on ARM 64-bit platforms"
+    },
+    "arista.softwaremanagement.v1.DigestType": {
+      "type": "string",
+      "enum": [
+        "DIGEST_TYPE_UNSPECIFIED",
+        "DIGEST_TYPE_SHA512"
+      ],
+      "default": "DIGEST_TYPE_UNSPECIFIED",
+      "description": "DigestType is the digest algorithm used as a checksum on the software file.\n\n - DIGEST_TYPE_UNSPECIFIED: DIGEST_TYPE_UNSPECIFIED indicates that the digest type is unknown\n - DIGEST_TYPE_SHA512: DIGEST_TYPE_SHA512 indicates that the SHA512 algorithm is used to calculate the digest"
+    },
+    "arista.softwaremanagement.v1.ExtensionMetadata": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "description is the swix or rpm description"
+        },
+        "name": {
+          "type": "string",
+          "title": "name is the name of the swix or rpm extension"
+        },
+        "version": {
+          "type": "string",
+          "title": "version is the version of the swix or rpm extension"
+        },
+        "release": {
+          "type": "string",
+          "title": "release is the value of the swix or rpm extension release"
+        },
+        "epoch": {
+          "type": "string",
+          "title": "epoch is versioning metadata in swix or rpm extensions which allows handling for\nhard-to-compare version numbers"
+        },
+        "arch": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Arch",
+          "title": "arch is the architecture of the swix or rpm extension"
+        },
+        "supportedEosVersions": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "supported_eos_versions is a list which contains EOS versions supported by the extension.\nAn empty list indicates there are no known restrictions on the EOS versions supported by\nthe extension"
+        }
+      },
+      "description": "ExtensionMetadata is versioning metadata describing extensions (.swix and .rpm)."
+    },
+    "arista.softwaremanagement.v1.Flavor": {
+      "type": "string",
+      "enum": [
+        "FLAVOR_UNSPECIFIED",
+        "FLAVOR_DEFAULT",
+        "FLAVOR_2GB",
+        "FLAVOR_CLOUD",
+        "FLAVOR_DPE",
+        "FLAVOR_PDP",
+        "FLAVOR_2GB_PDP",
+        "FLAVOR_DPE_CTNR"
+      ],
+      "default": "FLAVOR_UNSPECIFIED",
+      "description": "Flavor is an enum containing the possible .swi flavor types.\n\n - FLAVOR_UNSPECIFIED: FLAVOR_UNSPECIFIED indicates that the swi image flavor is unknown\n - FLAVOR_DEFAULT: FLAVOR_DEFAULT is the default swi image\n - FLAVOR_2GB: FLAVOR_2GB is an obsolete image supporting a reduced-size 2GB image version that runs\nonly on older models of devices with two gigabytes of flash memory\n - FLAVOR_CLOUD: FLAVOR_CLOUD is a swi image that runs in a virtualized cloud environment\n - FLAVOR_DPE: FLAVOR_DPE is a swi image that provides MacSec without a license\n - FLAVOR_PDP: FLAVOR_PDP is an image that defaults to support PDP but can also support CoPP\n - FLAVOR_2GB_PDP: FLAVOR_2GB_PDP is a 2GB image that defaults to support PDP if available, but can support\nCoPP\n - FLAVOR_DPE_CTNR: FLAVOR_DPE_CTNR is a swi image that provides MacSec without a license and natively\nsupports running containers on EOS"
+    },
+    "arista.softwaremanagement.v1.ImageFormatVersion": {
+      "type": "string",
+      "enum": [
+        "IMAGE_FORMAT_VERSION_UNSPECIFIED",
+        "IMAGE_FORMAT_VERSION_1_0",
+        "IMAGE_FORMAT_VERSION_2_0",
+        "IMAGE_FORMAT_VERSION_3_0"
+      ],
+      "default": "IMAGE_FORMAT_VERSION_UNSPECIFIED",
+      "description": "ImageFormatVersion is an enum defining the image format versions of a SWI image.\n\n - IMAGE_FORMAT_VERSION_UNSPECIFIED: IMAGE_FORMAT_VERSION_UNSPECIFIED indicates an unknown image format\n - IMAGE_FORMAT_VERSION_1_0: IMAGE_FORMAT_VERSION_1_0 indicates legacy swi format\n - IMAGE_FORMAT_VERSION_2_0: IMAGE_FORMAT_VERSION_2_0 indicates modular swi format\n - IMAGE_FORMAT_VERSION_3_0: IMAGE_FORMAT_VERSION_3_0 indicates optimised modular swi format"
+    },
+    "arista.softwaremanagement.v1.Level": {
+      "type": "string",
+      "enum": [
+        "LEVEL_UNSPECIFIED",
+        "LEVEL_INFO",
+        "LEVEL_WARNING",
+        "LEVEL_ERROR"
+      ],
+      "default": "LEVEL_UNSPECIFIED",
+      "description": "Level specifies relative importance of the information returned in the message field of the\nsoftware releases status.\n\n - LEVEL_UNSPECIFIED: LEVEL_UNSPECIFIED is set when the message level is unknown\n - LEVEL_INFO: LEVEL_INFO is set when the message contains useful, informational content. No user action is\nrequired.\n - LEVEL_WARNING: LEVEL_WARNING is set when the message contains important information for the user that\nshould be addressed for continued proper behavior\n - LEVEL_ERROR: LEVEL_ERROR is set when the message contains information alerting the user to an error\ncondition that occurred while retrieving the set of software releases. Remedial user action\nmay be required to clear this condition."
+    },
+    "arista.softwaremanagement.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.Progress": {
+      "type": "string",
+      "enum": [
+        "PROGRESS_UNSPECIFIED",
+        "PROGRESS_INITIAL",
+        "PROGRESS_QUEUED",
+        "PROGRESS_LOADING",
+        "PROGRESS_VALIDATING",
+        "PROGRESS_SAVING",
+        "PROGRESS_SUCCESS",
+        "PROGRESS_ERROR"
+      ],
+      "default": "PROGRESS_UNSPECIFIED",
+      "description": "Progress is used by the Repository service to describe the stages of the software upload\nand verification process.\n\n - PROGRESS_UNSPECIFIED: PROGRESS_UNSPECIFIED indicates that upload progress is not currently reportable\n - PROGRESS_INITIAL: PROGRESS_INITIAL indicates that a software upload has begun\n - PROGRESS_QUEUED: PROGRESS_QUEUED indicates that an image or extension upload is waiting in a queue\n - PROGRESS_LOADING: PROGRESS_LOADING indicates that an image or extension is currently being retrieved from\nArista's Software Download site or CloudVision file server for processing\n - PROGRESS_VALIDATING: PROGRESS_VALIDATING indicates that an image or extension is being validated\n - PROGRESS_SAVING: PROGRESS_SAVING indicates that an image or extension is being uploaded to\nCloudVision file server\n - PROGRESS_SUCCESS: PROGRESS_SUCCESS indicates that an image or extension has been successfully uploaded and\nvalidated. This is a terminal state of an upload.\n - PROGRESS_ERROR: PROGRESS_ERROR indicates that an image or extension failed at either the upload or\nvalidation phase. This is a terminal state of an upload."
+    },
+    "arista.softwaremanagement.v1.RecommendedAction": {
+      "type": "string",
+      "enum": [
+        "RECOMMENDED_ACTION_UNSPECIFIED",
+        "RECOMMENDED_ACTION_CONTACT_TAC",
+        "RECOMMENDED_ACTION_ADD_TOKEN",
+        "RECOMMENDED_ACTION_UPDATE_TOKEN",
+        "RECOMMENDED_ACTION_ACCEPT_EULA",
+        "RECOMMENDED_ACTION_RETRY"
+      ],
+      "default": "RECOMMENDED_ACTION_UNSPECIFIED",
+      "description": "RecommendedAction is an enum containing all of the possible steps a user can take to address\nproblems encountered while performing software management-related actions.\n\n - RECOMMENDED_ACTION_UNSPECIFIED: RECOMMENDED_ACTION_UNSPECIFIED indicates that no remedial action is needed.\n - RECOMMENDED_ACTION_CONTACT_TAC: RECOMMENDED_ACTION_CONTACT_TAC indicates that in order to resolve the current issue,\nArista TAC assistance is recommended.\n - RECOMMENDED_ACTION_ADD_TOKEN: RECOMMENDED_ACTION_ADD_TOKEN indicates that a particular issue can be resolved by adding\nthe access token stored in CloudVision.\n - RECOMMENDED_ACTION_UPDATE_TOKEN: RECOMMENDED_ACTION_UPDATE_TOKEN indicates that a particular issue can be resolved by updating\nthe access token stored in CloudVision.\n - RECOMMENDED_ACTION_ACCEPT_EULA: RECOMMENDED_ACTION_ACCEPT_EULA indicates that a particular issue can be resolved by accepting\nthe EULA agreement available at the Arista Software Download site.\n - RECOMMENDED_ACTION_RETRY: RECOMMENDED_ACTION_RETRY indicates that a paticular issue may be resolved by\nre-attempting the previous action."
+    },
+    "arista.softwaremanagement.v1.Releases": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.ReleasesStatus",
+          "title": "status is providing additional information about the retrieval of the software releases\nreturned in the message"
+        },
+        "uris": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "uris are the URI paths specifying the location of the available software releases that\ncan be downloaded from the Arista's Software Download site. These URIs are used\nby the `RepositoryConfig` API to add a software release to CloudVision."
+        }
+      },
+      "description": "Releases is the entire set of software releases available from the Arista's Software\nDownload site. Once downloaded, a software release can be deployed to devices managed by\nCloudVision."
+    },
+    "arista.softwaremanagement.v1.ReleasesResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Releases",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nReleases instance in this response."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.ReleasesStatus": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Level",
+          "title": "level is the relative importance of the message field contained in the status"
+        },
+        "message": {
+          "type": "string",
+          "title": "message is populated with a string which will provide more information regarding\nthe latest interaction with the Arista's Software Download site while pulling the set of\navailable software releases"
+        },
+        "recommendedAction": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RecommendedAction",
+          "description": "recommended_action expresses a particular user-actionable step that can be carried out to\nensure the proper operation of CloudVision while interacting with Arista's Software\nDownload site to obtain the set of available software releases."
+        }
+      },
+      "description": "ReleasesStatus contains information about the state of the available software releases\nwhich are retrieved from Arista's Software Download site by CloudVision."
+    },
+    "arista.softwaremanagement.v1.ReleasesStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.Releases"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Releases at end.\n    * Each Releases response is fully-specified (all fields set).\n  * start: Returns the state of each Releases at start, followed by updates until now.\n    * Each Releases response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Releases at start, followed by updates\n    until end.\n    * Each Releases response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.ReleasesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Releases",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Releases's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Releases value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.Repository": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey",
+          "title": "key is the unique identifier"
+        },
+        "uploadedBy": {
+          "type": "string",
+          "title": "uploaded_by specifies the author of the upload"
+        },
+        "uploadedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "uploaded_at specifies the date and time of the upload"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "title": "last_modified_by is the author of the most recent metadata modification"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last_modified_at is the date and time of the most recent metadata modification"
+        },
+        "softwareStatus": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.SoftwareStatus",
+          "title": "software_status displays status of the software that is being added to CloudVision"
+        },
+        "softwareMetadata": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.SoftwareMetadata",
+          "title": "software_metadata displays details about available software"
+        }
+      },
+      "description": "Repository is the state model that displays metadata for software images and extensions.\n\n`Repository` objects are created when new software is added via a `Set`\nrequest issued to the `RepositoryConfig` resource or when using the Software Upload REST API.\nThe `key` uniquely identifies the software state and is identical to the key used to create it\nvia the call to `Set`."
+    },
+    "arista.softwaremanagement.v1.RepositoryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey",
+          "title": "key is a unique identifier that must be supplied by the user to start a valid upload of\nsoftware"
+        },
+        "uri": {
+          "type": "string",
+          "description": "uri value depends on the origin of the software. If you are downloading an image or\nextension file from Arista's Software Download site, use the site identifier. If you are\nuploading software from your computer using the Software Upload REST API, this field will\nbe populated with the CloudVision file server identifier."
+        },
+        "rebootRequired": {
+          "type": "boolean",
+          "description": "reboot_required is a Boolean indicating if a device requires a reboot after software\ninstallation. .swi images always require a reboot."
+        }
+      },
+      "description": "RepositoryConfig objects are used to add, delete, and update images or extensions in\nCloudVision.\n\nThe `Set` method is used to add and modify software stored in CloudVision.\nThe `Delete` method is used to remove software.\n\nAdding Software to CloudVision:\n\nWhen a `Set` is made, the software identified by the URI will be downloaded from Arista's\nSoftware Download site and stored in CloudVision. The status of the software will be reflected\nby a corresponding `Repository` entry identified by the same `RepositoryKey`.\n\nHere is an example where a .swi EOS image is added to CloudVision:\n\n```\n{\n \"value\": {\n   \"key\": {\n     \"name\": \"EOS64-4.30.0.1F.swi\"\n   },\n   \"uri\": \"/support/download/EOS-USA/Active Releases/4.30/EOS-4.30.0.1F/EOS64-4.30.0.1F.swi\",\n   \"rebootRequired\": true\n },\n}\n```\n\nThe following is an example of a configuration that will add the\n_AristaAppForSplunk-2.0.1-4.27.swix_ extension to CloudVision:\n\n```\n{\n \"value\": {\n   \"key\": {\n     \"name\": \"AristaAppForSplunk-2.0.1-4.27.swix\"\n   },\n   \"uri\": \"/support/download/Extensions/Splunk/AristaAppForSplunk-2.0.1-4.27.swix\",\n   \"rebootRequired\": false\n },\n}\n```\n\nUpdating Existing Software:\n\n`Repository` metadata objects can be _updated_ by using the config `Set` method and\nspecifying the field or fields to be modified. Currently, `reboot_required` is the only field\nthat can be modified after software has been added to CloudVision. All other fields must match\nthe existing configuration, or can be omitted.\n\nNOTE: The `reboot_required` field must be `true` for .swi images.\n\nIn this example, we update the `reboot_required` field changing it from `false` to `true`\nwhile leaving out the uri field:\n\n```\n{\n \"value\": {\n   \"key\": {\n     \"name\": \"AristaAppForSplunk-2.0.1-4.27.swix\"\n   },\n   \"rebootRequired\": true\n },\n}\n```\n\nDeleting Software:\n\n`Repository` objects can be deleted using the `RepositoryConfig` `Delete` method.\nA `Delete` request will specify the `key` which uniquely identifies the image or extension in\nCloudVision. For example, a delete request will look like the following:\n```\n{\n \"value\": {\n   \"key\": {\n     \"name\": \"AristaAppForSplunk-2.0.1-4.27.swix\"\n   },\n },\n}\n```"
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey",
+          "description": "This is the key of the RepositoryConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey",
+          "description": "Key echoes back the key of the deleted RepositoryConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey"
+          },
+          "title": "key contains a list of RepositoryConfig keys to delete"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "RepositoryConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nRepositoryConfig instance in this response."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig",
+          "description": "Value carries all the values given in the RepositoryConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig"
+          },
+          "description": "value contains a list of RepositoryConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each RepositoryConfig at end.\n    * Each RepositoryConfig response is fully-specified (all fields set).\n  * start: Returns the state of each RepositoryConfig at start, followed by updates until now.\n    * Each RepositoryConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each RepositoryConfig at start, followed by updates\n    until end.\n    * Each RepositoryConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this RepositoryConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the RepositoryConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryKey": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name is a unique identifier that will be used to identify the image or extension in\nCloudVision"
+        }
+      },
+      "description": "RepositoryKey is the key used by the `Repository` state and config models to uniquely\nidentify an image or extension.\n\nThe `name` field must contain the file suffix. Valid file types include .swi, .swix and .rpm\nfiles. Streaming Agent files must also contain the term: `TerminAttr` (case insensitive).",
+      "required": [
+        "name"
+      ]
+    },
+    "arista.softwaremanagement.v1.RepositoryResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Repository",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nRepository instance in this response."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositorySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositorySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Repository",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.softwaremanagement.v1.Repository"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Repository at end.\n    * Each Repository response is fully-specified (all fields set).\n  * start: Returns the state of each Repository at start, followed by updates until now.\n    * Each Repository response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Repository at start, followed by updates\n    until end.\n    * Each Repository response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.RepositoryStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Repository",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Repository's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Repository value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.softwaremanagement.v1.SoftwareMetadata": {
+      "type": "object",
+      "properties": {
+        "digestType": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.DigestType",
+          "title": "digest_type specifies the type of digest algorithm used to calculate the digest for this\nimage or extension"
+        },
+        "digest": {
+          "type": "string",
+          "title": "digest is the digest value for the image or extension"
+        },
+        "size": {
+          "type": "string",
+          "format": "uint64",
+          "title": "size is the size of the image or extension in bytes"
+        },
+        "rebootRequired": {
+          "type": "boolean",
+          "title": "reboot_required boolean indicating if a device requires a reboot after software installation"
+        },
+        "softwareType": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.SoftwareType",
+          "description": "software_type determines which version field is populated - .swi image metadata appears in\nswi_metadata. .swix and .rpm extensions appear in extension_metadata."
+        },
+        "swiMetadata": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.SwiMetadata",
+          "title": "swi_metadata is versioning information for .swi type images"
+        },
+        "extensionMetadata": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.ExtensionMetadata",
+          "title": "extension_metadata is versioning information for extensions (.rpm and .swix)"
+        },
+        "fileServerPath": {
+          "type": "string",
+          "title": "file_server_path is the location of the image or extension as stored in CloudVision"
+        },
+        "softwareSource": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.SoftwareSource",
+          "title": "software_source indicates if the software being processed has been downloaded\nfrom Arista's Software Download site or uploaded to CloudVision from a user's local computer"
+        }
+      },
+      "description": "SoftwareMetadata is the detailed metadata describing software files."
+    },
+    "arista.softwaremanagement.v1.SoftwareSource": {
+      "type": "string",
+      "enum": [
+        "SOFTWARE_SOURCE_UNSPECIFIED",
+        "SOFTWARE_SOURCE_CLOUD",
+        "SOFTWARE_SOURCE_LOCAL",
+        "SOFTWARE_SOURCE_PRELOADED",
+        "SOFTWARE_SOURCE_NP_MIGRATION"
+      ],
+      "default": "SOFTWARE_SOURCE_UNSPECIFIED",
+      "description": "SoftwareSource describes the software upload mode.\n\n - SOFTWARE_SOURCE_UNSPECIFIED: SOFTWARE_SOURCE_UNSPECIFIED indicates that the source is not known\n - SOFTWARE_SOURCE_CLOUD: SOFTWARE_SOURCE_CLOUD indicates that the image or extension has been downloaded from\nArista's Software Download site\n - SOFTWARE_SOURCE_LOCAL: SOFTWARE_SOURCE_LOCAL indicates that the image or extension file has been uploaded directly\nto CloudVision by the user\n - SOFTWARE_SOURCE_PRELOADED: SOFTWARE_SOURCE_PRELOADED indicates that the image or extension file has been added as part\nof an upgrade of CloudVision.\n - SOFTWARE_SOURCE_NP_MIGRATION: SOFTWARE_SOURCE_NP_MIGRATION indicates that the image or extension file has been internally\ntransferred from Network Provisioning to Software Management Studio as part of the\nmigration process."
+    },
+    "arista.softwaremanagement.v1.SoftwareStatus": {
+      "type": "object",
+      "properties": {
+        "progress": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Progress",
+          "title": "progress displays the current status of the software upload"
+        },
+        "message": {
+          "type": "string",
+          "title": "message describes the progress of the software upload"
+        },
+        "recommendedAction": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.RecommendedAction",
+          "description": "recommended_action expresses a particular user-actionable step that can be carried out to\nensure the proper operation of CloudVision while managing software."
+        }
+      },
+      "description": "SoftwareStatus contains a progress field and a description explaining the progress during\nsoftware upload."
+    },
+    "arista.softwaremanagement.v1.SoftwareType": {
+      "type": "string",
+      "enum": [
+        "SOFTWARE_TYPE_UNSPECIFIED",
+        "SOFTWARE_TYPE_SWI",
+        "SOFTWARE_TYPE_TERMINATTR",
+        "SOFTWARE_TYPE_SWIX",
+        "SOFTWARE_TYPE_RPM"
+      ],
+      "default": "SOFTWARE_TYPE_UNSPECIFIED",
+      "description": "SoftwareType is an enum containing the possible Software types. `SOFTWARE_TYPE_TERMINATTR`,\nwhich corresponds to an EOS Streaming Agent, is first-classed due to it's importance to\nCloudVision.\n\n - SOFTWARE_TYPE_UNSPECIFIED: SOFTWARE_TYPE_UNSPECIFIED indicates that the type cannot or has not been determined\n - SOFTWARE_TYPE_SWI: SOFTWARE_TYPE_SWI identifies an EOS swi image type. The corresponding image files will\nhave a .swi extension.\n - SOFTWARE_TYPE_TERMINATTR: SOFTWARE_TYPE_TERMINATTR identifies a Streaming Agent extension. The corresponding\nfiles will contain the term: \"TerminAttr\" (case insensitive) and a .swix extension.\n - SOFTWARE_TYPE_SWIX: SOFTWARE_TYPE_SWIX identifies an extension type. The corresponding files will have a .swix\nextension.\n - SOFTWARE_TYPE_RPM: SOFTWARE_TYPE_RPM identifies an RPM file. The corresponding files will have a .rpm\nextension."
+    },
+    "arista.softwaremanagement.v1.SwiMetadata": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "version specifies the version of the swi image"
+        },
+        "release": {
+          "type": "string",
+          "title": "release specifies the swi image release information"
+        },
+        "variant": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Variant",
+          "title": "variant specifies the swi image variant"
+        },
+        "flavor": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Flavor",
+          "title": "flavor is the swi image flavor"
+        },
+        "arch": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Arch",
+          "title": "arch is the swi architecture"
+        },
+        "maxHardwareEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "title": "max_hardware_epoch specifies the max hardware epoch value supported"
+        },
+        "blessed": {
+          "type": "boolean",
+          "title": "blessed indicates if the swi image is blessed"
+        },
+        "imageFormatVersion": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.ImageFormatVersion",
+          "title": "image_format_version specifies the EOS image format version"
+        },
+        "embeddedTerminattr": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.ExtensionMetadata",
+          "title": "embedded_terminattr specifies the default embedded TerminAttr version pre-installed in the\nEOS swi image"
+        },
+        "optimization": {
+          "type": "string",
+          "title": "optimization specifies any adaptations made to the image for specific products or\nuse-cases"
+        }
+      },
+      "description": "SwiMetadata is versioning metadata describing .swi type images."
+    },
+    "arista.softwaremanagement.v1.Variant": {
+      "type": "string",
+      "enum": [
+        "VARIANT_UNSPECIFIED",
+        "VARIANT_US",
+        "VARIANT_INTERNATIONAL"
+      ],
+      "default": "VARIANT_UNSPECIFIED",
+      "description": "Variant is an enum containing the possible .swi variant types.\n\n - VARIANT_UNSPECIFIED: VARIANT_UNSPECIFIED is used to indicate an unknown or unspecified EOS image variant\n - VARIANT_US: VARIANT_US specifies a US or default version of an EOS image variant\n - VARIANT_INTERNATIONAL: VARIANT_INTERNATIONAL specifies an international EOS image variant"
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
