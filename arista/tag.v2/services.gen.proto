@@ -32,6 +32,151 @@ message MetaResponse {
 	google.protobuf.UInt32Value count = 3;
 };
 
+message ElementRequest {
+	// Key uniquely identifies a Element instance to retrieve.
+	// This value must be populated.
+	ElementKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ElementResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Element value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Element instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ElementSomeRequest {
+	repeated ElementKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ElementSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	Element value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Element instance in this response.
+	google.protobuf.Timestamp time = 3;
+};
+
+message ElementStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Element partial_eq_filter = 1;
+	// For each Element in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given Element is streamed to the user.
+	ElementFilter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Element at end.
+	//     * Each Element response is fully-specified (all fields set).
+	//   * start: Returns the state of each Element at start, followed by updates until now.
+	//     * Each Element response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Element at start, followed by updates
+	//     until end.
+	//     * Each Element response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+};
+
+message ElementStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	Element value = 1;
+
+	// Time holds the timestamp of this Element's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the Element value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message ElementBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated Element partial_eq_filter = 1;
+	// For each Element in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given Element is streamed to the user.
+	ElementFilter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each Element at end.
+	//     * Each Element response is fully-specified (all fields set).
+	//   * start: Returns the state of each Element at start, followed by updates until now.
+	//     * Each Element response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each Element at start, followed by updates
+	//     until end.
+	//     * Each Element response at start is fully-specified, but updates until end may
+	//       be partial.
+	//
+	// This field is not allowed in the Subscribe RPC.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ElementBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ElementStreamResponse responses = 1;
+};
+
+service ElementService {
+	rpc GetOne (ElementRequest) returns (ElementResponse);
+	rpc GetSome (ElementSomeRequest) returns (stream ElementSomeResponse);
+	rpc GetAll (ElementStreamRequest) returns (stream ElementStreamResponse);
+	rpc Subscribe (ElementStreamRequest) returns (stream ElementStreamResponse);
+	rpc GetMeta (ElementStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ElementStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ElementBatchedStreamRequest) returns (stream ElementBatchedStreamResponse);
+	rpc SubscribeBatched (ElementBatchedStreamRequest) returns (stream ElementBatchedStreamResponse);
+}
+
 message TagRequest {
 	// Key uniquely identifies a Tag instance to retrieve.
 	// This value must be populated.
@@ -72,6 +217,8 @@ message TagSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Tag instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -151,7 +298,7 @@ message TagBatchedStreamRequest {
 
 message TagBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated TagStreamResponse responses = 1;
 };
@@ -207,6 +354,8 @@ message TagAssignmentSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// TagAssignment instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -286,7 +435,7 @@ message TagAssignmentBatchedStreamRequest {
 
 message TagAssignmentBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated TagAssignmentStreamResponse responses = 1;
 };
@@ -342,6 +491,8 @@ message TagAssignmentConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// TagAssignmentConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -421,7 +572,7 @@ message TagAssignmentConfigBatchedStreamRequest {
 
 message TagAssignmentConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated TagAssignmentConfigStreamResponse responses = 1;
 };
@@ -566,6 +717,8 @@ message TagConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// TagConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -645,7 +798,7 @@ message TagConfigBatchedStreamRequest {
 
 message TagConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated TagConfigStreamResponse responses = 1;
 };

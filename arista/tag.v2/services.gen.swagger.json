@@ -10,6 +10,9 @@
   },
   "tags": [
     {
+      "name": "ElementService"
+    },
+    {
       "name": "TagService"
     },
     {
@@ -32,6 +35,617 @@
     "application/json"
   ],
   "paths": {
+    "/api/resources/tag/v2/Element": {
+      "get": {
+        "operationId": "ElementService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.type",
+            "description": "type is the type of the element.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE",
+              "ELEMENT_TYPE_VIRTUAL"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.subType",
+            "description": "sub_type is the sub-type of the element.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ELEMENT_SUB_TYPE_UNSPECIFIED",
+              "ELEMENT_SUB_TYPE_DEVICE",
+              "ELEMENT_SUB_TYPE_VDS",
+              "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
+              "ELEMENT_SUB_TYPE_VM",
+              "ELEMENT_SUB_TYPE_APPLICATION"
+            ],
+            "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.primaryId",
+            "description": "primary_id is the device ID of the element. The value of\nthis ID is based on type and sub_type:\n\ntype: DEVICE\n  sub_type: DEVICE\n    id: \u003cserial_number\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cuuid\u003e\ntype: INTERFACE\n  sub_type: DEVICE\n    id: \u003cserial_number\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cuuid\u003e\ntype: VIRTUAL\n  sub_type: APPLICATION\n    id: \u003capplication_id\u003e",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.secondaryId",
+            "description": "secondary_id is the interface ID of the element. The value of\nthis ID is based on type and sub_type:\n\ntype: DEVICE\n  N/A\ntype: INTERFACE\n  sub_type: DEVICE\n    id: \u003cinterface_name\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cinterface_name\u003e\ntype: VIRTUAL\n  sub_type: APPLICATION\n    id: \u003cservice_id\u003e",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Element/all": {
+      "get": {
+        "operationId": "ElementService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.ElementStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.search.queryElementType",
+            "description": "query_element_type (required) indicates the type of element against which\nthe query will be executed. To search by sub-type, use the special \"type:\"\ntag from within the query.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE",
+              "ELEMENT_TYPE_VIRTUAL"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.search.query",
+            "description": "query (required) is a tag query. This is a string that specifies a set of\ntag assignment conditions. For example:\n\n- \"Campus:SF\"\n    Match any device that has the \"Campus:SF\" tag assigned to it.\n    I.e., match any device in the SF campus.\n- \"Campus:*\"\n    Match any device that has any \"Campus:\" tag assigned to it.\n    I.e., match any device in any campus.\n- \"Campus:SF AND Role:Spine\"\n    Match any device that has the \"Campus:SF\" and \"Role:Spine\"\n    tag assigned to it.\n    I.e., match any spine device in the SF campus.\n\nTODO: Link to grammar file.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.workspaceId",
+            "description": "workspace_id is the ID of a workspace. If set, it indicates that the\nsearch space should be constrained only to the elements that are known\nor configured in the given workspace.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.excludeUnregisteredElements",
+            "description": "exclude_unregistered_elements indicates whether elements that are not registered\nin the Inventory and Topology (I\u0026T) Studio should be excluded from the results.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "filter.search.ignoreTopologyTags",
+            "description": "ignore_topology_tags indicates whether topology_hint tags should be ignored during\nthe execution of the query.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      },
+      "post": {
+        "operationId": "ElementService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.ElementStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Element/getsome": {
+      "post": {
+        "operationId": "ElementService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.ElementSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.ElementSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Element/metadata": {
+      "get": {
+        "operationId": "ElementService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.search.queryElementType",
+            "description": "query_element_type (required) indicates the type of element against which\nthe query will be executed. To search by sub-type, use the special \"type:\"\ntag from within the query.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE",
+              "ELEMENT_TYPE_VIRTUAL"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.search.query",
+            "description": "query (required) is a tag query. This is a string that specifies a set of\ntag assignment conditions. For example:\n\n- \"Campus:SF\"\n    Match any device that has the \"Campus:SF\" tag assigned to it.\n    I.e., match any device in the SF campus.\n- \"Campus:*\"\n    Match any device that has any \"Campus:\" tag assigned to it.\n    I.e., match any device in any campus.\n- \"Campus:SF AND Role:Spine\"\n    Match any device that has the \"Campus:SF\" and \"Role:Spine\"\n    tag assigned to it.\n    I.e., match any spine device in the SF campus.\n\nTODO: Link to grammar file.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.workspaceId",
+            "description": "workspace_id is the ID of a workspace. If set, it indicates that the\nsearch space should be constrained only to the elements that are known\nor configured in the given workspace.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.excludeUnregisteredElements",
+            "description": "exclude_unregistered_elements indicates whether elements that are not registered\nin the Inventory and Topology (I\u0026T) Studio should be excluded from the results.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "filter.search.ignoreTopologyTags",
+            "description": "ignore_topology_tags indicates whether topology_hint tags should be ignored during\nthe execution of the query.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      },
+      "post": {
+        "operationId": "ElementService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Element/watch": {
+      "get": {
+        "operationId": "ElementService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.ElementStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.search.queryElementType",
+            "description": "query_element_type (required) indicates the type of element against which\nthe query will be executed. To search by sub-type, use the special \"type:\"\ntag from within the query.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE",
+              "ELEMENT_TYPE_VIRTUAL"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.search.query",
+            "description": "query (required) is a tag query. This is a string that specifies a set of\ntag assignment conditions. For example:\n\n- \"Campus:SF\"\n    Match any device that has the \"Campus:SF\" tag assigned to it.\n    I.e., match any device in the SF campus.\n- \"Campus:*\"\n    Match any device that has any \"Campus:\" tag assigned to it.\n    I.e., match any device in any campus.\n- \"Campus:SF AND Role:Spine\"\n    Match any device that has the \"Campus:SF\" and \"Role:Spine\"\n    tag assigned to it.\n    I.e., match any spine device in the SF campus.\n\nTODO: Link to grammar file.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.workspaceId",
+            "description": "workspace_id is the ID of a workspace. If set, it indicates that the\nsearch space should be constrained only to the elements that are known\nor configured in the given workspace.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.excludeUnregisteredElements",
+            "description": "exclude_unregistered_elements indicates whether elements that are not registered\nin the Inventory and Topology (I\u0026T) Studio should be excluded from the results.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "filter.search.ignoreTopologyTags",
+            "description": "ignore_topology_tags indicates whether topology_hint tags should be ignored during\nthe execution of the query.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      },
+      "post": {
+        "operationId": "ElementService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.ElementStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
+    "/api/resources/tag/v2/Element/watchmetadata": {
+      "get": {
+        "operationId": "ElementService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.search.queryElementType",
+            "description": "query_element_type (required) indicates the type of element against which\nthe query will be executed. To search by sub-type, use the special \"type:\"\ntag from within the query.\n\n - ELEMENT_TYPE_UNSPECIFIED: ELEMENT_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_TYPE_DEVICE: ELEMENT_TYPE_DEVICE is used for device tags.\n - ELEMENT_TYPE_INTERFACE: ELEMENT_TYPE_INTERFACE is used for interface tags.\n - ELEMENT_TYPE_VIRTUAL: ELEMENT_TYPE_VIRTUAL is used for virtual entities(applications/services) tags.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ELEMENT_TYPE_UNSPECIFIED",
+              "ELEMENT_TYPE_DEVICE",
+              "ELEMENT_TYPE_INTERFACE",
+              "ELEMENT_TYPE_VIRTUAL"
+            ],
+            "default": "ELEMENT_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.search.query",
+            "description": "query (required) is a tag query. This is a string that specifies a set of\ntag assignment conditions. For example:\n\n- \"Campus:SF\"\n    Match any device that has the \"Campus:SF\" tag assigned to it.\n    I.e., match any device in the SF campus.\n- \"Campus:*\"\n    Match any device that has any \"Campus:\" tag assigned to it.\n    I.e., match any device in any campus.\n- \"Campus:SF AND Role:Spine\"\n    Match any device that has the \"Campus:SF\" and \"Role:Spine\"\n    tag assigned to it.\n    I.e., match any spine device in the SF campus.\n\nTODO: Link to grammar file.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.workspaceId",
+            "description": "workspace_id is the ID of a workspace. If set, it indicates that the\nsearch space should be constrained only to the elements that are known\nor configured in the given workspace.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.search.excludeUnregisteredElements",
+            "description": "exclude_unregistered_elements indicates whether elements that are not registered\nin the Inventory and Topology (I\u0026T) Studio should be excluded from the results.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "filter.search.ignoreTopologyTags",
+            "description": "ignore_topology_tags indicates whether topology_hint tags should be ignored during\nthe execution of the query.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      },
+      "post": {
+        "operationId": "ElementService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.tag.v2.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.tag.v2.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.tag.v2.ElementStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ElementService"
+        ]
+      }
+    },
     "/api/resources/tag/v2/Tag": {
       "get": {
         "operationId": "TagService_GetOne",
@@ -2371,6 +2985,184 @@
       "default": "CREATOR_TYPE_UNSPECIFIED",
       "description": "CreatorType enumerates the types of entities that can create\na tag.\n\n - CREATOR_TYPE_UNSPECIFIED: CREATOR_TYPE_UNSPECIFIED is the default value.\n - CREATOR_TYPE_SYSTEM: CREATOR_TYPE_SYSTEM is used for system tags.\n - CREATOR_TYPE_USER: CREATOR_TYPE_USER is used for user tags.\n - CREATOR_TYPE_EXTERNAL: CREATOR_TYPE_EXTERNAL is used for tags created from external sources.\nFor E.g., vCenter"
     },
+    "arista.tag.v2.Element": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.tag.v2.ElementKey",
+          "description": "key uniquely identifies the element."
+        }
+      },
+      "description": "Element holds basic information about a tagged or untagged network\nelement."
+    },
+    "arista.tag.v2.ElementBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.tag.v2.ElementFilter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "$ref": "#/definitions/arista.tag.v2.ElementSearchFilter",
+          "description": "search can be used to search for elements via a tag query."
+        }
+      },
+      "description": "ElementFilter is a custom filter for elements."
+    },
+    "arista.tag.v2.ElementKey": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/arista.tag.v2.ElementType",
+          "description": "type is the type of the element."
+        },
+        "subType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementSubType",
+          "description": "sub_type is the sub-type of the element."
+        },
+        "primaryId": {
+          "type": "string",
+          "description": "type: DEVICE\n  sub_type: DEVICE\n    id: \u003cserial_number\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cuuid\u003e\ntype: INTERFACE\n  sub_type: DEVICE\n    id: \u003cserial_number\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cuuid\u003e\ntype: VIRTUAL\n  sub_type: APPLICATION\n    id: \u003capplication_id\u003e",
+          "title": "primary_id is the device ID of the element. The value of\nthis ID is based on type and sub_type:"
+        },
+        "secondaryId": {
+          "type": "string",
+          "description": "type: DEVICE\n  N/A\ntype: INTERFACE\n  sub_type: DEVICE\n    id: \u003cinterface_name\u003e\n  sub_type: VDS, WORKLOAD_SERVER, VM\n    id: \u003cinterface_name\u003e\ntype: VIRTUAL\n  sub_type: APPLICATION\n    id: \u003cservice_id\u003e",
+          "title": "secondary_id is the interface ID of the element. The value of\nthis ID is based on type and sub_type:"
+        }
+      },
+      "description": "ElementKey uniquely identifies a tagged or untagged network element.",
+      "required": [
+        "type",
+        "subType",
+        "primaryId",
+        "secondaryId"
+      ]
+    },
+    "arista.tag.v2.ElementResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Element",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nElement instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.ElementSearchFilter": {
+      "type": "object",
+      "properties": {
+        "queryElementType": {
+          "$ref": "#/definitions/arista.tag.v2.ElementType",
+          "description": "query_element_type (required) indicates the type of element against which\nthe query will be executed. To search by sub-type, use the special \"type:\"\ntag from within the query."
+        },
+        "query": {
+          "type": "string",
+          "description": "- \"Campus:SF\"\n    Match any device that has the \"Campus:SF\" tag assigned to it.\n    I.e., match any device in the SF campus.\n- \"Campus:*\"\n    Match any device that has any \"Campus:\" tag assigned to it.\n    I.e., match any device in any campus.\n- \"Campus:SF AND Role:Spine\"\n    Match any device that has the \"Campus:SF\" and \"Role:Spine\"\n    tag assigned to it.\n    I.e., match any spine device in the SF campus.\n\nTODO: Link to grammar file.",
+          "title": "query (required) is a tag query. This is a string that specifies a set of\ntag assignment conditions. For example:"
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the ID of a workspace. If set, it indicates that the\nsearch space should be constrained only to the elements that are known\nor configured in the given workspace."
+        },
+        "excludeUnregisteredElements": {
+          "type": "boolean",
+          "description": "exclude_unregistered_elements indicates whether elements that are not registered\nin the Inventory and Topology (I\u0026T) Studio should be excluded from the results."
+        },
+        "ignoreTopologyTags": {
+          "type": "boolean",
+          "description": "ignore_topology_tags indicates whether topology_hint tags should be ignored during\nthe execution of the query."
+        }
+      },
+      "description": "ElementSearchFilter is a filter that can be used to search for a set of\nelements using a tag query."
+    },
+    "arista.tag.v2.ElementSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.tag.v2.ElementKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.tag.v2.ElementSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Element",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nElement instance in this response."
+        }
+      }
+    },
+    "arista.tag.v2.ElementStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.tag.v2.Element"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "$ref": "#/definitions/arista.tag.v2.ElementFilter",
+          "description": "For each Element in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Element is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Element at end.\n    * Each Element response is fully-specified (all fields set).\n  * start: Returns the state of each Element at start, followed by updates until now.\n    * Each Element response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Element at start, followed by updates\n    until end.\n    * Each Element response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+        }
+      }
+    },
+    "arista.tag.v2.ElementStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.tag.v2.Element",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Element's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Element value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
     "arista.tag.v2.ElementSubType": {
       "type": "string",
       "enum": [
@@ -2455,7 +3247,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2482,7 +3274,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2631,7 +3423,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagAssignmentConfig instance in this response."
         }
       }
     },
@@ -2768,7 +3561,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagAssignment instance in this response."
         }
       }
     },
@@ -2816,7 +3610,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2843,7 +3637,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2992,7 +3786,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTagConfig instance in this response."
         }
       }
     },
@@ -3108,7 +3903,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTag instance in this response."
         }
       }
     },
@@ -3217,4 +4013,3 @@
     "url": "https://aristanetworks.github.io/cloudvision-apis"
   }
 }
-

@@ -32,7 +32,7 @@ enum ElementSubType {
 	// ELEMENT_SUB_TYPE_DEVICE is used for EOS or
 	// third-party devices discovered via LLDP/SNMP.
 	ELEMENT_SUB_TYPE_DEVICE = 1;
-        // ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.
+	// ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.
 	ELEMENT_SUB_TYPE_VDS = 2;
 	// ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server
 	// tags (such as VMWare ESXi host).
@@ -170,4 +170,94 @@ message TagAssignment {
 	// tag_creator_type is the creator type of the tag
 	// involved in the assignment.
 	CreatorType tag_creator_type = 2;
+}
+
+// ElementFilter is a custom filter for elements.
+message ElementFilter {
+	// search can be used to search for elements via a tag query.
+	ElementSearchFilter search = 1;
+}
+
+// ElementSearchFilter is a filter that can be used to search for a set of
+// elements using a tag query.
+message ElementSearchFilter {
+	// query_element_type (required) indicates the type of element against which
+	// the query will be executed. To search by sub-type, use the special "type:"
+	// tag from within the query.
+	ElementType query_element_type = 1;
+	// query (required) is a tag query. This is a string that specifies a set of
+	// tag assignment conditions. For example:
+	//
+	// - "Campus:SF"
+	//     Match any device that has the "Campus:SF" tag assigned to it.
+	//     I.e., match any device in the SF campus.
+	// - "Campus:*"
+	//     Match any device that has any "Campus:" tag assigned to it.
+	//     I.e., match any device in any campus.
+	// - "Campus:SF AND Role:Spine"
+	//     Match any device that has the "Campus:SF" and "Role:Spine"
+	//     tag assigned to it.
+	//     I.e., match any spine device in the SF campus.
+	//
+	// TODO: Link to grammar file.
+	google.protobuf.StringValue query = 2;
+	// workspace_id is the ID of a workspace. If set, it indicates that the
+	// search space should be constrained only to the elements that are known
+	// or configured in the given workspace.
+	google.protobuf.StringValue workspace_id = 10;
+	// exclude_unregistered_elements indicates whether elements that are not registered
+	// in the Inventory and Topology (I&T) Studio should be excluded from the results.
+	google.protobuf.BoolValue exclude_unregistered_elements = 11;
+	// ignore_topology_tags indicates whether topology_hint tags should be ignored during
+	// the execution of the query.
+	google.protobuf.BoolValue ignore_topology_tags = 12;
+}
+
+// ElementKey uniquely identifies a tagged or untagged network element.
+message ElementKey {
+	option (fmp.model_key) = true;
+	// type is the type of the element.
+	ElementType type = 1;
+	// sub_type is the sub-type of the element.
+	ElementSubType sub_type = 2;
+	// primary_id is the device ID of the element. The value of
+	// this ID is based on type and sub_type:
+	//
+	// type: DEVICE
+	//   sub_type: DEVICE
+	//     id: <serial_number>
+	//   sub_type: VDS, WORKLOAD_SERVER, VM
+	//     id: <uuid>
+	// type: INTERFACE
+	//   sub_type: DEVICE
+	//     id: <serial_number>
+	//   sub_type: VDS, WORKLOAD_SERVER, VM
+	//     id: <uuid>
+	// type: VIRTUAL
+	//   sub_type: APPLICATION
+	//     id: <application_id>
+	google.protobuf.StringValue primary_id = 3;
+	// secondary_id is the interface ID of the element. The value of
+	// this ID is based on type and sub_type:
+	//
+	// type: DEVICE
+	//   N/A
+	// type: INTERFACE
+	//   sub_type: DEVICE
+	//     id: <interface_name>
+	//   sub_type: VDS, WORKLOAD_SERVER, VM
+	//     id: <interface_name>
+	// type: VIRTUAL
+	//   sub_type: APPLICATION
+	//     id: <service_id>
+	google.protobuf.StringValue secondary_id = 4;
+}
+
+// Element holds basic information about a tagged or untagged network
+// element.
+message Element {
+	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "ElementFilter";
+	// key uniquely identifies the element.
+	ElementKey key = 1;
 }
