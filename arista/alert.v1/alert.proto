@@ -98,6 +98,7 @@ message SenderStatusKey {
 // SenderStatus provides information about the status of particular send.
 message SenderStatus {
 	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "EventFilter";
 
 	// key uniquely identifies the instance of sender status.
 	SenderStatusKey key = 1;
@@ -138,6 +139,24 @@ message EventIdentifier {
 	google.protobuf.Int32Value alerter_rule_index = 3;
 	// firing is true if event is ongoing and false if event has finished.
 	google.protobuf.BoolValue firing = 4;
+	// is_test is true if event was initiated via test notification page.
+	google.protobuf.BoolValue is_test = 5;
+}
+
+// EventFilter defines the criteria to filter response data based on the contained event
+// identifiers.
+// If EventFilter is nil, it's a pass-through filter.
+message EventFilter {
+	// events is a slice of EventIdentifiers that are matched against the EventIdentifiers in
+	// a SenderStatus message.
+	// Filter passes if any EventIdentifier from events match any EventIdentifier in SenderStatus.
+	// Nil fields are considered pass-through.
+	EventIdentifiers events = 1;
+	// is_test specifies filtering option with regard to sender status being triggered by a test event
+	// or non-test event.
+	// When set, it will discard events from status based on matching the IsTest field.
+	// If not set, returns all.
+	google.protobuf.BoolValue is_test = 2;
 }
 
 // EndpointErrors is a set of errors related to sending of alerts

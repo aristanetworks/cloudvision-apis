@@ -347,6 +347,10 @@ message SenderStatusStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated SenderStatus partial_eq_filter = 1;
+	// For each SenderStatus in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given SenderStatus is streamed to the user.
+	EventFilter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -387,6 +391,10 @@ message SenderStatusBatchedStreamRequest {
 	// While transparent to users, this field also allows services to optimize internal
 	// subscriptions if filter(s) are sufficiently specific.
 	repeated SenderStatus partial_eq_filter = 1;
+	// For each SenderStatus in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given SenderStatus is streamed to the user.
+	EventFilter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
