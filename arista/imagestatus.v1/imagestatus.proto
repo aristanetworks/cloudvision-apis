@@ -77,6 +77,8 @@ message Extension {
     // is_embedded indicates whether the extension is embedded in the EOS swi
     // or not.
     google.protobuf.BoolValue is_embedded = 7;
+    // arch is architecture type of the extension.
+    google.protobuf.StringValue arch = 8;
 }
 
 // Extensions provides an ordered list of running/designed extensions.

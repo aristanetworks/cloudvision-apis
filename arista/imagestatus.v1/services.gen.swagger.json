@@ -529,6 +529,10 @@
         "isEmbedded": {
           "type": "boolean",
           "description": "is_embedded indicates whether the extension is embedded in the EOS swi\nor not."
+        },
+        "arch": {
+          "type": "string",
+          "title": "arch is architecture type of the extension."
         }
       },
       "description": "Extension provides information of the running/designed extensions."
@@ -921,7 +925,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.SummaryStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -982,7 +986,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSummary instance in this response."
         }
       }
     },
@@ -999,7 +1004,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
