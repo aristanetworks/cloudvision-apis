@@ -25,6 +25,9 @@
       "name": "WorkspaceConfigService"
     },
     {
+      "name": "WorkspaceDiffsService"
+    },
+    {
       "name": "WorkspaceSyncConfigService"
     }
   ],
@@ -2281,6 +2284,454 @@
         ]
       }
     },
+    "/api/resources/workspace/v1/WorkspaceDiffs": {
+      "get": {
+        "operationId": "WorkspaceDiffsService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.workspaceId",
+            "description": "workspace_id is the unique ID of the workspace.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.diffType",
+            "description": "diff_type categorizes a diff by its purpose, a rebase or modification.\n\n - DIFF_TYPE_UNSPECIFIED: DIFF_TYPE_UNSPECIFIED is the default, unspecified value.\n - DIFF_TYPE_REBASE: DIFF_TYPE_REBASE represents a diff generated during a workspace rebase operation.\nit means that we return two sets of diffs - one for what happened in the workspace\nrelative to its original mainline, and another for what happened between original\nmainline and latest mainline.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DIFF_TYPE_UNSPECIFIED",
+              "DIFF_TYPE_REBASE"
+            ],
+            "default": "DIFF_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.entityType",
+            "description": "entity_type is the type of entity being compared.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic configuration studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static configuration studio.\n - ENTITY_TYPE_TAG: ENTITY_TYPE_TAG indicates the tags entity type.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ENTITY_TYPE_UNSPECIFIED",
+              "ENTITY_TYPE_STUDIO",
+              "ENTITY_TYPE_INPUTS",
+              "ENTITY_TYPE_ASSIGNED_TAGS",
+              "ENTITY_TYPE_BUILD_HOOK",
+              "ENTITY_TYPE_AUTOFILL_ACTION",
+              "ENTITY_TYPE_CONFIGLET",
+              "ENTITY_TYPE_CONFIGLET_ASSIGNMENT",
+              "ENTITY_TYPE_TAG"
+            ],
+            "default": "ENTITY_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "key.entityIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceDiffs/all": {
+      "get": {
+        "operationId": "WorkspaceDiffsService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceDiffsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceDiffsService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceDiffsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceDiffs/getsome": {
+      "post": {
+        "operationId": "WorkspaceDiffsService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceDiffsSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceDiffs/metadata": {
+      "get": {
+        "operationId": "WorkspaceDiffsService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceDiffsService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceDiffs/watch": {
+      "get": {
+        "operationId": "WorkspaceDiffsService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceDiffsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceDiffsService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.WorkspaceDiffsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
+    "/api/resources/workspace/v1/WorkspaceDiffs/watchmetadata": {
+      "get": {
+        "operationId": "WorkspaceDiffsService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      },
+      "post": {
+        "operationId": "WorkspaceDiffsService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.workspace.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.workspace.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkspaceDiffsService"
+        ]
+      }
+    },
     "/api/resources/workspace/v1/WorkspaceSyncConfig": {
       "get": {
         "operationId": "WorkspaceSyncConfigService_GetOne",
@@ -3733,6 +4184,106 @@
       "default": "DEVICE_AUTHZ_STATUS_UNSPECIFIED",
       "description": "DeviceAuthzStatus holds the result of the authorization check on device.\n\n - DEVICE_AUTHZ_STATUS_UNSPECIFIED: DEVICE_AUTHZ_STATUS_UNSPECIFIED indicates the authorization check is pending.\n - DEVICE_AUTHZ_STATUS_AUTHORIZED: DEVICE_AUTHZ_STATUS_AUTHORIZED indicates the subject\nis authorized to provision this device.\n - DEVICE_AUTHZ_STATUS_UNAUTHORIZED: DEVICE_AUTHZ_STATUS_UNAUTHORIZED indicates the subject\nis unauthorized to provision this device."
     },
+    "arista.workspace.v1.DiffEntries": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.DiffEntry"
+          },
+          "description": "values contains a list of DiffEntry messages, each representing a change."
+        }
+      },
+      "description": "DiffEntries is a container for a list of individual diff entries."
+    },
+    "arista.workspace.v1.DiffEntry": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/arista.workspace.v1.DiffOp",
+          "description": "op is the type of diff operation."
+        },
+        "path": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "path to the changed field or attribute, represented as a sequence of field names or indices."
+        },
+        "valueA": {
+          "type": "string",
+          "description": "value_a is the value from workspace_a."
+        },
+        "valueB": {
+          "type": "string",
+          "description": "value_b is the value from workspace_b."
+        }
+      },
+      "description": "DiffEntry represents a change detected between two versions of an entity."
+    },
+    "arista.workspace.v1.DiffKey": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "workspace_id is the unique ID of the workspace."
+        },
+        "diffType": {
+          "$ref": "#/definitions/arista.workspace.v1.DiffType",
+          "description": "diff_type categorizes a diff by its purpose, a rebase or modification."
+        },
+        "entityType": {
+          "$ref": "#/definitions/arista.workspace.v1.EntityType",
+          "description": "entity_type is the type of entity being compared."
+        },
+        "entityIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "entity_ids uniquely identifies the entity in the workspace. It is represented\nby [key1, value1, key2, value2, ...]\nstudio_id are well known e.g studio-date-time\ne.g entity_ids for entity types\nstudio, inputs, assigned tags: [“studio_id”, \u003cid\u003e]\nbuildhook: [“studio_id”, \u003cid\u003e, “hook_id”, \u003cid\u003e]\nautofill: [“studio_id”, \u003cid\u003e, “input_field_id”, \u003cid\u003e]\nconfiglet: [“configlet_id”, \u003cid\u003e]\nconfigletassignment : [“configlet_assignment_id”, \u003cid\u003e]\ntags:\nelement_type is one of \"device\", \"interface\"\n[\"creator_type\", \"user\", \"element_type\", \u003celement_type\u003e, \"element_sub_type\",\n\"device\", \"label\", \u003clabel\u003e, \"value\", \u003cvalue\u003e]\ntag assignments:\nFor element_type = \"device\"\n[\"creator_type\", \"user\", \"element_type\", \"device\", \"element_sub_type\",\n\"device\", \"label\", \u003clabel\u003e, \"value\", \u003cvalue\u003e, \"device_id\", \u003cid\u003e]\nFor element_type = \"interface\"\n[\"creator_type\", \"user\", \"element_type\", \"interface\", \"element_sub_type\",\n\"device\", \"label\", \u003clabel\u003e, \"value\", \u003cvalue\u003e, \"device_id\", \u003cid\u003e,\n\"interface_id\", \u003cid\u003e]"
+        }
+      },
+      "description": "DiffKey represents the key that identifies a diff for an entity.",
+      "required": [
+        "workspaceId",
+        "diffType",
+        "entityType",
+        "entityIds"
+      ]
+    },
+    "arista.workspace.v1.DiffOp": {
+      "type": "string",
+      "enum": [
+        "DIFF_OP_UNSPECIFIED",
+        "DIFF_OP_ADD",
+        "DIFF_OP_DELETE",
+        "DIFF_OP_CHANGE"
+      ],
+      "default": "DIFF_OP_UNSPECIFIED",
+      "description": "DiffOp enumerates the types of operations that can occur within a diff.\n\n - DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED indicates an unspecified diff operation.\n - DIFF_OP_ADD: DIFF_OP_ADD indicates the addition of a new item.\n - DIFF_OP_DELETE: DIFF_OP_DELETE indicates the deletion of an item.\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE indicates modification of an item."
+    },
+    "arista.workspace.v1.DiffType": {
+      "type": "string",
+      "enum": [
+        "DIFF_TYPE_UNSPECIFIED",
+        "DIFF_TYPE_REBASE"
+      ],
+      "default": "DIFF_TYPE_UNSPECIFIED",
+      "description": "DiffType enumerates types of diff.\n\n - DIFF_TYPE_UNSPECIFIED: DIFF_TYPE_UNSPECIFIED is the default, unspecified value.\n - DIFF_TYPE_REBASE: DIFF_TYPE_REBASE represents a diff generated during a workspace rebase operation.\nit means that we return two sets of diffs - one for what happened in the workspace\nrelative to its original mainline, and another for what happened between original\nmainline and latest mainline."
+    },
+    "arista.workspace.v1.EntityType": {
+      "type": "string",
+      "enum": [
+        "ENTITY_TYPE_UNSPECIFIED",
+        "ENTITY_TYPE_STUDIO",
+        "ENTITY_TYPE_INPUTS",
+        "ENTITY_TYPE_ASSIGNED_TAGS",
+        "ENTITY_TYPE_BUILD_HOOK",
+        "ENTITY_TYPE_AUTOFILL_ACTION",
+        "ENTITY_TYPE_CONFIGLET",
+        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT",
+        "ENTITY_TYPE_TAG"
+      ],
+      "default": "ENTITY_TYPE_UNSPECIFIED",
+      "description": "EntityType enumerates the different types of entities that can be\ncompared or referenced in a diff operation.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic configuration studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static configuration studio.\n - ENTITY_TYPE_TAG: ENTITY_TYPE_TAG indicates the tags entity type."
+    },
     "arista.workspace.v1.HierarchyBuildStatus": {
       "type": "object",
       "properties": {
@@ -4036,7 +4587,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.StudioGeneratedConfigurationStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -4112,7 +4663,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudioGeneratedConfiguration instance in this response."
         }
       }
     },
@@ -4129,7 +4681,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioGeneratedConfiguration at end.\n    * Each StudioGeneratedConfiguration response is fully-specified (all fields set).\n  * start: Returns the state of each StudioGeneratedConfiguration at start, followed by updates until now.\n    * Each StudioGeneratedConfiguration response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioGeneratedConfiguration at start, followed by updates\n    until end.\n    * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioGeneratedConfiguration at end.\n    * Each StudioGeneratedConfiguration response is fully-specified (all fields set).\n  * start: Returns the state of each StudioGeneratedConfiguration at start, followed by updates until now.\n    * Each StudioGeneratedConfiguration response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioGeneratedConfiguration at start, followed by updates\n    until end.\n    * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -4275,7 +4827,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -4322,7 +4874,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -4393,7 +4945,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -4464,7 +5016,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceBuildDetails instance in this response."
         }
       }
     },
@@ -4481,7 +5034,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuildDetails at end.\n    * Each WorkspaceBuildDetails response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuildDetails at start, followed by updates until now.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuildDetails at start, followed by updates\n    until end.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuildDetails at end.\n    * Each WorkspaceBuildDetails response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuildDetails at start, followed by updates until now.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuildDetails at start, followed by updates\n    until end.\n    * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -4565,7 +5118,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceBuild instance in this response."
         }
       }
     },
@@ -4582,7 +5136,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuild at end.\n    * Each WorkspaceBuild response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuild at start, followed by updates until now.\n    * Each WorkspaceBuild response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuild at start, followed by updates\n    until end.\n    * Each WorkspaceBuild response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceBuild at end.\n    * Each WorkspaceBuild response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceBuild at start, followed by updates until now.\n    * Each WorkspaceBuild response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceBuild at start, followed by updates\n    until end.\n    * Each WorkspaceBuild response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -4643,7 +5197,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -4792,7 +5346,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceConfig instance in this response."
         }
       }
     },
@@ -4809,7 +5364,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceConfig at end.\n    * Each WorkspaceConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceConfig at start, followed by updates until now.\n    * Each WorkspaceConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceConfig at start, followed by updates\n    until end.\n    * Each WorkspaceConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceConfig at end.\n    * Each WorkspaceConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceConfig at start, followed by updates until now.\n    * Each WorkspaceConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceConfig at start, followed by updates\n    until end.\n    * Each WorkspaceConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -4828,6 +5383,149 @@
         "type": {
           "$ref": "#/definitions/arista.subscriptions.Operation",
           "description": "Operation indicates how the WorkspaceConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffSet": {
+      "type": "object",
+      "properties": {
+        "workspaceA": {
+          "type": "string",
+          "description": "workspace_a is the unique identifier for the first workspace being compared."
+        },
+        "workspaceB": {
+          "type": "string",
+          "description": "workspace_b is the unique identifier for the second workspace being compared."
+        },
+        "entries": {
+          "$ref": "#/definitions/arista.workspace.v1.DiffEntries",
+          "description": "entries indicates multiple entity diffs."
+        }
+      },
+      "description": "WorkspaceDiffSet represents diffs between two specific workspaces."
+    },
+    "arista.workspace.v1.WorkspaceDiffSets": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffSet"
+          },
+          "description": "values contains a list of WorkspaceDiffSet messages, each detailing the differences\nbetween a pair of workspaces."
+        }
+      },
+      "description": "WorkspaceDiffSets represents a collection of WorkspaceDiffSet messages,\nallowing for the representation of diffs across multiple pairs of workspaces."
+    },
+    "arista.workspace.v1.WorkspaceDiffs": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.workspace.v1.DiffKey",
+          "description": "key uniquely identifies this particular collection of diffs.\nIt sets the primary context, indicating which workspace\n(via DiffKey.workspace_id) is the subject of these diffs,\nthe overall type of diff operation (e.g., rebase), and the kind of entity\nthat is primarily being analyzed."
+        },
+        "diffs": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffSets",
+          "description": "diffs contains a collection of comparisons between pairs of workspaces.\nEach entry within 'values' in WorkspaceDiffSets defines a specific pair\nof workspaces being compared:\n'workspace_a' typically represents the \"source\",\ne.g., the current mainline, or an older version.\n'workspace_b' typically represents the \"target\",\ne.g., the current workspace\nidentified in the top-level DiffKey.workspace_id.\nThe differences described in 'entries' are calculated from\n'workspace_a' to 'workspace_b'."
+        }
+      },
+      "description": "WorkspaceDiffs represents diffs, or changes made in the\nworkspace of a given type."
+    },
+    "arista.workspace.v1.WorkspaceDiffsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffsResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffs",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceDiffs instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.DiffKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffsSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffs",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceDiffs instance in this response."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffsStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffs"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceDiffs at end.\n    * Each WorkspaceDiffs response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceDiffs at start, followed by updates until now.\n    * Each WorkspaceDiffs response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceDiffs at start, followed by updates\n    until end.\n    * Each WorkspaceDiffs response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.workspace.v1.WorkspaceDiffsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffs",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this WorkspaceDiffs's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the WorkspaceDiffs value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
     },
@@ -4888,7 +5586,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspace instance in this response."
         }
       }
     },
@@ -4918,7 +5617,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Workspace at end.\n    * Each Workspace response is fully-specified (all fields set).\n  * start: Returns the state of each Workspace at start, followed by updates until now.\n    * Each Workspace response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Workspace at start, followed by updates\n    until end.\n    * Each Workspace response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Workspace at end.\n    * Each Workspace response is fully-specified (all fields set).\n  * start: Returns the state of each Workspace at start, followed by updates until now.\n    * Each Workspace response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Workspace at start, followed by updates\n    until end.\n    * Each Workspace response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -4963,7 +5662,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5112,7 +5811,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nWorkspaceSyncConfig instance in this response."
         }
       }
     },
@@ -5129,7 +5829,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceSyncConfig at end.\n    * Each WorkspaceSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceSyncConfig at start, followed by updates until now.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceSyncConfig at start, followed by updates\n    until end.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each WorkspaceSyncConfig at end.\n    * Each WorkspaceSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each WorkspaceSyncConfig at start, followed by updates until now.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each WorkspaceSyncConfig at start, followed by updates\n    until end.\n    * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },

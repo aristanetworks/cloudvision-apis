@@ -92,6 +92,8 @@ message StudioGeneratedConfigurationSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// StudioGeneratedConfiguration instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -116,8 +118,6 @@ message StudioGeneratedConfigurationStreamRequest {
 	//     until end.
 	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -158,8 +158,6 @@ message StudioGeneratedConfigurationBatchedStreamRequest {
 	//     until end.
 	//     * Each StudioGeneratedConfiguration response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -227,6 +225,8 @@ message WorkspaceSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Workspace instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -251,8 +251,6 @@ message WorkspaceStreamRequest {
 	//     until end.
 	//     * Each Workspace response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -293,8 +291,6 @@ message WorkspaceBatchedStreamRequest {
 	//     until end.
 	//     * Each Workspace response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -362,6 +358,8 @@ message WorkspaceBuildSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceBuild instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -386,8 +384,6 @@ message WorkspaceBuildStreamRequest {
 	//     until end.
 	//     * Each WorkspaceBuild response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -428,8 +424,6 @@ message WorkspaceBuildBatchedStreamRequest {
 	//     until end.
 	//     * Each WorkspaceBuild response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -497,6 +491,8 @@ message WorkspaceBuildDetailsSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceBuildDetails instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -521,8 +517,6 @@ message WorkspaceBuildDetailsStreamRequest {
 	//     until end.
 	//     * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -563,8 +557,6 @@ message WorkspaceBuildDetailsBatchedStreamRequest {
 	//     until end.
 	//     * Each WorkspaceBuildDetails response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -632,6 +624,8 @@ message WorkspaceConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -656,8 +650,6 @@ message WorkspaceConfigStreamRequest {
 	//     until end.
 	//     * Each WorkspaceConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -698,8 +690,6 @@ message WorkspaceConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each WorkspaceConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -816,6 +806,139 @@ service WorkspaceConfigService {
 	rpc SubscribeBatched (WorkspaceConfigBatchedStreamRequest) returns (stream WorkspaceConfigBatchedStreamResponse);
 }
 
+message WorkspaceDiffsRequest {
+	// Key uniquely identifies a WorkspaceDiffs instance to retrieve.
+	// This value must be populated.
+	DiffKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceDiffsResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceDiffs value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceDiffs instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceDiffsSomeRequest {
+	repeated DiffKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message WorkspaceDiffsSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	WorkspaceDiffs value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceDiffs instance in this response.
+	google.protobuf.Timestamp time = 3;
+};
+
+message WorkspaceDiffsStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceDiffs partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceDiffs at end.
+	//     * Each WorkspaceDiffs response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceDiffs at start, followed by updates until now.
+	//     * Each WorkspaceDiffs response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceDiffs at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceDiffs response at start is fully-specified, but updates until end may
+	//       be partial.
+	arista.time.TimeBounds time = 3;
+};
+
+message WorkspaceDiffsStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	WorkspaceDiffs value = 1;
+
+	// Time holds the timestamp of this WorkspaceDiffs's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the WorkspaceDiffs value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message WorkspaceDiffsBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated WorkspaceDiffs partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each WorkspaceDiffs at end.
+	//     * Each WorkspaceDiffs response is fully-specified (all fields set).
+	//   * start: Returns the state of each WorkspaceDiffs at start, followed by updates until now.
+	//     * Each WorkspaceDiffs response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each WorkspaceDiffs at start, followed by updates
+	//     until end.
+	//     * Each WorkspaceDiffs response at start is fully-specified, but updates until end may
+	//       be partial.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message WorkspaceDiffsBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated WorkspaceDiffsStreamResponse responses = 1;
+};
+
+service WorkspaceDiffsService {
+	rpc GetOne (WorkspaceDiffsRequest) returns (WorkspaceDiffsResponse);
+	rpc GetSome (WorkspaceDiffsSomeRequest) returns (stream WorkspaceDiffsSomeResponse);
+	rpc GetAll (WorkspaceDiffsStreamRequest) returns (stream WorkspaceDiffsStreamResponse);
+	rpc Subscribe (WorkspaceDiffsStreamRequest) returns (stream WorkspaceDiffsStreamResponse);
+	rpc GetMeta (WorkspaceDiffsStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (WorkspaceDiffsStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (WorkspaceDiffsBatchedStreamRequest) returns (stream WorkspaceDiffsBatchedStreamResponse);
+	rpc SubscribeBatched (WorkspaceDiffsBatchedStreamRequest) returns (stream WorkspaceDiffsBatchedStreamResponse);
+}
+
 message WorkspaceSyncConfigRequest {
 	// Key uniquely identifies a WorkspaceSyncConfig instance to retrieve.
 	// This value must be populated.
@@ -856,6 +979,8 @@ message WorkspaceSyncConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// WorkspaceSyncConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -880,8 +1005,6 @@ message WorkspaceSyncConfigStreamRequest {
 	//     until end.
 	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -922,8 +1045,6 @@ message WorkspaceSyncConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each WorkspaceSyncConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
