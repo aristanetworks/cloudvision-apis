@@ -20,6 +20,9 @@
     },
     {
       "name": "TokenConfigService"
+    },
+    {
+      "name": "TokenSelfRefreshConfigService"
     }
   ],
   "schemes": [
@@ -1997,6 +2000,155 @@
           "TokenConfigService"
         ]
       }
+    },
+    "/api/resources/serviceaccount/v1/TokenSelfRefreshConfig": {
+      "get": {
+        "operationId": "TokenSelfRefreshConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TokenSelfRefreshConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TokenSelfRefreshConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "TokenSelfRefreshConfig carries the value to set into the datastore.\nSee the documentation on the TokenSelfRefreshConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfig"
+            }
+          }
+        ],
+        "tags": [
+          "TokenSelfRefreshConfigService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/TokenSelfRefreshConfig/watch": {
+      "get": {
+        "operationId": "TokenSelfRefreshConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.TokenSelfRefreshConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "TokenSelfRefreshConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "TokenSelfRefreshConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.TokenSelfRefreshConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TokenSelfRefreshConfigService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2027,6 +2179,10 @@
           "type": "string",
           "format": "date-time",
           "description": "last_access is the time when the service account was last fetched."
+        },
+        "allowTokenRefresh": {
+          "type": "boolean",
+          "description": "allow_token_refresh determines whether or not the service account can refresh\nany of its own active tokens, including preexisting ones."
         }
       },
       "description": "Account describes a service account."
@@ -2049,6 +2205,10 @@
         "groups": {
           "$ref": "#/definitions/fmp.RepeatedString",
           "description": "groups is a list of roles that the service account inherits permissions from."
+        },
+        "allowTokenRefresh": {
+          "type": "boolean",
+          "description": "allow_token_refresh determines whether or not the service account can refresh\nany of its own active tokens, including preexisting ones."
         }
       },
       "description": "AccountConfig holds the configuration for a service account."
@@ -2198,7 +2358,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAccountConfig instance in this response."
         }
       }
     },
@@ -2215,7 +2376,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AccountConfig at end.\n    * Each AccountConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AccountConfig at start, followed by updates until now.\n    * Each AccountConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AccountConfig at start, followed by updates\n    until end.\n    * Each AccountConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AccountConfig at end.\n    * Each AccountConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AccountConfig at start, followed by updates until now.\n    * Each AccountConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AccountConfig at start, followed by updates\n    until end.\n    * Each AccountConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2294,7 +2455,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAccount instance in this response."
         }
       }
     },
@@ -2321,7 +2483,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Account at end.\n    * Each Account response is fully-specified (all fields set).\n  * start: Returns the state of each Account at start, followed by updates until now.\n    * Each Account response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Account at start, followed by updates\n    until end.\n    * Each Account response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Account at end.\n    * Each Account response is fully-specified (all fields set).\n  * start: Returns the state of each Account at start, followed by updates until now.\n    * Each Account response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Account at start, followed by updates\n    until end.\n    * Each Account response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2390,6 +2552,11 @@
           "type": "string",
           "format": "date-time",
           "description": "last_used is the time when the service account token was last used to authenticate."
+        },
+        "replacedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "replaced_at is the time which the token has been replaced.\nIt is only populated when the token is refreshed."
         }
       },
       "description": "Token describes a service account token."
@@ -2415,7 +2582,7 @@
         },
         "token": {
           "type": "string",
-          "description": "token is the JWT token generated for a service account token.\nIt is only populated in Set response."
+          "description": "token is the JWT generated for a service account token.\nIt is only populated in Set response."
         }
       },
       "description": "TokenConfig holds the configuration for a service account token. The token is a signed JWT which\ncan be used as a credential for REST and WRPC endpoints."
@@ -2565,7 +2732,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTokenConfig instance in this response."
         }
       }
     },
@@ -2582,7 +2750,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TokenConfig at end.\n    * Each TokenConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TokenConfig at start, followed by updates until now.\n    * Each TokenConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TokenConfig at start, followed by updates\n    until end.\n    * Each TokenConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TokenConfig at end.\n    * Each TokenConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TokenConfig at start, followed by updates until now.\n    * Each TokenConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TokenConfig at start, followed by updates\n    until end.\n    * Each TokenConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2631,6 +2799,84 @@
         }
       }
     },
+    "arista.serviceaccount.v1.TokenSelfRefreshConfig": {
+      "type": "object",
+      "properties": {
+        "validFor": {
+          "type": "string",
+          "description": "valid_for is the duration that the service account token will be valid for.\nDefault value will be the original token duration."
+        },
+        "newToken": {
+          "type": "string",
+          "description": "new_token is the JWT token generated for a service account token.\nThis is populated in the response of a Set() request."
+        }
+      },
+      "title": "TokenSelfRefreshConfig describes the response a service account gets when they refresh their token"
+    },
+    "arista.serviceaccount.v1.TokenSelfRefreshConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTokenSelfRefreshConfig instance in this response."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenSelfRefreshConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfig",
+          "description": "Value carries all the values given in the TokenSelfRefreshConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenSelfRefreshConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TokenSelfRefreshConfig at end.\n    * Each TokenSelfRefreshConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TokenSelfRefreshConfig at start, followed by updates until now.\n    * Each TokenSelfRefreshConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TokenSelfRefreshConfig at start, followed by updates\n    until end.\n    * Each TokenSelfRefreshConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.TokenSelfRefreshConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.TokenSelfRefreshConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this TokenSelfRefreshConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the TokenSelfRefreshConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
     "arista.serviceaccount.v1.TokenSomeRequest": {
       "type": "object",
       "properties": {
@@ -2661,7 +2907,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nToken instance in this response."
         }
       }
     },
@@ -2678,7 +2925,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Token at end.\n    * Each Token response is fully-specified (all fields set).\n  * start: Returns the state of each Token at start, followed by updates until now.\n    * Each Token response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Token at start, followed by updates\n    until end.\n    * Each Token response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Token at end.\n    * Each Token response is fully-specified (all fields set).\n  * start: Returns the state of each Token at start, followed by updates until now.\n    * Each Token response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Token at start, followed by updates\n    until end.\n    * Each Token response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
