@@ -3607,6 +3607,10 @@
         "isEmbedded": {
           "type": "boolean",
           "description": "is_embedded indicates whether the extension is embedded in the EOS swi\nor not."
+        },
+        "arch": {
+          "type": "string",
+          "description": "arch is architecture type of the extension."
         }
       },
       "description": "Extension provides information of the running/designed extensions."
@@ -5183,7 +5187,7 @@
         },
         "excludeNetworkProvisioning": {
           "type": "boolean",
-          "description": "exclude_network_provisioning excludes Network Provisioning components from\nbuild and from designed config on submit. This field is set to true in the\nworkspace in which migration to Studios is initiated from the UI."
+          "description": "exclude_network_provisioning is a flag used to manage the migration\nfrom Network Provisioning to Studios. When set to true, it prevents Network\nProvisioning components from being included in the build process and in the\ndesigned config generated upon submission.\nThis flag is set exclusively at the start of the migration process.\nThis field must not be set for workspaces in \"Studios-only\" mode or after a\nmigration is complete. Any attempt to submit a workspace where this field is\ntrue in these states will result in a failure."
         }
       },
       "description": "WorkspaceConfig holds the configuration of a workspace."
