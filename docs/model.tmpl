@@ -59,7 +59,7 @@
 | ---------- | ----  | ----------- |
 {{range .Fields -}}
 {{$rep := eq "repeated" .Label -}}
-| **{{.Name}}** | {{if hasPrefix $pkg .FullType}}[{{.LongType}}](#{{lower .LongType}}){{else}}{{.LongType}}{{end}}{{if $rep}}[...]{{end}} | {{p .Description}} |
+| **{{.Name}}** | {{if hasPrefix $pkg .FullType}}[{{.LongType}}](#{{lower .LongType}}){{else}}{{.LongType}}{{end}}{{if $rep}}[...]{{end}} | {{ .Description | html | p }} |
 {{end}}
 {{end}}
 
@@ -68,7 +68,7 @@
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
 {{range .Extensions -}}
-| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{p .Description}} |
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{ .Description | html | p }} |
 {{end}}
 {{end}}
 
@@ -83,7 +83,7 @@
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 {{range .Values -}}
-| {{.Name}} | {{.Number}} | {{p .Description}} |
+| {{.Name}} | {{.Number}} | {{ .Description | html | p }} |
 {{end}}
 
 {{end}} <!-- end enums -->
@@ -95,7 +95,7 @@
 | Extension | Type | Base | Number | Description |
 | --------- | ---- | ---- | ------ | ----------- |
 {{range .Extensions -}}
-| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{p .Description}} |
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{ .Description | html | p }} |
 {{end}}
 {{end}} <!-- end HasExtensions -->
 
@@ -108,7 +108,7 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 {{range .Methods -}}
-| {{.Name}} | [{{.RequestLongType}}](#{{.RequestFullType}}){{if .RequestStreaming}} stream{{end}} | [{{.ResponseLongType}}](#{{.ResponseFullType}}){{if .ResponseStreaming}} stream{{end}} | {{p .Description}} |
+| {{.Name}} | [{{.RequestLongType}}](#{{.RequestFullType}}){{if .RequestStreaming}} stream{{end}} | [{{.ResponseLongType}}](#{{.ResponseFullType}}){{if .ResponseStreaming}} stream{{end}} | {{ .Description | html | p }} |
 {{end}}
 {{end}} <!-- end services -->
 
