@@ -757,7 +757,7 @@
           },
           {
             "name": "key.endpointType",
-            "description": "endpoint_type indicates the target to which an attempt to send an alert was made\nor is \"unknown\" if not endpoint-specific (eg: slack, opsgenie).\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.",
+            "description": "endpoint_type indicates the target to which an attempt to send an alert was made\nor is \"unknown\" if not endpoint-specific (eg: slack, opsgenie).\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.\n - ENDPOINT_TYPE_CV_ACTION: ENDPOINT_TYPE_CV_ACTION represents the Actions of the Cloud Vision Portal endpoint type.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -779,7 +779,8 @@
               "ENDPOINT_TYPE_SNMP",
               "ENDPOINT_TYPE_CUE_SNMP",
               "ENDPOINT_TYPE_ZOOM",
-              "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL"
+              "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL",
+              "ENDPOINT_TYPE_CV_ACTION"
             ],
             "default": "ENDPOINT_TYPE_UNSPECIFIED"
           },
@@ -1862,7 +1863,7 @@
       "properties": {
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AlertConfig at end.\n    * Each AlertConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AlertConfig at start, followed by updates until now.\n    * Each AlertConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AlertConfig at start, followed by updates\n    until end.\n    * Each AlertConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AlertConfig at end.\n    * Each AlertConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AlertConfig at start, followed by updates until now.\n    * Each AlertConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AlertConfig at start, followed by updates\n    until end.\n    * Each AlertConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1903,7 +1904,7 @@
       "properties": {
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Alert at end.\n    * Each Alert response is fully-specified (all fields set).\n  * start: Returns the state of each Alert at start, followed by updates until now.\n    * Each Alert response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Alert at start, followed by updates\n    until end.\n    * Each Alert response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Alert at end.\n    * Each Alert response is fully-specified (all fields set).\n  * start: Returns the state of each Alert at start, followed by updates until now.\n    * Each Alert response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Alert at start, followed by updates\n    until end.\n    * Each Alert response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2021,6 +2022,10 @@
         "msGraphSendMail": {
           "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailEndpoints",
           "title": "ms_graph_send_mail is a set of Microsoft Graph sendMail endpoints to send alerts to\nas part of this group"
+        },
+        "cvAction": {
+          "$ref": "#/definitions/arista.alert.v1.CvActionEndpoints",
+          "description": "cv_action is a set of Cloud Vision Portal Action endpoints to send alerts to as part\nof this group. If the field is present during a Set call, all the Actions are set\nto authenticate as the calling user."
         }
       },
       "title": "BroadcastGroup is a series of endpoints that alerts are sent to if routed there by a rule\nNo restriction on the number of types of endpoints that can be defined"
@@ -2330,6 +2335,62 @@
       },
       "title": "CueSyslogSettings contain the settings for sending alerts with syslog for cue"
     },
+    "arista.alert.v1.CvAction": {
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "action_id identifies the Action to run. Presently one cannot specify its arguments."
+        }
+      },
+      "description": "CvAction is a single CloudVision Action to be executed."
+    },
+    "arista.alert.v1.CvActionEndpoint": {
+      "type": "object",
+      "properties": {
+        "onFiring": {
+          "$ref": "#/definitions/arista.alert.v1.CvActions",
+          "description": "on_firing are the CloudVision Actions to be executed sequentially, one after another,\nwhen an event is triggered."
+        },
+        "onResolving": {
+          "$ref": "#/definitions/arista.alert.v1.CvActions",
+          "description": "on_resolving are the CloudVision Actions to be executed sequentially, one after another,\nwhen an event resolves."
+        }
+      },
+      "description": "CvActionEndpoint contains the required information for an alert to run CloudVision Actions\n(e.g. python scripts)."
+    },
+    "arista.alert.v1.CvActionEndpoints": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.CvActionEndpoint"
+          },
+          "title": "values are the elements of the set"
+        }
+      },
+      "title": "CvActionEndpoints is a set of Cloud Vision Portal Action endpoints"
+    },
+    "arista.alert.v1.CvActionSettings": {
+      "type": "object",
+      "title": "CvActionSettings contain the settings for sending alerts to CloudVision Action"
+    },
+    "arista.alert.v1.CvActions": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.alert.v1.CvAction"
+          },
+          "description": "values is a list of CloudVision Actions to be executed."
+        }
+      },
+      "description": "CvActions is a list of CloudVision Actions to be executed sequentially, one after another."
+    },
     "arista.alert.v1.DefaultTemplate": {
       "type": "object",
       "properties": {
@@ -2373,7 +2434,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2421,7 +2482,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDefaultTemplate instance in this response."
         }
       }
     },
@@ -2430,7 +2492,7 @@
       "properties": {
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DefaultTemplate at end.\n    * Each DefaultTemplate response is fully-specified (all fields set).\n  * start: Returns the state of each DefaultTemplate at start, followed by updates until now.\n    * Each DefaultTemplate response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DefaultTemplate at start, followed by updates\n    until end.\n    * Each DefaultTemplate response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DefaultTemplate at end.\n    * Each DefaultTemplate response is fully-specified (all fields set).\n  * start: Returns the state of each DefaultTemplate at start, followed by updates until now.\n    * Each DefaultTemplate response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DefaultTemplate at start, followed by updates\n    until end.\n    * Each DefaultTemplate response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2595,10 +2657,11 @@
         "ENDPOINT_TYPE_SNMP",
         "ENDPOINT_TYPE_CUE_SNMP",
         "ENDPOINT_TYPE_ZOOM",
-        "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL"
+        "ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL",
+        "ENDPOINT_TYPE_CV_ACTION"
       ],
       "default": "ENDPOINT_TYPE_UNSPECIFIED",
-      "description": "EndpointType describes the set of possible endpoint types.\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type."
+      "description": "EndpointType describes the set of possible endpoint types.\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.\n - ENDPOINT_TYPE_CV_ACTION: ENDPOINT_TYPE_CV_ACTION represents the Actions of the Cloud Vision Portal endpoint type."
     },
     "arista.alert.v1.EventIdentifier": {
       "type": "object",
@@ -2820,7 +2883,7 @@
           "title": "settings_override is the override for the microsoft graph send mail global endpoint settings"
         }
       },
-      "title": "MsGraphSendMailEndpoint contains the required information for an alert to be sent to the \nmicrosft graph send mail api"
+      "title": "MsGraphSendMailEndpoint contains the required information for an alert to be sent to the\nmicrosft graph send mail api"
     },
     "arista.alert.v1.MsGraphSendMailEndpoints": {
       "type": "object",
@@ -3272,7 +3335,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3338,7 +3401,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSenderStatus instance in this response."
         }
       }
     },
@@ -3355,7 +3419,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SenderStatus at end.\n    * Each SenderStatus response is fully-specified (all fields set).\n  * start: Returns the state of each SenderStatus at start, followed by updates until now.\n    * Each SenderStatus response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SenderStatus at start, followed by updates\n    until end.\n    * Each SenderStatus response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SenderStatus at end.\n    * Each SenderStatus response is fully-specified (all fields set).\n  * start: Returns the state of each SenderStatus at start, followed by updates until now.\n    * Each SenderStatus response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SenderStatus at start, followed by updates\n    until end.\n    * Each SenderStatus response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3509,6 +3573,10 @@
         "msGraphSendMail": {
           "$ref": "#/definitions/arista.alert.v1.MsGraphSendMailSettings",
           "title": "ms_graph_send_mail is the settings for Microsoft Graph sendMail"
+        },
+        "cvAction": {
+          "$ref": "#/definitions/arista.alert.v1.CvActionSettings",
+          "title": "cv_action is the global default settings for CloudVision Action"
         }
       },
       "title": "Settings portion of config, a list of default global settings used by broadcast groups"
@@ -3641,7 +3709,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.alert.v1.TemplateConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3790,7 +3858,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nTemplateConfig instance in this response."
         }
       }
     },
@@ -3799,7 +3868,7 @@
       "properties": {
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TemplateConfig at end.\n    * Each TemplateConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TemplateConfig at start, followed by updates until now.\n    * Each TemplateConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TemplateConfig at start, followed by updates\n    until end.\n    * Each TemplateConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TemplateConfig at end.\n    * Each TemplateConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TemplateConfig at start, followed by updates until now.\n    * Each TemplateConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TemplateConfig at start, followed by updates\n    until end.\n    * Each TemplateConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
