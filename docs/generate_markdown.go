@@ -143,6 +143,7 @@ import ShowVersion from '@site/src/components/ShowVersion';
 	})
 }
 
+// main function is to generate markdown files for each released resource.
 func main() {
 	repoRoot := flag.String("root", "../", "Path to repository root")
 	inputFile := flag.String("in", "", "Input proto file")

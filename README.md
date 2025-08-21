@@ -16,7 +16,7 @@ There, you can read more about:
 * [Config and state models](https://aristanetworks.github.io/cloudvision-apis/modeling)
 * [RPCs](https://aristanetworks.github.io/cloudvision-apis/rpcs)
 * [Authentication](https://aristanetworks.github.io/cloudvision-apis/connecting)
-* [Service-specific API documentation, example: dashboard.v1](https://aristanetworks.github.io/cloudvision-apis/models/dashboard.v1)
+* [Service-specific API documentation](https://aristanetworks.github.io/cloudvision-apis/models)
 * [Examples](https://aristanetworks.github.io/cloudvision-apis/examples)
 
 ## Clients
