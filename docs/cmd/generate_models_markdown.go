@@ -21,7 +21,7 @@ title: "Models"
 Models are also listed under the sidebar tab ` + "`Models`" + `
 
 {{range .}}
-- [{{.}}](https://aristanetworks.github.io/cloudvision-apis/models/{{.}}/){{end}}
+- [{{.}}](/cloudvision-apis/models/{{.}}/){{end}}
 `
 
 // main function is to generate a markdown file that contains links to all the resources
