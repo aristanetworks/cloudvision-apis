@@ -688,6 +688,8 @@ enum EntityType {
 	ENTITY_TYPE_CONFIGLET_ASSIGNMENT = 7;
 	// ENTITY_TYPE_TAG indicates the tags entity type.
 	ENTITY_TYPE_TAG = 8;
+	// ENTITY_TYPE_TAG_ASSIGNMENT indicates the tag assignment entity type.
+	ENTITY_TYPE_TAG_ASSIGNMENT = 9;
 }
 
 // DiffType enumerates types of diff.
@@ -744,16 +746,16 @@ message DiffKey {
 	// configlet: [“configlet_id”, <id>]
 	// configletassignment : [“configlet_assignment_id”, <id>]
 	// tags:
-	// element_type is one of "device", "interface"
-	// ["creator_type", "user", "element_type", <element_type>, "element_sub_type",
-	// "device", "label", <label>, "value", <value>]
+	// element_type is one of "1" (device), "2" (interface)
+	// ["creator_type", "2", "element_type", <element_type>,
+	// "element_sub_type", "1", "label", <label>, "value", <value>]
 	// tag assignments:
-	// For element_type = "device"
-	// ["creator_type", "user", "element_type", "device", "element_sub_type",
-	// "device", "label", <label>, "value", <value>, "device_id", <id>]
-	// For element_type = "interface"
-	// ["creator_type", "user", "element_type", "interface", "element_sub_type",
-	// "device", "label", <label>, "value", <value>, "device_id", <id>,
+	// For element_type = "1" (device)
+	// ["creator_type", "2", "element_type", "1", "element_sub_type", "1",
+	// "label", <label>, "value", <value>, "device_id", <id>]
+	// For element_type = "2" (interface)
+	// ["creator_type", "2", "element_type", "2", "element_sub_type", "1",
+	// "label", <label>, "value", <value>, "device_id", <id>,
 	// "interface_id", <id>]
 	fmp.RepeatedString entity_ids = 4;
 }
