@@ -1,0 +1,778 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.auditlog.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "AuditlogService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/auditlog/v1/Auditlog": {
+      "get": {
+        "operationId": "AuditlogService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the unique uuid for an audit log.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    },
+    "/api/resources/auditlog/v1/Auditlog/all": {
+      "get": {
+        "operationId": "AuditlogService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.AuditlogStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      },
+      "post": {
+        "operationId": "AuditlogService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.AuditlogStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    },
+    "/api/resources/auditlog/v1/Auditlog/getsome": {
+      "post": {
+        "operationId": "AuditlogService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.AuditlogSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.AuditlogSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    },
+    "/api/resources/auditlog/v1/Auditlog/metadata": {
+      "get": {
+        "operationId": "AuditlogService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      },
+      "post": {
+        "operationId": "AuditlogService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    },
+    "/api/resources/auditlog/v1/Auditlog/watch": {
+      "get": {
+        "operationId": "AuditlogService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.AuditlogStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      },
+      "post": {
+        "operationId": "AuditlogService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.AuditlogStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    },
+    "/api/resources/auditlog/v1/Auditlog/watchmetadata": {
+      "get": {
+        "operationId": "AuditlogService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      },
+      "post": {
+        "operationId": "AuditlogService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.auditlog.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.auditlog.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.auditlog.v1.AuditlogStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuditlogService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.auditlog.v1.Attributes": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "user is the CloudVision user to which the log corresponds to."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp at which the log was generated.\neg: 2006-01-02T15:04:05.000Z"
+        },
+        "severity": {
+          "$ref": "#/definitions/arista.auditlog.v1.Severity",
+          "title": "severity is level of importance or urgency of the audit log message.\neg: Debug, Info, Error"
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "device_name of the device for which audit log is sent."
+        },
+        "service": {
+          "type": "string",
+          "title": "service name for which audit log is added.\neg: aaa, accesscontrol, inventory"
+        },
+        "message": {
+          "type": "string",
+          "title": "message in the audit log.\neg: \"user logged in\""
+        },
+        "tags": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "title": "tags associated with the audit log.\neg: \"tags\": {\"mnemonic\": \"DEVICE_PROVISIONING_SUCCESS\"}"
+        }
+      },
+      "description": "Attributes are fields that make up the audit log."
+    },
+    "arista.auditlog.v1.Auditlog": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.auditlog.v1.AuditlogKey",
+          "description": "key is the unique key for each message."
+        },
+        "attributes": {
+          "$ref": "#/definitions/arista.auditlog.v1.Attributes",
+          "description": "attributes are the different fields that make up the audit log."
+        },
+        "log": {
+          "type": "string",
+          "title": "log is the formatted log message containing the different attributes\nincluding timestamp, serviceName, severity , userName in addition to\nthe message.\nMay 17 12:50:54 host service Message: user logged in, User: abc"
+        }
+      },
+      "description": "Auditlog contains the different fields as well as the formatted log."
+    },
+    "arista.auditlog.v1.AuditlogKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is the unique uuid for an audit log."
+        }
+      },
+      "description": "AuditlogKey is the unique key for each message.",
+      "required": [
+        "id"
+      ]
+    },
+    "arista.auditlog.v1.AuditlogResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.auditlog.v1.Auditlog",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAuditlog instance in this response."
+        }
+      }
+    },
+    "arista.auditlog.v1.AuditlogSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.auditlog.v1.AuditlogKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.auditlog.v1.AuditlogSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.auditlog.v1.Auditlog",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAuditlog instance in this response."
+        }
+      }
+    },
+    "arista.auditlog.v1.AuditlogStreamRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.auditlog.v1.Filter"
+          },
+          "description": "For each Auditlog in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given Auditlog is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Auditlog at end.\n    * Each Auditlog response is fully-specified (all fields set).\n  * start: Returns the state of each Auditlog at start, followed by updates until now.\n    * Each Auditlog response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Auditlog at start, followed by updates\n    until end.\n    * Each Auditlog response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.auditlog.v1.AuditlogStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.auditlog.v1.Auditlog",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Auditlog's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Auditlog value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.auditlog.v1.Category": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/arista.auditlog.v1.CategoryType",
+          "description": "type of the category."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "identifier is the object with which we want to filter the category.\neg: fetch all logs from the device with id abc\nHere the category is inventory and the identifier is abc."
+        },
+        "customType": {
+          "type": "string",
+          "description": "custom_type is a custom category that can be created by the user.\nthis is used if none of the existing categories can support the users's usecase."
+        }
+      },
+      "title": "Category organizes audit logs into different groups using the CategoryType and the identifier\neg:\"filter\":[{\"category\":{\"type\":\"CATEGORY_TYPE_INVENTORY\",\"identifier\":\"abc\"}}]\nfilters all logs associated with the service \"inventory\" and device abc"
+    },
+    "arista.auditlog.v1.CategoryType": {
+      "type": "string",
+      "enum": [
+        "CATEGORY_TYPE_UNSPECIFIED",
+        "CATEGORY_TYPE_INVENTORY",
+        "CATEGORY_TYPE_CONFIGLET",
+        "CATEGORY_TYPE_IMAGE",
+        "CATEGORY_TYPE_LABEL",
+        "CATEGORY_TYPE_USER",
+        "CATEGORY_TYPE_CHANGECONTROL",
+        "CATEGORY_TYPE_ROLE",
+        "CATEGORY_TYPE_SNAPSHOT",
+        "CATEGORY_TYPE_EXECACTION",
+        "CATEGORY_TYPE_ACCESSCONTROL"
+      ],
+      "default": "CATEGORY_TYPE_UNSPECIFIED",
+      "description": "- CATEGORY_TYPE_UNSPECIFIED: CATEGORY_TYPE_UNSPECIFIED categoryType\n - CATEGORY_TYPE_INVENTORY: CATEGORY_TYPE_INVENTORY categoryType\nthe identifier for this category is the deviceId\n - CATEGORY_TYPE_CONFIGLET: CATEGORY_TYPE_CONFIGLET categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_IMAGE: CATEGORY_TYPE_IMAGE categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_LABEL: CATEGORY_TYPE_LABEL categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_USER: CATEGORY_TYPE_USER categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_CHANGECONTROL: CATEGORY_TYPE_CHANGECONTROL categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_ROLE: CATEGORY_TYPE_ROLE categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_SNAPSHOT: CATEGORY_TYPE_SNAPSHOT categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_EXECACTION: CATEGORY_TYPE_EXECACTION categoryType\nthe identifier for this category is a custom identifier defined by the user.\n - CATEGORY_TYPE_ACCESSCONTROL: CATEGORY_TYPE_ACCESSCONTROL categoryType\nthe identifier for this category is a custom identifier defined by the user.",
+      "title": "CategoryType is the type of the category"
+    },
+    "arista.auditlog.v1.Filter": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/arista.auditlog.v1.Category",
+          "description": "category filters based on category of the logs.\neg:\n{\"filter\":[{\"category\":{\"custom_type\": \"abc\"}}]}\nfilters all logs associated with the service abc."
+        },
+        "queries": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "queries is the list of strings that should be present in the log.\neg: {\"filter\":[{\"queries\":{\"values\":[\"abc\"]}}]} searches for all\nlogs containing the string abc."
+        },
+        "tags": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "description": "tags filters based on tags associated with the log.\neg: {\"filter\":[{\"tags\":{\"values\":{\"id\":\"xyz\"}}}]}\nsearches for all logs associates with the tag\nid:xyz."
+        },
+        "severity": {
+          "$ref": "#/definitions/arista.auditlog.v1.Severity",
+          "description": "severity is level of importance or urgency of the audit log message."
+        },
+        "user": {
+          "type": "string",
+          "description": "user filters the audit logs by given username across categories."
+        }
+      },
+      "description": "Filter are the different filters that can be applied."
+    },
+    "arista.auditlog.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.auditlog.v1.Severity": {
+      "type": "string",
+      "enum": [
+        "SEVERITY_UNSPECIFIED",
+        "SEVERITY_EMERGENCY",
+        "SEVERITY_ALERT",
+        "SEVERITY_CRITICAL",
+        "SEVERITY_ERROR",
+        "SEVERITY_WARNING",
+        "SEVERITY_NOTICE",
+        "SEVERITY_INFO",
+        "SEVERITY_DEBUG"
+      ],
+      "default": "SEVERITY_UNSPECIFIED",
+      "description": "Severity is the level of criticality of the log.\n\n - SEVERITY_UNSPECIFIED: SEVERITY_UNSPECIFIED severity\n - SEVERITY_EMERGENCY: SEVERITY_EMERGENCY severity\n - SEVERITY_ALERT: SEVERITY_ALERT severity\n - SEVERITY_CRITICAL: SEVERITY_CRITICAL severity\n - SEVERITY_ERROR: SEVERITY_ERROR severity\n - SEVERITY_WARNING: SEVERITY_WARNING severity\n - SEVERITY_NOTICE: SEVERITY_NOTICE severity\n - SEVERITY_INFO: SEVERITY_INFO severity\n - SEVERITY_DEBUG: SEVERITY_DEBUG severity"
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.MapStringString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The map\u003cstring, string\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, string\u003e`."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

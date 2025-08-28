@@ -1,0 +1,22 @@
+# Copyright (c) 2025 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2025-08-28
+      description: Releasing to cvaas and onprem
+      version: 1.0.2
+      onprem: true
+      cvaas: true
+
+    - date: 2025-06-26
+      description: Added Username to list of filters.
+      version: 1.0.1
+
+    - date: 2025-01-30
+      description: Add model for remote syslog server pull
+      version: 1.0.0
