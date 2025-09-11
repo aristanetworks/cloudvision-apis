@@ -826,6 +826,13 @@
         },
         "parameters": [
           {
+            "name": "filter.isTest",
+            "description": "is_test specifies filtering option with regard to sender status being triggered by a test event\nor non-test event.\nWhen set, it will discard events from status based on matching the IsTest field.\nIf not set, returns all.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -944,6 +951,13 @@
         },
         "parameters": [
           {
+            "name": "filter.isTest",
+            "description": "is_test specifies filtering option with regard to sender status being triggered by a test event\nor non-test event.\nWhen set, it will discard events from status based on matching the IsTest field.\nIf not set, returns all.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1020,6 +1034,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.isTest",
+            "description": "is_test specifies filtering option with regard to sender status being triggered by a test event\nor non-test event.\nWhen set, it will discard events from status based on matching the IsTest field.\nIf not set, returns all.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -1106,6 +1127,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "filter.isTest",
+            "description": "is_test specifies filtering option with regard to sender status being triggered by a test event\nor non-test event.\nWhen set, it will discard events from status based on matching the IsTest field.\nIf not set, returns all.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "name": "time.start",
             "in": "query",
@@ -2663,6 +2691,20 @@
       "default": "ENDPOINT_TYPE_UNSPECIFIED",
       "description": "EndpointType describes the set of possible endpoint types.\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED represents the unspecified enum value.\n - ENDPOINT_TYPE_EMAIL: ENDPOINT_TYPE_EMAIL represents the email endpoint type.\n - ENDPOINT_TYPE_SLACK: ENDPOINT_TYPE_SLACK represents the Slack endpoint type.\n - ENDPOINT_TYPE_VICTOROPS: ENDPOINT_TYPE_VICTOROPS represents the VictorOps endpoint type.\n - ENDPOINT_TYPE_PAGERDUTY: ENDPOINT_TYPE_PAGERDUTY represents the PagerDuty endpoint type.\n - ENDPOINT_TYPE_PUSHOVER: ENDPOINT_TYPE_PUSHOVER represents the Pushover endpoint type.\n - ENDPOINT_TYPE_OPSGENIE: ENDPOINT_TYPE_OPSGENIE represents the Opsgenie endpoint type.\n - ENDPOINT_TYPE_GOOGLE_CHAT: ENDPOINT_TYPE_GOOGLE_CHAT represents the Google Chat endpoint type.\n - ENDPOINT_TYPE_MICROSOFT_TEAMS: ENDPOINT_TYPE_MICROSOFT_TEAMS represents the Microsft Teams endpoint type.\n - ENDPOINT_TYPE_WEBHOOK: ENDPOINT_TYPE_WEBHOOK represents the Webhook endpoint type.\n - ENDPOINT_TYPE_SYSLOG: ENDPOINT_TYPE_SYSLOG represents the Syslog endpoint type.\n - ENDPOINT_TYPE_CUE_SYSLOG: ENDPOINT_TYPE_CUE_SYSLOG represents the Cue Syslog endpoint type.\n - ENDPOINT_TYPE_SENDGRID: ENDPOINT_TYPE_SENDGRID represents the Sendgrid endpoint type.\n - ENDPOINT_TYPE_CUE_SENDGRID: ENDPOINT_TYPE_CUE_SENDGRID represents the Cue Sendgrid endpoint type.\n - ENDPOINT_TYPE_SNMP: ENDPOINT_TYPE_SNMP represents the SNMP endpoint type.\n - ENDPOINT_TYPE_CUE_SNMP: ENDPOINT_TYPE_CUE_SNMP represents the Cue SNMP endpoint type.\n - ENDPOINT_TYPE_ZOOM: ENDPOINT_TYPE_ZOOM represents the Zoom endpoint type.\n - ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL: ENDPOINT_TYPE_MS_GRAPH_SEND_MAIL represents the Microsoft Graph sendMail endpoint type.\n - ENDPOINT_TYPE_CV_ACTION: ENDPOINT_TYPE_CV_ACTION represents the Actions of the Cloud Vision Portal endpoint type."
     },
+    "arista.alert.v1.EventFilter": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "$ref": "#/definitions/arista.alert.v1.EventIdentifiers",
+          "description": "events is a slice of EventIdentifiers that are matched against the EventIdentifiers in\na SenderStatus message.\nFilter passes if any EventIdentifier from events match any EventIdentifier in SenderStatus.\nNil fields are considered pass-through."
+        },
+        "isTest": {
+          "type": "boolean",
+          "description": "is_test specifies filtering option with regard to sender status being triggered by a test event\nor non-test event.\nWhen set, it will discard events from status based on matching the IsTest field.\nIf not set, returns all."
+        }
+      },
+      "description": "EventFilter defines the criteria to filter response data based on the contained event\nidentifiers.\nIf EventFilter is nil, it's a pass-through filter."
+    },
     "arista.alert.v1.EventIdentifier": {
       "type": "object",
       "properties": {
@@ -2683,6 +2725,10 @@
         "firing": {
           "type": "boolean",
           "description": "firing is true if event is ongoing and false if event has finished."
+        },
+        "isTest": {
+          "type": "boolean",
+          "description": "is_test is true if event was initiated via test notification page."
         }
       },
       "description": "EventIdentifier consists of the minimal information required\nto uniquely match which event triggered an alert and due to which rule."
@@ -3416,6 +3462,10 @@
             "$ref": "#/definitions/arista.alert.v1.SenderStatus"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "$ref": "#/definitions/arista.alert.v1.EventFilter",
+          "description": "For each SenderStatus in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given SenderStatus is streamed to the user."
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
