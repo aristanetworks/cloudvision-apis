@@ -1,13 +1,12 @@
 // Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
-// Arista Networks, Inc. Confidential and Proprietary.
-// Subject to Arista Networks, Inc.'s EULA.
-// FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
 
 syntax = "proto3";
 
 package arista.syslog.v1;
 
-option go_package = "arista/resources/arista/syslog.v1;syslog";
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/syslog.v1;syslog";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
@@ -16,13 +15,17 @@ import "fmp/inet.proto";
 
 // TransportProtocol defines the set of transport protocols to be used for export.
 enum TransportProtocol {
+    // TRANSPORT_PROTOCOL_UNSPECIFIED indicates unspecified protocol.
     TRANSPORT_PROTOCOL_UNSPECIFIED = 0;
     // TRANSPORT_PROTOCOL_UDP indicates the User Datagram Protocol (UDP).
     TRANSPORT_PROTOCOL_UDP = 1;
+    // TRANSPORT_PROTOCOL_TCP indicates the TCP over TLS protocol.
+    TRANSPORT_PROTOCOL_TCP = 2;
 }
 
 // Format defines the set of formats to be used for export to syslog servers.
 enum Format {
+    // FORMAT_UNSPECIFIED indicates unspecified format.
     FORMAT_UNSPECIFIED = 0;
     // FORMAT_RFC3164 indicates the BSD syslog protocol as defined by RFC 3164.
     FORMAT_RFC3164 = 1;
@@ -34,6 +37,7 @@ enum Format {
 
 // ExportResult defines the set of possible results of an export operation.
 enum ExportResult {
+    // EXPORT_RESULT_UNSPECIFIED indicates unspecified export operation.
     EXPORT_RESULT_UNSPECIFIED = 0;
     // EXPORT_RESULT_SUCCESS indicates a successful export operation.
     EXPORT_RESULT_SUCCESS = 1;
@@ -101,7 +105,7 @@ message ExportFormatConfig {
 // Export provides the export status for a syslog server.
 message Export {
     option (fmp.model) = "ro";
-    // key uniquely identifies a syslog server
+    // key uniquely identifies a syslog server.
     ExportKey key = 1;
     // stats contains the statistics for all export operations.
     ExportStats stats = 2;

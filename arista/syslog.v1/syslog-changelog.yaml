@@ -7,6 +7,17 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-08-28
+      description: Releasing on cvaas and onprem
+      version: 1.1.0
+      onprem: true
+      cvaas: true
+
+    - date: 2024-04-24
+      description: Updating transport protocol to include tcp over tls protocol
+      version: 1.0.6
+      onprem: true
+
     - date: 2022-01-27
       description: Data Model change for syslog export status
       version: 1.0.5
