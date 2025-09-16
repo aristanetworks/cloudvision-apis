@@ -1,0 +1,175 @@
+// Copyright (c) 2025 Arista Networks, Inc. All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.auditlog.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/auditlog.v1;audit";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// Severity is the level of criticality of the log.
+enum Severity {
+    // SEVERITY_UNSPECIFIED severity
+    SEVERITY_UNSPECIFIED = 0;
+    // SEVERITY_EMERGENCY severity
+    SEVERITY_EMERGENCY = 1;
+    // SEVERITY_ALERT severity
+    SEVERITY_ALERT = 2;
+    // SEVERITY_CRITICAL severity
+    SEVERITY_CRITICAL = 3;
+    // SEVERITY_ERROR severity
+    SEVERITY_ERROR = 4;
+    // SEVERITY_WARNING severity
+    SEVERITY_WARNING = 5;
+    // SEVERITY_NOTICE severity
+    SEVERITY_NOTICE = 6;
+    // SEVERITY_INFO severity
+    SEVERITY_INFO = 7;
+    // SEVERITY_DEBUG severity
+    SEVERITY_DEBUG = 8;
+}
+
+// Attributes are fields that make up the audit log.
+message Attributes {
+
+    // user is the CloudVision user to which the log corresponds to.
+    google.protobuf.StringValue user = 1;
+
+    // timestamp at which the log was generated.
+    // eg: 2006-01-02T15:04:05.000Z
+    google.protobuf.Timestamp timestamp = 2;
+
+    // severity is level of importance or urgency of the audit log message.
+    // eg: Debug, Info, Error
+    Severity severity = 3;
+
+    // device_name of the device for which audit log is sent.
+    google.protobuf.StringValue device_name = 4;
+
+    // service name for which audit log is added.
+    // eg: aaa, accesscontrol, inventory
+    google.protobuf.StringValue service = 5;
+
+    // message in the audit log.
+    // eg: "user logged in"
+    google.protobuf.StringValue message = 6;
+
+    // tags associated with the audit log.
+    // eg: "tags": {"mnemonic": "DEVICE_PROVISIONING_SUCCESS"}
+    fmp.MapStringString tags = 7;
+}
+
+// AuditlogKey is the unique key for each message.
+message AuditlogKey {
+    // unique uuid for each log.
+    option (fmp.model_key) = true;
+    // id is the unique uuid for an audit log.
+    google.protobuf.StringValue id = 1;
+}
+
+// Auditlog contains the different fields as well as the formatted log.
+message Auditlog {
+    option (fmp.model) = "ro";
+    option (fmp.no_default_filter) = true;
+    option (fmp.custom_filter) = "[]Filter";
+
+    // key is the unique key for each message.
+    AuditlogKey key = 1;
+
+    // attributes are the different fields that make up the audit log.
+    Attributes attributes = 2;
+
+    // log is the formatted log message containing the different attributes
+    // including timestamp, serviceName, severity , userName in addition to
+    // the message.
+    // May 17 12:50:54 host service Message: user logged in, User: abc
+    google.protobuf.StringValue log = 3;
+}
+
+// Filter are the different filters that can be applied.
+message Filter {
+
+    // category filters based on category of the logs.
+    // eg:
+    // {"filter":[{"category":{"custom_type": "abc"}}]}
+    // filters all logs associated with the service abc.
+    Category category = 1;
+
+    // queries is the list of strings that should be present in the log.
+    // eg: {"filter":[{"queries":{"values":["abc"]}}]} searches for all
+    // logs containing the string abc.
+    fmp.RepeatedString queries = 2;
+
+    // tags filters based on tags associated with the log.
+    // eg: {"filter":[{"tags":{"values":{"id":"xyz"}}}]}
+    // searches for all logs associates with the tag
+    // id:xyz.
+    fmp.MapStringString tags = 3;
+
+    // severity is level of importance or urgency of the audit log message.
+    Severity severity = 4;
+
+    // user filters the audit logs by given username across categories.
+    google.protobuf.StringValue user = 5;
+}
+
+// CategoryType is the type of the category
+enum CategoryType {
+    // CATEGORY_TYPE_UNSPECIFIED categoryType
+    CATEGORY_TYPE_UNSPECIFIED = 0;
+    // CATEGORY_TYPE_INVENTORY categoryType
+    // the identifier for this category is the deviceId
+    CATEGORY_TYPE_INVENTORY = 1;
+    // CATEGORY_TYPE_CONFIGLET categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_CONFIGLET = 2;
+    // CATEGORY_TYPE_IMAGE categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_IMAGE = 3;
+    // CATEGORY_TYPE_LABEL categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_LABEL = 4;
+    // CATEGORY_TYPE_USER categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_USER = 5;
+    // CATEGORY_TYPE_CHANGECONTROL categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_CHANGECONTROL = 6;
+    // CATEGORY_TYPE_ROLE categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_ROLE = 7;
+    // CATEGORY_TYPE_SNAPSHOT categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_SNAPSHOT = 8;
+    // CATEGORY_TYPE_EXECACTION categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_EXECACTION = 9;
+    // CATEGORY_TYPE_ACCESSCONTROL categoryType
+    // the identifier for this category is a custom identifier defined by the user.
+    CATEGORY_TYPE_ACCESSCONTROL = 10;
+}
+
+// Category organizes audit logs into different groups using the CategoryType and the identifier
+// eg:"filter":[{"category":{"type":"CATEGORY_TYPE_INVENTORY","identifier":"abc"}}]
+// filters all logs associated with the service "inventory" and device abc
+message Category {
+
+    // type of the category.
+    CategoryType type = 1;
+
+    // identifier is the object with which we want to filter the category.
+    // eg: fetch all logs from the device with id abc
+    // Here the category is inventory and the identifier is abc.
+    google.protobuf.StringValue identifier = 2;
+
+    // custom_type is a custom category that can be created by the user.
+    // this is used if none of the existing categories can support the users's usecase.
+    google.protobuf.StringValue custom_type = 3;
+}
