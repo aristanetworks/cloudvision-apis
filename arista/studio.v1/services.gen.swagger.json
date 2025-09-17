@@ -5000,7 +5000,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5031,7 +5031,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5180,7 +5180,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAssignedTagsConfig instance in this response."
         }
       }
     },
@@ -5197,7 +5198,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AssignedTagsConfig at end.\n    * Each AssignedTagsConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AssignedTagsConfig at start, followed by updates until now.\n    * Each AssignedTagsConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AssignedTagsConfig at start, followed by updates\n    until end.\n    * Each AssignedTagsConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AssignedTagsConfig at end.\n    * Each AssignedTagsConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AssignedTagsConfig at start, followed by updates until now.\n    * Each AssignedTagsConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AssignedTagsConfig at start, followed by updates\n    until end.\n    * Each AssignedTagsConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -5263,7 +5264,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAssignedTags instance in this response."
         }
       }
     },
@@ -5280,7 +5282,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AssignedTags at end.\n    * Each AssignedTags response is fully-specified (all fields set).\n  * start: Returns the state of each AssignedTags at start, followed by updates until now.\n    * Each AssignedTags response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AssignedTags at start, followed by updates\n    until end.\n    * Each AssignedTags response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AssignedTags at end.\n    * Each AssignedTags response is fully-specified (all fields set).\n  * start: Returns the state of each AssignedTags at start, followed by updates until now.\n    * Each AssignedTags response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AssignedTags at start, followed by updates\n    until end.\n    * Each AssignedTags response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -5351,7 +5353,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5390,7 +5392,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5539,7 +5541,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAutofillActionConfig instance in this response."
         }
       }
     },
@@ -5556,7 +5559,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AutofillActionConfig at end.\n    * Each AutofillActionConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AutofillActionConfig at start, followed by updates until now.\n    * Each AutofillActionConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AutofillActionConfig at start, followed by updates\n    until end.\n    * Each AutofillActionConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AutofillActionConfig at end.\n    * Each AutofillActionConfig response is fully-specified (all fields set).\n  * start: Returns the state of each AutofillActionConfig at start, followed by updates until now.\n    * Each AutofillActionConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AutofillActionConfig at start, followed by updates\n    until end.\n    * Each AutofillActionConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -5645,7 +5648,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAutofillAction instance in this response."
         }
       }
     },
@@ -5662,7 +5666,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AutofillAction at end.\n    * Each AutofillAction response is fully-specified (all fields set).\n  * start: Returns the state of each AutofillAction at start, followed by updates until now.\n    * Each AutofillAction response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AutofillAction at start, followed by updates\n    until end.\n    * Each AutofillAction response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AutofillAction at end.\n    * Each AutofillAction response is fully-specified (all fields set).\n  * start: Returns the state of each AutofillAction at start, followed by updates until now.\n    * Each AutofillAction response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AutofillAction at start, followed by updates\n    until end.\n    * Each AutofillAction response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -5811,7 +5815,7 @@
         },
         "dynamicOptions": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "description": "dynamic_options defines the set of possible values for the float\nbased on the possible values for other floats in the schema.\nEach field should be referenced by a JSON object of the form\n`{ \"fieldId\": \u003cfield_id\u003e }`.\n\nE.g,\n```\n[\n  { \"fieldId\": \"floatField1ID\" },\n  { \"fieldId\": \"floatField2ID\" }\n]\n```\nHere, the possible values for the floats identified by\n`\"floatField1ID\"` and `\"floatField2ID\"` are used as the\npossible values for this float."
+          "description": "dynamic_options defines the set of possible values for the float\nbased on the possible values for other floats in the schema.\nEach field should be referenced by a JSON object of the form\n`{ fieldId: field_id }`.\n\nE.g,\n[\n  `{ fieldId: floatField1ID }`,\n  `{ fieldId: floatField2ID }`\n]\nHere, the possible values for the floats identified by\n`floatField1ID` and `floatField2ID` are used as the\npossible values for this float."
         },
         "extraValuesAllowed": {
           "type": "boolean",
@@ -5980,7 +5984,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6011,7 +6015,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6160,7 +6164,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nInputsConfig instance in this response."
         }
       }
     },
@@ -6177,7 +6182,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each InputsConfig at end.\n    * Each InputsConfig response is fully-specified (all fields set).\n  * start: Returns the state of each InputsConfig at start, followed by updates until now.\n    * Each InputsConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each InputsConfig at start, followed by updates\n    until end.\n    * Each InputsConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each InputsConfig at end.\n    * Each InputsConfig response is fully-specified (all fields set).\n  * start: Returns the state of each InputsConfig at start, followed by updates until now.\n    * Each InputsConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each InputsConfig at start, followed by updates\n    until end.\n    * Each InputsConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6266,7 +6271,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nInputs instance in this response."
         }
       }
     },
@@ -6283,7 +6289,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Inputs at end.\n    * Each Inputs response is fully-specified (all fields set).\n  * start: Returns the state of each Inputs at start, followed by updates until now.\n    * Each Inputs response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Inputs at start, followed by updates\n    until end.\n    * Each Inputs response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Inputs at end.\n    * Each Inputs response is fully-specified (all fields set).\n  * start: Returns the state of each Inputs at start, followed by updates until now.\n    * Each Inputs response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Inputs at start, followed by updates\n    until end.\n    * Each Inputs response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6432,7 +6438,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6480,7 +6486,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecretInput instance in this response."
         }
       }
     },
@@ -6497,7 +6504,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecretInput at end.\n    * Each SecretInput response is fully-specified (all fields set).\n  * start: Returns the state of each SecretInput at start, followed by updates until now.\n    * Each SecretInput response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecretInput at start, followed by updates\n    until end.\n    * Each SecretInput response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecretInput at end.\n    * Each SecretInput response is fully-specified (all fields set).\n  * start: Returns the state of each SecretInput at start, followed by updates until now.\n    * Each SecretInput response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecretInput at start, followed by updates\n    until end.\n    * Each SecretInput response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6615,7 +6622,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6658,7 +6665,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6807,7 +6814,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudioConfig instance in this response."
         }
       }
     },
@@ -6824,7 +6832,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioConfig at end.\n    * Each StudioConfig response is fully-specified (all fields set).\n  * start: Returns the state of each StudioConfig at start, followed by updates until now.\n    * Each StudioConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioConfig at start, followed by updates\n    until end.\n    * Each StudioConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioConfig at end.\n    * Each StudioConfig response is fully-specified (all fields set).\n  * start: Returns the state of each StudioConfig at start, followed by updates until now.\n    * Each StudioConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioConfig at start, followed by updates\n    until end.\n    * Each StudioConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6908,7 +6916,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudio instance in this response."
         }
       }
     },
@@ -6925,7 +6934,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Studio at end.\n    * Each Studio response is fully-specified (all fields set).\n  * start: Returns the state of each Studio at start, followed by updates until now.\n    * Each Studio response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Studio at start, followed by updates\n    until end.\n    * Each Studio response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Studio at end.\n    * Each Studio response is fully-specified (all fields set).\n  * start: Returns the state of each Studio at start, followed by updates until now.\n    * Each Studio response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Studio at start, followed by updates\n    until end.\n    * Each Studio response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6976,7 +6985,7 @@
         },
         "fromPackage": {
           "type": "string",
-          "description": "from_package indicates that this studio was created by a package, and can only be modified\nby the packaging service."
+          "description": "from_package indicates that this studio was created by a package, and can only be modified\nby the packaging service. It stores packageID."
         }
       },
       "description": "StudioSummary holds basic information about a studio."
@@ -6990,7 +6999,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7038,7 +7047,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nStudioSummary instance in this response."
         }
       }
     },
@@ -7055,7 +7065,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioSummary at end.\n    * Each StudioSummary response is fully-specified (all fields set).\n  * start: Returns the state of each StudioSummary at start, followed by updates until now.\n    * Each StudioSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioSummary at start, followed by updates\n    until end.\n    * Each StudioSummary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each StudioSummary at end.\n    * Each StudioSummary response is fully-specified (all fields set).\n  * start: Returns the state of each StudioSummary at start, followed by updates until now.\n    * Each StudioSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each StudioSummary at start, followed by updates\n    until end.\n    * Each StudioSummary response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
