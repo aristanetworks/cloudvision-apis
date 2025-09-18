@@ -713,6 +713,8 @@ enum DiffOp {
 	DIFF_OP_DELETE = 2;
 	// DIFF_OP_CHANGE indicates modification of an item.
 	DIFF_OP_CHANGE = 3;
+	// DIFF_OP_MOVE indicates change in position of an item in a list.
+	DIFF_OP_MOVE = 4;
 }
 
 // DiffEntry represents a change detected between two versions of an entity.
@@ -725,6 +727,26 @@ message DiffEntry {
 	google.protobuf.StringValue value_a = 3;
 	// value_b is the value from workspace_b.
 	google.protobuf.StringValue value_b = 4;
+	// index_b is the new position of an array element in workspace_b (only for MOVE).
+	// MOVE represents relocating a single element while preserving
+	// the relative order of all others. Detected using LCS.
+	// Example:
+	//   workspace_a: users = ["u1","u2","u3"]
+	//   workspace_b: users = ["u2","u1","u3"]
+	//   DiffEntry for "u2": path = ["1"], op = MOVE, index_b = 0
+	google.protobuf.UInt32Value index_b = 5;
+	// key_path is used to locate list elements when they have
+	// stable keys instead of numeric indices.
+	//
+	// Syntax: [field=value]
+	// - field: the unique key field of the element
+	// - value: the element’s identifier
+	//
+	// Example:
+	//   users = [\{"id":"u1","name":"Alice"\}]
+	//   key_path = ["users", "[id=u1]", "name"]
+	//   path     = ["users", "0", "name"]
+	fmp.RepeatedString key_path = 6;
 }
 
 // DiffKey represents the key that identifies a diff for an entity.

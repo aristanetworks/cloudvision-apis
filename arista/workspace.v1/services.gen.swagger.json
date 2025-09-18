@@ -3365,6 +3365,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigError"
           },
           "title": "values - list of errors"
@@ -3405,6 +3406,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigSource"
           },
           "title": "values - ordered list of all the config snippets present in DC"
@@ -3642,6 +3644,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ExtensionDiff"
           },
           "description": "values is an ordered list of extension diffs applied to the device."
@@ -3697,6 +3700,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ImageError"
           },
           "description": "values is a list of image errors."
@@ -3728,6 +3732,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ImageInfo"
           },
           "description": "values is a list of image infos."
@@ -3847,6 +3852,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.imagestatus.v1.ImageWarning"
           },
           "description": "values is a list of image warnings."
@@ -4189,6 +4195,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.DiffEntry"
           },
           "description": "values contains a list of DiffEntry messages, each representing a change."
@@ -4214,6 +4221,15 @@
         "valueB": {
           "type": "string",
           "description": "value_b is the value from workspace_b."
+        },
+        "indexB": {
+          "type": "integer",
+          "format": "int64",
+          "title": "index_b is the new position of an array element in workspace_b (only for MOVE).\nMOVE represents relocating a single element while preserving\nthe relative order of all others. Detected using LCS.\nExample:\n  workspace_a: users = [\"u1\",\"u2\",\"u3\"]\n  workspace_b: users = [\"u2\",\"u1\",\"u3\"]\n  DiffEntry for \"u2\": path = [\"1\"], op = MOVE, index_b = 0"
+        },
+        "keyPath": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "key_path is used to locate list elements when they have\nstable keys instead of numeric indices.\n\nSyntax: [field=value]\n- field: the unique key field of the element\n- value: the element’s identifier\n\nExample:\n  users = [{\"id\":\"u1\",\"name\":\"Alice\"}]\n  key_path = [\"users\", \"[id=u1]\", \"name\"]\n  path     = [\"users\", \"0\", \"name\"]"
         }
       },
       "description": "DiffEntry represents a change detected between two versions of an entity."
@@ -4252,10 +4268,11 @@
         "DIFF_OP_UNSPECIFIED",
         "DIFF_OP_ADD",
         "DIFF_OP_DELETE",
-        "DIFF_OP_CHANGE"
+        "DIFF_OP_CHANGE",
+        "DIFF_OP_MOVE"
       ],
       "default": "DIFF_OP_UNSPECIFIED",
-      "description": "DiffOp enumerates the types of operations that can occur within a diff.\n\n - DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED indicates an unspecified diff operation.\n - DIFF_OP_ADD: DIFF_OP_ADD indicates the addition of a new item.\n - DIFF_OP_DELETE: DIFF_OP_DELETE indicates the deletion of an item.\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE indicates modification of an item."
+      "description": "DiffOp enumerates the types of operations that can occur within a diff.\n\n - DIFF_OP_UNSPECIFIED: DIFF_OP_UNSPECIFIED indicates an unspecified diff operation.\n - DIFF_OP_ADD: DIFF_OP_ADD indicates the addition of a new item.\n - DIFF_OP_DELETE: DIFF_OP_DELETE indicates the deletion of an item.\n - DIFF_OP_CHANGE: DIFF_OP_CHANGE indicates modification of an item.\n - DIFF_OP_MOVE: DIFF_OP_MOVE indicates change in position of an item in a list."
     },
     "arista.workspace.v1.DiffType": {
       "type": "string",
@@ -4378,6 +4395,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.InputError"
           },
           "description": "values is a list of InputError."
@@ -4448,6 +4466,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.InputWarning"
           },
           "description": "values is a list of InputWarning."
@@ -4581,6 +4600,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.StudioGeneratedConfigurationStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -4635,6 +4655,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.StudioGeneratedConfigurationKey"
           }
         },
@@ -4669,6 +4690,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.StudioGeneratedConfiguration"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -4735,6 +4757,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.TemplateError"
           },
           "description": "values is a list of TemplateError."
@@ -4817,6 +4840,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -4863,6 +4887,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -4933,6 +4958,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -4982,6 +5008,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetailsKey"
           }
         },
@@ -5016,6 +5043,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildDetails"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5082,6 +5110,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuildKey"
           }
         },
@@ -5116,6 +5145,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceBuild"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5180,6 +5210,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfigStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -5229,6 +5260,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
           },
           "title": "key contains a list of WorkspaceConfig keys to delete"
@@ -5282,6 +5314,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
           },
           "description": "value contains a list of WorkspaceConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
@@ -5305,6 +5338,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
           }
         },
@@ -5339,6 +5373,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5391,6 +5426,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffSet"
           },
           "description": "values contains a list of WorkspaceDiffSet messages, each detailing the differences\nbetween a pair of workspaces."
@@ -5418,6 +5454,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffsStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -5444,6 +5481,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.DiffKey"
           }
         },
@@ -5478,6 +5516,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceDiffs"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5539,6 +5578,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceKey"
           }
         },
@@ -5586,6 +5626,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.Workspace"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5634,6 +5675,7 @@
         "responses": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfigStreamResponse"
           },
           "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
@@ -5683,6 +5725,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
           },
           "title": "key contains a list of WorkspaceSyncConfig keys to delete"
@@ -5736,6 +5779,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig"
           },
           "description": "value contains a list of WorkspaceSyncConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
@@ -5759,6 +5803,7 @@
         "keys": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncKey"
           }
         },
@@ -5793,6 +5838,7 @@
         "partialEqFilter": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/arista.workspace.v1.WorkspaceSyncConfig"
           },
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
@@ -5885,6 +5931,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/google.protobuf.Any"
           }
         }
