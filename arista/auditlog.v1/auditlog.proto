@@ -62,7 +62,7 @@ message Attributes {
     google.protobuf.StringValue message = 6;
 
     // tags associated with the audit log.
-    // eg: "tags": {"mnemonic": "DEVICE_PROVISIONING_SUCCESS"}
+    // eg: `tags: {mnemonic: DEVICE_PROVISIONING_SUCCESS}`
     fmp.MapStringString tags = 7;
 }
 
@@ -98,17 +98,17 @@ message Filter {
 
     // category filters based on category of the logs.
     // eg:
-    // {"filter":[{"category":{"custom_type": "abc"}}]}
+    // `{filter:[{category:{custom_type: abc}}]}`
     // filters all logs associated with the service abc.
     Category category = 1;
 
     // queries is the list of strings that should be present in the log.
-    // eg: {"filter":[{"queries":{"values":["abc"]}}]} searches for all
+    // eg: `{filter:[{queries:{values:[abc]}}]}` searches for all
     // logs containing the string abc.
     fmp.RepeatedString queries = 2;
 
     // tags filters based on tags associated with the log.
-    // eg: {"filter":[{"tags":{"values":{"id":"xyz"}}}]}
+    // eg: `{filter:[{tags:{values:{id:xyz}}}]}`
     // searches for all logs associates with the tag
     // id:xyz.
     fmp.MapStringString tags = 3;
@@ -157,7 +157,7 @@ enum CategoryType {
 }
 
 // Category organizes audit logs into different groups using the CategoryType and the identifier
-// eg:"filter":[{"category":{"type":"CATEGORY_TYPE_INVENTORY","identifier":"abc"}}]
+// eg: `filter:[{category:{type:CATEGORY_TYPE_INVENTORY,identifier:abc}}]`
 // filters all logs associated with the service "inventory" and device abc
 message Category {
 

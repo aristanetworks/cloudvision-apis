@@ -461,7 +461,7 @@
         },
         "tags": {
           "$ref": "#/definitions/fmp.MapStringString",
-          "title": "tags associated with the audit log.\neg: \"tags\": {\"mnemonic\": \"DEVICE_PROVISIONING_SUCCESS\"}"
+          "title": "tags associated with the audit log.\neg: `tags: {mnemonic: DEVICE_PROVISIONING_SUCCESS}`"
         }
       },
       "description": "Attributes are fields that make up the audit log."
@@ -597,7 +597,7 @@
           "description": "custom_type is a custom category that can be created by the user.\nthis is used if none of the existing categories can support the users's usecase."
         }
       },
-      "title": "Category organizes audit logs into different groups using the CategoryType and the identifier\neg:\"filter\":[{\"category\":{\"type\":\"CATEGORY_TYPE_INVENTORY\",\"identifier\":\"abc\"}}]\nfilters all logs associated with the service \"inventory\" and device abc"
+      "title": "Category organizes audit logs into different groups using the CategoryType and the identifier\neg: `filter:[{category:{type:CATEGORY_TYPE_INVENTORY,identifier:abc}}]`\nfilters all logs associated with the service \"inventory\" and device abc"
     },
     "arista.auditlog.v1.CategoryType": {
       "type": "string",
@@ -623,15 +623,15 @@
       "properties": {
         "category": {
           "$ref": "#/definitions/arista.auditlog.v1.Category",
-          "description": "category filters based on category of the logs.\neg:\n{\"filter\":[{\"category\":{\"custom_type\": \"abc\"}}]}\nfilters all logs associated with the service abc."
+          "description": "category filters based on category of the logs.\neg:\n`{filter:[{category:{custom_type: abc}}]}`\nfilters all logs associated with the service abc."
         },
         "queries": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "description": "queries is the list of strings that should be present in the log.\neg: {\"filter\":[{\"queries\":{\"values\":[\"abc\"]}}]} searches for all\nlogs containing the string abc."
+          "description": "queries is the list of strings that should be present in the log.\neg: `{filter:[{queries:{values:[abc]}}]}` searches for all\nlogs containing the string abc."
         },
         "tags": {
           "$ref": "#/definitions/fmp.MapStringString",
-          "description": "tags filters based on tags associated with the log.\neg: {\"filter\":[{\"tags\":{\"values\":{\"id\":\"xyz\"}}}]}\nsearches for all logs associates with the tag\nid:xyz."
+          "description": "tags filters based on tags associated with the log.\neg: `{filter:[{tags:{values:{id:xyz}}}]}`\nsearches for all logs associates with the tag\nid:xyz."
         },
         "severity": {
           "$ref": "#/definitions/arista.auditlog.v1.Severity",
