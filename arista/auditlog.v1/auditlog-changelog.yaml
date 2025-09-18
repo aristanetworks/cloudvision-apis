@@ -7,6 +7,12 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-09-17
+      description: Improve formatting in field comments
+      version: 1.0.3
+      onprem: true
+      cvaas: true
+
     - date: 2025-08-28
       description: Releasing to cvaas and onprem
       version: 1.0.2
