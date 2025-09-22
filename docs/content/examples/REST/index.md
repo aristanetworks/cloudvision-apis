@@ -5,8 +5,8 @@ toc_max_heading_level: 3
 ---
 
 :::info
-Examples scripts: [examples_cvprac.py](https://github.com/aristanetworks/cloudvision-apis/blob/trunk/docs/content/examples/REST/_index.files/examples_cvprac.py), 
-[examples_python_rest.py](https://github.com/aristanetworks/cloudvision-apis/blob/trunk/docs/content/examples/REST/_index.files/examples_python_rest.py)
+Examples scripts: [examples_cvprac.py](https://github.com/aristanetworks/cloudvision-apis/blob/trunk/docs/content/examples/REST/index.files/examples_cvprac.py), 
+[examples_python_rest.py](https://github.com/aristanetworks/cloudvision-apis/blob/trunk/docs/content/examples/REST/index.files/examples_python_rest.py)
 :::
 
 :::note
