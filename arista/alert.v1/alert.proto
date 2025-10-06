@@ -118,6 +118,9 @@ message SenderStatus {
 	google.protobuf.StringValue error_message = 6;
 	// events is a list of events triggering the alert.
 	EventIdentifiers events = 7;
+	// previous_attempts is the number of times the alert corresponding to this sender status has been
+	// retried.
+	google.protobuf.UInt32Value previous_attempts = 8;
 }
 
 // EventIdentifiers is a list of EventIdentifier messages.

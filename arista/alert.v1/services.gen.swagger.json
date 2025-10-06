@@ -3368,6 +3368,11 @@
         "events": {
           "$ref": "#/definitions/arista.alert.v1.EventIdentifiers",
           "description": "events is a list of events triggering the alert."
+        },
+        "previousAttempts": {
+          "type": "integer",
+          "format": "int64",
+          "description": "previous_attempts is the number of times the alert corresponding to this sender status has been\nretried."
         }
       },
       "description": "SenderStatus provides information about the status of particular send."
