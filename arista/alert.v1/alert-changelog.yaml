@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2025-10-13
+    description: Add event_type field to EventIdentifier message
+    version: 1.16.0
+    onprem: true
+    cvaas: true
   - date: 2025-10-03
     description: Add previous_attempts field to SenderStatus message
     version: 1.15.0

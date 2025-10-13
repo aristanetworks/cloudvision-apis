@@ -2729,6 +2729,10 @@
         "isTest": {
           "type": "boolean",
           "description": "is_test is true if event was initiated via test notification page."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "event_type is the type of the event."
         }
       },
       "description": "EventIdentifier consists of the minimal information required\nto uniquely match which event triggered an alert and due to which rule."
