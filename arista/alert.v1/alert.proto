@@ -144,6 +144,8 @@ message EventIdentifier {
 	google.protobuf.BoolValue firing = 4;
 	// is_test is true if event was initiated via test notification page.
 	google.protobuf.BoolValue is_test = 5;
+	// event_type is the type of the event.
+	google.protobuf.StringValue event_type = 6;
 }
 
 // EventFilter defines the criteria to filter response data based on the contained event
