@@ -11,6 +11,11 @@
 # PATCH version when you make backward compatible bug fixes
 
 Changes:
+    - date: 2025-09-17
+      description: Add multiarch support
+      version: 1.3.0
+      cvaas: true
+      onprem: true
     - date: 2025-04-24
       description: Add new software source field for migration SOFTWARE_SOURCE_NP_MIGRATION
       version: 1.2.0

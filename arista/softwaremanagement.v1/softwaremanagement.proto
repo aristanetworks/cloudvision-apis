@@ -294,6 +294,8 @@ message SwiMetadata {
     // optimization specifies any adaptations made to the image for specific products or
     // use-cases
     google.protobuf.StringValue optimization = 10;
+    // concrete_type_to_concrete_swi_map indicates a map to the concrete swi metadata
+    ConcreteTypeToConcreteSwiMap concrete_type_to_concrete_swi_map = 11;
 }
 
 // ExtensionMetadata is versioning metadata describing extensions (.swix and .rpm).
@@ -331,6 +333,8 @@ enum Arch {
     ARCH_X86_64 = 4;
     // ARCH_AARCH64 indicates that the software is intended to be run on ARM 64-bit platforms
     ARCH_AARCH64 = 5;
+    // ARCH_MULTIARCH indicates that the software supports all architectures
+    ARCH_MULTIARCH = 6;
 }
 
 // Variant is an enum containing the possible .swi variant types.
@@ -441,4 +445,24 @@ message Releases {
     // can be downloaded from the Arista's Software Download site. These URIs are used
     // by the `RepositoryConfig` API to add a software release to CloudVision.
     fmp.RepeatedString uris = 2;
+}
+
+// ConcreteFile contains the name and corresponding metadata of the
+// file (like fileserver, file size)
+message ConcreteFile {
+    // name is the name of the concrete file
+    google.protobuf.StringValue name = 1;
+    // file_server_path is the location of the image or extension as stored in CloudVision
+    google.protobuf.StringValue file_server_path = 2;
+    // size is the size of the image or extension in bytes
+    google.protobuf.UInt64Value size = 3;
+    // release is the release version of the concrete file
+    google.protobuf.StringValue release = 4;
+}
+
+// ConcreteTypeToConcreteSwiMap indicates a map keyed by stringified concrete type (limited
+// to i386, i686, x86_64 and aarch64, but can be extended to platform types in the future) to the concrete swi map.
+message ConcreteTypeToConcreteSwiMap {
+    // values contains a collection of ConcreteTypeToConcreteSwiMap items.
+    map<string, ConcreteFile> values = 1;
 }

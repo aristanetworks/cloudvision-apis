@@ -1140,10 +1140,47 @@
         "ARCH_I386",
         "ARCH_I686",
         "ARCH_X86_64",
-        "ARCH_AARCH64"
+        "ARCH_AARCH64",
+        "ARCH_MULTIARCH"
       ],
       "default": "ARCH_UNSPECIFIED",
-      "description": "Arch is an enum used to specify the target architecture of an image or extension.\n\n - ARCH_UNSPECIFIED: ARCH_UNSPECIFIED indicates an unknown or unspecified architecture\n - ARCH_NO_ARCH: ARCH_NO_ARCH indicates that the software is architecture agnostic\n - ARCH_I386: ARCH_I386 indicates that the software is intended for the i386 architecture\n - ARCH_I686: ARCH_I686 indicates that the software is intended for the i686 architecture\n - ARCH_X86_64: ARCH_X86_64 indicates that the software is intended to be run on 64-bit platforms\n - ARCH_AARCH64: ARCH_AARCH64 indicates that the software is intended to be run on ARM 64-bit platforms"
+      "description": "Arch is an enum used to specify the target architecture of an image or extension.\n\n - ARCH_UNSPECIFIED: ARCH_UNSPECIFIED indicates an unknown or unspecified architecture\n - ARCH_NO_ARCH: ARCH_NO_ARCH indicates that the software is architecture agnostic\n - ARCH_I386: ARCH_I386 indicates that the software is intended for the i386 architecture\n - ARCH_I686: ARCH_I686 indicates that the software is intended for the i686 architecture\n - ARCH_X86_64: ARCH_X86_64 indicates that the software is intended to be run on 64-bit platforms\n - ARCH_AARCH64: ARCH_AARCH64 indicates that the software is intended to be run on ARM 64-bit platforms\n - ARCH_MULTIARCH: ARCH_MULTIARCH indicates that the software supports all architectures"
+    },
+    "arista.softwaremanagement.v1.ConcreteFile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name is the name of the concrete file"
+        },
+        "fileServerPath": {
+          "type": "string",
+          "title": "file_server_path is the location of the image or extension as stored in CloudVision"
+        },
+        "size": {
+          "type": "string",
+          "format": "uint64",
+          "title": "size is the size of the image or extension in bytes"
+        },
+        "release": {
+          "type": "string",
+          "title": "release is the release version of the concrete file"
+        }
+      },
+      "title": "ConcreteFile contains the name and corresponding metadata of the\nfile (like fileserver, file size)"
+    },
+    "arista.softwaremanagement.v1.ConcreteTypeToConcreteSwiMap": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.softwaremanagement.v1.ConcreteFile"
+          },
+          "description": "values contains a collection of ConcreteTypeToConcreteSwiMap items."
+        }
+      },
+      "description": "ConcreteTypeToConcreteSwiMap indicates a map keyed by stringified concrete type (limited\nto i386, i686, x86_64 and aarch64, but can be extended to platform types in the future) to the concrete swi map."
     },
     "arista.softwaremanagement.v1.DigestType": {
       "type": "string",
@@ -1331,7 +1368,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Releases at end.\n    * Each Releases response is fully-specified (all fields set).\n  * start: Returns the state of each Releases at start, followed by updates until now.\n    * Each Releases response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Releases at start, followed by updates\n    until end.\n    * Each Releases response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Releases at end.\n    * Each Releases response is fully-specified (all fields set).\n  * start: Returns the state of each Releases at start, followed by updates until now.\n    * Each Releases response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Releases at start, followed by updates\n    until end.\n    * Each Releases response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1398,7 +1435,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -1429,7 +1466,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.softwaremanagement.v1.RepositoryConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -1578,7 +1615,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nRepositoryConfig instance in this response."
         }
       }
     },
@@ -1595,7 +1633,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each RepositoryConfig at end.\n    * Each RepositoryConfig response is fully-specified (all fields set).\n  * start: Returns the state of each RepositoryConfig at start, followed by updates until now.\n    * Each RepositoryConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each RepositoryConfig at start, followed by updates\n    until end.\n    * Each RepositoryConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each RepositoryConfig at end.\n    * Each RepositoryConfig response is fully-specified (all fields set).\n  * start: Returns the state of each RepositoryConfig at start, followed by updates until now.\n    * Each RepositoryConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each RepositoryConfig at start, followed by updates\n    until end.\n    * Each RepositoryConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1674,7 +1712,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nRepository instance in this response."
         }
       }
     },
@@ -1691,7 +1730,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Repository at end.\n    * Each Repository response is fully-specified (all fields set).\n  * start: Returns the state of each Repository at start, followed by updates until now.\n    * Each Repository response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Repository at start, followed by updates\n    until end.\n    * Each Repository response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Repository at end.\n    * Each Repository response is fully-specified (all fields set).\n  * start: Returns the state of each Repository at start, followed by updates until now.\n    * Each Repository response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Repository at start, followed by updates\n    until end.\n    * Each Repository response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1841,6 +1880,10 @@
         "optimization": {
           "type": "string",
           "title": "optimization specifies any adaptations made to the image for specific products or\nuse-cases"
+        },
+        "concreteTypeToConcreteSwiMap": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.ConcreteTypeToConcreteSwiMap",
+          "title": "concrete_type_to_concrete_swi_map indicates a map to the concrete swi metadata"
         }
       },
       "description": "SwiMetadata is versioning metadata describing .swi type images."
