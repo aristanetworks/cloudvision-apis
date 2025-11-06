@@ -261,6 +261,11 @@ enum EndpointErrorType {
 	// ENDPOINT_ERROR_TYPE_O_AUTH_ERROR is caused when we failed authenticating using the
 	// OAuth apis
 	ENDPOINT_ERROR_TYPE_O_AUTH_ERROR = 11;
+	// ENDPOINT_ERROR_TYPE_INTERNAL_ERROR indicates an unexpected internal error
+	ENDPOINT_ERROR_TYPE_INTERNAL_ERROR = 12;
+	// ENDPOINT_ERROR_TYPE_BROADCAST_GROUP_MISSING is caused when Alerter is trying to send
+	// an alert to a broadcast group that isn't present in the config
+	ENDPOINT_ERROR_TYPE_BROADCAST_GROUP_MISSING = 13;
 }
 
 // Settings portion of config, a list of default global settings used by broadcast groups
