@@ -1165,9 +1165,17 @@
         "release": {
           "type": "string",
           "title": "release is the release version of the concrete file"
+        },
+        "variant": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Variant",
+          "title": "variant specifies the swi image variant"
+        },
+        "flavor": {
+          "$ref": "#/definitions/arista.softwaremanagement.v1.Flavor",
+          "title": "flavor is the swi image flavor"
         }
       },
-      "title": "ConcreteFile contains the name and corresponding metadata of the\nfile (like fileserver, file size)"
+      "title": "ConcreteFile contains the name and corresponding metadata of the\nfile (like fileserver path, file size)"
     },
     "arista.softwaremanagement.v1.ConcreteTypeToConcreteSwiMap": {
       "type": "object",
