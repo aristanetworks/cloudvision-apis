@@ -2623,7 +2623,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigDiffStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2711,7 +2711,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigDiff instance in this response."
         }
       }
     },
@@ -2728,7 +2729,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigDiff at end.\n    * Each ConfigDiff response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigDiff at start, followed by updates until now.\n    * Each ConfigDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigDiff at start, followed by updates\n    until end.\n    * Each ConfigDiff response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigDiff at end.\n    * Each ConfigDiff response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigDiff at start, followed by updates until now.\n    * Each ConfigDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigDiff at start, followed by updates\n    until end.\n    * Each ConfigDiff response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2895,7 +2896,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.ConfigurationStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2943,7 +2944,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfiguration instance in this response."
         }
       }
     },
@@ -2960,7 +2962,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configuration at end.\n    * Each Configuration response is fully-specified (all fields set).\n  * start: Returns the state of each Configuration at start, followed by updates until now.\n    * Each Configuration response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configuration at start, followed by updates\n    until end.\n    * Each Configuration response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configuration at end.\n    * Each Configuration response is fully-specified (all fields set).\n  * start: Returns the state of each Configuration at start, followed by updates until now.\n    * Each Configuration response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configuration at start, followed by updates\n    until end.\n    * Each Configuration response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3102,7 +3104,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3178,7 +3180,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3226,7 +3228,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecurityProfileDiff instance in this response."
         }
       }
     },
@@ -3243,7 +3246,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiff at end.\n    * Each SecurityProfileDiff response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiff at start, followed by updates until now.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiff at start, followed by updates\n    until end.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiff at end.\n    * Each SecurityProfileDiff response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiff at start, followed by updates until now.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiff at start, followed by updates\n    until end.\n    * Each SecurityProfileDiff response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3288,7 +3291,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SecurityProfileDiffSummaryStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3336,7 +3339,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecurityProfileDiffSummary instance in this response."
         }
       }
     },
@@ -3353,7 +3357,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiffSummary at end.\n    * Each SecurityProfileDiffSummary response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiffSummary at start, followed by updates until now.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiffSummary at start, followed by updates\n    until end.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfileDiffSummary at end.\n    * Each SecurityProfileDiffSummary response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfileDiffSummary at start, followed by updates until now.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfileDiffSummary at start, followed by updates\n    until end.\n    * Each SecurityProfileDiffSummary response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3419,7 +3423,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSecurityProfile instance in this response."
         }
       }
     },
@@ -3436,7 +3441,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfile at end.\n    * Each SecurityProfile response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfile at start, followed by updates until now.\n    * Each SecurityProfile response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfile at start, followed by updates\n    until end.\n    * Each SecurityProfile response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SecurityProfile at end.\n    * Each SecurityProfile response is fully-specified (all fields set).\n  * start: Returns the state of each SecurityProfile at start, followed by updates until now.\n    * Each SecurityProfile response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SecurityProfile at start, followed by updates\n    until end.\n    * Each SecurityProfile response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3481,7 +3486,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configstatus.v1.SummaryStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3542,7 +3547,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSummary instance in this response."
         }
       }
     },
@@ -3559,7 +3565,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Summary at end.\n    * Each Summary response is fully-specified (all fields set).\n  * start: Returns the state of each Summary at start, followed by updates until now.\n    * Each Summary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Summary at start, followed by updates\n    until end.\n    * Each Summary response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },

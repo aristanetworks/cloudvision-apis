@@ -14,7 +14,6 @@ option java_multiple_files = true;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-
 import "fmp/extensions.proto";
 
 // ErrorCode indicates warnings and errors produced during computing config
@@ -31,6 +30,8 @@ enum ErrorCode {
   ERROR_CODE_CONFIG_FILTER_ERROR = 4;
   // ERROR_CODE_INTERNAL indicates internal errors
   ERROR_CODE_INTERNAL = 5;
+  // ERROR_CODE_PROPOSED_CONFIG_CHECK indicates an issue with the content of proposed configuration.
+  ERROR_CODE_PROPOSED_CONFIG_CHECK = 6;
 }
 
 // ConfigError represents errors reported by CVP/EOS when handling device configuration
