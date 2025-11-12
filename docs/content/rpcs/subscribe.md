@@ -25,6 +25,8 @@ The flow of messages follows these steps:
 3. `N` messages with either:
     - `arista.subscriptions.Operation::UPDATED`
     - `arista.subscriptions.Operation::DELETED`
+    - `arista.subscriptions.Operation::PARTIAL_DELETE`
+        - not used at the moment
     - these can happen in any order or frequency until the subscription/connection is closed
 
 
