@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-11-19
+      description: Add fields for expected devices configuration
+      version: 1.0.8
+      cvaas: true
+
     - date: 2025-02-01
       description: Release APIs
       version: 1.0.7

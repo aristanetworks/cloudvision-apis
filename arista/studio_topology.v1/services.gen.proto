@@ -76,6 +76,8 @@ message DecommissionSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Decommission instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -100,8 +102,6 @@ message DecommissionStreamRequest {
 	//     until end.
 	//     * Each Decommission response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -142,8 +142,6 @@ message DecommissionBatchedStreamRequest {
 	//     until end.
 	//     * Each Decommission response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -155,7 +153,7 @@ message DecommissionBatchedStreamRequest {
 
 message DecommissionBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DecommissionStreamResponse responses = 1;
 };
@@ -211,6 +209,8 @@ message DecommissionConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DecommissionConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -235,8 +235,6 @@ message DecommissionConfigStreamRequest {
 	//     until end.
 	//     * Each DecommissionConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -277,8 +275,6 @@ message DecommissionConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each DecommissionConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -290,7 +286,7 @@ message DecommissionConfigBatchedStreamRequest {
 
 message DecommissionConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DecommissionConfigStreamResponse responses = 1;
 };
@@ -435,6 +431,8 @@ message DeviceInputConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceInputConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -459,8 +457,6 @@ message DeviceInputConfigStreamRequest {
 	//     until end.
 	//     * Each DeviceInputConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -501,8 +497,6 @@ message DeviceInputConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceInputConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -514,7 +508,7 @@ message DeviceInputConfigBatchedStreamRequest {
 
 message DeviceInputConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceInputConfigStreamResponse responses = 1;
 };
@@ -659,6 +653,8 @@ message DeviceStateSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceState instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -683,8 +679,6 @@ message DeviceStateStreamRequest {
 	//     until end.
 	//     * Each DeviceState response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -725,8 +719,6 @@ message DeviceStateBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceState response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -738,7 +730,7 @@ message DeviceStateBatchedStreamRequest {
 
 message DeviceStateBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceStateStreamResponse responses = 1;
 };
@@ -794,6 +786,8 @@ message InterfaceInputConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// InterfaceInputConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -818,8 +812,6 @@ message InterfaceInputConfigStreamRequest {
 	//     until end.
 	//     * Each InterfaceInputConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -860,8 +852,6 @@ message InterfaceInputConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each InterfaceInputConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -873,7 +863,7 @@ message InterfaceInputConfigBatchedStreamRequest {
 
 message InterfaceInputConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated InterfaceInputConfigStreamResponse responses = 1;
 };
@@ -1018,6 +1008,8 @@ message ReplaceSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Replace instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1042,8 +1034,6 @@ message ReplaceStreamRequest {
 	//     until end.
 	//     * Each Replace response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -1084,8 +1074,6 @@ message ReplaceBatchedStreamRequest {
 	//     until end.
 	//     * Each Replace response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1097,7 +1085,7 @@ message ReplaceBatchedStreamRequest {
 
 message ReplaceBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ReplaceStreamResponse responses = 1;
 };
@@ -1153,6 +1141,8 @@ message ReplaceConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ReplaceConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1177,8 +1167,6 @@ message ReplaceConfigStreamRequest {
 	//     until end.
 	//     * Each ReplaceConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -1219,8 +1207,6 @@ message ReplaceConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each ReplaceConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1232,7 +1218,7 @@ message ReplaceConfigBatchedStreamRequest {
 
 message ReplaceConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ReplaceConfigStreamResponse responses = 1;
 };
@@ -1377,6 +1363,8 @@ message RevertConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// RevertConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1401,8 +1389,6 @@ message RevertConfigStreamRequest {
 	//     until end.
 	//     * Each RevertConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -1443,8 +1429,6 @@ message RevertConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each RevertConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1456,7 +1440,7 @@ message RevertConfigBatchedStreamRequest {
 
 message RevertConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated RevertConfigStreamResponse responses = 1;
 };
@@ -1601,6 +1585,8 @@ message UpdateSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Update instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1625,8 +1611,6 @@ message UpdateStreamRequest {
 	//     until end.
 	//     * Each Update response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -1667,8 +1651,6 @@ message UpdateBatchedStreamRequest {
 	//     until end.
 	//     * Each Update response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1680,7 +1662,7 @@ message UpdateBatchedStreamRequest {
 
 message UpdateBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated UpdateStreamResponse responses = 1;
 };
@@ -1736,6 +1718,8 @@ message UpdateConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// UpdateConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1760,8 +1744,6 @@ message UpdateConfigStreamRequest {
 	//     until end.
 	//     * Each UpdateConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -1802,8 +1784,6 @@ message UpdateConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each UpdateConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1815,7 +1795,7 @@ message UpdateConfigBatchedStreamRequest {
 
 message UpdateConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated UpdateConfigStreamResponse responses = 1;
 };
@@ -1960,6 +1940,8 @@ message UpdateSyncConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// UpdateSyncConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -1984,8 +1966,6 @@ message UpdateSyncConfigStreamRequest {
 	//     until end.
 	//     * Each UpdateSyncConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -2026,8 +2006,6 @@ message UpdateSyncConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each UpdateSyncConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -2039,7 +2017,7 @@ message UpdateSyncConfigBatchedStreamRequest {
 
 message UpdateSyncConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated UpdateSyncConfigStreamResponse responses = 1;
 };

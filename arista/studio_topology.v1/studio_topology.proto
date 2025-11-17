@@ -12,6 +12,7 @@ option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/studio_
 
 import "fmp/extensions.proto";
 import "fmp/yang.proto";
+import "fmp/wrappers.proto";
 
 import "arista/workspace.v1/workspace.proto";
 import "google/protobuf/timestamp.proto";
@@ -55,6 +56,21 @@ enum UpdateStatus {
 	UPDATE_STATUS_IGNORED = 3;
 }
 
+// DeviceStatus defines the set of statuses that apply to a device.
+enum DeviceStatus {
+	// DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.
+	DEVICE_STATUS_UNSPECIFIED = 0;
+	// DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data
+	// to CloudVision.
+	DEVICE_STATUS_ACTIVE = 1;
+	// DEVICE_STATUS_INACTIVE indicates a device is not streaming its telemetry data
+	// to CloudVision.
+	DEVICE_STATUS_INACTIVE = 2;
+	// DEVICE_STATUS_EXPECTED indicates a device has not yet streamed its telemetry
+	// data to CloudVision.
+	DEVICE_STATUS_EXPECTED = 3;
+ }
+
 // DeviceInfo contains device properties.
 message DeviceInfo {
 	// device_id identifies the device uniquely.
@@ -65,6 +81,23 @@ message DeviceInfo {
 	fmp.MACAddress mac_address = 3;
 	// hostname indicates the hostname of the device.
 	google.protobuf.StringValue hostname = 4;
+	// match_any_device is an indicator to match any online device with the device
+	// identified by the device_id field above. An online device is any EOS device
+	// which is streaming to CVP and has not been provisioned yet.
+	// This argument is used only if the device is an expected device and not relevant
+	// to other devices.
+	// For an expected device, the device_id fields holds an temporary UUID. Hence,
+	// the match has to occur based on the combination of expected_serial_numbers
+	// and match_any_device fields and not the device_id field.
+	// This field is mandatory for an expected device.
+	// If this field is true, expected_serial_numbers should be empty.
+	// If this field is false, expected_serial_numbers should be provided.
+	google.protobuf.BoolValue match_any_device = 5;
+	// expected_serial_numbers indicates a list of possible serial numbers which can
+	// be expected for this device. The expected device entry specified by the device_id
+	// field above will be matched with only one of the serial numbers in this list.
+	// Should be populated only for an expected device and when match_any_device is set to false.
+	fmp.RepeatedString expected_serial_numbers = 6;
 }
 
 // InterfaceInfo contains interface properties.
@@ -73,10 +106,19 @@ message InterfaceInfo {
 	google.protobuf.StringValue name = 1;
 	// neighbor_device_id indicates the device ID of the neighbor to which
 	// this interface is connected.
+	// For an expected device, this would be a device_id (temporary UUID in case
+	// the neighbour is also an expected device) of a known device resource to the
+	// studios or lldp sysname in case of a non Arista device like third party
+	// external router.
 	google.protobuf.StringValue neighbor_device_id = 2;
 	// neighbor_interface_name indicates the interface on the neighbor to which
 	// this interface is connected.
+	// For expected devices having the neighbour as a non Arista device, this field
+	// does not need to be populated.
 	google.protobuf.StringValue neighbor_interface_name = 3;
+	// non_provisioned indicates if the interface is connected to a non-provisioned device, ie, a
+	// device which is not part of the I&T studio and cannot be provisioned by CloudVision.
+	google.protobuf.BoolValue non_provisioned = 4;
 }
 
 // InterfaceInfos is a list of InterfaceInfo.
@@ -102,8 +144,10 @@ message DeviceInputConfig {
 	// device_info contains device properties.
 	DeviceInfo device_info = 2;
 	// remove if set to true will remove the device from mainline
-	// post workspace merge
+	// post workspace merge.
 	google.protobuf.BoolValue remove = 3;
+	// is_expected_device specifies if this is an expected device.
+	google.protobuf.BoolValue is_expected_device = 4;
 }
 
 // InterfaceInputKey is the set of inputs that uniquely identify
@@ -119,7 +163,7 @@ message InterfaceInputKey {
 }
 
 // InterfaceInputConfig is the resource for manually adding
-// an interface in I&T studios
+// an interface in I&T studios.
 message InterfaceInputConfig {
 	option (fmp.model) = "rw";
 	// key uniquely identifies the interface for a given workspace.
@@ -127,22 +171,24 @@ message InterfaceInputConfig {
 	// interface_info contains interface properties.
 	InterfaceInfo interface_info = 2;
 	// remove if set to true will remove the interface from mainline
-	// post workspace merge
+	// post workspace merge.
 	google.protobuf.BoolValue remove = 3;
 }
 
 // DeviceState is the state of a device written by
 // InterfaceInputConfig, DeviceInputConfig and
-// UpdateConfig resources
+// UpdateConfig resources.
 message DeviceState {
 	option (fmp.model) = "ro";
 	// key uniquely identifies the device for a given workspace.
 	DeviceKey key = 1;
-	// device_info contains device properties
+	// device_info contains device properties.
 	DeviceInfo device_info = 2;
 	// interface_infos contains interface properties of all the interfaces
-	// belonging to the device
+	// belonging to the device.
 	InterfaceInfos interface_infos = 3;
+	// device_status contains the status of the device.
+	DeviceStatus device_status = 4;
 }
 
 // UpdateKey uniquely identifies a workspace topology update.
@@ -164,7 +210,7 @@ message UpdateConfig {
 	// remove if set to true will remove the update key from mainline
 	// post workspace merge. This can only be set true for ignored keys
 	// since we don't carry accepted keys to mainline post workspace
-	// merge
+	// merge.
 	google.protobuf.BoolValue remove = 3;
 }
 
@@ -227,9 +273,9 @@ message Decommission {
 	google.protobuf.Timestamp last_modified_at = 4;
 	// last_modified_by is the name of the user that last modified the status.
 	google.protobuf.StringValue last_modified_by = 5;
-	// status of the decommissioning operation
+	// status is the status of the decommissioning operation.
 	DecommissionStatus status = 6;
-	// error indicates if there is a failure in decommissioning
+	// error indicates if there is a failure in decommissioning.
 	google.protobuf.StringValue error = 7;
 }
 

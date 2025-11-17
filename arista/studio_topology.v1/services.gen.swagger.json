@@ -5857,11 +5857,11 @@
         },
         "status": {
           "$ref": "#/definitions/arista.studio_topology.v1.DecommissionStatus",
-          "title": "status of the decommissioning operation"
+          "description": "status is the status of the decommissioning operation."
         },
         "error": {
           "type": "string",
-          "title": "error indicates if there is a failure in decommissioning"
+          "description": "error indicates if there is a failure in decommissioning."
         }
       },
       "description": "Decommission is the resource that holds the decommissioning\nstate of a device."
@@ -5875,7 +5875,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.DecommissionStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -5898,7 +5898,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.DecommissionConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6047,7 +6047,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDecommissionConfig instance in this response."
         }
       }
     },
@@ -6064,7 +6065,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DecommissionConfig at end.\n    * Each DecommissionConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DecommissionConfig at start, followed by updates until now.\n    * Each DecommissionConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DecommissionConfig at start, followed by updates\n    until end.\n    * Each DecommissionConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DecommissionConfig at end.\n    * Each DecommissionConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DecommissionConfig at start, followed by updates until now.\n    * Each DecommissionConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DecommissionConfig at start, followed by updates\n    until end.\n    * Each DecommissionConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6130,7 +6131,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDecommission instance in this response."
         }
       }
     },
@@ -6157,7 +6159,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Decommission at end.\n    * Each Decommission response is fully-specified (all fields set).\n  * start: Returns the state of each Decommission at start, followed by updates until now.\n    * Each Decommission response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Decommission at start, followed by updates\n    until end.\n    * Each Decommission response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Decommission at end.\n    * Each Decommission response is fully-specified (all fields set).\n  * start: Returns the state of each Decommission at start, followed by updates until now.\n    * Each Decommission response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Decommission at start, followed by updates\n    until end.\n    * Each Decommission response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6197,6 +6199,14 @@
         "hostname": {
           "type": "string",
           "description": "hostname indicates the hostname of the device."
+        },
+        "matchAnyDevice": {
+          "type": "boolean",
+          "description": "match_any_device is an indicator to match any online device with the device\nidentified by the device_id field above. An online device is any EOS device\nwhich is streaming to CVP and has not been provisioned yet.\nThis argument is used only if the device is an expected device and not relevant\nto other devices.\nFor an expected device, the device_id fields holds an temporary UUID. Hence,\nthe match has to occur based on the combination of expected_serial_numbers\nand match_any_device fields and not the device_id field.\nThis field is mandatory for an expected device.\nIf this field is true, expected_serial_numbers should be empty.\nIf this field is false, expected_serial_numbers should be provided."
+        },
+        "expectedSerialNumbers": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "expected_serial_numbers indicates a list of possible serial numbers which can\nbe expected for this device. The expected device entry specified by the device_id\nfield above will be matched with only one of the serial numbers in this list.\nShould be populated only for an expected device and when match_any_device is set to false."
         }
       },
       "description": "DeviceInfo contains device properties."
@@ -6214,7 +6224,11 @@
         },
         "remove": {
           "type": "boolean",
-          "title": "remove if set to true will remove the device from mainline\npost workspace merge"
+          "description": "remove if set to true will remove the device from mainline\npost workspace merge."
+        },
+        "isExpectedDevice": {
+          "type": "boolean",
+          "description": "is_expected_device specifies if this is an expected device."
         }
       },
       "description": "DeviceInputConfig is the desired topology input for a device."
@@ -6228,7 +6242,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.DeviceInputConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6377,7 +6391,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceInputConfig instance in this response."
         }
       }
     },
@@ -6394,7 +6409,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceInputConfig at end.\n    * Each DeviceInputConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceInputConfig at start, followed by updates until now.\n    * Each DeviceInputConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceInputConfig at start, followed by updates\n    until end.\n    * Each DeviceInputConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceInputConfig at end.\n    * Each DeviceInputConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceInputConfig at start, followed by updates until now.\n    * Each DeviceInputConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceInputConfig at start, followed by updates\n    until end.\n    * Each DeviceInputConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6443,14 +6458,18 @@
         },
         "deviceInfo": {
           "$ref": "#/definitions/arista.studio_topology.v1.DeviceInfo",
-          "title": "device_info contains device properties"
+          "description": "device_info contains device properties."
         },
         "interfaceInfos": {
           "$ref": "#/definitions/arista.studio_topology.v1.InterfaceInfos",
-          "title": "interface_infos contains interface properties of all the interfaces\nbelonging to the device"
+          "description": "interface_infos contains interface properties of all the interfaces\nbelonging to the device."
+        },
+        "deviceStatus": {
+          "$ref": "#/definitions/arista.studio_topology.v1.DeviceStatus",
+          "description": "device_status contains the status of the device."
         }
       },
-      "title": "DeviceState is the state of a device written by\nInterfaceInputConfig, DeviceInputConfig and\nUpdateConfig resources"
+      "description": "DeviceState is the state of a device written by\nInterfaceInputConfig, DeviceInputConfig and\nUpdateConfig resources."
     },
     "arista.studio_topology.v1.DeviceStateBatchedStreamResponse": {
       "type": "object",
@@ -6461,7 +6480,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.DeviceStateStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6509,7 +6528,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceState instance in this response."
         }
       }
     },
@@ -6526,7 +6546,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceState at end.\n    * Each DeviceState response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceState at start, followed by updates until now.\n    * Each DeviceState response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceState at start, followed by updates\n    until end.\n    * Each DeviceState response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceState at end.\n    * Each DeviceState response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceState at start, followed by updates until now.\n    * Each DeviceState response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceState at start, followed by updates\n    until end.\n    * Each DeviceState response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6548,6 +6568,17 @@
         }
       }
     },
+    "arista.studio_topology.v1.DeviceStatus": {
+      "type": "string",
+      "enum": [
+        "DEVICE_STATUS_UNSPECIFIED",
+        "DEVICE_STATUS_ACTIVE",
+        "DEVICE_STATUS_INACTIVE",
+        "DEVICE_STATUS_EXPECTED"
+      ],
+      "default": "DEVICE_STATUS_UNSPECIFIED",
+      "description": "DeviceStatus defines the set of statuses that apply to a device.\n\n - DEVICE_STATUS_UNSPECIFIED: DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.\n - DEVICE_STATUS_ACTIVE: DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_INACTIVE: DEVICE_STATUS_INACTIVE indicates a device is not streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_EXPECTED: DEVICE_STATUS_EXPECTED indicates a device has not yet streamed its telemetry\ndata to CloudVision."
+    },
     "arista.studio_topology.v1.Element": {
       "type": "string",
       "enum": [
@@ -6568,11 +6599,15 @@
         },
         "neighborDeviceId": {
           "type": "string",
-          "description": "neighbor_device_id indicates the device ID of the neighbor to which\nthis interface is connected."
+          "description": "neighbor_device_id indicates the device ID of the neighbor to which\nthis interface is connected.\nFor an expected device, this would be a device_id (temporary UUID in case\nthe neighbour is also an expected device) of a known device resource to the\nstudios or lldp sysname in case of a non Arista device like third party\nexternal router."
         },
         "neighborInterfaceName": {
           "type": "string",
-          "description": "neighbor_interface_name indicates the interface on the neighbor to which\nthis interface is connected."
+          "description": "neighbor_interface_name indicates the interface on the neighbor to which\nthis interface is connected.\nFor expected devices having the neighbour as a non Arista device, this field\ndoes not need to be populated."
+        },
+        "nonProvisioned": {
+          "type": "boolean",
+          "description": "non_provisioned indicates if the interface is connected to a non-provisioned device, ie, a\ndevice which is not part of the I\u0026T studio and cannot be provisioned by CloudVision."
         }
       },
       "description": "InterfaceInfo contains interface properties."
@@ -6604,10 +6639,10 @@
         },
         "remove": {
           "type": "boolean",
-          "title": "remove if set to true will remove the interface from mainline\npost workspace merge"
+          "description": "remove if set to true will remove the interface from mainline\npost workspace merge."
         }
       },
-      "title": "InterfaceInputConfig is the resource for manually adding\nan interface in I\u0026T studios"
+      "description": "InterfaceInputConfig is the resource for manually adding\nan interface in I\u0026T studios."
     },
     "arista.studio_topology.v1.InterfaceInputConfigBatchedStreamResponse": {
       "type": "object",
@@ -6618,7 +6653,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.InterfaceInputConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6767,7 +6802,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nInterfaceInputConfig instance in this response."
         }
       }
     },
@@ -6784,7 +6820,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each InterfaceInputConfig at end.\n    * Each InterfaceInputConfig response is fully-specified (all fields set).\n  * start: Returns the state of each InterfaceInputConfig at start, followed by updates until now.\n    * Each InterfaceInputConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each InterfaceInputConfig at start, followed by updates\n    until end.\n    * Each InterfaceInputConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each InterfaceInputConfig at end.\n    * Each InterfaceInputConfig response is fully-specified (all fields set).\n  * start: Returns the state of each InterfaceInputConfig at start, followed by updates until now.\n    * Each InterfaceInputConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each InterfaceInputConfig at start, followed by updates\n    until end.\n    * Each InterfaceInputConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -6908,7 +6944,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.ReplaceStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -6935,7 +6971,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.ReplaceConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7084,7 +7120,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nReplaceConfig instance in this response."
         }
       }
     },
@@ -7101,7 +7138,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ReplaceConfig at end.\n    * Each ReplaceConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ReplaceConfig at start, followed by updates until now.\n    * Each ReplaceConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ReplaceConfig at start, followed by updates\n    until end.\n    * Each ReplaceConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ReplaceConfig at end.\n    * Each ReplaceConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ReplaceConfig at start, followed by updates until now.\n    * Each ReplaceConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ReplaceConfig at start, followed by updates\n    until end.\n    * Each ReplaceConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -7167,7 +7204,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nReplace instance in this response."
         }
       }
     },
@@ -7194,7 +7232,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Replace at end.\n    * Each Replace response is fully-specified (all fields set).\n  * start: Returns the state of each Replace at start, followed by updates until now.\n    * Each Replace response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Replace at start, followed by updates\n    until end.\n    * Each Replace response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Replace at end.\n    * Each Replace response is fully-specified (all fields set).\n  * start: Returns the state of each Replace at start, followed by updates until now.\n    * Each Replace response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Replace at start, followed by updates\n    until end.\n    * Each Replace response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -7235,7 +7273,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.RevertConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7384,7 +7422,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nRevertConfig instance in this response."
         }
       }
     },
@@ -7401,7 +7440,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each RevertConfig at end.\n    * Each RevertConfig response is fully-specified (all fields set).\n  * start: Returns the state of each RevertConfig at start, followed by updates until now.\n    * Each RevertConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each RevertConfig at start, followed by updates\n    until end.\n    * Each RevertConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each RevertConfig at end.\n    * Each RevertConfig response is fully-specified (all fields set).\n  * start: Returns the state of each RevertConfig at start, followed by updates until now.\n    * Each RevertConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each RevertConfig at start, followed by updates\n    until end.\n    * Each RevertConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -7462,7 +7501,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.UpdateStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7479,7 +7518,7 @@
         },
         "remove": {
           "type": "boolean",
-          "title": "remove if set to true will remove the update key from mainline\npost workspace merge. This can only be set true for ignored keys\nsince we don't carry accepted keys to mainline post workspace\nmerge"
+          "description": "remove if set to true will remove the update key from mainline\npost workspace merge. This can only be set true for ignored keys\nsince we don't carry accepted keys to mainline post workspace\nmerge."
         }
       },
       "description": "UpdateConfig contains the acceptance status of an Update."
@@ -7493,7 +7532,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.UpdateConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7642,7 +7681,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nUpdateConfig instance in this response."
         }
       }
     },
@@ -7659,7 +7699,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each UpdateConfig at end.\n    * Each UpdateConfig response is fully-specified (all fields set).\n  * start: Returns the state of each UpdateConfig at start, followed by updates until now.\n    * Each UpdateConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each UpdateConfig at start, followed by updates\n    until end.\n    * Each UpdateConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each UpdateConfig at end.\n    * Each UpdateConfig response is fully-specified (all fields set).\n  * start: Returns the state of each UpdateConfig at start, followed by updates until now.\n    * Each UpdateConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each UpdateConfig at start, followed by updates\n    until end.\n    * Each UpdateConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -7743,7 +7783,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nUpdate instance in this response."
         }
       }
     },
@@ -7771,7 +7812,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Update at end.\n    * Each Update response is fully-specified (all fields set).\n  * start: Returns the state of each Update at start, followed by updates until now.\n    * Each Update response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Update at start, followed by updates\n    until end.\n    * Each Update response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Update at end.\n    * Each Update response is fully-specified (all fields set).\n  * start: Returns the state of each Update at start, followed by updates until now.\n    * Each Update response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Update at start, followed by updates\n    until end.\n    * Each Update response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -7817,7 +7858,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.studio_topology.v1.UpdateSyncConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -7966,7 +8007,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nUpdateSyncConfig instance in this response."
         }
       }
     },
@@ -7983,7 +8025,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each UpdateSyncConfig at end.\n    * Each UpdateSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each UpdateSyncConfig at start, followed by updates until now.\n    * Each UpdateSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each UpdateSyncConfig at start, followed by updates\n    until end.\n    * Each UpdateSyncConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each UpdateSyncConfig at end.\n    * Each UpdateSyncConfig response is fully-specified (all fields set).\n  * start: Returns the state of each UpdateSyncConfig at start, followed by updates until now.\n    * Each UpdateSyncConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each UpdateSyncConfig at start, followed by updates\n    until end.\n    * Each UpdateSyncConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -8058,6 +8100,19 @@
           "type": "string"
         }
       }
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
     },
     "google.protobuf.Any": {
       "type": "object",
