@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2025-11-21
+    description: Add sensor_name to BroadcastGroup
+    version: 1.17.1
+    onprem: true
+    cvaas: true
   - date: 2025-11-05
     description: Add BROADCAST_GROUP_MISSING and INTERNAL_ERROR error types
     version: 1.17.0
