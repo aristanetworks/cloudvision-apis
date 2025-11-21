@@ -820,6 +820,10 @@ message BroadcastGroup {
 	// of this group. If the field is present during a Set call, all the Actions are set
 	// to authenticate as the calling user.
 	CvActionEndpoints cv_action = 18;
+	// sensor_name is the name of the sensor that runs on prem for a CVaaS customer, that has its
+	// own alert-sender running to send alerts to internal endpoints. This is an optional field and
+	// if left empty the alerts are sent using the alert-sender on CVaaS.
+	google.protobuf.StringValue sensor_name = 19;
 }
 
 
