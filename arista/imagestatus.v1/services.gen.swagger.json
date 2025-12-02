@@ -532,7 +532,7 @@
         },
         "arch": {
           "type": "string",
-          "title": "arch is architecture type of the extension."
+          "description": "arch is architecture type of the extension."
         }
       },
       "description": "Extension provides information of the running/designed extensions."
@@ -785,10 +785,11 @@
       "type": "string",
       "enum": [
         "INFO_CODE_UNSPECIFIED",
-        "INFO_CODE_NEWER_VERSION_AVAILABLE"
+        "INFO_CODE_NEWER_VERSION_AVAILABLE",
+        "INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED"
       ],
       "default": "INFO_CODE_UNSPECIFIED",
-      "description": "InfoCode indicates info messages produced during image validations.\n\n - INFO_CODE_UNSPECIFIED: INFO_CODE_UNSPECIFIED indicates info code is unspecified.\n - INFO_CODE_NEWER_VERSION_AVAILABLE: INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance\nrelease is available for download."
+      "description": "InfoCode indicates info messages produced during image validations.\n\n - INFO_CODE_UNSPECIFIED: INFO_CODE_UNSPECIFIED indicates info code is unspecified.\n - INFO_CODE_NEWER_VERSION_AVAILABLE: INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance\nrelease is available for download.\n - INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED: INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED represents cases where a specific architecture is\npicked for a Universal (multiarch) EOS image."
     },
     "arista.imagestatus.v1.MetaResponse": {
       "type": "object",

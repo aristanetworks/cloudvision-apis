@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-12-01
+      description: Add a new info code INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED
+      version: 1.20.0
+      cvaas: true
     - date: 2025-07-17
       description: Add a new field arch for Extension
       version: 1.19.0

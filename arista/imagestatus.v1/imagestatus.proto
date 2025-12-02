@@ -415,6 +415,9 @@ enum InfoCode {
     // INFO_CODE_NEWER_VERSION_AVAILABLE represents cases where a newer EOS maintainance
     // release is available for download.
     INFO_CODE_NEWER_VERSION_AVAILABLE = 1;
+    // INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED represents cases where a specific architecture is
+    // picked for a Universal (multiarch) EOS image.
+    INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED = 2;
 }
 
 // ImageInfo wraps `InfoCode` enum with a reason string.
