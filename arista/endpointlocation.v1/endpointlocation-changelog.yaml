@@ -93,3 +93,8 @@ Changes:
       version: 1.10.0
       onprem: true
       cvaas: true
+    - date: 2025-11-13
+      description: Added programmedStaticMac, evpnVespaDynamicMac, evpnIntfDynamicFrrMac, evpnIntfStaticFrrMac, learnedDynamicFrrMac, and configuredStaticFrrMac to MacType enum
+      version: 1.11.0
+      onprem: true
+      cvaas: true
