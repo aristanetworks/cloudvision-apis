@@ -71,6 +71,8 @@ message EndpointLocationSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// EndpointLocation instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -95,8 +97,6 @@ message EndpointLocationStreamRequest {
 	//     until end.
 	//     * Each EndpointLocation response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -137,8 +137,6 @@ message EndpointLocationBatchedStreamRequest {
 	//     until end.
 	//     * Each EndpointLocation response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -150,7 +148,7 @@ message EndpointLocationBatchedStreamRequest {
 
 message EndpointLocationBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated EndpointLocationStreamResponse responses = 1;
 };
