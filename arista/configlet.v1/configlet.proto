@@ -16,6 +16,7 @@ import "fmp/wrappers.proto";
 // MatchPolicy specifies how the tag query of a configlet assignment
 // should be used to resolve devices for its children
 enum MatchPolicy {
+  // MATCH_POLICY_UNSPECIFIED is the unspecified match policy.
   MATCH_POLICY_UNSPECIFIED = 0;
   // MATCH_POLICY_MATCH_FIRST dictates that matching devices are used only for the first match amongst its children
   MATCH_POLICY_MATCH_FIRST = 1;
@@ -45,6 +46,7 @@ message Filter {
 message Configlet {
 	option (fmp.model) = "ro";
 	option (fmp.custom_filter) = "Filter";
+	// key uniquely identifies the static configlet.
 	ConfigletKey key = 1;
 
 	// display_name is the display name of the static configlet.
@@ -53,7 +55,7 @@ message Configlet {
 	google.protobuf.StringValue description = 3;
 	// migrated_from is populated with the source configlet name when migrated
 	// from network provisioning to studio.
-	google.protobuf.StringValue migrated_from = 4;
+	google.protobuf.StringValue migrated_from = 4 [deprecated = true];
 	// body is the static configlet body.
 	google.protobuf.StringValue body = 5;
 	// created_at is the time when the Configlet was created.
@@ -74,6 +76,7 @@ message Configlet {
 message ConfigletConfig {
 	option (fmp.model) = "rw";
 	option (fmp.custom_filter) = "Filter";
+	// key uniquely identifies the static configlet.
 	ConfigletKey key = 1;
 
 	// remove specifies the static configlet is to be removed from the workspace.
@@ -85,7 +88,7 @@ message ConfigletConfig {
 	google.protobuf.StringValue description = 4;
 	// migrated_from is populated with the source configlet name when migrated
 	// from network provisioning to studio.
-	google.protobuf.StringValue migrated_from = 5;
+	google.protobuf.StringValue migrated_from = 5 [deprecated = true];
 	// body is the static configlet body.
 	google.protobuf.StringValue body = 6;
 }
@@ -112,41 +115,47 @@ message ConfigletAssignmentKey {
 // 2) Match policy determines how the assignment's devices get divied up amongst its children.
 message ConfigletAssignmentConfig {
 	option (fmp.model) = "rw";
+	// key uniquely identifies the configlet assignment.
 	ConfigletAssignmentKey key = 1;
 
+	// display_name is the display name of the configlet assignment.
 	google.protobuf.StringValue display_name = 3;
+	// description is the description of the configlet assignment.
 	google.protobuf.StringValue description = 4;
 
 	// configlet_ids is the list of configlets to be assigned
 	fmp.RepeatedString configlet_ids = 5;
 
-        // query is a tag query string that conforms to the CloudVision
-        // tag query language. E.g., the query, `"datacenter:NYC,SFO AND
-        // sflow:enabled"`, matches all devices with sflow enabled in
-        // data centers NYC and SFO.
-        // malformed queries result in an error
+	// query is a tag query string that conforms to the CloudVision
+	// tag query language. E.g., the query, `"datacenter:NYC,SFO AND
+	// sflow:enabled"`, matches all devices with sflow enabled in
+	// data centers NYC and SFO.
+	// malformed queries result in an error
 	// tags not matching devices are ignored
 	google.protobuf.StringValue query = 6;
 
-        // remove indicates whether to remove (`true`) or add (`false`,
-        // unset) the tag assignments involving the studio identified
-        // by the key if the encompassing workspace merges. Other data
-        // fields are not allowed if this field is set to true.
+	// remove indicates whether to remove (`true`) or add (`false`,
+	// unset) the tag assignments involving the studio identified
+	// by the key if the encompassing workspace merges. Other data
+	// fields are not allowed if this field is set to true.
 	google.protobuf.BoolValue remove = 7;
 
 	// match_policy is the discriminator for the query field
 	MatchPolicy match_policy = 8;
 
-	// list of child assignments
+	// child_assignment_ids is the list of child assignment IDs.
 	fmp.RepeatedString child_assignment_ids = 9;
 }
 
 // ConfigletAssignment is the state of this assignment in a workspace/mainline
 message ConfigletAssignment {
 	option (fmp.model) = "ro";
+	// key uniquely identifies the configlet assignment.
 	ConfigletAssignmentKey key = 1;
 
+	// display_name is the display name of the configlet assignment.
 	google.protobuf.StringValue display_name = 3;
+	// description is the description of the configlet assignment.
 	google.protobuf.StringValue description = 4;
 	// configlet_ids is the list of configlets which are assigned
 	fmp.RepeatedString configlet_ids = 5;
@@ -154,7 +163,7 @@ message ConfigletAssignment {
 	google.protobuf.StringValue query = 6;
 	// match_policy is the discriminator for the query field
 	MatchPolicy match_policy = 7;
-	// list of child assignments
+	// child_assignment_ids is the list of child assignment IDs.
 	fmp.RepeatedString child_assignment_ids = 8;
 	// created_at is the time when the ConfigletAssignment was created.
 	google.protobuf.Timestamp created_at = 9;

@@ -2111,7 +2111,8 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey",
+          "description": "key uniquely identifies the static configlet."
         },
         "displayName": {
           "type": "string",
@@ -2163,13 +2164,16 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey",
+          "description": "key uniquely identifies the configlet assignment."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "display_name is the display name of the configlet assignment."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "description is the description of the configlet assignment."
         },
         "configletIds": {
           "$ref": "#/definitions/fmp.RepeatedString",
@@ -2185,7 +2189,7 @@
         },
         "childAssignmentIds": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "title": "list of child assignments"
+          "description": "child_assignment_ids is the list of child assignment IDs."
         },
         "createdAt": {
           "type": "string",
@@ -2217,7 +2221,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2225,13 +2229,16 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey"
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentKey",
+          "description": "key uniquely identifies the configlet assignment."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "display_name is the display name of the configlet assignment."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "description is the description of the configlet assignment."
         },
         "configletIds": {
           "$ref": "#/definitions/fmp.RepeatedString",
@@ -2251,7 +2258,7 @@
         },
         "childAssignmentIds": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "title": "list of child assignments"
+          "description": "child_assignment_ids is the list of child assignment IDs."
         }
       },
       "description": "ConfigletAssignmentConfig are the the inputs to the static configlet studio.\nEach assignment assigns a list of configlets to the devices matching the tag query.\nIndividual assignments can have a list of \"child\" assignments.\nThe totality of these assignments form a list of tree hierarchies.\nUsing the corresponding GUI workflow should help explain this structure.\nWhen traversing a tree and assigning static configlets to devices, the following rules\nare applied:\n1) Tag queries at each level need to resolve to a subset of its parent's queries.\nDevices resolved in child assignments but which do not resolve in that of its parent's\nare skipped.\n2) Match policy determines how the assignment's devices get divied up amongst its children."
@@ -2265,7 +2272,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configlet.v1.ConfigletAssignmentConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2414,7 +2421,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletAssignmentConfig instance in this response."
         }
       }
     },
@@ -2431,7 +2439,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignmentConfig at end.\n    * Each ConfigletAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignmentConfig at start, followed by updates until now.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignmentConfig at start, followed by updates\n    until end.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignmentConfig at end.\n    * Each ConfigletAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignmentConfig at start, followed by updates until now.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignmentConfig at start, followed by updates\n    until end.\n    * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2515,7 +2523,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletAssignment instance in this response."
         }
       }
     },
@@ -2532,7 +2541,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignment at end.\n    * Each ConfigletAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignment at start, followed by updates until now.\n    * Each ConfigletAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignment at start, followed by updates\n    until end.\n    * Each ConfigletAssignment response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletAssignment at end.\n    * Each ConfigletAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletAssignment at start, followed by updates until now.\n    * Each ConfigletAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletAssignment at start, followed by updates\n    until end.\n    * Each ConfigletAssignment response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2563,7 +2572,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configlet.v1.ConfigletStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2571,7 +2580,8 @@
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey"
+          "$ref": "#/definitions/arista.configlet.v1.ConfigletKey",
+          "description": "key uniquely identifies the static configlet."
         },
         "remove": {
           "type": "boolean",
@@ -2605,7 +2615,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.configlet.v1.ConfigletConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2754,7 +2764,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfigletConfig instance in this response."
         }
       }
     },
@@ -2775,7 +2786,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletConfig at end.\n    * Each ConfigletConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletConfig at start, followed by updates until now.\n    * Each ConfigletConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletConfig at start, followed by updates\n    until end.\n    * Each ConfigletConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ConfigletConfig at end.\n    * Each ConfigletConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ConfigletConfig at start, followed by updates until now.\n    * Each ConfigletConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ConfigletConfig at start, followed by updates\n    until end.\n    * Each ConfigletConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2859,7 +2870,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nConfiglet instance in this response."
         }
       }
     },
@@ -2880,7 +2892,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configlet at end.\n    * Each Configlet response is fully-specified (all fields set).\n  * start: Returns the state of each Configlet at start, followed by updates until now.\n    * Each Configlet response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configlet at start, followed by updates\n    until end.\n    * Each Configlet response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Configlet at end.\n    * Each Configlet response is fully-specified (all fields set).\n  * start: Returns the state of each Configlet at start, followed by updates until now.\n    * Each Configlet response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Configlet at start, followed by updates\n    until end.\n    * Each Configlet response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2920,7 +2932,7 @@
         "MATCH_POLICY_MATCH_ALL"
       ],
       "default": "MATCH_POLICY_UNSPECIFIED",
-      "description": "- MATCH_POLICY_MATCH_FIRST: MATCH_POLICY_MATCH_FIRST dictates that matching devices are used only for the first match amongst its children\n - MATCH_POLICY_MATCH_ALL: MATCH_POLICY_MATCH_ALL dictates that matching devices are used across all children",
+      "description": "- MATCH_POLICY_UNSPECIFIED: MATCH_POLICY_UNSPECIFIED is the unspecified match policy.\n - MATCH_POLICY_MATCH_FIRST: MATCH_POLICY_MATCH_FIRST dictates that matching devices are used only for the first match amongst its children\n - MATCH_POLICY_MATCH_ALL: MATCH_POLICY_MATCH_ALL dictates that matching devices are used across all children",
       "title": "MatchPolicy specifies how the tag query of a configlet assignment\nshould be used to resolve devices for its children"
     },
     "arista.configlet.v1.MetaResponse": {
@@ -2949,10 +2961,11 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
     },
     "arista.time.TimeBounds": {
       "type": "object",

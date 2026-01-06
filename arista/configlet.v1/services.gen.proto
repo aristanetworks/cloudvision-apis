@@ -72,6 +72,8 @@ message ConfigletSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Configlet instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -100,8 +102,6 @@ message ConfigletStreamRequest {
 	//     until end.
 	//     * Each Configlet response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -146,8 +146,6 @@ message ConfigletBatchedStreamRequest {
 	//     until end.
 	//     * Each Configlet response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -159,7 +157,7 @@ message ConfigletBatchedStreamRequest {
 
 message ConfigletBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ConfigletStreamResponse responses = 1;
 };
@@ -215,6 +213,8 @@ message ConfigletAssignmentSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ConfigletAssignment instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -239,8 +239,6 @@ message ConfigletAssignmentStreamRequest {
 	//     until end.
 	//     * Each ConfigletAssignment response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -281,8 +279,6 @@ message ConfigletAssignmentBatchedStreamRequest {
 	//     until end.
 	//     * Each ConfigletAssignment response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -294,7 +290,7 @@ message ConfigletAssignmentBatchedStreamRequest {
 
 message ConfigletAssignmentBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ConfigletAssignmentStreamResponse responses = 1;
 };
@@ -350,6 +346,8 @@ message ConfigletAssignmentConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ConfigletAssignmentConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -374,8 +372,6 @@ message ConfigletAssignmentConfigStreamRequest {
 	//     until end.
 	//     * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -416,8 +412,6 @@ message ConfigletAssignmentConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each ConfigletAssignmentConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -429,7 +423,7 @@ message ConfigletAssignmentConfigBatchedStreamRequest {
 
 message ConfigletAssignmentConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ConfigletAssignmentConfigStreamResponse responses = 1;
 };
@@ -574,6 +568,8 @@ message ConfigletConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ConfigletConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -602,8 +598,6 @@ message ConfigletConfigStreamRequest {
 	//     until end.
 	//     * Each ConfigletConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -648,8 +642,6 @@ message ConfigletConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each ConfigletConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -661,7 +653,7 @@ message ConfigletConfigBatchedStreamRequest {
 
 message ConfigletConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ConfigletConfigStreamResponse responses = 1;
 };
