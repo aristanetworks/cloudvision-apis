@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-01-08
+      description: Update input path comments 
+      version: 1.8.2
+      cvaas: true
+
     - date: 2025-9-17
       description: Improve formatting in field comments
       version: 1.8.1

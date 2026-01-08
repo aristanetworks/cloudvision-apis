@@ -4991,19 +4991,6 @@
       },
       "description": "AssignedTags can be used to retrieve additional metadata about a\nstudio's `AssignedTagsConfig`."
     },
-    "arista.studio.v1.AssignedTagsBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.AssignedTagsConfig": {
       "type": "object",
       "properties": {
@@ -5021,19 +5008,6 @@
         }
       },
       "description": "AssignedTagsConfig holds a configuration to assign a studio to a set of devices\nmatching a tag query."
-    },
-    "arista.studio.v1.AssignedTagsConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.AssignedTagsConfigDeleteAllResponse": {
       "type": "object",
@@ -5344,19 +5318,6 @@
       },
       "description": "AutofillAction can be used to retrieve additional metadata about an autofill action."
     },
-    "arista.studio.v1.AutofillActionBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.AutofillActionConfig": {
       "type": "object",
       "properties": {
@@ -5382,19 +5343,6 @@
         }
       },
       "description": "AutofillActionConfig contains configuration information for an autofill action."
-    },
-    "arista.studio.v1.AutofillActionConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.AutofillActionConfigDeleteAllResponse": {
       "type": "object",
@@ -5975,19 +5923,6 @@
       },
       "description": "Inputs is used to retrieve the existing inputs to a studio."
     },
-    "arista.studio.v1.InputsBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.InputsConfig": {
       "type": "object",
       "properties": {
@@ -6005,19 +5940,6 @@
         }
       },
       "description": "InputsConfig is used to input values into a studio.\n\nNOTE: Setting an input at a higher path overwrite any prior\n`Set`s at lower paths. E.g.,\n\n1. Set `[\"A\", \"X\"]` to `\"foo\"`\n2. Set `[\"A\", \"Y\"]` to `\"bar\"`\n3. Set `[\"A\"]` to `{\"X\": \"bar\"}`\n\nThe resulting inputs would be:\n```\n{ \"A\": { \"X\": \"bar\" } }\n```"
-    },
-    "arista.studio.v1.InputsConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.InputsConfigDeleteAllResponse": {
       "type": "object",
@@ -6217,7 +6139,7 @@
         },
         "path": {
           "$ref": "#/definitions/fmp.RepeatedString",
-          "description": "path is the sequence of elements that uniquely identify an input field.\nAn empty path (`[]`) stands for the root of the inputs, or the entire\nset of inputs for the studio.\n\nThe members of a group are referenced by field name. E.g., for a group\nA with a member B, the path to B would be `[\"A\", \"B\"]`.\n\nThe members of a collection or resolver are referenced by an integer\nstring. E.g., for a collection A with three members, the path to the\nsecond member would be `[\"A\", \"1\"]`."
+          "description": "path is the sequence of elements that uniquely identify an input field.\nAn empty path (`[]`) stands for the root of the inputs, or the entire\nset of inputs for the studio.\n\nThe members of a group are referenced by field name. E.g., for a group\nA with a member B, the path to B would be `[\"A\", \"B\"]`.\n\nCollection and resolver members can be referenced in two ways:\n\n1. Index-based: Using an integer string index.\n   E.g., for a collection A with three members, the path to the\n   second member would be `[\"A\", \"1\"]`.\n\n2. Key-based: Using bracket notation to specify\n   key-value pairs for keyed collections:\n   `[\"collectionName\", \"[keyName=keyValue]\", ...]`\n   E.g., for a collection of NTP servers keyed by IP address:\n   `[\"ntpServers\", \"[ip=10.10.10.10]\", \"vrf\"]`\n\nFor resolver fields with tag queries, bracket notation is supported\nwith the mandatory \"inputs\" keyword:\n`[\"resolverName\", \"[tags/query=tagQuery]\", \"inputs\", ...]`\nE.g., for a device resolver with tag query \"device:leaf1\":\n`[\"devices\", \"[tags/query=device:leaf1]\", \"inputs\", \"hostname\"]`\n\nBoth index-based and key-based formats are supported for collections\nand resolvers."
         }
       },
       "description": "InputsKey identifies a set of inputs for a particular studio.",
@@ -6429,19 +6351,6 @@
       },
       "description": "SecretInput can be used to retrieve the unmasked value of\na secret in a studio."
     },
-    "arista.studio.v1.SecretInputBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.SecretInputResponse": {
       "type": "object",
       "properties": {
@@ -6613,19 +6522,6 @@
       },
       "description": "Studio holds the active state for a studio."
     },
-    "arista.studio.v1.StudioBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.StudioConfig": {
       "type": "object",
       "properties": {
@@ -6655,19 +6551,6 @@
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."
-    },
-    "arista.studio.v1.StudioConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.StudioConfigDeleteAllResponse": {
       "type": "object",
@@ -6990,19 +6873,6 @@
       },
       "description": "StudioSummary holds basic information about a studio."
     },
-    "arista.studio.v1.StudioSummaryBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.StudioSummaryResponse": {
       "type": "object",
       "properties": {
@@ -7153,10 +7023,11 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
     },
     "arista.time.TimeBounds": {
       "type": "object",
