@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2025-01-08
+      description: Add a new error code ERROR_CODE_EOS_EXTENSION_ARCHITECTURE_INCOMPATIBLE
+      version: 1.21.0
+      cvaas: true
     - date: 2025-12-01
       description: Add a new info code INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED
       version: 1.20.0
