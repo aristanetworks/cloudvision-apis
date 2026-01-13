@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-01-05
+      description: Update workspace diff api with Hierarchy entities.
+      version: 1.8.0
+      cvaas: true
     - date: 2025-09-22
       description: move operation for workspace diff.
       version: 1.7.0
