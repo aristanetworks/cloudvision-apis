@@ -1,0 +1,18 @@
+# Copyright (c) 2025 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2026-01-13
+      description: Releasing to github
+      version: 1.1.0
+      onprem: true
+      cvaas: true
+
+    - date: 2025-04-14
+      description: Initial revision
+      version: 1.0.0

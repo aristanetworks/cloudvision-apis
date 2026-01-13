@@ -1,0 +1,908 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.arista_portal.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "APIProxyService"
+    },
+    {
+      "name": "APIProxyConfigService"
+    },
+    {
+      "name": "APITokenService"
+    },
+    {
+      "name": "APITokenConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/arista_portal/v1/APIProxy": {
+      "get": {
+        "operationId": "APIProxyService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APIProxyService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APIProxy/watch": {
+      "get": {
+        "operationId": "APIProxyService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APIProxyStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APIProxyStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APIProxyService"
+        ]
+      },
+      "post": {
+        "operationId": "APIProxyService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APIProxyStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APIProxyStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "APIProxyService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APIProxyConfig": {
+      "get": {
+        "operationId": "APIProxyConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APIProxyConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "APIProxyConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "APIProxyConfig carries the value to set into the datastore.\nSee the documentation on the APIProxyConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfig"
+            }
+          }
+        ],
+        "tags": [
+          "APIProxyConfigService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APIProxyConfig/watch": {
+      "get": {
+        "operationId": "APIProxyConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APIProxyConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APIProxyConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "APIProxyConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APIProxyConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "APIProxyConfigService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APIToken": {
+      "get": {
+        "operationId": "APITokenService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APITokenService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APIToken/watch": {
+      "get": {
+        "operationId": "APITokenService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APITokenStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APITokenStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APITokenService"
+        ]
+      },
+      "post": {
+        "operationId": "APITokenService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APITokenStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APITokenStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "APITokenService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APITokenConfig": {
+      "get": {
+        "operationId": "APITokenConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APITokenConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "APITokenConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "APITokenConfig carries the value to set into the datastore.\nSee the documentation on the APITokenConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfig"
+            }
+          }
+        ],
+        "tags": [
+          "APITokenConfigService"
+        ]
+      }
+    },
+    "/api/resources/arista_portal/v1/APITokenConfig/watch": {
+      "get": {
+        "operationId": "APITokenConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APITokenConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "APITokenConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "APITokenConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.arista_portal.v1.APITokenConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "APITokenConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.arista_portal.v1.APIProxy": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "url is the proxy URL string"
+        }
+      },
+      "description": "APIProxy is the state model that displays the proxy url string value set and found on\nthe CloudVision instance.\n\nAPIProxy Methods:\n\nThe `GetOne` method is used to return a proxy with username and password obscured\nthat has been set within CloudVision.\n\nRetrieving a proxy:\n\nThe proxy can be retrieved from CloudVision by calling the `GetOne` method.\n\nHere is an example of a proxy being retrieved\n\n```\nGetOne(APIProxy{\n})\n```\n\nNOTE: Proxy configuration is not applicable to CloudVision-as-a-Service.\n- If a proxy contains a username and/or password, it will be returned with the credentials\ncensored."
+    },
+    "arista.arista_portal.v1.APIProxyConfig": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "url is the proxy URL string"
+        }
+      },
+      "description": "APIProxyConfig is the config model allowing users to set and delete the proxy value which\nis used in retrieving resources from arista.com.\n\nAPIProxyConfig Methods:\n\nThe `Set` method is used to add and/or modify a proxy stored in CloudVision.\nThe `Delete` method is used to remove said proxy.\nThe `GetOne` method is used to return a proxy with username and password obscured\nthat has been set within CloudVision.\n\nAdding a proxy to CloudVision:\n\nWhen a `Set` is called, the rAPI will first ensure this proxy is valid after which it will\nstored within CloudVision.\n\nHere is an example of a proxy value being set\n\n```\nSet(APIProxyConfig{\n   Url: “http://10.0.0.0:0”\n})\n```\n\nDeleting a proxy:\n\nThe proxy configuration can be removed from CloudVision by calling `Delete`.\n\nHere is an example of a proxy being deleted\n\n```\nDelete(APIProxyConfig{\n})\n```\n\nRetrieving a proxy:\n\nThe proxy can be retrieved from CloudVision by calling the `GetOne` method.\n\nHere is an example of a proxy being retrieved\n\n```\nGetOne(APIProxyConfig{\n})\n```\n\nNOTE: Proxy configuration is not applicable to CloudVision-as-a-Service.\n- If a proxy contains a username and/or password, it will be returned with the credentials\ncensored."
+    },
+    "arista.arista_portal.v1.APIProxyConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAPIProxyConfig instance in this response."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfig",
+          "description": "Value carries all the values given in the APIProxyConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each APIProxyConfig at end.\n    * Each APIProxyConfig response is fully-specified (all fields set).\n  * start: Returns the state of each APIProxyConfig at start, followed by updates until now.\n    * Each APIProxyConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each APIProxyConfig at start, followed by updates\n    until end.\n    * Each APIProxyConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIProxyConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this APIProxyConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the APIProxyConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIProxy",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAPIProxy instance in this response."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.arista_portal.v1.APIProxy"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each APIProxy at end.\n    * Each APIProxy response is fully-specified (all fields set).\n  * start: Returns the state of each APIProxy at start, followed by updates until now.\n    * Each APIProxy response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each APIProxy at start, followed by updates\n    until end.\n    * Each APIProxy response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIProxyStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIProxy",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this APIProxy's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the APIProxy value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APIToken": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "title": "token is the token string"
+        }
+      },
+      "description": "APIToken is the state model that indicates whether a token is set or not.\n\nAPIToken Methods:\n\nThe `GetOne` method is used to determine whether a token is set or not within CloudVision.\n\nRetrieving a token:\n\nThe token can be retrieved from CloudVision by calling the `GetOne` method.\n\nHere is an example of a token being retrieved\n\n```\nGetOne(APIToken{\n})\n```\n\nNOTE: `GetOne` functionality for APIToken will only display whether a token is\ncurrently present or not. No secret values will be returned.\nThe two valid responses are;\n* \"Token is set\"\n* \"Token not set\""
+    },
+    "arista.arista_portal.v1.APITokenConfig": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "title": "token is the token string"
+        }
+      },
+      "description": "APITokenConfig is the config model allowing users to modify the token value which\nis used for a multitude of functionalities, mainly in retrieving resources from arista.com e.g.\nthe AlertBase.json or software images.\nWithout a token set, a user can not retrieve any resources from arista.com\nNOTE: A user configured token is not required on CloudVision-as-a-Service for AlertBase updates.\n\nAPITokenConfig Methods:\n\nThe `Set` method is used to add and/or modify a token stored in CloudVision.\nThe `Delete` method is used to remove the token.\nThe `GetOne` method is used to determine whether a token is set or not on CloudVision.\n\nAdding a token to CloudVision:\n\nWhen a `Set` is called, the rAPI will first ensure the token is valid and in the correct format\nafter which it will stored within CloudVision.\n\nHere is an example of a token value being set\n\n```\nSet(APITokenConfig{\n   Token: \"f7f898e3860f618301c01f2de1ao1482\"\n})\n```\n\nDeleting a token:\n\nThe token can be removed from CloudVision by calling `Delete`.\n\nHere is an example of a token being deleted\n\n```\nDelete(APITokenConfig{\n})\n```\n\nRetrieving a token:\n\nThe token can be retrieved from CloudVision by calling the `GetOne` method.\n\nHere is an example of a token being retrieved\n\n```\nGetOne(APITokenConfig{\n})\n```\n\nNOTE: `GetOne` functionality for APITokenConfig will only display whether a token is\ncurrently present or not. No secret values will be returned.\nThe two valid responses are;\n* \"Token is set\"\n* \"Token not set\""
+    },
+    "arista.arista_portal.v1.APITokenConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAPITokenConfig instance in this response."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfig",
+          "description": "Value carries all the values given in the APITokenConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each APITokenConfig at end.\n    * Each APITokenConfig response is fully-specified (all fields set).\n  * start: Returns the state of each APITokenConfig at start, followed by updates until now.\n    * Each APITokenConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each APITokenConfig at start, followed by updates\n    until end.\n    * Each APITokenConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APITokenConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this APITokenConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the APITokenConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIToken",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAPIToken instance in this response."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.arista_portal.v1.APIToken"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each APIToken at end.\n    * Each APIToken response is fully-specified (all fields set).\n  * start: Returns the state of each APIToken at start, followed by updates until now.\n    * Each APIToken response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each APIToken at start, followed by updates\n    until end.\n    * Each APIToken response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.arista_portal.v1.APITokenStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.arista_portal.v1.APIToken",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this APIToken's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the APIToken value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED",
+        "PARTIAL_DELETE"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
