@@ -12,6 +12,11 @@
 # PATCH version when you make backward compatible bug fixes
 
 Changes:
+    - date: 2026-01-19
+      description: Add new assignments service.
+      version: 1.4.0
+      cvaas: true
+      onprem: true
     - date: 2025-11-07
       description: Add variant and flavor to concrete file
       version: 1.3.1

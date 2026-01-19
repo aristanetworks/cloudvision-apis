@@ -470,3 +470,66 @@ message ConcreteTypeToConcreteSwiMap {
     // values contains a collection of ConcreteTypeToConcreteSwiMap items.
     map<string, ConcreteFile> values = 1;
 }
+
+// Device represents a device that has a designed image that references the software image
+// identified by the key
+message Device {
+    // device_id contains the unique device id string for a device
+    google.protobuf.StringValue device_id = 1;
+}
+// Devices is the collection of devices whose designed images reference the software image
+// identified by the key.
+message Devices {
+    // values is a list of devices
+    repeated Device values = 1;
+}
+
+// ZtpUpgradeRule represents a Zero Touch Provisioning (ZTP) rule (identified by its model_regex
+// string) that references the software image identified by the key.
+message ZtpUpgradeRule {
+    // model_regex represents a ZTP upgrade rule. It is a RE2-style regular expression used to match
+    // against the model names of devices undergoing the ZTP software upgrade workflow.
+    google.protobuf.StringValue model_regex = 1;
+}
+
+// ZtpUpgradeRules is the collection of Zero Touch Provisioning (ZTP) rules
+// which are currently referencing the software image identified by the key.
+message ZtpUpgradeRules {
+    // values is a list of ZtpUpgradeRules
+    repeated ZtpUpgradeRule values = 1;
+}
+
+// StudioTagQuery is a device tag query used in the Software Management Studio (SMS)
+// inputs. The software image represented by the key will be assigned to
+// the set of devices identified by the device tag query.
+message StudioTagQuery {
+    // studio_tag_query stores a device tag query string that conforms to the CloudVision
+    // tag query language. E.g., the query, `"datacenter:NYC,SFO AND sflow:enabled"`, matches all
+    // devices with sflow enabled in data centers NYC and SFO
+    google.protobuf.StringValue studio_tag_query = 1;
+}
+
+// StudioTagQueries is the collection of device tag queries which are currently referencing the
+// software image identified by the key
+message StudioTagQueries {
+    // values is a list of studio tag queries
+    repeated StudioTagQuery values = 1;
+}
+
+// Assignments returns the lists of devices, ZTP upgrade rules, and studio tags queries that
+// reference the software image identified by the key
+message Assignments {
+    option (fmp.model) = "ro";
+    // key uniquely identifies the software image resource being queried.
+    // This key is defined as part of the repository configuration request when an image is added to the software repository.
+    RepositoryKey key = 1;
+    // devices is a list of devices whose designed image references the software image identified by
+    // the key.
+    Devices devices = 2;
+    // ztp_upgrade_rules is a list of ztp upgrade rules which reference the software image identified
+    // by the key.
+    ZtpUpgradeRules ztp_upgrade_rules = 3;
+    // studio_tag_queries contains the studio tags queries which reference the software image identified
+    // by the key.
+    StudioTagQueries studio_tag_queries = 4;
+}
