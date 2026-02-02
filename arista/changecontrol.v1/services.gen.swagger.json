@@ -17,6 +17,9 @@
     },
     {
       "name": "ChangeControlConfigService"
+    },
+    {
+      "name": "ChangeControlSummaryService"
     }
   ],
   "schemes": [
@@ -1632,6 +1635,456 @@
           "ChangeControlConfigService"
         ]
       }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary": {
+      "get": {
+        "operationId": "ChangeControlSummaryService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is the ID of the change control.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary/all": {
+      "get": {
+        "operationId": "ChangeControlSummaryService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.deviceIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlSummaryService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary/getsome": {
+      "post": {
+        "operationId": "ChangeControlSummaryService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummarySomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlSummarySomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummarySomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary/metadata": {
+      "get": {
+        "operationId": "ChangeControlSummaryService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.deviceIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlSummaryService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary/watch": {
+      "get": {
+        "operationId": "ChangeControlSummaryService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.deviceIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlSummaryService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
+    },
+    "/api/resources/changecontrol/v1/ChangeControlSummary/watchmetadata": {
+      "get": {
+        "operationId": "ChangeControlSummaryService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.deviceIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "ChangeControlSummaryService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.changecontrol.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.changecontrol.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChangeControlSummaryService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1653,6 +2106,20 @@
         }
       },
       "description": "Action is an action to perform during the execution of\na stage of a change control. Available actions can be\nfetched using the \"action\" services."
+    },
+    "arista.changecontrol.v1.ActionCount": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "values is a map from action id to number of actions of said type."
+        }
+      },
+      "description": "ActionCount holds the count of the various action types."
     },
     "arista.changecontrol.v1.ActionSteps": {
       "type": "object",
@@ -1695,7 +2162,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -1844,7 +2311,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApproveConfig instance in this response."
         }
       }
     },
@@ -1861,7 +2329,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ApproveConfig at end.\n    * Each ApproveConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ApproveConfig at start, followed by updates until now.\n    * Each ApproveConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ApproveConfig at start, followed by updates\n    until end.\n    * Each ApproveConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ApproveConfig at end.\n    * Each ApproveConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ApproveConfig at start, followed by updates until now.\n    * Each ApproveConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ApproveConfig at start, followed by updates\n    until end.\n    * Each ApproveConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1974,6 +2442,10 @@
         "deviceIdToStageIds": {
           "$ref": "#/definitions/arista.changecontrol.v1.DeviceToStageMap",
           "description": "device_id_to_stage_ids is a map of device IDs to the stages present in the\nspecified Change state.\nThis is not affected by the device ID based custom filtering and will contain\ninfo about all the devices associated with a CC ID."
+        },
+        "creation": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Creation",
+          "description": "creation holds information about when and by whom the change control was created."
         }
       },
       "description": "ChangeControl holds the configuration and status of a change control."
@@ -1987,7 +2459,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2022,7 +2494,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2171,7 +2643,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControlConfig instance in this response."
         }
       }
     },
@@ -2188,7 +2661,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ChangeControlConfig at end.\n    * Each ChangeControlConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ChangeControlConfig at start, followed by updates until now.\n    * Each ChangeControlConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ChangeControlConfig at start, followed by updates\n    until end.\n    * Each ChangeControlConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ChangeControlConfig at end.\n    * Each ChangeControlConfig response is fully-specified (all fields set).\n  * start: Returns the state of each ChangeControlConfig at start, followed by updates until now.\n    * Each ChangeControlConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ChangeControlConfig at start, followed by updates\n    until end.\n    * Each ChangeControlConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2267,7 +2740,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControl instance in this response."
         }
       }
     },
@@ -2300,7 +2774,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ChangeControl at end.\n    * Each ChangeControl response is fully-specified (all fields set).\n  * start: Returns the state of each ChangeControl at start, followed by updates until now.\n    * Each ChangeControl response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ChangeControl at start, followed by updates\n    until end.\n    * Each ChangeControl response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ChangeControl at end.\n    * Each ChangeControl response is fully-specified (all fields set).\n  * start: Returns the state of each ChangeControl at start, followed by updates until now.\n    * Each ChangeControl response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ChangeControl at start, followed by updates\n    until end.\n    * Each ChangeControl response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -2321,6 +2795,207 @@
           "description": "Operation indicates how the ChangeControl value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.changecontrol.v1.ChangeControlSummary": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey",
+          "description": "key uniquely identifies the change control."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the name of the change control."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStatus",
+          "description": "status is the status of the change control."
+        },
+        "deviceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "device_count is the count of the devices impacted in the change control."
+        },
+        "actionCount": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ActionCount",
+          "description": "action_count is the map of action types to their corresponding counts."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created_time is the time at which the change control was created."
+        },
+        "createdUser": {
+          "type": "string",
+          "description": "created_user is the user by whom the change control was created."
+        },
+        "lastEditedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_edited_time is the time at which the change control was last edited."
+        },
+        "lastEditedUser": {
+          "type": "string",
+          "description": "last_edited_user is the user by whom the change control was last edited."
+        },
+        "lastApprovedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_approved_time is the time of the last approve or unapprove operation."
+        },
+        "lastApprovedUser": {
+          "type": "string",
+          "description": "last_approved_user is the user who performed the last approve or unapprove operation."
+        },
+        "lastScheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last_scheduled_time is the time of the last schedule or unschedule operation."
+        },
+        "lastScheduledUser": {
+          "type": "string",
+          "description": "last_scheduled_user is the user who performed the last schedule or unschedule operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start_time is the time at which the change control started execution."
+        },
+        "startUser": {
+          "type": "string",
+          "description": "start_user is the user who started the change control execution."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end_time is the time at which the change control completed execution."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is any error that occurred during the execution of the change control."
+        },
+        "approved": {
+          "type": "boolean",
+          "description": "approved indicates whether the change control is approved."
+        }
+      },
+      "description": "ChangeControlSummary provides the summary of the change control."
+    },
+    "arista.changecontrol.v1.ChangeControlSummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControlSummary instance in this response."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlSummarySomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlSummarySomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummary",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nChangeControlSummary instance in this response."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlSummaryStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummary"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "$ref": "#/definitions/arista.changecontrol.v1.Filter",
+          "description": "For each ChangeControlSummary in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given ChangeControlSummary is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ChangeControlSummary at end.\n    * Each ChangeControlSummary response is fully-specified (all fields set).\n  * start: Returns the state of each ChangeControlSummary at start, followed by updates until now.\n    * Each ChangeControlSummary response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ChangeControlSummary at start, followed by updates\n    until end.\n    * Each ChangeControlSummary response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.changecontrol.v1.ChangeControlSummaryStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummary",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ChangeControlSummary's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ChangeControlSummary value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.changecontrol.v1.Creation": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time is the time when the change control was created."
+        },
+        "user": {
+          "type": "string",
+          "description": "user is the user who created the change control."
+        }
+      },
+      "description": "Creation holds information about when and by whom a change control was created."
     },
     "arista.changecontrol.v1.DeviceToStageMap": {
       "type": "object",
@@ -2591,10 +3266,11 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
     },
     "arista.time.TimeBounds": {
       "type": "object",

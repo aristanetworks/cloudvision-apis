@@ -284,6 +284,14 @@ message TimestampFlag {
 	google.protobuf.StringValue user = 4;
 }
 
+// Creation holds information about when and by whom a change control was created.
+message Creation {
+	// time is the time when the change control was created.
+	google.protobuf.Timestamp time = 1;
+	// user is the user who created the change control.
+	google.protobuf.StringValue user = 2;
+}
+
 // ChangeControlStatus defines the possible execution statuses of
 // a change control.
 enum ChangeControlStatus {
@@ -357,6 +365,8 @@ message ChangeControl {
 	// This is not affected by the device ID based custom filtering and will contain
 	// info about all the devices associated with a CC ID.
 	DeviceToStageMap device_id_to_stage_ids = 9;
+	// creation holds information about when and by whom the change control was created.
+	Creation creation = 10;
 }
 
 // ApproveConfig is used to configure the approval of a change control.
@@ -373,4 +383,70 @@ message ApproveConfig {
 	// and is intended to safeguard against approving a change control
 	// that has been updated since last read.
 	google.protobuf.Timestamp version = 3;
+}
+
+// ActionCount holds the count of the various action types.
+message ActionCount {
+	// values is a map from action id to number of actions of said type.
+	map<string, uint32> values = 1;
+}
+
+// ChangeControlSummary provides the summary of the change control.
+message ChangeControlSummary {
+	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "Filter";
+
+	// key uniquely identifies the change control.
+	ChangeControlKey key = 1;
+
+	// name is the name of the change control.
+	google.protobuf.StringValue name = 2;
+
+	// status is the status of the change control.
+	ChangeControlStatus status = 3;
+
+	// device_count is the count of the devices impacted in the change control.
+	google.protobuf.UInt32Value device_count = 4;
+
+	// action_count is the map of action types to their corresponding counts.
+	ActionCount action_count = 5;
+
+	// created_time is the time at which the change control was created.
+	google.protobuf.Timestamp created_time = 6;
+
+	// created_user is the user by whom the change control was created.
+	google.protobuf.StringValue created_user = 7;
+
+	// last_edited_time is the time at which the change control was last edited.
+	google.protobuf.Timestamp last_edited_time = 8;
+
+	// last_edited_user is the user by whom the change control was last edited.
+	google.protobuf.StringValue last_edited_user = 9;
+
+	// last_approved_time is the time of the last approve or unapprove operation.
+	google.protobuf.Timestamp last_approved_time = 10;
+
+	// last_approved_user is the user who performed the last approve or unapprove operation.
+	google.protobuf.StringValue last_approved_user = 11;
+
+	// last_scheduled_time is the time of the last schedule or unschedule operation.
+	google.protobuf.Timestamp last_scheduled_time = 12;
+
+	// last_scheduled_user is the user who performed the last schedule or unschedule operation.
+	google.protobuf.StringValue last_scheduled_user = 13;
+
+	// start_time is the time at which the change control started execution.
+	google.protobuf.Timestamp start_time = 14;
+
+	// start_user is the user who started the change control execution.
+	google.protobuf.StringValue start_user = 15;
+
+	// end_time is the time at which the change control completed execution.
+	google.protobuf.Timestamp end_time = 16;
+
+	// error is any error that occurred during the execution of the change control.
+	google.protobuf.StringValue error = 17;
+
+	// approved indicates whether the change control is approved.
+	google.protobuf.BoolValue approved = 18;
 }
