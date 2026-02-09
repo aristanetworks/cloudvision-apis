@@ -72,6 +72,8 @@ message DeviceSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Device instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -96,8 +98,6 @@ message DeviceStreamRequest {
 	//     until end.
 	//     * Each Device response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -138,8 +138,6 @@ message DeviceBatchedStreamRequest {
 	//     until end.
 	//     * Each Device response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -151,7 +149,7 @@ message DeviceBatchedStreamRequest {
 
 message DeviceBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceStreamResponse responses = 1;
 };
@@ -207,6 +205,8 @@ message DeviceDecommissioningSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceDecommissioning instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -231,8 +231,6 @@ message DeviceDecommissioningStreamRequest {
 	//     until end.
 	//     * Each DeviceDecommissioning response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -273,8 +271,6 @@ message DeviceDecommissioningBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceDecommissioning response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -286,7 +282,7 @@ message DeviceDecommissioningBatchedStreamRequest {
 
 message DeviceDecommissioningBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceDecommissioningStreamResponse responses = 1;
 };
@@ -342,6 +338,8 @@ message DeviceDecommissioningConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceDecommissioningConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -366,8 +364,6 @@ message DeviceDecommissioningConfigStreamRequest {
 	//     until end.
 	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -408,8 +404,6 @@ message DeviceDecommissioningConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -421,7 +415,7 @@ message DeviceDecommissioningConfigBatchedStreamRequest {
 
 message DeviceDecommissioningConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceDecommissioningConfigStreamResponse responses = 1;
 };
@@ -566,6 +560,8 @@ message DeviceOnboardingSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceOnboarding instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -590,8 +586,6 @@ message DeviceOnboardingStreamRequest {
 	//     until end.
 	//     * Each DeviceOnboarding response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -632,8 +626,6 @@ message DeviceOnboardingBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceOnboarding response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -645,7 +637,7 @@ message DeviceOnboardingBatchedStreamRequest {
 
 message DeviceOnboardingBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceOnboardingStreamResponse responses = 1;
 };
@@ -701,6 +693,8 @@ message DeviceOnboardingConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DeviceOnboardingConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -725,8 +719,6 @@ message DeviceOnboardingConfigStreamRequest {
 	//     until end.
 	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -767,8 +759,6 @@ message DeviceOnboardingConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -780,7 +770,7 @@ message DeviceOnboardingConfigBatchedStreamRequest {
 
 message DeviceOnboardingConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DeviceOnboardingConfigStreamResponse responses = 1;
 };
@@ -925,6 +915,8 @@ message ProvisionedDeviceSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ProvisionedDevice instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -949,8 +941,6 @@ message ProvisionedDeviceStreamRequest {
 	//     until end.
 	//     * Each ProvisionedDevice response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -991,8 +981,6 @@ message ProvisionedDeviceBatchedStreamRequest {
 	//     until end.
 	//     * Each ProvisionedDevice response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -1004,7 +992,7 @@ message ProvisionedDeviceBatchedStreamRequest {
 
 message ProvisionedDeviceBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ProvisionedDeviceStreamResponse responses = 1;
 };
