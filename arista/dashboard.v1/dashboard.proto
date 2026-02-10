@@ -112,6 +112,9 @@ message DashboardConfig {
 
 	// widgets list of widgets in the dashboard.
 	Widgets widgets = 4;
+
+	// layout_type is the dashboard layout type, which changes the behaviour of the dashboard.
+	google.protobuf.StringValue layout_type = 5;
 }
 
 // DashboardMetadata includes versioning metadata. All the data here is managed internally, and
@@ -176,6 +179,9 @@ message Dashboard {
 
 	// widgets list of widgets in the dashboard.
 	Widgets widgets = 9;
+
+	// layout_type is the dashboard layout type, which changes the behaviour of the dashboard.
+	google.protobuf.StringValue layout_type = 10;
 }
 
 // GlobalDashboardConfig holds global configs related to Dashboards.
