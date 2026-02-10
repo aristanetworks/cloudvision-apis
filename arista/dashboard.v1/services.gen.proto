@@ -72,6 +72,8 @@ message DashboardSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// Dashboard instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -100,8 +102,6 @@ message DashboardStreamRequest {
 	//     until end.
 	//     * Each Dashboard response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -146,8 +146,6 @@ message DashboardBatchedStreamRequest {
 	//     until end.
 	//     * Each Dashboard response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -159,7 +157,7 @@ message DashboardBatchedStreamRequest {
 
 message DashboardBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DashboardStreamResponse responses = 1;
 };
@@ -215,6 +213,8 @@ message DashboardConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// DashboardConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -239,8 +239,6 @@ message DashboardConfigStreamRequest {
 	//     until end.
 	//     * Each DashboardConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -281,8 +279,6 @@ message DashboardConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each DashboardConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -294,7 +290,7 @@ message DashboardConfigBatchedStreamRequest {
 
 message DashboardConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated DashboardConfigStreamResponse responses = 1;
 };
@@ -439,8 +435,6 @@ message GlobalDashboardConfigStreamRequest {
 	//     until end.
 	//     * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 

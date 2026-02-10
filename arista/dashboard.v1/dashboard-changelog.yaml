@@ -7,48 +7,54 @@
 # New entries go on top.
 
 Changes:
-    - date: 2024-09-25
-      description: Remove unimplemented batching endpoints for GlobalDashboardConfig
-      version: 1.6.0
-      cvaas: true
-      onprem: true
+  - date: 2026-02-05
+    description: Add layout_type field to Dashboard and DashboardConfig
+    version: 1.7.0
+    cvaas: true
+    onprem: true
 
-    - date: 2024-05-09
-      description: Update GetSome, SetSome, DeleteSome REST endpoints
-      version: 1.5.0
-      cvaas: true
-      onprem: true
+  - date: 2024-09-25
+    description: Remove unimplemented batching endpoints for GlobalDashboardConfig
+    version: 1.6.0
+    cvaas: true
+    onprem: true
 
-    - date: 2024-03-28
-      description: Update available APIs
-      version: 1.4.0
-      cvaas: true
-      onprem: true
+  - date: 2024-05-09
+    description: Update GetSome, SetSome, DeleteSome REST endpoints
+    version: 1.5.0
+    cvaas: true
+    onprem: true
 
-    - date: 2023-05-11
-      description: Add a new widget field to store the id of its parent widget
-      version: 1.3.0
-      cvaas: true
-      onprem: true
+  - date: 2024-03-28
+    description: Update available APIs
+    version: 1.4.0
+    cvaas: true
+    onprem: true
 
-    - date: 2022-11-28
-      description: Add new widget fields for determining panel appearance
-      version: 1.2.0
-      cvaas: true
-      onprem: true
+  - date: 2023-05-11
+    description: Add a new widget field to store the id of its parent widget
+    version: 1.3.0
+    cvaas: true
+    onprem: true
 
-    - date: 2022-09-19
-      description: Add a new field to indicate that a Dashboard was added from packaging
-      version: 1.1.0
-      cvaas: true
-      onprem: true
+  - date: 2022-11-28
+    description: Add new widget fields for determining panel appearance
+    version: 1.2.0
+    cvaas: true
+    onprem: true
 
-    - date: 2021-12-03
-      description: Remove unused import
-      version: 1.0.1
-      cvaas: true
-      onprem: true
+  - date: 2022-09-19
+    description: Add a new field to indicate that a Dashboard was added from packaging
+    version: 1.1.0
+    cvaas: true
+    onprem: true
 
-    - date: 2020-11-12
-      description: Initial revision
-      version: 1.0.0
+  - date: 2021-12-03
+    description: Remove unused import
+    version: 1.0.1
+    cvaas: true
+    onprem: true
+
+  - date: 2020-11-12
+    description: Initial revision
+    version: 1.0.0

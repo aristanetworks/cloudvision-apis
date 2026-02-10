@@ -1203,22 +1203,13 @@
         "widgets": {
           "$ref": "#/definitions/arista.dashboard.v1.Widgets",
           "description": "widgets list of widgets in the dashboard."
+        },
+        "layoutType": {
+          "type": "string",
+          "description": "layout_type is the dashboard layout type, which changes the behaviour of the dashboard."
         }
       },
       "description": "Dashboard state contains all dashboard data."
-    },
-    "arista.dashboard.v1.DashboardBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.dashboard.v1.DashboardStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.dashboard.v1.DashboardConfig": {
       "type": "object",
@@ -1238,22 +1229,13 @@
         "widgets": {
           "$ref": "#/definitions/arista.dashboard.v1.Widgets",
           "description": "widgets list of widgets in the dashboard."
+        },
+        "layoutType": {
+          "type": "string",
+          "description": "layout_type is the dashboard layout type, which changes the behaviour of the dashboard."
         }
       },
       "description": "DashboardConfig includes all user-editable dashboard fields."
-    },
-    "arista.dashboard.v1.DashboardConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.dashboard.v1.DashboardConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.dashboard.v1.DashboardConfigDeleteAllResponse": {
       "type": "object",
@@ -1400,7 +1382,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDashboardConfig instance in this response."
         }
       }
     },
@@ -1417,7 +1400,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DashboardConfig at end.\n    * Each DashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DashboardConfig at start, followed by updates until now.\n    * Each DashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DashboardConfig at start, followed by updates\n    until end.\n    * Each DashboardConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DashboardConfig at end.\n    * Each DashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DashboardConfig at start, followed by updates until now.\n    * Each DashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DashboardConfig at start, followed by updates\n    until end.\n    * Each DashboardConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1518,7 +1501,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDashboard instance in this response."
         }
       }
     },
@@ -1543,7 +1527,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Dashboard at end.\n    * Each Dashboard response is fully-specified (all fields set).\n  * start: Returns the state of each Dashboard at start, followed by updates until now.\n    * Each Dashboard response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Dashboard at start, followed by updates\n    until end.\n    * Each Dashboard response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Dashboard at end.\n    * Each Dashboard response is fully-specified (all fields set).\n  * start: Returns the state of each Dashboard at start, followed by updates until now.\n    * Each Dashboard response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Dashboard at start, followed by updates\n    until end.\n    * Each Dashboard response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1643,7 +1627,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each GlobalDashboardConfig at end.\n    * Each GlobalDashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates\n    until end.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each GlobalDashboardConfig at end.\n    * Each GlobalDashboardConfig response is fully-specified (all fields set).\n  * start: Returns the state of each GlobalDashboardConfig at start, followed by updates until now.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each GlobalDashboardConfig at start, followed by updates\n    until end.\n    * Each GlobalDashboardConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -1786,10 +1770,11 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
     },
     "arista.time.TimeBounds": {
       "type": "object",
