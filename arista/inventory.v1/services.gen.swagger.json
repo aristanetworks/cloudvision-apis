@@ -2889,7 +2889,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.DeviceStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2937,7 +2937,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -2972,7 +2972,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.DeviceDecommissioningConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3121,7 +3121,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceDecommissioningConfig instance in this response."
         }
       }
     },
@@ -3138,7 +3139,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceDecommissioningConfig at end.\n    * Each DeviceDecommissioningConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceDecommissioningConfig at start, followed by updates until now.\n    * Each DeviceDecommissioningConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceDecommissioningConfig at start, followed by updates\n    until end.\n    * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceDecommissioningConfig at end.\n    * Each DeviceDecommissioningConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceDecommissioningConfig at start, followed by updates until now.\n    * Each DeviceDecommissioningConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceDecommissioningConfig at start, followed by updates\n    until end.\n    * Each DeviceDecommissioningConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3204,7 +3205,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceDecommissioning instance in this response."
         }
       }
     },
@@ -3221,7 +3223,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceDecommissioning at end.\n    * Each DeviceDecommissioning response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceDecommissioning at start, followed by updates until now.\n    * Each DeviceDecommissioning response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceDecommissioning at start, followed by updates\n    until end.\n    * Each DeviceDecommissioning response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceDecommissioning at end.\n    * Each DeviceDecommissioning response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceDecommissioning at start, followed by updates until now.\n    * Each DeviceDecommissioning response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceDecommissioning at start, followed by updates\n    until end.\n    * Each DeviceDecommissioning response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3278,6 +3280,10 @@
         "statusMessage": {
           "type": "string",
           "description": "status_message contains information on the status of the onboarding attempt,\nif any. This is generally an unstructured log message that is for display\npurposes only (its structure and contents may change)."
+        },
+        "profileName": {
+          "type": "string",
+          "description": "profile_name is the name of the custom TerminAttr profile that was specified in the\nonboarding request."
         }
       },
       "description": "DeviceOnboarding describes the status of an onboarding process."
@@ -3291,7 +3297,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3330,7 +3336,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.DeviceOnboardingConfigStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3479,7 +3485,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceOnboardingConfig instance in this response."
         }
       }
     },
@@ -3496,7 +3503,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceOnboardingConfig at end.\n    * Each DeviceOnboardingConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceOnboardingConfig at start, followed by updates until now.\n    * Each DeviceOnboardingConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceOnboardingConfig at start, followed by updates\n    until end.\n    * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceOnboardingConfig at end.\n    * Each DeviceOnboardingConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceOnboardingConfig at start, followed by updates until now.\n    * Each DeviceOnboardingConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceOnboardingConfig at start, followed by updates\n    until end.\n    * Each DeviceOnboardingConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3562,7 +3569,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceOnboarding instance in this response."
         }
       }
     },
@@ -3579,7 +3587,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceOnboarding at end.\n    * Each DeviceOnboarding response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceOnboarding at start, followed by updates until now.\n    * Each DeviceOnboarding response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceOnboarding at start, followed by updates\n    until end.\n    * Each DeviceOnboarding response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceOnboarding at end.\n    * Each DeviceOnboarding response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceOnboarding at start, followed by updates until now.\n    * Each DeviceOnboarding response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceOnboarding at start, followed by updates\n    until end.\n    * Each DeviceOnboarding response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3645,7 +3653,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDevice instance in this response."
         }
       }
     },
@@ -3662,7 +3671,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Device at end.\n    * Each Device response is fully-specified (all fields set).\n  * start: Returns the state of each Device at start, followed by updates until now.\n    * Each Device response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Device at start, followed by updates\n    until end.\n    * Each Device response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Device at end.\n    * Each Device response is fully-specified (all fields set).\n  * start: Returns the state of each Device at start, followed by updates until now.\n    * Each Device response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Device at start, followed by updates\n    until end.\n    * Each Device response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3770,7 +3779,7 @@
             "type": "object",
             "$ref": "#/definitions/arista.inventory.v1.ProvisionedDeviceStreamResponse"
           },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and \nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
         }
       }
     },
@@ -3818,7 +3827,8 @@
         },
         "time": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nProvisionedDevice instance in this response."
         }
       }
     },
@@ -3835,7 +3845,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ProvisionedDevice at end.\n    * Each ProvisionedDevice response is fully-specified (all fields set).\n  * start: Returns the state of each ProvisionedDevice at start, followed by updates until now.\n    * Each ProvisionedDevice response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ProvisionedDevice at start, followed by updates\n    until end.\n    * Each ProvisionedDevice response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ProvisionedDevice at end.\n    * Each ProvisionedDevice response is fully-specified (all fields set).\n  * start: Returns the state of each ProvisionedDevice at start, followed by updates until now.\n    * Each ProvisionedDevice response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ProvisionedDevice at start, followed by updates\n    until end.\n    * Each ProvisionedDevice response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3898,10 +3908,11 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
     },
     "arista.time.TimeBounds": {
       "type": "object",

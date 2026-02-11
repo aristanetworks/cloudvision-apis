@@ -144,6 +144,9 @@ message DeviceOnboarding {
     // if any. This is generally an unstructured log message that is for display
     // purposes only (its structure and contents may change).
     google.protobuf.StringValue status_message = 5;
+    // profile_name is the name of the custom TerminAttr profile that was specified in the
+    // onboarding request.
+    google.protobuf.StringValue profile_name = 6;
 }
 
 // DeviceDecommissioningConfig describes a device decommissioning request.

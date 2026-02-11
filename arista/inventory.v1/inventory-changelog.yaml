@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-02-08
+      description: Add field profile_name in DeviceOnboarding
+      version: 1.1.4
+      cvaas: true
+      onprem: true
     - date: 2025-05-18
       description: Add field profile_name in DeviceOnboardingConfig
       version: 1.1.3
