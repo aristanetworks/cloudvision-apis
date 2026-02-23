@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-02-23
+      description: Reinstate a deprecated warning code WARNING_CODE_TA_CV_INCOMPATIBLE
+      version: 1.22.0
     - date: 2025-01-08
       description: Add a new error code ERROR_CODE_EOS_EXTENSION_ARCHITECTURE_INCOMPATIBLE
       version: 1.21.0
