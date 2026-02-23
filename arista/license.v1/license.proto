@@ -1,0 +1,433 @@
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+// These APIs are part of License management solution, the basic workflow  -
+// 1. Sales order placed by customer.
+// 2. Generate list of purchased licenses from sales and invoice data.
+// 3. Assign the device to a purchased license.
+// 4. Procure license file for the assigned device license.
+// 5. Install generated license file from procurement to assigned device.
+
+syntax = "proto3";
+
+package arista.license.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/license.v1;license";
+
+option java_package = "com.arista.license.v1";
+option java_outer_classname = "License";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+// LicenseScope indicates the number of devices a license supports.
+enum LicenseScope {
+  // LICENSE_SCOPE_UNSPECIFIED indicates an unspecified license scope.
+  LICENSE_SCOPE_UNSPECIFIED = 0;
+  // LICENSE_SCOPE_SINGLE_DEVICE indicates a license file that supports a single device.
+  LICENSE_SCOPE_SINGLE_DEVICE = 1;
+  // LICENSE_SCOPE_MULTIPLE_DEVICE indicates a license file that supports multiple devices.
+  LICENSE_SCOPE_MULTIPLE_DEVICE = 2;
+}
+
+// LicenseState represents the installation status of a device license file.
+enum LicenseState {
+  // LICENSE_STATE_UNSPECIFIED indicates an unspecified license state.
+  LICENSE_STATE_UNSPECIFIED = 0;
+  // LICENSE_STATE_INSTALLED indicates the license is installed.
+  LICENSE_STATE_INSTALLED = 1;
+  // LICENSE_STATE_UNINSTALLED indicates the license is uninstalled.
+  LICENSE_STATE_UNINSTALLED = 2;
+  // LICENSE_STATE_INSTALLATION_IN_PROGRESS indicates the license installation is in progress.
+  LICENSE_STATE_INSTALLATION_IN_PROGRESS = 3;
+  // LICENSE_STATE_UNINSTALLATION_IN_PROGRESS indicates the license uninstallation is in progress.
+  LICENSE_STATE_UNINSTALLATION_IN_PROGRESS = 4;
+  // LICENSE_STATE_INSTALLATION_FAILED indicates the license installation failed.
+  LICENSE_STATE_INSTALLATION_FAILED = 5;
+  // LICENSE_STATE_UNINSTALLATION_FAILED indicates the license uninstallation failed.
+  LICENSE_STATE_UNINSTALLATION_FAILED = 6;
+}
+
+// LicenseSource is the source from where
+// license file has been obtained.
+enum LicenseSource {
+    // LICENSE_SOURCE_UNSPECIFIED refers to
+    // unspecified license source.
+    LICENSE_SOURCE_UNSPECIFIED = 0;
+    // LICENSE_SOURCE_USER_UPLOAD refers
+    // to the license source as uploaded
+    // by user through UI.
+    LICENSE_SOURCE_USER_UPLOAD = 1;
+    // LICENSE_SOURCE_DISCOVERED refers to
+    // the license source as being discovered
+    // from device where license was manually
+    // installed.
+    LICENSE_SOURCE_DISCOVERED = 2;
+    // LICENSE_SOURCE_PROCURED refers to
+    // the license source as being procured from
+    // License Request Service.
+    LICENSE_SOURCE_PROCURED = 3;
+}
+
+// Feature is the name of the feature for which the
+// license was purchased.
+enum Feature {
+    // FEATURE_UNSPECIFIED refers to
+    // unspecified license feature.
+    FEATURE_UNSPECIFIED = 0;
+    // FEATURE_IPSEC refers to the feature IPSEC.
+    FEATURE_IPSEC = 1;
+    // FEATURE_MACSEC refers to the feature MACSEC.
+    FEATURE_MACSEC = 2;
+    // FEATURE_ENCR refers to the encryption.
+    FEATURE_ENCR = 3;
+    // FEATURE_CLOUDEOS refers to the feature CLOUDEOS.
+    FEATURE_CLOUDEOS = 4;
+    // FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.
+    FEATURE_CVPATHFINDER = 5;
+}
+
+// PlanName is the name of the plan for which the
+// license was purchased.
+enum PlanName {
+    // PLAN_NAME_UNSPECIFIED refers to unspecified plan name.
+    PLAN_NAME_UNSPECIFIED = 0;
+    // PLAN_NAME_SUBSCRIPTION refers to the subscription licenses.
+    PLAN_NAME_SUBSCRIPTION = 1;
+    // PLAN_NAME_PERPETUAL refers to the licenses valid for lifetime of the device.
+    PLAN_NAME_PERPETUAL = 2;
+}
+
+// AssignmentStatus enumerates the set of execution statuses of device assignment.
+enum AssignmentStatus {
+    // ASSIGNMENT_STATUS_UNSPECIFIED refers to unspecified status.
+    ASSIGNMENT_STATUS_UNSPECIFIED = 0;
+    // ASSIGNMENT_STATUS_ASSIGNMENT_IN_PROGRESS indicates device assignment is in progress.
+    ASSIGNMENT_STATUS_ASSIGNMENT_IN_PROGRESS = 1;
+    // ASSIGNMENT_STATUS_ASSIGNMENT_SUCCESS indicates device assignment succeeded.
+    ASSIGNMENT_STATUS_ASSIGNMENT_SUCCESS = 2;
+    // ASSIGNMENT_STATUS_ASSIGNMENT_FAILURE indicates device assignment failed.
+    ASSIGNMENT_STATUS_ASSIGNMENT_FAILURE = 3;
+    // ASSIGNMENT_STATUS_UNASSIGNMENT_IN_PROGRESS indicates device unassignment is in progress.
+    ASSIGNMENT_STATUS_UNASSIGNMENT_IN_PROGRESS = 4;
+    // ASSIGNMENT_STATUS_UNASSIGNMENT_SUCCESS indicates device unassignment succeeded.
+    ASSIGNMENT_STATUS_UNASSIGNMENT_SUCCESS = 5;
+    // ASSIGNMENT_STATUS_UNASSIGNMENT_FAILURE indicates device unassignment failed.
+    ASSIGNMENT_STATUS_UNASSIGNMENT_FAILURE = 6;
+}
+
+// PreferredBundleReason indicates the reason a license bundle is preferred.
+enum PreferredBundleReason {
+    // PREFERRED_BUNDLE_REASON_UNSPECIFIED indicates an unspecified reason.
+    PREFERRED_BUNDLE_REASON_UNSPECIFIED = 0;
+    // PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH indicates a match with the device's sales order.
+    PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH = 1;
+    // PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN indicates that the license is preferred over other licenses as it is a perpetual license
+    PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN = 2;
+    // PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE indicates a perpetual license
+    // with the oldest sales order.
+    PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE = 3;
+}
+
+// PurchasedLicenseKey uniquely identifies a license.
+message PurchasedLicenseKey {
+    option (fmp.model_key) = true;
+
+    // license_uuid is a unique id associated with a license.
+    google.protobuf.StringValue license_uuid = 1;
+}
+
+// PurchasedLicense is a license record derived from the sales order
+// information where each order is expanded into individual licenses.
+// These licenses will be uniquely identified with license_uuid.
+// Note: This resource is only available in CVaaS.
+message PurchasedLicense {
+    option (fmp.model) = "ro";
+
+    // key uniquely identifies a license.
+    PurchasedLicenseKey key = 1;
+    // assigned_device denotes device serial number to which this
+    // license is associated. Initially assigned_device will be nil,
+    // it will be updated after device assignment by the user.
+    google.protobuf.StringValue assigned_device = 2;
+    // so_number is the sales order number for the purchased license.
+    google.protobuf.StringValue so_number = 3;
+    // license_bundle_uuid is a unique id of the license bundle.
+    google.protobuf.StringValue license_bundle_uuid = 4;
+    // sku represents the name of the sku which is combination
+    // of platform and feature name. Example: LIC-FIX-4-MACSEC
+    google.protobuf.StringValue sku = 5;
+    // feature is the name of the feature for which the
+    // license was purchased.
+    Feature feature = 6;
+    // start_time is the time when the license comes into force.
+    google.protobuf.Timestamp start_time = 7;
+    // end_time is the time when the license expires.
+    google.protobuf.Timestamp end_time = 8;
+    // plan_name indicates type of license (perpetual/ subscription).
+    PlanName plan_name = 9;
+    // original_subscription_record_number is the parent subscription record number.
+    google.protobuf.Int64Value original_subscription_record_number = 10;
+    // original_sales_order_number is the parent sales order number.
+    google.protobuf.Int64Value original_sales_order_number = 11;
+    // renewal_status is the renewal status of license.
+    google.protobuf.StringValue renewal_status = 12;
+    // renewal_status_date is the renewal date of license.
+    google.protobuf.Timestamp renewal_status_date = 13;
+    // end_customer_parent_account_id is the parent company ID.
+    google.protobuf.Int64Value end_customer_parent_account_id = 14;
+    // end_customer_parent_account_name is the parent company name.
+    google.protobuf.StringValue end_customer_parent_account_name = 15;
+    // platform_class is the platform class of the license sku.
+    google.protobuf.StringValue platform_class = 16;
+}
+
+// LicenseAssignmentKey uniquely identifies a license.
+message LicenseAssignmentKey {
+    option (fmp.model_key) = true;
+
+    // license_bundle_uuid is a unique id of the license bundle.
+    google.protobuf.StringValue license_bundle_uuid = 1;
+    // device is the serial number of the device
+    // to which the license should be assigned.
+    google.protobuf.StringValue device = 2;
+}
+
+// LicenseAssignmentConfig describes a device assignment request.
+// "Assignment" refers to associating the purchased license to a device.
+// Note: This resource is only available in CVaaS.
+message LicenseAssignmentConfig {
+    option (fmp.model) = "rw";
+
+    // key uniquely identifies a license assignment for the device.
+    LicenseAssignmentKey key = 1;
+    // assigned indicates whether the license
+    // should be assigned or unassigned.
+    google.protobuf.BoolValue assigned = 2;
+}
+
+// LicenseAssignment describes the status of device assignment.
+// Note: This resource is only available in CVaaS.
+message LicenseAssignment {
+    option (fmp.model) = "ro";
+
+    // key uniquely identifies a license assignment for the device.
+    LicenseAssignmentKey key = 1;
+    // license_uuid is a unique id associated with a license.
+    google.protobuf.StringValue license_uuid = 2;
+    // license_file_serial is unique serial number embedded
+    // in the license file.
+    google.protobuf.StringValue license_file_serial = 3;
+    // status is device assignment status.
+    AssignmentStatus status = 4;
+    // assign_time is the time when the license is assigned.
+    google.protobuf.Timestamp assign_time = 5;
+    // error is an error message for the device assignment failure.
+    google.protobuf.StringValue error = 6;
+}
+
+// LicenseFileKey uniquely identifies a license file.
+message LicenseFileKey {
+    option (fmp.model_key) = true;
+
+    // license_file_serial is unique serial number embedded
+    // in the license file.
+    google.protobuf.StringValue license_file_serial = 1;
+}
+
+// LicenseFileConfig describes a request to upload and
+// install/uninstall a license file to the assigned device.
+// User can request license installation or uninstallation
+// by setting the installed attribute as true/false in the request.
+message LicenseFileConfig {
+    option (fmp.model) = "rw";
+
+    // key uniquely identifies a license file.
+    LicenseFileKey key = 1;
+    // license_file_json is the JSON string
+    // of the license file.
+    google.protobuf.StringValue license_file_json = 2;
+    // installed indicates whether the license file
+    // should be installed or uninstalled.
+    google.protobuf.BoolValue installed = 3;
+}
+
+// LicenseStatus contains license installation state
+// and error.
+message LicenseStatus {
+    // state is the installation status
+    // of the license file on the device.
+    LicenseState state = 1;
+    // error indicates the error message for license
+    // installation/uninstallation failure.
+    google.protobuf.StringValue error = 2;
+}
+
+// DeviceLicenseStatus contains a mapping of assigned
+// devices to license installation state.
+message DeviceLicenseStatus {
+    // values is a map of deviceID to installation status.
+    map<string, LicenseStatus> values = 1;
+}
+
+// LicenseFile describes the available license files for
+// installation or uninstallation on the device.
+message LicenseFile {
+    option (fmp.model) = "ro";
+
+    // key uniquely identifies a license file.
+    LicenseFileKey key = 1;
+    // version is the version number of the license file.
+    google.protobuf.StringValue version = 2;
+    // customer_name is the name of customer
+    // who owns this license file.
+    google.protobuf.StringValue customer_name = 3;
+    // device_license_status contains mapping of assigned.
+    // devices to license installation status.
+    DeviceLicenseStatus device_license_status = 4;
+    // feature is the name of license feature
+    // that this license file refers to.
+    Feature feature = 5;
+    // start_time is the time when the license comes into force.
+    google.protobuf.Timestamp start_time = 6;
+    // end_time is the time when the license expires.
+    google.protobuf.Timestamp end_time = 7;
+    // source is the means by which the
+    // license file was obtained.
+    LicenseSource source = 8;
+    // file_name is the name of the license file.
+    google.protobuf.StringValue file_name = 9;
+}
+
+// LicenseInfo has the start time, end time, grace period and plan name of a license.
+message LicenseInfo {
+    // start_time is the time when the license starts its effect.
+    google.protobuf.Timestamp start_time = 1;
+    // end_time is the time when the license will be terminated.
+    google.protobuf.Timestamp end_time = 2;
+    // grace_period is the number of days a license is valid after expiry.
+    google.protobuf.UInt32Value grace_period = 3;
+    // plan_name indicates type of license (perpetual/subscription).
+    PlanName plan_name = 4;
+}
+
+// RepeatedLicenseInfo is a wrapper around LicenseInfo.
+message RepeatedLicenseInfo{
+    // values store the details of licenses installed on the devices.
+    repeated LicenseInfo values =1;
+}
+
+// DeviceData represents basic data of the device along with the licenses installed on it.
+message DeviceData {
+    //  serial is the serial number of the device.
+    google.protobuf.StringValue serial = 1;
+    //  hostname is the hostname of the device.
+    google.protobuf.StringValue hostname = 2;
+    //  sales_order_number is the sales order of the device.
+    google.protobuf.StringValue sales_order_number = 3;
+    //  model is the model name of the device.
+    google.protobuf.StringValue model = 4;
+    //  platform_classes are the supported license platform classes of the device.
+    fmp.RepeatedString platform_classes = 5;
+    // licenses which are already installed on the device.
+    RepeatedLicenseInfo licenses = 6;
+    // applicable_license_skus are the applicable license SKUs for the device
+    // of the requested feature.
+    fmp.RepeatedString applicable_license_skus = 7;
+}
+
+// ApplicableDevicesKey uniquely identifies an ApplicableDevice for a feature.
+message ApplicableDevicesKey {
+    option (fmp.model_key) = true;
+
+    // feature is the name of license feature.
+    Feature feature = 1;
+    // device_serial is the serial number of the device.
+    google.protobuf.StringValue device_serial = 2;
+}
+
+// Filter is used to filter devices based on licenses installed on it.
+message Filter{
+  // has_perpetual_license when set filters devices which has atleast one
+  // perpetual license for the given feature.
+  google.protobuf.BoolValue has_perpetual_license  = 1;
+}
+
+// ApplicableDevices represents a feature and an applicable device data for the feature.
+// To get this, We take devices from purchaseDevices and Inventory path, extract model
+// for each device, check applicable feature using modelSKUMapping path and if the model
+// has SKU of the requested feature, send it. License information of the device is
+// aggregated from license/deviceLicenseMapping path.
+// Note: This resource is only available in CVaaS.
+message ApplicableDevices {
+  option (fmp.model) = "ro";
+  option (fmp.custom_filter) = "Filter";
+  // key uniquely identifies applicable devices.
+  ApplicableDevicesKey key = 1;
+  // device_licenses_data is basic device data with licenses it has.
+  DeviceData device_licenses_data = 2;
+}
+
+// ApplicableLicenseBundlesKey is used to request a list of license bundles
+// applicable to a specific device serial for a given feature.
+// The device's model number derived from the serial
+// is used to determine compatibility and to prioritize bundles.
+message ApplicableLicenseBundlesKey {
+    option (fmp.model_key) = true;
+
+    // feature is the name of license feature.
+    Feature feature = 1;
+    // device_serial is the serial number of the device.
+    google.protobuf.StringValue device_serial = 2;
+}
+
+// LicenseBundle represents a single license bundle with its UUID and preference status.
+message LicenseBundle {
+    // license_bundle_uuid is a unique id of the license bundle.
+    google.protobuf.StringValue license_bundle_uuid = 1;
+    // sales_order_number is the sales order number for the purchased license bundle.
+    google.protobuf.Int64Value sales_order_number = 2;
+    // sku represents the name of the sku which is combination
+    // of platform and feature name. Example: LIC-FIX-4-MACSEC
+    google.protobuf.StringValue sku = 3;
+    // plan_name indicates type of license (perpetual/subscription).
+    PlanName plan_name = 4;
+    // start_time is the time when the license comes into force.
+    google.protobuf.Timestamp start_time = 5;
+    // end_time is the time when the license expires.
+    google.protobuf.Timestamp end_time = 6;
+    // total_license_count is the total number of licenses purchased in this bundle.
+    google.protobuf.UInt64Value total_license_count = 7;
+    // unassigned_license_count is the number of licenses that are currently unassigned in this bundle.
+    google.protobuf.UInt64Value unassigned_license_count = 8;
+    // is_preferred indicates if this bundle is the preferred bundle.
+    google.protobuf.BoolValue is_preferred = 9;
+    // preferred_bundle_reason indicates why this bundle is preferred. This field is only
+    // populated when is_preferred is true.
+    PreferredBundleReason preferred_bundle_reason = 10;
+}
+
+// RepeatedLicenseBundle is a wrapper around LicenseBundle.
+message RepeatedLicenseBundle {
+    // values store the details of license bundles.
+    repeated LicenseBundle values = 1;
+}
+
+// ApplicableLicenseBundles represents a list of license bundles that are compatible
+// with a given device for a specific feature.
+// The list may contain a preferred bundle based on a defined priority order.
+// Note: This resource is only available in CVaaS.
+message ApplicableLicenseBundles {
+    option (fmp.model) = "ro";
+
+    // key is the key identifying the bundle request.
+    ApplicableLicenseBundlesKey key = 1;
+    // bundles is a list of applicable license bundles.
+    // There should be at most one `preferred` bundle in the list.
+    RepeatedLicenseBundle bundles = 2;
+}

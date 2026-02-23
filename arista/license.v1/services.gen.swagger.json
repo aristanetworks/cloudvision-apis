@@ -1,0 +1,4849 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.license.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "ApplicableDevicesService"
+    },
+    {
+      "name": "ApplicableLicenseBundlesService"
+    },
+    {
+      "name": "LicenseAssignmentService"
+    },
+    {
+      "name": "LicenseAssignmentConfigService"
+    },
+    {
+      "name": "LicenseFileService"
+    },
+    {
+      "name": "LicenseFileConfigService"
+    },
+    {
+      "name": "PurchasedLicenseService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/license/v1/ApplicableDevices": {
+      "get": {
+        "operationId": "ApplicableDevicesService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.feature",
+            "description": "feature is the name of license feature.\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "key.deviceSerial",
+            "description": "device_serial is the serial number of the device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableDevices/all": {
+      "get": {
+        "operationId": "ApplicableDevicesService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableDevicesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.hasPerpetualLicense",
+            "description": "has_perpetual_license when set filters devices which has atleast one\nperpetual license for the given feature.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableDevicesService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableDevicesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableDevices/getsome": {
+      "post": {
+        "operationId": "ApplicableDevicesService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableDevicesSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableDevicesSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableDevices/metadata": {
+      "get": {
+        "operationId": "ApplicableDevicesService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.hasPerpetualLicense",
+            "description": "has_perpetual_license when set filters devices which has atleast one\nperpetual license for the given feature.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableDevicesService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableDevices/watch": {
+      "get": {
+        "operationId": "ApplicableDevicesService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableDevicesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.hasPerpetualLicense",
+            "description": "has_perpetual_license when set filters devices which has atleast one\nperpetual license for the given feature.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableDevicesService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableDevicesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableDevices/watchmetadata": {
+      "get": {
+        "operationId": "ApplicableDevicesService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.hasPerpetualLicense",
+            "description": "has_perpetual_license when set filters devices which has atleast one\nperpetual license for the given feature.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableDevicesService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableDevicesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles": {
+      "get": {
+        "operationId": "ApplicableLicenseBundlesService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.feature",
+            "description": "feature is the name of license feature.\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "key.deviceSerial",
+            "description": "device_serial is the serial number of the device.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles/all": {
+      "get": {
+        "operationId": "ApplicableLicenseBundlesService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableLicenseBundlesService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles/getsome": {
+      "post": {
+        "operationId": "ApplicableLicenseBundlesService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableLicenseBundlesSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles/metadata": {
+      "get": {
+        "operationId": "ApplicableLicenseBundlesService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableLicenseBundlesService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles/watch": {
+      "get": {
+        "operationId": "ApplicableLicenseBundlesService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableLicenseBundlesService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/ApplicableLicenseBundles/watchmetadata": {
+      "get": {
+        "operationId": "ApplicableLicenseBundlesService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      },
+      "post": {
+        "operationId": "ApplicableLicenseBundlesService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicableLicenseBundlesService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment": {
+      "get": {
+        "operationId": "LicenseAssignmentService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseBundleUuid",
+            "description": "license_bundle_uuid is a unique id of the license bundle.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.device",
+            "description": "device is the serial number of the device\nto which the license should be assigned.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment/all": {
+      "get": {
+        "operationId": "LicenseAssignmentService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment/getsome": {
+      "post": {
+        "operationId": "LicenseAssignmentService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment/metadata": {
+      "get": {
+        "operationId": "LicenseAssignmentService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment/watch": {
+      "get": {
+        "operationId": "LicenseAssignmentService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignment/watchmetadata": {
+      "get": {
+        "operationId": "LicenseAssignmentService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig": {
+      "get": {
+        "operationId": "LicenseAssignmentConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseBundleUuid",
+            "description": "license_bundle_uuid is a unique id of the license bundle.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.device",
+            "description": "device is the serial number of the device\nto which the license should be assigned.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseAssignmentConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseBundleUuid",
+            "description": "license_bundle_uuid is a unique id of the license bundle.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.device",
+            "description": "device is the serial number of the device\nto which the license should be assigned.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "LicenseAssignmentConfig carries the value to set into the datastore.\nSee the documentation on the LicenseAssignmentConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/all": {
+      "get": {
+        "operationId": "LicenseAssignmentConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseAssignmentConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/deletesome": {
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/getsome": {
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/metadata": {
+      "get": {
+        "operationId": "LicenseAssignmentConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/some": {
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/watch": {
+      "get": {
+        "operationId": "LicenseAssignmentConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseAssignmentConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseAssignmentConfig/watchmetadata": {
+      "get": {
+        "operationId": "LicenseAssignmentConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseAssignmentConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseAssignmentConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile": {
+      "get": {
+        "operationId": "LicenseFileService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseFileSerial",
+            "description": "license_file_serial is unique serial number embedded\nin the license file.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile/all": {
+      "get": {
+        "operationId": "LicenseFileService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile/getsome": {
+      "post": {
+        "operationId": "LicenseFileService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile/metadata": {
+      "get": {
+        "operationId": "LicenseFileService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile/watch": {
+      "get": {
+        "operationId": "LicenseFileService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFile/watchmetadata": {
+      "get": {
+        "operationId": "LicenseFileService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig": {
+      "get": {
+        "operationId": "LicenseFileConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseFileSerial",
+            "description": "license_file_serial is unique serial number embedded\nin the license file.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseFileConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseFileSerial",
+            "description": "license_file_serial is unique serial number embedded\nin the license file.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "LicenseFileConfig carries the value to set into the datastore.\nSee the documentation on the LicenseFileConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfig"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/all": {
+      "get": {
+        "operationId": "LicenseFileConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseFileConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/deletesome": {
+      "post": {
+        "operationId": "LicenseFileConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/getsome": {
+      "post": {
+        "operationId": "LicenseFileConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/metadata": {
+      "get": {
+        "operationId": "LicenseFileConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/some": {
+      "post": {
+        "operationId": "LicenseFileConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/watch": {
+      "get": {
+        "operationId": "LicenseFileConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.LicenseFileConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/LicenseFileConfig/watchmetadata": {
+      "get": {
+        "operationId": "LicenseFileConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseFileConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseFileConfigService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense": {
+      "get": {
+        "operationId": "PurchasedLicenseService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseUuid",
+            "description": "license_uuid is a unique id associated with a license.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense/all": {
+      "get": {
+        "operationId": "PurchasedLicenseService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.PurchasedLicenseStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      },
+      "post": {
+        "operationId": "PurchasedLicenseService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.PurchasedLicenseStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense/getsome": {
+      "post": {
+        "operationId": "PurchasedLicenseService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.PurchasedLicenseSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.PurchasedLicenseSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense/metadata": {
+      "get": {
+        "operationId": "PurchasedLicenseService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      },
+      "post": {
+        "operationId": "PurchasedLicenseService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense/watch": {
+      "get": {
+        "operationId": "PurchasedLicenseService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.PurchasedLicenseStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      },
+      "post": {
+        "operationId": "PurchasedLicenseService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.PurchasedLicenseStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    },
+    "/api/resources/license/v1/PurchasedLicense/watchmetadata": {
+      "get": {
+        "operationId": "PurchasedLicenseService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      },
+      "post": {
+        "operationId": "PurchasedLicenseService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.license.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.license.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PurchasedLicenseService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.license.v1.ApplicableDevices": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableDevicesKey",
+          "description": "key uniquely identifies applicable devices."
+        },
+        "deviceLicensesData": {
+          "$ref": "#/definitions/arista.license.v1.DeviceData",
+          "description": "device_licenses_data is basic device data with licenses it has."
+        }
+      },
+      "description": "ApplicableDevices represents a feature and an applicable device data for the feature.\nTo get this, We take devices from purchaseDevices and Inventory path, extract model\nfor each device, check applicable feature using modelSKUMapping path and if the model\nhas SKU of the requested feature, send it. License information of the device is\naggregated from license/deviceLicenseMapping path.\nNote: This resource is only available in CVaaS."
+    },
+    "arista.license.v1.ApplicableDevicesBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableDevicesStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableDevicesKey": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "description": "feature is the name of license feature."
+        },
+        "deviceSerial": {
+          "type": "string",
+          "description": "device_serial is the serial number of the device."
+        }
+      },
+      "description": "ApplicableDevicesKey uniquely identifies an ApplicableDevice for a feature.",
+      "required": [
+        "feature",
+        "deviceSerial"
+      ]
+    },
+    "arista.license.v1.ApplicableDevicesResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableDevices",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApplicableDevices instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableDevicesSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableDevicesKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableDevicesSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableDevices",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApplicableDevices instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableDevicesStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableDevices"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "$ref": "#/definitions/arista.license.v1.Filter",
+          "description": "For each ApplicableDevices in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given ApplicableDevices is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ApplicableDevices at end.\n    * Each ApplicableDevices response is fully-specified (all fields set).\n  * start: Returns the state of each ApplicableDevices at start, followed by updates until now.\n    * Each ApplicableDevices response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ApplicableDevices at start, followed by updates\n    until end.\n    * Each ApplicableDevices response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableDevicesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableDevices",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ApplicableDevices's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ApplicableDevices value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundles": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesKey",
+          "description": "key is the key identifying the bundle request."
+        },
+        "bundles": {
+          "$ref": "#/definitions/arista.license.v1.RepeatedLicenseBundle",
+          "description": "bundles is a list of applicable license bundles.\nThere should be at most one `preferred` bundle in the list."
+        }
+      },
+      "description": "ApplicableLicenseBundles represents a list of license bundles that are compatible\nwith a given device for a specific feature.\nThe list may contain a preferred bundle based on a defined priority order.\nNote: This resource is only available in CVaaS."
+    },
+    "arista.license.v1.ApplicableLicenseBundlesBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundlesKey": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "description": "feature is the name of license feature."
+        },
+        "deviceSerial": {
+          "type": "string",
+          "description": "device_serial is the serial number of the device."
+        }
+      },
+      "description": "ApplicableLicenseBundlesKey is used to request a list of license bundles\napplicable to a specific device serial for a given feature.\nThe device's model number derived from the serial\nis used to determine compatibility and to prioritize bundles.",
+      "required": [
+        "feature",
+        "deviceSerial"
+      ]
+    },
+    "arista.license.v1.ApplicableLicenseBundlesResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundles",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApplicableLicenseBundles instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundlesSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundlesKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundlesSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundles",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nApplicableLicenseBundles instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundlesStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundles"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each ApplicableLicenseBundles at end.\n    * Each ApplicableLicenseBundles response is fully-specified (all fields set).\n  * start: Returns the state of each ApplicableLicenseBundles at start, followed by updates until now.\n    * Each ApplicableLicenseBundles response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each ApplicableLicenseBundles at start, followed by updates\n    until end.\n    * Each ApplicableLicenseBundles response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.ApplicableLicenseBundlesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.ApplicableLicenseBundles",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this ApplicableLicenseBundles's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the ApplicableLicenseBundles value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.AssignmentStatus": {
+      "type": "string",
+      "enum": [
+        "ASSIGNMENT_STATUS_UNSPECIFIED",
+        "ASSIGNMENT_STATUS_ASSIGNMENT_IN_PROGRESS",
+        "ASSIGNMENT_STATUS_ASSIGNMENT_SUCCESS",
+        "ASSIGNMENT_STATUS_ASSIGNMENT_FAILURE",
+        "ASSIGNMENT_STATUS_UNASSIGNMENT_IN_PROGRESS",
+        "ASSIGNMENT_STATUS_UNASSIGNMENT_SUCCESS",
+        "ASSIGNMENT_STATUS_UNASSIGNMENT_FAILURE"
+      ],
+      "default": "ASSIGNMENT_STATUS_UNSPECIFIED",
+      "description": "AssignmentStatus enumerates the set of execution statuses of device assignment.\n\n - ASSIGNMENT_STATUS_UNSPECIFIED: ASSIGNMENT_STATUS_UNSPECIFIED refers to unspecified status.\n - ASSIGNMENT_STATUS_ASSIGNMENT_IN_PROGRESS: ASSIGNMENT_STATUS_ASSIGNMENT_IN_PROGRESS indicates device assignment is in progress.\n - ASSIGNMENT_STATUS_ASSIGNMENT_SUCCESS: ASSIGNMENT_STATUS_ASSIGNMENT_SUCCESS indicates device assignment succeeded.\n - ASSIGNMENT_STATUS_ASSIGNMENT_FAILURE: ASSIGNMENT_STATUS_ASSIGNMENT_FAILURE indicates device assignment failed.\n - ASSIGNMENT_STATUS_UNASSIGNMENT_IN_PROGRESS: ASSIGNMENT_STATUS_UNASSIGNMENT_IN_PROGRESS indicates device unassignment is in progress.\n - ASSIGNMENT_STATUS_UNASSIGNMENT_SUCCESS: ASSIGNMENT_STATUS_UNASSIGNMENT_SUCCESS indicates device unassignment succeeded.\n - ASSIGNMENT_STATUS_UNASSIGNMENT_FAILURE: ASSIGNMENT_STATUS_UNASSIGNMENT_FAILURE indicates device unassignment failed."
+    },
+    "arista.license.v1.DeviceData": {
+      "type": "object",
+      "properties": {
+        "serial": {
+          "type": "string",
+          "description": "serial is the serial number of the device."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "hostname is the hostname of the device."
+        },
+        "salesOrderNumber": {
+          "type": "string",
+          "description": "sales_order_number is the sales order of the device."
+        },
+        "model": {
+          "type": "string",
+          "description": "model is the model name of the device."
+        },
+        "platformClasses": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "platform_classes are the supported license platform classes of the device."
+        },
+        "licenses": {
+          "$ref": "#/definitions/arista.license.v1.RepeatedLicenseInfo",
+          "description": "licenses which are already installed on the device."
+        },
+        "applicableLicenseSkus": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "applicable_license_skus are the applicable license SKUs for the device\nof the requested feature."
+        }
+      },
+      "description": "DeviceData represents basic data of the device along with the licenses installed on it."
+    },
+    "arista.license.v1.DeviceLicenseStatus": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/arista.license.v1.LicenseStatus"
+          },
+          "description": "values is a map of deviceID to installation status."
+        }
+      },
+      "description": "DeviceLicenseStatus contains a mapping of assigned\ndevices to license installation state."
+    },
+    "arista.license.v1.Feature": {
+      "type": "string",
+      "enum": [
+        "FEATURE_UNSPECIFIED",
+        "FEATURE_IPSEC",
+        "FEATURE_MACSEC",
+        "FEATURE_ENCR",
+        "FEATURE_CLOUDEOS",
+        "FEATURE_CVPATHFINDER"
+      ],
+      "default": "FEATURE_UNSPECIFIED",
+      "description": "Feature is the name of the feature for which the\nlicense was purchased.\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER."
+    },
+    "arista.license.v1.Filter": {
+      "type": "object",
+      "properties": {
+        "hasPerpetualLicense": {
+          "type": "boolean",
+          "description": "has_perpetual_license when set filters devices which has atleast one\nperpetual license for the given feature."
+        }
+      },
+      "description": "Filter is used to filter devices based on licenses installed on it."
+    },
+    "arista.license.v1.LicenseAssignment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey",
+          "description": "key uniquely identifies a license assignment for the device."
+        },
+        "licenseUuid": {
+          "type": "string",
+          "description": "license_uuid is a unique id associated with a license."
+        },
+        "licenseFileSerial": {
+          "type": "string",
+          "description": "license_file_serial is unique serial number embedded\nin the license file."
+        },
+        "status": {
+          "$ref": "#/definitions/arista.license.v1.AssignmentStatus",
+          "description": "status is device assignment status."
+        },
+        "assignTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "assign_time is the time when the license is assigned."
+        },
+        "error": {
+          "type": "string",
+          "description": "error is an error message for the device assignment failure."
+        }
+      },
+      "description": "LicenseAssignment describes the status of device assignment.\nNote: This resource is only available in CVaaS."
+    },
+    "arista.license.v1.LicenseAssignmentBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey",
+          "description": "key uniquely identifies a license assignment for the device."
+        },
+        "assigned": {
+          "type": "boolean",
+          "description": "assigned indicates whether the license\nshould be assigned or unassigned."
+        }
+      },
+      "description": "LicenseAssignmentConfig describes a device assignment request.\n\"Assignment\" refers to associating the purchased license to a device.\nNote: This resource is only available in CVaaS."
+    },
+    "arista.license.v1.LicenseAssignmentConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey",
+          "description": "This is the key of the LicenseAssignmentConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey",
+          "description": "Key echoes back the key of the deleted LicenseAssignmentConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey"
+          },
+          "title": "key contains a list of LicenseAssignmentConfig keys to delete"
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "LicenseAssignmentConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.license.v1.LicenseAssignmentConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseAssignmentConfig instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig",
+          "description": "Value carries all the values given in the LicenseAssignmentConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig"
+          },
+          "description": "value contains a list of LicenseAssignmentConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseAssignmentConfig instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseAssignmentConfig at end.\n    * Each LicenseAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseAssignmentConfig at start, followed by updates until now.\n    * Each LicenseAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseAssignmentConfig at start, followed by updates\n    until end.\n    * Each LicenseAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignmentConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseAssignmentConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseAssignmentConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentKey": {
+      "type": "object",
+      "properties": {
+        "licenseBundleUuid": {
+          "type": "string",
+          "description": "license_bundle_uuid is a unique id of the license bundle."
+        },
+        "device": {
+          "type": "string",
+          "description": "device is the serial number of the device\nto which the license should be assigned."
+        }
+      },
+      "description": "LicenseAssignmentKey uniquely identifies a license.",
+      "required": [
+        "licenseBundleUuid",
+        "device"
+      ]
+    },
+    "arista.license.v1.LicenseAssignmentResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseAssignment instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignmentKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseAssignment instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseAssignment"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseAssignment at end.\n    * Each LicenseAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseAssignment at start, followed by updates until now.\n    * Each LicenseAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseAssignment at start, followed by updates\n    until end.\n    * Each LicenseAssignment response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.LicenseAssignmentStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseAssignment",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseAssignment's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseAssignment value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.LicenseBundle": {
+      "type": "object",
+      "properties": {
+        "licenseBundleUuid": {
+          "type": "string",
+          "description": "license_bundle_uuid is a unique id of the license bundle."
+        },
+        "salesOrderNumber": {
+          "type": "string",
+          "format": "int64",
+          "description": "sales_order_number is the sales order number for the purchased license bundle."
+        },
+        "sku": {
+          "type": "string",
+          "title": "sku represents the name of the sku which is combination\nof platform and feature name. Example: LIC-FIX-4-MACSEC"
+        },
+        "planName": {
+          "$ref": "#/definitions/arista.license.v1.PlanName",
+          "description": "plan_name indicates type of license (perpetual/subscription)."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start_time is the time when the license comes into force."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end_time is the time when the license expires."
+        },
+        "totalLicenseCount": {
+          "type": "string",
+          "format": "uint64",
+          "description": "total_license_count is the total number of licenses purchased in this bundle."
+        },
+        "unassignedLicenseCount": {
+          "type": "string",
+          "format": "uint64",
+          "description": "unassigned_license_count is the number of licenses that are currently unassigned in this bundle."
+        },
+        "isPreferred": {
+          "type": "boolean",
+          "description": "is_preferred indicates if this bundle is the preferred bundle."
+        },
+        "preferredBundleReason": {
+          "$ref": "#/definitions/arista.license.v1.PreferredBundleReason",
+          "description": "preferred_bundle_reason indicates why this bundle is preferred. This field is only\npopulated when is_preferred is true."
+        }
+      },
+      "description": "LicenseBundle represents a single license bundle with its UUID and preference status."
+    },
+    "arista.license.v1.LicenseFile": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey",
+          "description": "key uniquely identifies a license file."
+        },
+        "version": {
+          "type": "string",
+          "description": "version is the version number of the license file."
+        },
+        "customerName": {
+          "type": "string",
+          "description": "customer_name is the name of customer\nwho owns this license file."
+        },
+        "deviceLicenseStatus": {
+          "$ref": "#/definitions/arista.license.v1.DeviceLicenseStatus",
+          "description": "device_license_status contains mapping of assigned.\ndevices to license installation status."
+        },
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "description": "feature is the name of license feature\nthat this license file refers to."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start_time is the time when the license comes into force."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end_time is the time when the license expires."
+        },
+        "source": {
+          "$ref": "#/definitions/arista.license.v1.LicenseSource",
+          "description": "source is the means by which the\nlicense file was obtained."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "file_name is the name of the license file."
+        }
+      },
+      "description": "LicenseFile describes the available license files for\ninstallation or uninstallation on the device."
+    },
+    "arista.license.v1.LicenseFileBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey",
+          "description": "key uniquely identifies a license file."
+        },
+        "licenseFileJson": {
+          "type": "string",
+          "description": "license_file_json is the JSON string\nof the license file."
+        },
+        "installed": {
+          "type": "boolean",
+          "description": "installed indicates whether the license file\nshould be installed or uninstalled."
+        }
+      },
+      "description": "LicenseFileConfig describes a request to upload and\ninstall/uninstall a license file to the assigned device.\nUser can request license installation or uninstallation\nby setting the installed attribute as true/false in the request."
+    },
+    "arista.license.v1.LicenseFileConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey",
+          "description": "This is the key of the LicenseFileConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey",
+          "description": "Key echoes back the key of the deleted LicenseFileConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileKey"
+          },
+          "title": "key contains a list of LicenseFileConfig keys to delete"
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "LicenseFileConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.license.v1.LicenseFileConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseFileConfig instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileConfig",
+          "description": "Value carries all the values given in the LicenseFileConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileConfig"
+          },
+          "description": "value contains a list of LicenseFileConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseFileConfig instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseFileConfig at end.\n    * Each LicenseFileConfig response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseFileConfig at start, followed by updates until now.\n    * Each LicenseFileConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseFileConfig at start, followed by updates\n    until end.\n    * Each LicenseFileConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFileConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseFileConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseFileConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileKey": {
+      "type": "object",
+      "properties": {
+        "licenseFileSerial": {
+          "type": "string",
+          "description": "license_file_serial is unique serial number embedded\nin the license file."
+        }
+      },
+      "description": "LicenseFileKey uniquely identifies a license file.",
+      "required": [
+        "licenseFileSerial"
+      ]
+    },
+    "arista.license.v1.LicenseFileResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFile",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseFile instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFileKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFile",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseFile instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseFile"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseFile at end.\n    * Each LicenseFile response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseFile at start, followed by updates until now.\n    * Each LicenseFile response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseFile at start, followed by updates\n    until end.\n    * Each LicenseFile response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.LicenseFileStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.LicenseFile",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseFile's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseFile value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.LicenseInfo": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start_time is the time when the license starts its effect."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end_time is the time when the license will be terminated."
+        },
+        "gracePeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "grace_period is the number of days a license is valid after expiry."
+        },
+        "planName": {
+          "$ref": "#/definitions/arista.license.v1.PlanName",
+          "description": "plan_name indicates type of license (perpetual/subscription)."
+        }
+      },
+      "description": "LicenseInfo has the start time, end time, grace period and plan name of a license."
+    },
+    "arista.license.v1.LicenseSource": {
+      "type": "string",
+      "enum": [
+        "LICENSE_SOURCE_UNSPECIFIED",
+        "LICENSE_SOURCE_USER_UPLOAD",
+        "LICENSE_SOURCE_DISCOVERED",
+        "LICENSE_SOURCE_PROCURED"
+      ],
+      "default": "LICENSE_SOURCE_UNSPECIFIED",
+      "description": "LicenseSource is the source from where\nlicense file has been obtained.\n\n - LICENSE_SOURCE_UNSPECIFIED: LICENSE_SOURCE_UNSPECIFIED refers to\nunspecified license source.\n - LICENSE_SOURCE_USER_UPLOAD: LICENSE_SOURCE_USER_UPLOAD refers\nto the license source as uploaded\nby user through UI.\n - LICENSE_SOURCE_DISCOVERED: LICENSE_SOURCE_DISCOVERED refers to\nthe license source as being discovered\nfrom device where license was manually\ninstalled.\n - LICENSE_SOURCE_PROCURED: LICENSE_SOURCE_PROCURED refers to\nthe license source as being procured from\nLicense Request Service."
+    },
+    "arista.license.v1.LicenseState": {
+      "type": "string",
+      "enum": [
+        "LICENSE_STATE_UNSPECIFIED",
+        "LICENSE_STATE_INSTALLED",
+        "LICENSE_STATE_UNINSTALLED",
+        "LICENSE_STATE_INSTALLATION_IN_PROGRESS",
+        "LICENSE_STATE_UNINSTALLATION_IN_PROGRESS",
+        "LICENSE_STATE_INSTALLATION_FAILED",
+        "LICENSE_STATE_UNINSTALLATION_FAILED"
+      ],
+      "default": "LICENSE_STATE_UNSPECIFIED",
+      "description": "LicenseState represents the installation status of a device license file.\n\n - LICENSE_STATE_UNSPECIFIED: LICENSE_STATE_UNSPECIFIED indicates an unspecified license state.\n - LICENSE_STATE_INSTALLED: LICENSE_STATE_INSTALLED indicates the license is installed.\n - LICENSE_STATE_UNINSTALLED: LICENSE_STATE_UNINSTALLED indicates the license is uninstalled.\n - LICENSE_STATE_INSTALLATION_IN_PROGRESS: LICENSE_STATE_INSTALLATION_IN_PROGRESS indicates the license installation is in progress.\n - LICENSE_STATE_UNINSTALLATION_IN_PROGRESS: LICENSE_STATE_UNINSTALLATION_IN_PROGRESS indicates the license uninstallation is in progress.\n - LICENSE_STATE_INSTALLATION_FAILED: LICENSE_STATE_INSTALLATION_FAILED indicates the license installation failed.\n - LICENSE_STATE_UNINSTALLATION_FAILED: LICENSE_STATE_UNINSTALLATION_FAILED indicates the license uninstallation failed."
+    },
+    "arista.license.v1.LicenseStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/arista.license.v1.LicenseState",
+          "description": "state is the installation status\nof the license file on the device."
+        },
+        "error": {
+          "type": "string",
+          "description": "error indicates the error message for license\ninstallation/uninstallation failure."
+        }
+      },
+      "description": "LicenseStatus contains license installation state\nand error."
+    },
+    "arista.license.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.license.v1.PlanName": {
+      "type": "string",
+      "enum": [
+        "PLAN_NAME_UNSPECIFIED",
+        "PLAN_NAME_SUBSCRIPTION",
+        "PLAN_NAME_PERPETUAL"
+      ],
+      "default": "PLAN_NAME_UNSPECIFIED",
+      "description": "PlanName is the name of the plan for which the\nlicense was purchased.\n\n - PLAN_NAME_UNSPECIFIED: PLAN_NAME_UNSPECIFIED refers to unspecified plan name.\n - PLAN_NAME_SUBSCRIPTION: PLAN_NAME_SUBSCRIPTION refers to the subscription licenses.\n - PLAN_NAME_PERPETUAL: PLAN_NAME_PERPETUAL refers to the licenses valid for lifetime of the device."
+    },
+    "arista.license.v1.PreferredBundleReason": {
+      "type": "string",
+      "enum": [
+        "PREFERRED_BUNDLE_REASON_UNSPECIFIED",
+        "PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH",
+        "PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN",
+        "PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE"
+      ],
+      "default": "PREFERRED_BUNDLE_REASON_UNSPECIFIED",
+      "description": "PreferredBundleReason indicates the reason a license bundle is preferred.\n\n - PREFERRED_BUNDLE_REASON_UNSPECIFIED: PREFERRED_BUNDLE_REASON_UNSPECIFIED indicates an unspecified reason.\n - PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH: PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH indicates a match with the device's sales order.\n - PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN: PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN indicates that the license is preferred over other licenses as it is a perpetual license\n - PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE: PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE indicates a perpetual license\nwith the oldest sales order."
+    },
+    "arista.license.v1.PurchasedLicense": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey",
+          "description": "key uniquely identifies a license."
+        },
+        "assignedDevice": {
+          "type": "string",
+          "description": "assigned_device denotes device serial number to which this\nlicense is associated. Initially assigned_device will be nil,\nit will be updated after device assignment by the user."
+        },
+        "soNumber": {
+          "type": "string",
+          "description": "so_number is the sales order number for the purchased license."
+        },
+        "licenseBundleUuid": {
+          "type": "string",
+          "description": "license_bundle_uuid is a unique id of the license bundle."
+        },
+        "sku": {
+          "type": "string",
+          "title": "sku represents the name of the sku which is combination\nof platform and feature name. Example: LIC-FIX-4-MACSEC"
+        },
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "description": "feature is the name of the feature for which the\nlicense was purchased."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start_time is the time when the license comes into force."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end_time is the time when the license expires."
+        },
+        "planName": {
+          "$ref": "#/definitions/arista.license.v1.PlanName",
+          "description": "plan_name indicates type of license (perpetual/ subscription)."
+        },
+        "originalSubscriptionRecordNumber": {
+          "type": "string",
+          "format": "int64",
+          "description": "original_subscription_record_number is the parent subscription record number."
+        },
+        "originalSalesOrderNumber": {
+          "type": "string",
+          "format": "int64",
+          "description": "original_sales_order_number is the parent sales order number."
+        },
+        "renewalStatus": {
+          "type": "string",
+          "description": "renewal_status is the renewal status of license."
+        },
+        "renewalStatusDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "renewal_status_date is the renewal date of license."
+        },
+        "endCustomerParentAccountId": {
+          "type": "string",
+          "format": "int64",
+          "description": "end_customer_parent_account_id is the parent company ID."
+        },
+        "endCustomerParentAccountName": {
+          "type": "string",
+          "description": "end_customer_parent_account_name is the parent company name."
+        },
+        "platformClass": {
+          "type": "string",
+          "description": "platform_class is the platform class of the license sku."
+        }
+      },
+      "description": "PurchasedLicense is a license record derived from the sales order\ninformation where each order is expanded into individual licenses.\nThese licenses will be uniquely identified with license_uuid.\nNote: This resource is only available in CVaaS."
+    },
+    "arista.license.v1.PurchasedLicenseBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicenseStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.license.v1.PurchasedLicenseKey": {
+      "type": "object",
+      "properties": {
+        "licenseUuid": {
+          "type": "string",
+          "description": "license_uuid is a unique id associated with a license."
+        }
+      },
+      "description": "PurchasedLicenseKey uniquely identifies a license.",
+      "required": [
+        "licenseUuid"
+      ]
+    },
+    "arista.license.v1.PurchasedLicenseResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicense",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nPurchasedLicense instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.PurchasedLicenseSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.license.v1.PurchasedLicenseSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicense",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nPurchasedLicense instance in this response."
+        }
+      }
+    },
+    "arista.license.v1.PurchasedLicenseStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicense"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each PurchasedLicense at end.\n    * Each PurchasedLicense response is fully-specified (all fields set).\n  * start: Returns the state of each PurchasedLicense at start, followed by updates until now.\n    * Each PurchasedLicense response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each PurchasedLicense at start, followed by updates\n    until end.\n    * Each PurchasedLicense response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.license.v1.PurchasedLicenseStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicense",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this PurchasedLicense's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the PurchasedLicense value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.license.v1.RepeatedLicenseBundle": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseBundle"
+          },
+          "description": "values store the details of license bundles."
+        }
+      },
+      "description": "RepeatedLicenseBundle is a wrapper around LicenseBundle."
+    },
+    "arista.license.v1.RepeatedLicenseInfo": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.LicenseInfo"
+          },
+          "description": "values store the details of licenses installed on the devices."
+        }
+      },
+      "description": "RepeatedLicenseInfo is a wrapper around LicenseInfo."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED",
+        "PARTIAL_DELETE"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}

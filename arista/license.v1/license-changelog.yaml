@@ -1,0 +1,72 @@
+# Copyright (c) 2022 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+    - date: 2026-02-13
+      description: Initial release of License.v1 API
+      version: 1.1.0
+
+    - date: 2025-05-06
+      description: Changed platform class to platform classes and added applicable license skus in ApplicableDevices
+      version: 1.0.14
+
+    - date: 2024-08-10
+      description: Added platform class to purchased license
+      version: 1.0.13
+
+    - date: 2024-07-09
+      description: Added ApplicableDevices
+      version: 1.0.12
+
+    - date: 2024-07-08
+      description: changed data type of version in InstallLicense proto
+      version: 1.0.11
+
+    - date: 2024-06-17
+      description: Added LicenseFileRepositoryConfig, InstallLicenseConfig and InstallLicense resources
+      version: 1.0.10
+
+    - date: 2024-06-03
+      description: Added subscription related fields
+      version: 1.0.9
+
+    - date: 2024-01-22
+      description: Added FEATURE_CARAVAN and plan_name field
+      version: 1.0.8
+
+    - date: 2023-07-05
+      description: Added FEATURE_ENCR in Feature enum
+      version: 1.0.7
+
+    - date: 2023-06-05
+      description: Added FEATURE_VEOS in Feature enum
+      version: 1.0.6
+
+    - date: 2023-05-12
+      description: Added DeviceLicenseStatus in LicenseFile message
+      version: 1.0.5
+
+    - date:  2023-02-24
+      description: Add License, LicenseAssignmentConfig, LicenseAssignmentStatus and LicenseSalesOrderStatus resources
+      version: 1.0.4
+
+    - date: 2023-02-21
+      description: Added a new field in LicenseFile message – file_name
+      version: 1.0.3
+
+    - date: 2022-12-26
+      description: Changed the data type of field version from uint32 to string
+      version: 1.0.2
+
+    - date: 2022-12-26
+      description: Renamed field licenseSerial to licenseFileSerial
+      version: 1.0.1
+
+    - date: 2022-11-03
+      description: Initial revision
+      version: 1.0.0
