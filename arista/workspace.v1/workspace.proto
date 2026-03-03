@@ -276,6 +276,30 @@ message InputErrors {
 	repeated InputError values = 1;
 }
 
+// HierarchyErrorCode is an error code related to hierarchy.
+enum HierarchyErrorCode {
+	// HIERARCHY_ERROR_CODE_UNSPECIFIED indicates unspecified hierarchy error code.
+	HIERARCHY_ERROR_CODE_UNSPECIFIED = 0;
+	// HIERARCHY_ERROR_CODE_INPUT_VALIDATION indicates an input validation error
+	// for software image assignments in hierarchy.
+	HIERARCHY_ERROR_CODE_INPUT_VALIDATION = 1;
+}
+
+// HierarchyError holds the details for a hierarchy
+// validation error.
+message HierarchyError {
+	// message is the error message.
+	google.protobuf.StringValue message = 1;
+	// code is the error code of hierarchy error.
+	HierarchyErrorCode code = 2;
+}
+
+// HierarchyErrors is a list of HierarchyError.
+message HierarchyErrors {
+	// values is a list of HierarchyError.
+	repeated HierarchyError values = 1;
+}
+
 // InputWarning holds the details for a warning on a studio input field or value.
 message InputWarning {
 	// field_id is the ID of the input field.
@@ -305,6 +329,8 @@ message InputValidationResult {
 	reserved 4;
 	// input_warnings are warnings for values assigned to fields in the input schema.
 	InputWarnings input_warnings = 5;
+	// hierarchy_errors are errors for hierarchy.
+	HierarchyErrors hierarchy_errors = 6;
 }
 
 // InputValidationResults is a collection of InputValidationResult (one per studio).
