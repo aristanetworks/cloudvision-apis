@@ -1,0 +1,30 @@
+# Copyright (c) 2024 Arista Networks, Inc. All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+# Subject to Arista Networks, Inc.'s EULA.
+# FOR INTERNAL USE ONLY. NOT FOR DISTRIBUTION.
+
+# Add a short description of each model change here.
+# New entries go on top.
+
+Changes:
+
+    - date: 2026-03-05
+      description: Initial release of asset_manager.v1 API
+      version: 1.1.0
+
+    - date: 2026-02-17
+      description: Making shipping date sortable in DeviceTenantAssignment message
+      version: 1.0.3
+
+    - date: 2024-10-01
+      description: Adding customer information in AllowedTenants, update_by_user in
+        DeviceTenantAssignment and platform_class, update_by_user in LicenseTenantAssignment
+      version: 1.0.2
+
+    - date: 2024-09-06
+      description: Adding message for SalesOrderData
+      version: 1.0.1
+
+    - date: 2024-07-19
+      description: Initial revision
+      version: 1.0.0

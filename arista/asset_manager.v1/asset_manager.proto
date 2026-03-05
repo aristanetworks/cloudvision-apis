@@ -1,0 +1,341 @@
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.asset_manager.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/asset_manager.v1;asset_manager";
+
+option java_package = "com.arista.asset_manager.v1";
+option java_outer_classname = "AssetManager";
+option java_multiple_files = true;
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "arista/license.v1/license.proto";
+
+// Source inducates different type of actors that can do asset_manager operations.
+enum Source {
+	// SOURCE_UNSPECIFIED indicates an unknown source
+	SOURCE_UNSPECIFIED = 0;
+	// SOURCE_VENDOR indicates assignment was done by the vendor (Arista).
+	SOURCE_VENDOR = 1;
+	// SOURCE_TAC indidcates assignment was done by Arista TAC.
+	SOURCE_TAC = 2;
+	// SOURCE_CUSTOMER indicates assignment was done directly by customer.
+	SOURCE_CUSTOMER = 3;
+}
+
+// AssetType represent type of assets which can be procurred
+enum AssetType {
+	// ASSET_TYPE_UNSPECIFIED indicates unknown asset type
+	ASSET_TYPE_UNSPECIFIED = 0;
+	// ASSET_TYPE_DEVICES indicate asset type of devices
+	ASSET_TYPE_DEVICES = 1;
+	// ASSET_TYPE_LICENSES indicates asset type of licenses
+	ASSET_TYPE_LICENSES = 2;
+	// ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both
+	// device and license
+	ASSET_TYPE_DEVICES_AND_LICENSES = 3;
+}
+
+// SalesOrderKey uniquely identifies a sales order
+message SalesOrderKey {
+	option (fmp.model_key) = true;
+
+	// sales_order_number is the invoice number of the entire order
+	google.protobuf.Int64Value sales_order_number = 1;
+}
+
+// PurchaseOrder represents unique identifier assigned to an
+// order, either by a business partner or customer
+message PurchaseOrder {
+	// partner_purchase_order represents unique identifier assigned
+	// to a purchase order (PO) by a business partner
+	google.protobuf.StringValue partner_purchase_order = 1;
+	// customer_purchase_order represents unique identifier assigned
+	// to a purchase order (PO) by customer
+	google.protobuf.StringValue customer_purchase_order = 2;
+}
+
+// SalesOrderFilter is used to filter sales orders based
+// on various parameters
+message SalesOrderFilter {
+	// customer_ids represents the customers to which different
+	// assets of a sales order are assigned
+	fmp.RepeatedInt64 customer_ids = 1;
+	// tenant_ids represents the tenants to which different
+	// assets of a sales order are assigned
+	fmp.RepeatedString tenant_ids = 2;
+	// device_serial represents a device which is present in
+	// the given sales order
+	google.protobuf.StringValue device_serial = 3;
+	// device_model corresponds to the model of a device which
+	// is present in the given sales order
+	google.protobuf.StringValue device_model = 4;
+	// feature is the name of the feature for which the
+	// license was purchased
+	arista.license.v1.Feature feature = 5;
+	// asset_type denotes which type of assets are present in a
+	// sales order
+	AssetType asset_type = 6;
+}
+
+// SalesOrder represent sales order information for purchase
+message SalesOrder {
+	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "SalesOrderFilter";
+	// key uniquely identifies a sales order
+	SalesOrderKey key = 1;
+	// last_invoiced_at represents the latest timestamp at which an asset
+	// (a device or a license) in the given sales order was invoiced
+	google.protobuf.Timestamp last_invoiced_at = 2;
+	// customer_names represents the list of customers to which the
+	// assets of the given sales order belong into
+	fmp.RepeatedString customer_names = 3;
+}
+
+// UserInfo contains information about a user within a system.
+message UserInfo {
+	// user_tenant represents the tenant identifier associated
+	// with the user.
+	google.protobuf.StringValue user_tenant = 1;
+	// user_name represents the name of the user.
+	google.protobuf.StringValue user_name = 2;
+}
+
+// DeviceKey uniquely identifies the device
+message DeviceKey {
+	option (fmp.model_key) = true;
+	// device_id uniquely identifies the device via its serial number
+	google.protobuf.StringValue device_id = 1 [(fmp.sortable) = "true"];
+}
+
+// DeviceTenantAssignment represents tenant/customer information for a device
+// This api could also be used to get a list of all devices assigned to a tenant
+// id. Example : get list of devices assigned to a tenant
+// Request :
+//  {
+//    "partial_eq_filter": [
+//       {
+//           "tenant_id" : "Tenant1"
+//       }
+//    ]
+//  }
+// Response :
+//  {
+//    "key" : {
+//      "device_id": "JPA22270020"
+//    },
+//    "model_name": "DCS-7500",
+//    ...
+//  },
+//  {
+//    "key" : {
+//      "device_id": "JPA22270022"
+//    },
+//    "model_name": "DCS-7130",
+//    ...
+//  }
+message DeviceTenantAssignment {
+	option (fmp.model) = "ro";
+	option (fmp.paginated) = true;
+	// key is device serial to uniquely identify a device
+	DeviceKey key = 1;
+	// model_name describes the hardware model of this device.
+	google.protobuf.StringValue model_name = 2 [(fmp.sortable) = "true"];
+	// customer_id uniquely identifies a customer. Customer refers
+	// to the entity (organization or business) that subscribes to
+	// and utilizes CloudVision services. A customer could have
+	// single or multiple tenants tailored to its specific needs,
+	// such as different departments, branches, or subsidiaries.
+	google.protobuf.Int64Value customer_id = 3;
+	// preferred_customer_name is preffered name associated with
+	// customer id. This name is indicative and might differ from
+	// actual customer name
+	google.protobuf.StringValue preferred_customer_name = 4;
+	// tenant_id uniquely identifies a tenant. Tenant represents an
+	// organization within CloudVision dedicated to a specific
+	// segment of the customer's operations.
+	google.protobuf.StringValue tenant_id = 5 [(fmp.sortable) = "true"];
+	// shipping_date is the date on which the order was fulfilled
+	google.protobuf.Timestamp shipping_date = 6 [(fmp.sortable) = "true"];
+	// sales_order_number is the invoice number of the entire order
+	google.protobuf.Int64Value sales_order_number = 7 [(fmp.sortable) = "true"];
+	// source is the source of device data
+	Source source = 8;
+	// updated_by_user represents information of user who performed
+	// last device assignment.
+	UserInfo updated_by_user = 9;
+}
+
+// DeviceTenantAssignConfig describes a device tenant modify request
+message DeviceTenantAssignConfig {
+	option (fmp.model) = "rw";
+	// key uniquely identifies a device
+	DeviceKey key = 1;
+	// source_tenant_id is the existing tenant for a device
+	google.protobuf.StringValue source_tenant_id = 2;
+	// destination_tenant_id is the new tenant for a device
+	google.protobuf.StringValue destination_tenant_id = 3;
+	// metadata is the additional data for request
+	fmp.MapStringString metadata = 4;
+}
+
+// LicenseTenantAssignment represents tenant/customer information for a license
+// This api could also be used to get a list of all licenses assigned to a tenant
+// id. Example : get list of licenses assigned to a tenant
+// Request :
+//  {
+//    "partial_eq_filter": [
+//       {
+//           "tenant_id" : "Tenant1"
+//       }
+//    ]
+//  }
+// Response :
+//  {
+//    "key" : {
+//      "license_uuid": "19898989"
+//    },
+//    "sku": "LIC-FIX-4-MACSEC",
+//    ...
+//  },
+//  {
+//    "key" : {
+//      "license_uuid": "29898989"
+//    },
+//    "sku": "LIC-FIX-4-MACSEC",
+//    ...
+//  }
+message LicenseTenantAssignment {
+	option (fmp.model) = "ro";
+	option (fmp.paginated) = true;
+	// key is used to uniquely identify a license
+	arista.license.v1.PurchasedLicenseKey key = 1 [(fmp.sortable) = "true"];
+	// sku represents the name of the sku which is the combination
+	// of platform and feature name.
+	google.protobuf.StringValue sku = 2 [(fmp.sortable) = "true"];
+	// feature is the name of the feature for which the
+	// license was purchased.
+	arista.license.v1.Feature feature = 3;
+	// invoice_number represent invoice number on which order is paid
+	google.protobuf.Int64Value invoice_number = 4;
+	// invoice_line_number identifies a unique line in case of multiple line in an invoice
+	google.protobuf.StringValue invoice_line_number = 5;
+	// customer_id uniquely identifies a customer. Customer refers
+	// to the entity (organization or business) that subscribes to
+	// and utilizes CloudVision services. A customer could have
+	// single or multiple tenants tailored to its specific needs,
+	// such as different departments, branches, or subsidiaries.
+	google.protobuf.Int64Value customer_id = 6;
+	// preferred_customer_name is preferred name associated with
+	// customer id. This name is indicative and might differ from
+	// actual customer name
+	google.protobuf.StringValue preferred_customer_name = 7;
+	// sales_order_number is integer number for an order
+	google.protobuf.Int64Value sales_order_number = 8 [(fmp.sortable) = "true"];
+	// start_date denotes date from which license validity begins
+	google.protobuf.Timestamp start_date = 9 [(fmp.sortable) = "true"];
+	// end_date indicates the date when the license validity expires
+	google.protobuf.Timestamp end_date = 10 [(fmp.sortable) = "true"];
+	// tenant_id uniquely identifies a tenant. Tenant represents an
+	// organization within CloudVision dedicated to a specific
+	// segment of the customer's operations.
+	google.protobuf.StringValue tenant_id = 11 [(fmp.sortable) = "true"];
+	// platform_class is the platform class of the license.
+	google.protobuf.StringValue platform_class = 12;
+	// updated_by_user represents information of user who performed
+	// last license assignment.
+	UserInfo updated_by_user = 13;
+	// assigned_device represents the device to which the license
+	// is assigned to currently
+	google.protobuf.StringValue assigned_device = 14;
+	// license_bundle_uuid corresponds to the bundle id to which
+	// the license belongs to
+	google.protobuf.StringValue license_bundle_uuid = 15;
+}
+
+// LicenseTenantAssignConfig describes a license tenant modify request
+message LicenseTenantAssignConfig {
+	option (fmp.model) = "rw";
+	// key is used to uniquely identify a license
+	arista.license.v1.PurchasedLicenseKey key = 1;
+	// source_tenant_id is the existing tenant for a license
+	google.protobuf.StringValue source_tenant_id = 2;
+	// destination_tenant_id is the new tenant for a license
+	google.protobuf.StringValue destination_tenant_id = 3;
+	// metadata is the additional data for request
+	fmp.MapStringString metadata = 4;
+}
+
+// TenantKey is used to uniquely identify a tenant
+message TenantKey {
+	option (fmp.model_key) = true;
+	// tenant_id is unique id assigned to every tenant
+	google.protobuf.StringValue tenant_id = 1;
+}
+
+// CustomerInfo represent a specific customer. Customer refers
+// to the entity (organization or business) that subscribes to
+// and utilizes CloudVision services. A customer could have
+// single or multiple tenants tailored to its specific needs,
+// such as different departments, branches, or subsidiaries.
+message CustomerInfo {
+	// customer_id uniquely identifies a customer.
+	google.protobuf.Int64Value customer_id = 1;
+	// customer_name is the name associated with corresponding
+	// customer_id.
+	google.protobuf.StringValue customer_name = 2;
+	// allowed_tenant_ids represents a list of tenant ids
+	// of a single customer eligible for Asset Management.
+	fmp.RepeatedString allowed_tenant_ids = 3;
+}
+
+// AllowedTenants represents a list of authorized
+// customers whose assets (devices/licenses) the tenant key has
+// permission to view or move.
+// Request :
+//  {
+//    "key" : {
+//      "tenant_id": "tenant_1"
+//    }
+//  }
+// Response:
+// {
+// 	"access_type": "ACCESS_TYPE_READ_WRITE",
+// 	"customer_info": {
+// 	  "customer_id": 1234,
+// 	  "customer_name": "customer_id1",
+// 	  "allowed_tenant_ids": [
+// 		"tenant_1",
+// 		"tenant_2",
+// 		"tenant_3"
+// 	  ]
+// 	}
+//  }
+message AllowedTenants {
+	option (fmp.model) = "ro";
+	// key is used to identify a tenant
+	TenantKey key = 1;
+	// customer_info represents a customer whose
+	// assets(devices/licenses)can be managed by key tenant_id.
+	CustomerInfo customer_info = 2;
+	// access_type represents the level of access the tenant has to the customer's assets.
+	AccessType access_type = 3;
+}
+
+// AccessType represents the level of access a tenant has to a customer's assets.
+enum AccessType {
+	// ACCESS_TYPE_UNSPECIFIED indicates an unknown access level.
+	ACCESS_TYPE_UNSPECIFIED = 0;
+	// ACCESS_TYPE_READ indicates read-only access.
+	ACCESS_TYPE_READ = 1;
+	// ACCESS_TYPE_READ_WRITE indicates read and write access.
+	ACCESS_TYPE_READ_WRITE = 2;
+ }

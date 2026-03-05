@@ -1,0 +1,4409 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.asset_manager.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "AllowedTenantsService"
+    },
+    {
+      "name": "DeviceTenantAssignConfigService"
+    },
+    {
+      "name": "DeviceTenantAssignmentService"
+    },
+    {
+      "name": "LicenseTenantAssignConfigService"
+    },
+    {
+      "name": "LicenseTenantAssignmentService"
+    },
+    {
+      "name": "SalesOrderService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/asset_manager/v1/AllowedTenants": {
+      "get": {
+        "operationId": "AllowedTenantsService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.tenantId",
+            "description": "tenant_id is unique id assigned to every tenant",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/AllowedTenants/all": {
+      "get": {
+        "operationId": "AllowedTenantsService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.AllowedTenantsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      },
+      "post": {
+        "operationId": "AllowedTenantsService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.AllowedTenantsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/AllowedTenants/getsome": {
+      "post": {
+        "operationId": "AllowedTenantsService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.AllowedTenantsSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/AllowedTenants/metadata": {
+      "get": {
+        "operationId": "AllowedTenantsService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      },
+      "post": {
+        "operationId": "AllowedTenantsService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/AllowedTenants/watch": {
+      "get": {
+        "operationId": "AllowedTenantsService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.AllowedTenantsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      },
+      "post": {
+        "operationId": "AllowedTenantsService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.AllowedTenantsStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/AllowedTenants/watchmetadata": {
+      "get": {
+        "operationId": "AllowedTenantsService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      },
+      "post": {
+        "operationId": "AllowedTenantsService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AllowedTenantsService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig": {
+      "get": {
+        "operationId": "DeviceTenantAssignConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id uniquely identifies the device via its serial number",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceTenantAssignConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id uniquely identifies the device via its serial number",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "DeviceTenantAssignConfig carries the value to set into the datastore.\nSee the documentation on the DeviceTenantAssignConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/all": {
+      "get": {
+        "operationId": "DeviceTenantAssignConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeviceTenantAssignConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/deletesome": {
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/getsome": {
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/metadata": {
+      "get": {
+        "operationId": "DeviceTenantAssignConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/some": {
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/watch": {
+      "get": {
+        "operationId": "DeviceTenantAssignConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignConfig/watchmetadata": {
+      "get": {
+        "operationId": "DeviceTenantAssignConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment": {
+      "get": {
+        "operationId": "DeviceTenantAssignmentService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.deviceId",
+            "description": "device_id uniquely identifies the device via its serial number",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment/all": {
+      "get": {
+        "operationId": "DeviceTenantAssignmentService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignmentService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment/getsome": {
+      "post": {
+        "operationId": "DeviceTenantAssignmentService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignmentSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment/metadata": {
+      "get": {
+        "operationId": "DeviceTenantAssignmentService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignmentService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment/watch": {
+      "get": {
+        "operationId": "DeviceTenantAssignmentService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignmentService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/DeviceTenantAssignment/watchmetadata": {
+      "get": {
+        "operationId": "DeviceTenantAssignmentService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "DeviceTenantAssignmentService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig": {
+      "get": {
+        "operationId": "LicenseTenantAssignConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseUuid",
+            "description": "license_uuid is a unique id associated with a license.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseTenantAssignConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseUuid",
+            "description": "license_uuid is a unique id associated with a license.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "LicenseTenantAssignConfig carries the value to set into the datastore.\nSee the documentation on the LicenseTenantAssignConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/all": {
+      "get": {
+        "operationId": "LicenseTenantAssignConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LicenseTenantAssignConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/deletesome": {
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/getsome": {
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/metadata": {
+      "get": {
+        "operationId": "LicenseTenantAssignConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/some": {
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/watch": {
+      "get": {
+        "operationId": "LicenseTenantAssignConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignConfig/watchmetadata": {
+      "get": {
+        "operationId": "LicenseTenantAssignConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignConfigService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment": {
+      "get": {
+        "operationId": "LicenseTenantAssignmentService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.licenseUuid",
+            "description": "license_uuid is a unique id associated with a license.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment/all": {
+      "get": {
+        "operationId": "LicenseTenantAssignmentService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignmentService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment/getsome": {
+      "post": {
+        "operationId": "LicenseTenantAssignmentService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignmentSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment/metadata": {
+      "get": {
+        "operationId": "LicenseTenantAssignmentService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignmentService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment/watch": {
+      "get": {
+        "operationId": "LicenseTenantAssignmentService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignmentService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/LicenseTenantAssignment/watchmetadata": {
+      "get": {
+        "operationId": "LicenseTenantAssignmentService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      },
+      "post": {
+        "operationId": "LicenseTenantAssignmentService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LicenseTenantAssignmentService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder": {
+      "get": {
+        "operationId": "SalesOrderService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.salesOrderNumber",
+            "description": "sales_order_number is the invoice number of the entire order",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder/all": {
+      "get": {
+        "operationId": "SalesOrderService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.SalesOrderStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.customerIds.values",
+            "description": "The repeated int64 values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.tenantIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.deviceSerial",
+            "description": "device_serial represents a device which is present in\nthe given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.deviceModel",
+            "description": "device_model corresponds to the model of a device which\nis present in the given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.feature",
+            "description": "feature is the name of the feature for which the\nlicense was purchased\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.assetType",
+            "description": "asset_type denotes which type of assets are present in a\nsales order\n\n - ASSET_TYPE_UNSPECIFIED: ASSET_TYPE_UNSPECIFIED indicates unknown asset type\n - ASSET_TYPE_DEVICES: ASSET_TYPE_DEVICES indicate asset type of devices\n - ASSET_TYPE_LICENSES: ASSET_TYPE_LICENSES indicates asset type of licenses\n - ASSET_TYPE_DEVICES_AND_LICENSES: ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both\ndevice and license",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASSET_TYPE_UNSPECIFIED",
+              "ASSET_TYPE_DEVICES",
+              "ASSET_TYPE_LICENSES",
+              "ASSET_TYPE_DEVICES_AND_LICENSES"
+            ],
+            "default": "ASSET_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      },
+      "post": {
+        "operationId": "SalesOrderService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.SalesOrderStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder/getsome": {
+      "post": {
+        "operationId": "SalesOrderService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.SalesOrderSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder/metadata": {
+      "get": {
+        "operationId": "SalesOrderService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.customerIds.values",
+            "description": "The repeated int64 values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.tenantIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.deviceSerial",
+            "description": "device_serial represents a device which is present in\nthe given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.deviceModel",
+            "description": "device_model corresponds to the model of a device which\nis present in the given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.feature",
+            "description": "feature is the name of the feature for which the\nlicense was purchased\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.assetType",
+            "description": "asset_type denotes which type of assets are present in a\nsales order\n\n - ASSET_TYPE_UNSPECIFIED: ASSET_TYPE_UNSPECIFIED indicates unknown asset type\n - ASSET_TYPE_DEVICES: ASSET_TYPE_DEVICES indicate asset type of devices\n - ASSET_TYPE_LICENSES: ASSET_TYPE_LICENSES indicates asset type of licenses\n - ASSET_TYPE_DEVICES_AND_LICENSES: ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both\ndevice and license",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASSET_TYPE_UNSPECIFIED",
+              "ASSET_TYPE_DEVICES",
+              "ASSET_TYPE_LICENSES",
+              "ASSET_TYPE_DEVICES_AND_LICENSES"
+            ],
+            "default": "ASSET_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      },
+      "post": {
+        "operationId": "SalesOrderService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder/watch": {
+      "get": {
+        "operationId": "SalesOrderService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.SalesOrderStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.customerIds.values",
+            "description": "The repeated int64 values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.tenantIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.deviceSerial",
+            "description": "device_serial represents a device which is present in\nthe given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.deviceModel",
+            "description": "device_model corresponds to the model of a device which\nis present in the given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.feature",
+            "description": "feature is the name of the feature for which the\nlicense was purchased\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.assetType",
+            "description": "asset_type denotes which type of assets are present in a\nsales order\n\n - ASSET_TYPE_UNSPECIFIED: ASSET_TYPE_UNSPECIFIED indicates unknown asset type\n - ASSET_TYPE_DEVICES: ASSET_TYPE_DEVICES indicate asset type of devices\n - ASSET_TYPE_LICENSES: ASSET_TYPE_LICENSES indicates asset type of licenses\n - ASSET_TYPE_DEVICES_AND_LICENSES: ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both\ndevice and license",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASSET_TYPE_UNSPECIFIED",
+              "ASSET_TYPE_DEVICES",
+              "ASSET_TYPE_LICENSES",
+              "ASSET_TYPE_DEVICES_AND_LICENSES"
+            ],
+            "default": "ASSET_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      },
+      "post": {
+        "operationId": "SalesOrderService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.SalesOrderStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    },
+    "/api/resources/asset_manager/v1/SalesOrder/watchmetadata": {
+      "get": {
+        "operationId": "SalesOrderService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.customerIds.values",
+            "description": "The repeated int64 values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.tenantIds.values",
+            "description": "The repeated string values.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.deviceSerial",
+            "description": "device_serial represents a device which is present in\nthe given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.deviceModel",
+            "description": "device_model corresponds to the model of a device which\nis present in the given sales order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.feature",
+            "description": "feature is the name of the feature for which the\nlicense was purchased\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FEATURE_UNSPECIFIED",
+              "FEATURE_IPSEC",
+              "FEATURE_MACSEC",
+              "FEATURE_ENCR",
+              "FEATURE_CLOUDEOS",
+              "FEATURE_CVPATHFINDER"
+            ],
+            "default": "FEATURE_UNSPECIFIED"
+          },
+          {
+            "name": "filter.assetType",
+            "description": "asset_type denotes which type of assets are present in a\nsales order\n\n - ASSET_TYPE_UNSPECIFIED: ASSET_TYPE_UNSPECIFIED indicates unknown asset type\n - ASSET_TYPE_DEVICES: ASSET_TYPE_DEVICES indicate asset type of devices\n - ASSET_TYPE_LICENSES: ASSET_TYPE_LICENSES indicates asset type of licenses\n - ASSET_TYPE_DEVICES_AND_LICENSES: ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both\ndevice and license",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASSET_TYPE_UNSPECIFIED",
+              "ASSET_TYPE_DEVICES",
+              "ASSET_TYPE_LICENSES",
+              "ASSET_TYPE_DEVICES_AND_LICENSES"
+            ],
+            "default": "ASSET_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      },
+      "post": {
+        "operationId": "SalesOrderService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.asset_manager.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.asset_manager.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SalesOrderService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.asset_manager.v1.AccessType": {
+      "type": "string",
+      "enum": [
+        "ACCESS_TYPE_UNSPECIFIED",
+        "ACCESS_TYPE_READ",
+        "ACCESS_TYPE_READ_WRITE"
+      ],
+      "default": "ACCESS_TYPE_UNSPECIFIED",
+      "description": "AccessType represents the level of access a tenant has to a customer's assets.\n\n - ACCESS_TYPE_UNSPECIFIED: ACCESS_TYPE_UNSPECIFIED indicates an unknown access level.\n - ACCESS_TYPE_READ: ACCESS_TYPE_READ indicates read-only access.\n - ACCESS_TYPE_READ_WRITE: ACCESS_TYPE_READ_WRITE indicates read and write access."
+    },
+    "arista.asset_manager.v1.AllowedTenants": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.TenantKey",
+          "title": "key is used to identify a tenant"
+        },
+        "customerInfo": {
+          "$ref": "#/definitions/arista.asset_manager.v1.CustomerInfo",
+          "description": "customer_info represents a customer whose\nassets(devices/licenses)can be managed by key tenant_id."
+        },
+        "accessType": {
+          "$ref": "#/definitions/arista.asset_manager.v1.AccessType",
+          "description": "access_type represents the level of access the tenant has to the customer's assets."
+        }
+      },
+      "title": "AllowedTenants represents a list of authorized\ncustomers whose assets (devices/licenses) the tenant key has\npermission to view or move.\nRequest :\n {\n   \"key\" : {\n     \"tenant_id\": \"tenant_1\"\n   }\n }\nResponse:\n{\n\t\"access_type\": \"ACCESS_TYPE_READ_WRITE\",\n\t\"customer_info\": {\n\t  \"customer_id\": 1234,\n\t  \"customer_name\": \"customer_id1\",\n\t  \"allowed_tenant_ids\": [\n\t\t\"tenant_1\",\n\t\t\"tenant_2\",\n\t\t\"tenant_3\"\n\t  ]\n\t}\n }"
+    },
+    "arista.asset_manager.v1.AllowedTenantsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AllowedTenantsResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenants",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAllowedTenants instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AllowedTenantsSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.TenantKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AllowedTenantsSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenants",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAllowedTenants instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AllowedTenantsStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenants"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AllowedTenants at end.\n    * Each AllowedTenants response is fully-specified (all fields set).\n  * start: Returns the state of each AllowedTenants at start, followed by updates until now.\n    * Each AllowedTenants response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AllowedTenants at start, followed by updates\n    until end.\n    * Each AllowedTenants response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AllowedTenantsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenants",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this AllowedTenants's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the AllowedTenants value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.AssetType": {
+      "type": "string",
+      "enum": [
+        "ASSET_TYPE_UNSPECIFIED",
+        "ASSET_TYPE_DEVICES",
+        "ASSET_TYPE_LICENSES",
+        "ASSET_TYPE_DEVICES_AND_LICENSES"
+      ],
+      "default": "ASSET_TYPE_UNSPECIFIED",
+      "description": "- ASSET_TYPE_UNSPECIFIED: ASSET_TYPE_UNSPECIFIED indicates unknown asset type\n - ASSET_TYPE_DEVICES: ASSET_TYPE_DEVICES indicate asset type of devices\n - ASSET_TYPE_LICENSES: ASSET_TYPE_LICENSES indicates asset type of licenses\n - ASSET_TYPE_DEVICES_AND_LICENSES: ASSET_TYPE_DEVICES_AND_LICENSES indicates asset type for both\ndevice and license",
+      "title": "AssetType represent type of assets which can be procurred"
+    },
+    "arista.asset_manager.v1.CustomerInfo": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "format": "int64",
+          "description": "customer_id uniquely identifies a customer."
+        },
+        "customerName": {
+          "type": "string",
+          "description": "customer_name is the name associated with corresponding\ncustomer_id."
+        },
+        "allowedTenantIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "allowed_tenant_ids represents a list of tenant ids\nof a single customer eligible for Asset Management."
+        }
+      },
+      "description": "CustomerInfo represent a specific customer. Customer refers\nto the entity (organization or business) that subscribes to\nand utilizes CloudVision services. A customer could have\nsingle or multiple tenants tailored to its specific needs,\nsuch as different departments, branches, or subsidiaries."
+    },
+    "arista.asset_manager.v1.DeviceKey": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "title": "device_id uniquely identifies the device via its serial number"
+        }
+      },
+      "title": "DeviceKey uniquely identifies the device",
+      "required": [
+        "deviceId"
+      ]
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey",
+          "title": "key uniquely identifies a device"
+        },
+        "sourceTenantId": {
+          "type": "string",
+          "title": "source_tenant_id is the existing tenant for a device"
+        },
+        "destinationTenantId": {
+          "type": "string",
+          "title": "destination_tenant_id is the new tenant for a device"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "title": "metadata is the additional data for request"
+        }
+      },
+      "title": "DeviceTenantAssignConfig describes a device tenant modify request"
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey",
+          "description": "This is the key of the DeviceTenantAssignConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey",
+          "description": "Key echoes back the key of the deleted DeviceTenantAssignConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey"
+          },
+          "title": "key contains a list of DeviceTenantAssignConfig keys to delete"
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "DeviceTenantAssignConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceTenantAssignConfig instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig",
+          "description": "Value carries all the values given in the DeviceTenantAssignConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig"
+          },
+          "description": "value contains a list of DeviceTenantAssignConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceTenantAssignConfig instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceTenantAssignConfig at end.\n    * Each DeviceTenantAssignConfig response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceTenantAssignConfig at start, followed by updates until now.\n    * Each DeviceTenantAssignConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceTenantAssignConfig at start, followed by updates\n    until end.\n    * Each DeviceTenantAssignConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceTenantAssignConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceTenantAssignConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey",
+          "title": "key is device serial to uniquely identify a device"
+        },
+        "modelName": {
+          "type": "string",
+          "description": "model_name describes the hardware model of this device."
+        },
+        "customerId": {
+          "type": "string",
+          "format": "int64",
+          "description": "customer_id uniquely identifies a customer. Customer refers\nto the entity (organization or business) that subscribes to\nand utilizes CloudVision services. A customer could have\nsingle or multiple tenants tailored to its specific needs,\nsuch as different departments, branches, or subsidiaries."
+        },
+        "preferredCustomerName": {
+          "type": "string",
+          "title": "preferred_customer_name is preffered name associated with\ncustomer id. This name is indicative and might differ from\nactual customer name"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenant_id uniquely identifies a tenant. Tenant represents an\norganization within CloudVision dedicated to a specific\nsegment of the customer's operations."
+        },
+        "shippingDate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "shipping_date is the date on which the order was fulfilled"
+        },
+        "salesOrderNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "sales_order_number is the invoice number of the entire order"
+        },
+        "source": {
+          "$ref": "#/definitions/arista.asset_manager.v1.Source",
+          "title": "source is the source of device data"
+        },
+        "updatedByUser": {
+          "$ref": "#/definitions/arista.asset_manager.v1.UserInfo",
+          "description": "updated_by_user represents information of user who performed\nlast device assignment."
+        }
+      },
+      "title": "DeviceTenantAssignment represents tenant/customer information for a device\nThis api could also be used to get a list of all devices assigned to a tenant\nid. Example : get list of devices assigned to a tenant\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270020\"\n   },\n   \"model_name\": \"DCS-7500\",\n   ...\n },\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270022\"\n   },\n   \"model_name\": \"DCS-7130\",\n   ...\n }"
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceTenantAssignment instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceTenantAssignment instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentSortableField": {
+      "type": "string",
+      "enum": [
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED",
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_KEY_DEVICE_ID",
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_MODEL_NAME",
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_TENANT_ID",
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SHIPPING_DATE",
+        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SALES_ORDER_NUMBER"
+      ],
+      "default": "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED"
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignment"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each DeviceTenantAssignment at end.\n    * Each DeviceTenantAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each DeviceTenantAssignment at start, followed by updates until now.\n    * Each DeviceTenantAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each DeviceTenantAssignment at start, followed by updates\n    until end.\n    * Each DeviceTenantAssignment response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignment",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this DeviceTenantAssignment's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the DeviceTenantAssignment value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey",
+          "title": "key is used to uniquely identify a license"
+        },
+        "sourceTenantId": {
+          "type": "string",
+          "title": "source_tenant_id is the existing tenant for a license"
+        },
+        "destinationTenantId": {
+          "type": "string",
+          "title": "destination_tenant_id is the new tenant for a license"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "title": "metadata is the additional data for request"
+        }
+      },
+      "title": "LicenseTenantAssignConfig describes a license tenant modify request"
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey",
+          "description": "This is the key of the LicenseTenantAssignConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey",
+          "description": "Key echoes back the key of the deleted LicenseTenantAssignConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+          },
+          "title": "key contains a list of LicenseTenantAssignConfig keys to delete"
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "LicenseTenantAssignConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseTenantAssignConfig instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig",
+          "description": "Value carries all the values given in the LicenseTenantAssignConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig"
+          },
+          "description": "value contains a list of LicenseTenantAssignConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseTenantAssignConfig instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseTenantAssignConfig at end.\n    * Each LicenseTenantAssignConfig response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseTenantAssignConfig at start, followed by updates until now.\n    * Each LicenseTenantAssignConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseTenantAssignConfig at start, followed by updates\n    until end.\n    * Each LicenseTenantAssignConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseTenantAssignConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseTenantAssignConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey",
+          "title": "key is used to uniquely identify a license"
+        },
+        "sku": {
+          "type": "string",
+          "description": "sku represents the name of the sku which is the combination\nof platform and feature name."
+        },
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "description": "feature is the name of the feature for which the\nlicense was purchased."
+        },
+        "invoiceNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "invoice_number represent invoice number on which order is paid"
+        },
+        "invoiceLineNumber": {
+          "type": "string",
+          "title": "invoice_line_number identifies a unique line in case of multiple line in an invoice"
+        },
+        "customerId": {
+          "type": "string",
+          "format": "int64",
+          "description": "customer_id uniquely identifies a customer. Customer refers\nto the entity (organization or business) that subscribes to\nand utilizes CloudVision services. A customer could have\nsingle or multiple tenants tailored to its specific needs,\nsuch as different departments, branches, or subsidiaries."
+        },
+        "preferredCustomerName": {
+          "type": "string",
+          "title": "preferred_customer_name is preferred name associated with\ncustomer id. This name is indicative and might differ from\nactual customer name"
+        },
+        "salesOrderNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "sales_order_number is integer number for an order"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start_date denotes date from which license validity begins"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end_date indicates the date when the license validity expires"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenant_id uniquely identifies a tenant. Tenant represents an\norganization within CloudVision dedicated to a specific\nsegment of the customer's operations."
+        },
+        "platformClass": {
+          "type": "string",
+          "description": "platform_class is the platform class of the license."
+        },
+        "updatedByUser": {
+          "$ref": "#/definitions/arista.asset_manager.v1.UserInfo",
+          "description": "updated_by_user represents information of user who performed\nlast license assignment."
+        },
+        "assignedDevice": {
+          "type": "string",
+          "title": "assigned_device represents the device to which the license\nis assigned to currently"
+        },
+        "licenseBundleUuid": {
+          "type": "string",
+          "title": "license_bundle_uuid corresponds to the bundle id to which\nthe license belongs to"
+        }
+      },
+      "title": "LicenseTenantAssignment represents tenant/customer information for a license\nThis api could also be used to get a list of all licenses assigned to a tenant\nid. Example : get list of licenses assigned to a tenant\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"license_uuid\": \"19898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n },\n {\n   \"key\" : {\n     \"license_uuid\": \"29898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n }"
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseTenantAssignment instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.license.v1.PurchasedLicenseKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignment",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseTenantAssignment instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentSortableField": {
+      "type": "string",
+      "enum": [
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED",
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SKU",
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SALES_ORDER_NUMBER",
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_START_DATE",
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_END_DATE",
+        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_TENANT_ID"
+      ],
+      "default": "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED"
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignment"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LicenseTenantAssignment at end.\n    * Each LicenseTenantAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each LicenseTenantAssignment at start, followed by updates until now.\n    * Each LicenseTenantAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LicenseTenantAssignment at start, followed by updates\n    until end.\n    * Each LicenseTenantAssignment response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignment",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LicenseTenantAssignment's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LicenseTenantAssignment value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrder": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderKey",
+          "title": "key uniquely identifies a sales order"
+        },
+        "lastInvoicedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last_invoiced_at represents the latest timestamp at which an asset\n(a device or a license) in the given sales order was invoiced"
+        },
+        "customerNames": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "customer_names represents the list of customers to which the\nassets of the given sales order belong into"
+        }
+      },
+      "title": "SalesOrder represent sales order information for purchase"
+    },
+    "arista.asset_manager.v1.SalesOrderBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrderFilter": {
+      "type": "object",
+      "properties": {
+        "customerIds": {
+          "$ref": "#/definitions/fmp.RepeatedInt64",
+          "title": "customer_ids represents the customers to which different\nassets of a sales order are assigned"
+        },
+        "tenantIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "title": "tenant_ids represents the tenants to which different\nassets of a sales order are assigned"
+        },
+        "deviceSerial": {
+          "type": "string",
+          "title": "device_serial represents a device which is present in\nthe given sales order"
+        },
+        "deviceModel": {
+          "type": "string",
+          "title": "device_model corresponds to the model of a device which\nis present in the given sales order"
+        },
+        "feature": {
+          "$ref": "#/definitions/arista.license.v1.Feature",
+          "title": "feature is the name of the feature for which the\nlicense was purchased"
+        },
+        "assetType": {
+          "$ref": "#/definitions/arista.asset_manager.v1.AssetType",
+          "title": "asset_type denotes which type of assets are present in a\nsales order"
+        }
+      },
+      "title": "SalesOrderFilter is used to filter sales orders based\non various parameters"
+    },
+    "arista.asset_manager.v1.SalesOrderKey": {
+      "type": "object",
+      "properties": {
+        "salesOrderNumber": {
+          "type": "string",
+          "format": "int64",
+          "title": "sales_order_number is the invoice number of the entire order"
+        }
+      },
+      "title": "SalesOrderKey uniquely identifies a sales order",
+      "required": [
+        "salesOrderNumber"
+      ]
+    },
+    "arista.asset_manager.v1.SalesOrderResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.SalesOrder",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSalesOrder instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrderSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrderSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.SalesOrder",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nSalesOrder instance in this response."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrderStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.asset_manager.v1.SalesOrder"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "filter": {
+          "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderFilter",
+          "description": "For each SalesOrder in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given SalesOrder is streamed to the user."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each SalesOrder at end.\n    * Each SalesOrder response is fully-specified (all fields set).\n  * start: Returns the state of each SalesOrder at start, followed by updates until now.\n    * Each SalesOrder response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each SalesOrder at start, followed by updates\n    until end.\n    * Each SalesOrder response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.asset_manager.v1.SalesOrderStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.asset_manager.v1.SalesOrder",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this SalesOrder's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the SalesOrder value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.asset_manager.v1.Source": {
+      "type": "string",
+      "enum": [
+        "SOURCE_UNSPECIFIED",
+        "SOURCE_VENDOR",
+        "SOURCE_TAC",
+        "SOURCE_CUSTOMER"
+      ],
+      "default": "SOURCE_UNSPECIFIED",
+      "description": "Source inducates different type of actors that can do asset_manager operations.\n\n - SOURCE_UNSPECIFIED: SOURCE_UNSPECIFIED indicates an unknown source\n - SOURCE_VENDOR: SOURCE_VENDOR indicates assignment was done by the vendor (Arista).\n - SOURCE_TAC: SOURCE_TAC indidcates assignment was done by Arista TAC.\n - SOURCE_CUSTOMER: SOURCE_CUSTOMER indicates assignment was done directly by customer."
+    },
+    "arista.asset_manager.v1.TenantKey": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "title": "tenant_id is unique id assigned to every tenant"
+        }
+      },
+      "title": "TenantKey is used to uniquely identify a tenant",
+      "required": [
+        "tenantId"
+      ]
+    },
+    "arista.asset_manager.v1.UserInfo": {
+      "type": "object",
+      "properties": {
+        "userTenant": {
+          "type": "string",
+          "description": "user_tenant represents the tenant identifier associated\nwith the user."
+        },
+        "userName": {
+          "type": "string",
+          "description": "user_name represents the name of the user."
+        }
+      },
+      "description": "UserInfo contains information about a user within a system."
+    },
+    "arista.license.v1.Feature": {
+      "type": "string",
+      "enum": [
+        "FEATURE_UNSPECIFIED",
+        "FEATURE_IPSEC",
+        "FEATURE_MACSEC",
+        "FEATURE_ENCR",
+        "FEATURE_CLOUDEOS",
+        "FEATURE_CVPATHFINDER"
+      ],
+      "default": "FEATURE_UNSPECIFIED",
+      "description": "Feature is the name of the feature for which the\nlicense was purchased.\n\n - FEATURE_UNSPECIFIED: FEATURE_UNSPECIFIED refers to\nunspecified license feature.\n - FEATURE_IPSEC: FEATURE_IPSEC refers to the feature IPSEC.\n - FEATURE_MACSEC: FEATURE_MACSEC refers to the feature MACSEC.\n - FEATURE_ENCR: FEATURE_ENCR refers to the encryption.\n - FEATURE_CLOUDEOS: FEATURE_CLOUDEOS refers to the feature CLOUDEOS.\n - FEATURE_CVPATHFINDER: FEATURE_CVPATHFINDER refers to the feature CVPATHFINDER."
+    },
+    "arista.license.v1.PurchasedLicenseKey": {
+      "type": "object",
+      "properties": {
+        "licenseUuid": {
+          "type": "string",
+          "description": "license_uuid is a unique id associated with a license."
+        }
+      },
+      "description": "PurchasedLicenseKey uniquely identifies a license."
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED",
+        "PARTIAL_DELETE"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.MapStringString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The map\u003cstring, string\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, string\u003e`."
+    },
+    "fmp.RepeatedInt64": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "The repeated int64 values."
+        }
+      },
+      "description": "Wrapper message for `repeated int64`."
+    },
+    "fmp.RepeatedString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The repeated string values."
+        }
+      },
+      "description": "Wrapper message for `repeated string`."
+    },
+    "fmp.SortDirection": {
+      "type": "string",
+      "enum": [
+        "SORT_DIRECTION_UNSPECIFIED",
+        "SORT_DIRECTION_ASCENDING",
+        "SORT_DIRECTION_DESCENDING"
+      ],
+      "default": "SORT_DIRECTION_UNSPECIFIED",
+      "description": "SortDirection is an enum of possible values for direction of sorting.\n\n - SORT_DIRECTION_UNSPECIFIED: SORT_DIRECTION_UNSPECIFIED means that no sort direction specified.\n - SORT_DIRECTION_ASCENDING: SORT_DIRECTION_ASCENDING sorts in ascending order.\n - SORT_DIRECTION_DESCENDING: SORT_DIRECTION_DESCENDING sorts in descending order."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
