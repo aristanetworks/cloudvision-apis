@@ -3113,20 +3113,7 @@
           "description": "access_type represents the level of access the tenant has to the customer's assets."
         }
       },
-      "title": "AllowedTenants represents a list of authorized\ncustomers whose assets (devices/licenses) the tenant key has\npermission to view or move.\nRequest :\n {\n   \"key\" : {\n     \"tenant_id\": \"tenant_1\"\n   }\n }\nResponse:\n{\n\t\"access_type\": \"ACCESS_TYPE_READ_WRITE\",\n\t\"customer_info\": {\n\t  \"customer_id\": 1234,\n\t  \"customer_name\": \"customer_id1\",\n\t  \"allowed_tenant_ids\": [\n\t\t\"tenant_1\",\n\t\t\"tenant_2\",\n\t\t\"tenant_3\"\n\t  ]\n\t}\n }"
-    },
-    "arista.asset_manager.v1.AllowedTenantsBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.AllowedTenantsStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
+      "title": "AllowedTenants represents a list of authorized\ncustomers whose assets (devices/licenses) the tenant key has\npermission to view or move.\n```\nRequest :\n {\n   \"key\" : {\n     \"tenant_id\": \"tenant_1\"\n   }\n }\nResponse:\n{\n\t\"access_type\": \"ACCESS_TYPE_READ_WRITE\",\n\t\"customer_info\": {\n\t  \"customer_id\": 1234,\n\t  \"customer_name\": \"customer_id1\",\n\t  \"allowed_tenant_ids\": [\n\t\t\"tenant_1\",\n\t\t\"tenant_2\",\n\t\t\"tenant_3\"\n\t  ]\n\t}\n}\n```"
     },
     "arista.asset_manager.v1.AllowedTenantsResponse": {
       "type": "object",
@@ -3277,19 +3264,6 @@
         }
       },
       "title": "DeviceTenantAssignConfig describes a device tenant modify request"
-    },
-    "arista.asset_manager.v1.DeviceTenantAssignConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.asset_manager.v1.DeviceTenantAssignConfigDeleteAllResponse": {
       "type": "object",
@@ -3519,20 +3493,7 @@
           "description": "updated_by_user represents information of user who performed\nlast device assignment."
         }
       },
-      "title": "DeviceTenantAssignment represents tenant/customer information for a device\nThis api could also be used to get a list of all devices assigned to a tenant\nid. Example : get list of devices assigned to a tenant\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270020\"\n   },\n   \"model_name\": \"DCS-7500\",\n   ...\n },\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270022\"\n   },\n   \"model_name\": \"DCS-7130\",\n   ...\n }"
-    },
-    "arista.asset_manager.v1.DeviceTenantAssignmentBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.DeviceTenantAssignmentStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
+      "title": "DeviceTenantAssignment represents tenant/customer information for a device\nThis api could also be used to get a list of all devices assigned to a tenant\nid. Example : get list of devices assigned to a tenant\n```\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270020\"\n   },\n   \"model_name\": \"DCS-7500\",\n   ...\n },\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270022\"\n   },\n   \"model_name\": \"DCS-7130\",\n   ...\n }\n```"
     },
     "arista.asset_manager.v1.DeviceTenantAssignmentResponse": {
       "type": "object",
@@ -3582,18 +3543,6 @@
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nDeviceTenantAssignment instance in this response."
         }
       }
-    },
-    "arista.asset_manager.v1.DeviceTenantAssignmentSortableField": {
-      "type": "string",
-      "enum": [
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED",
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_KEY_DEVICE_ID",
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_MODEL_NAME",
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_TENANT_ID",
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SHIPPING_DATE",
-        "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SALES_ORDER_NUMBER"
-      ],
-      "default": "DEVICE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED"
     },
     "arista.asset_manager.v1.DeviceTenantAssignmentStreamRequest": {
       "type": "object",
@@ -3651,19 +3600,6 @@
         }
       },
       "title": "LicenseTenantAssignConfig describes a license tenant modify request"
-    },
-    "arista.asset_manager.v1.LicenseTenantAssignConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.asset_manager.v1.LicenseTenantAssignConfigDeleteAllResponse": {
       "type": "object",
@@ -3919,20 +3855,7 @@
           "title": "license_bundle_uuid corresponds to the bundle id to which\nthe license belongs to"
         }
       },
-      "title": "LicenseTenantAssignment represents tenant/customer information for a license\nThis api could also be used to get a list of all licenses assigned to a tenant\nid. Example : get list of licenses assigned to a tenant\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"license_uuid\": \"19898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n },\n {\n   \"key\" : {\n     \"license_uuid\": \"29898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n }"
-    },
-    "arista.asset_manager.v1.LicenseTenantAssignmentBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.LicenseTenantAssignmentStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
+      "title": "LicenseTenantAssignment represents tenant/customer information for a license\nThis api could also be used to get a list of all licenses assigned to a tenant\nid. Example : get list of licenses assigned to a tenant\n```\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"license_uuid\": \"19898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n },\n {\n   \"key\" : {\n     \"license_uuid\": \"29898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n }\n```"
     },
     "arista.asset_manager.v1.LicenseTenantAssignmentResponse": {
       "type": "object",
@@ -3982,18 +3905,6 @@
           "description": "Time carries the (UTC) timestamp of the last-modification of the\nLicenseTenantAssignment instance in this response."
         }
       }
-    },
-    "arista.asset_manager.v1.LicenseTenantAssignmentSortableField": {
-      "type": "string",
-      "enum": [
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED",
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SKU",
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_SALES_ORDER_NUMBER",
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_START_DATE",
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_END_DATE",
-        "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_TENANT_ID"
-      ],
-      "default": "LICENSE_TENANT_ASSIGNMENT_SORTABLE_FIELD_UNSPECIFIED"
     },
     "arista.asset_manager.v1.LicenseTenantAssignmentStreamRequest": {
       "type": "object",
@@ -4067,19 +3978,6 @@
         }
       },
       "title": "SalesOrder represent sales order information for purchase"
-    },
-    "arista.asset_manager.v1.SalesOrderBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.asset_manager.v1.SalesOrderStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.asset_manager.v1.SalesOrderFilter": {
       "type": "object",
@@ -4350,16 +4248,6 @@
         }
       },
       "description": "Wrapper message for `repeated string`."
-    },
-    "fmp.SortDirection": {
-      "type": "string",
-      "enum": [
-        "SORT_DIRECTION_UNSPECIFIED",
-        "SORT_DIRECTION_ASCENDING",
-        "SORT_DIRECTION_DESCENDING"
-      ],
-      "default": "SORT_DIRECTION_UNSPECIFIED",
-      "description": "SortDirection is an enum of possible values for direction of sorting.\n\n - SORT_DIRECTION_UNSPECIFIED: SORT_DIRECTION_UNSPECIFIED means that no sort direction specified.\n - SORT_DIRECTION_ASCENDING: SORT_DIRECTION_ASCENDING sorts in ascending order.\n - SORT_DIRECTION_DESCENDING: SORT_DIRECTION_DESCENDING sorts in descending order."
     },
     "google.protobuf.Any": {
       "type": "object",

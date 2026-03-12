@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-03-12
+      description: Update message description format
+      version: 1.1.1
 
     - date: 2026-03-05
       description: Initial release of asset_manager.v1 API

@@ -119,6 +119,7 @@ message DeviceKey {
 // DeviceTenantAssignment represents tenant/customer information for a device
 // This api could also be used to get a list of all devices assigned to a tenant
 // id. Example : get list of devices assigned to a tenant
+// ```
 // Request :
 //  {
 //    "partial_eq_filter": [
@@ -142,6 +143,7 @@ message DeviceKey {
 //    "model_name": "DCS-7130",
 //    ...
 //  }
+// ```
 message DeviceTenantAssignment {
 	option (fmp.model) = "ro";
 	option (fmp.paginated) = true;
@@ -190,6 +192,7 @@ message DeviceTenantAssignConfig {
 // LicenseTenantAssignment represents tenant/customer information for a license
 // This api could also be used to get a list of all licenses assigned to a tenant
 // id. Example : get list of licenses assigned to a tenant
+// ```
 // Request :
 //  {
 //    "partial_eq_filter": [
@@ -213,6 +216,7 @@ message DeviceTenantAssignConfig {
 //    "sku": "LIC-FIX-4-MACSEC",
 //    ...
 //  }
+// ```
 message LicenseTenantAssignment {
 	option (fmp.model) = "ro";
 	option (fmp.paginated) = true;
@@ -300,6 +304,7 @@ message CustomerInfo {
 // AllowedTenants represents a list of authorized
 // customers whose assets (devices/licenses) the tenant key has
 // permission to view or move.
+// ```
 // Request :
 //  {
 //    "key" : {
@@ -318,7 +323,8 @@ message CustomerInfo {
 // 		"tenant_3"
 // 	  ]
 // 	}
-//  }
+// }
+// ```
 message AllowedTenants {
 	option (fmp.model) = "ro";
 	// key is used to identify a tenant
