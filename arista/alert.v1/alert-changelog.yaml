@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+  - date: 2026-03-18
+    description: Add virtual_tags to Matches message
+    version: 1.17.2
+    onprem: true
+    cvaas: true
   - date: 2025-11-21
     description: Add sensor_name to BroadcastGroup
     version: 1.17.1

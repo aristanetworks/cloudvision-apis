@@ -766,6 +766,8 @@ message Matches {
 	google.protobuf.StringValue device_tags = 4;
 	// intf_tags is a string tag query that is used to match on the event's interface tags
 	google.protobuf.StringValue intf_tags = 5;
+	// virtual_tags is a string tag query that is used to match on the event's virtual tags
+	google.protobuf.StringValue virtual_tags = 7;
 	// rule_ids is a list of rule IDs to filter on,
 	// if an event does not have one of these rule IDs, it will not match
 	fmp.RepeatedString rule_ids = 6;
