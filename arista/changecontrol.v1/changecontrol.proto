@@ -385,10 +385,25 @@ message ApproveConfig {
 	google.protobuf.Timestamp version = 3;
 }
 
-// ActionCount holds the count of the various action types.
-message ActionCount {
-	// values is a map from action id to number of actions of said type.
-	map<string, uint32> values = 1;
+// ActionSummary provides detailed information about actions in a change control.
+message ActionSummary {
+	// id uniquely identifies the action.
+	// For built-in actions: it will be the action identifier (e.g., "setImage", "setConfig")
+	// For custom scripts: it will be the script UUID
+	// For task actions: it will be the task type (e.g., "ADD", "CONFIG_PUSH", "IMAGE_PUSH")
+	google.protobuf.StringValue id = 1;
+
+	// name is the name of the action.
+	google.protobuf.StringValue name = 2;
+
+	// count is the number of times this action appears in the change control.
+	google.protobuf.UInt32Value count = 3;
+}
+
+// ActionSummaries contains a list of ActionSummary values.
+message ActionSummaries {
+	// values is a list of ActionSummary.
+	repeated ActionSummary values = 1;
 }
 
 // ChangeControlSummary provides the summary of the change control.
@@ -408,8 +423,8 @@ message ChangeControlSummary {
 	// device_count is the count of the devices impacted in the change control.
 	google.protobuf.UInt32Value device_count = 4;
 
-	// action_count is the map of action types to their corresponding counts.
-	ActionCount action_count = 5;
+	// action_summaries provides detailed information about each action type used in the change control.
+	ActionSummaries action_summaries = 5;
 
 	// created_time is the time at which the change control was created.
 	google.protobuf.Timestamp created_time = 6;

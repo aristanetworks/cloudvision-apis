@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-03-17
+      description: Add ActionSummary and ActionSummaries messages to provide detailed action information in ChangeControlSummary.
+      version: 1.3.0
+
     - date: 2026-01-05
       description: Add ChangeControlSummary model and service. Add Creation type and creation field to ChangeControl.
       version: 1.2.0

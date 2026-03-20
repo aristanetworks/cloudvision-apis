@@ -2107,20 +2107,6 @@
       },
       "description": "Action is an action to perform during the execution of\na stage of a change control. Available actions can be\nfetched using the \"action\" services."
     },
-    "arista.changecontrol.v1.ActionCount": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "description": "values is a map from action id to number of actions of said type."
-        }
-      },
-      "description": "ActionCount holds the count of the various action types."
-    },
     "arista.changecontrol.v1.ActionSteps": {
       "type": "object",
       "properties": {
@@ -2133,6 +2119,39 @@
         }
       },
       "description": "ActionSteps tracks the status of each step within an action."
+    },
+    "arista.changecontrol.v1.ActionSummaries": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.changecontrol.v1.ActionSummary"
+          },
+          "description": "values is a list of ActionSummary."
+        }
+      },
+      "description": "ActionSummaries contains a list of ActionSummary values."
+    },
+    "arista.changecontrol.v1.ActionSummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id uniquely identifies the action.\nFor built-in actions: it will be the action identifier (e.g., \"setImage\", \"setConfig\")\nFor custom scripts: it will be the script UUID\nFor task actions: it will be the task type (e.g., \"ADD\", \"CONFIG_PUSH\", \"IMAGE_PUSH\")"
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the name of the action."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "count is the number of times this action appears in the change control."
+        }
+      },
+      "description": "ActionSummary provides detailed information about actions in a change control."
     },
     "arista.changecontrol.v1.ApproveConfig": {
       "type": "object",
@@ -2816,9 +2835,9 @@
           "format": "int64",
           "description": "device_count is the count of the devices impacted in the change control."
         },
-        "actionCount": {
-          "$ref": "#/definitions/arista.changecontrol.v1.ActionCount",
-          "description": "action_count is the map of action types to their corresponding counts."
+        "actionSummaries": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ActionSummaries",
+          "description": "action_summaries provides detailed information about each action type used in the change control."
         },
         "createdTime": {
           "type": "string",
@@ -2859,7 +2878,7 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "start_time is the time at which the change control started execution."
+          "description": "start_time is the time at which the change control execution was started."
         },
         "startUser": {
           "type": "string",
@@ -2868,7 +2887,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "end_time is the time at which the change control completed execution."
+          "description": "end_time is the time at which the change control execution was completed."
         },
         "error": {
           "type": "string",
@@ -2876,7 +2895,7 @@
         },
         "approved": {
           "type": "boolean",
-          "description": "approved indicates whether the change control is approved."
+          "description": "approved indicates whether the change control is currently approved or unapproved."
         }
       },
       "description": "ChangeControlSummary provides the summary of the change control."
