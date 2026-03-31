@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+  - date: 2026-03-31
+    description: Add OAuth2ClientCredentials settings for webhook
+    version: 1.17.3
   - date: 2026-03-18
     description: Add virtual_tags to Matches message
     version: 1.17.2

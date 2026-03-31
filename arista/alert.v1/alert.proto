@@ -340,7 +340,7 @@ message EmailSettings {
 	AzureOAuth azure_o_auth = 7;
 }
 
-// AzureOAuth contains the settings for the sending of emails on Azure smtp server
+// AzureOAuth contains the settings for authenticating against Azure using OAuth2
 message AzureOAuth {
 	// client_id of the Azure environment
 	google.protobuf.StringValue client_id = 1;
@@ -354,6 +354,22 @@ message AzureOAuth {
 	google.protobuf.StringValue auth_uri = 4;
 	// scopes are the scopes that auth is granted for
 	fmp.RepeatedString scopes = 5;
+}
+
+// OAuth2ClientCredentials contains generic settings for authenticating webhook
+// requests using the OAuth2 client credentials (including OpenID Connect) flow.
+message OAuth2ClientCredentials {
+	// client_id of the OAuth2 client
+	google.protobuf.StringValue client_id = 1;
+	// client_secret for the OAuth2 client
+	google.protobuf.StringValue client_secret = 2;
+	// token_url is the full URL of the OAuth2/OIDC token endpoint
+	// e.g. https://example.com/oauth2/token
+	google.protobuf.StringValue token_url = 3;
+	// scope is the optional OAuth2 scope string requested for the access token.
+	// Multiple scopes can be defined by separating them with spaces,
+	// e.g. "scope1 scope2 scope3".
+	google.protobuf.StringValue scope = 4;
 }
 
 // HttpSettings are the settings to be used when sending various message over a http connection
@@ -429,9 +445,10 @@ message MsTeamsSettings {
 
 // WebhookSettings contain the settings for sending alerts to a Webhook
 message WebhookSettings {
-	// azure_o_auth used for auth when using an Azure smtp server
-	// uses auth_username
+	// azure_o_auth used for auth when using Azure to authenticate webhook requests
 	AzureOAuth azure_o_auth = 1;
+	// oauth2_client_credentials used for generic OAuth2/OIDC client-credentials auth for webhook
+	OAuth2ClientCredentials oauth2_client_credentials = 2;
 }
 
 // MsGraphSendMailSettings contain the settings for sending alerts to a Microsoft Graph sendMail

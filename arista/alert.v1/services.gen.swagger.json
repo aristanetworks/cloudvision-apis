@@ -1978,7 +1978,7 @@
           "title": "scopes are the scopes that auth is granted for"
         }
       },
-      "title": "AzureOAuth contains the settings for the sending of emails on Azure smtp server"
+      "title": "AzureOAuth contains the settings for authenticating against Azure using OAuth2"
     },
     "arista.alert.v1.BroadcastGroup": {
       "type": "object",
@@ -3018,6 +3018,28 @@
         }
       },
       "title": "MsTeamsSettings contain the settings for sending alerts to MS Teams"
+    },
+    "arista.alert.v1.OAuth2ClientCredentials": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "title": "client_id of the OAuth2 client"
+        },
+        "clientSecret": {
+          "type": "string",
+          "title": "client_secret for the OAuth2 client"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "title": "token_url is the full URL of the OAuth2/OIDC token endpoint\ne.g. https://example.com/oauth2/token"
+        },
+        "scope": {
+          "type": "string",
+          "description": "scope is the optional OAuth2 scope string requested for the access token.\nMultiple scopes can be defined by separating them with spaces,\ne.g. \"scope1 scope2 scope3\"."
+        }
+      },
+      "description": "OAuth2ClientCredentials contains generic settings for authenticating webhook\nrequests using the OAuth2 client credentials (including OpenID Connect) flow."
     },
     "arista.alert.v1.OpsgenieEndpoint": {
       "type": "object",
@@ -4110,7 +4132,11 @@
       "properties": {
         "azureOAuth": {
           "$ref": "#/definitions/arista.alert.v1.AzureOAuth",
-          "title": "azure_o_auth used for auth when using an Azure smtp server\nuses auth_username"
+          "title": "azure_o_auth used for auth when using Azure to authenticate webhook requests"
+        },
+        "oauth2ClientCredentials": {
+          "$ref": "#/definitions/arista.alert.v1.OAuth2ClientCredentials",
+          "title": "oauth2_client_credentials used for generic OAuth2/OIDC client-credentials auth for webhook"
         }
       },
       "title": "WebhookSettings contain the settings for sending alerts to a Webhook"
@@ -4169,10 +4195,12 @@
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
         "DELETED",
-        "PARTIAL_DELETE"
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
     },
     "arista.time.TimeBounds": {
       "type": "object",
