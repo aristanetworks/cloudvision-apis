@@ -20,7 +20,6 @@ extend google.protobuf.MessageOptions {
     bool     require_set_key = 51427;
     string   unkeyed_model = 51428;
     bool     paginated = 51429;
-    bool     disable_yang_for_message = 51430;
 }
 
 extend google.protobuf.FieldOptions {
