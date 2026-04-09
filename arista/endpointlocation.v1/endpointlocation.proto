@@ -80,6 +80,10 @@ enum MacType {
     MAC_TYPE_LEARNED_DYNAMIC_FRR = 30;
     // MAC_TYPE_CONFIGURED_STATIC_FRR indicates a MAC configured statically and protected by an EVPN FRR backup tunnel.
     MAC_TYPE_CONFIGURED_STATIC_FRR = 31;
+     // MAC_TYPE_VPLS_DYNAMIC_REMOTE indicates a remote MAC learned dynamically from the VPLS.
+    MAC_TYPE_VPLS_DYNAMIC_REMOTE = 32;
+    // MAC_TYPE_CONFIGURED_SYS indicates a system MAC address configured on an interface.
+    MAC_TYPE_CONFIGURED_SYS = 33;
     // MAC_TYPE_OTHER is used for capturing future MAC types.
     MAC_TYPE_OTHER = 99999;
 }

@@ -76,25 +76,18 @@ Changes:
     - date: 2023-04-24
       description: Added EXPLANATION_ACCESS_PORT to schema
       version: 1.8.1
-      onprem: true
-      cvaas: true
     - date: 2024-03-28
       description: Update Available APIs
       version: 1.8.2
-      onprem: true
-      cvaas: true
     - date: 2024-05-09
       description: Update GetSome REST endpoints
       version: 1.9.0
-      onprem: true
-      cvaas: true
     - date: 2024-08-15
       description: Deprecate wifi-related fields
       version: 1.10.0
-      onprem: true
-      cvaas: true
     - date: 2025-11-13
       description: Added programmedStaticMac, evpnVespaDynamicMac, evpnIntfDynamicFrrMac, evpnIntfStaticFrrMac, learnedDynamicFrrMac, and configuredStaticFrrMac to MacType enum
       version: 1.11.0
-      onprem: true
-      cvaas: true
+    - date: 2026-01-14
+      description: Added vplsDynamicRemoteMac and configuredSysMac to MacType enum
+      version: 1.11.1
