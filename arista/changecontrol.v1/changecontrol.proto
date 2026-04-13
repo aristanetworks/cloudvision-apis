@@ -272,7 +272,7 @@ message Flag {
 }
 
 // TimestampFlag holds the configuration of a timestamp flag
-// plus some information about when and by whom is was set.
+// plus some information about when and by whom it was set.
 message TimestampFlag {
 	// value is the value of the flag (some timestamp).
 	google.protobuf.Timestamp value = 1;
@@ -382,6 +382,14 @@ message ChangeControl {
 	// completion_reason indicates why the change control completed (only relevant when
 	// status is CHANGE_CONTROL_STATUS_COMPLETED).
 	CompletionReason completion_reason = 11;
+	// validation_statuses indicates failed validation statuses for the change control.
+	// This is only relevant when one or more devices fail validation.
+	ChangeControlValidationStatuses validation_statuses = 12;
+	// validation_detail contains additional information about the validation statuses.
+	// This is only relevant when one or more devices fail validation.
+	ChangeControlValidationDetail validation_detail = 13;
+	// override_reason indicates user intent to override change control validation.
+	OverrideReason override_reason = 14;
 }
 
 // ApproveConfig is used to configure the approval of a change control.
@@ -398,6 +406,8 @@ message ApproveConfig {
 	// and is intended to safeguard against approving a change control
 	// that has been updated since last read.
 	google.protobuf.Timestamp version = 3;
+	// override_reason indicates user intent to override change control validation.
+	OverrideReason override_reason = 4;
 }
 
 // ActionSummary provides detailed information about actions in a change control.
@@ -483,4 +493,77 @@ message ChangeControlSummary {
 	// completion_reason indicates why the change control completed (only relevant when
 	// status is CHANGE_CONTROL_STATUS_COMPLETED).
 	CompletionReason completion_reason = 19;
+	// validation_statuses indicates failed validation statuses for the change control.
+	// This field is only populated when one or more validations fail.
+	ChangeControlValidationStatuses validation_statuses = 20;
+}
+
+// OverrideReason provides a reason for overriding the validation.
+enum OverrideReason {
+	// OVERRIDE_REASON_UNSPECIFIED indicates that the reason for overriding the validation
+	// is unknown.
+	OVERRIDE_REASON_UNSPECIFIED = 0;
+	// OVERRIDE_REASON_USER_FORCED indicates that the user has overridden the validation and forced
+	// the approval of the change control.
+	OVERRIDE_REASON_USER_FORCED = 1;
+}
+
+// ChangeControlValidationStatuses is a list of validation statuses for the change control.
+message ChangeControlValidationStatuses {
+	// values is a list of validation statuses.
+	repeated ChangeControlValidationStatus values = 1;
+}
+
+// ChangeControlValidationStatus is used to indicate the status of the change control validation.
+enum ChangeControlValidationStatus {
+	// CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED indicates that the validation status
+	// is unknown.
+	CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED = 0;
+	// CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS indicates that the validation has succeeded.
+	CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS = 1;
+	// CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED indicates that the validation has failed, and the
+	// change control has been obsoleted. This is due to the execution of a newer change control.
+	CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED = 2;
+}
+
+// ChangeControlValidationDetail contains validation details for a change control.
+message ChangeControlValidationDetail {
+	// devices is a list of devices that failed the change control validation.
+	// The failure type is included in the details.
+	DeviceValidationDetails devices = 1;
+}
+
+// DeviceValidationDetails is a list of devices that failed validation, along with details
+// about each failure.
+message DeviceValidationDetails {
+	// values is a list of devices with validation failures.
+	repeated DeviceValidationDetail values = 1;
+}
+
+// DeviceValidationDetail represents a device and its failure type.
+message DeviceValidationDetail {
+	// device_id is the ID of the device.
+	google.protobuf.StringValue device_id = 1;
+	// failure_type indicates the type of validation failure.
+	DeviceValidationFailure failure_type = 2;
+	// metadata is a string that contains additional information related to the failure.
+	// Current failures and their corresponding metadata are:
+	// DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER: ID of the newer Change Control that
+	// caused the designed config to be out of order.
+	// DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER: ID of the newer Change Control that
+	// caused the designed image to be out of order.
+	google.protobuf.StringValue metadata = 3;
+}
+
+// DeviceValidationFailure is used to indicate the type of the validation failure.
+enum DeviceValidationFailure {
+	// DEVICE_VALIDATION_FAILURE_UNSPECIFIED indicates that the reason for the validation failure
+	// is unknown.
+	DEVICE_VALIDATION_FAILURE_UNSPECIFIED = 0;
+	// DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER indicates that the designed config is out of
+	// order due to the execution of a newer change control.
+	DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER = 1;
+	// DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER indicates that the designed image is out of
+	// order due to the execution of a newer change control.
+	DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER = 2;
 }

@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-06-11
+      description: Add validation status, detail and override reason to ChangeControl. Add validation status to ChangeControlSummary.
+      version: 1.5.0
+
     - date: 2026-04-30
       description: Add CompletionReason enum and completion_reason field to ChangeControl and ChangeControlSummary.
       version: 1.4.0

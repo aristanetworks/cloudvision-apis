@@ -2168,6 +2168,10 @@
           "type": "string",
           "format": "date-time",
           "description": "version is the timestamp of the change control to approve.\nThis field must be set when `approve.value` is set to `true`\nand is intended to safeguard against approving a change control\nthat has been updated since last read."
+        },
+        "overrideReason": {
+          "$ref": "#/definitions/arista.changecontrol.v1.OverrideReason",
+          "description": "override_reason indicates user intent to override change control validation."
         }
       },
       "description": "ApproveConfig is used to configure the approval of a change control."
@@ -2469,6 +2473,18 @@
         "completionReason": {
           "$ref": "#/definitions/arista.changecontrol.v1.CompletionReason",
           "description": "completion_reason indicates why the change control completed (only relevant when\nstatus is CHANGE_CONTROL_STATUS_COMPLETED)."
+        },
+        "validationStatuses": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlValidationStatuses",
+          "description": "validation_statuses indicates failed validation statuses for the change control.\nThis is only relevant when one or more devices fail validation."
+        },
+        "validationDetail": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlValidationDetail",
+          "description": "validation_detail contains additional information about the validation statuses.\nThis is only relevant when one or more devices fail validation."
+        },
+        "overrideReason": {
+          "$ref": "#/definitions/arista.changecontrol.v1.OverrideReason",
+          "description": "override_reason indicates user intent to override change control validation."
         }
       },
       "description": "ChangeControl holds the configuration and status of a change control."
@@ -2904,6 +2920,10 @@
         "completionReason": {
           "$ref": "#/definitions/arista.changecontrol.v1.CompletionReason",
           "description": "completion_reason indicates why the change control completed (only relevant when\nstatus is CHANGE_CONTROL_STATUS_COMPLETED)."
+        },
+        "validationStatuses": {
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlValidationStatuses",
+          "description": "validation_statuses indicates failed validation statuses for the change control.\nThis field is only populated when one or more validations fail."
         }
       },
       "description": "ChangeControlSummary provides the summary of the change control."
@@ -3009,6 +3029,39 @@
         }
       }
     },
+    "arista.changecontrol.v1.ChangeControlValidationDetail": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "$ref": "#/definitions/arista.changecontrol.v1.DeviceValidationDetails",
+          "description": "devices is a list of devices that failed the change control validation.\nThe failure type is included in the details."
+        }
+      },
+      "description": "ChangeControlValidationDetail contains validation details for a change control."
+    },
+    "arista.changecontrol.v1.ChangeControlValidationStatus": {
+      "type": "string",
+      "enum": [
+        "CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED",
+        "CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS",
+        "CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED"
+      ],
+      "default": "CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED",
+      "description": "ChangeControlValidationStatus is used to indicate the status of the change control validation.\n\n - CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED: CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED indicates that the validation status\nis unknown.\n - CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS: CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS indicates that the validation has succeeded.\n - CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED: CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED indicates that the validation has failed, and the\nchange control has been obsoleted. This is due to the execution of a newer change control."
+    },
+    "arista.changecontrol.v1.ChangeControlValidationStatuses": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlValidationStatus"
+          },
+          "description": "values is a list of validation statuses."
+        }
+      },
+      "description": "ChangeControlValidationStatuses is a list of validation statuses for the change control."
+    },
     "arista.changecontrol.v1.CompletionReason": {
       "type": "string",
       "enum": [
@@ -3047,6 +3100,48 @@
         }
       },
       "description": "DeviceToStageMap is a map of a device ID and its list of corresponding stages."
+    },
+    "arista.changecontrol.v1.DeviceValidationDetail": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "device_id is the ID of the device."
+        },
+        "failureType": {
+          "$ref": "#/definitions/arista.changecontrol.v1.DeviceValidationFailure",
+          "description": "failure_type indicates the type of validation failure."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is a string that contains additional information related to the failure.\nCurrent failures and their corresponding metadata are:\nDEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER: ID of the newer Change Control that\ncaused the designed config to be out of order.\nDEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER: ID of the newer Change Control that\ncaused the designed image to be out of order."
+        }
+      },
+      "description": "DeviceValidationDetail represents a device and its failure type."
+    },
+    "arista.changecontrol.v1.DeviceValidationDetails": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.changecontrol.v1.DeviceValidationDetail"
+          },
+          "description": "values is a list of devices with validation failures."
+        }
+      },
+      "description": "DeviceValidationDetails is a list of devices that failed validation, along with details\nabout each failure."
+    },
+    "arista.changecontrol.v1.DeviceValidationFailure": {
+      "type": "string",
+      "enum": [
+        "DEVICE_VALIDATION_FAILURE_UNSPECIFIED",
+        "DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER",
+        "DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER"
+      ],
+      "default": "DEVICE_VALIDATION_FAILURE_UNSPECIFIED",
+      "description": "DeviceValidationFailure is used to indicate the type of the validation failure.\n\n - DEVICE_VALIDATION_FAILURE_UNSPECIFIED: DEVICE_VALIDATION_FAILURE_UNSPECIFIED indicates that the reason for the validation failure\nis unknown.\n - DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER: DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER indicates that the designed config is out of\norder due to the execution of a newer change control.\n - DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER: DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER indicates that the designed image is out of\norder due to the execution of a newer change control."
     },
     "arista.changecontrol.v1.Filter": {
       "type": "object",
@@ -3113,6 +3208,15 @@
           "description": "Count is the number of items present under the conditions of the request."
         }
       }
+    },
+    "arista.changecontrol.v1.OverrideReason": {
+      "type": "string",
+      "enum": [
+        "OVERRIDE_REASON_UNSPECIFIED",
+        "OVERRIDE_REASON_USER_FORCED"
+      ],
+      "default": "OVERRIDE_REASON_UNSPECIFIED",
+      "description": "OverrideReason provides a reason for overriding the validation.\n\n - OVERRIDE_REASON_UNSPECIFIED: OVERRIDE_REASON_UNSPECIFIED indicates that the reason for overriding the validation\nis unknown.\n - OVERRIDE_REASON_USER_FORCED: OVERRIDE_REASON_USER_FORCED indicates that the user has overridden the validation and forced\nthe approval of the change control."
     },
     "arista.changecontrol.v1.RepeatedRepeatedString": {
       "type": "object",
@@ -3280,7 +3384,7 @@
           "description": "user is the user by which the flag was last updated."
         }
       },
-      "description": "TimestampFlag holds the configuration of a timestamp flag\nplus some information about when and by whom is was set."
+      "description": "TimestampFlag holds the configuration of a timestamp flag\nplus some information about when and by whom it was set."
     },
     "arista.changecontrol.v1.TimestampFlagConfig": {
       "type": "object",
