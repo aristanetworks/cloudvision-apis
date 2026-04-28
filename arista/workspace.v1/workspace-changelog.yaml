@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-04-02
+      description: Add image_source to ImageValidationResult.
+      version: 1.9.1
     - date: 2026-02-03
       description: Add hierarchy error list to input validation result.
       version: 1.9.0

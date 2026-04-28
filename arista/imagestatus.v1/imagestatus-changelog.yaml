@@ -7,58 +7,49 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-04-02
+      description: Add ImageSource enum with studio, NP and hierarchy options
+      version: 1.23.0
     - date: 2026-02-23
       description: Reinstate a deprecated warning code WARNING_CODE_TA_CV_INCOMPATIBLE
       version: 1.22.0
     - date: 2025-01-08
       description: Add a new error code ERROR_CODE_EOS_EXTENSION_ARCHITECTURE_INCOMPATIBLE
       version: 1.21.0
-      cvaas: true
     - date: 2025-12-01
       description: Add a new info code INFO_CODE_UNIVERSAL_IMAGE_ARCH_APPLIED
       version: 1.20.0
-      cvaas: true
     - date: 2025-07-17
       description: Add a new field arch for Extension
       version: 1.19.0
-      cvaas: true
     - date: 2025-03-13
       description: Updated description for error code ERROR_CODE_EOS_CV_INCOMPATIBLE
       version: 1.18.0
-      cvaas: true
     - date: 2025-03-03
       description: Reinstate a deprecated warning code WARNING_CODE_EOS_CV_INCOMPATIBLE.
                     Ensure comments conform to standards
       version: 1.17.0
-      cvaas: true
     - date: 2024-08-05
       description: Add a new field text_code for GetImageDiffV3
       version: 1.16.0
-      cvaas: true
     - date: 2024-07-22
       description: Add a new error code ERROR_CODE_ARCH_UNSUPPORTED
       version: 1.15.0
-      cvaas: true
     - date: 2024-07-01
       description: Add a new error code ERROR_CODE_EOS_EXTENSION_VERSION_INCOMPATIBLE
       version: 1.14.0
-      cvaas: true
     - date: 2024-06-26
       description: Add Info field to Summary and info code INFO_CODE_NEWER_VERSION_AVAILABLE
       version: 1.13.0
-      cvaas: true
     - date: 2024-06-05
       description: Add a new warning code WARNING_CODE_BUGALERTS_DATA_MISSING
       version: 1.12.0
-      cvaas: true
     - date: 2024-06-03
       description: Add a new error code ERROR_CODE_DEVICE_EOS_2GB_INCOMPATIBLE
       version: 1.11.0
-      cvaas: true
     - date: 2024-05-24
       description: Update GetSome REST endpoints
       version: 1.10.0
-      cvaas: true
     - date: 2024-05-15
       description: Add a new warning code WARNING_CODE_TA_STUDIO_INCOMPATIBLE
       version: 1.9.0

@@ -438,3 +438,16 @@ message ImageInfos {
     // values is a list of image infos.
     repeated ImageInfo values = 1;
 }
+
+// ImageSource indicates the source type for the image configuration.
+enum ImageSource {
+    // IMAGE_SOURCE_UNSPECIFIED uninitialized value
+    IMAGE_SOURCE_UNSPECIFIED = 0;
+    // IMAGE_SOURCE_STUDIO - image configured from studio
+    IMAGE_SOURCE_STUDIO = 1;
+    // IMAGE_SOURCE_NETWORK_PROVISIONING - image configured from
+    // network provisioning workflow
+    IMAGE_SOURCE_NETWORK_PROVISIONING = 2;
+    // IMAGE_SOURCE_HIERARCHY - image configured from hierarchy workflow
+    IMAGE_SOURCE_HIERARCHY = 3;
+}

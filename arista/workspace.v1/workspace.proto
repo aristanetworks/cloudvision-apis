@@ -407,6 +407,8 @@ message ImageValidationResult {
 	google.protobuf.StringValue image_input_error = 4;
 	// infos are any info messages about the generated image.
 	arista.imagestatus.v1.ImageInfos infos = 5;
+	// image_source identifies the source of the image.
+	arista.imagestatus.v1.ImageSource image_source = 6;
 }
 
 // ConfigSyncResult holds the result of config sync operation.
