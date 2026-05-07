@@ -7,25 +7,25 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-05-06
+      description: Dependencies entity for studio summary
+      version: 1.8.3
+
     - date: 2026-01-08
-      description: Update input path comments 
+      description: Update input path comments
       version: 1.8.2
-      cvaas: true
 
     - date: 2025-9-17
       description: Improve formatting in field comments
       version: 1.8.1
-      cvaas: true
 
     - date: 2024-12-16
       description: Added from_package field to studio summary
       version: 1.8.0
-      cvaas: true
 
     - date: 2024-05-09
       description: Update GetSome, SetSome, DeleteSome REST endpoints
       version: 1.7.0
-      cvaas: true
 
     - date: 2024-04-12
       description: Add configlet enums to studio summary

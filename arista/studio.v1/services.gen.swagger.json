@@ -4991,6 +4991,19 @@
       },
       "description": "AssignedTags can be used to retrieve additional metadata about a\nstudio's `AssignedTagsConfig`."
     },
+    "arista.studio.v1.AssignedTagsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AssignedTagsConfig": {
       "type": "object",
       "properties": {
@@ -5008,6 +5021,19 @@
         }
       },
       "description": "AssignedTagsConfig holds a configuration to assign a studio to a set of devices\nmatching a tag query."
+    },
+    "arista.studio.v1.AssignedTagsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AssignedTagsConfigDeleteAllResponse": {
       "type": "object",
@@ -5318,6 +5344,19 @@
       },
       "description": "AutofillAction can be used to retrieve additional metadata about an autofill action."
     },
+    "arista.studio.v1.AutofillActionBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AutofillActionConfig": {
       "type": "object",
       "properties": {
@@ -5343,6 +5382,19 @@
         }
       },
       "description": "AutofillActionConfig contains configuration information for an autofill action."
+    },
+    "arista.studio.v1.AutofillActionConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AutofillActionConfigDeleteAllResponse": {
       "type": "object",
@@ -5706,7 +5758,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/arista.studio.v1.Entity"
           },
-          "description": "values is a map from entity type name to entity\nThe possible keys to this map are ENTITY_TYPE_STUDIO,\nENTITY_TYPE_INPUTS, ENTITY_TYPE_ASSIGNED_TAGS,\nENTITY_TYPE_BUILD_HOOK and ENTITY_TYPE_AUTOFILL_ACTION."
+          "title": "values is a map from EntityType enum name to Entity.\nKeys are the EntityType enum names defined below, e.g.:\n  \"ENTITY_TYPE_INPUTS\" -\u003e Entity{\n      entity_type:      ENTITY_TYPE_INPUTS,\n      last_modified_at: 2026-05-07T12:34:56Z,\n      last_modified_by: \"admin\",\n      removed:          false,\n  }"
         }
       },
       "description": "Entities is a list of Entity."
@@ -5744,10 +5796,11 @@
         "ENTITY_TYPE_BUILD_HOOK",
         "ENTITY_TYPE_AUTOFILL_ACTION",
         "ENTITY_TYPE_CONFIGLET",
-        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT"
+        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT",
+        "ENTITY_TYPE_DEPENDENCIES"
       ],
       "default": "ENTITY_TYPE_UNSPECIFIED",
-      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic config studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static config studio."
+      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic config studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static config studio.\n - ENTITY_TYPE_DEPENDENCIES: ENTITY_TYPE_DEPENDENCIES indicates the Dependencies entity type."
     },
     "arista.studio.v1.FloatInputFieldProps": {
       "type": "object",
@@ -5923,6 +5976,19 @@
       },
       "description": "Inputs is used to retrieve the existing inputs to a studio."
     },
+    "arista.studio.v1.InputsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.InputsConfig": {
       "type": "object",
       "properties": {
@@ -5940,6 +6006,19 @@
         }
       },
       "description": "InputsConfig is used to input values into a studio.\n\nNOTE: Setting an input at a higher path overwrite any prior\n`Set`s at lower paths. E.g.,\n\n1. Set `[\"A\", \"X\"]` to `\"foo\"`\n2. Set `[\"A\", \"Y\"]` to `\"bar\"`\n3. Set `[\"A\"]` to `{\"X\": \"bar\"}`\n\nThe resulting inputs would be:\n```\n{ \"A\": { \"X\": \"bar\" } }\n```"
+    },
+    "arista.studio.v1.InputsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.InputsConfigDeleteAllResponse": {
       "type": "object",
@@ -6351,6 +6430,19 @@
       },
       "description": "SecretInput can be used to retrieve the unmasked value of\na secret in a studio."
     },
+    "arista.studio.v1.SecretInputBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.SecretInputResponse": {
       "type": "object",
       "properties": {
@@ -6522,6 +6614,19 @@
       },
       "description": "Studio holds the active state for a studio."
     },
+    "arista.studio.v1.StudioBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioConfig": {
       "type": "object",
       "properties": {
@@ -6551,6 +6656,19 @@
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."
+    },
+    "arista.studio.v1.StudioConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.StudioConfigDeleteAllResponse": {
       "type": "object",
@@ -6873,6 +6991,19 @@
       },
       "description": "StudioSummary holds basic information about a studio."
     },
+    "arista.studio.v1.StudioSummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioSummaryResponse": {
       "type": "object",
       "properties": {
@@ -7024,10 +7155,12 @@
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
         "DELETED",
-        "PARTIAL_DELETE"
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
     },
     "arista.time.TimeBounds": {
       "type": "object",
