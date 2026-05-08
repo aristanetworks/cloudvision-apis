@@ -216,6 +216,12 @@ message Workspace {
 	// exclude_network_provisioning indicates whether the workspace is
 	// configured to exclude Network Provisioning.
 	google.protobuf.BoolValue exclude_network_provisioning = 15;
+	// decommission_request_ids provides, for each device staged for
+	// decommission in this workspace, the corresponding request UUID passed
+	// to inventory.v1.DeviceDecommissioningConfig. These request UUIDs can
+	// be used to track the status using the inventory.v1.DeviceDecommissioning
+	// resource.
+	fmp.MapStringString decommission_request_ids = 16;
 }
 
 // BuildState enumerates the set of states that a BuildStage can be in during a
