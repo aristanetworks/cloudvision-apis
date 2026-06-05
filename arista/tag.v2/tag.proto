@@ -48,6 +48,10 @@ enum ElementSubType {
 	// a subset of the application’s functionality. An application can exist without
 	// a service but not vice-versa.
 	ELEMENT_SUB_TYPE_APPLICATION = 5;
+	// ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.
+	// A connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that
+	// monitors connectivity to a specific target from a device.
+	ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE = 6;
 }
 
 // TagKey uniquely identifies a tag.

@@ -102,8 +102,6 @@ message ElementStreamRequest {
 	//     until end.
 	//     * Each Element response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -148,8 +146,6 @@ message ElementBatchedStreamRequest {
 	//     until end.
 	//     * Each Element response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -243,8 +239,6 @@ message TagStreamRequest {
 	//     until end.
 	//     * Each Tag response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -285,8 +279,6 @@ message TagBatchedStreamRequest {
 	//     until end.
 	//     * Each Tag response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -380,8 +372,6 @@ message TagAssignmentStreamRequest {
 	//     until end.
 	//     * Each TagAssignment response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -422,8 +412,6 @@ message TagAssignmentBatchedStreamRequest {
 	//     until end.
 	//     * Each TagAssignment response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -517,8 +505,6 @@ message TagAssignmentConfigStreamRequest {
 	//     until end.
 	//     * Each TagAssignmentConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -559,8 +545,6 @@ message TagAssignmentConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each TagAssignmentConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -743,8 +727,6 @@ message TagConfigStreamRequest {
 	//     until end.
 	//     * Each TagConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -785,8 +767,6 @@ message TagConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each TagConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.

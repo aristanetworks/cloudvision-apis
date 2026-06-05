@@ -5,6 +5,12 @@
 
 Changes:
     - date: 2025-05-29
+      description: Add ElementSubType ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE
+      version: 2.2.0
+      onprem: true
+      cvaas: true
+
+    - date: 2025-05-29
       description: Add Element model
       version: 2.1.0
       onprem: true

@@ -69,7 +69,7 @@
           },
           {
             "name": "key.subType",
-            "description": "sub_type is the sub-type of the element.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "sub_type is the sub-type of the element.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -79,7 +79,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -701,7 +702,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -711,7 +712,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -1165,7 +1167,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1175,7 +1177,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -1643,7 +1646,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1653,7 +1656,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -1752,7 +1756,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the element sub-type of a tag.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1762,7 +1766,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -2350,7 +2355,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -2360,7 +2365,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           },
@@ -2431,7 +2437,7 @@
           },
           {
             "name": "key.elementSubType",
-            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.",
+            "description": "element_sub_type is the sub-category of network element\nto which this tag can be assigned.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device.",
             "in": "query",
             "required": true,
             "type": "string",
@@ -2441,7 +2447,8 @@
               "ELEMENT_SUB_TYPE_VDS",
               "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
               "ELEMENT_SUB_TYPE_VM",
-              "ELEMENT_SUB_TYPE_APPLICATION"
+              "ELEMENT_SUB_TYPE_APPLICATION",
+              "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
             ],
             "default": "ELEMENT_SUB_TYPE_UNSPECIFIED"
           }
@@ -2969,10 +2976,13 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
     },
     "arista.tag.v2.CreatorType": {
       "type": "string",
@@ -2994,19 +3004,6 @@
         }
       },
       "description": "Element holds basic information about a tagged or untagged network\nelement."
-    },
-    "arista.tag.v2.ElementBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.tag.v2.ElementStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.tag.v2.ElementFilter": {
       "type": "object",
@@ -3141,7 +3138,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Element at end.\n    * Each Element response is fully-specified (all fields set).\n  * start: Returns the state of each Element at start, followed by updates until now.\n    * Each Element response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Element at start, followed by updates\n    until end.\n    * Each Element response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Element at end.\n    * Each Element response is fully-specified (all fields set).\n  * start: Returns the state of each Element at start, followed by updates until now.\n    * Each Element response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Element at start, followed by updates\n    until end.\n    * Each Element response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3171,10 +3168,11 @@
         "ELEMENT_SUB_TYPE_VDS",
         "ELEMENT_SUB_TYPE_WORKLOAD_SERVER",
         "ELEMENT_SUB_TYPE_VM",
-        "ELEMENT_SUB_TYPE_APPLICATION"
+        "ELEMENT_SUB_TYPE_APPLICATION",
+        "ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE"
       ],
       "default": "ELEMENT_SUB_TYPE_UNSPECIFIED",
-      "description": "ElementSubType enumerates the sub-types of network elements that can\nbe associated with tags.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa."
+      "description": "ElementSubType enumerates the sub-types of network elements that can\nbe associated with tags.\n\n - ELEMENT_SUB_TYPE_UNSPECIFIED: ELEMENT_SUB_TYPE_UNSPECIFIED is the default value.\n - ELEMENT_SUB_TYPE_DEVICE: ELEMENT_SUB_TYPE_DEVICE is used for EOS or\nthird-party devices discovered via LLDP/SNMP.\n - ELEMENT_SUB_TYPE_VDS: ELEMENT_SUB_TYPE_VDS is used for VMWare vSphere Distributed Switch (VDS) tags.\n - ELEMENT_SUB_TYPE_WORKLOAD_SERVER: ELEMENT_SUB_TYPE_WORKLOAD_SERVER is used for workload server\ntags (such as VMWare ESXi host).\nA workload server is a server/data storage device on which\nthe hypervisor is installed.\n - ELEMENT_SUB_TYPE_VM: ELEMENT_SUB_TYPE_VM is used for VM tags.\nA VM is a software computer that, like a physical computer,\nruns an operating system and applications.\n - ELEMENT_SUB_TYPE_APPLICATION: ELEMENT_SUB_TYPE_APPLICATION is used for application tags.\nAn application is defined as a set of services where each service provides\na subset of the application’s functionality. An application can exist without\na service but not vice-versa.\n - ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE: ELEMENT_SUB_TYPE_CONNECTIVITY_MONITOR_PROBE is used for connectivity monitor probe tags.\nA connectivity monitor probe represents a configured probe (ICMP, HTTP, or TCP) that\nmonitors connectivity to a specific target from a device."
     },
     "arista.tag.v2.ElementType": {
       "type": "string",
@@ -3238,19 +3236,6 @@
       },
       "description": "TagAssignment holds a merge-preview or the existing merged\nstate (if the workspace ID is \"\") of an assignment between\na tag and a network element."
     },
-    "arista.tag.v2.TagAssignmentBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.tag.v2.TagAssignmentStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.tag.v2.TagAssignmentConfig": {
       "type": "object",
       "properties": {
@@ -3264,19 +3249,6 @@
         }
       },
       "description": "TagAssignmentConfig holds a configuration for an assignment\nbetween a tag and a network element.\nThe tag assignments that belong to entities other than ELEMENT_SUB_TYPE_DEVICE\nwill always be present in mainline only."
-    },
-    "arista.tag.v2.TagAssignmentConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.tag.v2.TagAssignmentConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.tag.v2.TagAssignmentConfigDeleteAllResponse": {
       "type": "object",
@@ -3441,7 +3413,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignmentConfig at end.\n    * Each TagAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignmentConfig at start, followed by updates until now.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignmentConfig at start, followed by updates\n    until end.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignmentConfig at end.\n    * Each TagAssignmentConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignmentConfig at start, followed by updates until now.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignmentConfig at start, followed by updates\n    until end.\n    * Each TagAssignmentConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3579,7 +3551,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignment at end.\n    * Each TagAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignment at start, followed by updates until now.\n    * Each TagAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignment at start, followed by updates\n    until end.\n    * Each TagAssignment response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagAssignment at end.\n    * Each TagAssignment response is fully-specified (all fields set).\n  * start: Returns the state of each TagAssignment at start, followed by updates until now.\n    * Each TagAssignment response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagAssignment at start, followed by updates\n    until end.\n    * Each TagAssignment response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3601,19 +3573,6 @@
         }
       }
     },
-    "arista.tag.v2.TagBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.tag.v2.TagStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.tag.v2.TagConfig": {
       "type": "object",
       "properties": {
@@ -3627,19 +3586,6 @@
         }
       },
       "description": "TagConfig holds a configuration for a user tag.\nThe tags that belong to entities other than ELEMENT_SUB_TYPE_DEVICE\nwill always be present in mainline only."
-    },
-    "arista.tag.v2.TagConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.tag.v2.TagConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.tag.v2.TagConfigDeleteAllResponse": {
       "type": "object",
@@ -3804,7 +3750,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagConfig at end.\n    * Each TagConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagConfig at start, followed by updates until now.\n    * Each TagConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagConfig at start, followed by updates\n    until end.\n    * Each TagConfig response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each TagConfig at end.\n    * Each TagConfig response is fully-specified (all fields set).\n  * start: Returns the state of each TagConfig at start, followed by updates until now.\n    * Each TagConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each TagConfig at start, followed by updates\n    until end.\n    * Each TagConfig response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
@@ -3921,7 +3867,7 @@
         },
         "time": {
           "$ref": "#/definitions/arista.time.TimeBounds",
-          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Tag at end.\n    * Each Tag response is fully-specified (all fields set).\n  * start: Returns the state of each Tag at start, followed by updates until now.\n    * Each Tag response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Tag at start, followed by updates\n    until end.\n    * Each Tag response at start is fully-specified, but updates until end may\n      be partial.\n\nThis field is not allowed in the Subscribe RPC."
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Tag at end.\n    * Each Tag response is fully-specified (all fields set).\n  * start: Returns the state of each Tag at start, followed by updates until now.\n    * Each Tag response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Tag at start, followed by updates\n    until end.\n    * Each Tag response at start is fully-specified, but updates until end may\n      be partial."
         }
       }
     },
