@@ -316,6 +316,18 @@ enum ChangeControlStatus {
      CHANGE_CONTROL_STATUS_NOT_STARTED = 4;
 }
 
+// CompletionReason describes the reason behind the terminal state of an executed change control.
+enum CompletionReason {
+    // COMPLETION_REASON_UNSPECIFIED means the completion reason is unknown.
+    COMPLETION_REASON_UNSPECIFIED = 0;
+    // COMPLETION_REASON_SUCCESS means the change control completed successfully.
+    COMPLETION_REASON_SUCCESS = 1;
+    // COMPLETION_REASON_FAILED means the change control completed due to failure.
+    COMPLETION_REASON_FAILED = 2;
+    // COMPLETION_REASON_STOPPED means the change control was stopped by a user.
+    COMPLETION_REASON_STOPPED = 3;
+}
+
 // Filter is used to filter changecontrols for requested device ids.
 message Filter {
 	// device_ids includes the list of device ids to be matched with devices
@@ -367,6 +379,9 @@ message ChangeControl {
 	DeviceToStageMap device_id_to_stage_ids = 9;
 	// creation holds information about when and by whom the change control was created.
 	Creation creation = 10;
+	// completion_reason indicates why the change control completed (only relevant when
+	// status is CHANGE_CONTROL_STATUS_COMPLETED).
+	CompletionReason completion_reason = 11;
 }
 
 // ApproveConfig is used to configure the approval of a change control.
@@ -450,18 +465,22 @@ message ChangeControlSummary {
 	// last_scheduled_user is the user who performed the last schedule or unschedule operation.
 	google.protobuf.StringValue last_scheduled_user = 13;
 
-	// start_time is the time at which the change control started execution.
+	// start_time is the time at which the change control execution was started.
 	google.protobuf.Timestamp start_time = 14;
 
 	// start_user is the user who started the change control execution.
 	google.protobuf.StringValue start_user = 15;
 
-	// end_time is the time at which the change control completed execution.
+	// end_time is the time at which the change control execution was completed.
 	google.protobuf.Timestamp end_time = 16;
 
 	// error is any error that occurred during the execution of the change control.
 	google.protobuf.StringValue error = 17;
 
-	// approved indicates whether the change control is approved.
+	// approved indicates whether the change control is currently approved or unapproved.
 	google.protobuf.BoolValue approved = 18;
+
+	// completion_reason indicates why the change control completed (only relevant when
+	// status is CHANGE_CONTROL_STATUS_COMPLETED).
+	CompletionReason completion_reason = 19;
 }

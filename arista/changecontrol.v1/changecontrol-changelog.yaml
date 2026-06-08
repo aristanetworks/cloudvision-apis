@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-04-30
+      description: Add CompletionReason enum and completion_reason field to ChangeControl and ChangeControlSummary.
+      version: 1.4.0
+
     - date: 2026-03-17
       description: Add ActionSummary and ActionSummaries messages to provide detailed action information in ChangeControlSummary.
       version: 1.3.0
