@@ -121,6 +121,10 @@ message SenderStatus {
 	// previous_attempts is the number of times the alert corresponding to this sender status has been
 	// retried.
 	google.protobuf.UInt32Value previous_attempts = 8;
+	// config_timestamp is the AlertConfig update timestamp captured when the send attempt associated
+	// with this sender status was made. It correlates the status with the configuration it used,
+	// which is not always possible using just Sender Status last-modification timestamp.
+	google.protobuf.Timestamp config_timestamp = 9;
 }
 
 // EventIdentifiers is a list of EventIdentifier messages.

@@ -3409,6 +3409,11 @@
           "type": "integer",
           "format": "int64",
           "description": "previous_attempts is the number of times the alert corresponding to this sender status has been\nretried."
+        },
+        "configTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "config_timestamp is the AlertConfig update timestamp captured when the send attempt associated\nwith this sender status was made. It correlates the status with the configuration it used,\nwhich is not always possible using just Sender Status last-modification timestamp."
         }
       },
       "description": "SenderStatus provides information about the status of particular send."

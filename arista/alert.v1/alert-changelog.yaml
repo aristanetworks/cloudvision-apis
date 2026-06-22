@@ -7,134 +7,87 @@
 # New entries go on top.
 
 Changes:
+  - date: 2026-06-19
+    description: Add config_timestamp field to SenderStatus message
+    version: 1.18.0
   - date: 2026-03-31
     description: Add OAuth2ClientCredentials settings for webhook
     version: 1.17.3
   - date: 2026-03-18
     description: Add virtual_tags to Matches message
     version: 1.17.2
-    onprem: true
-    cvaas: true
   - date: 2025-11-21
     description: Add sensor_name to BroadcastGroup
     version: 1.17.1
-    onprem: true
-    cvaas: true
   - date: 2025-11-05
     description: Add BROADCAST_GROUP_MISSING and INTERNAL_ERROR error types
     version: 1.17.0
-    onprem: true
-    cvaas: true
   - date: 2025-10-13
     description: Add event_type field to EventIdentifier message
     version: 1.16.0
-    onprem: true
-    cvaas: true
   - date: 2025-10-03
     description: Add previous_attempts field to SenderStatus message
     version: 1.15.0
-    onprem: true
-    cvaas: true
   - date: 2025-07-16
     description: Add custom filter for SenderStatus message
     version: 1.14.0
-    onprem: true
-    cvaas: true
   - date: 2025-05-15
     description: Add CvAction endpoint
     version: 1.13.0
-    onprem: true
-    cvaas: true
   - date: 2025-03-03
     description: Updating generated Golang and Python code in cloudvision-go and cloudvision-python
     version: 1.12.2
-    onprem: true
-    cvaas: true
   - date: 2025-02-27
     description: Add user_principal_name for Microsoft Graph Send Mail endpoint
     version: 1.12.1
-    onprem: true
-    cvaas: true
   - date: 2025-01-15
     description: Add SenderStatus model
     version: 1.12.0
-    onprem: true
-    cvaas: true
   - date: 2024-07-03
     description: Add Microsoft Graph Send Mail endpoint
     version: 1.11.0
-    onprem: true
-    cvaas: true
   - date: 2024-06-17
     description: Add Azure OAuth settings for webhook
     version: 1.10.0
-    onprem: true
-    cvaas: true
   - date: 2024-06-12
     description: Update Rule struct with debouncing field
     version: 1.9.1
-    onprem: true
-    cvaas: true
   - date: 2024-05-09
     description: Update GetSome, SetSome, DeleteSome REST endpoints
     version: 1.9.0
-    onprem: true
-    cvaas: true
   - date: 2024-03-06
     description: Add DefaultTemplate.display_name
     version: 1.8.3
-    onprem: true
-    cvaas: true
   - date: 2024-02-13
     description: Add snmp engine ID
     version: 1.8.2
-    onprem: true
-    cvaas: true
   - date: 2024-01-15
     description: Adding descriptive fields to DefaultTemplate resource
     version: 1.8.1
-    onprem: true
-    cvaas: true
   - date: 2023-10-11
     description: Allow webhook body to be customised
     version: 1.8.0
-    onprem: true
-    cvaas: true
   - date: 2023-10-20
     description: Adding single email templates
     version: 1.7.2
-    onprem: true
-    cvaas: true
   - date: 2023-10-20
     description: Adding auth_uri for AzureOAuth option
     version: 1.7.1
-    onprem: true
-    cvaas: true
   - date: 2023-10-05
     description: Adding DefaultTemplate read-only resource
     version: 1.7.0
-    onprem: true
-    cvaas: true
   - date: 2023-09-14
     description: Adding Azure Auth support
     version: 1.6.0
-    onprem: true
-    cvaas: true
   - date: 2023-05-02
     description: Adding custom HTTP headers
     version: 1.5.0
-    onprem: true
-    cvaas: true
   - date: 2023-04-21
     description: Adding additional documentation
     version: 1.4.1
-    onprem: true
-    cvaas: true
   - date: 2023-01-04
     description: Adding matches.ruleID
     version: 1.4.0
-    onprem: true
-    cvaas: true
   - date: 2022-12-12
     description: Adding single alert/webhook option
     version: 1.3.0
