@@ -3614,6 +3614,10 @@
         "applicableLicenseSkus": {
           "$ref": "#/definitions/fmp.RepeatedString",
           "description": "applicable_license_skus are the applicable license SKUs for the device\nof the requested feature."
+        },
+        "endCustomerPurchaseOrderNumber": {
+          "type": "string",
+          "description": "end_customer_purchase_order_number is the purchase order number associated with this device."
         }
       },
       "description": "DeviceData represents basic data of the device along with the licenses installed on it."
@@ -4059,6 +4063,10 @@
         "preferredBundleReason": {
           "$ref": "#/definitions/arista.license.v1.PreferredBundleReason",
           "description": "preferred_bundle_reason indicates why this bundle is preferred. This field is only\npopulated when is_preferred is true."
+        },
+        "endCustomerPurchaseOrderNumber": {
+          "type": "string",
+          "description": "end_customer_purchase_order_number is the purchase order number associated with this bundle."
         }
       },
       "description": "LicenseBundle represents a single license bundle with its UUID and preference status."
@@ -4609,6 +4617,10 @@
         "platformClass": {
           "type": "string",
           "description": "platform_class is the platform class of the license sku."
+        },
+        "endCustomerPurchaseOrderNumber": {
+          "type": "string",
+          "description": "end_customer_purchase_order_number is the purchase order number associated with this license."
         }
       },
       "description": "PurchasedLicense is a license record derived from the sales order\ninformation where each order is expanded into individual licenses.\nThese licenses will be uniquely identified with license_uuid.\nNote: This resource is only available in CVaaS."

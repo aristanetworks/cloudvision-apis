@@ -174,6 +174,8 @@ message DeviceTenantAssignment {
 	// updated_by_user represents information of user who performed
 	// last device assignment.
 	UserInfo updated_by_user = 9;
+	// end_customer_purchase_order_number is the purchase order number associated with this device.
+	google.protobuf.StringValue end_customer_purchase_order_number = 10 [(fmp.sortable) = "true"];
 }
 
 // DeviceTenantAssignConfig describes a device tenant modify request
@@ -263,6 +265,8 @@ message LicenseTenantAssignment {
 	// license_bundle_uuid corresponds to the bundle id to which
 	// the license belongs to
 	google.protobuf.StringValue license_bundle_uuid = 15;
+	// end_customer_purchase_order_number is the purchase order number associated with this license.
+	google.protobuf.StringValue end_customer_purchase_order_number = 16 [(fmp.sortable) = "true"];
 }
 
 // LicenseTenantAssignConfig describes a license tenant modify request

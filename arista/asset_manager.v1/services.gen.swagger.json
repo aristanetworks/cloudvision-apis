@@ -3491,6 +3491,10 @@
         "updatedByUser": {
           "$ref": "#/definitions/arista.asset_manager.v1.UserInfo",
           "description": "updated_by_user represents information of user who performed\nlast device assignment."
+        },
+        "endCustomerPurchaseOrderNumber": {
+          "type": "string",
+          "description": "end_customer_purchase_order_number is the purchase order number associated with this device."
         }
       },
       "title": "DeviceTenantAssignment represents tenant/customer information for a device\nThis api could also be used to get a list of all devices assigned to a tenant\nid. Example : get list of devices assigned to a tenant\n```\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270020\"\n   },\n   \"model_name\": \"DCS-7500\",\n   ...\n },\n {\n   \"key\" : {\n     \"device_id\": \"JPA22270022\"\n   },\n   \"model_name\": \"DCS-7130\",\n   ...\n }\n```"
@@ -3853,6 +3857,10 @@
         "licenseBundleUuid": {
           "type": "string",
           "title": "license_bundle_uuid corresponds to the bundle id to which\nthe license belongs to"
+        },
+        "endCustomerPurchaseOrderNumber": {
+          "type": "string",
+          "description": "end_customer_purchase_order_number is the purchase order number associated with this license."
         }
       },
       "title": "LicenseTenantAssignment represents tenant/customer information for a license\nThis api could also be used to get a list of all licenses assigned to a tenant\nid. Example : get list of licenses assigned to a tenant\n```\nRequest :\n {\n   \"partial_eq_filter\": [\n      {\n          \"tenant_id\" : \"Tenant1\"\n      }\n   ]\n }\nResponse :\n {\n   \"key\" : {\n     \"license_uuid\": \"19898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n },\n {\n   \"key\" : {\n     \"license_uuid\": \"29898989\"\n   },\n   \"sku\": \"LIC-FIX-4-MACSEC\",\n   ...\n }\n```"

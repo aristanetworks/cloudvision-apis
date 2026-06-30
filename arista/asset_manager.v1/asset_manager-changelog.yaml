@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-06-23
+      description: Adding end_customer_purchase_order_number to
+        DeviceTenantAssignment and LicenseTenantAssignment
+      version: 1.1.2
+
     - date: 2026-03-12
       description: Update message description format
       version: 1.1.1
