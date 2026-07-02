@@ -22,16 +22,16 @@ message RepeatedRepeatedString {
 	repeated fmp.RepeatedString values = 1;
 }
 
-// ChangeControlKey uniquely identifies a change control.
+// ChangeControlKey uniquely identifies a Change Control.
 message ChangeControlKey {
 	option (fmp.model_key) = true;
 
-	// id is the ID of the change control.
+	// id is the ID of the Change Control.
 	google.protobuf.StringValue id = 1;
 }
 
 // Action is an action to perform during the execution of
-// a stage of a change control. Available actions can be
+// a stage of a Change Control. Available actions can be
 // fetched using the "action" services.
 message Action {
 	// name is the name of the action.
@@ -71,7 +71,7 @@ message StageConfig {
 
 // StageConfigMap wraps a map from stage ID to `StageConfig`.
 // This defines the configuration and order of execution
-// for the stages in a change control.
+// for the stages in a Change Control.
 //
 // For example:
 //
@@ -87,7 +87,7 @@ message StageConfig {
 // }
 // ```
 //
-// Assuming the root stage ID of the enclosing change control
+// Assuming the root stage ID of the enclosing Change Control
 // is "root", this would mean to do the following in sequence:
 //
 // ```
@@ -120,7 +120,7 @@ message ChangeConfig {
 	google.protobuf.StringValue notes = 4;
 }
 
-// FlagConfig is used to set a flag on a change control that takes
+// FlagConfig is used to set a flag on a Change Control that takes
 // a boolean value (e.g. start/stop, approve/unapprove).
 message FlagConfig {
 	// value is the value of the flag (`true` or `false`).
@@ -129,7 +129,7 @@ message FlagConfig {
 	google.protobuf.StringValue notes = 2;
 }
 
-// TimestampFlagConfig is used to set a flag on a change control
+// TimestampFlagConfig is used to set a flag on a Change Control
 // that takes a timestamp value (e.g. schedule/unschedule).
 message TimestampFlagConfig {
 	// value is the value of the flag (some timestamp).
@@ -138,21 +138,21 @@ message TimestampFlagConfig {
 	google.protobuf.StringValue notes = 2;
 }
 
-// ChangeControlConfig holds the configuration of a change control.
+// ChangeControlConfig holds the configuration of a Change Control.
 message ChangeControlConfig {
 	option (fmp.model) = "rw";
 
-	// key uniquely identifies the change control.
+	// key uniquely identifies the Change Control.
 	ChangeControlKey key = 1;
 	// change is the change subject to execution.
 	ChangeConfig change = 2;
 	// start is the flag to start (`start.value` set to `true`)
 	// or stop (`start.value` set to `false`) execution of the
-	// change control.
+	// Change Control.
 	FlagConfig start = 3;
 	// schedule is the flag to schedule (`schedule.value` set to
 	// some timestamp) or unschedule (`schedule.value` set to
-	// `nil`) the change control for execution.
+	// `nil`) the Change Control for execution.
 	TimestampFlagConfig schedule = 4;
 }
 
@@ -226,7 +226,7 @@ message Stage {
 	// end_time is the time when status change to Completed.
 	google.protobuf.Timestamp end_time = 7;
 	// steps represent the granular steps and their statuses
-	// associated with the action performed in the change control stage.
+	// associated with the action performed in the Change Control stage.
 	// Each stage generally defines either an action
 	// or a series of sub-stages.
 	ActionSteps steps = 8;
@@ -241,7 +241,7 @@ message StageMap {
 }
 
 // Change holds the configuration and status of the change of a
-// change control.
+// Change Control.
 message Change {
 	// name is the name of the change.
 	google.protobuf.StringValue name = 1;
@@ -284,47 +284,47 @@ message TimestampFlag {
 	google.protobuf.StringValue user = 4;
 }
 
-// Creation holds information about when and by whom a change control was created.
+// Creation holds information about when and by whom a Change Control was created.
 message Creation {
-	// time is the time when the change control was created.
+	// time is the time when the Change Control was created.
 	google.protobuf.Timestamp time = 1;
-	// user is the user who created the change control.
+	// user is the user who created the Change Control.
 	google.protobuf.StringValue user = 2;
 }
 
 // ChangeControlStatus defines the possible execution statuses of
-// a change control.
+// a Change Control.
 enum ChangeControlStatus {
-     // CHANGE_CONTROL_STATUS_UNSPECIFIED means the change control status is unknown.
+     // CHANGE_CONTROL_STATUS_UNSPECIFIED means the Change Control status is unknown.
      CHANGE_CONTROL_STATUS_UNSPECIFIED = 0;
-     // CHANGE_CONTROL_STATUS_RUNNING means the change control has begun
+     // CHANGE_CONTROL_STATUS_RUNNING means the Change Control has begun
      // execution.
      CHANGE_CONTROL_STATUS_RUNNING = 1;
-     // CHANGE_CONTROL_STATUS_COMPLETED means the change control has ceased
-     // execution. Success/failure of a change control cannot be inferred
-     // from this status alone but rather this status plus the change control
+     // CHANGE_CONTROL_STATUS_COMPLETED means the Change Control has ceased
+     // execution. Success/failure of a Change Control cannot be inferred
+     // from this status alone but rather this status plus the Change Control
      // error. That is, no error implies success and some error implies failure.
      CHANGE_CONTROL_STATUS_COMPLETED = 2;
-     // CHANGE_CONTROL_STATUS_SCHEDULED means the change control has been
+     // CHANGE_CONTROL_STATUS_SCHEDULED means the Change Control has been
      // scheduled for execution at some time. Any failure that occurs during
      // this process will cause a transition back to the unspecified status,
      // a reset of the schedule flag by the system, and an error on the change
      // control reporting the details of the failure.
      CHANGE_CONTROL_STATUS_SCHEDULED = 3;
-     // CHANGE_CONTROL_STATUS_NOT_STARTED means the change control has not been
-     // started. This would include approved and not approved change controls.
+     // CHANGE_CONTROL_STATUS_NOT_STARTED means the Change Control has not been
+     // started. This would include approved and not approved Change Controls.
      CHANGE_CONTROL_STATUS_NOT_STARTED = 4;
 }
 
-// CompletionReason describes the reason behind the terminal state of an executed change control.
+// CompletionReason describes the reason behind the terminal state of an executed Change Control.
 enum CompletionReason {
     // COMPLETION_REASON_UNSPECIFIED means the completion reason is unknown.
     COMPLETION_REASON_UNSPECIFIED = 0;
-    // COMPLETION_REASON_SUCCESS means the change control completed successfully.
+    // COMPLETION_REASON_SUCCESS means the Change Control completed successfully.
     COMPLETION_REASON_SUCCESS = 1;
-    // COMPLETION_REASON_FAILED means the change control completed due to failure.
+    // COMPLETION_REASON_FAILED means the Change Control completed due to failure.
     COMPLETION_REASON_FAILED = 2;
-    // COMPLETION_REASON_STOPPED means the change control was stopped by a user.
+    // COMPLETION_REASON_STOPPED means the Change Control was stopped by a user.
     COMPLETION_REASON_STOPPED = 3;
 }
 
@@ -343,74 +343,74 @@ message DeviceToStageMap {
 	map<string, fmp.RepeatedString> values = 1;
 }
 
-// ChangeControl holds the configuration and status of a change control.
+// ChangeControl holds the configuration and status of a Change Control.
 message ChangeControl {
 	option (fmp.model) = "ro";
 	option (fmp.custom_filter) = "Filter";
 
-	// key uniquely identifies the change control.
+	// key uniquely identifies the Change Control.
 	ChangeControlKey key = 1;
 	// change holds the configuration and status of the change of
-	// the change control.
+	// the Change Control.
 	Change change = 2;
-	// approve indicates whether the change control was flagged
+	// approve indicates whether the Change Control was flagged
 	// as approved (`approve.value` set to `true`) or unapproved
 	// (`approve.value` set to `false`).
 	Flag approve = 3;
-	// start indicates whether the change control was flagged to
+	// start indicates whether the Change Control was flagged to
 	// start (`start.value` set to `true`) or stop (`start.value`
 	// set to `false`) execution.
 	Flag start = 4;
-	// status is the execution status of the change control.
+	// status is the execution status of the Change Control.
 	ChangeControlStatus status = 5;
 	// error is any error that occurred during the execution of the
-	// change control.
+	// Change Control.
 	google.protobuf.StringValue error = 6;
-	// schedule indicates whether the change control was flagged
+	// schedule indicates whether the Change Control was flagged
 	// to be scheduled (`schedule.value` set to some timestamp) or
 	// unscheduled (`schedule.value` set to `nil`) for execution.
 	TimestampFlag schedule = 7;
-	// device_ids is a list of device IDs on which the change control will operate.
+	// device_ids is a list of device IDs on which the Change Control will operate.
 	fmp.RepeatedString device_ids = 8;
 	// device_id_to_stage_ids is a map of device IDs to the stages present in the
 	// specified Change state.
 	// This is not affected by the device ID based custom filtering and will contain
 	// info about all the devices associated with a CC ID.
 	DeviceToStageMap device_id_to_stage_ids = 9;
-	// creation holds information about when and by whom the change control was created.
+	// creation holds information about when and by whom the Change Control was created.
 	Creation creation = 10;
-	// completion_reason indicates why the change control completed (only relevant when
+	// completion_reason indicates why the Change Control completed (only relevant when
 	// status is CHANGE_CONTROL_STATUS_COMPLETED).
 	CompletionReason completion_reason = 11;
-	// validation_statuses indicates failed validation statuses for the change control.
+	// validation_statuses indicates failed validation statuses for the Change Control.
 	// This is only relevant when one or more devices fail validation.
 	ChangeControlValidationStatuses validation_statuses = 12;
 	// validation_detail contains additional information about the validation statuses.
 	// This is only relevant when one or more devices fail validation.
 	ChangeControlValidationDetail validation_detail = 13;
-	// override_reason indicates user intent to override change control validation.
+	// override_reason indicates user intent to override Change Control validation.
 	OverrideReason override_reason = 14;
 }
 
-// ApproveConfig is used to configure the approval of a change control.
+// ApproveConfig is used to configure the approval of a Change Control.
 message ApproveConfig {
 	option (fmp.model) = "rw";
 
-	// key uniquely identifies the change control.
+	// key uniquely identifies the Change Control.
 	ChangeControlKey key = 1;
 	// approve is the flag to approve (`approve.value` set to `true`)
-	// or unapprove (`approve.value` set to `false`) the change control.
+	// or unapprove (`approve.value` set to `false`) the Change Control.
 	FlagConfig approve = 2;
-	// version is the timestamp of the change control to approve.
+	// version is the timestamp of the Change Control to approve.
 	// This field must be set when `approve.value` is set to `true`
-	// and is intended to safeguard against approving a change control
+	// and is intended to safeguard against approving a Change Control
 	// that has been updated since last read.
 	google.protobuf.Timestamp version = 3;
-	// override_reason indicates user intent to override change control validation.
+	// override_reason indicates user intent to override Change Control validation.
 	OverrideReason override_reason = 4;
 }
 
-// ActionSummary provides detailed information about actions in a change control.
+// ActionSummary provides detailed information about actions in a Change Control.
 message ActionSummary {
 	// id uniquely identifies the action.
 	// For built-in actions: it will be the action identifier (e.g., "setImage", "setConfig")
@@ -421,7 +421,7 @@ message ActionSummary {
 	// name is the name of the action.
 	google.protobuf.StringValue name = 2;
 
-	// count is the number of times this action appears in the change control.
+	// count is the number of times this action appears in the Change Control.
 	google.protobuf.UInt32Value count = 3;
 }
 
@@ -431,36 +431,36 @@ message ActionSummaries {
 	repeated ActionSummary values = 1;
 }
 
-// ChangeControlSummary provides the summary of the change control.
+// ChangeControlSummary provides the summary of the Change Control.
 message ChangeControlSummary {
 	option (fmp.model) = "ro";
 	option (fmp.custom_filter) = "Filter";
 
-	// key uniquely identifies the change control.
+	// key uniquely identifies the Change Control.
 	ChangeControlKey key = 1;
 
-	// name is the name of the change control.
+	// name is the name of the Change Control.
 	google.protobuf.StringValue name = 2;
 
-	// status is the status of the change control.
+	// status is the status of the Change Control.
 	ChangeControlStatus status = 3;
 
-	// device_count is the count of the devices impacted in the change control.
+	// device_count is the count of the devices impacted in the Change Control.
 	google.protobuf.UInt32Value device_count = 4;
 
-	// action_summaries provides detailed information about each action type used in the change control.
+	// action_summaries provides detailed information about each action type used in the Change Control.
 	ActionSummaries action_summaries = 5;
 
-	// created_time is the time at which the change control was created.
+	// created_time is the time at which the Change Control was created.
 	google.protobuf.Timestamp created_time = 6;
 
-	// created_user is the user by whom the change control was created.
+	// created_user is the user by whom the Change Control was created.
 	google.protobuf.StringValue created_user = 7;
 
-	// last_edited_time is the time at which the change control was last edited.
+	// last_edited_time is the time at which the Change Control was last edited.
 	google.protobuf.Timestamp last_edited_time = 8;
 
-	// last_edited_user is the user by whom the change control was last edited.
+	// last_edited_user is the user by whom the Change Control was last edited.
 	google.protobuf.StringValue last_edited_user = 9;
 
 	// last_approved_time is the time of the last approve or unapprove operation.
@@ -475,26 +475,31 @@ message ChangeControlSummary {
 	// last_scheduled_user is the user who performed the last schedule or unschedule operation.
 	google.protobuf.StringValue last_scheduled_user = 13;
 
-	// start_time is the time at which the change control execution was started.
+	// start_time is the time at which the Change Control execution was started.
 	google.protobuf.Timestamp start_time = 14;
 
-	// start_user is the user who started the change control execution.
+	// start_user is the user who started the Change Control execution.
 	google.protobuf.StringValue start_user = 15;
 
-	// end_time is the time at which the change control execution was completed.
+	// end_time is the time at which the Change Control execution was completed.
 	google.protobuf.Timestamp end_time = 16;
 
-	// error is any error that occurred during the execution of the change control.
+	// error is any error that occurred during the execution of the Change Control.
 	google.protobuf.StringValue error = 17;
 
-	// approved indicates whether the change control is currently approved or unapproved.
+	// approved indicates whether the Change Control is currently approved or unapproved.
 	google.protobuf.BoolValue approved = 18;
 
-	// completion_reason indicates why the change control completed (only relevant when
+	// completion_reason indicates why the Change Control completed (only relevant when
 	// status is CHANGE_CONTROL_STATUS_COMPLETED).
 	CompletionReason completion_reason = 19;
-	// validation_statuses indicates failed validation statuses for the change control.
-	// This field is only populated when one or more validations fail.
+
+	// validation_statuses indicates the active failed validation statuses surfaced
+	// in the Change Control summary. This field may contain multiple values when
+	// more than one validation condition fails. For example, a Change Control may
+	// be obsolete due to ordering and also temporarily blocked by concurrent
+	// execution. An empty value means there are no active validation failures to
+	// surface in the summary.
 	ChangeControlValidationStatuses validation_statuses = 20;
 }
 
@@ -504,17 +509,17 @@ enum OverrideReason {
 	// is unknown.
 	OVERRIDE_REASON_UNSPECIFIED = 0;
 	// OVERRIDE_REASON_USER_FORCED indicates that the user has overridden the validation and forced
-	// the approval of the change control.
+	// the approval of the Change Control.
 	OVERRIDE_REASON_USER_FORCED = 1;
 }
 
-// ChangeControlValidationStatuses is a list of validation statuses for the change control.
+// ChangeControlValidationStatuses is a list of validation statuses for the Change Control.
 message ChangeControlValidationStatuses {
 	// values is a list of validation statuses.
 	repeated ChangeControlValidationStatus values = 1;
 }
 
-// ChangeControlValidationStatus is used to indicate the status of the change control validation.
+// ChangeControlValidationStatus is used to indicate the status of the Change Control validation.
 enum ChangeControlValidationStatus {
 	// CHANGE_CONTROL_VALIDATION_STATUS_UNSPECIFIED indicates that the validation status
 	// is unknown.
@@ -522,13 +527,18 @@ enum ChangeControlValidationStatus {
 	// CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS indicates that the validation has succeeded.
 	CHANGE_CONTROL_VALIDATION_STATUS_SUCCESS = 1;
 	// CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED indicates that the validation has failed, and the
-	// change control has been obsoleted. This is due to the execution of a newer change control.
+	// Change Control has been obsoleted. This is due to the execution of a newer Change Control.
 	CHANGE_CONTROL_VALIDATION_STATUS_OBSOLETED = 2;
+	// CHANGE_CONTROL_VALIDATION_STATUS_CONCURRENT_EXECUTION indicates that validation failed
+	// because execution would conflict with another Change Control that is currently running
+	// on one or more target devices. This Change Control is blocked until the conflicting
+	// execution completes.
+	CHANGE_CONTROL_VALIDATION_STATUS_CONCURRENT_EXECUTION = 3;
 }
 
-// ChangeControlValidationDetail contains validation details for a change control.
+// ChangeControlValidationDetail contains validation details for a Change Control.
 message ChangeControlValidationDetail {
-	// devices is a list of devices that failed the change control validation.
+	// devices is a list of devices that failed the Change Control validation.
 	// The failure type is included in the details.
 	DeviceValidationDetails devices = 1;
 }
@@ -547,11 +557,13 @@ message DeviceValidationDetail {
 	// failure_type indicates the type of validation failure.
 	DeviceValidationFailure failure_type = 2;
 	// metadata is a string that contains additional information related to the failure.
+	// This field may contain multiple values when more than one validation condition fails.
 	// Current failures and their corresponding metadata are:
 	// DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER: ID of the newer Change Control that
 	// caused the designed config to be out of order.
 	// DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER: ID of the newer Change Control that
 	// caused the designed image to be out of order.
+	// DEVICE_VALIDATION_FAILURE_CONCURRENT_EXECUTION: ID of the running Change Control.
 	google.protobuf.StringValue metadata = 3;
 }
 
@@ -561,9 +573,12 @@ enum DeviceValidationFailure {
 	// is unknown.
 	DEVICE_VALIDATION_FAILURE_UNSPECIFIED = 0;
 	// DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER indicates that the designed config is out of
-	// order due to the execution of a newer change control.
+	// order due to the execution of a newer Change Control.
 	DEVICE_VALIDATION_FAILURE_CONFIG_OUT_OF_ORDER = 1;
 	// DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER indicates that the designed image is out of
-	// order due to the execution of a newer change control.
+	// order due to the execution of a newer Change Control.
 	DEVICE_VALIDATION_FAILURE_IMAGE_OUT_OF_ORDER = 2;
+	// DEVICE_VALIDATION_FAILURE_CONCURRENT_EXECUTION indicates that the device is currently
+	// executing another Change Control.
+	DEVICE_VALIDATION_FAILURE_CONCURRENT_EXECUTION = 3;
 }
