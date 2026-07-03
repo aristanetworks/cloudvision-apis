@@ -5866,19 +5866,6 @@
       },
       "description": "Decommission is the resource that holds the decommissioning\nstate of a device."
     },
-    "arista.studio_topology.v1.DecommissionBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.DecommissionStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.DecommissionConfig": {
       "type": "object",
       "properties": {
@@ -5888,19 +5875,6 @@
         }
       },
       "description": "DecommissionConfig is the resource for decommissioning\nthe device from the studio."
-    },
-    "arista.studio_topology.v1.DecommissionConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.DecommissionConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio_topology.v1.DecommissionConfigDeleteAllResponse": {
       "type": "object",
@@ -6233,19 +6207,6 @@
       },
       "description": "DeviceInputConfig is the desired topology input for a device."
     },
-    "arista.studio_topology.v1.DeviceInputConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.DeviceInputConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.DeviceInputConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
@@ -6471,19 +6432,6 @@
       },
       "description": "DeviceState is the state of a device written by\nInterfaceInputConfig, DeviceInputConfig and\nUpdateConfig resources."
     },
-    "arista.studio_topology.v1.DeviceStateBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.DeviceStateStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.DeviceStateResponse": {
       "type": "object",
       "properties": {
@@ -6574,10 +6522,11 @@
         "DEVICE_STATUS_UNSPECIFIED",
         "DEVICE_STATUS_ACTIVE",
         "DEVICE_STATUS_INACTIVE",
-        "DEVICE_STATUS_EXPECTED"
+        "DEVICE_STATUS_EXPECTED",
+        "DEVICE_STATUS_DECOMMISSIONED"
       ],
       "default": "DEVICE_STATUS_UNSPECIFIED",
-      "description": "DeviceStatus defines the set of statuses that apply to a device.\n\n - DEVICE_STATUS_UNSPECIFIED: DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.\n - DEVICE_STATUS_ACTIVE: DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_INACTIVE: DEVICE_STATUS_INACTIVE indicates a device is not streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_EXPECTED: DEVICE_STATUS_EXPECTED indicates a device has not yet streamed its telemetry\ndata to CloudVision."
+      "description": "DeviceStatus defines the set of statuses that apply to a device.\n\n - DEVICE_STATUS_UNSPECIFIED: DEVICE_STATUS_UNSPECIFIED is the default unspecified device status.\n - DEVICE_STATUS_ACTIVE: DEVICE_STATUS_ACTIVE indicates a device is streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_INACTIVE: DEVICE_STATUS_INACTIVE indicates a device is not streaming its telemetry data\nto CloudVision.\n - DEVICE_STATUS_EXPECTED: DEVICE_STATUS_EXPECTED indicates a device has not yet streamed its telemetry\ndata to CloudVision.\n - DEVICE_STATUS_DECOMMISSIONED: DEVICE_STATUS_DECOMMISSIONED indicates a device that has been previously decommissioned."
     },
     "arista.studio_topology.v1.Element": {
       "type": "string",
@@ -6643,19 +6592,6 @@
         }
       },
       "description": "InterfaceInputConfig is the resource for manually adding\nan interface in I\u0026T studios."
-    },
-    "arista.studio_topology.v1.InterfaceInputConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.InterfaceInputConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio_topology.v1.InterfaceInputConfigDeleteAllResponse": {
       "type": "object",
@@ -6935,19 +6871,6 @@
       },
       "description": "Replace is the resource that holds the status of the replace operation."
     },
-    "arista.studio_topology.v1.ReplaceBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.ReplaceStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.ReplaceConfig": {
       "type": "object",
       "properties": {
@@ -6961,19 +6884,6 @@
         }
       },
       "description": "ReplaceConfig is the resource for replacing a device with another device in Studios."
-    },
-    "arista.studio_topology.v1.ReplaceConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.ReplaceConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio_topology.v1.ReplaceConfigDeleteAllResponse": {
       "type": "object",
@@ -7264,19 +7174,6 @@
       },
       "description": "RevertConfig is the model provided to revert a workspace."
     },
-    "arista.studio_topology.v1.RevertConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.RevertConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.RevertConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
@@ -7492,19 +7389,6 @@
       },
       "description": "Update represents an update on to the workspace."
     },
-    "arista.studio_topology.v1.UpdateBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.UpdateStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.UpdateConfig": {
       "type": "object",
       "properties": {
@@ -7522,19 +7406,6 @@
         }
       },
       "description": "UpdateConfig contains the acceptance status of an Update."
-    },
-    "arista.studio_topology.v1.UpdateConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.UpdateConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio_topology.v1.UpdateConfigDeleteAllResponse": {
       "type": "object",
@@ -7849,19 +7720,6 @@
       },
       "description": "UpdateSyncConfig model represents a point in time all updates\nare to be accepted."
     },
-    "arista.studio_topology.v1.UpdateSyncConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio_topology.v1.UpdateSyncConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio_topology.v1.UpdateSyncConfigDeleteAllResponse": {
       "type": "object",
       "properties": {
@@ -8054,10 +7912,13 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
     },
     "arista.time.TimeBounds": {
       "type": "object",

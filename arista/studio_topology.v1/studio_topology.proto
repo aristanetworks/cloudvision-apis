@@ -69,6 +69,8 @@ enum DeviceStatus {
 	// DEVICE_STATUS_EXPECTED indicates a device has not yet streamed its telemetry
 	// data to CloudVision.
 	DEVICE_STATUS_EXPECTED = 3;
+	// DEVICE_STATUS_DECOMMISSIONED indicates a device that has been previously decommissioned.
+	DEVICE_STATUS_DECOMMISSIONED = 4;
  }
 
 // DeviceInfo contains device properties.

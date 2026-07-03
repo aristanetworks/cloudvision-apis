@@ -7,15 +7,17 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-07-01
+      description: Add DEVICE_STATUS_DECOMMISSIONED field in DeviceStatus enum
+      version: 1.0.9
+
     - date: 2025-11-19
       description: Add fields for expected devices configuration
       version: 1.0.8
-      cvaas: true
 
     - date: 2025-02-01
       description: Release APIs
       version: 1.0.7
-      cvaas: true
 
     - date: 2025-01-28
       description: Add Device ID parameter to Updates message
