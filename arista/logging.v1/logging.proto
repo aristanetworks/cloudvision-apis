@@ -1,0 +1,111 @@
+// Copyright (c) 2026 Arista Networks, Inc.  All rights reserved.
+// Use of this source code is governed by the Apache License 2.0
+// that can be found in the COPYING file.
+
+syntax = "proto3";
+
+package arista.logging.v1;
+
+option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/logging.v1;logging";
+
+option java_package = "com.arista.logging.v1";
+option java_outer_classname = "Logging";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "fmp/extensions.proto";
+import "fmp/wrappers.proto";
+
+
+// LoggingKey uniquely identifies a log via its id, its category and level.
+// All log lines for executions of change controls, studios, etc. are written under the same key.
+message LoggingKey {
+    option (fmp.model_key) = true;
+	// id is a unique identifier provided by the client.
+	google.protobuf.StringValue id = 1;
+	// category is the category of the log.
+	LoggingCategory category = 2;
+	// level is the verbosity level of the log.
+	LoggingLevel level = 3;
+}
+
+// LoggingCategory describes the possible categories of logging.
+enum LoggingCategory {
+	// LOGGING_CATEGORY_UNSPECIFIED is an unspecified category. Disallowed for writes.
+	LOGGING_CATEGORY_UNSPECIFIED = 0;
+	// LOGGING_CATEGORY_CHANGECONTROL is used for actions executed as part of a change control.
+	LOGGING_CATEGORY_CHANGECONTROL = 1;
+	// LOGGING_CATEGORY_ACTION_EXEC is used for actions executed via autofill actions, build hooks,
+	// or the standalone execution feature.
+	LOGGING_CATEGORY_ACTION_EXEC = 2;
+	// LOGGING_CATEGORY_STUDIO_TEMPLATE is used for studio template rendering executions.
+	LOGGING_CATEGORY_STUDIO_TEMPLATE = 3;
+}
+
+// LoggingLevel describes the different verbosity levels of logging.
+enum LoggingLevel {
+	// LOGGING_LEVEL_UNSPECIFIED is an unspecified level. Disallowed for writes,
+	// but setting this in a GetAll filter returns all logging levels.
+	LOGGING_LEVEL_UNSPECIFIED = 0;
+	// LOGGING_LEVEL_TRACE is equivalent to a trace verbosity log call.
+	LOGGING_LEVEL_TRACE = 1;
+	// LOGGING_LEVEL_DEBUG is equivalent to a debug verbosity log call.
+	LOGGING_LEVEL_DEBUG = 2;
+	// LOGGING_LEVEL_INFO is equivalent to an info verbosity log call.
+	LOGGING_LEVEL_INFO = 3;
+	// LOGGING_LEVEL_WARNING is equivalent to a warning verbosity log call.
+	LOGGING_LEVEL_WARNING = 4;
+	// LOGGING_LEVEL_ERROR is equivalent to an error verbosity log call.
+	LOGGING_LEVEL_ERROR = 5;
+	// LOGGING_LEVEL_CRITICAL is equivalent to a critical verbosity log call.
+	LOGGING_LEVEL_CRITICAL = 6;
+}
+
+// LoggingConfig is used to write non-audit related logs produced by such services as
+// change controls, studio builds, python autofill actions, etc. by providing a key
+// related to the current execution, the log, and optional metadata such as
+// file name, line number and tags.
+message LoggingConfig {
+	option (fmp.model) = "rw";
+	// key uniquely identifies a standalone log or a series of logs for a single execution.
+	LoggingKey key = 1;
+	// log contains the actual log contents.
+	google.protobuf.StringValue log = 2;
+	// file contains the file name of the script being executed, if relevant.
+	google.protobuf.StringValue file = 3;
+	// line contains the line number of the log in the script being executed, if relevant.
+	google.protobuf.Int64Value line = 4;
+	// tags is a map of tag values that can be set on write and can be used in queries
+	// to filter the logs. Some executions will automatically populate some tags. E.g.
+	// change control logs will populate a "changeControlId" and "stageId" tag.
+	fmp.MapStringString tags = 5;
+}
+
+// LoggingAudit contains audit information about the given log. It's added by the logging rAPI
+// and only accessible in the state model.
+message LoggingAudit {
+	// added_by contains the name of the user who added the log.
+	google.protobuf.StringValue added_by = 1;
+}
+
+// Logging is used to retrieve non-audit related logs produced by such services as
+// change controls, studio builds, python autofill actions, etc.
+message Logging {
+	option (fmp.model) = "ro";
+	// key uniquely identifies a standalone log or a series of logs for a single execution.
+	LoggingKey key = 1;
+	// log contains the actual log contents.
+	google.protobuf.StringValue log = 2;
+	// file contains the file name of the script being executed, if relevant.
+	google.protobuf.StringValue file = 3;
+	// line contains the line number of the log in the script being executed, if relevant.
+	google.protobuf.Int64Value line = 4;
+	// audit contains additional audit information added by the service when the log was
+	// written.
+	LoggingAudit audit = 5;
+	// tags is a map of tag values that was set on write and can be used in queries
+	// to filter the logs. Some executions will automatically populate some tags. E.g.
+	// change control logs will populate a "changeControlId" and "stageId" tag.
+	fmp.MapStringString tags = 6;
+}

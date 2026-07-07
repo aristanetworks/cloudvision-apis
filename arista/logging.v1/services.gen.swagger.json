@@ -1,0 +1,1608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "arista.logging.v1 Resources",
+    "version": "CV_RESOURCE_VER_DEV",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "https://github.com/aristanetworks/cloudvision-apis/blob/trunk/COPYING"
+    }
+  },
+  "tags": [
+    {
+      "name": "LoggingService"
+    },
+    {
+      "name": "LoggingConfigService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/resources/logging/v1/Logging": {
+      "get": {
+        "operationId": "LoggingService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is a unique identifier provided by the client.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.category",
+            "description": "category is the category of the log.\n\n - LOGGING_CATEGORY_UNSPECIFIED: LOGGING_CATEGORY_UNSPECIFIED is an unspecified category. Disallowed for writes.\n - LOGGING_CATEGORY_CHANGECONTROL: LOGGING_CATEGORY_CHANGECONTROL is used for actions executed as part of a change control.\n - LOGGING_CATEGORY_ACTION_EXEC: LOGGING_CATEGORY_ACTION_EXEC is used for actions executed via autofill actions, or the\nstandalone execution feature.\n - LOGGING_CATEGORY_STUDIO_TEMPLATE: LOGGING_CATEGORY_STUDIO_TEMPLATE is used for studio related executions, e.g. build hooks\nor templates being rendered.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_CATEGORY_UNSPECIFIED",
+              "LOGGING_CATEGORY_CHANGECONTROL",
+              "LOGGING_CATEGORY_ACTION_EXEC",
+              "LOGGING_CATEGORY_STUDIO_TEMPLATE"
+            ],
+            "default": "LOGGING_CATEGORY_UNSPECIFIED"
+          },
+          {
+            "name": "key.level",
+            "description": "level is the verbosity level of the log.\n\n - LOGGING_LEVEL_UNSPECIFIED: LOGGING_LEVEL_UNSPECIFIED is an unspecified level. Disallowed for writes,\nbut setting this in a GetAll filter returns all logging levels.\n - LOGGING_LEVEL_TRACE: LOGGING_LEVEL_TRACE is equivalent to a trace verbosity log call.\n - LOGGING_LEVEL_DEBUG: LOGGING_LEVEL_DEBUG is equivalent to a debug verbosity log call.\n - LOGGING_LEVEL_INFO: LOGGING_LEVEL_INFO is equivalent to an info verbosity log call.\n - LOGGING_LEVEL_WARNING: LOGGING_LEVEL_WARNING is equivalent to a warning verbosity log call.\n - LOGGING_LEVEL_ERROR: LOGGING_LEVEL_ERROR is equivalent to an error verbosity log call.\n - LOGGING_LEVEL_CRITICAL: LOGGING_LEVEL_CRITICAL is equivalent to a critical verbosity log call.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_LEVEL_UNSPECIFIED",
+              "LOGGING_LEVEL_TRACE",
+              "LOGGING_LEVEL_DEBUG",
+              "LOGGING_LEVEL_INFO",
+              "LOGGING_LEVEL_WARNING",
+              "LOGGING_LEVEL_ERROR",
+              "LOGGING_LEVEL_CRITICAL"
+            ],
+            "default": "LOGGING_LEVEL_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/Logging/all": {
+      "get": {
+        "operationId": "LoggingService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/Logging/getsome": {
+      "post": {
+        "operationId": "LoggingService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/Logging/metadata": {
+      "get": {
+        "operationId": "LoggingService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/Logging/watch": {
+      "get": {
+        "operationId": "LoggingService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/Logging/watchmetadata": {
+      "get": {
+        "operationId": "LoggingService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig": {
+      "get": {
+        "operationId": "LoggingConfigService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is a unique identifier provided by the client.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.category",
+            "description": "category is the category of the log.\n\n - LOGGING_CATEGORY_UNSPECIFIED: LOGGING_CATEGORY_UNSPECIFIED is an unspecified category. Disallowed for writes.\n - LOGGING_CATEGORY_CHANGECONTROL: LOGGING_CATEGORY_CHANGECONTROL is used for actions executed as part of a change control.\n - LOGGING_CATEGORY_ACTION_EXEC: LOGGING_CATEGORY_ACTION_EXEC is used for actions executed via autofill actions, or the\nstandalone execution feature.\n - LOGGING_CATEGORY_STUDIO_TEMPLATE: LOGGING_CATEGORY_STUDIO_TEMPLATE is used for studio related executions, e.g. build hooks\nor templates being rendered.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_CATEGORY_UNSPECIFIED",
+              "LOGGING_CATEGORY_CHANGECONTROL",
+              "LOGGING_CATEGORY_ACTION_EXEC",
+              "LOGGING_CATEGORY_STUDIO_TEMPLATE"
+            ],
+            "default": "LOGGING_CATEGORY_UNSPECIFIED"
+          },
+          {
+            "name": "key.level",
+            "description": "level is the verbosity level of the log.\n\n - LOGGING_LEVEL_UNSPECIFIED: LOGGING_LEVEL_UNSPECIFIED is an unspecified level. Disallowed for writes,\nbut setting this in a GetAll filter returns all logging levels.\n - LOGGING_LEVEL_TRACE: LOGGING_LEVEL_TRACE is equivalent to a trace verbosity log call.\n - LOGGING_LEVEL_DEBUG: LOGGING_LEVEL_DEBUG is equivalent to a debug verbosity log call.\n - LOGGING_LEVEL_INFO: LOGGING_LEVEL_INFO is equivalent to an info verbosity log call.\n - LOGGING_LEVEL_WARNING: LOGGING_LEVEL_WARNING is equivalent to a warning verbosity log call.\n - LOGGING_LEVEL_ERROR: LOGGING_LEVEL_ERROR is equivalent to an error verbosity log call.\n - LOGGING_LEVEL_CRITICAL: LOGGING_LEVEL_CRITICAL is equivalent to a critical verbosity log call.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_LEVEL_UNSPECIFIED",
+              "LOGGING_LEVEL_TRACE",
+              "LOGGING_LEVEL_DEBUG",
+              "LOGGING_LEVEL_INFO",
+              "LOGGING_LEVEL_WARNING",
+              "LOGGING_LEVEL_ERROR",
+              "LOGGING_LEVEL_CRITICAL"
+            ],
+            "default": "LOGGING_LEVEL_UNSPECIFIED"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LoggingConfigService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.id",
+            "description": "id is a unique identifier provided by the client.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key.category",
+            "description": "category is the category of the log.\n\n - LOGGING_CATEGORY_UNSPECIFIED: LOGGING_CATEGORY_UNSPECIFIED is an unspecified category. Disallowed for writes.\n - LOGGING_CATEGORY_CHANGECONTROL: LOGGING_CATEGORY_CHANGECONTROL is used for actions executed as part of a change control.\n - LOGGING_CATEGORY_ACTION_EXEC: LOGGING_CATEGORY_ACTION_EXEC is used for actions executed via autofill actions, or the\nstandalone execution feature.\n - LOGGING_CATEGORY_STUDIO_TEMPLATE: LOGGING_CATEGORY_STUDIO_TEMPLATE is used for studio related executions, e.g. build hooks\nor templates being rendered.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_CATEGORY_UNSPECIFIED",
+              "LOGGING_CATEGORY_CHANGECONTROL",
+              "LOGGING_CATEGORY_ACTION_EXEC",
+              "LOGGING_CATEGORY_STUDIO_TEMPLATE"
+            ],
+            "default": "LOGGING_CATEGORY_UNSPECIFIED"
+          },
+          {
+            "name": "key.level",
+            "description": "level is the verbosity level of the log.\n\n - LOGGING_LEVEL_UNSPECIFIED: LOGGING_LEVEL_UNSPECIFIED is an unspecified level. Disallowed for writes,\nbut setting this in a GetAll filter returns all logging levels.\n - LOGGING_LEVEL_TRACE: LOGGING_LEVEL_TRACE is equivalent to a trace verbosity log call.\n - LOGGING_LEVEL_DEBUG: LOGGING_LEVEL_DEBUG is equivalent to a debug verbosity log call.\n - LOGGING_LEVEL_INFO: LOGGING_LEVEL_INFO is equivalent to an info verbosity log call.\n - LOGGING_LEVEL_WARNING: LOGGING_LEVEL_WARNING is equivalent to a warning verbosity log call.\n - LOGGING_LEVEL_ERROR: LOGGING_LEVEL_ERROR is equivalent to an error verbosity log call.\n - LOGGING_LEVEL_CRITICAL: LOGGING_LEVEL_CRITICAL is equivalent to a critical verbosity log call.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "LOGGING_LEVEL_UNSPECIFIED",
+              "LOGGING_LEVEL_TRACE",
+              "LOGGING_LEVEL_DEBUG",
+              "LOGGING_LEVEL_INFO",
+              "LOGGING_LEVEL_WARNING",
+              "LOGGING_LEVEL_ERROR",
+              "LOGGING_LEVEL_CRITICAL"
+            ],
+            "default": "LOGGING_LEVEL_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingConfigService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigSetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "value",
+            "description": "LoggingConfig carries the value to set into the datastore.\nSee the documentation on the LoggingConfig struct for which fields are required.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfig"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/all": {
+      "get": {
+        "operationId": "LoggingConfigService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "delete": {
+        "operationId": "LoggingConfigService_DeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigDeleteAllResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigDeleteAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingConfigService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/deletesome": {
+      "post": {
+        "operationId": "LoggingConfigService_DeleteSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigDeleteSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigDeleteSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigDeleteSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/getsome": {
+      "post": {
+        "operationId": "LoggingConfigService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/metadata": {
+      "get": {
+        "operationId": "LoggingConfigService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingConfigService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/some": {
+      "post": {
+        "operationId": "LoggingConfigService_SetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigSetSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigSetSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigSetSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/watch": {
+      "get": {
+        "operationId": "LoggingConfigService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingConfigService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.LoggingConfigStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    },
+    "/api/resources/logging/v1/LoggingConfig/watchmetadata": {
+      "get": {
+        "operationId": "LoggingConfigService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      },
+      "post": {
+        "operationId": "LoggingConfigService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.logging.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.logging.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.logging.v1.LoggingConfigStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "LoggingConfigService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "arista.logging.v1.Logging": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey",
+          "description": "key uniquely identifies a standalone log or a series of logs for a single execution."
+        },
+        "log": {
+          "type": "string",
+          "description": "log contains the actual log contents."
+        },
+        "file": {
+          "type": "string",
+          "description": "file contains the file name of the script being executed, if relevant."
+        },
+        "line": {
+          "type": "string",
+          "format": "int64",
+          "description": "line contains the line number of the log in the script being executed, if relevant."
+        },
+        "audit": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingAudit",
+          "description": "audit contains additional audit information added by the service when the log was\nwritten."
+        },
+        "tags": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "description": "tags is a map of tag values that was set on write and can be used in queries\nto filter the logs. Some executions will automatically populate some tags. E.g.\nchange control logs will populate a \"changeControlId\" and \"stageId\" tag."
+        }
+      },
+      "description": "Logging is used to retrieve non-audit related logs produced by such services as\nchange controls, studio builds, python autofill actions, etc."
+    },
+    "arista.logging.v1.LoggingAudit": {
+      "type": "object",
+      "properties": {
+        "addedBy": {
+          "type": "string",
+          "description": "added_by contains the name of the user who added the log."
+        }
+      },
+      "description": "LoggingAudit contains audit information about the given log. It's added by the logging rAPI\nand only accessible in the state model."
+    },
+    "arista.logging.v1.LoggingCategory": {
+      "type": "string",
+      "enum": [
+        "LOGGING_CATEGORY_UNSPECIFIED",
+        "LOGGING_CATEGORY_CHANGECONTROL",
+        "LOGGING_CATEGORY_ACTION_EXEC",
+        "LOGGING_CATEGORY_STUDIO_TEMPLATE"
+      ],
+      "default": "LOGGING_CATEGORY_UNSPECIFIED",
+      "description": "LoggingCategory describes the possible categories of logging.\n\n - LOGGING_CATEGORY_UNSPECIFIED: LOGGING_CATEGORY_UNSPECIFIED is an unspecified category. Disallowed for writes.\n - LOGGING_CATEGORY_CHANGECONTROL: LOGGING_CATEGORY_CHANGECONTROL is used for actions executed as part of a change control.\n - LOGGING_CATEGORY_ACTION_EXEC: LOGGING_CATEGORY_ACTION_EXEC is used for actions executed via autofill actions, or the\nstandalone execution feature.\n - LOGGING_CATEGORY_STUDIO_TEMPLATE: LOGGING_CATEGORY_STUDIO_TEMPLATE is used for studio related executions, e.g. build hooks\nor templates being rendered."
+    },
+    "arista.logging.v1.LoggingConfig": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey",
+          "description": "key uniquely identifies a standalone log or a series of logs for a single execution."
+        },
+        "log": {
+          "type": "string",
+          "description": "log contains the actual log contents."
+        },
+        "file": {
+          "type": "string",
+          "description": "file contains the file name of the script being executed, if relevant."
+        },
+        "line": {
+          "type": "string",
+          "format": "int64",
+          "description": "line contains the line number of the log in the script being executed, if relevant."
+        },
+        "tags": {
+          "$ref": "#/definitions/fmp.MapStringString",
+          "description": "tags is a map of tag values that can be set on write and can be used in queries\nto filter the logs. Some executions will automatically populate some tags. E.g.\nchange control logs will populate a \"changeControlId\" and \"stageId\" tag."
+        }
+      },
+      "description": "LoggingConfig is used to write non-audit related logs produced by such services as\nchange controls, studio builds, python autofill actions, etc. by providing a key\nrelated to the current execution, the log, and optional metadata such as\nfile name, line number and tags."
+    },
+    "arista.logging.v1.LoggingConfigDeleteAllResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/fmp.DeleteError",
+          "description": "This describes the class of delete error.\nA DeleteAllResponse is only sent when there is an error."
+        },
+        "error": {
+          "type": "string",
+          "description": "This indicates the error message from the delete failure."
+        },
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey",
+          "description": "This is the key of the LoggingConfig instance that failed to be deleted."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the (UTC) timestamp when the key was being deleted."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey",
+          "description": "Key echoes back the key of the deleted LoggingConfig instance."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==DeletedAt will not include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ndeletion. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigDeleteSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.LoggingKey"
+          },
+          "title": "key contains a list of LoggingConfig keys to delete"
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigDeleteSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "description": "LoggingConfigDeleteSomeResponse is only sent when there is an error."
+    },
+    "arista.logging.v1.LoggingConfigResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLoggingConfig instance in this response."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigSetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingConfig",
+          "description": "Value carries all the values given in the LoggingConfigSetRequest as well\nas any server-generated values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "- it is after the time the request was received\n   - a time-ranged query with StartTime==CreatedAt will include this instance.",
+          "title": "Time indicates the (UTC) timestamp at which the system recognizes the\ncreation. The only guarantees made about this timestamp are:"
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigSetSomeRequest": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.LoggingConfig"
+          },
+          "description": "value contains a list of LoggingConfig values to write.\nIt is possible to provide more values than can fit within either:\n    - the maxiumum send size of the client\n    - the maximum receive size of the server\nIf this error occurs you must reduce the number of values sent.\nSee gRPC \"maximum message size\" documentation for more information."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigSetSomeResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingKey"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.LoggingKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingConfig",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLoggingConfig instance in this response."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.LoggingConfig"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each LoggingConfig at end.\n    * Each LoggingConfig response is fully-specified (all fields set).\n  * start: Returns the state of each LoggingConfig at start, followed by updates until now.\n    * Each LoggingConfig response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each LoggingConfig at start, followed by updates\n    until end.\n    * Each LoggingConfig response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingConfigStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingConfig",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this LoggingConfig's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the LoggingConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is a unique identifier provided by the client."
+        },
+        "category": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingCategory",
+          "description": "category is the category of the log."
+        },
+        "level": {
+          "$ref": "#/definitions/arista.logging.v1.LoggingLevel",
+          "description": "level is the verbosity level of the log."
+        }
+      },
+      "description": "LoggingKey uniquely identifies a log via its id, its category and level.\nAll log lines for executions of change controls, studios, etc. are written under the same key.",
+      "required": [
+        "id",
+        "category",
+        "level"
+      ]
+    },
+    "arista.logging.v1.LoggingLevel": {
+      "type": "string",
+      "enum": [
+        "LOGGING_LEVEL_UNSPECIFIED",
+        "LOGGING_LEVEL_TRACE",
+        "LOGGING_LEVEL_DEBUG",
+        "LOGGING_LEVEL_INFO",
+        "LOGGING_LEVEL_WARNING",
+        "LOGGING_LEVEL_ERROR",
+        "LOGGING_LEVEL_CRITICAL"
+      ],
+      "default": "LOGGING_LEVEL_UNSPECIFIED",
+      "description": "LoggingLevel describes the different verbosity levels of logging.\n\n - LOGGING_LEVEL_UNSPECIFIED: LOGGING_LEVEL_UNSPECIFIED is an unspecified level. Disallowed for writes,\nbut setting this in a GetAll filter returns all logging levels.\n - LOGGING_LEVEL_TRACE: LOGGING_LEVEL_TRACE is equivalent to a trace verbosity log call.\n - LOGGING_LEVEL_DEBUG: LOGGING_LEVEL_DEBUG is equivalent to a debug verbosity log call.\n - LOGGING_LEVEL_INFO: LOGGING_LEVEL_INFO is equivalent to an info verbosity log call.\n - LOGGING_LEVEL_WARNING: LOGGING_LEVEL_WARNING is equivalent to a warning verbosity log call.\n - LOGGING_LEVEL_ERROR: LOGGING_LEVEL_ERROR is equivalent to an error verbosity log call.\n - LOGGING_LEVEL_CRITICAL: LOGGING_LEVEL_CRITICAL is equivalent to a critical verbosity log call."
+    },
+    "arista.logging.v1.LoggingResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.Logging",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLogging instance in this response."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.LoggingKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.Logging",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nLogging instance in this response."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.logging.v1.Logging"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each Logging at end.\n    * Each Logging response is fully-specified (all fields set).\n  * start: Returns the state of each Logging at start, followed by updates until now.\n    * Each Logging response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each Logging at start, followed by updates\n    until end.\n    * Each Logging response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.logging.v1.LoggingStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.logging.v1.Logging",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this Logging's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the Logging value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.logging.v1.MetaResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of the last item included in the metadata calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count is the number of items present under the conditions of the request."
+        }
+      }
+    },
+    "arista.subscriptions.Operation": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "INITIAL",
+        "INITIAL_SYNC_COMPLETE",
+        "UPDATED",
+        "DELETED",
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
+      ],
+      "default": "UNSPECIFIED",
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
+    },
+    "arista.time.TimeBounds": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fmp.DeleteError": {
+      "type": "string",
+      "enum": [
+        "DELETE_ERROR_UNSPECIFIED",
+        "DELETE_ERROR_UNAUTHORIZED",
+        "DELETE_ERROR_INTERNAL",
+        "DELETE_ERROR_UNDELETABLE_KEY"
+      ],
+      "default": "DELETE_ERROR_UNSPECIFIED",
+      "description": "DeleteError defines the set of delete error types.\n\n - DELETE_ERROR_UNSPECIFIED: DELETE_ERROR_UNSPECIFIED indicates that the delete error\nis not specified.\n - DELETE_ERROR_UNAUTHORIZED: DELETE_ERROR_UNAUTHORIZED indicates that the user is not authorized\nto perform the specified delete.\n - DELETE_ERROR_INTERNAL: DELETE_ERROR_INTERNAL indicates that the server encountered an\nunrecoverable error on the specified delete.\n - DELETE_ERROR_UNDELETABLE_KEY: DELETE_ERROR_UNDELETABLE_KEY indicates that the specified error is\nnot allowed by the service."
+    },
+    "fmp.MapStringString": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The map\u003cstring, string\u003e values."
+        }
+      },
+      "description": "Wrapper message for `map\u003cstring, string\u003e`."
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiToken": {
+      "type": "apiKey",
+      "name": "access_token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "More on CloudVision Resource APIs",
+    "url": "https://aristanetworks.github.io/cloudvision-apis"
+  }
+}
