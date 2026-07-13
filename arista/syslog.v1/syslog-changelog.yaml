@@ -7,8 +7,12 @@
 # New entries go on top.
 
 Changes:
-    - date: 2026-08-28
-      description: Releasing on cvaas and onprem
+    - date: 2026-07-07
+      description: Adding endpoint_type and endpoint_token field to support a splunk endpoint
+      version: 1.2.0
+
+    - date: 2025-08-28
+      description: Releasing to cvaas
       version: 1.1.0
       onprem: true
       cvaas: true

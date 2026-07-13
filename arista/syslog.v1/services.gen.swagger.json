@@ -1230,10 +1230,23 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
+    },
+    "arista.syslog.v1.EndpointType": {
+      "type": "string",
+      "enum": [
+        "ENDPOINT_TYPE_UNSPECIFIED",
+        "ENDPOINT_TYPE_INTERNAL_CLIENT",
+        "ENDPOINT_TYPE_SPLUNK_CLIENT"
+      ],
+      "default": "ENDPOINT_TYPE_UNSPECIFIED",
+      "description": "EndpointType defines the type of export endpoint.\n\n - ENDPOINT_TYPE_UNSPECIFIED: ENDPOINT_TYPE_UNSPECIFIED indicates unspecified endpoint type.\n - ENDPOINT_TYPE_INTERNAL_CLIENT: ENDPOINT_TYPE_INTERNAL_CLIENT indicates an internal client.\n - ENDPOINT_TYPE_SPLUNK_CLIENT: ENDPOINT_TYPE_SPLUNK_CLIENT indicates a splunk client."
     },
     "arista.syslog.v1.Export": {
       "type": "object",
@@ -1263,6 +1276,14 @@
         "key": {
           "$ref": "#/definitions/arista.syslog.v1.ExportKey",
           "description": "key uniquely identifies a syslog server."
+        },
+        "endpointType": {
+          "$ref": "#/definitions/arista.syslog.v1.EndpointType",
+          "description": "endpoint_type defines the type of export client to use.\nIf unset, it defaults to internal client."
+        },
+        "endpointToken": {
+          "type": "string",
+          "description": "endpoint_token is the authentication token for a splunk endpoint."
         }
       },
       "description": "ExportConfig is used to configure a syslog server."

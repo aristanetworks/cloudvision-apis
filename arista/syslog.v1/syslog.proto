@@ -35,6 +35,16 @@ enum Format {
     FORMAT_CUSTOM = 3;
 }
 
+// EndpointType defines the type of export endpoint.
+enum EndpointType{
+    // ENDPOINT_TYPE_UNSPECIFIED indicates unspecified endpoint type.
+    ENDPOINT_TYPE_UNSPECIFIED = 0;
+    // ENDPOINT_TYPE_INTERNAL_CLIENT indicates an internal client.
+    ENDPOINT_TYPE_INTERNAL_CLIENT = 1;
+    // ENDPOINT_TYPE_SPLUNK_CLIENT indicates a splunk client.
+    ENDPOINT_TYPE_SPLUNK_CLIENT = 2;
+}
+
 // ExportResult defines the set of possible results of an export operation.
 enum ExportResult {
     // EXPORT_RESULT_UNSPECIFIED indicates unspecified export operation.
@@ -92,6 +102,11 @@ message ExportConfig {
     option (fmp.model) = "rw";
     // key uniquely identifies a syslog server.
     ExportKey key = 1;
+    // endpoint_type defines the type of export client to use.
+    // If unset, it defaults to internal client.
+    EndpointType endpoint_type = 2;
+    // endpoint_token is the authentication token for a splunk endpoint.
+    google.protobuf.StringValue endpoint_token = 3;
 }
 
 // ExportFormatConfig is used to confgure a global format for
