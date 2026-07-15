@@ -4991,19 +4991,6 @@
       },
       "description": "AssignedTags can be used to retrieve additional metadata about a\nstudio's `AssignedTagsConfig`."
     },
-    "arista.studio.v1.AssignedTagsBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.AssignedTagsConfig": {
       "type": "object",
       "properties": {
@@ -5021,19 +5008,6 @@
         }
       },
       "description": "AssignedTagsConfig holds a configuration to assign a studio to a set of devices\nmatching a tag query."
-    },
-    "arista.studio.v1.AssignedTagsConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.AssignedTagsConfigDeleteAllResponse": {
       "type": "object",
@@ -5344,19 +5318,6 @@
       },
       "description": "AutofillAction can be used to retrieve additional metadata about an autofill action."
     },
-    "arista.studio.v1.AutofillActionBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.AutofillActionConfig": {
       "type": "object",
       "properties": {
@@ -5382,19 +5343,6 @@
         }
       },
       "description": "AutofillActionConfig contains configuration information for an autofill action."
-    },
-    "arista.studio.v1.AutofillActionConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.AutofillActionConfigDeleteAllResponse": {
       "type": "object",
@@ -5758,7 +5706,8 @@
           "additionalProperties": {
             "$ref": "#/definitions/arista.studio.v1.Entity"
           },
-          "title": "values is a map from EntityType enum name to Entity.\nKeys are the EntityType enum names defined below, e.g.:\n  \"ENTITY_TYPE_INPUTS\" -\u003e Entity{\n      entity_type:      ENTITY_TYPE_INPUTS,\n      last_modified_at: 2026-05-07T12:34:56Z,\n      last_modified_by: \"admin\",\n      removed:          false,\n  }"
+          "description": "```\n\"ENTITY_TYPE_INPUTS\" -\u003e Entity{\n    entity_type:      ENTITY_TYPE_INPUTS,\n    last_modified_at: 2026-05-07T12:34:56Z,\n    last_modified_by: \"admin\",\n    removed:          false,\n}\n```",
+          "title": "values is a map from EntityType enum name to Entity.\nKeys are the EntityType enum names defined below, e.g.:"
         }
       },
       "description": "Entities is a list of Entity."
@@ -5976,19 +5925,6 @@
       },
       "description": "Inputs is used to retrieve the existing inputs to a studio."
     },
-    "arista.studio.v1.InputsBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.InputsConfig": {
       "type": "object",
       "properties": {
@@ -6006,19 +5942,6 @@
         }
       },
       "description": "InputsConfig is used to input values into a studio.\n\nNOTE: Setting an input at a higher path overwrite any prior\n`Set`s at lower paths. E.g.,\n\n1. Set `[\"A\", \"X\"]` to `\"foo\"`\n2. Set `[\"A\", \"Y\"]` to `\"bar\"`\n3. Set `[\"A\"]` to `{\"X\": \"bar\"}`\n\nThe resulting inputs would be:\n```\n{ \"A\": { \"X\": \"bar\" } }\n```"
-    },
-    "arista.studio.v1.InputsConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.InputsConfigDeleteAllResponse": {
       "type": "object",
@@ -6430,19 +6353,6 @@
       },
       "description": "SecretInput can be used to retrieve the unmasked value of\na secret in a studio."
     },
-    "arista.studio.v1.SecretInputBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.SecretInputResponse": {
       "type": "object",
       "properties": {
@@ -6614,19 +6524,6 @@
       },
       "description": "Studio holds the active state for a studio."
     },
-    "arista.studio.v1.StudioBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.studio.v1.StudioConfig": {
       "type": "object",
       "properties": {
@@ -6656,19 +6553,6 @@
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."
-    },
-    "arista.studio.v1.StudioConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.StudioConfigDeleteAllResponse": {
       "type": "object",
@@ -6990,19 +6874,6 @@
         }
       },
       "description": "StudioSummary holds basic information about a studio."
-    },
-    "arista.studio.v1.StudioSummaryBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.studio.v1.StudioSummaryResponse": {
       "type": "object",

@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-07-15
+      description: Remove the unused Dependencies enum value
+      version: 1.8.4
+
     - date: 2026-05-06
       description: Dependencies entity for studio summary
       version: 1.8.3

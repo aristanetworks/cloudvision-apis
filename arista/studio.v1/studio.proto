@@ -131,8 +131,6 @@ enum EntityType {
 	// ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment
 	// entity type for static config studio.
 	ENTITY_TYPE_CONFIGLET_ASSIGNMENT = 7;
-	// ENTITY_TYPE_DEPENDENCIES indicates the Dependencies entity type.
-	ENTITY_TYPE_DEPENDENCIES = 8;
 }
 
 // Studio holds the active state for a studio.
@@ -490,13 +488,10 @@ message FloatInputFieldProps {
 	// `{ fieldId: field_id }`.
 	//
 	// E.g,
-	//
-	// ```
 	// [
-	//   { fieldId: floatField1ID },
-	//   { fieldId: floatField2ID }
+	//   `{ fieldId: floatField1ID }`,
+	//   `{ fieldId: floatField2ID }`
 	// ]
-	// ```
 	// Here, the possible values for the floats identified by
 	// `floatField1ID` and `floatField2ID` are used as the
 	// possible values for this float.
