@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-07-21
+      description: Remove SummaryService
+      version: 1.24.0
     - date: 2026-04-02
       description: Add ImageSource enum with studio, NP and hierarchy options
       version: 1.23.0

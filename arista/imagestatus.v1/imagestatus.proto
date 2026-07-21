@@ -15,8 +15,6 @@ option java_multiple_files = true;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-import "fmp/extensions.proto";
-
 // SoftwareImage provides information of the running/designed EOS image.
 message SoftwareImage {
     // name is the name of the EOS image.
@@ -235,31 +233,6 @@ message ImageSummary {
     //software_image_diff, terminattr_diff and extensions_diff and computing the
     // hash.
     google.protobuf.StringValue digest = 13;
-}
-
-// SummaryKey uniquely identifies a device summary request.
-message SummaryKey {
-    option (fmp.model_key) = true;
-    // device_id is the serial number of the device
-    google.protobuf.StringValue device_id = 1;
-}
-
-// Summary represents the device image summary.
-message Summary {
-    option (fmp.model) = "ro";
-    // key represents the image summary key.
-    SummaryKey key = 1;
-    // summary is the image diff summary.
-    ImageSummary summary = 2;
-    // errors are the image errors encountered while validating the image. These are
-    // displayed on the workspace build results page.
-    ImageErrors errors = 3;
-    // warnings are the image warnings encountered while validating the image. These are
-    // displayed on the workspace build results page.
-    ImageWarnings warnings = 4;
-    // infos are the image infos encountered while validating the image. These are
-    // displayed on the workspace build results page.
-    ImageInfos infos = 5;
 }
 
 // ErrorCode indicates errors produced during image validations.
