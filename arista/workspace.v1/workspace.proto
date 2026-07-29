@@ -787,7 +787,6 @@ message DiffEntry {
 	// - value: the element’s identifier
 	//
 	// Example:
-	//
 	// ```
 	// users = [{"id":"u1","name":"Alice"}]
 	// key_path = ["users", "[id=u1]", "name"]
@@ -858,10 +857,29 @@ message WorkspaceDiffSets {
 	repeated WorkspaceDiffSet values = 1;
 }
 
+// DiffScope controls which category of diffs the server returns.
+enum DiffScope {
+	// DIFF_SCOPE_UNSPECIFIED indicates an unspecified diff scope.
+	DIFF_SCOPE_UNSPECIFIED = 0;
+	// DIFF_SCOPE_MODIFIED returns workspace and mainline diffs for entities
+	// modified in this workspace.
+	DIFF_SCOPE_MODIFIED = 1;
+	// DIFF_SCOPE_UNMODIFIED returns mainline only diffs for entities not
+	// modified in this workspace.
+	DIFF_SCOPE_UNMODIFIED = 2;
+}
+
+// WorkspaceDiffsFilter controls what diffs the server returns.
+message WorkspaceDiffsFilter {
+	// scope selects which category of diffs to return.
+	DiffScope scope = 1;
+}
+
 // WorkspaceDiffs represents diffs, or changes made in the
 // workspace of a given type.
 message WorkspaceDiffs {
 	option (fmp.model) = "ro";
+	option (fmp.custom_filter) = "WorkspaceDiffsFilter";
 
 	// key uniquely identifies this particular collection of diffs.
 	// It sets the primary context, indicating which workspace

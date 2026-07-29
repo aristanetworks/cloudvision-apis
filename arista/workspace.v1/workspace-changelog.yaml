@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-07-08
+      description: Update workspace diff api with mainline only diffs
+      version: 1.9.4
     - date: 2026-04-29
       description: Add decommission_request_ids to workspace.
       version: 1.9.3
