@@ -204,13 +204,21 @@ func escapeCurlyBraces(s string) string {
 
 func generateMarkdown(inputFile, outputFile, repoRoot string, version string) error {
 	// Use protoc to generate the full markdown content
-	cmd := exec.Command("protoc",
+	args := []string{
 		"-I", repoRoot,
 		"--doc_out=.",
 		"--doc_opt=model.tmpl,output.tmp",
 		inputFile,
-		filepath.Join(filepath.Dir(inputFile), "services.gen.proto"),
-	)
+	}
+	servicesProto := filepath.Join(filepath.Dir(inputFile), "services.gen.proto")
+	if _, err := os.Stat(servicesProto); err == nil {
+		args = append(args, servicesProto)
+	} else if os.IsNotExist(err) {
+		log.Printf("Warning: %s does not exist, skipping", servicesProto)
+	} else {
+		return fmt.Errorf("failed to stat %s: %w", servicesProto, err)
+	}
+	cmd := exec.Command("protoc", args...)
 
 	var out bytes.Buffer
 	cmd.Stdout = &out
