@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-10-23
+      description: Add supervisor model and swag match mode fields for preprovisioning swag
+      version: 1.0.10
+
     - date: 2026-07-01
       description: Add DEVICE_STATUS_DECOMMISSIONED field in DeviceStatus enum
       version: 1.0.9

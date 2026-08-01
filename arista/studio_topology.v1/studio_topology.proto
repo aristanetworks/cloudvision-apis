@@ -73,6 +73,19 @@ enum DeviceStatus {
 	DEVICE_STATUS_DECOMMISSIONED = 4;
  }
 
+// MatchDeviceAggregationMode specifies the aggregation modes applicable when
+// matching a streaming device to an expected SWAG device.
+enum MatchDeviceAggregationMode {
+  // MATCH_DEVICE_AGGREGATION_MODE_UNSPECIFIED indicates that no aggregation
+  // mode has been specified.
+  MATCH_DEVICE_AGGREGATION_MODE_UNSPECIFIED = 0;
+  // MATCH_DEVICE_AGGREGATION_MODE_STANDALONE matches standalone devices.
+  // Provisioning then converts it to SWAG.
+  MATCH_DEVICE_AGGREGATION_MODE_STANDALONE = 10;
+  // MATCH_DEVICE_AGGREGATION_MODE_SWAG matches a streaming device that is already a SWAG.
+  MATCH_DEVICE_AGGREGATION_MODE_SWAG = 20;
+}
+
 // DeviceInfo contains device properties.
 message DeviceInfo {
 	// device_id identifies the device uniquely.
@@ -100,6 +113,15 @@ message DeviceInfo {
 	// field above will be matched with only one of the serial numbers in this list.
 	// Should be populated only for an expected device and when match_any_device is set to false.
 	fmp.RepeatedString expected_serial_numbers = 6;
+	// supervisor_model specifies the model that a standalone streaming device must
+	// have to match this expected device when model_name is "Switch Aggregation Group".
+	google.protobuf.StringValue supervisor_model = 7;
+	// match_device_aggregation_mode specifies whether a streaming device must be
+	// standalone or an existing SWAG to match this expected device. It applies only
+	// when model_name is "Switch Aggregation Group" and must be unspecified otherwise.
+	// When this field is set to MATCH_DEVICE_AGGEGATION_MODE_SWAG, supervisor_model must
+	// be empty.
+	MatchDeviceAggregationMode match_device_aggregation_mode = 8;
 }
 
 // InterfaceInfo contains interface properties.
