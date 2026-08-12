@@ -72,6 +72,8 @@ message ApproveConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ApproveConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -96,8 +98,6 @@ message ApproveConfigStreamRequest {
 	//     until end.
 	//     * Each ApproveConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -138,8 +138,6 @@ message ApproveConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each ApproveConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -151,7 +149,7 @@ message ApproveConfigBatchedStreamRequest {
 
 message ApproveConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ApproveConfigStreamResponse responses = 1;
 };
@@ -296,6 +294,8 @@ message ChangeControlSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ChangeControl instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -324,8 +324,6 @@ message ChangeControlStreamRequest {
 	//     until end.
 	//     * Each ChangeControl response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -370,8 +368,6 @@ message ChangeControlBatchedStreamRequest {
 	//     until end.
 	//     * Each ChangeControl response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -383,7 +379,7 @@ message ChangeControlBatchedStreamRequest {
 
 message ChangeControlBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ChangeControlStreamResponse responses = 1;
 };
@@ -439,6 +435,8 @@ message ChangeControlConfigSomeResponse {
 	// Error is an optional field.
 	// It should be filled when there is an error in the GetSome process.
 	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ChangeControlConfig instance in this response.
 	google.protobuf.Timestamp time = 3;
 };
 
@@ -463,8 +461,6 @@ message ChangeControlConfigStreamRequest {
 	//     until end.
 	//     * Each ChangeControlConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 };
 
@@ -505,8 +501,6 @@ message ChangeControlConfigBatchedStreamRequest {
 	//     until end.
 	//     * Each ChangeControlConfig response at start is fully-specified, but updates until end may
 	//       be partial.
-	//
-	// This field is not allowed in the Subscribe RPC.
 	arista.time.TimeBounds time = 3;
 
 	// MaxMessages limits the maximum number of messages that can be contained in one batch.
@@ -518,7 +512,7 @@ message ChangeControlConfigBatchedStreamRequest {
 
 message ChangeControlConfigBatchedStreamResponse {
 	// Values are the values deemed relevant to the initiating request.
-	// The length of this structure is guaranteed to be between (inclusive) 1 and 
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
 	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
 	repeated ChangeControlConfigStreamResponse responses = 1;
 };
@@ -621,4 +615,145 @@ service ChangeControlConfigService {
 	rpc DeleteAll (ChangeControlConfigDeleteAllRequest) returns (stream ChangeControlConfigDeleteAllResponse);
 	rpc GetAllBatched (ChangeControlConfigBatchedStreamRequest) returns (stream ChangeControlConfigBatchedStreamResponse);
 	rpc SubscribeBatched (ChangeControlConfigBatchedStreamRequest) returns (stream ChangeControlConfigBatchedStreamResponse);
+}
+
+message ChangeControlSummaryRequest {
+	// Key uniquely identifies a ChangeControlSummary instance to retrieve.
+	// This value must be populated.
+	ChangeControlKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ChangeControlSummaryResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ChangeControlSummary value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ChangeControlSummary instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ChangeControlSummarySomeRequest {
+	repeated ChangeControlKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message ChangeControlSummarySomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	ChangeControlSummary value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// ChangeControlSummary instance in this response.
+	google.protobuf.Timestamp time = 3;
+};
+
+message ChangeControlSummaryStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ChangeControlSummary partial_eq_filter = 1;
+	// For each ChangeControlSummary in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ChangeControlSummary is streamed to the user.
+	Filter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControlSummary at end.
+	//     * Each ChangeControlSummary response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControlSummary at start, followed by updates until now.
+	//     * Each ChangeControlSummary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControlSummary at start, followed by updates
+	//     until end.
+	//     * Each ChangeControlSummary response at start is fully-specified, but updates until end may
+	//       be partial.
+	arista.time.TimeBounds time = 3;
+};
+
+message ChangeControlSummaryStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	ChangeControlSummary value = 1;
+
+	// Time holds the timestamp of this ChangeControlSummary's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the ChangeControlSummary value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+message ChangeControlSummaryBatchedStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated ChangeControlSummary partial_eq_filter = 1;
+	// For each ChangeControlSummary in the list, all populated fields are considered ANDed together
+	// as a filtering operation. Similarly, the list itself is ORed such that any individual
+	// filter that matches a given ChangeControlSummary is streamed to the user.
+	Filter filter = 2;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each ChangeControlSummary at end.
+	//     * Each ChangeControlSummary response is fully-specified (all fields set).
+	//   * start: Returns the state of each ChangeControlSummary at start, followed by updates until now.
+	//     * Each ChangeControlSummary response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each ChangeControlSummary at start, followed by updates
+	//     until end.
+	//     * Each ChangeControlSummary response at start is fully-specified, but updates until end may
+	//       be partial.
+	arista.time.TimeBounds time = 3;
+
+	// MaxMessages limits the maximum number of messages that can be contained in one batch.
+	// MaxMessages is required to be at least 1.
+	// The maximum number of messages in a batch is min(max_messages, INTERNAL_BATCH_LIMIT)
+	// INTERNAL_BATCH_LIMIT is set based on the maximum message size.
+	google.protobuf.UInt32Value max_messages = 4;
+};
+
+message ChangeControlSummaryBatchedStreamResponse {
+	// Values are the values deemed relevant to the initiating request.
+	// The length of this structure is guaranteed to be between (inclusive) 1 and
+	// min(req.max_messages, INTERNAL_BATCH_LIMIT).
+	repeated ChangeControlSummaryStreamResponse responses = 1;
+};
+
+service ChangeControlSummaryService {
+	rpc GetOne (ChangeControlSummaryRequest) returns (ChangeControlSummaryResponse);
+	rpc GetSome (ChangeControlSummarySomeRequest) returns (stream ChangeControlSummarySomeResponse);
+	rpc GetAll (ChangeControlSummaryStreamRequest) returns (stream ChangeControlSummaryStreamResponse);
+	rpc Subscribe (ChangeControlSummaryStreamRequest) returns (stream ChangeControlSummaryStreamResponse);
+	rpc GetMeta (ChangeControlSummaryStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (ChangeControlSummaryStreamRequest) returns (stream MetaResponse);
+	rpc GetAllBatched (ChangeControlSummaryBatchedStreamRequest) returns (stream ChangeControlSummaryBatchedStreamResponse);
+	rpc SubscribeBatched (ChangeControlSummaryBatchedStreamRequest) returns (stream ChangeControlSummaryBatchedStreamResponse);
 }
