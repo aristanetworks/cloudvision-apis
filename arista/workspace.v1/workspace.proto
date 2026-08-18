@@ -120,6 +120,12 @@ message Response {
 	google.protobuf.StringValue message = 2;
 	// code is the code of the response.
 	ResponseCode code = 3;
+	// start_time is the time when the request execution started.
+	google.protobuf.Timestamp start_time = 4;
+	// end_time is the time when the request execution completed.
+	google.protobuf.Timestamp end_time = 5;
+	// request_type is the type of request that this response is for.
+	Request request_type = 6;
 }
 
 // ResponseCode is a code for a Response indicating a particular scenario.
