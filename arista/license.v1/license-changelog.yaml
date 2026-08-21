@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-08-22
+      description: Added PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER in PreferredBundleReason enum.
+      version: 1.1.2
+
     - date: 2026-06-23
       description: Adding end_customer_purchase_order_number to
         PurchasedLicense, DeviceData, and LicenseBundle
