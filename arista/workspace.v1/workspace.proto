@@ -751,6 +751,9 @@ enum DiffType {
 	// relative to its original mainline, and another for what happened between original
 	// mainline and latest mainline.
 	DIFF_TYPE_REBASE = 1;
+	// DIFF_TYPE_MODIFICATION represents live workspace modification diffs while the
+	// workspace is pending.
+	DIFF_TYPE_MODIFICATION = 2;
 }
 
 // DiffOp enumerates the types of operations that can occur within a diff.
