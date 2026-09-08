@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-09-03
+      description: Adding transient status and recommended action in export error
+      version: 1.3.0
+
     - date: 2026-07-07
       description: Adding endpoint_type and endpoint_token field to support a splunk endpoint
       version: 1.2.0

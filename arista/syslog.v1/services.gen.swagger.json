@@ -1493,6 +1493,14 @@
           "type": "string",
           "format": "date-time",
           "description": "log_timestamp provides the timestamp of the last audit log\nthat was not exported due to error."
+        },
+        "isTransient": {
+          "type": "boolean",
+          "description": "is_transient indicates whether the export failure is transient."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "recommended_action indicates the user action required to fix a non-transient error.\nIt does not apply to transient errors."
         }
       },
       "description": "ExportError provides the details of the most recent export error."

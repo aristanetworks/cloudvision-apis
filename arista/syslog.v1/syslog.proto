@@ -85,6 +85,11 @@ message ExportError {
     // log_timestamp provides the timestamp of the last audit log
     // that was not exported due to error.
     google.protobuf.Timestamp log_timestamp = 4;
+    // is_transient indicates whether the export failure is transient.
+    google.protobuf.BoolValue is_transient = 5;
+    // recommended_action indicates the user action required to fix a non-transient error.
+    // It does not apply to transient errors.
+    google.protobuf.StringValue recommended_action = 6;
 }
 
 // ExportStats provide statistics of export operations to a syslog sever.
