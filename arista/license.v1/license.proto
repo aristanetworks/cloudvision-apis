@@ -189,6 +189,8 @@ message PurchasedLicense {
     google.protobuf.StringValue platform_class = 16;
     // end_customer_purchase_order_number is the purchase order number associated with this license.
     google.protobuf.StringValue end_customer_purchase_order_number = 17;
+    // shipset_number is the shipset number associated with this license.
+    google.protobuf.Int64Value shipset_number = 18;
 }
 
 // LicenseAssignmentKey uniquely identifies a license.

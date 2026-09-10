@@ -3453,7 +3453,7 @@
           "description": "bundles is a list of applicable license bundles.\nThere should be at most one `preferred` bundle in the list."
         }
       },
-      "description": "ApplicableLicenseBundles represents a list of license bundles that are compatible\nwith a given device for a specific feature.\nThe list may contain multiple applicable bundles, but at most one bundle is\nmarked preferred. A bundle is marked preferred only when it matches the\npreferred bundle criteria and is selected by the first applicable priority\nrule high to low:\n 1. sales order number + shipset number match, (device and license are within same sales order and shipset)\n 2. sales order match (device and license are within same sales order),\n 3. perpetual plan (license is perpetual).\nNote: This resource is only available in CVaaS."
+      "description": "ApplicableLicenseBundles represents a list of license bundles that are compatible\nwith a given device for a specific feature.\nThe list may contain multiple applicable bundles, but at most one bundle is\nmarked preferred. A bundle is marked preferred only when it matches the\npreferred bundle criteria and is selected by the first applicable priority\nrule high to low:\n 1. sales order number + shipset number match, (device and license are within same sales order and shipset)\n 2. sales order match (device and license are within same sales order)\n 3. perpetual plan (license is perpetual).\nNote: This resource is only available in CVaaS."
     },
     "arista.license.v1.ApplicableLicenseBundlesBatchedStreamResponse": {
       "type": "object",
@@ -4549,7 +4549,7 @@
         "PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER"
       ],
       "default": "PREFERRED_BUNDLE_REASON_UNSPECIFIED",
-      "description": "PreferredBundleReason indicates the reason a license bundle is preferred.\n\n - PREFERRED_BUNDLE_REASON_UNSPECIFIED: PREFERRED_BUNDLE_REASON_UNSPECIFIED indicates an unspecified reason.\n - PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH: PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH indicates a match with the device's sales order.\n - PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN: PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN indicates that the license is preferred over other licenses as it is a perpetual license\n - PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE: PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE indicates a perpetual license\nwith the oldest sales order.\n - PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER: PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER indicates a device and license is within same sales order and shipset."
+      "description": "PreferredBundleReason indicates the reason a license bundle is preferred.\n\n - PREFERRED_BUNDLE_REASON_UNSPECIFIED: PREFERRED_BUNDLE_REASON_UNSPECIFIED indicates an unspecified reason.\n - PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH: PREFERRED_BUNDLE_REASON_SALES_ORDER_MATCH indicates a match with the device's sales order.\n - PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN: PREFERRED_BUNDLE_REASON_PERPETUAL_PLAN indicates that the license is preferred over other licenses as it is a perpetual license\n - PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE: PREFERRED_BUNDLE_REASON_PERPETUAL_AND_SALES_ORDER_AGE indicates a perpetual license\nwith the oldest sales order.\n - PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER: PREFERRED_BUNDLE_REASON_SHIPSET_NUMBER indicates a device and license is within the same sales order and shipset."
     },
     "arista.license.v1.PurchasedLicense": {
       "type": "object",
@@ -4627,6 +4627,11 @@
         "endCustomerPurchaseOrderNumber": {
           "type": "string",
           "description": "end_customer_purchase_order_number is the purchase order number associated with this license."
+        },
+        "shipsetNumber": {
+          "type": "string",
+          "format": "int64",
+          "description": "shipset_number is the shipset number associated with this license."
         }
       },
       "description": "PurchasedLicense is a license record derived from the sales order\ninformation where each order is expanded into individual licenses.\nThese licenses will be uniquely identified with license_uuid.\nNote: This resource is only available in CVaaS."
