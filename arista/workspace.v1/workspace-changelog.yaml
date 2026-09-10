@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-09-08
+      description: Add RESPONSE_STATUS_IN_PROGRESS to ResponseStatus.
+      version: 1.9.7
     - date: 2026-08-18
       description: Update workspace diff api with modification diff type
       version: 1.9.6

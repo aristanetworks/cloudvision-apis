@@ -103,6 +103,9 @@ enum ResponseStatus {
 	// RESPONSE_STATUS_FAIL indicates that the original Request was unsuccessful
 	// in its execution.
 	RESPONSE_STATUS_FAIL = 2;
+	// RESPONSE_STATUS_IN_PROGRESS indicates that the original Request is
+	// currently being processed.
+	RESPONSE_STATUS_IN_PROGRESS = 3;
 }
 
 // RequestParams define the parameters for a Request.
@@ -228,6 +231,8 @@ message Workspace {
 	// be used to track the status using the inventory.v1.DeviceDecommissioning
 	// resource.
 	fmp.MapStringString decommission_request_ids = 16;
+	// last_rebase_id is the last rebase ID that was set for this workspace.
+	google.protobuf.StringValue last_rebase_id = 17;
 }
 
 // BuildState enumerates the set of states that a BuildStage can be in during a
