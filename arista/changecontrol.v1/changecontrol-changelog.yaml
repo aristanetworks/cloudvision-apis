@@ -7,6 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-09-02
+      description: Add ChangeControlSummaryFilter with device_ids and end_time_range fields for server-side
+                    filtering of change control summaries.
+      version: 1.7.0
+
     - date: 2026-06-12
       description: Add new fields to ChangeControlValidationStatus enum and DeviceValidationFailure enum.
       version: 1.6.0

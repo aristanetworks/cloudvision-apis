@@ -672,7 +672,7 @@ message ChangeControlSummaryStreamRequest {
 	// For each ChangeControlSummary in the list, all populated fields are considered ANDed together
 	// as a filtering operation. Similarly, the list itself is ORed such that any individual
 	// filter that matches a given ChangeControlSummary is streamed to the user.
-	Filter filter = 2;
+	ChangeControlSummaryFilter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.
@@ -716,7 +716,7 @@ message ChangeControlSummaryBatchedStreamRequest {
 	// For each ChangeControlSummary in the list, all populated fields are considered ANDed together
 	// as a filtering operation. Similarly, the list itself is ORed such that any individual
 	// filter that matches a given ChangeControlSummary is streamed to the user.
-	Filter filter = 2;
+	ChangeControlSummaryFilter filter = 2;
 
 	// TimeRange allows limiting response data to within a specified time window.
 	// If this field is populated, at least one of the two time fields are required.

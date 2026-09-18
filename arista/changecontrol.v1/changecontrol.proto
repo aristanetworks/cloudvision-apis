@@ -11,6 +11,7 @@ option go_package = "github.com/aristanetworks/cloudvision-go/api/arista/changec
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+import "arista/time/time.proto";
 import "fmp/extensions.proto";
 import "fmp/wrappers.proto";
 
@@ -336,6 +337,18 @@ message Filter {
 	fmp.RepeatedString device_ids = 1;
 }
 
+// ChangeControlSummaryFilter is used to filter change control summaries.
+message ChangeControlSummaryFilter {
+	// device_ids identifies devices associated with the change control.
+	// A change control matches when it contains at least one of the provided device IDs.
+	fmp.RepeatedString device_ids = 1;
+
+	// end_time_range restricts results to change controls whose end_time falls
+	// within [start, end]. Either bound may be nil for a one-sided range.
+	// When unset, no end_time_range constraint is applied.
+	arista.time.TimeBounds end_time_range = 2;
+}
+
 // DeviceToStageMap is a map of a device ID and its list of corresponding stages.
 message DeviceToStageMap {
 	// values maps the device ID with the stages which are associated with a device
@@ -434,7 +447,7 @@ message ActionSummaries {
 // ChangeControlSummary provides the summary of the Change Control.
 message ChangeControlSummary {
 	option (fmp.model) = "ro";
-	option (fmp.custom_filter) = "Filter";
+	option (fmp.custom_filter) = "ChangeControlSummaryFilter";
 
 	// key uniquely identifies the Change Control.
 	ChangeControlKey key = 1;

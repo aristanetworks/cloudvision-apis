@@ -1714,6 +1714,20 @@
             "collectionFormat": "multi"
           },
           {
+            "name": "filter.endTimeRange.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "filter.endTimeRange.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1843,6 +1857,20 @@
             "collectionFormat": "multi"
           },
           {
+            "name": "filter.endTimeRange.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "filter.endTimeRange.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
             "name": "time.start",
             "in": "query",
             "required": false,
@@ -1929,6 +1957,20 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.endTimeRange.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "filter.endTimeRange.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           },
           {
             "name": "time.start",
@@ -2026,6 +2068,20 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "filter.endTimeRange.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "filter.endTimeRange.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           },
           {
             "name": "time.start",
@@ -2175,19 +2231,6 @@
         }
       },
       "description": "ApproveConfig is used to configure the approval of a Change Control."
-    },
-    "arista.changecontrol.v1.ApproveConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.changecontrol.v1.ApproveConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.changecontrol.v1.ApproveConfigDeleteAllResponse": {
       "type": "object",
@@ -2489,19 +2532,6 @@
       },
       "description": "ChangeControl holds the configuration and status of a Change Control."
     },
-    "arista.changecontrol.v1.ChangeControlBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.changecontrol.v1.ChangeControlConfig": {
       "type": "object",
       "properties": {
@@ -2523,19 +2553,6 @@
         }
       },
       "description": "ChangeControlConfig holds the configuration of a Change Control."
-    },
-    "arista.changecontrol.v1.ChangeControlConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.changecontrol.v1.ChangeControlConfigDeleteAllResponse": {
       "type": "object",
@@ -2928,18 +2945,19 @@
       },
       "description": "ChangeControlSummary provides the summary of the Change Control."
     },
-    "arista.changecontrol.v1.ChangeControlSummaryBatchedStreamResponse": {
+    "arista.changecontrol.v1.ChangeControlSummaryFilter": {
       "type": "object",
       "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        "deviceIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "device_ids identifies devices associated with the change control.\nA change control matches when it contains at least one of the provided device IDs."
+        },
+        "endTimeRange": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "end_time_range restricts results to change controls whose end_time falls\nwithin [start, end]. Either bound may be nil for a one-sided range.\nWhen unset, no end_time_range constraint is applied."
         }
-      }
+      },
+      "description": "ChangeControlSummaryFilter is used to filter change control summaries."
     },
     "arista.changecontrol.v1.ChangeControlSummaryResponse": {
       "type": "object",
@@ -3002,7 +3020,7 @@
           "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
         },
         "filter": {
-          "$ref": "#/definitions/arista.changecontrol.v1.Filter",
+          "$ref": "#/definitions/arista.changecontrol.v1.ChangeControlSummaryFilter",
           "description": "For each ChangeControlSummary in the list, all populated fields are considered ANDed together\nas a filtering operation. Similarly, the list itself is ORed such that any individual\nfilter that matches a given ChangeControlSummary is streamed to the user."
         },
         "time": {
