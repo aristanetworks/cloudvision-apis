@@ -101,6 +101,8 @@ enum PlanName {
     PLAN_NAME_SUBSCRIPTION = 1;
     // PLAN_NAME_PERPETUAL refers to the licenses valid for lifetime of the device.
     PLAN_NAME_PERPETUAL = 2;
+    // PLAN_NAME_TRIAL refers to the trial licenses.
+    PLAN_NAME_TRIAL = 3;
 }
 
 // AssignmentStatus enumerates the set of execution statuses of device assignment.

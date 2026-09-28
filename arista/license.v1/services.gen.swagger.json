@@ -4534,10 +4534,11 @@
       "enum": [
         "PLAN_NAME_UNSPECIFIED",
         "PLAN_NAME_SUBSCRIPTION",
-        "PLAN_NAME_PERPETUAL"
+        "PLAN_NAME_PERPETUAL",
+        "PLAN_NAME_TRIAL"
       ],
       "default": "PLAN_NAME_UNSPECIFIED",
-      "description": "PlanName is the name of the plan for which the\nlicense was purchased.\n\n - PLAN_NAME_UNSPECIFIED: PLAN_NAME_UNSPECIFIED refers to unspecified plan name.\n - PLAN_NAME_SUBSCRIPTION: PLAN_NAME_SUBSCRIPTION refers to the subscription licenses.\n - PLAN_NAME_PERPETUAL: PLAN_NAME_PERPETUAL refers to the licenses valid for lifetime of the device."
+      "description": "PlanName is the name of the plan for which the\nlicense was purchased.\n\n - PLAN_NAME_UNSPECIFIED: PLAN_NAME_UNSPECIFIED refers to unspecified plan name.\n - PLAN_NAME_SUBSCRIPTION: PLAN_NAME_SUBSCRIPTION refers to the subscription licenses.\n - PLAN_NAME_PERPETUAL: PLAN_NAME_PERPETUAL refers to the licenses valid for lifetime of the device.\n - PLAN_NAME_TRIAL: PLAN_NAME_TRIAL refers to the trial licenses."
     },
     "arista.license.v1.PreferredBundleReason": {
       "type": "string",
