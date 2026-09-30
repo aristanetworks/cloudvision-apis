@@ -105,7 +105,7 @@ enum ResponseStatus {
 	RESPONSE_STATUS_FAIL = 2;
 	// RESPONSE_STATUS_IN_PROGRESS indicates that the original Request is
 	// currently being processed.
-	RESPONSE_STATUS_IN_PROGRESS = 3;
+	RESPONSE_STATUS_IN_PROGRESS = 3 [deprecated = true];
 }
 
 // RequestParams define the parameters for a Request.

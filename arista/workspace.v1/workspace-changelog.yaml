@@ -7,8 +7,11 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-09-28
+      description: Deprecate RESPONSE_STATUS_IN_PROGRESS from Workspace.
+      version: 1.9.8
     - date: 2026-09-08
-      description: Add RESPONSE_STATUS_IN_PROGRESS to ResponseStatus.
+      description: Add RESPONSE_STATUS_IN_PROGRESS and last_rebase_id to Workspace.
       version: 1.9.7
     - date: 2026-08-18
       description: Update workspace diff api with modification diff type
