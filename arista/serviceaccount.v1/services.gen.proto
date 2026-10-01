@@ -309,6 +309,100 @@ service AccountConfigService {
 	rpc DeleteAll (AccountConfigDeleteAllRequest) returns (stream AccountConfigDeleteAllResponse);
 }
 
+message AccountForEventActionRequest {
+	// Key uniquely identifies a AccountForEventAction instance to retrieve.
+	// This value must be populated.
+	AccountKey key = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AccountForEventActionResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AccountForEventAction value = 1;
+
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// AccountForEventAction instance in this response.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AccountForEventActionSomeRequest {
+	repeated AccountKey keys = 1;
+
+	// Time indicates the time for which you are interested in the data.
+	// If no time is given, the server will use the time at which it makes the request.
+	google.protobuf.Timestamp time = 2;
+};
+
+message AccountForEventActionSomeResponse {
+	// Value is the value requested.
+	// This structure will be fully-populated as it exists in the datastore. If
+	// optional fields were not given at creation, these fields will be empty or
+	// set to default values.
+	AccountForEventAction value = 1;
+
+	// Error is an optional field.
+	// It should be filled when there is an error in the GetSome process.
+	google.protobuf.StringValue error = 2;
+	// Time carries the (UTC) timestamp of the last-modification of the
+	// AccountForEventAction instance in this response.
+	google.protobuf.Timestamp time = 3;
+};
+
+message AccountForEventActionStreamRequest {
+	// PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.
+	// This requires all provided fields to be equal to the response.
+	//
+	// While transparent to users, this field also allows services to optimize internal
+	// subscriptions if filter(s) are sufficiently specific.
+	repeated AccountForEventAction partial_eq_filter = 1;
+
+	// TimeRange allows limiting response data to within a specified time window.
+	// If this field is populated, at least one of the two time fields are required.
+	//
+	// For GetAll, the fields start and end can be used as follows:
+	//
+	//   * end: Returns the state of each AccountForEventAction at end.
+	//     * Each AccountForEventAction response is fully-specified (all fields set).
+	//   * start: Returns the state of each AccountForEventAction at start, followed by updates until now.
+	//     * Each AccountForEventAction response at start is fully-specified, but updates may be partial.
+	//   * start and end: Returns the state of each AccountForEventAction at start, followed by updates
+	//     until end.
+	//     * Each AccountForEventAction response at start is fully-specified, but updates until end may
+	//       be partial.
+	arista.time.TimeBounds time = 3;
+};
+
+message AccountForEventActionStreamResponse {
+	// Value is a value deemed relevant to the initiating request.
+	// This structure will always have its key-field populated. Which other fields are
+	// populated, and why, depends on the value of Operation and what triggered this notification.
+	AccountForEventAction value = 1;
+
+	// Time holds the timestamp of this AccountForEventAction's last modification.
+	google.protobuf.Timestamp time = 2;
+
+	// Operation indicates how the AccountForEventAction value in this response should be considered.
+	// Under non-subscribe requests, this value should always be INITIAL. In a subscription,
+	// once all initial data is streamed and the client begins to receive modification updates,
+	// you should not see INITIAL again.
+	arista.subscriptions.Operation type = 3;
+};
+
+service AccountForEventActionService {
+	rpc GetOne (AccountForEventActionRequest) returns (AccountForEventActionResponse);
+	rpc GetSome (AccountForEventActionSomeRequest) returns (stream AccountForEventActionSomeResponse);
+	rpc GetAll (AccountForEventActionStreamRequest) returns (stream AccountForEventActionStreamResponse);
+	rpc Subscribe (AccountForEventActionStreamRequest) returns (stream AccountForEventActionStreamResponse);
+	rpc GetMeta (AccountForEventActionStreamRequest) returns (MetaResponse);
+	rpc SubscribeMeta (AccountForEventActionStreamRequest) returns (stream MetaResponse);
+}
+
 message TokenRequest {
 	// Key uniquely identifies a Token instance to retrieve.
 	// This value must be populated.

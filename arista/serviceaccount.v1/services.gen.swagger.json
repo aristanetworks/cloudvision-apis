@@ -16,6 +16,9 @@
       "name": "AccountConfigService"
     },
     {
+      "name": "AccountForEventActionService"
+    },
+    {
       "name": "TokenService"
     },
     {
@@ -1015,6 +1018,412 @@
         ],
         "tags": [
           "AccountConfigService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction": {
+      "get": {
+        "operationId": "AccountForEventActionService_GetOne",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "description": "name is the unique identifier of the service account.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction/all": {
+      "get": {
+        "operationId": "AccountForEventActionService_GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountForEventActionService_GetAll2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction/getsome": {
+      "post": {
+        "operationId": "AccountForEventActionService_GetSome",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionSomeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.AccountForEventActionSomeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionSomeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction/metadata": {
+      "get": {
+        "operationId": "AccountForEventActionService_GetMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountForEventActionService_GetMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction/watch": {
+      "get": {
+        "operationId": "AccountForEventActionService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountForEventActionService_Subscribe2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.AccountForEventActionStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      }
+    },
+    "/api/resources/serviceaccount/v1/AccountForEventAction/watchmetadata": {
+      "get": {
+        "operationId": "AccountForEventActionService_SubscribeMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "time.start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "time.end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountForEventActionService_SubscribeMeta2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/arista.serviceaccount.v1.MetaResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of arista.serviceaccount.v1.MetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventActionStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountForEventActionService"
         ]
       }
     },
@@ -2183,6 +2592,10 @@
         "allowTokenRefresh": {
           "type": "boolean",
           "description": "allow_token_refresh determines whether or not the service account can refresh\nany of its own active tokens, including preexisting ones."
+        },
+        "allowImpersonationByEvent": {
+          "type": "boolean",
+          "title": "allow_impersonation_by_event determines whether Event Notifications may run\nCloudVision Actions as this service account.\nNote: when true, any user with Event Notification Management write permission\ncan configure such impersonation. (See arista.alert.v1.CvActionEndpoint.run_as_login.)"
         }
       },
       "description": "Account describes a service account."
@@ -2209,6 +2622,10 @@
         "allowTokenRefresh": {
           "type": "boolean",
           "description": "allow_token_refresh determines whether or not the service account can refresh\nany of its own active tokens, including preexisting ones."
+        },
+        "allowImpersonationByEvent": {
+          "type": "boolean",
+          "title": "allow_impersonation_by_event determines whether Event Notifications may run\nCloudVision Actions as this service account.\nNote: when true, any user with Event Notification Management write permission\ncan configure such impersonation. (See arista.alert.v1.CvActionEndpoint.run_as_login.)"
         }
       },
       "description": "AccountConfig holds the configuration for a service account."
@@ -2395,6 +2812,100 @@
         "type": {
           "$ref": "#/definitions/arista.subscriptions.Operation",
           "description": "Operation indicates how the AccountConfig value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountForEventAction": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey",
+          "description": "key uniquely identifies the service account."
+        }
+      },
+      "description": "AccountForEventAction contains the service accounts which can be impersonated\nin Event Notifications. An instance exists exactly when\nAccountConfig.allow_impersonation_by_event is true. It is a read-only view that lets\nEvent Notification users list such accounts without read access to AccountConfig."
+    },
+    "arista.serviceaccount.v1.AccountForEventActionResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventAction",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAccountForEventAction instance in this response."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountForEventActionSomeRequest": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountKey"
+          }
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time indicates the time for which you are interested in the data.\nIf no time is given, the server will use the time at which it makes the request."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountForEventActionSomeResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventAction",
+          "description": "Value is the value requested.\nThis structure will be fully-populated as it exists in the datastore. If\noptional fields were not given at creation, these fields will be empty or\nset to default values."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error is an optional field.\nIt should be filled when there is an error in the GetSome process."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time carries the (UTC) timestamp of the last-modification of the\nAccountForEventAction instance in this response."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountForEventActionStreamRequest": {
+      "type": "object",
+      "properties": {
+        "partialEqFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventAction"
+          },
+          "description": "PartialEqFilter provides a way to server-side filter a GetAll/Subscribe.\nThis requires all provided fields to be equal to the response.\n\nWhile transparent to users, this field also allows services to optimize internal\nsubscriptions if filter(s) are sufficiently specific."
+        },
+        "time": {
+          "$ref": "#/definitions/arista.time.TimeBounds",
+          "description": "TimeRange allows limiting response data to within a specified time window.\nIf this field is populated, at least one of the two time fields are required.\n\nFor GetAll, the fields start and end can be used as follows:\n\n  * end: Returns the state of each AccountForEventAction at end.\n    * Each AccountForEventAction response is fully-specified (all fields set).\n  * start: Returns the state of each AccountForEventAction at start, followed by updates until now.\n    * Each AccountForEventAction response at start is fully-specified, but updates may be partial.\n  * start and end: Returns the state of each AccountForEventAction at start, followed by updates\n    until end.\n    * Each AccountForEventAction response at start is fully-specified, but updates until end may\n      be partial."
+        }
+      }
+    },
+    "arista.serviceaccount.v1.AccountForEventActionStreamResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/arista.serviceaccount.v1.AccountForEventAction",
+          "description": "Value is a value deemed relevant to the initiating request.\nThis structure will always have its key-field populated. Which other fields are\npopulated, and why, depends on the value of Operation and what triggered this notification."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time holds the timestamp of this AccountForEventAction's last modification."
+        },
+        "type": {
+          "$ref": "#/definitions/arista.subscriptions.Operation",
+          "description": "Operation indicates how the AccountForEventAction value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
     },
@@ -2954,10 +3465,13 @@
         "INITIAL",
         "INITIAL_SYNC_COMPLETE",
         "UPDATED",
-        "DELETED"
+        "DELETED",
+        "PARTIAL_DELETE",
+        "BATCH_START",
+        "BATCH_END"
       ],
       "default": "UNSPECIFIED",
-      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected."
+      "description": " - INITIAL: INITIAL indicates the associated notification is that of the\ncurrent state and a fully-specified Resource is provided.\n - INITIAL_SYNC_COMPLETE: INITIAL_SYNC_COMPLETE indicates all existing-state has been\nstreamed to the client. This status will be sent in an\notherwise-empty message and no subsequent INITIAL messages\nshould be expected.\n - UPDATED: UPDATED indicates the associated notification carries\nmodification to the last-streamed state. This indicates\nthe contained Resource may be a partial diff, though, it\nmay contain a fully-specified Resource.\n - DELETED: DETLETED indicates the associated notification carries\na deletion. The Resource's key will always be set in this case,\nbut no other fields should be expected.\n - PARTIAL_DELETE: PARTIAL_DELETE indicates the associated notification carries\ndeletions of specific fields within the last-streamed state.\nThe Resource's key is always set.\n - BATCH_START: BATCH_START indicates the beginning of a batch of notifications.\nThis message will carry no resource value. A corresponding BATCH_END\nmessage will mark the end of the batch. The semantics of what a\nbatch means is defined by the service.\n - BATCH_END: BATCH_END indicates the end of a batch of notifications that\nbegan with a BATCH_START message. This message will carry no\nresource value."
     },
     "arista.time.TimeBounds": {
       "type": "object",
