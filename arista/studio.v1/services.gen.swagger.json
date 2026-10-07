@@ -5684,6 +5684,20 @@
       },
       "description": "BooleanInputFieldProps defines the set of properties for a single\nboolean field in a studio input schema."
     },
+    "arista.studio.v1.BuildOptimization": {
+      "type": "object",
+      "properties": {
+        "optimizationLevel": {
+          "$ref": "#/definitions/arista.studio.v1.OptimizationLevel",
+          "description": "optimization_level controls how aggressively the build system narrows\nthe set of devices to rebuild when this studio is included in a\nworkspace build. See `OptimizationLevel` for the available levels."
+        },
+        "levelParams": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "level_params holds parameters whose meaning depends on\n`optimization_level`. For `OPTIMIZATION_LEVEL_TAG_BASED`, these are\nthe tag labels used to expand the rebuild set: for each device flagged\nfor rebuild, all assigned devices sharing the same value for any of\nthese tag labels are added to the rebuild set. Ignored for levels\nthat do not define a meaning for this field."
+        }
+      },
+      "description": "BuildOptimization configures how the build system narrows the set of\ndevices to rebuild for a studio when changes are detected in a\nworkspace."
+    },
     "arista.studio.v1.CollectionInputFieldProps": {
       "type": "object",
       "properties": {
@@ -5745,11 +5759,10 @@
         "ENTITY_TYPE_BUILD_HOOK",
         "ENTITY_TYPE_AUTOFILL_ACTION",
         "ENTITY_TYPE_CONFIGLET",
-        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT",
-        "ENTITY_TYPE_DEPENDENCIES"
+        "ENTITY_TYPE_CONFIGLET_ASSIGNMENT"
       ],
       "default": "ENTITY_TYPE_UNSPECIFIED",
-      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic config studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static config studio.\n - ENTITY_TYPE_DEPENDENCIES: ENTITY_TYPE_DEPENDENCIES indicates the Dependencies entity type."
+      "description": "EntityType enumerates the set of entity types.\n\n - ENTITY_TYPE_UNSPECIFIED: ENTITY_TYPE_UNSPECIFIED indicates an unspecified entity type.\n - ENTITY_TYPE_STUDIO: ENTITY_TYPE_STUDIO indicates the Studio entity type.\n - ENTITY_TYPE_INPUTS: ENTITY_TYPE_INPUTS indicates the Inputs entity type.\n - ENTITY_TYPE_ASSIGNED_TAGS: ENTITY_TYPE_ASSIGNED_TAGS indicates the AssignedTags entity type.\n - ENTITY_TYPE_BUILD_HOOK: ENTITY_TYPE_BUILD_HOOK indicates the BuildHook entity type.\n - ENTITY_TYPE_AUTOFILL_ACTION: ENTITY_TYPE_AUTOFILL_ACTION indicates the AutofillAction entity type.\n - ENTITY_TYPE_CONFIGLET: ENTITY_TYPE_CONFIGLET indicates the Configlet entity type for\nstatic config studio.\n - ENTITY_TYPE_CONFIGLET_ASSIGNMENT: ENTITY_TYPE_CONFIGLET_ASSIGNMENT indicates the ConfigletAssignment\nentity type for static config studio."
     },
     "arista.studio.v1.FloatInputFieldProps": {
       "type": "object",
@@ -6291,6 +6304,17 @@
         }
       }
     },
+    "arista.studio.v1.OptimizationLevel": {
+      "type": "string",
+      "enum": [
+        "OPTIMIZATION_LEVEL_UNSPECIFIED",
+        "OPTIMIZATION_LEVEL_DISABLED",
+        "OPTIMIZATION_LEVEL_INPUTS",
+        "OPTIMIZATION_LEVEL_TAG_BASED"
+      ],
+      "default": "OPTIMIZATION_LEVEL_UNSPECIFIED",
+      "description": "OptimizationLevel controls how the build system narrows the set of\ndevices to rebuild for a given studio when changes are detected in a\nworkspace.\n\n - OPTIMIZATION_LEVEL_UNSPECIFIED: OPTIMIZATION_LEVEL_UNSPECIFIED indicates that no optimization level is specified.\n - OPTIMIZATION_LEVEL_DISABLED: OPTIMIZATION_LEVEL_DISABLED applies no optimization. When the studio\nis included in a build, all assigned devices (including newly added\ndevices) are rebuilt. This is the conservative default for studios\nwith cross-device dependencies that cannot be safely narrowed.\n - OPTIMIZATION_LEVEL_INPUTS: OPTIMIZATION_LEVEL_INPUTS rebuilds only the devices whose validated\ninputs differ from mainline, plus any devices whose I\u0026T digest\n(hostname, interface wiring) changed. Used by studios with no\ncross-device dependencies.\n - OPTIMIZATION_LEVEL_TAG_BASED: OPTIMIZATION_LEVEL_TAG_BASED behaves like OPTIMIZATION_LEVEL_INPUTS\nbut expands the rebuild set to all assigned devices sharing the same\nvalue for any of the tag labels listed in `BuildOptimization.level_params`.\nUsed by fabric studios whose cross-device dependencies are scoped to\na fabric boundary (e.g. Campus, DC)."
+    },
     "arista.studio.v1.ResolverFieldDisplayMode": {
       "type": "string",
       "enum": [
@@ -6520,6 +6544,10 @@
         "fromPackage": {
           "type": "string",
           "description": "from_package indicates that this studio was created by a package, and can only be modified\nby the packaging service."
+        },
+        "buildOptimization": {
+          "$ref": "#/definitions/arista.studio.v1.BuildOptimization",
+          "description": "build_optimization controls how the build system narrows the set of\ndevices to rebuild when this studio is included in a workspace build."
         }
       },
       "description": "Studio holds the active state for a studio."
@@ -6550,6 +6578,10 @@
         "inputSchema": {
           "$ref": "#/definitions/arista.studio.v1.InputSchema",
           "description": "input_schema is the schema for the studio inputs that are processed\nby `template`."
+        },
+        "buildOptimization": {
+          "$ref": "#/definitions/arista.studio.v1.BuildOptimization",
+          "description": "build_optimization controls how the build system narrows the set of\ndevices to rebuild when this studio is included in a workspace build."
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."

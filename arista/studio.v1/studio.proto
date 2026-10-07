@@ -56,6 +56,9 @@ message StudioConfig {
 	// input_schema is the schema for the studio inputs that are processed
 	// by `template`.
 	InputSchema input_schema = 6;
+	// build_optimization controls how the build system narrows the set of
+	// devices to rebuild when this studio is included in a workspace build.
+	BuildOptimization build_optimization = 7;
 }
 
 // StudioSummary holds basic information about a studio.
@@ -133,6 +136,47 @@ enum EntityType {
 	ENTITY_TYPE_CONFIGLET_ASSIGNMENT = 7;
 }
 
+// OptimizationLevel controls how the build system narrows the set of
+// devices to rebuild for a given studio when changes are detected in a
+// workspace.
+enum OptimizationLevel {
+	// OPTIMIZATION_LEVEL_UNSPECIFIED indicates that no optimization level is specified.
+	OPTIMIZATION_LEVEL_UNSPECIFIED = 0;
+	// OPTIMIZATION_LEVEL_DISABLED applies no optimization. When the studio
+	// is included in a build, all assigned devices (including newly added
+	// devices) are rebuilt. This is the conservative default for studios
+	// with cross-device dependencies that cannot be safely narrowed.
+	OPTIMIZATION_LEVEL_DISABLED = 1;
+	// OPTIMIZATION_LEVEL_INPUTS rebuilds only the devices whose validated
+	// inputs differ from mainline, plus any devices whose I&T digest
+	// (hostname, interface wiring) changed. Used by studios with no
+	// cross-device dependencies.
+	OPTIMIZATION_LEVEL_INPUTS = 2;
+	// OPTIMIZATION_LEVEL_TAG_BASED behaves like OPTIMIZATION_LEVEL_INPUTS
+	// but expands the rebuild set to all assigned devices sharing the same
+	// value for any of the tag labels listed in `BuildOptimization.level_params`.
+	// Used by fabric studios whose cross-device dependencies are scoped to
+	// a fabric boundary (e.g. Campus, DC).
+	OPTIMIZATION_LEVEL_TAG_BASED = 3;
+}
+
+// BuildOptimization configures how the build system narrows the set of
+// devices to rebuild for a studio when changes are detected in a
+// workspace.
+message BuildOptimization {
+	// optimization_level controls how aggressively the build system narrows
+	// the set of devices to rebuild when this studio is included in a
+	// workspace build. See `OptimizationLevel` for the available levels.
+	OptimizationLevel optimization_level = 1;
+	// level_params holds parameters whose meaning depends on
+	// `optimization_level`. For `OPTIMIZATION_LEVEL_TAG_BASED`, these are
+	// the tag labels used to expand the rebuild set: for each device flagged
+	// for rebuild, all assigned devices sharing the same value for any of
+	// these tag labels are added to the rebuild set. Ignored for levels
+	// that do not define a meaning for this field.
+	fmp.RepeatedString level_params = 2;
+}
+
 // Studio holds the active state for a studio.
 message Studio {
 	option (fmp.model) = "ro";
@@ -164,6 +208,9 @@ message Studio {
 	// from_package indicates that this studio was created by a package, and can only be modified
 	// by the packaging service.
 	google.protobuf.StringValue from_package = 11;
+	// build_optimization controls how the build system narrows the set of
+	// devices to rebuild when this studio is included in a workspace build.
+	BuildOptimization build_optimization = 12;
 }
 
 // AssignedTagsConfig holds a configuration to assign a studio to a set of devices
