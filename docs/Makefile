@@ -27,7 +27,7 @@ $(MODELS_TARGET):
 	go run cmd/generate_models_markdown.go -out content/models.md -protodirs "$(PROTODIRS)"
 
 .PHONY: start
-start:
+start: docs
 	@echo "Starting Docusaurus with version $(VERSION)"
 	@VERSION_TAG=$(VERSION) npx docusaurus start
 

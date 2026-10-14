@@ -9,7 +9,8 @@ Once existing state has been sent to the client, any changes to resource entitie
 _update_ messages will represent what was updated and can either be a diff/partial or a fully-specified model.
 
 :::note
-Any [filters](/cloudvision-apis/rpcs/filtering) apply both to the initial state and updates.
+Any [filters](/docs/rpcs/filtering) apply both to the initial state and updates.
+See the section [Best Practices](/docs/clients/best-practices/) for more info.
 :::
 
 Clients can determine whether a given message is part of the initial `GetAll` or an update via the
