@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+  - date: 2026-10-23
+    description: Add run_as_login and run_as_auth_type fields to CvActionEndpoint message
+    version: 1.19.0
   - date: 2026-06-19
     description: Add config_timestamp field to SenderStatus message
     version: 1.18.0

@@ -2053,7 +2053,7 @@
         },
         "cvAction": {
           "$ref": "#/definitions/arista.alert.v1.CvActionEndpoints",
-          "description": "cv_action is a set of Cloud Vision Portal Action endpoints to send alerts to as part\nof this group. If the field is present during a Set call, all the Actions are set\nto authenticate as the calling user."
+          "description": "cv_action is a set of Cloud Vision Portal Action endpoints to send alerts to as part\nof this group."
         },
         "sensorName": {
           "type": "string",
@@ -2387,6 +2387,14 @@
         "onResolving": {
           "$ref": "#/definitions/arista.alert.v1.CvActions",
           "description": "on_resolving are the CloudVision Actions to be executed sequentially, one after another,\nwhen an event resolves."
+        },
+        "runAsLogin": {
+          "type": "string",
+          "description": "run_as_login is the identity to assume for running the actions."
+        },
+        "runAsAuthType": {
+          "type": "string",
+          "description": "run_as_auth_type is the authn type for run_as_login. For now only \"account\" is supported,\nmeaning that the login should belong to a Service Account."
         }
       },
       "description": "CvActionEndpoint contains the required information for an alert to run CloudVision Actions\n(e.g. python scripts)."
@@ -2456,19 +2464,6 @@
         }
       },
       "title": "DefaultTemplate is the system default template which is used when no user template has been set"
-    },
-    "arista.alert.v1.DefaultTemplateBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.alert.v1.DefaultTemplateStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.alert.v1.DefaultTemplateResponse": {
       "type": "object",
@@ -3418,19 +3413,6 @@
       },
       "description": "SenderStatus provides information about the status of particular send."
     },
-    "arista.alert.v1.SenderStatusBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.alert.v1.SenderStatusStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
-    },
     "arista.alert.v1.SenderStatusKey": {
       "type": "object",
       "properties": {
@@ -3795,19 +3777,6 @@
         }
       },
       "title": "TemplateConfig represents a template configuration"
-    },
-    "arista.alert.v1.TemplateConfigBatchedStreamResponse": {
-      "type": "object",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/arista.alert.v1.TemplateConfigStreamResponse"
-          },
-          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
-        }
-      }
     },
     "arista.alert.v1.TemplateConfigDeleteAllResponse": {
       "type": "object",
@@ -4251,7 +4220,7 @@
           "type": "string"
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": true
     },
     "google.rpc.Status": {
       "type": "object",

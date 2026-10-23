@@ -840,8 +840,7 @@ message BroadcastGroup {
 	// as part of this group
 	MsGraphSendMailEndpoints ms_graph_send_mail = 17;
 	// cv_action is a set of Cloud Vision Portal Action endpoints to send alerts to as part
-	// of this group. If the field is present during a Set call, all the Actions are set
-	// to authenticate as the calling user.
+	// of this group.
 	CvActionEndpoints cv_action = 18;
 	// sensor_name is the name of the sensor that runs on prem for a CVaaS customer, that has its
 	// own alert-sender running to send alerts to internal endpoints. This is an optional field and
@@ -1180,6 +1179,11 @@ message CvActionEndpoint {
 	// on_resolving are the CloudVision Actions to be executed sequentially, one after another,
 	// when an event resolves.
 	CvActions on_resolving = 2;
+	// run_as_login is the identity to assume for running the actions.
+	google.protobuf.StringValue run_as_login = 3;
+	// run_as_auth_type is the authn type for run_as_login. For now only "account" is supported,
+	// meaning that the login should belong to a Service Account.
+	google.protobuf.StringValue run_as_auth_type = 4;
 }
 
 
