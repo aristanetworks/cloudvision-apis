@@ -4991,6 +4991,19 @@
       },
       "description": "AssignedTags can be used to retrieve additional metadata about a\nstudio's `AssignedTagsConfig`."
     },
+    "arista.studio.v1.AssignedTagsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AssignedTagsConfig": {
       "type": "object",
       "properties": {
@@ -5008,6 +5021,19 @@
         }
       },
       "description": "AssignedTagsConfig holds a configuration to assign a studio to a set of devices\nmatching a tag query."
+    },
+    "arista.studio.v1.AssignedTagsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AssignedTagsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AssignedTagsConfigDeleteAllResponse": {
       "type": "object",
@@ -5318,6 +5344,19 @@
       },
       "description": "AutofillAction can be used to retrieve additional metadata about an autofill action."
     },
+    "arista.studio.v1.AutofillActionBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.AutofillActionConfig": {
       "type": "object",
       "properties": {
@@ -5343,6 +5382,19 @@
         }
       },
       "description": "AutofillActionConfig contains configuration information for an autofill action."
+    },
+    "arista.studio.v1.AutofillActionConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.AutofillActionConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.AutofillActionConfigDeleteAllResponse": {
       "type": "object",
@@ -5712,6 +5764,44 @@
       },
       "description": "CollectionInputFieldProps defines the set of properties for a single\ncollection field in a studio input schema."
     },
+    "arista.studio.v1.DESKeyComponent": {
+      "type": "object",
+      "properties": {
+        "componentType": {
+          "$ref": "#/definitions/arista.studio.v1.DESKeyComponentType",
+          "description": "component_type specifies how component_value is interpreted."
+        },
+        "componentValue": {
+          "type": "string",
+          "description": "component_value contains either a literal value or a schema field ID,\ndepending on component_type."
+        }
+      },
+      "description": "DESKeyComponent defines one component of a Type 7 DES encryption key."
+    },
+    "arista.studio.v1.DESKeyComponentType": {
+      "type": "string",
+      "enum": [
+        "DES_KEY_COMPONENT_TYPE_UNSPECIFIED",
+        "DES_KEY_COMPONENT_TYPE_LITERAL",
+        "DES_KEY_COMPONENT_TYPE_FIELD_ID"
+      ],
+      "default": "DES_KEY_COMPONENT_TYPE_UNSPECIFIED",
+      "description": "DESKeyComponentType identifies how a DESKeyComponent value is interpreted.\n\n - DES_KEY_COMPONENT_TYPE_UNSPECIFIED: DES_KEY_COMPONENT_TYPE_UNSPECIFIED indicates that the component type is not configured.\n - DES_KEY_COMPONENT_TYPE_LITERAL: DES_KEY_COMPONENT_TYPE_LITERAL indicates that component_value contains a literal string\nused directly as a component of the DES key.\n - DES_KEY_COMPONENT_TYPE_FIELD_ID: DES_KEY_COMPONENT_TYPE_FIELD_ID indicates that component_value contains the\nID of an input field whose resolved value supplies one component of the DES\nkey used to encrypt or decrypt the password. Supported fields are string\nfields, integer fields, and single-interface-tag matchers when they are\neither a sibling or sibling of an ancestor. A single-interface-tag resolver\nis supported only when it is an ancestor."
+    },
+    "arista.studio.v1.DESKeyComponents": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.DESKeyComponent"
+          },
+          "description": "values contains the ordered DES key components."
+        }
+      },
+      "description": "DESKeyComponents contains the ordered components of a Type 7 DES encryption key."
+    },
     "arista.studio.v1.Entities": {
       "type": "object",
       "properties": {
@@ -5938,6 +6028,19 @@
       },
       "description": "Inputs is used to retrieve the existing inputs to a studio."
     },
+    "arista.studio.v1.InputsBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.InputsConfig": {
       "type": "object",
       "properties": {
@@ -5955,6 +6058,19 @@
         }
       },
       "description": "InputsConfig is used to input values into a studio.\n\nNOTE: Setting an input at a higher path overwrite any prior\n`Set`s at lower paths. E.g.,\n\n1. Set `[\"A\", \"X\"]` to `\"foo\"`\n2. Set `[\"A\", \"Y\"]` to `\"bar\"`\n3. Set `[\"A\"]` to `{\"X\": \"bar\"}`\n\nThe resulting inputs would be:\n```\n{ \"A\": { \"X\": \"bar\" } }\n```"
+    },
+    "arista.studio.v1.InputsConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.InputsConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.InputsConfigDeleteAllResponse": {
       "type": "object",
@@ -6315,6 +6431,17 @@
       "default": "OPTIMIZATION_LEVEL_UNSPECIFIED",
       "description": "OptimizationLevel controls how the build system narrows the set of\ndevices to rebuild for a given studio when changes are detected in a\nworkspace.\n\n - OPTIMIZATION_LEVEL_UNSPECIFIED: OPTIMIZATION_LEVEL_UNSPECIFIED indicates that no optimization level is specified.\n - OPTIMIZATION_LEVEL_DISABLED: OPTIMIZATION_LEVEL_DISABLED applies no optimization. When the studio\nis included in a build, all assigned devices (including newly added\ndevices) are rebuilt. This is the conservative default for studios\nwith cross-device dependencies that cannot be safely narrowed.\n - OPTIMIZATION_LEVEL_INPUTS: OPTIMIZATION_LEVEL_INPUTS rebuilds only the devices whose validated\ninputs differ from mainline, plus any devices whose I\u0026T digest\n(hostname, interface wiring) changed. Used by studios with no\ncross-device dependencies.\n - OPTIMIZATION_LEVEL_TAG_BASED: OPTIMIZATION_LEVEL_TAG_BASED behaves like OPTIMIZATION_LEVEL_INPUTS\nbut expands the rebuild set to all assigned devices sharing the same\nvalue for any of the tag labels listed in `BuildOptimization.level_params`.\nUsed by fabric studios whose cross-device dependencies are scoped to\na fabric boundary (e.g. Campus, DC)."
     },
+    "arista.studio.v1.PasswordType": {
+      "type": "string",
+      "enum": [
+        "PASSWORD_TYPE_UNSPECIFIED",
+        "PASSWORD_TYPE_UNENCRYPTED",
+        "PASSWORD_TYPE_7",
+        "PASSWORD_TYPE_8A"
+      ],
+      "default": "PASSWORD_TYPE_UNSPECIFIED",
+      "description": "PasswordType defines the password value formats supported by string fields\nwhen transformation_type is TRANSFORMATION_TYPE_ENCRYPTION.\n\n - PASSWORD_TYPE_UNSPECIFIED: PASSWORD_TYPE_UNSPECIFIED indicates an unspecified password type.\n - PASSWORD_TYPE_UNENCRYPTED: PASSWORD_TYPE_UNENCRYPTED indicates a plaintext password.\n - PASSWORD_TYPE_7: PASSWORD_TYPE_7 indicates a Type 7 (DES or OBFUSCATION) encrypted password.\n - PASSWORD_TYPE_8A: PASSWORD_TYPE_8A indicates a Type 8a (AES-256-GCM) encrypted password."
+    },
     "arista.studio.v1.ResolverFieldDisplayMode": {
       "type": "string",
       "enum": [
@@ -6376,6 +6503,19 @@
         }
       },
       "description": "SecretInput can be used to retrieve the unmasked value of\na secret in a studio."
+    },
+    "arista.studio.v1.SecretInputBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.SecretInputStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.SecretInputResponse": {
       "type": "object",
@@ -6496,6 +6636,10 @@
         "extraValuesAllowed": {
           "type": "boolean",
           "description": "extra_values_allowed allows adding values to the field in\naddition to what's allowed by static_options/dynamic_options."
+        },
+        "transformationOption": {
+          "$ref": "#/definitions/arista.studio.v1.TransformationOption",
+          "description": "transformation_option configures a transformation applied to this field's value when\ngenerating device configuration."
         }
       },
       "description": "StringInputFieldProps defines the set of properties for a single\nstring field in a studio input schema."
@@ -6552,6 +6696,19 @@
       },
       "description": "Studio holds the active state for a studio."
     },
+    "arista.studio.v1.StudioBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioConfig": {
       "type": "object",
       "properties": {
@@ -6585,6 +6742,19 @@
         }
       },
       "description": "StudioConfig holds a configuration for a studio.\n\nChanges to fields other than `key` and `remove` are applied to\na copy of the mainline."
+    },
+    "arista.studio.v1.StudioConfigBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioConfigStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
     },
     "arista.studio.v1.StudioConfigDeleteAllResponse": {
       "type": "object",
@@ -6907,6 +7077,19 @@
       },
       "description": "StudioSummary holds basic information about a studio."
     },
+    "arista.studio.v1.StudioSummaryBatchedStreamResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/arista.studio.v1.StudioSummaryStreamResponse"
+          },
+          "description": "Values are the values deemed relevant to the initiating request.\nThe length of this structure is guaranteed to be between (inclusive) 1 and\nmin(req.max_messages, INTERNAL_BATCH_LIMIT)."
+        }
+      }
+    },
     "arista.studio.v1.StudioSummaryResponse": {
       "type": "object",
       "properties": {
@@ -7049,6 +7232,51 @@
       ],
       "default": "TEMPLATE_TYPE_UNSPECIFIED",
       "description": "TemplateType defines the set of supported languages that can\nbe used in studio templates.\n\n - TEMPLATE_TYPE_UNSPECIFIED: TEMPLATE_TYPE_UNSPECIFIED indicates an unspecified template type.\n - TEMPLATE_TYPE_MAKO: TEMPLATE_TYPE_MAKO is the Mako templating language for Python.\nMore information: https://www.makotemplates.org\n - TEMPLATE_TYPE_JINJA: TEMPLATE_TYPE_JINJA is the Jinja templating language for Python.\nMore information: https://palletsprojects.com/p/jinja\n - TEMPLATE_TYPE_GO: TEMPLATE_TYPE_GO is the Go templating language.\nMore information: https://pkg.go.dev/text/template\n\nNOTE: Not all template functions are supported for this type."
+    },
+    "arista.studio.v1.TransformationOption": {
+      "type": "object",
+      "properties": {
+        "transformationType": {
+          "$ref": "#/definitions/arista.studio.v1.TransformationType",
+          "description": "transformation_type specifies the transformation to apply to the string field's value."
+        },
+        "passwordTypeFieldId": {
+          "type": "string",
+          "description": "password_type_field_id is the ID of a string field in the same group or an\nancestor group whose value selects the password type for this field.\nSupported values are `0` (plaintext), `7` (Type 7), and `8a` (Type 8a)."
+        },
+        "defaultPasswordType": {
+          "$ref": "#/definitions/arista.studio.v1.PasswordType",
+          "description": "default_password_type specifies the password type to use when\npassword_type_field_id is unset. is_secret may be `false` when\ndefault_password_type is `PASSWORD_TYPE_7` or `PASSWORD_TYPE_8A`; when it\nis `PASSWORD_TYPE_UNENCRYPTED`, is_secret must be `true`.\nExactly one of password_type_field_id or default_password_type must be set when\ntransformation_type is TRANSFORMATION_TYPE_ENCRYPTION."
+        },
+        "type7Algorithm": {
+          "$ref": "#/definitions/arista.studio.v1.Type7Algorithm",
+          "description": "type7_algorithm specifies the algorithm used to encrypt and decrypt Type 7\nvalues for this field. It is fixed by the EOS CLI configuration and cannot\nbe changed. It is also used to encrypt plaintext as Type 7 on devices that do not\nhave Type 8a enabled and is not required when default_password_type is `PASSWORD_TYPE_8A`."
+        },
+        "desEncryptionKeyComponents": {
+          "$ref": "#/definitions/arista.studio.v1.DESKeyComponents",
+          "description": "des_encryption_key_components contains the ordered components used to derive the\nEOS Type 7 DES encryption key.\n\nEach component may be a literal value or a reference to a field in the\nsame input group or an ancestor group. The order of the components is\nsignificant and must match the EOS key format for the corresponding\nconfiguration.\n\nThis field is valid only when type7_algorithm is TYPE7_ALGORITHM_DES."
+        }
+      },
+      "description": "TransformationOption defines a transformation applied to a string field's\nvalue and the settings required by that transformation."
+    },
+    "arista.studio.v1.TransformationType": {
+      "type": "string",
+      "enum": [
+        "TRANSFORMATION_TYPE_UNSPECIFIED",
+        "TRANSFORMATION_TYPE_ENCRYPTION"
+      ],
+      "default": "TRANSFORMATION_TYPE_UNSPECIFIED",
+      "description": "TransformationType defines the type of transformation to apply to a field value.\n\n - TRANSFORMATION_TYPE_UNSPECIFIED: TRANSFORMATION_TYPE_UNSPECIFIED indicates that no transformation has been selected.\n - TRANSFORMATION_TYPE_ENCRYPTION: TRANSFORMATION_TYPE_ENCRYPTION indicates that the field value is encrypted\nwith Type 8a when Security Profiles Studio enables Type 8a for the device,\nand with Type 7 otherwise."
+    },
+    "arista.studio.v1.Type7Algorithm": {
+      "type": "string",
+      "enum": [
+        "TYPE7_ALGORITHM_UNSPECIFIED",
+        "TYPE7_ALGORITHM_OBFUSCATION",
+        "TYPE7_ALGORITHM_DES"
+      ],
+      "default": "TYPE7_ALGORITHM_UNSPECIFIED",
+      "description": "Type7Algorithm defines the algorithms supported for Type 7 password encryption.\n\n - TYPE7_ALGORITHM_UNSPECIFIED: TYPE7_ALGORITHM_UNSPECIFIED indicates an unspecified Type 7 algorithm.\n - TYPE7_ALGORITHM_OBFUSCATION: TYPE7_ALGORITHM_OBFUSCATION indicates the obfuscation algorithm,\nwhich applies a simple reversible XOR-based encoding.\n - TYPE7_ALGORITHM_DES: TYPE7_ALGORITHM_DES indicates the DES algorithm,\nwhich uses DES encryption with a master key."
     },
     "arista.subscriptions.Operation": {
       "type": "string",

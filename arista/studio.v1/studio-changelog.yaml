@@ -7,6 +7,10 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-10-29
+      description: Add Transformation Option to string input field properties
+      version: 1.8.6
+
     - date: 2026-10-07
       description: Added build_optimization field to studio and studio config
       version: 1.8.5

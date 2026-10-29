@@ -548,6 +548,41 @@ message FloatInputFieldProps {
 	google.protobuf.BoolValue extra_values_allowed = 5;
 }
 
+// Type7Algorithm defines the algorithms supported for Type 7 password encryption.
+enum Type7Algorithm {
+	// TYPE7_ALGORITHM_UNSPECIFIED indicates an unspecified Type 7 algorithm.
+	TYPE7_ALGORITHM_UNSPECIFIED = 0;
+	// TYPE7_ALGORITHM_OBFUSCATION indicates the obfuscation algorithm,
+	// which applies a simple reversible XOR-based encoding.
+	TYPE7_ALGORITHM_OBFUSCATION = 1;
+	// TYPE7_ALGORITHM_DES indicates the DES algorithm,
+	// which uses DES encryption with a master key.
+	TYPE7_ALGORITHM_DES = 2;
+}
+
+// TransformationType defines the type of transformation to apply to a field value.
+enum TransformationType {
+	// TRANSFORMATION_TYPE_UNSPECIFIED indicates that no transformation has been selected.
+	TRANSFORMATION_TYPE_UNSPECIFIED = 0;
+	// TRANSFORMATION_TYPE_ENCRYPTION indicates that the field value is encrypted
+	// with Type 8a when Security Profiles Studio enables Type 8a for the device,
+	// and with Type 7 otherwise.
+	TRANSFORMATION_TYPE_ENCRYPTION = 1;
+}
+
+// PasswordType defines the password value formats supported by string fields
+// when transformation_type is TRANSFORMATION_TYPE_ENCRYPTION.
+enum PasswordType {
+	// PASSWORD_TYPE_UNSPECIFIED indicates an unspecified password type.
+	PASSWORD_TYPE_UNSPECIFIED = 0;
+	// PASSWORD_TYPE_UNENCRYPTED indicates a plaintext password.
+	PASSWORD_TYPE_UNENCRYPTED = 1;
+	// PASSWORD_TYPE_7 indicates a Type 7 (DES or OBFUSCATION) encrypted password.
+	PASSWORD_TYPE_7 = 2;
+	// PASSWORD_TYPE_8A indicates a Type 8a (AES-256-GCM) encrypted password.
+	PASSWORD_TYPE_8A = 3;
+}
+
 // StringInputFieldProps defines the set of properties for a single
 // string field in a studio input schema.
 message StringInputFieldProps {
@@ -600,6 +635,74 @@ message StringInputFieldProps {
 	// extra_values_allowed allows adding values to the field in
 	// addition to what's allowed by static_options/dynamic_options.
 	google.protobuf.BoolValue extra_values_allowed = 9;
+	// transformation_option configures a transformation applied to this field's value when
+	// generating device configuration.
+	TransformationOption transformation_option = 10;
+}
+
+// TransformationOption defines a transformation applied to a string field's
+// value and the settings required by that transformation.
+message TransformationOption {
+	// transformation_type specifies the transformation to apply to the string field's value.
+	TransformationType transformation_type = 1;
+	// password_type_field_id is the ID of a string field in the same group or an
+	// ancestor group whose value selects the password type for this field.
+	// Supported values are `0` (plaintext), `7` (Type 7), and `8a` (Type 8a).
+	google.protobuf.StringValue password_type_field_id = 2;
+	// default_password_type specifies the password type to use when
+	// password_type_field_id is unset. is_secret may be `false` when
+	// default_password_type is `PASSWORD_TYPE_7` or `PASSWORD_TYPE_8A`; when it
+	// is `PASSWORD_TYPE_UNENCRYPTED`, is_secret must be `true`.
+	// Exactly one of password_type_field_id or default_password_type must be set when
+	// transformation_type is TRANSFORMATION_TYPE_ENCRYPTION.
+	PasswordType default_password_type = 3;
+	// type7_algorithm specifies the algorithm used to encrypt and decrypt Type 7
+	// values for this field. It is fixed by the EOS CLI configuration and cannot
+	// be changed. It is also used to encrypt plaintext as Type 7 on devices that do not
+	// have Type 8a enabled.
+	Type7Algorithm type7_algorithm = 4;
+
+	// des_encryption_key_components contains the ordered components used to derive the
+	// EOS Type 7 DES encryption key.
+	//
+	// Each component may be a literal value or a reference to a field in the
+	// same input group or an ancestor group. The order of the components is
+	// significant and must match the EOS key format for the corresponding
+	// configuration.
+	//
+	// This field is valid only when type7_algorithm is TYPE7_ALGORITHM_DES.
+	DESKeyComponents des_encryption_key_components = 5;
+}
+
+// DESKeyComponentType identifies how a DESKeyComponent value is interpreted.
+enum DESKeyComponentType {
+	// DES_KEY_COMPONENT_TYPE_UNSPECIFIED indicates that the component type is not configured.
+	DES_KEY_COMPONENT_TYPE_UNSPECIFIED = 0;
+	// DES_KEY_COMPONENT_TYPE_LITERAL indicates that component_value contains a literal string
+	// used directly as a component of the DES key.
+	DES_KEY_COMPONENT_TYPE_LITERAL = 1;
+	// DES_KEY_COMPONENT_TYPE_FIELD_ID indicates that component_value contains the
+	// ID of an input field whose resolved value supplies one component of the DES
+	// key used to encrypt or decrypt the password. Supported fields are string
+	// fields, integer fields, and single-interface-tag matchers when they are
+	// either a sibling or sibling of an ancestor. A single-interface-tag resolver
+	// is supported only when it is an ancestor.
+	DES_KEY_COMPONENT_TYPE_FIELD_ID = 2;
+}
+
+// DESKeyComponent defines one component of a Type 7 DES encryption key.
+message DESKeyComponent {
+	// component_type specifies how component_value is interpreted.
+	DESKeyComponentType component_type = 1;
+	// component_value contains either a literal value or a schema field ID,
+	// depending on component_type.
+	google.protobuf.StringValue component_value = 2;
+}
+
+// DESKeyComponents contains the ordered components of a Type 7 DES encryption key.
+message DESKeyComponents {
+	// values contains the ordered DES key components.
+	repeated DESKeyComponent values = 1;
 }
 
 // GroupInputFieldProps defines the set of properties for a single
