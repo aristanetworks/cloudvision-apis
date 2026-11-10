@@ -55,6 +55,20 @@ enum ExportResult {
     EXPORT_RESULT_FAILURE = 2;
 }
 
+// BackfillExportState defines the possible states of exporting existing
+// audit logs after a syslog server is configured.
+enum BackfillExportState {
+    // BACKFILL_EXPORT_STATE_UNSPECIFIED indicates the state is unknown.
+    BACKFILL_EXPORT_STATE_UNSPECIFIED = 0;
+    // BACKFILL_EXPORT_STATE_IN_PROGRESS indicates existing audit logs are being exported.
+    BACKFILL_EXPORT_STATE_IN_PROGRESS = 1;
+    // BACKFILL_EXPORT_STATE_COMPLETED indicates existing audit logs were exported.
+    BACKFILL_EXPORT_STATE_COMPLETED = 2;
+    // BACKFILL_EXPORT_STATE_FAILED indicates exporting existing audit logs failed.
+    // The failure details are provided in last_error.
+    BACKFILL_EXPORT_STATE_FAILED = 3;
+}
+
 // ExportKey uniquely identifies a syslog server to which to export logs.
 message ExportKey {
     option (fmp.model_key) = true;
@@ -133,4 +147,6 @@ message Export {
     ExportError last_error = 3;
     // last_success provides details of last successful export.
     ExportSuccess last_success = 4;
+    // backfill_export_state provides the state of exporting existing audit logs.
+    BackfillExportState backfill_export_state = 5;
 }
