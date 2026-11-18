@@ -113,6 +113,19 @@ message RequestParams {
 	// request_id is the unique ID of the request. This is used to identify
 	// the Response for the request in Responses.
 	google.protobuf.StringValue request_id = 1;
+	// submit_options specifies optional parameters that modify submit behavior.
+	// This field is valid only when the request field in the containing WorkspaceConfig
+	// is set to REQUEST_SUBMIT or REQUEST_SUBMIT_FORCE.
+	SubmitOptions submit_options = 2;
+}
+
+// SubmitOptions controls whether a REQUEST_SUBMIT or REQUEST_SUBMIT_FORCE
+// request rebases and/or builds the workspace before submitting it.
+message SubmitOptions {
+	// rebase_if_needed when true, rebases the workspace before submitting if a rebase is required.
+	google.protobuf.BoolValue rebase_if_needed = 1;
+	// build_if_needed when true, builds the workspace before submitting if a build is required.
+	google.protobuf.BoolValue build_if_needed = 2;
 }
 
 // Response is a response to a Request.
@@ -129,6 +142,10 @@ message Response {
 	google.protobuf.Timestamp end_time = 5;
 	// request_type is the type of request that this response is for.
 	Request request_type = 6;
+	// generated_request_ids are the IDs of sub-requests created while executing an
+	// orchestrated request. The IDs are ordered from the sub-request executed first to
+	// the sub-request executed last.
+	fmp.RepeatedString generated_request_ids = 7;
 }
 
 // ResponseCode is a code for a Response indicating a particular scenario.

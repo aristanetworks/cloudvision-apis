@@ -7,6 +7,9 @@
 # New entries go on top.
 
 Changes:
+    - date: 2026-11-18
+      description: Add SubmitOptions and generated_request_ids.
+      version: 1.9.10
     - date: 2026-10-30
       description: Add Fixture Group and Member entity
       version: 1.9.9

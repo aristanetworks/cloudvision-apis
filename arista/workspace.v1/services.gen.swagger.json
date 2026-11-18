@@ -4654,6 +4654,10 @@
         "requestId": {
           "type": "string",
           "description": "request_id is the unique ID of the request. This is used to identify\nthe Response for the request in Responses."
+        },
+        "submitOptions": {
+          "$ref": "#/definitions/arista.workspace.v1.SubmitOptions",
+          "description": "submit_options specifies optional parameters that modify submit behavior.\nThis field is valid only when the request field in the containing WorkspaceConfig\nis set to REQUEST_SUBMIT or REQUEST_SUBMIT_FORCE."
         }
       },
       "description": "RequestParams define the parameters for a Request."
@@ -4686,6 +4690,10 @@
         "requestType": {
           "$ref": "#/definitions/arista.workspace.v1.Request",
           "description": "request_type is the type of request that this response is for."
+        },
+        "generatedRequestIds": {
+          "$ref": "#/definitions/fmp.RepeatedString",
+          "description": "generated_request_ids are the IDs of sub-requests created while executing an\norchestrated request. The IDs are ordered from the sub-request executed first to\nthe sub-request executed last."
         }
       },
       "description": "Response is a response to a Request."
@@ -4873,6 +4881,20 @@
           "description": "Operation indicates how the StudioGeneratedConfiguration value in this response should be considered.\nUnder non-subscribe requests, this value should always be INITIAL. In a subscription,\nonce all initial data is streamed and the client begins to receive modification updates,\nyou should not see INITIAL again."
         }
       }
+    },
+    "arista.workspace.v1.SubmitOptions": {
+      "type": "object",
+      "properties": {
+        "rebaseIfNeeded": {
+          "type": "boolean",
+          "description": "rebase_if_needed when true, rebases the workspace before submitting if a rebase is required."
+        },
+        "buildIfNeeded": {
+          "type": "boolean",
+          "description": "build_if_needed when true, builds the workspace before submitting if a build is required."
+        }
+      },
+      "description": "SubmitOptions controls whether a REQUEST_SUBMIT or REQUEST_SUBMIT_FORCE\nrequest rebases and/or builds the workspace before submitting it."
     },
     "arista.workspace.v1.SyncOperation": {
       "type": "string",
